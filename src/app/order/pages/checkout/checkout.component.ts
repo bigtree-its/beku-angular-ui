@@ -12,6 +12,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StripeService } from 'src/app/services/stripe.service';
 import { Observable } from 'rxjs';
 import {crypto} from 'crypto-js';
+import { PaymentIntentResponse } from 'src/app/model/order';
 
 @Component({
   selector: 'app-checkout',
