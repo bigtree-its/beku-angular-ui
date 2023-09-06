@@ -1,0 +1,15 @@
+.order-item-container {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  gap: 1rem;
+  padding: 5px 10px;
+  margin: 5px 0;
+  align-items: center;
+}
+
+.order-item-wrapper {
+  display: block;
+  width: auto;
+}

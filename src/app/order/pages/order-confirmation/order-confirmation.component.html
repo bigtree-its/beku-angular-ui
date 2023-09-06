@@ -1,0 +1,199 @@
+<div class="container mt-5 mb-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <!-- <div class="text-left logo p-2 px-5">
+                    <img src="https://i.imgur.com/2zDU056.png" width="50">
+                </div> -->
+                <div class="invoice p-5">
+                    <h5>Your order Confirmed!</h5>
+                    <span class="font-weight-bold d-block mt-4">Hello, {{order.customer.name}}</span>
+                    <span>You order has been confirmed !</span>
+                    <div *ngIf="order.serviceMode === 'DELIVERY'">
+                        <div class="py-2">
+                            <span class="d-block text-muted">Delivery Address</span>
+                            <div class="address">
+                                <span>{{order.customer.address.addressLine1}},</span>
+                                <span>{{order.customer.address.addressLine2}}, </span>
+                                <span>{{order.customer.address.city}}, </span>
+                                <span>{{order.customer.address.postcode}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="order.serviceMode === 'COLLECTION'">
+                        <div class="py-2">
+                            <span class="d-block text-muted">Collection Address</span>
+                            <div class="address">
+                                <span>{{order.supplier.address.addressLine1}},</span>
+                                <span>{{order.supplier.address.addressLine2}}, </span>
+                                <span>{{order.supplier.address.city}}, </span>
+                                <span>{{order.supplier.address.postcode}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="payment border-top mt-3 mb-3 border-bottom table-responsive">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="py-2">
+                                            <span class="d-block text-muted">Order Date</span>
+                                            <span>{{order.dateCreated | date: 'dd MMM, yyyy'}}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="py-2">
+                                            <span class="d-block text-muted">Order Reference</span>
+                                            <span>{{order.reference}}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="py-2">
+                                            <span class="d-block text-muted">Payment</span>
+                                            <span><img src="https://img.icons8.com/color/48/000000/mastercard.png"
+                                                    width="20" /></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="product border-bottom table-responsive">
+                        <div *ngFor="let item of order.items">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <td width="20%">
+                                            <img src="https://i.imgur.com/SmBOua9.jpg" width="70">
+                                        </td>
+                                        <td width="60%">
+                                            <strong class="font-weight-bold">{{item.name}}</strong>
+                                            <div class="product-qty">
+                                                <span class="d-block">Quantity:{{item.quantity}}</span>
+                                                <!-- <span>Color:Orange</span> -->
+                                            </div>
+                                        </td>
+                                        <td width="20%">
+                                            <div class="text-right">
+                                                <strong class="font-weight-bold">{{item.subTotal | currency
+                                                    :'GBP'}}</strong>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="item.choice !== null && item.choice !== undefined">
+                                        <td width="20%">
+                                            <!-- <img src="https://i.imgur.com/SmBOua9.jpg" width="70"> -->
+                                        </td>
+                                        <td width="60%">
+                                            <strong class="font-weight-bold">{{item.choice.name}}</strong>
+                                            <div class="product-qty">
+                                                <span class="d-block">Quantity:{{item.choice.quantity}}</span>
+                                                <!-- <span>Color:Orange</span> -->
+                                            </div>
+                                        </td>
+                                        <td width="20%">
+                                            <div class="text-right">
+                                                <strong class="font-weight-bold">{{item.choice.price | currency
+                                                    :'GBP'}}</strong>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-borderless" *ngIf="item.extras !== null && item.extras !== undefined">
+                                <tbody>
+                                    <tr *ngFor="let extra of item.extras">
+                                        <td width="20%">
+                                            <!-- <img src="https://i.imgur.com/SmBOua9.jpg" width="70"> -->
+                                        </td>
+                                        <td width="60%">
+                                            <strong class="font-weight-bold">{{extra.name}}</strong>
+                                            <div class="product-qty">
+                                                <span class="d-block">Quantity:{{extra.quantity}}</span>
+                                                <!-- <span>Color:Orange</span> -->
+                                            </div>
+                                        </td>
+                                        <td width="20%">
+                                            <div class="text-right">
+                                                <strong class="font-weight-bold">{{extra.price | currency
+                                                    :'GBP'}}</strong>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-end">
+                        <div class="col-md-5">
+                            <table class="table table-borderless">
+                                <tbody class="totals">
+                                    <tr>
+                                        <td>
+                                            <div class="text-left">
+                                                <span class="text-muted">Subtotal</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="text-right">
+                                                <span>{{order.subTotal | currency:'GBP'}}</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="text-left">
+                                                <span class="text-muted">Delivery Fee</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="text-right">
+                                                <span>{{order.deliveryFee | currency:'GBP'}}</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="text-left">
+                                                <span class="text-muted">Service Fee</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="text-right">
+                                                <span>{{order.serviceFee | currency:'GBP'}}</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-top border-bottom">
+                                        <td>
+                                            <div class="text-left">
+                                                <span class="font-weight-bold">Total</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="text-right">
+                                                <strong>{{order.total | currency:'GBP'}}</strong>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div *ngIf="order.serviceMode === 'DELIVERY'">
+                        <p>We will be sending confirmation email when the order is ready to be delivered successfully!</p>
+                    </div>
+                    <div *ngIf="order.serviceMode === 'COLLECTION'">
+                        <p>We will be sending confirmation email when the order is ready for collection</p>
+                    </div>
+                    <p class="font-weight-bold mb-0">Thanks for ordering with us!</p>
+                    <span>FirstBites Team</span>
+                </div>
+                <div class="d-flex justify-content-between footer p-3">
+                    <span>Need Help? visit our <a href="#"> help center</a></span>
+                    <span>{{order.dateCreated | date: 'dd MMM, yyyy'}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

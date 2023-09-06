@@ -1,0 +1,41 @@
+<div class="basket-wrapper">
+    <img class="go-back" src="/assets/icons/arrow-left-long.png" (click)="goback()">
+    <div class="basket-container">
+        <span class="basket-header">YOUR BASKET</span>
+        <!-- <span class="chef-name" [routerLink]="['/cooks', chef._id]"
+            routerLinkActive="router-link-active">{{chef.displayName}}</span> -->
+        <div
+            *ngIf="order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0; then thenBlock else elseBlock">
+        </div>
+    </div>
+</div>
+
+<ng-template #elseBlock>
+    <div class="basket-no-items">
+        <img src="/assets/icons/shopping-basket.png" height="100px" width="100px" class="empty-bag">
+        <span style="margin-top: 50px;font-weight: 900;">
+            YOUR BASKET IS EMPTY
+        </span>
+        <p>What are you feeling today? Checkout our Home Cooks</p>
+    </div>
+</ng-template>
+
+<ng-template #thenBlock>
+    <div class="basket-with-items">
+        <strong style="font-size: 20px;" [routerLink]="['/cooks', chef._id]"
+        routerLinkActive="router-link-active">{{chef.displayName}}</strong>
+        <span class="chef-address">{{getAddress()}}</span>
+        <div class="btn-wrapper" style="width: 100%;" [routerLink]="['/checkout']">
+            <div style="display: flex; justify-content: space-between;">
+                <span>Checkout</span>
+                <span style="font-weight: bolder;font-size: 15px;">{{cartTotal | currency: 'GBP'}}</span>
+            </div>
+        </div>
+        <div class="items-container">
+            <div *ngIf="order !== null && order !== undefined">
+                <app-order-item *ngFor="let item of order.items" [item]="item"></app-order-item>
+            </div>
+        </div>
+    </div>
+</ng-template>
+

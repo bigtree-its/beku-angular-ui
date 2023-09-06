@@ -1,0 +1,26 @@
+<div class="application-header">
+  <div class="top-row">
+    <div class="left-container">
+      <div [routerLink]="['/']" routerLinkActive="router-link-active" class="logo">BEKU</div>
+      <div class="top-location-container">
+        <span class="location-slug" [routerLink]="[serviceLocation.slug, 'cooks']">#{{displayableServiceLocation}}</span>
+        <span class="change-area" routerLink="/">Change</span>
+      </div>
+    </div>
+    <div class="right-container">
+      <img src="/assets/icons/user.png" height="20px" width="20px" style="margin: 0 10px;">
+      <img src="/assets/icons/shopping-basket.png" height="20px" width="20px" style="margin: 0 1px;"
+        [routerLink]="['/basket']">
+      <div (click)="onClickBasket()">
+        <span class="cart-items-count" style="margin-right: 10px;">{{itemsCount}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="location-row">
+    <div>
+      <img src="/assets/icons/location.png" height="20px" width="20px" style="margin-right: 10px;">
+      <span class="location-slug" [routerLink]="[serviceLocation.slug, 'cooks']">#{{displayableServiceLocation}}</span>
+    </div>
+    <span class="change-area" routerLink="/">Change</span>
+  </div>
+</div>

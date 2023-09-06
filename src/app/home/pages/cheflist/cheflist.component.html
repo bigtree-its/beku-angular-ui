@@ -1,0 +1,47 @@
+<div class="cook-list">
+    <div style="padding: 5px; text-align: center;">
+        <strong style="font-size: 22px;">Top cooks in {{serviceLocation.name}}</strong>
+    </div>
+    <div class="cheflist-layout">
+        <div class="cuisines-check-container">
+            <div *ngFor="let cuisine of cuisines">
+                <input class="my-checkbox my-checkbox--teal" type="checkbox" name="cuisine" value="{{cuisine.name}}"
+                    id="{{cuisine.name}}" (change)="selectCuisine(cuisine.name,$event)">
+                <label for="{{cuisine.name}}">{{cuisine.name}}</label>
+            </div>
+        </div>
+        <div class="cheflist-container">
+            <div class="cuisines-select-container">
+                <select [ngModel]="selectedCuisine" (ngModelChange)="onSelectCuisine($event)" name="cuisineSelect" style="display: block;">
+                    <option [ngValue]="cuisine" *ngFor="let cuisine of cuisines">{{ cuisine.name }}</option>
+                </select>
+            </div>
+            <div *ngFor="let chef of filteredChefs" [routerLink]="['/cooks', chef._id]" class="chef-card">
+                <img src="/assets/images/users/user3.jpg">
+                <div class="chef-data-container">
+                    <span class="chef-name">{{chef.name}}</span>
+                    <!-- <p>{{getAddress(chef)}} </p> -->
+                    <div class="chef-ratings-container">
+                        <div class="ratings-div">
+                            <img [src]="chef.rating > 0 ? starSelected : star" style="width: 15px;height: 15px;">
+                            <img [src]="chef.rating > 1 ? starSelected : star" style="width: 15px;height: 15px;">
+                            <img [src]="chef.rating > 2 ? starSelected : star" style="width: 15px;height: 15px;">
+                            <img [src]="chef.rating > 3 ? starSelected : star" style="width: 15px;height: 15px;">
+                            <img [src]="chef.rating > 4 ? starSelected : star" style="width: 15px;height: 15px;">
+                        </div>
+                        <span style="padding-left: 10px;">({{chef.reviews}} reviews)</span>
+                    </div>
+                    <div class="chef-cuisines-container">
+                        <span *ngFor="let cuisine of chef.cuisines" class="cuisine">
+                            {{cuisine.name}}
+                        </span>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

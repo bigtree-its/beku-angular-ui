@@ -1,0 +1,44 @@
+<div class="home-wrapper">
+    <div class="home-container">
+        <strong style="padding-top: 100px;font-size: 32px;font-weight: 900;">Order online now</strong>
+        <span style="padding: 10px 0;font-size: 22px;color: var(--green);">Craving for home food?</span>
+        <div class="search-container">
+            <img src="/assets/icons/pin.png" height="25px" width="25px" style="margin-right: 20px; opacity: 0.5;">
+            <input type="text" placeholder="Enter your location" class="search-box" [(ngModel)]="serviceLocationSearchText"
+                (keyup.enter)="onEnter()">
+            <div class="btn-wrapper" (click)="onEnter()">
+                <a><span>Find</span></a>
+            </div>
+        </div>
+        <div *ngIf="showServiceLocations" class="locations-container">
+            <div class="close-bar">
+                <strong title="Close" (click)="closeServiceLocations()">X</strong>
+            </div>
+            <div class="location" *ngFor="let sl of serviceLocations" (click)="onSelectServiceLocation(sl)">
+                <span>{{ sl.name }}, {{sl.city}}</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <strong class="section-header">Popular Locations</strong>
+        <span class="section-sub-header">Choose from popular locations</span>
+        <div class="section-data-container">
+            <strong class="section-data-container-header">Glasgow</strong>
+            <div class="section-data" *ngIf="popularLocations !== null && popularLocations !== undefined">
+                <span class="popular-l" *ngFor="let pl of popularLocations"
+                [routerLink]="[pl.slug, 'cooks']">{{pl.name}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <strong class="section-header">Top Cuisines</strong>
+        <span class="section-sub-header">Browse popular cuisines from home chefs in your area and order delivery online.</span>
+        <div class="section-data-container">
+            <div class="section-data" *ngIf="cuisines !== null && cuisines !== undefined">
+                <span class="popular-l" *ngFor="let cuisine of cuisines">{{cuisine.name}}</span>
+            </div>
+        </div>
+    </div>
+</div>

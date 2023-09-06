@@ -1,1 +1,356 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Josefin+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --green: #27ae60;
+  --black: rgb(0, 0, 0);
+  --light-color: #666;
+  --section-background: rgb(238, 238, 238);
+  --aquamarine: aquamarine;
+  --orange: coral;
+  --white: #fff;
+  --warning: #ffc107;
+  --border: #efedea;
+  --v-border: chartreuse;
+  --light-background: #fafafa;
+  --mild-white: rgb(233, 230, 230);
+  --form-control-color: rebeccapurple;
+  --box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+
+  font-family: 'Josefin Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  color: var(--black);
+  font-size: clamp(.5rem, 0.5rem + 10vw, .8rem);
+  letter-spacing: .1px;
+  font-weight: 300;
+  overflow-y: scroll;
+  box-sizing: content-box;
+}
+
+html {
+  font-size: 70%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scroll-padding-top: 5.5.rem;
+  scroll-behavior: smooth;
+  text-size-adjust: 100%;
+
+}
+
+.special-title{
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.modal {
+  overflow-y: auto;
+}
+
+.modal-open {
+  overflow: auto;
+  padding-right: 0px !important;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+img {
+  overflow-clip-margin: content-box;
+  overflow: clip;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: rgb(248, 247, 247);
+
+}
+
+select {
+  width: 100%;
+}
+
+.ng-form-control {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.section {
+  margin: 10px;
+}
+
+.section-w-br {
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.section-header {
+  font-size: large;
+  padding: 10px 0;
+}
+
+.flex-row {
+  display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row-space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-row-justify-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.grid {
+  display: grid;
+  gap: .75rem;
+}
+
+.btn-wrapper {
+  background-color: var(--section-background);
+}
+
+.btn-wrapper>:nth-child(1) {
+  display: block;
+  width: auto;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  font-family: sans-serif;
+  text-decoration: none;
+  text-align: center;
+  position: relative;
+  transition: all .35s;
+  padding: 0 20px;
+}
+
+.btn-wrapper>:nth-child(1) span {
+  position: relative;
+  z-index: 2;
+
+}
+
+.btn-wrapper>:nth-child(1):after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  color: #fff;
+  background-color: var(--black);
+  transition: all .35s;
+}
+
+.btn-wrapper>:nth-child(1):hover {
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-wrapper>:nth-child(1):hover:after {
+  width: 100%;
+}
+
+.n-button, .ok-button, .cancel-button {
+  line-height: 40px;
+  padding: 0 10px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 3px;
+  /* box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); */
+}
+
+.n-button:hover {
+  --box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+}
+
+.ok-button {
+  background-color: salmon;
+  color: #fff;
+}
+
+.cancel-button {}
+
+.ok-button:hover {
+  background-color: 1px solid rgb(255, 67, 46);
+}
+
+.cancel-button:hover {}
+
+.n-button {
+  border: 1px solid var(--border);
+  background-color: var(--light-background);
+  line-height: 40px;
+  padding: 0 10px;
+}
+
+.n-button:hover {
+  cursor: pointer;
+  border: 1px solid darkgray;
+}
+
+.n-w-10 {
+  width: 10px;
+}
+
+.n-w-20 {
+  width: 20px;
+}
+
+.n-w-30 {
+  width: 30px;
+}
+
+.n-w-40 {
+  width: 40px;
+}
+
+.n-w-50 {
+  width: 50px;
+}
+
+.n-w-60 {
+  width: 60px;
+}
+
+.n-w-70 {
+  width: 70px;
+}
+
+.n-w-80 {
+  width: 80px;
+}
+
+.n-w-10 {
+  width: 10px;
+}
+
+.n-w-90 {
+  width: 90px;
+}
+
+.n-w-100 {
+  width: 100px;
+}
+
+.fb-btn {
+  font-weight: 500;
+  border: 1px solid var(--border);
+  background-color: var(--light-color);
+  padding: 10px;
+}
+
+.fb-btn:hover {
+  background-color: var(--green);
+  cursor: pointer;
+}
+
+.fb-btn-selected {
+  background-color: #d2f4ea;
+}
+
+.fb-input {
+  width: 100%;
+  outline: none;
+  padding: 10px;
+  border: 1px solid var(--border);
+}
+
+.my-checkbox {
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.75rem;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: 0;
+}
+
+.my-checkbox:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #f2f2f2;
+  transition: all 0.3s ease-in-out;
+}
+
+.my-checkbox:checked:before {
+  height: 50%;
+  transform: rotate(-45deg);
+  border-top-style: none;
+  border-right-style: none;
+}
+
+.my-checkbox--teal:checked:before {
+  border-color: #009688;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.qty-icon, .plus-icon, .minus-icon {
+  background-color: #81ab32;
+  color: var(--white);
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 7px;
+  border:#27ae60;
+  font-weight: 900;
+}
+.minus-icon{
+  background-color: #c54545;
+  border:#ab0000
+}
+.plus-icon:hover {
+  cursor: pointer;
+  background-color: var(--green);
+  color: var(--white);
+}
+
+.minus-icon:hover {
+  cursor: pointer;
+  background-color: red;
+  color: var(--white);
+}

@@ -1,0 +1,146 @@
+{
+    "id": "",
+    "items": [
+        {
+            "_tempId": 1693002433546,
+            "productId": "373cefdd-4141-405d-b7e7-8c444af3f483",
+            "image": "https://geekrobocook.com/wp-content/uploads/2021/05/Muradabadi-chicken-biryani-1200x900.jpg",
+            "name": "Chines Fried Rice",
+            "quantity": 1,
+            "unitPrice": 10,
+            "price": 10,
+            "subTotal": 11,
+            "extras": [],
+            "choice": {
+                "_id": "623a2fc96bfd845108091031",
+                "name": "Prawn",
+                "price": 1
+            }
+        }
+    ],
+    "chefId": "8cd44b23-ef4d-4311-af0d-787e6bfb2550",
+    "customerEmail": "",
+    "customerMobile": "",
+    "currency": "",
+    "reference": "",
+    "subTotal": 11,
+    "total": null,
+    "saleTax": 0,
+    "orderTime": "2023-08-25T22:27:07.361Z",
+    "pickupTime": "2023-08-25T22:27:07.361Z",
+    "deliveryTime": "2023-08-25T22:27:07.361Z",
+    "delivery": false,
+    "pickup": false,
+    "status": "CREATED",
+    "paymentReference": "PaymentReference",
+    "customer": null,
+    "chef": {
+        "address": {
+            "propertyNumber": "2",
+            "addressLine1": "Main St",
+            "addressLine2": "NY",
+            "city": "Glasgow",
+            "postcode": "G77 5GH",
+            "country": "SCOTLAND",
+            "latitude": 55.7716443,
+            "longitude": -4.314007399999999
+        },
+        "contact": {
+            "person": "Nava",
+            "email": "nava.arul@gmail.com",
+            "mobile": "07979191176",
+            "telephone": "07979191176"
+        },
+        "description": [
+            "Desi Swaad Foods are commited to provide quality foos"
+        ],
+        "specials": [],
+        "cuisines": [
+            {
+                "_id": "82d5a813-bd8a-440d-b280-b9aa0bb235da",
+                "name": "Indian",
+                "slug": "indian",
+                "createdAt": "2022-03-07T16:06:11.973Z",
+                "updatedAt": "2022-03-07T16:06:11.973Z",
+                "__v": 0
+            },
+            {
+                "_id": "0f2e59c0-a7e1-4189-a65c-fe3f97729a28",
+                "name": "Chinese",
+                "slug": "chinese",
+                "createdAt": "2022-03-08T17:16:20.253Z",
+                "updatedAt": "2022-03-08T17:16:20.253Z",
+                "__v": 0
+            }
+        ],
+        "gallery": [
+            "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/20190503-delish-pineapple-baked-salmon-horizontal-ehg-450-1557771120.jpg",
+            "https://www.refrigeratedfrozenfood.com/ext/resources/NEW_RD_Website/DefaultImages/default-pasta.jpg?1430942591",
+            "http://cdn.cnn.com/cnnnext/dam/assets/140430115517-06-comfort-foods.jpg",
+            "https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/slideshows/foods_for_healthy_supple_skin_slideshow/1800x1200_foods_for_healthy_supple_skin_slideshow.jpg",
+            "https://ychef.files.bbci.co.uk/976x549/p09wrjyz.jpg",
+            "https://www.expatica.com/app/uploads/sites/2/2016/09/spanish-food.jpg",
+            "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/20190503-delish-pineapple-baked-salmon-horizontal-ehg-450-1557771120.jpg",
+            "https://www.refrigeratedfrozenfood.com/ext/resources/NEW_RD_Website/DefaultImages/default-pasta.jpg?1430942591",
+            "http://cdn.cnn.com/cnnnext/dam/assets/140430115517-06-comfort-foods.jpg",
+            "https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/slideshows/foods_for_healthy_supple_skin_slideshow/1800x1200_foods_for_healthy_supple_skin_slideshow.jpg",
+            "https://ychef.files.bbci.co.uk/976x549/p09wrjyz.jpg",
+            "https://www.expatica.com/app/uploads/sites/2/2016/09/spanish-food.jpg"
+        ],
+        "serviceAreas": [
+            {
+                "_id": "19ddeaeb-a097-4815-b222-9558e1bf100c",
+                "name": "Waterfoot",
+                "city": "Glasgow",
+                "country": "Scotland",
+                "slug": "waterfoot-glasgow",
+                "createdAt": "2022-03-08T20:13:13.662Z",
+                "updatedAt": "2022-03-08T20:13:13.662Z",
+                "__v": 0
+            },
+            {
+                "_id": "9ccb28a1-9108-462e-bb0d-ed31af10dccb",
+                "name": "Eaglesham",
+                "city": "Glasgow",
+                "country": "Scotland",
+                "slug": "eaglesham-glasgow",
+                "createdAt": "2022-03-08T20:13:19.955Z",
+                "updatedAt": "2022-03-08T20:13:19.955Z",
+                "__v": 0
+            }
+        ],
+        "categories": [
+            "Starter",
+            "Mains",
+            "Desserts",
+            "Briyani"
+        ],
+        "slots": [
+            "Dinner",
+            "Lunch",
+            "Breakfast"
+        ],
+        "_id": "8cd44b23-ef4d-4311-af0d-787e6bfb2550",
+        "name": "Sujata Borker",
+        "displayName": "Desi Swaad Kitchen",
+        "slug": "desi-swaad-kitchen",
+        "rating": 5,
+        "reviews": 300,
+        "coverPhoto": "https://www.great-taste.net/wp-content/uploads/2015/04/guzman-local-chef-style.jpg",
+        "active": true,
+        "preOrder": true,
+        "delivery": true,
+        "takingOrdersNow": true,
+        "collectionOnly": false,
+        "minimumOrder": 12,
+        "collectionEstimate": 15,
+        "deliveryEstimateMin": 35,
+        "deliveryEstimateMax": 55,
+        "noMinimumOrder": true,
+        "createdAt": "2022-03-21T22:11:35.163Z",
+        "updatedAt": "2022-03-21T22:11:35.163Z",
+        "__v": 0
+    },
+    "review": null,
+    "serviceMode": "Collection"
+}

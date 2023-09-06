@@ -1,0 +1,152 @@
+.cheflist-layout {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 10px;
+
+}
+
+.cheflist-layout>*:nth-child(1) {
+    flex: 1 1 10%;
+    min-width: 125px;
+}
+
+.cheflist-layout>*:nth-child(2) {
+    flex: 1 1 90%;
+    min-width: 20ch;
+}
+
+.cheflist-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2em;
+}
+
+.cuisines-select-container {
+    display: flex;
+    height: 40px;
+    width: 100%;
+    background-color: var(--border);
+}
+
+.cuisines-check-container {
+    display: none;
+}
+
+.flex-container {
+    display: flex;
+    /* default the child are arranged in horizontally */
+    /* flex-direction: row; */
+
+    /* Use 'column' to arrange the child vertically */
+    /* flex-direction: column; */
+
+    /* To wrap the child to next line if there is not enough space */
+    /* When it wraps it takes  the minimum space required, and dont fill the reamining space in the row */
+    flex-wrap: wrap;
+}
+
+/* when it warps the each child take maximum space to fill the row */
+/* > * indicates all the elements inside the class .flex-container */
+.flex-container>* {
+    flex-grow: 1;
+}
+
+
+.chef-container {
+    display: grid;
+    gap: 2rem;
+    padding: 10px;
+    /* By default it stack the child vertically: .;To stak horizontally use below */
+    /* grid-auto-flow: column; */
+
+    /* Give the space equally between childs, minimum 260px and each column takes 1fr, 1 fraction *
+    /* Upon resixing the viewport, child will move to next line */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.chef-box {
+    border: 1px solid #eee;
+}
+
+/* div:not([class]){
+    outline: 2px solid black;
+    padding: .5rem;
+} */
+.chef-container-right {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+    flex-grow: 1;
+}
+
+.chef-card {
+    display: flex;
+    flex-direction: column;
+    -webkit-box-shadow: 0 3px 12px -1px rgba(7, 10, 25, 0.1), 0 22px 27px -30px rgba(7, 10, 25, 0.1);
+    box-shadow: 0 3px 12px -1px rgba(7, 10, 25, 0.1), 0 22px 27px -30px rgba(7, 10, 25, 0.1);
+    border-radius: 17px;
+    width: 23rem;
+    background-color: #fff;
+}
+
+.chef-card>img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-top-left-radius: 17px;
+    border-top-right-radius: 17px;
+    transition: 0.5s ease-in-out;
+}
+.chef-card>img:hover {
+    cursor: pointer;
+    transform: scale(1.08);
+}
+
+.chef-name {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.chef-data-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+.chef-ratings-container{
+    display: flex;
+}
+.chef-cuisines-container{
+    display: flex;
+}
+.cuisine {
+    margin: 0 10px 0 0;
+    display: inline-block;
+    opacity: 0.6;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+
+@media (min-width: 400px) {
+    .cuisines-select-container {
+        display: none;
+    }
+
+    .cuisines-check-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 10px;
+    }
+
+    .cuisines-check-container>div>input {
+        border: 1px solid rgb(94, 9, 9);
+        align-items: center;
+    }
+}

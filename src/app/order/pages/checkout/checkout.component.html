@@ -1,0 +1,170 @@
+<ng-container *ngIf="(loadStripe$ | async) as stripe; else loadingStripe"></ng-container>
+<div class="checkout-container">
+    <img src="/assets/icons/arrow-left-long.png" (click)="goback()">
+    <div class="basket-container">
+        <span style="font-weight: 900;font-size: 22px;margin-bottom: 30px;">Checkout</span>
+        <span style="font-weight: 900;" [routerLink]="['/cooks', chef._id]"
+            routerLinkActive="router-link-active">#{{chef.displayName}}</span>
+        <span class="chef-address">{{getAddress()}}</span>
+        <hr>
+        <div style="padding: 20px; border: 1px solid var(--border);background-color: white;min-width: 500px;">
+            <h4 style="padding: 0 0 30px 0;text-align: center;">{{divHeader}}</h4>
+            <div *ngIf="showCustomerDetailsSection" class="customer-details-container">
+                <div class="flex-column mb-3">
+                    <label for="customerName">Your name on order (for when you collect)<small
+                            style="color: red;">**</small></label>
+                    <input class="fb-input" type="text" name="customerName" tabindex="0" autocomplete="off" value=""
+                        [(ngModel)]="customerName" #ctrl="ngModel" required="true">
+                </div>
+                <div class="flex-column mb-3">
+                    <label for="customerMobile">Your mobile<small style="color: red;">**</small></label>
+                    <input class="fb-input" type="mobile" name="customerMobile" tabindex="1" autocomplete="off" value=""
+                        [(ngModel)]="customerMobile" #ctrl="ngModel" required="true">
+                </div>
+                <div class="flex-column">
+                    <label for="customerEmail">Your email<small style="color: red;">**</small></label>
+                    <input class="fb-input" type="email" name="customerEmail" tabindex="2" autocomplete="off" value=""
+                        [(ngModel)]="customerEmail" #ctrl="ngModel" required="true">
+                </div>
+            </div>
+
+            <div *ngIf="showServiceModeSection" class="flex-column justify-content-center">
+                <div class="delivery-mode-container" style="margin-bottom: 30px;">
+                    <button style="display: inline-block;" class="n-button" (click)="selectPickup()" [class.fb-btn-selected]="serviceMode==='Pickup'">I
+                        want to
+                        collect</button>
+                    <button style="display: inline-block;" class="n-button" (click)="selectDelivery()"
+                        [class.fb-btn-selected]="serviceMode==='Delivery'">I
+                        want delivery</button>
+                </div>
+                <div *ngIf="serviceMode === 'Pickup'">
+                    <strong style="display: block;">Please collect at</strong>
+                    <span style="display: block;">{{chef.address.addressLine1}}</span>
+                    <span style="display: block;">{{chef.address.addressLine2}}</span>
+                    <span style="display: block;">{{chef.address.city}}</span>
+                    <span style="display: block;">{{chef.address.postcode}}</span>
+                </div>
+                <div class="customer-delivery-address-container" *ngIf="chef.delivery  && serviceMode === 'Delivery'">
+                    <strong>Where should we send your order?</strong>
+                    <div class="customer-address-container"
+                        *ngIf="address.addressLine1 !== undefined &&  address.addressLine1.length > 0">
+                        <div class="customer-address-section">
+                            <span *ngIf="address.addressLine1 !== undefined &&  address.addressLine1.length > 0">{{
+                                address.addressLine1
+                                }}</span>
+                            <span *ngIf="address.addressLine2 !== undefined &&  address.addressLine2.length > 0">{{
+                                address.addressLine2
+                                }}</span>
+                            <span *ngIf="address.city !== undefined &&  address.city.length > 0">{{
+                                address.city
+                                }}</span>
+                            <span *ngIf="address.country !== undefined &&  address.country.length > 0">{{
+                                address.country }}</span>
+                        </div>
+                        <div>
+                            <button class="fb-btn" (click)="showAddressLookup()">Change</button>
+                        </div>
+                    </div>
+                    <div *ngIf="lookupAddress" class="postcode-lookup-container">
+                        <input class="fb-input" type="text" name="postcode" id="postcode" tabindex="4"
+                            autocomplete="off" value="" [(ngModel)]="addressLookup.postcode" #ctrl="ngModel"
+                            placeholder="Enter your postcode">
+                        <button class="n-button" (click)="findAddress()" style="margin-right: 8px;">Find</button>
+                    </div>
+                    <div
+                        *ngIf="postcodeAddressList !== undefined && postcodeAddressList.length > 0 && !addressSelected">
+                        <div style="border:1px solid #e0e0e0;overflow-y: auto;height: 150px;">
+                            <div class="address-item" *ngFor="let add of postcodeAddressList"
+                                (click)="onSelectDeliveryAddress(add)">
+                                <span> {{add.StreetAddress }}, {{add.Place}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div *ngIf="showItemsSection" class="items-container">
+                <div *ngIf="order !== null && order !== undefined">
+                    <app-order-item *ngFor="let item of order.items" [item]="item"></app-order-item>
+                </div>
+            </div>
+
+            <div *ngIf="showPaymentSection" class="order-details-container">
+                <div class="flex-row-space-between">
+                    <strong>Subtotal</strong>
+                    <strong>{{order.subTotal| currency: 'GBP'}}</strong>
+                </div>
+                <div class="flex-row-space-between">
+                    <span>Delivery fee</span>
+                    <span>{{order.deliveryFee| currency: 'GBP'}}</span>
+                </div>
+                <div class="flex-row-space-between">
+                    <span>Service Fee</span>
+                    <span>{{order.serviceFee| currency: 'GBP'}}</span>
+                </div>
+                <div class="flex-row-space-between" style="margin-top: 10px;">
+                    <strong>Total</strong>
+                    <strong>{{order.total| currency: 'GBP'}}</strong>
+                </div>
+            </div>
+            <div *ngIf="showStripeSection">
+                <div id="cardInfo" #cardInfo style="border: 1px solid var(--v-border);padding: 12px 5px;">
+                    <!--Stripe.js injects the Card Element-->
+                </div>
+                <div id="payment-element">
+                    <!--Stripe.js injects the Payment Element-->
+                  </div>
+                <button id="paywithCardButton" [disabled]="!enablePayButton"
+                    class="b-button"
+                    (click)="confirmPayment()">Pay {{
+                    order.subTotal| currency: 'GBP'}}</button>
+                <small class="text-muted">By selecting this button, you agree to the Terms of
+                    Sale.</small>
+
+                <div id="cardErrors" *ngIf="cardErrors">{{cardErrors}}</div>
+                <div id="payment-result-section" class="payment-result-section hidden">
+                    <span id="payment-message"></span>
+                </div>
+                <div class="my-5">
+                    <img src="/assets/icons/secure-stripe-payment-logo.png" class="stripe-logo" />
+                </div>
+            </div>
+            <div class="flex-row-space-between" style="margin-top: 30px;">
+                <button class="n-button n-w-100" (click)="previous()" tabindex="4">Previous</button>
+                <button *ngIf="!showPlaceOrderButton" class="n-button" style="min-width: 100px;" (click)="next()"  tabindex="5">Next</button>
+                <button *ngIf="showPlaceOrderButton" class="n-button" style="min-width: 100px;" (click)="placeOrder(stripeContent)"  tabindex="5">Proceed to Pay</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #itemsContent let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Your Items</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <div class="items-container">
+            <div *ngIf="order !== null && order !== undefined">
+                <app-order-item *ngFor="let item of order.items" [item]="item"></app-order-item>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<ng-template #stripeContent let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Secure Pay</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <app-stripeform [order]="order" [paymentIntent]="paymentIntent"></app-stripeform>
+    </div>
+
+</ng-template>
+
+<ng-template #loadingStripe>
+    Loading.... Please wait!
+</ng-template>

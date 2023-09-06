@@ -1,0 +1,207 @@
+.basket-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+    min-width: 400px;
+    margin-top: 1%;
+}
+
+.checkout-container>img {
+    margin: 10px;
+    height: 50px;
+    width: 50px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    align-items: center;
+    padding: 10px;
+}
+
+.checkout-container img:hover {
+    cursor: pointer;
+    border: 1px solid var(--border);
+}
+
+.basket-container>* {
+    flex-grow: 1;
+}
+
+.basket-header {
+    font-size: 1.5em;
+}
+
+.chef-container {
+    padding: 10px;
+}
+
+.delivery-mode-container {
+    display: flex;
+    gap: .2rem;
+    background-color: aliceblue;
+    align-items: stretch;
+}
+.delivery-mode-container> button{
+    flex-grow: 1;
+}
+
+.customer-details-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 450px;
+    font-weight: 700;
+}
+
+.customer-delivery-address-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 450px;
+}
+
+.customer-address-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.customer-address-section {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.postcode-lookup-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.postcode-lookup-container input {
+    line-height: 30px;
+}
+
+.order-details-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 450px;
+    border-left: 5px dotted #eee;
+    padding: 10px;
+}
+
+.order-details-header, .customer-details-header {
+    display: flex;
+    flex-direction: column;
+    min-width: 450px;
+    border-left: 5px dotted #eee;
+    font-weight: 700;
+    padding: 10px;
+}
+
+.order-details-header:hover {
+    background-color: var(--warning);
+    cursor: pointer;
+}
+
+.chef-name {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.chef-name:hover {
+    cursor: pointer;
+}
+
+.chef-info-container {
+    display: flex;
+    flex-flow: row;
+}
+
+.accordian-container {
+    min-width: 400px;
+    max-width: 1100px;
+}
+
+.items-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkout-button-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: aquamarine;
+}
+
+.btn-selected {
+    background-color: #eee;
+}
+
+
+
+.my-checkbox {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.75rem;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: none;
+}
+
+.my-checkbox:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #f2f2f2;
+    transition: all 0.3s ease-in-out;
+    font-size: 20px;
+}
+
+.my-checkbox:checked:before {
+    height: 50%;
+    transform: rotate(-45deg);
+    border-top-style: none;
+    border-right-style: none;
+}
+
+.my-checkbox--red:checked:before {
+    border-color: #7cf436;
+}
+
+.trigger input[type=checkbox]+div {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 0.33s, opacity 0.33s linear;
+}
+
+.trigger input[type=checkbox]:checked+div {
+    visibility: visible;
+    display: block;
+    opacity: 1;
+    transition-delay: 0s;
+}
+
+.msg {
+    /* display: block; */
+    margin-top: 8px;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+}
+
+@media (min-width: 55em) {
+    .customer-address-container {
+        display: flex;
+        flex-direction: row;
+    }
+}

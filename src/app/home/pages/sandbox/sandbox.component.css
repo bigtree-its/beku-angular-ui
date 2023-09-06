@@ -1,0 +1,66 @@
+.horizontal-scrollable-div {
+    scroll-snap-type: x mandatory;
+    overflow-x: scroll;
+    /* display: flex;    */
+    /* justify-content: space-around; */
+    border: 1px solid salmon;
+    width: 200px;
+}
+
+.horizontal-scrollable-div>span {
+    scroll-snap-align: center;
+}
+
+.scroll-container{
+    background-color: antiquewhite;
+    width: 550px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.info-widget {
+    /* width: 31.75%; */
+    border: 1px solid black;
+    display: inline-block;
+    padding: 10px;
+    background-color: #ddd;
+    margin: 0 10px;
+  }
+
+  .middle {
+    /* float: left; */
+    width: 415px;
+    background-color: aliceblue;
+    padding: 10px;
+    overflow-x: hidden;
+    /*will change this to hidden later to deny scolling to user*/
+    white-space: nowrap;
+  }
+
+.scroll-right {
+    height: 20px;
+    width: 20px;
+    margin: 10px;
+    opacity: 0.6;
+    border: 1px solid #ddd;
+}
+
+.scroll-right:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.scroll-left {
+    height: 20px;
+    width: 20px;
+    margin: 10px;
+    opacity: 0.6;
+    border: 1px solid #ddd;
+}
+
+.scroll-left:hover {
+    cursor: pointer;
+    opacity: 1;
+}
