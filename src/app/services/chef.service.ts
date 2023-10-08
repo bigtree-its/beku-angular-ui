@@ -50,6 +50,7 @@ export class ChefService {
   }
 
   getChef(id: string): Observable<LocalChef> {
+    console.log('Retrieving Supplier '+ id)
     var url = this.URL + this.BASEPATH + this.URI+ "/" + id;
     return this.http.get<LocalChef>(url);
   }

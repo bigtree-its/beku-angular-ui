@@ -75,11 +75,10 @@ export class ChefHomeComponent implements AfterViewInit {
       this.weekDays = this.computeDays();
     }
     this.activatedRoute.params.subscribe(params => {
-      const chefId = params['id'];
-      console.log(`Chef Id: ${params['id']}`);
+      const supplierId = params['id'];
       var chefOnCtx: LocalChef = this.contextService.retrieveChef();
-      if (chefOnCtx === null || chefOnCtx == undefined || chefOnCtx._id !== chefId) {
-        this.chefService.getChef(chefId).subscribe((d: LocalChef) => {
+      if (chefOnCtx === null || chefOnCtx == undefined || chefOnCtx._id !== supplierId) {
+        this.chefService.getChef(supplierId).subscribe((d: LocalChef) => {
           this.chef = d;
           this.contextService.selectChef(d);
           this.display_picture = this.chef.coverPhoto;
@@ -87,15 +86,16 @@ export class ChefHomeComponent implements AfterViewInit {
           this.chef.gallery.forEach(p => {
             this.gallery.push(p);
           });
-          this.fetchItems(chefId);
-          this.fetchCalendars(chefId);
+          this.fetchItems(supplierId);
+          this.fetchCalendars(supplierId);
           var order: CustomerOrder = this.orderService.createOrder();
           this.contextService.publishOrder(order);
         });
-      } else if (chefOnCtx === null && chefOnCtx && undefined || chefOnCtx._id === chefId) {
+      } else if (chefOnCtx === null && chefOnCtx && undefined || chefOnCtx._id === supplierId) {
         this.chef = chefOnCtx;
-        this.fetchItems(chefId);
-        this.fetchCalendars(chefId);
+        this.fetchItems(supplierId);
+        this.fetchCalendars(supplierId);
+      
       }
     });
     this.contextService.orderSubject.subscribe(theOrder => {
@@ -109,8 +109,8 @@ export class ChefHomeComponent implements AfterViewInit {
     })
   }
 
-  private fetchCalendars(chefId: string) {
-    this.chefService.getCalendars(chefId, true, false).subscribe((calendars: Calendar[]) => {
+  private fetchCalendars(supplierId: string) {
+    this.chefService.getCalendars(supplierId, true, false).subscribe((calendars: Calendar[]) => {
       this.calendars = calendars;
       this.groupCalendar();
       console.log('Calendars for chef: ' + this.calendars.length)
@@ -164,8 +164,8 @@ export class ChefHomeComponent implements AfterViewInit {
     console.log('Monthly Cals: ' + JSON.stringify(this.monthlyCals));
   }
 
-  private fetchItems(chefId: string) {
-    this.chefService.getAllFoods(chefId).subscribe((items: Food[]) => {
+  private fetchItems(supplierId: string) {
+    this.chefService.getAllFoods(supplierId).subscribe((items: Food[]) => {
       this.items = items;
       console.log('Foods fetched: ' + this.items.length)
 

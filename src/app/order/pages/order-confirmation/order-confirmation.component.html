@@ -1,11 +1,11 @@
-<div class="container mt-5 mb-5">
+<div class="container mt-5 mb-5" *ngIf="order !== null && order !== undefined">
     <div class="row d-flex justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <!-- <div class="text-left logo p-2 px-5">
                     <img src="https://i.imgur.com/2zDU056.png" width="50">
                 </div> -->
-                <div class="invoice p-5">
+                <div class="p-5">
                     <h5>Your order Confirmed!</h5>
                     <span class="font-weight-bold d-block mt-4">Hello, {{order.customer.name}}</span>
                     <span>You order has been confirmed !</span>
@@ -22,7 +22,7 @@
                     </div>
                     <div *ngIf="order.serviceMode === 'COLLECTION'">
                         <div class="py-2">
-                            <span class="d-block text-muted">Collection Address</span>
+                            <strong class="d-block text-muted">Collection Address</strong>
                             <div class="address">
                                 <span>{{order.supplier.address.addressLine1}},</span>
                                 <span>{{order.supplier.address.addressLine2}}, </span>
@@ -31,7 +31,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="payment border-top mt-3 mb-3 border-bottom table-responsive">
+                    <div class="border-top mt-3 mb-3 border-bottom table-responsive">
                         <table class="table table-borderless">
                             <tbody>
                                 <tr>
@@ -67,55 +67,32 @@
                                             <img src="https://i.imgur.com/SmBOua9.jpg" width="70">
                                         </td>
                                         <td width="60%">
-                                            <strong class="font-weight-bold">{{item.name}}</strong>
-                                            <div class="product-qty">
-                                                <span class="d-block">Quantity:{{item.quantity}}</span>
-                                                <!-- <span>Color:Orange</span> -->
+                                            <span><b>{{item.name}}</b> <small> x <i>{{item.quantity}}</i></small></span>
+                                            <div *ngIf="item.choice !== null">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td width="80%"><i>+ ({{item.choice.name}})</i></td>
+                                                            <td width="20%"><small>{{item.choice.price | currency:'GBP'}}</small></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div *ngIf="item.extras !== null">
+                                                <table>
+                                                    <tbody>
+                                                        <tr *ngFor="let extra of item.extras">
+                                                            <td width="80%"><i>+ ({{extra.name}})</i></td>
+                                                            <td width="20%"><small>{{extra.price | currency:'GBP'}}</small></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <!-- <span *ngFor="let extra of item.extras"><i>+ ({{extra.name}})</i> <small> = {{extra.price | currency:'GBP'}}</small></span> -->
                                             </div>
                                         </td>
                                         <td width="20%">
                                             <div class="text-right">
                                                 <strong class="font-weight-bold">{{item.subTotal | currency
-                                                    :'GBP'}}</strong>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr *ngIf="item.choice !== null && item.choice !== undefined">
-                                        <td width="20%">
-                                            <!-- <img src="https://i.imgur.com/SmBOua9.jpg" width="70"> -->
-                                        </td>
-                                        <td width="60%">
-                                            <strong class="font-weight-bold">{{item.choice.name}}</strong>
-                                            <div class="product-qty">
-                                                <span class="d-block">Quantity:{{item.choice.quantity}}</span>
-                                                <!-- <span>Color:Orange</span> -->
-                                            </div>
-                                        </td>
-                                        <td width="20%">
-                                            <div class="text-right">
-                                                <strong class="font-weight-bold">{{item.choice.price | currency
-                                                    :'GBP'}}</strong>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <table class="table table-borderless" *ngIf="item.extras !== null && item.extras !== undefined">
-                                <tbody>
-                                    <tr *ngFor="let extra of item.extras">
-                                        <td width="20%">
-                                            <!-- <img src="https://i.imgur.com/SmBOua9.jpg" width="70"> -->
-                                        </td>
-                                        <td width="60%">
-                                            <strong class="font-weight-bold">{{extra.name}}</strong>
-                                            <div class="product-qty">
-                                                <span class="d-block">Quantity:{{extra.quantity}}</span>
-                                                <!-- <span>Color:Orange</span> -->
-                                            </div>
-                                        </td>
-                                        <td width="20%">
-                                            <div class="text-right">
-                                                <strong class="font-weight-bold">{{extra.price | currency
                                                     :'GBP'}}</strong>
                                             </div>
                                         </td>
@@ -127,7 +104,7 @@
                     <div class="row d-flex justify-content-end">
                         <div class="col-md-5">
                             <table class="table table-borderless">
-                                <tbody class="totals">
+                                <tbody>
                                     <tr>
                                         <td>
                                             <div class="text-left">
@@ -187,7 +164,7 @@
                         <p>We will be sending confirmation email when the order is ready for collection</p>
                     </div>
                     <p class="font-weight-bold mb-0">Thanks for ordering with us!</p>
-                    <span>FirstBites Team</span>
+                    <span>BEKU Team</span>
                 </div>
                 <div class="d-flex justify-content-between footer p-3">
                     <span>Need Help? visit our <a href="#"> help center</a></span>

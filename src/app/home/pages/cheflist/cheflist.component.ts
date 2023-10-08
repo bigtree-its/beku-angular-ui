@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChefSearchQuery } from 'src/app/model/ChefSearchQuery';
 import { Cuisine, LocalChef } from 'src/app/model/localchef';
@@ -6,6 +6,7 @@ import { ServiceLocation } from 'src/app/model/ServiceLocation';
 import { ChefService } from 'src/app/services/chef.service';
 import { ContextService } from 'src/app/services/context.service';
 import { CuisinesService } from 'src/app/services/cusines.service';
+import { LocationService } from 'src/app/services/location.service';
 import { Utils } from 'src/app/services/utils';
 
 @Component({
@@ -14,13 +15,16 @@ import { Utils } from 'src/app/services/utils';
   styleUrls: ['./cheflist.component.css']
 })
 export class CheflistComponent {
+
+  @ViewChild('widgetsContent', { read: ElementRef }) public widgetsContent: ElementRef<any>;
+
   serviceLocation: ServiceLocation;
   localChefs: LocalChef[] = [];
   filteredChefs: LocalChef[] = [];
   serviceLocations: ServiceLocation[] = [];
 
   starSelected: string = "/assets/icons/star3.png";
-  star: string = "/assets/icons/star1.png";
+  star: string = "/assets/icons/star.png";
   cuisines: Cuisine[] = [];
   selectedCuisines: Cuisine[] = [];
   selectedCuisine: Cuisine;
@@ -29,6 +33,7 @@ export class CheflistComponent {
   constructor(private activatedRoute: ActivatedRoute,
     private chefService: ChefService,
     private contextService: ContextService,
+    private locationService: LocationService,
     private utils: Utils,
     private cuisinesService: CuisinesService,
     private router: Router) {
@@ -37,8 +42,14 @@ export class CheflistComponent {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       var serviceLocation = params['servicelocation'];
-      console.log(`Service Location : ${params['servicelocation']}`);
-      this.fetchChefsByServiceLocation(serviceLocation);
+      this.locationService.getLocation(serviceLocation).subscribe(sl=>{
+        if ( this.utils.isValid(sl)){
+          this.serviceLocation = sl;
+          this.contextService.selectLocation(sl);
+          this.fetchChefsByServiceLocation(serviceLocation);
+        }
+      });
+      
     });
     this.cuisinesService.getCuisines().subscribe(d => {
       this.cuisines = d;
@@ -48,7 +59,6 @@ export class CheflistComponent {
         this.cuisineMap.set(theCuisine.name, theCuisine);
       }
     });
-    this.serviceLocation = this.contextService.getServiceLocation();
   }
 
   onSelectCuisine(value) {
@@ -113,5 +123,13 @@ export class CheflistComponent {
 
   getAddress(cook: LocalChef): string {
     return this.utils.getChefAddress(cook);
+  }
+
+  public scrollRight(): void {
+    this.widgetsContent.nativeElement.scrollTo({ left: (this.widgetsContent.nativeElement.scrollLeft + 150), behavior: 'smooth' });
+  }
+
+  public scrollLeft(): void {
+    this.widgetsContent.nativeElement.scrollTo({ left: (this.widgetsContent.nativeElement.scrollLeft - 150), behavior: 'smooth' });
   }
 }

@@ -9,6 +9,7 @@ import { Utils } from './utils';
 })
 export class ContextService {
   
+  
   chefSubject: BehaviorSubject<LocalChef>;
   orderSubject: BehaviorSubject<CustomerOrder>;
   serviceLocationSubject: BehaviorSubject<ServiceLocation>;
@@ -36,6 +37,12 @@ export class ContextService {
     return order;
   }
 
+  publishServiceLocation(serviceLocation: ServiceLocation) {
+    this.serviceLocation = serviceLocation;
+    localStorage.setItem("serviceLocation", JSON.stringify(serviceLocation));
+    this.serviceLocationSubject.next({ ...serviceLocation });
+  }
+
   public selectChef(theChef: LocalChef) {
     this.chef = theChef;
     localStorage.setItem("chef", JSON.stringify(theChef));
@@ -56,10 +63,17 @@ export class ContextService {
     localStorage.setItem("order", JSON.stringify(theOrder));
   }
 
-  selectLocation(selectedServiceLocation: ServiceLocation) {
-    this.serviceLocation = selectedServiceLocation;
+  public destroyOrder(){
+    console.log('Destroying order')
+    this.order = undefined;
+    this.orderSubject.next(null);
+    localStorage.removeItem('order');
+  }
+
+  selectLocation(sl: ServiceLocation) {
+    this.serviceLocation = sl;
     this.serviceLocationSubject.next({ ...this.serviceLocation });
-    localStorage.setItem("servicelocation", JSON.stringify(selectedServiceLocation));
+    localStorage.setItem("servicelocation", JSON.stringify(sl));
   }
 
   getServiceLocation(): ServiceLocation{

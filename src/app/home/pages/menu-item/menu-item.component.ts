@@ -34,6 +34,7 @@ export class MenuItemComponent {
   ngOnInit() {
     this.price = this.food.price;
   }
+
   open(content) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
       (result) => {
@@ -49,7 +50,6 @@ export class MenuItemComponent {
   }
 
   handleChoiceSelection(e: any) {
-    console.log('Choice selected:' + e.target.value);
     if (this.food !== null && this.food !== undefined) {
       this.food.choices.forEach(choice => {
         if (choice.name === e.target.value) {

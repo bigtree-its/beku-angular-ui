@@ -1,17 +1,20 @@
-.basket-wrapper{
+.basket-wrapper {
     display: flex;
     flex-direction: column;
 }
-.basket-container{
+
+.basket-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.basket-header{
+
+.basket-header {
     font-size: 1.5em;
     border-bottom: 3px solid salmon;
 }
+
 .go-back {
     margin: 10px;
     height: 50px;
@@ -21,7 +24,23 @@
     align-items: center;
     padding: 10px;
 }
-.basket-no-items{
+
+.scroll-left {
+    margin: 10px;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    align-items: center;
+    padding: 10px;
+    background-color: transparent;
+}
+
+.scroll-left:hover {
+    cursor: pointer;
+    background-color: var(--white);
+}
+
+.basket-no-items {
     margin-top: 100px;
     display: flex;
     flex-direction: column;
@@ -29,7 +48,8 @@
     justify-content: center;
     align-items: center;
 }
-.basket-with-items{
+
+.basket-with-items {
     margin-top: 30px;
     display: flex;
     flex-direction: column;
@@ -37,24 +57,30 @@
     justify-content: center;
     align-items: center;
 }
-.empty-bag{
+
+.empty-bag {
     opacity: 0.1;
 }
-.chef-name{
+
+.chef-name {
     font-size: 2.5em;
 }
-.chef-name:hover{
+
+.chef-name:hover {
     cursor: pointer;
 }
-.chef-info-container{
+
+.chef-info-container {
     display: flex;
 }
-.items-container{
+
+.items-container {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
-.checkout-button-container{
+
+.checkout-button-container {
     display: flex;
     justify-content: space-between;
     padding: 10px;

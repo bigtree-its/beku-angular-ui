@@ -9,19 +9,11 @@
     margin-top: 1%;
 }
 
-.checkout-container>img {
-    margin: 10px;
-    height: 50px;
-    width: 50px;
-    border: 1px solid #fff;
-    border-radius: 50%;
-    align-items: center;
-    padding: 10px;
-}
-
-.checkout-container img:hover {
-    cursor: pointer;
+.section {
+    padding: 20px;
     border: 1px solid var(--border);
+    min-width: 500px;
+    border-radius: 18px;
 }
 
 .basket-container>* {
@@ -37,13 +29,29 @@
 }
 
 .delivery-mode-container {
+    background-color: #efedea;
+    border-radius: 50rem;
     display: flex;
-    gap: .2rem;
-    background-color: aliceblue;
-    align-items: stretch;
+    height: 50px;
+    justify-content: space-around;
+    margin: 8px 0 16px;
+    padding: 3px;
 }
-.delivery-mode-container> button{
+
+.delivery-mode-container>button {
     flex-grow: 1;
+}
+
+.service-mode-option {
+    border-radius: 50rem;
+    border: none;
+    padding: 5px 10px;
+    background: transparent;
+}
+
+.service-mode-option-selected {
+    background: var(--white);
+    box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
 }
 
 .customer-details-container {
@@ -91,7 +99,8 @@
     padding: 10px;
 }
 
-.order-details-header, .customer-details-header {
+.order-details-header,
+.customer-details-header {
     display: flex;
     flex-direction: column;
     min-width: 450px;
@@ -140,7 +149,20 @@
     background-color: #eee;
 }
 
+.scroll-left {
+    margin: 10px;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    align-items: center;
+    padding: 10px;
+    background-color: transparent;
+}
 
+.scroll-left:hover {
+    cursor: pointer;
+    background-color: var(--white);
+}
 
 .my-checkbox {
     width: 2rem;

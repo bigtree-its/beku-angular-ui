@@ -1,7 +1,7 @@
 import { Address, ChefContact, Contact, User } from "./common-models";
 
 export interface OrderSupplier{
-    id: string;
+    _id: string;
     name: string;
     image: string;
     mobile: string;
@@ -10,13 +10,14 @@ export interface OrderSupplier{
 }
 
 export class OrderStatus{
-    readonly created: string = "CREATED";
-    readonly accepted: string = "ACCEPTED";
-    readonly processing: string = "PROCESSING";
-    readonly collected: string = "COLLECTED";
-    readonly delivered: string = "DELIVERED";
-    readonly cancelled: string = "CANCELLED";
-    readonly refunded: string = "REFUNDED";
+    static readonly created: string = "CREATED";
+    static readonly accepted: string = "ACCEPTED";
+    static readonly paid: string = "PAID";
+    static readonly processing: string = "PROCESSING";
+    static readonly collected: string = "COLLECTED";
+    static readonly delivered: string = "DELIVERED";
+    static readonly cancelled: string = "CANCELLED";
+    static readonly refunded: string = "REFUNDED";
 }
 
 export interface OrderCustomer{
@@ -246,6 +247,11 @@ export interface OrderSearchQuery {
     thisYear: boolean;
     all: boolean;
     orderId: string;
+}
+
+export interface OrderTracking{
+    reference: string;
+    status: string;
 }
 
 export interface OrderUpdateRequest {

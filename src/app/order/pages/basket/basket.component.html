@@ -1,11 +1,12 @@
 <div class="basket-wrapper">
-    <img class="go-back" src="/assets/icons/arrow-left-long.png" (click)="goback()">
+    <div style="display: flex;align-items: center;">
+        <img src="/assets/icons/left-arrow.png" loading="lazy" class="scroll-left" (click)="goback()"><span style="font-size: x-large;">Your Basket</span>
+    </div>
     <div class="basket-container">
-        <span class="basket-header">YOUR BASKET</span>
+        <!-- <span class="basket-header">YOUR BASKET</span> -->
         <!-- <span class="chef-name" [routerLink]="['/cooks', chef._id]"
             routerLinkActive="router-link-active">{{chef.displayName}}</span> -->
-        <div
-            *ngIf="order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0; then thenBlock else elseBlock">
+        <div *ngIf="order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0; then thenBlock else elseBlock">
         </div>
     </div>
 </div>
@@ -22,8 +23,7 @@
 
 <ng-template #thenBlock>
     <div class="basket-with-items">
-        <strong style="font-size: 20px;" [routerLink]="['/cooks', chef._id]"
-        routerLinkActive="router-link-active">{{chef.displayName}}</strong>
+        <strong style="font-size: 20px;" [routerLink]="['/cooks', chef._id]" routerLinkActive="router-link-active">{{chef.displayName}}</strong>
         <span class="chef-address">{{getAddress()}}</span>
         <div class="btn-wrapper" style="width: 100%;" [routerLink]="['/checkout']">
             <div style="display: flex; justify-content: space-between;">
@@ -38,4 +38,3 @@
         </div>
     </div>
 </ng-template>
-

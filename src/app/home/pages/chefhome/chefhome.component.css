@@ -1,187 +1,71 @@
-@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Josefin+Sans:wght@400;500;600;700&display=swap');
-
-.chef-home {
-    display: flex;
-    flex-direction: column;
-}
-
-.special-title{
-    font-family: 'Josefin Sans', sans-serif;
-}
-
-.chef-page-layout {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    /* Below is to stop a column growing vertically when other column grows */
-    align-items: start;
-    gap: 1rem;
-    padding: 10px;
-    max-width: 1440px;
-    margin: auto;
-    grid-auto-rows: min(8rem, 100%); 
-}
-
-.chef-page-layout>*:nth-child(1) {
-    grid-column: span 2;
-}
-
-.chef-page-layout>*:nth-child(2) {
-    grid-column: span 4;
-}
-
-.chef-page-layout>*:nth-child(3) {
-    grid-column: span 2;
-}
-
-.chef-profile {
-    display: none;
-    max-width: 375px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 10px;
-    background-color: var(--light-background);
-}
-
-.chef-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.order-container {
+.profile-section {
     display: none;
 }
 
-.menu-items-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.chef-home>img {
-    margin: 10px;
-    height: 50px;
-    width: 50px;
-    border: 1px solid #fff;
-    border-radius: 50%;
-    align-items: center;
-    padding: 10px;
-}
-
-.chef-home img:hover {
-    cursor: pointer;
-    border: 1px solid var(--border);
-}
-
-.chef-main-header {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 10px;
-    max-width: 375px;
-}
-
-.chef-profile-info-container {
-    display: done;
-}
-
-.chef-main-name {
-    padding: 10px 0;
-}
-
-.chef-profile>p {
-    font-family: 'Architects Daughter', cursive;
-}
-
-.chef-profile-header {
-    display: flex;
-    align-items: center;
-}
-
-.chef-profile-header-name {
-    font-size: 1.6rem;
-    font-weight: 900;
-    padding: 0 10px;
-}
-
-.chef-profile-header>img {
-    height: 100px;
-    width: 100px;
-    object-fit: cover;
-    border-radius: 50%;
-    transition: 0.5s ease-in-out;
-}
-
-.chef-name {
-    font-size: 2.8rem;
-    margin: 10px 0;
-}
-
-.chef-info-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-
-}
-
-.chef-collection-d {
-    display: flex;
-    align-items: flex-start;
-    align-items: center;
-    border: 1px solid var(--border);
-}
-
-.chef-collection-d>img {
-    height: 50px;
-    width: 50px;
-}
-
-.chef-address {
-    font-size: 15px;
-}
-
-.thisweek {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .5rem;
-}
-
-.main-layout {
-    display: flex;
-    gap: 0.2rem;
-    margin-top: 0;
-}
-
-.side-panel {
-    width: 300px;
+.main-section {
     display: flex;
     flex-direction: column;
     border-right: 1px solid var(--border);
-}
-
-.side-header {
-    font-size: medium;
-    font-weight: 600;
-    padding: 10px;
-    border: 1px solid var(--green);
     width: 100%;
-    text-align: center;
-    margin-bottom: 10px;
-    margin-top: 5px;
+    height: 50%;
 }
 
-.content-panel {
+.main-profile-section {
+    display: flex;
+    gap: 0.3rem;
+    padding: 5px 0;
+}
+
+.main-profile-info-section {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    padding: 0px 20px;
 }
 
 .menu-items-container {
+    padding: 10px;
+}
+
+.order-section {
+    display: none;
+}
+
+.section-header {
+    padding: 10px;
+    border-bottom: 1px solid var(--border);
+    width: 100%;
+}
+
+.section-header-a {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    padding: 13px;
+}
+
+.select-span {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    padding: 6px 10px;
+    align-items: center;
+    margin: 3px 10px;
+}
+
+.select-span:hover {
+    border-bottom: 1px solid var(--black);
+    cursor: pointer;
+}
+
+.selectedSpan {
+    border-bottom: 1px solid var(--black);
+    cursor: pointer;
+}
+
+.order-items-section {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    padding: 5px;
 }
 
 .calendar-box {
@@ -198,194 +82,105 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-
-.grid-container {
-    display: grid;
-    /* By default it stack the child vertically: .;To stak horizontally use below */
-    /* grid-auto-flow: column; */
-
-    /* Give the space equally between childs, minimum 260px and each column takes 1fr, 1 fraction *
-    /* Upon resixing the viewport, child will move to next line */
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-
-.chef-info-container {
-    display: flex;
-    align-items: center;
-}
-
-.chef-address {
-    margin-top: 10px;
-}
-
-
 .scroll-container {
     min-width: 415px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 0.5rem;
+    padding: 0;
 }
-
-.category {
-    /* width: 31.75%; */
-    border: 2px solid rgb(238, 238, 238);
-    display: inline-block;
-    padding: 10px;
-    background-color: rgb(238, 238, 238);
-    margin: 0 10px;
-    border-radius: 12px;
-}
-.category:hover {
-    cursor: pointer;
-    border: 2px solid rgb(0, 0, 0);
-}
-
-.selectedCategory {
-    border: 2px solid rgb(0, 0, 0);
-}
-
 
 .middle {
-    /* float: left; */
+    display: flex;
     width: 415px;
     padding: 10px;
     overflow-x: hidden;
-    /*will change this to hidden later to deny scolling to user*/
     white-space: nowrap;
 }
 
-.scroll-right, .scroll-left {
+.scroll-right,
+.scroll-left {
     margin: 10px;
-    height: 40px;
-    width: 40px;
-    border: 2px solid rgb(238, 238, 238);
+    height: 30px;
+    width: 30px;
+    /* border: 2px solid rgb(238, 238, 238); */
     border-radius: 50%;
     align-items: center;
     padding: 10px;
+    background-color: transparent;
 }
 
 .scroll-right:hover {
     cursor: pointer;
-    border: 2px solid rgb(0, 0, 0);
+    /* border: 2px solid rgb(0, 0, 0); */
+    background-color: var(--white);
 }
 
 .scroll-left:hover {
     cursor: pointer;
-    border: 2px solid rgb(0, 0, 0);
+    background-color: var(--white);
+    /* border: 2px solid rgb(0, 0, 0); */
 }
 
 
 /* Tablet */
-@media (min-width: 600px) {
-    .chef-page-layout>*:nth-child(1) {
-        grid-column: span 2;
-        display: none;
-    }
-    
-    .chef-page-layout>*:nth-child(2) {
-        grid-column: span 4;
-    }
-    
-    .chef-page-layout>*:nth-child(3) {
-        grid-column: span 2;
-        display: none;
-    }
-}
 
-/* Desktop */
+@media (min-width: 600px) {}
+
+
+/* Desktop/laptop */
+
 @media (min-width: 900px) {
-    .chef-page-layout {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        gap: 1rem;
-        padding: 10px;
-        min-width: 1440px;
-        margin: auto;
-    }
-
-    .chef-page-layout>*:nth-child(1) {
-        grid-column: span 2;
-        display: flex;
-    }
-    
-    .chef-page-layout>*:nth-child(2) {
-        grid-column: span 3;
-    }
-    
-    .chef-page-layout>*:nth-child(3) {
-        grid-column: span 2;
+    .profile-section {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        background-color: #fff;
+        border-right: 1px solid var(--border);
+        padding: 0;
+        width: 25%;
+        padding: 10px;
     }
-    .main-chef-profile{
+    .chef-profile-image {
+        object-fit: cover;
+        box-sizing: content-box;
+    }
+    .main-section {
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid var(--border);
+        padding: 0;
+        width: 50%;
+    }
+    .main-profile-section {
         display: none;
     }
-
-    .chef-info-container {
+    .order-section {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        padding: 5px;
+        width: 24%;
     }
-
-    .chef-profile {
+    .order-no-items {
+        margin-top: 10px;
         display: flex;
         flex-direction: column;
-        gap: 2rem;
-    }
-
-    .chef-main-header {
-        display: none;
-    }
-
-    .chef-profile-info-container {
-        display: flex;
-        flex-direction: column;
-        padding: 10px;
-        max-width: 375px;
-        font-size: 15px;
-    }
-
-    .order-wrapper {
-        display: flex;
-        flex-direction: column;
+        gap: 0.1rem;
         align-items: center;
-        background-color: #fff;
-        max-width: 600px;
-        padding: 10px 20px;
     }
-
-    .order-container {
+    .order-with-items {
+        display: flex;
+        flex-direction: column;
+        gap: 0.1rem;
         justify-content: center;
         align-items: center;
-        border-radius: 8px;
-        border: 5px dotted var(--border);
-        padding: 10px;
     }
-}
-
-/* Slider */
-
-/* Slider */
-
-.slider-wrapper {
-    overflow: hidden;
-}
-
-.slider {
-    position: relative;
-    display: flex;
-    aspect-ratio: 16/9;
-    overflow-x: auto;
-    transition: 0.5s;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-}
-
-.item {
-    flex: 1 0 50%;
-    min-height: 150px;
-    width: 200px;
+    .empty-bag {
+        opacity: 0.1;
+    }
+    .order-summary-section {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 5px 30px;
+    }
 }

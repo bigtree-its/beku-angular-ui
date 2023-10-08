@@ -2,17 +2,17 @@
     <div class="order-item-container">
         <div class="flex-column justify-content-center align-items-center">
             <span style="font-size: 15px; padding-top: 10px;">{{item.price | currency: 'GBP'}}</span>
-            <div class="flex-row-justify-center">
-                <button (click)="decreaseQuantity()" class="minus-icon"> - </button>
+            <div style="border: 1px solid var(--border);padding: 5px;display: flex;justify-content: space-around;">
+                <button style="border:none" (click)="decreaseQuantity()"> - </button>
                 <span class="qty-value">{{quantity}}</span>
-                <button (click)="increaseQuantity()" class="plus-icon">+</button>
+                <button style="border:none" (click)="increaseQuantity()">+</button>
             </div>
         </div>
-    
+
         <div class="flex-column" style="width: 100%;">
             <div style="width: 100%;clear: both; display: flex; justify-content: space-between;">
-                <strong>{{item.name}}</strong>
-                <strong>{{item.subTotal | currency: 'GBP'}}</strong>
+                <strong><small>{{item.name}}</small></strong>
+                <strong><small>{{item.subTotal | currency: 'GBP'}}</small></strong>
             </div>
             <div *ngIf="item.choice !== null && item.choice !== undefined">
                 <div style="width: 100%;clear: both; display: flex; justify-content: space-between;">
@@ -21,8 +21,7 @@
                 </div>
             </div>
             <div *ngIf="item.extras !== null && item.extras !== undefined && item.extras.length > 0">
-                <div style="width: 100%;clear: both; display: flex; justify-content: space-between;"
-                    *ngFor="let extra of item.extras">
+                <div style="width: 100%;clear: both; display: flex; justify-content: space-between;" *ngFor="let extra of item.extras">
                     <span>{{extra.name}}</span>
                     <span>{{extra.price | currency: 'GBP'}}</span>
                 </div>
@@ -30,5 +29,5 @@
         </div>
 
     </div>
-   
+
 </div>

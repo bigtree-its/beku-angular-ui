@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Address, RapidApiByPostcodeResponse, RapidApiByPostcodeResponseSummary } from 'src/app/model/address';
+import { RapidApiByPostcodeResponse, RapidApiByPostcodeResponseSummary } from 'src/app/model/address';
 import { CustomerOrder, FoodOrder, LocalChef } from 'src/app/model/localchef';
 import { ContextService } from 'src/app/services/context.service';
 import { FoodOrderservice } from 'src/app/services/food-order.service';
@@ -13,6 +13,7 @@ import { StripeService } from 'src/app/services/stripe.service';
 import { Observable } from 'rxjs';
 import {crypto} from 'crypto-js';
 import { PaymentIntentResponse } from 'src/app/model/order';
+import { Address } from 'src/app/model/common-models';
 
 @Component({
   selector: 'app-checkout',
@@ -32,6 +33,7 @@ export class CheckoutComponent {
   customerMobile: string = "";
   customerEmail: string = "";
   customerName: string = "";
+  notesToChef: string = "";
 
   divHeader: string = "";
   nextButtonText: string = "Next";
@@ -42,10 +44,10 @@ export class CheckoutComponent {
   showStripeSection: boolean = false;
   showPlaceOrderButton: boolean = false;
 
-  serviceMode: string = "Delivery";
-  address: Address = new Address();
-  addressLookup: Address = new Address();
-  hidePostcodeLoookupForm: boolean;
+  serviceMode: string = "COLLECTION";
+  customerAddress: Address;
+  addressLookupPostcode: string;
+  hidePostcodeLookupForm: boolean;
   postcodeAddressList: RapidApiByPostcodeResponseSummary[];
   rapidApiByPostcodeResponseSummary: RapidApiByPostcodeResponseSummary;
   postcode: string;
@@ -79,13 +81,13 @@ export class CheckoutComponent {
     });
 
     this.contextService.orderSubject.subscribe(theOrder => {
-      console.log('Subescribed order: ' + JSON.stringify(theOrder));
       if ( this.utils.isValid(theOrder) && theOrder.status === "Completed"){
         return;
       }
       this.order = theOrder;
       if (theOrder !== null && theOrder !== undefined) {
         this.cartTotal = theOrder.subTotal;
+        this.notesToChef= theOrder.notes;
         if (theOrder.items === null || theOrder.items === undefined || theOrder.items.length === 0) {
           if (this.chef !== null && this.chef !== undefined) {
             this.router.navigate(['cooks', this.chef._id]).then();
@@ -124,6 +126,8 @@ export class CheckoutComponent {
       this.showPaymentSection = false;
       this.showStripeSection = false;
       this.showPlaceOrderButton = false;
+      this.divHeader = "Your Details";
+      this.nextButtonText = "Next";
     } else if (this.showItemsSection) {
       this.showCustomerDetailsSection = false;
       this.showServiceModeSection = true;
@@ -131,6 +135,8 @@ export class CheckoutComponent {
       this.showPaymentSection = false;
       this.showStripeSection = false;
       this.showPlaceOrderButton = false;
+      this.divHeader = "Choose service mode";
+      this.nextButtonText = "Next";
     } else if (this.showPaymentSection) {
       this.showCustomerDetailsSection = false;
       this.showServiceModeSection = false;
@@ -138,6 +144,8 @@ export class CheckoutComponent {
       this.showPaymentSection = false;
       this.showStripeSection = false;
       this.showPlaceOrderButton = false;
+      this.divHeader = "Review Your Items";
+      this.nextButtonText = "Next";
     } else if (this.showStripeSection) {
       this.showCustomerDetailsSection = false;
       this.showServiceModeSection = false;
@@ -155,7 +163,7 @@ export class CheckoutComponent {
       this.showPaymentSection = false;
       this.showStripeSection = false;
       this.showPlaceOrderButton = false;
-      this.divHeader = "Collection/Delivery";
+      this.divHeader = "Choose service mode";
       this.nextButtonText = "Next";
     } else if (this.showServiceModeSection && this.validateServiceMode()) {
       this.showCustomerDetailsSection = false;
@@ -164,7 +172,7 @@ export class CheckoutComponent {
       this.showPaymentSection = false;
       this.showStripeSection = false;
       this.showPlaceOrderButton = false;
-      this.divHeader = "Your Items";
+      this.divHeader = "Review Your Items";
       this.nextButtonText = "Next";
     } else if (this.showItemsSection) {
       this.showCustomerDetailsSection = false;
@@ -174,6 +182,7 @@ export class CheckoutComponent {
       this.showStripeSection = false;
       this.showPlaceOrderButton = true;
       this.divHeader = "You Pay";
+      this.nextButtonText = "Proceed to Pay";
     } else if (this.showPaymentSection) {
       return;
     }
@@ -189,12 +198,12 @@ export class CheckoutComponent {
   }
 
   validateServiceMode(): boolean {
-    if (this.serviceMode === 'Delivery' && this.addressSelected &&
-      this.utils.isValid(this.address) && !this.utils.isEmpty(this.address.addressLine1)
+    if (this.serviceMode === 'DELIVERY' && this.addressSelected &&
+      this.utils.isValid(this.customerAddress) && !this.utils.isEmpty(this.customerAddress.addressLine1)
     ) {
       return true;
     }
-    if (this.serviceMode === 'Pickup') {
+    if (this.serviceMode === 'COLLECTION') {
       return true;
     }
     return false;
@@ -204,12 +213,14 @@ export class CheckoutComponent {
     this.order.customer.name = this.customerName;
     this.order.customer.email = this.customerEmail;
     this.order.customer.mobile = this.customerMobile;
+    this.order.customer.address = this.customerAddress;
+    this.order.serviceMode = this.serviceMode;
+    this.order.notes = this.notesToChef;
     this.orderService.saveOrder(this.order).subscribe(e => {
       if (this.utils.isStringValid(e.reference)) {
         this.contextService.publishOrder(e);
         this.orderService.createPaymentIntentForOrder(e).subscribe(pi => {
           this.paymentIntent = pi;
-          console.log('The Intent: '+ JSON.stringify(pi));
           this.open(content)
         });
       }
@@ -265,11 +276,19 @@ export class CheckoutComponent {
   }
 
   selectPickup() {
-    this.serviceMode = "Pickup";
+    this.serviceMode = "COLLECTION";
+    this.order.serviceMode = "COLLECTION";
+    if ( this.order.deliveryFee > 0){
+      this.order.deliveryFee = 0;
+      this.order.total = this.order.total - this.chef.deliveryFee;
+    }
   }
 
   selectDelivery() {
-    this.serviceMode = "Delivery";
+    this.serviceMode = "DELIVERY";
+    this.order.serviceMode = "DELIVERY";
+    this.order.deliveryFee = this.chef.deliveryFee;
+    this.order.total = this.order.total + this.chef.deliveryFee;
   }
 
   getAddress(): string {
@@ -299,10 +318,10 @@ export class CheckoutComponent {
     return chef;
   }
 
-  onSubmitPostcodeLookup(postcodeLoookupForm: NgForm) {
+  onSubmitPostcodeLookup(postcodeLookupForm: NgForm) {
     console.log('Search address form submitted..')
-    if (postcodeLoookupForm.valid) {
-      this.doPostcodeLookup(this.addressLookup.postcode);
+    if (postcodeLookupForm.valid) {
+      this.doPostcodeLookup(this.addressLookupPostcode);
     }
   }
 
@@ -311,7 +330,7 @@ export class CheckoutComponent {
       return;
     }
     this.rapidApiService
-      .lookupAddresses(this.addressLookup.postcode.trim())
+      .lookupAddresses(this.addressLookupPostcode.trim())
       // .pipe(first())
       .subscribe(
         (data: RapidApiByPostcodeResponse) => {
@@ -327,14 +346,15 @@ export class CheckoutComponent {
 
   onSelectDeliveryAddress(selectAddress: RapidApiByPostcodeResponseSummary) {
     var city = selectAddress.Place.split(/[\s ]+/).pop();
-    if (this.address == null || this.address === undefined) {
-      this.address = new Address();
-    }
-    this.address.city = city;
-    this.address.addressLine1 = selectAddress.StreetAddress
-    this.address.addressLine2 = selectAddress.Place
-    this.address.country = "UK"
-    this.address.postcode = this.addressLookup.postcode;
+    this.customerAddress = {
+      city: city,
+      addressLine1 :selectAddress.StreetAddress,
+      addressLine2 : selectAddress.Place,
+      country: 'UK',
+      postcode: this.addressLookupPostcode,
+      latitude: '',
+      longitude: ''
+    };
     this.addressSelected = true;
     this.lookupAddress = false;
   }
@@ -344,8 +364,8 @@ export class CheckoutComponent {
   }
 
   findAddress() {
-    if (this.addressLookup.postcode !== null && this.addressLookup.postcode !== undefined && this.addressLookup.postcode.length > 2) {
-      this.doPostcodeLookup(this.addressLookup.postcode);
+    if (this.addressLookupPostcode !== null && this.addressLookupPostcode !== undefined && this.addressLookupPostcode.length > 2) {
+      this.doPostcodeLookup(this.addressLookupPostcode);
     }
   }
 
