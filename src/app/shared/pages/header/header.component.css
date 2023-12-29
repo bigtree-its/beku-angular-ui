@@ -1,4 +1,6 @@
   @import url('https://fonts.googleapis.com/css2?family=Barriecito&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Vast+Shadow&display=swap');
+
   .application-header {
       display: flex;
       flex-direction: column;
@@ -58,7 +60,9 @@
   }
   
   .logo {
-      font-family: 'Barriecito', cursive;
+      font-family: 'Vast Shadow', serif;
+    /* transform: rotate(-3deg); */
+    text-decoration: underline;
       font-size: 25px;
       color: orangered;
       cursor: pointer;

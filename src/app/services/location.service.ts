@@ -10,7 +10,7 @@ export class LocationService {
 
   private URL = "http://localhost:8083";
   private BASEPATH = "/ads/v1";
-  private LOCALAREA_URI = "/localarea";
+  private LOCALAREA_URI = "/serviceareas";
 
   constructor( private http: HttpClient) { }
 

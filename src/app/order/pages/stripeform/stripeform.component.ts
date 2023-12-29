@@ -165,7 +165,7 @@ export class StripeformComponent {
   }
 
   // Stripe returns to this url:
-  //http://localhost:4200/order-confirmation/7a022f19-d82f-4b8a-9525-86a768af35b0?
+  //http://localhost:5200/order-confirmation/7a022f19-d82f-4b8a-9525-86a768af35b0?
   //payment_intent=pi_3Nkt1IJtRMxkXWc31hypLmHB&
   //payment_intent_client_secret=pi_3Nkt1IJtRMxkXWc31hypLmHB_secret_zD9W7MrKPXyS2awWy2vUQVnvp&
   //redirect_status=succeeded
@@ -177,7 +177,7 @@ export class StripeformComponent {
       elements,
       confirmParams: {
         // Return URL where the customer should be redirected after the PaymentIntent is confirmed.
-        return_url: 'http://localhost:4200/order-confirmation/'+ this.order.reference,
+        return_url: 'http://localhost:5200/order-confirmation/'+ this.order.reference,
         receipt_email: "nava.arul@gmail.com",
       },
     })
@@ -197,7 +197,7 @@ export class StripeformComponent {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:4200/order-complete",
+        return_url: "http://localhost:5200/order-complete",
         receipt_email: "nava.arul@gmail.com",
       },
     });

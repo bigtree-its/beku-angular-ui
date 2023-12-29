@@ -191,8 +191,8 @@ export class FoodOrderservice {
   }
 
   getOrder(): CustomerOrder {
-    var orderJson = localStorage.getItem('order');
-    console.log('Order in storage: ' + JSON.stringify(orderJson));
+    var orderJson = sessionStorage.getItem('order');
+    console.log('Order in session storage: ' + JSON.stringify(orderJson));
     var order: CustomerOrder = null;
     if (orderJson === null || orderJson === undefined) {
       order = this.createOrder();
@@ -296,7 +296,7 @@ export class FoodOrderservice {
       this.supplier = this.contextService.retrieveChef();
     }
 
-    return {
+    var customerOrder = {
       id: '',
       items: [],
       supplier: {
@@ -347,6 +347,8 @@ export class FoodOrderservice {
       status: 'CREATED',
       notes: '',
     };
+    console.log('Created a brand new Order '+ JSON.stringify(customerOrder));
+    return customerOrder;
   }
 
   getDeliveryFee(): number {
@@ -368,7 +370,7 @@ export class FoodOrderservice {
   updateOrder(orderUpdateRequest: OrderUpdateRequest) {
     var url = this.HOST + this.ORDERS_URI;
     console.log(
-      'Updateing Order: ' + url + ', ' + JSON.stringify(orderUpdateRequest)
+      'Updating Order: ' + url + ', ' + JSON.stringify(orderUpdateRequest)
     );
     this.http.put<OrderUpdateRequest>(url, orderUpdateRequest).subscribe({
       next: (data) => {

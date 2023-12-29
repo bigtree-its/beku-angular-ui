@@ -29,7 +29,7 @@ export class ContextService {
   }
 
   getOrder(): CustomerOrder{
-    var orderJson = localStorage.getItem('order');
+    var orderJson = sessionStorage.getItem('order');
     var order: CustomerOrder = null;
     if ( orderJson !== null && orderJson !== undefined){
       order = JSON.parse(orderJson);
@@ -39,18 +39,18 @@ export class ContextService {
 
   publishServiceLocation(serviceLocation: ServiceLocation) {
     this.serviceLocation = serviceLocation;
-    localStorage.setItem("serviceLocation", JSON.stringify(serviceLocation));
+    sessionStorage.setItem("serviceLocation", JSON.stringify(serviceLocation));
     this.serviceLocationSubject.next({ ...serviceLocation });
   }
 
   public selectChef(theChef: LocalChef) {
     this.chef = theChef;
-    localStorage.setItem("chef", JSON.stringify(theChef));
+    sessionStorage.setItem("chef", JSON.stringify(theChef));
     this.chefSubject.next({ ...theChef });
   }
 
   public retrieveChef(): LocalChef{
-    var json = localStorage.getItem("chef");
+    var json = sessionStorage.getItem("chef");
     if (! this.utils.isEmpty(json)){
       return JSON.parse(json);
     }
@@ -60,25 +60,25 @@ export class ContextService {
   public publishOrder(theOrder: CustomerOrder) {
     this.order = theOrder;
     this.orderSubject.next({ ...theOrder });
-    localStorage.setItem("order", JSON.stringify(theOrder));
+    sessionStorage.setItem("order", JSON.stringify(theOrder));
   }
 
   public destroyOrder(){
     console.log('Destroying order')
     this.order = undefined;
     this.orderSubject.next(null);
-    localStorage.removeItem('order');
+    sessionStorage.removeItem('order');
   }
 
   selectLocation(sl: ServiceLocation) {
     this.serviceLocation = sl;
     this.serviceLocationSubject.next({ ...this.serviceLocation });
-    localStorage.setItem("servicelocation", JSON.stringify(sl));
+    sessionStorage.setItem("servicelocation", JSON.stringify(sl));
   }
 
   getServiceLocation(): ServiceLocation{
     if ( this.serviceLocation === null || this.serviceLocation === undefined){
-      var serviceLocationJson = localStorage.getItem('servicelocation');
+      var serviceLocationJson = sessionStorage.getItem('servicelocation');
       if ( serviceLocationJson !== null && serviceLocationJson !== undefined){
         this.serviceLocation = JSON.parse(serviceLocationJson);
       }

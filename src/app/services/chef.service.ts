@@ -15,7 +15,7 @@ export class ChefService {
   configUrl = 'assets/static/location.json';
   private URL = "http://localhost:8083";
   private BASEPATH = "/ads/v1";
-  private URI = "/localchefs";
+  private URI = "/chefs";
   private CALENDARS_URI: string ="/calendars";
 
   constructor(private http:HttpClient) { }
@@ -57,7 +57,7 @@ export class ChefService {
 
   getAllFoods(chefId: string): Observable<Food[]> {
 
-    var url = this.URL + this.BASEPATH + "/foods";
+    var url = this.URL + this.BASEPATH + "/menus";
     var params = new HttpParams();
     if (chefId !== undefined && chefId !== null) {
       params = params.set('chef', chefId);

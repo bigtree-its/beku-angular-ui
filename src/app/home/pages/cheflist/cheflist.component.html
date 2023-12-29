@@ -38,7 +38,7 @@
                 </div> -->
                 <div class="cheflist-container">
                     <div *ngFor="let chef of filteredChefs " [routerLink]="[ '/cooks', chef._id] " class="chef-card ">
-                        <img src={{chef.coverPhoto}}>
+                        <img src="/assets/images/users/{{chef._id}}/cover-photo.jpg">
                         <div class="chef-data-container ">
                             <div class="flex-row-space-between">
                                 <span class="chef-name ">{{chef.name}}</span>
