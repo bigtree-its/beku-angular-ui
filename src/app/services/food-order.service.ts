@@ -18,16 +18,12 @@ import { UserSession } from '../model/common-models';
 import { PaymentIntentRequest, PaymentIntentResponse } from '../model/order';
 import { ContextService } from './context.service';
 import { Utils } from './utils';
+import { ServiceLocator } from './service.locator';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FoodOrderservice {
-  private HOST = 'http://localhost:8080';
-  private ORDERS_URI = '/api/customer-orders';
-  private STRIPE_URI = '/api/stripe-payments';
-  private PAYMENT_INTENT = '/payment-intent';
-  private ORDER_TRACKING = '/api/order-tracking';
+export class FoodOrderService {
 
   userSession: UserSession;
   ipAddress: any;
@@ -36,7 +32,8 @@ export class FoodOrderservice {
 
   constructor(
     private http: HttpClient,
-    private contextService: ContextService
+    private contextService: ContextService,
+    private serviceLocator: ServiceLocator
   ) {
     this.contextService.chefSubject.subscribe((supplier) => {
       this.supplier = supplier;
@@ -44,29 +41,26 @@ export class FoodOrderservice {
   }
 
   updateStatus(orderTracking: OrderTracking) {
-    var url = 'http://localhost:8080/api/order-tracking'
-    this.http.post<OrderTracking>(url, orderTracking).subscribe(e=>{
+    this.http.post<OrderTracking>(this.serviceLocator.OrderTrackingUrl, orderTracking).subscribe(e=>{
       console.log('Update status response. '+ JSON.stringify(e))
     });
   }
 
   saveOrder(order: CustomerOrder): Observable<CustomerOrder> {
-    var url = this.HOST + this.ORDERS_URI;
-    return this.http.post<CustomerOrder>(url, order);
+    return this.http.post<CustomerOrder>(this.serviceLocator.CustomerOrdersUrl, order);
   }
 
   retrieveOrder(reference: string): Observable<CustomerOrder> {
-    var url = this.HOST + this.ORDERS_URI + '/reference/' + reference;
+    var url = this.serviceLocator.CustomerOrdersUrl + '/reference/' + reference;
     return this.http.get<CustomerOrder>(url);
   }
 
-  retrievePymentIntent(orderId: string): Observable<PaymentIntentResponse> {
+  retrievePaymentIntent(orderId: string): Observable<PaymentIntentResponse> {
     var params = new HttpParams();
     if (orderId !== null && orderId !== undefined) {
       params = params.set('orderId', orderId);
     }
-    var url = this.HOST + this.STRIPE_URI + this.PAYMENT_INTENT;
-    return this.http.get<PaymentIntentResponse>(url, { params });
+    return this.http.get<PaymentIntentResponse>(this.serviceLocator.PaymentIntentUrl, { params });
   }
 
   getSupplierOrders(
@@ -106,8 +100,7 @@ export class FoodOrderservice {
     if (orderSearchQuery.all) {
       params = params.set('all', 'true');
     }
-    var url = this.HOST + this.ORDERS_URI + '/search';
-    return this.http.get<SupplierOrders>(url, { params });
+    return this.http.get<SupplierOrders>(this.serviceLocator.CustomerOrderSearchUrl, { params });
   }
 
   getOrders(orderSearchQuery: OrderSearchQuery): Observable<Orders> {
@@ -145,8 +138,7 @@ export class FoodOrderservice {
     if (orderSearchQuery.all) {
       params = params.set('all', 'true');
     }
-    var url = this.HOST + this.ORDERS_URI + '/search';
-    return this.http.get<Orders>(url, { params });
+    return this.http.get<Orders>(this.serviceLocator.CustomerOrderSearchUrl, { params });
   }
 
   getCustomerOrders(
@@ -180,8 +172,7 @@ export class FoodOrderservice {
     if (orderSearchQuery.all) {
       params = params.set('all', 'true');
     }
-    var url = this.HOST + this.ORDERS_URI + '/search';
-    return this.http.get<CustomerOrderList>(url, { params });
+    return this.http.get<CustomerOrderList>(this.serviceLocator.CustomerOrderSearchUrl, { params });
   }
 
   private getIPAddress() {
@@ -267,27 +258,25 @@ export class FoodOrderservice {
       amount: customerOrder.total,
       orderReference: customerOrder.reference,
     };
-    var url = this.HOST + this.STRIPE_URI + this.PAYMENT_INTENT;
     console.log(
       'Creating payment intent: ' +
-        url +
+      this.serviceLocator.PaymentIntentUrl +
         ', ' +
         JSON.stringify(paymentIntentRequest)
     );
-    return this.http.post<PaymentIntentResponse>(url, paymentIntentRequest);
+    return this.http.post<PaymentIntentResponse>(this.serviceLocator.PaymentIntentUrl, paymentIntentRequest);
   }
 
   createPaymentIntent(
     paymentIntentRequest: PaymentIntentRequest
   ): Observable<PaymentIntentResponse> {
-    var url = this.HOST + this.STRIPE_URI + this.PAYMENT_INTENT;
     console.log(
       'Creating payment intent: ' +
-        url +
+      this.serviceLocator.PaymentIntentUrl +
         ', ' +
         JSON.stringify(paymentIntentRequest)
     );
-    return this.http.post<PaymentIntentResponse>(url, paymentIntentRequest);
+    return this.http.post<PaymentIntentResponse>(this.serviceLocator.PaymentIntentUrl, paymentIntentRequest);
   }
 
   public createOrder(): CustomerOrder {
@@ -368,11 +357,10 @@ export class FoodOrderservice {
   }
 
   updateOrder(orderUpdateRequest: OrderUpdateRequest) {
-    var url = this.HOST + this.ORDERS_URI;
     console.log(
-      'Updating Order: ' + url + ', ' + JSON.stringify(orderUpdateRequest)
+      'Updating Order: ' + this.serviceLocator.CustomerOrdersUrl + ', ' + JSON.stringify(orderUpdateRequest)
     );
-    this.http.put<OrderUpdateRequest>(url, orderUpdateRequest).subscribe({
+    this.http.put<OrderUpdateRequest>(this.serviceLocator.CustomerOrdersUrl, orderUpdateRequest).subscribe({
       next: (data) => {
         var response = JSON.stringify(data);
         console.log('Order Updated: ' + response);
@@ -384,14 +372,13 @@ export class FoodOrderservice {
   }
 
   placeOrder(customerOrder: CustomerOrder): Observable<CustomerOrder> {
-    var url = this.HOST + this.ORDERS_URI;
     console.log(
       'Placing an order for LocalChef : ' +
-        url +
+      this.serviceLocator.CustomerOrdersUrl +
         ', ' +
         JSON.stringify(customerOrder)
     );
-    return this.http.post<CustomerOrder>(url, customerOrder);
+    return this.http.post<CustomerOrder>(this.serviceLocator.CustomerOrdersUrl, customerOrder);
     // .subscribe({
     //   next: data => {
     //     var response = JSON.stringify(data);

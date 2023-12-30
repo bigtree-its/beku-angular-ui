@@ -42,5 +42,6 @@ export const environment = {
   X_RapidAPI_Key: window["env"]["X_RapidAPI_Key"],
   PostCode4U_Key: window["env"]["PostCode4U_Key"],
   X_RapidAPI_Username: window["env"]["X_RapidAPI_Username"],
-  X_RapidAPI_Host: window["env"]["X_RapidAPI_Host"]
+  X_RapidAPI_Host: window["env"]["X_RapidAPI_Host"],
+  CUSTOMER_APP_ACCESS_TOKEN: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2MtY2FwcC0zMTUyNjQiLCJpc3MiOiJ3d3cuYXV0aC5ob2MuY29tIiwiaWF0IjoxNzAzODc3MDI0LCJleHAiOjE3MzUzNDQwMDB9.Mdw14EyUbfIZkWh5Td5EuJRg_avzI6NM6D9tStM_64g3pm49fAl2Jt9DgZgtfCH4vt1VVxwkudikybCD5Eap2w"
 };

@@ -1,21 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Cuisine, LocalChef } from '../model/localchef';
+import { Cuisine } from '../model/localchef';
+import { ServiceLocator } from './service.locator';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CuisinesService {
 
-  private HOST = "http://localhost:8083";
-  private URI = "/ads/v1/cuisines";
-
-  constructor(private http:HttpClient) {}
+  constructor(private http:HttpClient,
+    private serviceLocator: ServiceLocator) {}
 
   getCuisines(): Observable<Cuisine[]> {
-    var url = this.HOST + this.URI ;
-    return this.http.get<Cuisine[]>(url);
+    return this.http.get<Cuisine[]>(this.serviceLocator.cuisinesUrl);
   }
 
 }

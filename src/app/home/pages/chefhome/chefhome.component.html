@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-3 profile-section">
-                <img src={{chef.coverPhoto}} height="300" width="100%" class="chef-profile-image">
+                <img src="/assets/images/users/{{chef._id}}/cover-photo.jpg" height="300" width="100%" class="chef-profile-image">
                 <br>
                 <strong class="chef-profile-header-name ">{{chef.name}}</strong>
                 <br>
@@ -27,7 +27,8 @@
             </div>
             <div class="col-6  main-section">
                 <div class="main-profile-section">
-                    <img src={{chef.coverPhoto}} width="100px" height="100" style="object-fit: cover;">
+                    <img src="/assets/images/users/{{chef._id}}/cover-photo.jpg" height="100" style="object-fit: cover;">
+                    <!-- <img src={{chef.coverPhoto}} width="100px" height="100" style="object-fit: cover;"> -->
                     <div class="main-profile-info-section">
                         <span style="font-size: x-large;font-weight: 300;">{{chef.name}}</span>
                         <span style="font-size: small;"><b>Collect at</b></span>
@@ -49,7 +50,7 @@
                     </div>
 
                     <div #widgetsContent class="middle">
-                        <span *ngFor="let category of chef.categories" class="select-span" (click)="onSelectCategory($event, category)" [class.selectedSpan]="isSelectedCategory(category)">{{category}}</span>
+                        <span *ngFor="let c of collections" class="select-span" (click)="onSelectCategory($event, c)" [class.selectedSpan]="isSelectedCategory(c)">{{c.name}}</span>
                     </div>
 
                     <div style="float: right">
@@ -63,8 +64,8 @@
 
                 <div *ngIf="displayCal && calendarsToDisplay !== null && calendarsToDisplay !== undefined && calendarsToDisplay.length > 0">
                     <div *ngFor="let calendar of calendarsToDisplay;  let i = index">
-                        <div *ngIf="calendar.foods !== null && calendar.foods !== undefined" class="thisweek">
-                            <app-menu-item *ngFor="let item of calendar.foods" [food]="item" [orderBy]="calendar.orderBefore" [displayDescription]="false"></app-menu-item>
+                        <div *ngIf="calendar.menus !== null && calendar.menus !== undefined" class="thisweek">
+                            <app-menu-item *ngFor="let menu of calendar.menus" [menu]="menu" [orderBy]="calendar.orderBefore" [displayDescription]="false"></app-menu-item>
                         </div>
                     </div>
                 </div>
@@ -138,7 +139,7 @@
 </ng-template>
 <ng-template #ItemsInCategory>
     <div class="menu-items-container">
-        <app-menu-item *ngFor="let item of items_to_display" [food]="item" [displayDescription]="true">
+        <app-menu-item *ngFor="let menu of items_to_display" [menu]="menu" [displayDescription]="true">
         </app-menu-item>
     </div>
 </ng-template>

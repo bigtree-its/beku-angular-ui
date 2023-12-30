@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CustomerOrder, FoodOrder, LocalChef } from 'src/app/model/localchef';
 import { ContextService } from 'src/app/services/context.service';
-import { FoodOrderservice } from 'src/app/services/food-order.service';
 import { Utils } from 'src/app/services/utils';
 
 @Component({
@@ -21,13 +20,13 @@ export class BasketComponent {
 
   constructor(private contextService: ContextService,
     private utils: Utils,
-    private _lcoation: Location,
+    private _location: Location,
     private router: Router){
   }
 
   ngOnInit(): void{
     this.contextService.orderSubject.subscribe(theOrder =>{
-      console.log('Subescribed order: '+ JSON.stringify(theOrder))
+      console.log('Subscribed order: '+ JSON.stringify(theOrder))
       if ( this.utils.isValid(theOrder) && theOrder.status === "Completed"){
         return;
       }
@@ -74,7 +73,7 @@ export class BasketComponent {
   }
 
   goback(){
-    this._lcoation.back();
+    this._location.back();
   }
 
   getChef(): LocalChef{

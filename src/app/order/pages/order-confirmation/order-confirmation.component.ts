@@ -8,7 +8,7 @@ import {
   OrderTracking,
 } from 'src/app/model/localchef';
 import { ContextService } from 'src/app/services/context.service';
-import { FoodOrderservice } from 'src/app/services/food-order.service';
+import { FoodOrderService } from 'src/app/services/food-order.service';
 import { Utils } from 'src/app/services/utils';
 
 @Component({
@@ -22,7 +22,7 @@ export class OrderConfirmationComponent {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private orderService: FoodOrderservice,
+    private orderService: FoodOrderService,
     private ctxService: ContextService,
     private utils: Utils
   ) {

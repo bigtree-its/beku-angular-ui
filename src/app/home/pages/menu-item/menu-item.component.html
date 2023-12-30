@@ -1,9 +1,9 @@
-<div *ngIf="food !== null && food !== undefined" class="menu-item-layout" (click)="open(content)">
+<div *ngIf="menu !== null && menu !== undefined" class="menu-item-layout" (click)="open(content)">
     <img src="/assets/images/menu-items/chicken-tikka-kebab.jpg" loading="lazy">
     <div class="menu-item-main">
-        <span class="item-name">{{food.name}}</span>
-        <p *ngIf="displayDescription" class="menu-desc">{{food.description}}</p>
-        <span class="price"><b>{{food.price | currency: 'GBP'}}</b></span>
+        <span class="item-name">{{menu.name}}</span>
+        <p *ngIf="displayDescription" class="menu-desc">{{menu.description}}</p>
+        <span class="price"><b>{{menu.price | currency: 'GBP'}}</b></span>
         <small *ngIf="displayOrderBy">Order By: {{orderBy | date : 'EE d LLL'}}</small>
     </div>
 
@@ -11,11 +11,11 @@
 
 <ng-template #content let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">{{food.name}}</h4>
+        <h4 class="modal-title" id="modal-basic-title">{{menu.name}}</h4>
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <p class="menu-desc">{{food.description}}</p>
+        <p class="menu-desc">{{menu.description}}</p>
         <div class="flex-row-space-between">
             <div style="width: 50px;">
                 <div style="height: 25px;
@@ -23,20 +23,20 @@
                 border: 1px solid #46bb4c;
                 display: flex;
                 justify-content: center;
-                align-items: center;" *ngIf="food.vegetarian === true">
+                align-items: center;" *ngIf="menu.vegetarian === true">
                     <span style="height: 15px;width: 15px;border-radius: 50%;background-color: #46bb4c;"></span>
                 </div>
             </div>
 
             <div style="margin-left: 15px;width: 50px;" class="flex-row">
-                <img src="/assets/icons/jalapeno.png" [class.selectedSpice]="food.spice > 0" class="spice" placement="top" ngbTooltip="Mild">
-                <img src="/assets/icons/jalapeno.png" [class.selectedSpice]="food.spice > 1" class="spice" placement="top" ngbTooltip="Hot">
-                <img src="/assets/icons/jalapeno.png" [class.selectedSpice]="food.spice > 2" class="spice" placement="top" ngbTooltip="Extra Hot">
+                <img src="/assets/icons/jalapeno.png" [class.selectedSpice]="menu.spice > 0" class="spice" placement="top" ngbTooltip="Mild">
+                <img src="/assets/icons/jalapeno.png" [class.selectedSpice]="menu.spice > 1" class="spice" placement="top" ngbTooltip="Hot">
+                <img src="/assets/icons/jalapeno.png" [class.selectedSpice]="menu.spice > 2" class="spice" placement="top" ngbTooltip="Extra Hot">
             </div>
         </div>
-        <div class="flex-column section" *ngIf="food.choices !== null && food.choices !== undefined && food.choices.length > 0">
+        <div class="flex-column section" *ngIf="menu.choices !== null && menu.choices !== undefined && menu.choices.length > 0">
             <span class="section-header">Choose One</span>
-            <div class="flex-column" *ngFor="let choice of food.choices">
+            <div class="flex-column" *ngFor="let choice of menu.choices">
                 <div class="flex-row-space-between" style="margin: 5px 0;">
                     <div class="ng-form-control">
                         <input type="radio" name="favorite_pet" value="{{choice.name}}" id="{{choice.name}}" (change)="handleChoiceSelection($event)">
@@ -48,9 +48,9 @@
         </div>
 
         <!-- Extras -->
-        <div class="flex-column section" *ngIf="food.extras !== null && food.extras !== undefined && food.extras.length > 0">
+        <div class="flex-column section" *ngIf="menu.extras !== null && menu.extras !== undefined && menu.extras.length > 0">
             <span class="section-header">Add Extra</span>
-            <div class="flex-column" *ngFor="let extra of food.extras">
+            <div class="flex-column" *ngFor="let extra of menu.extras">
                 <div class="flex-row-space-between" style="margin: 5px 0;">
                     <div class="ng-form-control">
                         <input type="checkbox" name="favorite_pet" value="{{extra.name}}" id="{{extra.name}}" (change)="selectExtra(extra.name,$event)">

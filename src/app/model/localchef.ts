@@ -62,15 +62,12 @@ export interface Cuisine {
     name: string;
 }
 
-
-export interface Collection {
+export class Collection {
     _id: string;
-    chefId: string;
-    image: string;
     name: string;
-    displayName: string;
-    foods: Food[];
-    active: boolean;
+    chefId: string;
+    slug: String;
+    image: String;
 }
 
 export interface LocalAreaSearchResponse {
@@ -110,6 +107,27 @@ export interface Food {
     active: boolean;
     createdAt: Date;
     updatedAt: Date;
+    
+}
+
+export class Menu {
+    _id: string;
+    chefId: string;
+    collectionId: string;
+    image: string;
+    vegetarian: boolean;
+    special: boolean;
+    discounted: boolean;
+    spice: number;
+    extras: Extra[];
+    choices: Extra[];
+    description: string;
+    name: string;
+    price: number;
+    discountedPrice: number;
+    active: boolean;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 export interface Calendar {
@@ -117,7 +135,7 @@ export interface Calendar {
     chefId: string;
     description: string[];
     orderBefore: Date;
-    foods: Food[];
+    menus: Menu[];
     collectionStartDate: Date;
     collectionEndDate: Date;
     deliveryStartDate: Date;

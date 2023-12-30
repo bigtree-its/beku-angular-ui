@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { RapidApiByPostcodeResponse, RapidApiByPostcodeResponseSummary } from 'src/app/model/address';
 import { CustomerOrder, FoodOrder, LocalChef } from 'src/app/model/localchef';
 import { ContextService } from 'src/app/services/context.service';
-import { FoodOrderservice } from 'src/app/services/food-order.service';
 import { RapidApiService } from 'src/app/services/rapid-api.service';
 import { Utils } from 'src/app/services/utils';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -14,6 +13,7 @@ import { Observable } from 'rxjs';
 import {crypto} from 'crypto-js';
 import { PaymentIntentResponse } from 'src/app/model/order';
 import { Address } from 'src/app/model/common-models';
+import { FoodOrderService } from 'src/app/services/food-order.service';
 
 @Component({
   selector: 'app-checkout',
@@ -69,7 +69,7 @@ export class CheckoutComponent {
     private stripeService: StripeService,
     private _location: Location,
     private modalService: NgbModal,
-    private orderService: FoodOrderservice,
+    private orderService: FoodOrderService,
     private router: Router) {
   }
 

@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { CustomerOrder } from 'src/app/model/localchef';
 import { PaymentIntentRequest, PaymentIntentResponse } from 'src/app/model/order';
-import { FoodOrderservice } from 'src/app/services/food-order.service';
+import { FoodOrderService } from 'src/app/services/food-order.service';
 import { StripeService } from 'src/app/services/stripe.service';
 import { Utils } from 'src/app/services/utils';
 
@@ -27,7 +27,7 @@ export class StripeformComponent {
 
   constructor(
     private stripeService: StripeService,
-    private orderService: FoodOrderservice,
+    private orderService: FoodOrderService,
     private utils: Utils,
   ) {
 

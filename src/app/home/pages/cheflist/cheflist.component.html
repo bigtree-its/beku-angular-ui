@@ -48,9 +48,13 @@
                                 </div>
                             </div>
                             <div class="chef-cuisines-container">
-                                <span *ngFor="let cuisine of chef.cuisines" class="cuisine">
+                                <!-- <span *ngFor="let cuisine of chef.cuisines" class="cuisine">
                                     {{cuisine.name}}
-                                </span>
+                                </span> -->
+                                <!-- If chef has big list of cuisines, then Iterate only few items from array -->
+                                <ng-container *ngFor="let cuisine of chef.cuisines | slice:0:3">
+                                    <div class="cuisine">{{ cuisine.name }}</div>
+                                </ng-container>
                             </div>
                         </div>
                     </div>

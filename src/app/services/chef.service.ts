@@ -4,7 +4,8 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Location } from '../model/location';
 import { ChefSearchQuery } from '../model/ChefSearchQuery';
-import { Calendar, Food, LocalChef } from '../model/localchef';
+import { Calendar, Collection, Food, LocalChef, Menu } from '../model/localchef';
+import { ServiceLocator } from './service.locator';
 
 @Injectable({
   providedIn: 'root'
@@ -13,16 +14,13 @@ export class ChefService {
   
   ipAddress: string | undefined;
   configUrl = 'assets/static/location.json';
-  private URL = "http://localhost:8083";
-  private BASEPATH = "/ads/v1";
-  private URI = "/chefs";
-  private CALENDARS_URI: string ="/calendars";
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,
+    private serviceLocator: ServiceLocator) { 
+  }
 
   getAllLocalChefs(query: ChefSearchQuery): Observable<LocalChef[]> {
     console.log('Getting LocalChefs for : ' + JSON.stringify(query));
-    var url = this.URL + this.BASEPATH + this.URI;
     var params = new HttpParams();
     if (query.cuisines !== undefined && query.cuisines !== null) {
       params = params.set('cuisines', query.cuisines);
@@ -46,29 +44,27 @@ export class ChefService {
       params = params.set('noMinimumOrder', "");
     }
     console.log('Get LocalChefs for : ' + params)
-    return this.http.get<LocalChef[]>(url, { params });
+    return this.http.get<LocalChef[]>(this.serviceLocator.chefsUrl, { params });
   }
 
   getChef(id: string): Observable<LocalChef> {
     console.log('Retrieving Supplier '+ id)
-    var url = this.URL + this.BASEPATH + this.URI+ "/" + id;
+    var url = this.serviceLocator.chefsUrl+ "/" + id;
     return this.http.get<LocalChef>(url);
   }
 
-  getAllFoods(chefId: string): Observable<Food[]> {
+  getMenusForChef(chefId: string): Observable<Menu[]> {
 
-    var url = this.URL + this.BASEPATH + "/menus";
     var params = new HttpParams();
     if (chefId !== undefined && chefId !== null) {
       params = params.set('chef', chefId);
     }
-    console.log('Fetching foods for : ' + params)
-    return this.http.get<Food[]>(url, { params });
+    console.log('Fetching menus for : ' + params)
+    return this.http.get<Menu[]>(this.serviceLocator.menusUrl, { params });
   }
 
   getCalendars(chefId: string, thisWeek: boolean, thisMonth: boolean): Observable<Calendar[]> {
 
-    var url = this.URL + this.BASEPATH + this.CALENDARS_URI;
     var params = new HttpParams();
     if (chefId !== undefined && chefId !== null) {
       params = params.set('chef', chefId);
@@ -81,7 +77,15 @@ export class ChefService {
     }
 
     console.log('Fetching calendars for : ' + params)
-    return this.http.get<Calendar[]>(url, { params });
+    return this.http.get<Calendar[]>(this.serviceLocator.calendersUrl, { params });
+  }
+
+  getCollections(chefId: string): Observable<Collection[]> {
+    var params = new HttpParams();
+    if (chefId !== undefined && chefId !== null) {
+      params = params.set('chef', chefId);
+    }
+    return this.http.get<Collection[]>(this.serviceLocator.collectionsUrl, { params });
   }
 
   getIPAddress() {

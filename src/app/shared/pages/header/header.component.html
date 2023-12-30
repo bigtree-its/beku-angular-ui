@@ -1,7 +1,7 @@
 <div class="application-header">
     <div class="top-row">
         <div class="left-container">
-            <div [routerLink]="['/']" routerLinkActive="router-link-active" class="logo">HouseOfChef</div>
+            <div [routerLink]="['/']" routerLinkActive="router-link-active" class="logo">Lunchie Munchie</div>
             <div class="top-location-container" *ngIf="serviceLocation != null && serviceLocation !== undefined">
                 <span class="location-slug" [routerLink]="[serviceLocation.slug, 'cooks']">#{{serviceLocation.name}}, {{serviceLocation.city}}</span>
                 <span class="change-area" routerLink="/">Change</span>

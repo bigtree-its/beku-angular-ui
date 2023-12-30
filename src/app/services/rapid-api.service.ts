@@ -22,7 +22,7 @@ export class RapidApiService {
   ) { }
 
   lookupAddresses(postcode: string): Observable<RapidApiByPostcodeResponse> {
-    console.log('Fetching addresses for postcode ', postcode);
+    console.log('Fetching addresses for the postcode : ', postcode);
 
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');

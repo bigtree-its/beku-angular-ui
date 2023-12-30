@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { Extra, Food, FoodOrderItem } from 'src/app/model/localchef';
-import { FoodOrderservice } from 'src/app/services/food-order.service';
+import { Extra, FoodOrderItem, Menu } from 'src/app/model/localchef';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Utils } from 'src/app/services/utils';
 import { Day } from 'src/app/model/common-models';
+import { FoodOrderService } from 'src/app/services/food-order.service';
 
 
 @Component({
@@ -13,7 +13,7 @@ import { Day } from 'src/app/model/common-models';
 })
 export class MenuItemComponent {
 
-  @Input() food?: Food;
+  @Input() menu?: Menu;
   @Input() displayOrderBy?: Boolean = false;
   @Input() displayDescription?: Boolean = false;
   @Input() orderBy?: Date = new Date();
@@ -24,7 +24,7 @@ export class MenuItemComponent {
   quantity: number = 1;
   ordeByDate: Day;
 
-  constructor(private foodOrderService: FoodOrderservice,
+  constructor(private foodOrderService: FoodOrderService,
     private utils: Utils,
     private modalService: NgbModal) { 
       
@@ -32,7 +32,7 @@ export class MenuItemComponent {
 
 
   ngOnInit() {
-    this.price = this.food.price;
+    this.price = this.menu.price;
   }
 
   open(content) {
@@ -50,8 +50,8 @@ export class MenuItemComponent {
   }
 
   handleChoiceSelection(e: any) {
-    if (this.food !== null && this.food !== undefined) {
-      this.food.choices.forEach(choice => {
+    if (this.menu !== null && this.menu !== undefined) {
+      this.menu.choices.forEach(choice => {
         if (choice.name === e.target.value) {
           if (this.selectedchoice === null || this.selectedchoice === undefined) {
             this.selectedchoice = choice;
@@ -72,8 +72,8 @@ export class MenuItemComponent {
   }
 
   selectExtra(extraClicked: string, e: any) {
-    if (this.food !== null && this.food !== undefined) {
-      this.food.extras.forEach(item => {
+    if (this.menu !== null && this.menu !== undefined) {
+      this.menu.extras.forEach(item => {
         if (item.name === extraClicked) {
           if (e.target.checked) {
             this.selectedExtras.push(item);
@@ -115,8 +115,8 @@ export class MenuItemComponent {
     if (this.selectedchoice !== null && this.selectedchoice !== undefined) {
       extraTotal = extraTotal + this.selectedchoice.price;
     }
-    if (this.food !== null && this.food !== undefined) {
-      this.price = (this.food.price + extraTotal) * this.quantity;
+    if (this.menu !== null && this.menu !== undefined) {
+      this.price = (this.menu.price + extraTotal) * this.quantity;
       this.price = +(+this.price).toFixed(2);
     }
 
@@ -126,11 +126,11 @@ export class MenuItemComponent {
     console.log('Add to Order: ');
     var foodOrderItem: FoodOrderItem = {
       _tempId: Date.now(),
-      id: this.food._id,
-      image: this.food.image,
-      name: this.food.name,
+      id: this.menu._id,
+      image: this.menu.image,
+      name: this.menu.name,
       quantity: this.quantity,
-      price: this.food.price,
+      price: this.menu.price,
       subTotal: this.price,
       extras: this.selectedExtras,
       choice: this.selectedchoice,
