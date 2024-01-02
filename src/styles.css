@@ -2,7 +2,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Handlee&display=swap');
 :root {
-    --green: #27ae60;
+    --green: rgb(8, 222, 158);
     --black: rgb(0, 0, 0);
     --light-color: #666;
     --section-background: rgb(238, 238, 238);
@@ -11,7 +11,8 @@
     --white: #fff;
     --warning: #ffc107;
     /* --border: #e3e9ed; */
-    --border: #66E7E7;
+    --border: #3d3d3d;
+    --light-border: #e2e2e2;
     --v-border: chartreuse;
     --light-background: #fafafa;
     --mild-white: rgb(233, 230, 230);
@@ -30,6 +31,7 @@
     font-weight: 300;
     overflow-y: scroll;
     box-sizing: content-box;
+    font-family: 'Handlee', cursive;
 }
 
 html {
@@ -208,15 +210,16 @@ select {
 
 .n-button {
     border: 1px solid var(--border);
-    background-color: var(--light-background);
-    line-height: 40px;
-    padding: 0 10px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    border-radius: 7px;
+    text-align: center;
 }
 
 .n-button:hover {
     cursor: pointer;
-    border: 1px solid #66E7E7;
-    background-color: var(--light-background);
+    background-color: var(--green);
+    /* border: 1px solid #66E7E7;
+    background-color: var(--light-background); */
 }
 
 .fb-btn {
@@ -238,8 +241,9 @@ select {
 .fb-input {
     width: 100%;
     outline: none;
-    padding: 10px;
-    border: 1px solid var(--border);
+    padding: 6px;
+    border: 1px solid var(--light-border);
+    border-radius: 6px;
 }
 
 .my-checkbox {

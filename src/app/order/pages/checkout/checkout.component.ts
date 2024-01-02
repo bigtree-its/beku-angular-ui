@@ -361,6 +361,7 @@ export class CheckoutComponent {
 
   showAddressLookup() {
     this.lookupAddress = true;
+    this.customerAddress = undefined;
   }
 
   findAddress() {

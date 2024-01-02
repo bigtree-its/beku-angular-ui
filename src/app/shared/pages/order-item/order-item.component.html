@@ -2,7 +2,7 @@
     <div class="order-item-container">
         <div class="flex-column justify-content-center align-items-center">
             <span style="font-size: 15px; padding-top: 10px;">{{item.price | currency: 'GBP'}}</span>
-            <div style="border: 1px solid var(--border);padding: 5px;display: flex;justify-content: space-around;">
+            <div style="border: 1px solid var(--border);padding: 5px;display: flex;justify-content: space-around;border-radius: 7px;">
                 <button style="border:none" (click)="decreaseQuantity()"> - </button>
                 <span class="qty-value">{{quantity}}</span>
                 <button style="border:none" (click)="increaseQuantity()">+</button>

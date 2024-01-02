@@ -50,7 +50,7 @@
                     </div>
 
                     <div #widgetsContent class="middle">
-                        <span *ngFor="let c of collections" class="select-span" (click)="onSelectCategory($event, c)" [class.selectedSpan]="isSelectedCategory(c)">{{c.name}}</span>
+                        <span *ngFor="let c of collections" class="select-span" (click)="onSelectCategory(c)" [class.selectedSpan]="isSelectedCategory(c)">{{c.name}}</span>
                     </div>
 
                     <div style="float: right">
@@ -71,8 +71,8 @@
                 </div>
             </div>
             <div class="col-3 order-section">
-                <button class="n-button my-1 mx-1" style="width: 100%;" [routerLink]="[ '/checkout'] " [disabled]="!(order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0)">Go
-                    to checkout</button>
+                <button class="n-button my-1 mx-1" style="width: 100%;font-weight: 900;" [routerLink]="[ '/checkout'] " [disabled]="!(order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0)">
+                    CHECKOUT</button>
                 <!-- <div class="btn-wrapper " style="width: 100%; " [routerLink]="[ '/checkout'] ">
                     <div style="display: flex; justify-content: space-between; ">
                         <span>Checkout</span>
@@ -101,12 +101,6 @@
 
 <ng-template #itemsBlock>
     <div class="order-with-items">
-        <div class="order-items-section">
-            <div *ngIf="order !== null && order !== undefined && order.items !== null && order.items !== undefined && order.items.length > 0">
-                <app-order-item *ngFor="let item of order.items" [item]="item"></app-order-item>
-            </div>
-        </div>
-        <br>
         <div class="order-summary-section">
             <div class="flex-row-space-between">
                 <span>Subtotal</span>
@@ -125,8 +119,13 @@
                 <span>{{order.serviceFee | currency: 'GBP'}}</span>
             </div>
             <div class="flex-row-space-between" style="margin-top: 10px;">
-                <span style="font-weight: 900;">Total</span>
+                <span style="font-weight: 900;">TOTAL</span>
                 <span style="font-weight: 900;">{{order.total | currency: 'GBP'}}</span>
+            </div>
+        </div>
+        <div class="order-items-section">
+            <div *ngIf="order !== null && order !== undefined && order.items !== null && order.items !== undefined && order.items.length > 0">
+                <app-order-item *ngFor="let item of order.items" [item]="item"></app-order-item>
             </div>
         </div>
     </div>

@@ -240,6 +240,9 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
     this.chefService.getMenusForChef(supplierId).subscribe((items: Menu[]) => {
       this.items = items;
       console.log('Menus fetched: ' + this.items.length);
+      if ( this.collections !== null && this.collections !== undefined && this.collections.length > 0){
+        this.onSelectCategory(this.collections[0]);
+      }
     });
   }
 
@@ -286,7 +289,7 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
     this._location.back();
   }
 
-  onSelectCategory(event, category: Collection) {
+  onSelectCategory(category: Collection) {
     this.filterItemsByCat(category);
     this.selectedCategory = category;
     this.displayCal = false;
