@@ -1,67 +1,42 @@
-<div class="flex-column">
-    <div style="padding: 10px; text-align: center;border-bottom: 1px solid #e3e9ed;">
-        <strong style="font-size: 22px;" *ngIf="serviceLocation !== null && serviceLocation !== undefined">Top cooks in {{serviceLocation.name}}</strong>
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-2 filter-section">
-                <div class="filter-icon">
-                    <img src="/assets/icons/filter.png" width="10" height="10"> <b>Filters</b>
-                </div>
-                <div *ngFor="let cuisine of cuisines" class="cuisine-select">
-                    <input class="my-checkbox my-checkbox--teal" type="checkbox" name="cuisine" value="{{cuisine.name}}" id="{{cuisine.name}}" (change)="selectCuisine(cuisine.name,$event)">
-                    <label for="{{cuisine.name}}">{{cuisine.name}}</label>
-                </div>
-            </div>
-            <div class="col main-section">
-                <div class="cuisines-select-container">
-                    <div style="float: left">
-                        <img src="/assets/icons/left-arrow.png" alt="" loading="lazy" class="scroll-left" (click)="scrollLeft()">
-                    </div>
-
-                    <div #widgetsContent class="middle">
-                        <div *ngFor="let cuisine of cuisines" class="cuisine-select">
-                            <input class="my-checkbox my-checkbox--teal" type="checkbox" name="cuisine" value="{{cuisine.name}}" id="{{cuisine.name}}" (change)="selectCuisine(cuisine.name,$event)">
-                            <label for="{{cuisine.name}}">{{cuisine.name}}</label>
-                        </div>
-                    </div>
-
-                    <div style="float: right">
-                        <!-- <button (click)="scrollRight()">right</button> -->
-                        <img src="/assets/icons/right-arrow.png" alt="" loading="lazy" class="scroll-right" (click)="scrollRight()">
-                    </div>
-                </div>
-                <!-- <div class="cuisines-select-container">
-                    <select [ngModel]="selectedCuisine " (ngModelChange)="onSelectCuisine($event) " name="cuisineSelect " style="border: none;background-color: transparent;padding: 0 10px;outline: none;">
-                        <option [ngValue]="cuisine " *ngFor="let cuisine of cuisines ">{{ cuisine.name }}</option>
-                    </select>
-                </div> -->
-                <div class="cheflist-container">
-                    <div *ngFor="let chef of filteredChefs " [routerLink]="[ '/cooks', chef._id] " class="chef-card ">
-                        <img src="/assets/images/users/{{chef._id}}/cover-photo.jpg">
-                        <div class="chef-data-container ">
-                            <div class="flex-row-space-between">
-                                <span class="chef-name ">{{chef.name}}</span>
-                                <div style="display: flex;align-items: center;">
-                                    <img [src]="star" style="width: 15px;height: 15px;">
-                                    <span>{{chef.rating}}</span>
-                                </div>
-                            </div>
-                            <div class="chef-cuisines-container">
-                                <!-- <span *ngFor="let cuisine of chef.cuisines" class="cuisine">
-                                    {{cuisine.name}}
-                                </span> -->
-                                <!-- If chef has big list of cuisines, then Iterate only few items from array -->
-                                <ng-container *ngFor="let cuisine of chef.cuisines | slice:0:3">
-                                    <div class="cuisine">{{ cuisine.name }}</div>
-                                </ng-container>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
+<div class="flex-column" style="margin: 50px 0 ;">
+    <div style="width: 100%;display: flex;">
+        <div class="cuisines-container">
+            <div *ngFor="let cuisine of cuisines" class="cuisine" (click)="onSelectCuisine(cuisine)" [class.selectedCuisine]="isSelectedCuisine(cuisine)">
+                <img src={{cuisine.logo}} class="cuisine-logo" height="90px" width="120px">
+                <span>{{cuisine.name}}</span>
             </div>
         </div>
     </div>
+    <div style="display: flex;">
+        <div class="dish-container">
+            <span style="font-weight: 900;padding: 10px 0;">Popular Dishes</span>
+            <div *ngFor="let dish of dishes" class="dish">
+                <span>{{dish.name}}</span>
+            </div>
+        </div>
+        <div class="cheflist-container">
+            <div *ngFor="let chef of filteredChefs " [routerLink]="[ '/cooks', chef._id] " class="chef-card ">
+                <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg" class="chef-coverPhoto">
+                <div class="chef-data-container ">
+                    <div class="flex-row-space-between">
+                        <span class="chef-name ">{{chef.name}}</span>
+                        <div style="display: flex;align-items: center;">
+                            <img [src]="star" style="width: 15px;height: 15px;">
+                            <span>{{chef.rating}}</span>
+                        </div>
+                    </div>
+                    <div class="chef-cuisines-container">
+                        <!-- <span *ngFor="let cuisine of chef.cuisines" class="cuisine">
+                            {{cuisine.name}}
+                        </span> -->
+                        <!-- If chef has big list of cuisines, then Iterate only few items from array -->
+                        <ng-container *ngFor="let cuisine of chef.cuisines | slice:0:3">
+                            <div class="cuisine">{{ cuisine.name }}</div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

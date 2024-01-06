@@ -9,6 +9,7 @@ export class ServiceLocator {
     collectionsUrl: string = "";
     chefsUrl: string;
     cuisinesUrl: string;
+    DishesUrl: string;
     menusUrl: string;
     ServiceAreasUrl: string;
     calendersUrl: string;
@@ -22,6 +23,7 @@ export class ServiceLocator {
         this.collectionsUrl = environment.CollectionsUrl;
         this.chefsUrl = environment.ChefsUrl;
         this.cuisinesUrl = environment.CuisinesUrl;
+        this.DishesUrl = environment.DishesUrl;
         this.ServiceAreasUrl = environment.ServiceAreasUrl;
         this.menusUrl = environment.MenusUrl;
         this.calendersUrl = environment.CalendersUrl;

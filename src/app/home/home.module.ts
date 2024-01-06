@@ -14,7 +14,7 @@ import { SandboxComponent } from './pages/sandbox/sandbox.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
-  { path: ':servicelocation/cooks', component: CheflistComponent },
+  { path: 'cooks', component: CheflistComponent },
   { path: 'cooks/:id', component: ChefHomeComponent },
   { path: 'sandbox', component: SandboxComponent },
 ]

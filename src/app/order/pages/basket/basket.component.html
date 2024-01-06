@@ -25,12 +25,13 @@
     <div class="basket-with-items">
         <strong style="font-size: 20px;" [routerLink]="['/cooks', chef._id]" routerLinkActive="router-link-active">{{chef.displayName}}</strong>
         <span class="chef-address">{{getAddress()}}</span>
-        <div class="btn-wrapper" style="width: 100%;" [routerLink]="['/checkout']">
+        <div class="btn-wrapper" style="width: 100%;">
             <div style="display: flex; justify-content: space-between;">
-                <span>Checkout</span>
+                <span>Total</span>
                 <span style="font-weight: bolder;font-size: 15px;">{{cartTotal | currency: 'GBP'}}</span>
             </div>
         </div>
+        <button class="n-button" style="width: 100%;" [routerLink]="['/checkout']">Checkout</button>
         <div class="items-container">
             <div *ngIf="order !== null && order !== undefined">
                 <app-order-item *ngFor="let item of order.items" [item]="item"></app-order-item>

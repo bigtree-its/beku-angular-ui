@@ -3,43 +3,76 @@
         <strong style="padding-top: 100px;font-size: 32px;font-weight: 900;text-transform: uppercase;">Order online now</strong>
         <span style="padding: 10px 0;font-size: 22px;color: var(--green);">Craving for home food?</span>
         <div class="search-container">
-            <img src="/assets/icons/pin.png" height="25px" width="25px" style="margin-right: 20px; opacity: 0.5;">
+            <img src="/assets/icons/target.png" height="25px" width="25px" style="margin-right: 20px; opacity: 0.5;">
             <input type="text" placeholder="Enter your location" class="search-box" [(ngModel)]="serviceLocationSearchText" (keyup.enter)="onEnter()">
             <!-- <div class="btn-wrapper " (click)="onEnter()">
                 <div>
                     <span>Find</span>
                 </div>
             </div> -->
+            <span *ngIf="showServiceLocations" (click)="closeServiceLocations()" style="font-weight: 900;color: var(--green);cursor: pointer;padding: 0 10px;">Clear</span>
             <button class="n-button" (click)="onEnter()">Find</button>
         </div>
         <div *ngIf="showServiceLocations" class="locations-container">
-            <div class="close-bar">
+            <!-- <div class="close-bar">
                 <strong title="Close" (click)="closeServiceLocations()">X</strong>
-            </div>
-            <div class="location" *ngFor="let sl of serviceLocations" (click)="onSelectServiceLocation(sl)">
-                <span>{{ sl.name }}, {{sl.city}}</span>
+            </div> -->
+            <div class="locations">
+                <span class="location" *ngFor="let sl of serviceLocations" (click)="onSelectServiceLocation(sl)">{{ sl.name }}, {{sl.city}}</span>
             </div>
         </div>
     </div>
 
-    <div class="section">
-        <strong class="section-header">Popular Locations</strong>
+    <div class="top-locations">
+        <strong class="section-header">Top Locations</strong>
         <span class="section-sub-header">Choose from popular locations</span>
-        <div class="section-data-container">
-            <strong class="section-data-container-header">Glasgow</strong>
+        <div class="top-locations-data-container">
+            <strong class="top-locations-data-container-header">Glasgow</strong>
             <div class="section-data" *ngIf="popularLocations !== null && popularLocations !== undefined">
-                <span class="popular-l" *ngFor="let pl of popularLocations" [routerLink]="[pl.slug, 'cooks']">{{pl.name}}</span>
+                <span class="top-locations-data" *ngFor="let pl of popularLocations" [routerLink]="['cooks']" [queryParams]="{location: pl.slug}">{{pl.name}}</span>
             </div>
         </div>
     </div>
 
-    <div class="section">
+    <div class="top-cuisines">
         <strong class="section-header">Top Cuisines</strong>
         <span class="section-sub-header">Browse popular cuisines from home chefs in your area and order delivery online.</span>
-        <div class="section-data-container">
+        <div class="top-cuisines-data-container">
             <div class="section-data" *ngIf="cuisines !== null && cuisines !== undefined">
-                <span class="popular-l" *ngFor="let cuisine of cuisines">{{cuisine.name}}</span>
+                <span class="top-cuisines-data" *ngFor="let cuisine of cuisines" [routerLink]="['cooks']" [queryParams]="{cuisine: cuisine.slug}">{{cuisine.name}}</span>
             </div>
         </div>
+    </div>
+    <div class="section">
+        <strong class="section-header">How It Works!</strong>
+        <div style="display: flex;flex-wrap: wrap;gap:1rem;">
+            <div class="how-it-works-section">
+                <div class="flex-row justify-content-center  align-items-center">
+                    <span style="font-size: 40px;opacity: 0.5;">1</span>
+                    <img src="/assets/icons/chef.png" height="100px" width="100px">
+                </div>
+                <strong>Find a home chef</strong>
+                <small>Find a home chef nearest to your home</small>
+            </div>
+            <div class="how-it-works-section">
+                <div class="flex-row justify-content-center align-items-center">
+                    <span style="font-size: 40px;opacity: 0.5;">2</span>
+                    <img src="/assets/icons/order.png" height="100px" width="100px">
+                </div>
+                <strong>Place your order</strong>
+                <small>Order in for yourself or for the group, 
+                    with no restrictions on order value</small>
+            </div>
+            <div class="how-it-works-section">
+                <div class="flex-row justify-content-center  align-items-center">
+                    <span style="font-size: 40px;opacity: 0.5;">3</span>
+                    <img src="/assets/icons/eating.png" height="100px" width="100px">
+                </div>
+                <strong>Enjoy the home cooked food</strong>
+                <small>Enjoy the home cooked food at your home</small>
+            </div>
+        </div>
+
+
     </div>
 </div>

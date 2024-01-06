@@ -1,40 +1,25 @@
 export const environment = {
   production: true,
 
-  REVIEW_SERVICE_URL: window["env"]["reviewServiceUrl"],
-  AD_SERVICE_URL: window["env"]["adServiceUrl"],
-  // POSTCODELOOKUP_SERVICE_URL: window["env"]["postcodeLookupServiceUrl"] || "https://api.getaddress.io/find/g775sf?expand=true&api-key=VoEYLOWRyECPuAIwDnocAQ30109",
+  CURRENCY: 'GBP',
+  CURRENCY_SYMBOL: '£',
 
-  ACCOUNT_SERVICE_URL: window["env"]["userServiceUrl"],
-  ORDER_SERVICE_URL: window["env"]["orderServiceUrl"],
-  BASKET_SERVICE_URL: window["env"]["basketServiceUrl"],
-  
-  CHANGE_PASSWORD: window["env"]["userServiceUrl"] + '/auth/change-password',
-  FORGOT_PASSWORD: window["env"]["userServiceUrl"] + '/auth/forgot-password',
-  RESET_PASSWORD: window["env"]["userServiceUrl"] + '/auth/reset-password',
+  CollectionsUrl: "http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/collections",
+  ChefsUrl: "http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/chefs",
+  CuisinesUrl: "http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/cuisines",
+  DishesUrl: "http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/dishes",
+  ServiceAreasUrl: "http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/serviceareas",
+  MenusUrl: "http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/menus",
+  CalendersUrl: "http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/calendars",
+  OrderTrackingUrl: "https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/order-tracking",
+  CustomerOrdersUrl: "https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders",
+  CustomerOrderSearchUrl: "https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders/search",
+  StripePaymentsUrl: "https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments",
+  PaymentIntentUrl: "https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments/payment-intent",
+
 
   debug: window["env"]["debug"] || false,
 
-  // BasePaths
-  // Paths always starts with prefix '/'
-
-  AUTH_LOGIN_PATH: '/auth/login',
-  AUTH_REGISTER_PATH: '/auth/register',
-  USERS: '/users',
-  ORDERS: '/orders',
-  CREATE_PAYMENT_INTENT: '/create-payment-intent',
-  BASKETS: '/baskets',
-  ADS_BASEPATH: '/ads/v1',
-
-  /** URI */
-   PROPERTIES_URI: '/properties',
-   PROPERTY_TYPES_URI: '/property-types',
-
-  /** GetAddress.io */
-  API_KEY_GETADDRESS_IO: window["env"]["apiKeyGetAddressIO"],
-  POSTCODELOOKUP_SERVICE_URL: window["env"]["postcodeLookupServiceUrl"],
-  DISTANCE_SERVICE_URL: window["env"]["distanceServiceUrl"],
-  ORIGIN_POSTCODE: window["env"]["originPostcode"],
 
 
   /** RapidAPI  */

@@ -1,31 +1,28 @@
-.basket-container {
+.main {
+    /* width: 100%;
+    height: 100vh; */
+    display: flex;
+    overflow-y: hidden;
+    padding: 50px 0 0 0;
+}
+
+.left {
+    display: none;
+    width: 50%;
+}
+
+.right {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    flex-shrink: 0;
-    min-width: 400px;
-    margin-top: 1%;
+    overflow-x: hidden;
+    width: 100%;
 }
 
-.section {
+.data-section {
     padding: 20px;
-    border: 1px solid var(--border);
     min-width: 500px;
-    border-radius: 7px;
-}
-
-.basket-container>* {
-    flex-grow: 1;
-}
-
-.basket-header {
-    font-size: 1.5em;
-}
-
-.chef-container {
-    padding: 10px;
 }
 
 .delivery-mode-container {
@@ -51,7 +48,7 @@
 
 .service-mode-option-selected {
     background: var(--green);
-    box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
     border: 1px solid var(--border);
 }
 
@@ -59,7 +56,6 @@
     display: flex;
     flex-direction: column;
     min-width: 450px;
-    font-weight: 700;
 }
 
 .customer-delivery-address-container {
@@ -79,6 +75,7 @@
     padding: 1rem;
     display: flex;
     flex-direction: column;
+    background-color: var(--light-background);
 }
 
 .postcode-lookup-container {
@@ -150,70 +147,6 @@
     background-color: #eee;
 }
 
-.scroll-left {
-    margin: 10px;
-    height: 35px;
-    width: 35px;
-    border-radius: 50%;
-    align-items: center;
-    padding: 10px;
-    background-color: transparent;
-}
-
-.scroll-left:hover {
-    cursor: pointer;
-    background-color: var(--white);
-}
-
-.my-checkbox {
-    width: 2rem;
-    height: 2rem;
-    margin-right: 0.75rem;
-    cursor: pointer;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    display: none;
-}
-
-.my-checkbox:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    border: 2px solid #f2f2f2;
-    transition: all 0.3s ease-in-out;
-    font-size: 20px;
-}
-
-.my-checkbox:checked:before {
-    height: 50%;
-    transform: rotate(-45deg);
-    border-top-style: none;
-    border-right-style: none;
-}
-
-.my-checkbox--red:checked:before {
-    border-color: #7cf436;
-}
-
-.trigger input[type=checkbox]+div {
-    display: none;
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s linear 0.33s, opacity 0.33s linear;
-}
-
-.trigger input[type=checkbox]:checked+div {
-    visibility: visible;
-    display: block;
-    opacity: 1;
-    transition-delay: 0s;
-}
-
 .msg {
     /* display: block; */
     margin-top: 8px;
@@ -231,9 +164,37 @@
     cursor: pointer;
 }
 
-@media (min-width: 55em) {
+@media (min-width: 600px) {
     .customer-address-container {
         display: flex;
         flex-direction: row;
     }
+    .left {
+        display: flex;
+        overflow: hidden;
+        background-image: url('/assets/images/photo-3.jpeg');
+        background-repeat: no-repeat;
+        background-position: center;
+        position: relative;
+        height: 90vh;
+    }
+    .right {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        height: 90vh;
+    }
+    /* .left img {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-height: 100%;
+        min-width: 100%;
+        transform: translate(-50%, -50%);
+        object-fit: contain;
+        height: 100vh;
+    } */
 }

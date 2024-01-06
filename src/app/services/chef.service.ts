@@ -43,7 +43,6 @@ export class ChefService {
     if (query.noMinimumOrder !== undefined && query.noMinimumOrder !== null) {
       params = params.set('noMinimumOrder', "");
     }
-    console.log('Get LocalChefs for : ' + params)
     return this.http.get<LocalChef[]>(this.serviceLocator.chefsUrl, { params });
   }
 

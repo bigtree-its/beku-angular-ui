@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Handlee&family=Satisfy&display=swap');
 .application-header {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    min-height: 65px;
+    /* display: flex; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    /* flex-direction: column; */
     background-color: #fff;
 }
 

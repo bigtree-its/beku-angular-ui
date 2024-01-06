@@ -1,14 +1,17 @@
 <ng-container *ngIf="(loadStripe$ | async) as stripe; else loadingStripe"></ng-container>
-
-<div class="main">
-    <div class="left">
+<div class="checkout-container">
+    <div style="display: flex;align-items: center;">
+        <img src="/assets/icons/left-arrow.png" loading="lazy" class="scroll-left" (click)="goback()"><span style="font-size: x-large;font-weight: 300;">Confirm and pay</span>
     </div>
-    <div class="right">
-        <div class="data-section">
+
+    <div class="basket-container">
+        <span style="font-weight: 300;font-size: xx-large;" [routerLink]="['/cooks', chef._id]" routerLinkActive="router-link-active">{{chef.name}}</span>
+        <span class="chef-address">{{getAddress()}}</span>
+        <div class="section">
+            <div style="display: flex;justify-content: center;padding: 10px;">
+                <strong style="text-align: center;text-transform: uppercase;width: 100%;">{{divHeader}}</strong>
+            </div>
             <div *ngIf="showCustomerDetailsSection" class="customer-details-container">
-                <div style="display: flex;justify-content: center;padding: 10px;">
-                    <strong style="text-align: center;text-transform: uppercase;width: 100%;">Your details</strong>
-                </div>
                 <div class="flex-column mb-3">
                     <label for="customerName">Your name on order (for when you collect)<small
                             style="color: red;">**</small></label>
@@ -28,7 +31,7 @@
                     <button style="display: inline-block;" class="service-mode-option" (click)="selectPickup()" [class.service-mode-option-selected]="serviceMode==='COLLECTION'"><img src="/assets/icons/bike.png" width="20" height="20" class="mr-1">Collection</button>
                     <button style="display: inline-block;" class="service-mode-option" (click)="selectDelivery()" [class.service-mode-option-selected]="serviceMode==='DELIVERY'" [disabled]="!chef.delivery"><img src="/assets/icons/shopping-basket.png" width="20" height="20" class="mr-1">Delivery</button>
                 </div>
-                <div *ngIf="serviceMode === 'COLLECTION'" class="customer-address-section">
+                <div *ngIf="serviceMode === 'COLLECTION'">
                     <strong style="display: block;">Please collect at</strong>
                     <span style="display: block;">{{chef.address.addressLine1}}</span>
                     <span style="display: block;">{{chef.address.addressLine2}}</span>
@@ -70,9 +73,6 @@
 
             </div>
             <div *ngIf="showItemsSection" class="items-container">
-                <div style="display: flex;justify-content: center;padding: 10px;">
-                    <strong style="text-align: center;text-transform: uppercase;width: 100%;">Your Order</strong>
-                </div>
                 <div *ngIf="order !== null && order !== undefined">
                     <app-order-item *ngFor="let item of order.items" [item]="item"></app-order-item>
                 </div>
@@ -82,9 +82,6 @@
                 </div>
             </div>
             <div *ngIf="showPaymentSection" class="order-details-container">
-                <div style="display: flex;justify-content: center;padding: 10px;">
-                    <strong style="text-align: center;text-transform: uppercase;width: 100%;">You Pay</strong>
-                </div>
                 <div class="flex-row-space-between">
                     <strong>Subtotal</strong>
                     <strong>{{order.subTotal| currency: 'GBP'}}</strong>
@@ -130,7 +127,6 @@
         </div>
     </div>
 </div>
-
 
 
 <ng-template #itemsContent let-modal>

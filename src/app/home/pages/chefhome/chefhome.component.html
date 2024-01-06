@@ -1,9 +1,9 @@
 <div *ngIf="chef !== null && chef !== undefined">
 
-    <div class="container-fluid">
+    <div class="container-fluid" style="margin: 50px 0;">
         <div class="row">
             <div class="col-3 profile-section">
-                <img src="/assets/images/users/{{chef._id}}/cover-photo.jpg" height="300" width="100%" class="chef-profile-image">
+                <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg" height="300" width="100%" class="chef-profile-image">
                 <br>
                 <strong class="chef-profile-header-name ">{{chef.name}}</strong>
                 <br>
@@ -27,8 +27,7 @@
             </div>
             <div class="col-6  main-section">
                 <div class="main-profile-section">
-                    <img src="/assets/images/users/{{chef._id}}/cover-photo.jpg" height="100" style="object-fit: cover;">
-                    <!-- <img src={{chef.coverPhoto}} width="100px" height="100" style="object-fit: cover;"> -->
+                    <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg" class="chef-coverPhoto">
                     <div class="main-profile-info-section">
                         <span style="font-size: x-large;font-weight: 300;">{{chef.name}}</span>
                         <span style="font-size: small;"><b>Collect at</b></span>

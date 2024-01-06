@@ -9,12 +9,9 @@ import { RapidApiByPostcodeResponse, RapidApiResult } from '../model/address';
 })
 export class RapidApiService {
 
-  private ADDRESS_FINDER_URL = environment.POSTCODELOOKUP_SERVICE_URL;
-  private DISTANCE_SERVICE_URL = environment.DISTANCE_SERVICE_URL;
   private X_RapidAPI_Url = environment.X_RapidAPI_Url;
   private X_RapidAPI_Key = environment.X_RapidAPI_Key;
   private X_RapidAPI_Host = environment.X_RapidAPI_Host;
-  private ORIGIN_POSTCODE = environment.ORIGIN_POSTCODE;
 
 
   constructor(

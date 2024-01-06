@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CustomerOrder, FoodOrderItem, LocalChef } from '../model/localchef';
+import { Cuisine, CustomerOrder, FoodOrderItem, LocalChef } from '../model/localchef';
 import { ServiceLocation } from '../model/ServiceLocation';
 import { Utils } from './utils';
 
@@ -10,12 +10,14 @@ import { Utils } from './utils';
 export class ContextService {
   
   
+  
   chefSubject: BehaviorSubject<LocalChef>;
   orderSubject: BehaviorSubject<CustomerOrder>;
   serviceLocationSubject: BehaviorSubject<ServiceLocation>;
   private order: CustomerOrder;
   private chef: LocalChef;
   serviceLocation: ServiceLocation;
+  cuisine: Cuisine;
 
   constructor(
     private utils: Utils
@@ -68,6 +70,10 @@ export class ContextService {
     this.order = undefined;
     this.orderSubject.next(null);
     sessionStorage.removeItem('order');
+  }
+
+  selectCuisine(cuisine: Cuisine) {
+    this.cuisine = cuisine;
   }
 
   selectLocation(sl: ServiceLocation) {

@@ -60,6 +60,14 @@ export interface LocalChef {
 export interface Cuisine {
     _id: string;
     name: string;
+    logo: string;
+    slug: string;
+}
+
+export interface Dish {
+    _id: string;
+    name: string;
+    logo: string;
 }
 
 export class Collection {

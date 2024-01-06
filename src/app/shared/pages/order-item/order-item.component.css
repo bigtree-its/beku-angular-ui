@@ -1,12 +1,11 @@
 .order-item-container {
     display: flex;
     justify-content: space-between;
-    border: 1px solid var(--border);
-    border-radius: 7px;
     gap: 1rem;
     padding: 5px 10px;
-    margin: 5px 0;
+    margin: 1px 0;
     align-items: center;
+    background-color: var(--light-background);
 }
 
 .order-item-wrapper {

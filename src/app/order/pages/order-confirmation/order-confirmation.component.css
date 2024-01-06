@@ -1,5 +1,16 @@
-.address{
+.address {
     display: flex;
     flex-wrap: wrap;
     gap: 0.1rem;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 1px;
+}
+
+.table-row {
+    margin: 0;
+    /* background-color: #b37536; */
+    /* background-color: #f5f3f1; */
 }

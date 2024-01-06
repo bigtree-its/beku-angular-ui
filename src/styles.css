@@ -2,16 +2,17 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Handlee&display=swap');
 :root {
-    --green: rgb(8, 222, 158);
+    /* --green: #08DE9E; */
+    --green: coral;
     --black: rgb(0, 0, 0);
-    --light-color: #666;
+    --light-color: #e1e1e1;
     --section-background: rgb(238, 238, 238);
     --aquamarine: aquamarine;
     --orange: coral;
     --white: #fff;
     --warning: #ffc107;
     /* --border: #e3e9ed; */
-    --border: #3d3d3d;
+    --border: #bbbaba;
     --light-border: #e2e2e2;
     --v-border: chartreuse;
     --light-background: #fafafa;
@@ -69,7 +70,7 @@ img {
 body {
     margin: 0;
     padding: 0;
-    background: rgb(248, 247, 247);
+    /* background: rgb(248, 247, 247); */
 }
 
 select {
