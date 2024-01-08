@@ -1,12 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Handlee&family=Satisfy&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Handlee&family=Satisfy&display=swap");
 .application-header {
-    /* display: flex; */
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    /* flex-direction: column; */
-    background-color: #fff;
 }
 
 
@@ -15,7 +12,7 @@
 .top-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    box-shadow: 0 15px 40px -20px rgba(40, 44, 63, .15);
+    box-shadow: 0 15px 40px -20px rgba(40, 44, 63, 0.15);
     padding: 0 10px;
 }
 
@@ -23,7 +20,7 @@
     grid-column: span 3;
 }
 
-.top-location-container {
+.location-container {
     display: none;
 }
 
@@ -36,17 +33,6 @@
     text-decoration: underline;
     cursor: pointer;
     color: var(--black);
-}
-
-.middle-container {
-    display: none;
-}
-
-.location-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 20px 0 10px;
 }
 
 .left-container {
@@ -67,27 +53,9 @@
     color: #fff;
     cursor: pointer;
     font-weight: bold;
-    font-family: 'Satisfy', cursive;
+    font-family: "Satisfy", cursive;
     background-color: black;
     padding: 10px;
-}
-
-.location-container {
-    display: flex;
-    flex-direction: column;
-}
-
-.location {
-    font-weight: 500;
-    opacity: 0.5;
-}
-
-.change-area {
-    cursor: pointer;
-}
-
-.change-area:hover {
-    color: var(--black);
 }
 
 .change-location {
@@ -121,19 +89,13 @@
     .top-row>div:nth-child(1) {
         grid-column: span 3;
     }
-    .middle-container {
-        display: flex;
-    }
-    .top-location-container {
+    .location-container {
         display: flex;
         justify-content: space-between;
         gap: 0.8rem;
         align-items: center;
         padding: 5px;
         margin-left: 10px;
-    }
-    .location-row {
-        display: none;
     }
 }
 
@@ -148,22 +110,12 @@
     .top-row>div:nth-child(1) {
         grid-column: span 3;
     }
-    .top-location-container {
+    .location-container {
         display: flex;
         justify-content: space-between;
+        gap: 0.8rem;
         align-items: center;
         padding: 5px;
-    }
-    /* .tiles > div:first-child {
-      grid-column: span 2;
-    }
-    .tiles > div:second-child {
-      grid-column: span 2;
-    } */
-    .middle-container {
-        display: flex;
-    }
-    .location-row {
-        display: none;
+        margin-left: 10px;
     }
 }

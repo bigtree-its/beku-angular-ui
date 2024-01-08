@@ -2,7 +2,7 @@
     <div class="top-row">
         <div class="left-container">
             <div [routerLink]="['/']" routerLinkActive="router-link-active" class="logo">Lunchie Munchie</div>
-            <div class="top-location-container" *ngIf="serviceLocation != null && serviceLocation !== undefined">
+            <div class="location-container" *ngIf="serviceLocation != null && serviceLocation !== undefined">
                 <span class="location-slug" [routerLink]="['cooks']" [queryParams]="{location: serviceLocation.slug}">#{{serviceLocation.name}}, {{serviceLocation.city}}</span>
                 <span class="change-area" routerLink="/">Change</span>
             </div>
@@ -14,12 +14,5 @@
                 <span class="cart-items-count" style="margin-right: 10px;">{{itemsCount}}</span>
             </div>
         </div>
-    </div>
-    <div class="location-row" *ngIf="serviceLocation != null && serviceLocation !== undefined">
-        <div>
-            <img src="/assets/icons/location.png" height="20px" width="20px" style="margin-right: 10px;">
-            <span class="location-slug" [routerLink]="[serviceLocation.slug, 'cooks']">#{{serviceLocation.name}}</span>
-        </div>
-        <span class="change-area" routerLink="/">Change</span>
     </div>
 </div>
