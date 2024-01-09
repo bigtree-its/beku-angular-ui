@@ -11,7 +11,7 @@
         <span class="location-slug">{{serviceLocation.name}}, {{serviceLocation.city}}</span>
         <span class="change-area" routerLink="/">Change</span>
     </div>
-    <div style="display: flex;">
+    <div class="right-container">
         <div class="dish-container">
             <span style="font-weight: 900;padding: 10px 0;">Popular Dishes</span>
             <div *ngFor="let dish of dishes" class="dish">
@@ -26,7 +26,31 @@
                     <div class="chef-coverPhoto-desktop">
                         <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg">
                     </div>
-                    <div class="chef-info-desktop"></div>
+                    <div class="chef-info-desktop">
+                        <span class="chef-name-desktop">{{chef.kitchenName}}</span>
+                        <div class="flex-row space-between" style="border: 1px solid var(--green);">
+                            <div class="flex-column" style="padding: 10px 0;margin: 0 10px;border: 1px solid var(--green);flex-grow: 1;">
+                                <div style="display: flex;align-items: center;margin: 5px 0;">
+                                    <img [src]="star" style="width: 15px;height: 15px;">
+                                    <span>{{chef.rating}}</span>
+                                </div>
+                                <div class="flex-row">
+                                    <ng-container *ngFor="let cuisine of chef.cuisines | slice:0:3">
+                                        <div class="chef-cuisine-desktop">{{ cuisine.name }}</div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="flex-column" style="padding: 10px 0;margin: 0 10px;border: 1px solid var(--green);flex-grow:1;">
+                                <div class="flex-row">
+                                    <ng-container *ngFor="let slot of chef.slots | slice:0:3">
+                                        <div class="chef-cuisine-desktop">{{ slot.name }}</div>
+                                    </ng-container>
+                                </div>
+                                <span *ngIf="chef.doDelivery">I do delivery upto {{chef.deliveryDistance}} miles</span>
+                                <span *ngIf="chef.doPartyOrders">I take party orders</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="chef-card-mobile">

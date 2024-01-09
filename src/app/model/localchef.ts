@@ -32,7 +32,7 @@ export interface LocalChef {
     coverPhoto: string | undefined;
     name: string;
     email: string;
-    displayName: string;
+    kitchenName: string;
     days: string[];
     description: string[];
     cuisines: Cuisine[];

@@ -23,7 +23,7 @@
 
 <ng-template #thenBlock>
     <div class="basket-with-items">
-        <strong style="font-size: 20px;" [routerLink]="['/cooks', chef._id]" routerLinkActive="router-link-active">{{chef.displayName}}</strong>
+        <strong style="font-size: 20px;" [routerLink]="['/cooks', chef._id]" routerLinkActive="router-link-active">{{chef.kitchenName}}</strong>
         <span class="chef-address">{{getAddress()}}</span>
         <div class="btn-wrapper" style="width: 100%;">
             <div style="display: flex; justify-content: space-between;">
