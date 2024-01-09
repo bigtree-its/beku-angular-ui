@@ -20,26 +20,37 @@
         </div>
 
         <div class="chef-container">
-            <div *ngFor="let chef of filteredChefs " [routerLink]="[ '/cooks', chef._id] " class="chef-card ">
-                <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg" class="chef-coverPhoto">
-                <div class="chef-data-container ">
-                    <div class="flex-row-space-between">
-                        <span class="chef-name ">{{chef.name}}</span>
-                        <div style="display: flex;align-items: center;">
-                            <img [src]="star" style="width: 15px;height: 15px;">
-                            <span>{{chef.rating}}</span>
+            <div *ngFor="let chef of filteredChefs " [routerLink]="[ '/cooks', chef._id] ">
+
+                <div class="chef-card-desktop">
+                    <div class="chef-coverPhoto-desktop">
+                        <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg">
+                    </div>
+                    <div class="chef-info-desktop"></div>
+                </div>
+
+                <div class="chef-card-mobile">
+                    <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg" class="chef-coverPhoto">
+                    <div class="chef-data-container ">
+                        <div class="flex-row-space-between">
+                            <span class="chef-name ">{{chef.name}}</span>
+                            <div style="display: flex;align-items: center;">
+                                <img [src]="star" style="width: 15px;height: 15px;">
+                                <span>{{chef.rating}}</span>
+                            </div>
+                        </div>
+                        <div class="chef-cuisines-container">
+                            <!-- <span *ngFor="let cuisine of chef.cuisines" class="cuisine">
+                                {{cuisine.name}}
+                            </span> -->
+                            <!-- If chef has big list of cuisines, then Iterate only few items from array -->
+                            <ng-container *ngFor="let cuisine of chef.cuisines | slice:0:3">
+                                <div class="cuisine">{{ cuisine.name }}</div>
+                            </ng-container>
                         </div>
                     </div>
-                    <div class="chef-cuisines-container">
-                        <!-- <span *ngFor="let cuisine of chef.cuisines" class="cuisine">
-                            {{cuisine.name}}
-                        </span> -->
-                        <!-- If chef has big list of cuisines, then Iterate only few items from array -->
-                        <ng-container *ngFor="let cuisine of chef.cuisines | slice:0:3">
-                            <div class="cuisine">{{ cuisine.name }}</div>
-                        </ng-container>
-                    </div>
                 </div>
+
             </div>
         </div>
     </div>

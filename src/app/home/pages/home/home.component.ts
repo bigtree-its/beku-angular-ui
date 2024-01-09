@@ -118,7 +118,11 @@ export class HomeComponent {
     this.selectedServiceLocation = selectedServiceLocation;
     this.contextService.selectLocation(this.selectedServiceLocation);
     // this.fetchChefsByServiceLocation(selectedServiceLocation);
-    this.router.navigate([selectedServiceLocation.slug, 'cooks']).then();
+    this.router
+      .navigate(['cooks'], {
+        queryParams: { location: selectedServiceLocation.slug },
+      })
+      .then();
     console.log('Selected location: ' + selectedServiceLocation.name);
   }
 

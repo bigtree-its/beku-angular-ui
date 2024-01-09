@@ -26,7 +26,7 @@
             <div *ngIf="showServiceModeSection" class="flex-column justify-content-center">
                 <div class="delivery-mode-container" style="margin-bottom: 30px;">
                     <button style="display: inline-block;" class="service-mode-option" (click)="selectPickup()" [class.service-mode-option-selected]="serviceMode==='COLLECTION'"><img src="/assets/icons/bike.png" width="20" height="20" class="mr-1">Collection</button>
-                    <button style="display: inline-block;" class="service-mode-option" (click)="selectDelivery()" [class.service-mode-option-selected]="serviceMode==='DELIVERY'" [disabled]="!chef.delivery"><img src="/assets/icons/shopping-basket.png" width="20" height="20" class="mr-1">Delivery</button>
+                    <button style="display: inline-block;" class="service-mode-option" (click)="selectDelivery()" [class.service-mode-option-selected]="serviceMode==='DELIVERY'" [disabled]="!chef.doDelivery"><img src="/assets/icons/shopping-basket.png" width="20" height="20" class="mr-1">Delivery</button>
                 </div>
                 <div *ngIf="serviceMode === 'COLLECTION'" class="customer-address-section">
                     <strong style="display: block;">Please collect at</strong>
@@ -35,7 +35,7 @@
                     <span style="display: block;">{{chef.address.city}}</span>
                     <span style="display: block;">{{chef.address.postcode}}</span>
                 </div>
-                <div class="customer-delivery-address-container" *ngIf="chef.delivery  && serviceMode === 'DELIVERY'">
+                <div class="customer-delivery-address-container" *ngIf="chef.doDelivery  && serviceMode === 'DELIVERY'">
                     <strong>Where should we send your order?</strong>
                     <div class="customer-address-container" *ngIf="customerAddress !== null && customerAddress !== undefined && customerAddress.addressLine1 !== null && customerAddress.addressLine1 !== undefined &&  customerAddress.addressLine1.length > 0">
                         <div class="customer-address-section">

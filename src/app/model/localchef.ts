@@ -36,7 +36,7 @@ export interface LocalChef {
     days: string[];
     description: string[];
     cuisines: Cuisine[];
-    slots: string[];
+    slots: Slot[];
     serviceAreas: LocalArea[];
     categories: string[];
     specials: string[];
@@ -48,13 +48,21 @@ export interface LocalChef {
     active: boolean;
     minimumOrder: number;
     packagingFee: number;
-    delivery: boolean;
+    doPartyOrders: boolean;
+    doDelivery: boolean;
     partyOrders: boolean;
     freeDeliveryOver: number;
     deliveryMinimum: number;
     deliveryFee: number;
     deliveryDistance: number;
     minimumPartyOrder: number;
+}
+
+export interface Slot {
+    _id: string;
+    name: string;
+    logo: string;
+    slug: string;
 }
 
 export interface Cuisine {
