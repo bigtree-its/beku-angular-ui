@@ -7,6 +7,10 @@
             </div>
         </div>
     </div>
+    <div class="location-container" *ngIf="serviceLocation != null && serviceLocation !== undefined">
+        <span class="location-slug">{{serviceLocation.name}}, {{serviceLocation.city}}</span>
+        <span class="change-area" routerLink="/">Change</span>
+    </div>
     <div style="display: flex;">
         <div class="dish-container">
             <span style="font-weight: 900;padding: 10px 0;">Popular Dishes</span>
@@ -14,7 +18,8 @@
                 <span>{{dish.name}}</span>
             </div>
         </div>
-        <div class="cheflist-container">
+
+        <div class="chef-container">
             <div *ngFor="let chef of filteredChefs " [routerLink]="[ '/cooks', chef._id] " class="chef-card ">
                 <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg" class="chef-coverPhoto">
                 <div class="chef-data-container ">

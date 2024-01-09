@@ -1,108 +1,10 @@
-.cheflist-layout {
+.chef-container {
     display: flex;
-    justify-content: center;
-    gap: 1rem;
-    padding: 10px;
-}
-
-.cheflist-layout>*:nth-child(1) {
-    flex: 1 1 10%;
-    min-width: 125px;
-}
-
-.cheflist-layout>*:nth-child(2) {
-    flex: 1 1 90%;
-    min-width: 20ch;
-}
-
-.cheflist-container {
-    display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     gap: 2em;
     padding: 10px;
     margin-bottom: 100px;
-}
-
-.cuisines-select-container {
-    min-width: 415px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.cuisines-check-container {
-    display: none;
-}
-
-.filter-section {
-    border-right: 1px solid #e3e9ed;
-    display: none;
-}
-
-.filter-icon {
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #e3e9ed;
-    gap: 0.5rem;
-    margin-bottom: 10px;
-}
-
-.main-section {
-    display: flex;
     flex-direction: column;
-    padding: 10px;
-}
-
-.flex-container {
-    display: flex;
-    /* default the child are arranged in horizontally */
-    /* flex-direction: row; */
-    /* Use 'column' to arrange the child vertically */
-    /* flex-direction: column; */
-    /* To wrap the child to next line if there is not enough space */
-    /* When it wraps it takes  the minimum space required, and dont fill the reamining space in the row */
-    flex-wrap: wrap;
-}
-
-
-/* when it warps the each child take maximum space to fill the row */
-
-
-/* > * indicates all the elements inside the class .flex-container */
-
-.flex-container>* {
-    flex-grow: 1;
-}
-
-.chef-container {
-    display: grid;
-    gap: 2rem;
-    padding: 10px;
-    /* By default it stack the child vertically: .;To stak horizontally use below */
-    /* grid-auto-flow: column; */
-    /* Give the space equally between childs, minimum 260px and each column takes 1fr, 1 fraction *
-    /* Upon resixing the viewport, child will move to next line */
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-
-.chef-box {
-    border: 1px solid #eee;
-}
-
-
-/* div:not([class]){
-    outline: 2px solid black;
-    padding: .5rem;
-} */
-
-.chef-container-right {
-    display: flex;
-    flex-direction: column;
-    margin: 0 10px;
-    flex-grow: 1;
 }
 
 .chef-card {
@@ -110,10 +12,9 @@
     flex-direction: column;
     -webkit-box-shadow: 0 3px 12px -1px rgba(7, 10, 25, 0.1), 0 22px 27px -30px rgba(7, 10, 25, 0.1);
     box-shadow: 0 3px 12px -1px rgba(7, 10, 25, 0.1), 0 22px 27px -30px rgba(7, 10, 25, 0.1);
-    /* border-top-right-radius: 17px; */
-    /* border-top-left-radius: 17px; */
-    width: 10rem;
+    min-width: 28rem;
     background-color: #fff;
+    margin: 10px;
 }
 
 .chef-card>img {
@@ -153,6 +54,7 @@
     display: flex;
     overflow-x: auto;
     padding: 10px;
+    overflow: -moz-scrollbars-none;
 }
 
 .cuisine {
@@ -185,55 +87,7 @@
 }
 
 .dish-container {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-}
-
-.dish {
-    border: 1px solid var(--border);
-    padding: 7px;
-    border-radius: 7px;
-    text-align: center;
-    margin: 5px 0;
-}
-
-
-/* On mouse-over, add a deeper shadow */
-
-.card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
-
-.middle {
-    display: flex;
-    width: 415px;
-    padding: 10px;
-    overflow-x: hidden;
-    white-space: nowrap;
-}
-
-.cuisine-container {
-    display: flex;
-    padding: 10px;
-    overflow-x: hidden;
-    white-space: nowrap;
-    width: 80%;
-    overflow: -moz-scrollbars-none;
-}
-
-.cuisine-select {
-    display: flex;
-    border: 1px solid #3d3d3d;
-    padding: 6px 10px;
-    align-items: center;
-    margin: 3px 10px;
-    background-color: transparent;
-    border-radius: 3px;
-}
-
-.cuisine-select:hover {
-    background-color: var(--border);
+    display: none;
 }
 
 .scroll-right,
@@ -260,82 +114,27 @@
     /* border: 2px solid rgb(0, 0, 0); */
 }
 
-
-/* Mobile */
-
-@media (min-width: 400px) {
-    .cuisines-select-container {
-        min-width: 415px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 0.5rem;
-    }
-    .cuisines-check-container {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        padding: 10px;
-    }
-    .cuisines-check-container>div>input {
-        border: 1px solid rgb(94, 9, 9);
-        align-items: center;
-    }
+.location-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #e3e9ed;
+    margin: 10px;
 }
 
-
-/* tablet */
-
-@media (min-width: 600px) {
-    .filter-section {
-        display: none;
-    }
-    .cuisines-select-container {
-        min-width: 415px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 0.5rem;
-    }
-    .cuisines-check-container {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        padding: 10px;
-    }
-    .cuisines-check-container>div>input {
-        border: 1px solid rgb(94, 9, 9);
-        align-items: center;
-    }
-    .chef-card {
-        display: flex;
-        flex-direction: column;
-        -webkit-box-shadow: 0 3px 12px -1px rgba(7, 10, 25, 0.1), 0 22px 27px -30px rgba(7, 10, 25, 0.1);
-        box-shadow: 0 3px 12px -1px rgba(7, 10, 25, 0.1), 0 22px 27px -30px rgba(7, 10, 25, 0.1);
-        /* border-top-right-radius: 17px; */
-        /* border-top-left-radius: 17px; */
-        width: 20rem;
-        background-color: #fff;
-        border-radius: 7px;
-    }
-    .chef-card>img {
-        width: 100%;
-        height: 180px;
-        object-fit: contain;
-        border-top-left-radius: 7px;
-        border-top-right-radius: 7px;
-        transition: 0.5s ease-in-out;
-    }
-    .chef-card>img:hover {
-        cursor: pointer;
-        transform: scale(1.08);
-    }
+.change-area {
+    cursor: pointer;
+    font-weight: 800;
 }
 
 
 /* Desktop */
 
-@media (min-width: 900px) {
+@media (min-width: 700px) {
+    .location-container {
+        display: none;
+    }
     .filter-section {
         border-right: 1px solid var(--border);
         display: flex;
@@ -351,26 +150,42 @@
         border: 1px solid rgb(94, 9, 9);
         align-items: center;
     }
+    .chef-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 2em;
+        padding: 10px;
+        margin-bottom: 100px;
+    }
     .chef-card {
         display: flex;
         flex-direction: column;
         -webkit-box-shadow: 0 3px 12px -1px rgba(7, 10, 25, 0.1), 0 22px 27px -30px rgba(7, 10, 25, 0.1);
         box-shadow: 0 3px 12px -1px rgba(7, 10, 25, 0.1), 0 22px 27px -30px rgba(7, 10, 25, 0.1);
-        /* border-top-right-radius: 17px; */
-        /* border-top-left-radius: 17px; */
-        width: 20rem;
         background-color: #fff;
+        border: 1px solid var(--green);
     }
     .chef-card>img {
         width: 100%;
         height: 180px;
         object-fit: cover;
-        /* border-top-left-radius: 17px; */
-        /* border-top-right-radius: 17px; */
         transition: 0.5s ease-in-out;
     }
     .chef-card>img:hover {
         cursor: pointer;
         transform: scale(1.08);
+    }
+    .dish-container {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+    }
+    .dish {
+        border: 1px solid #e3e9ed;
+        border-radius: 7px;
+        margin: 5px;
+        text-align: center;
+        padding: 5px;
     }
 }
