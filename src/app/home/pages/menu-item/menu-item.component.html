@@ -1,9 +1,9 @@
 <div *ngIf="menu !== null && menu !== undefined" class="menu-item-layout" (click)="open(content)">
-    <img src="/assets/images/menu-items/chicken-tikka-kebab.jpg" loading="lazy">
+    <!-- <img src="/assets/images/menu-items/chicken-tikka-kebab.jpg" loading="lazy"> -->
     <div class="menu-item-main">
         <span class="item-name">{{menu.name}}</span>
         <p *ngIf="displayDescription" class="menu-desc">{{menu.description}}</p>
-        <span class="price"><b>{{menu.price | currency: 'GBP'}}</b></span>
+        <span class="price"><b>from {{menu.price | currency: 'GBP'}}</b></span>
         <small *ngIf="displayOrderBy">Order By: {{orderBy | date : 'EE d LLL'}}</small>
     </div>
 

@@ -3,7 +3,10 @@
     gap: 1rem;
     min-width: 375px;
     background-color: var(--light-background);
+    border: 1px solid #efedea;
+    border-radius: 12px;
     margin: 5px 0;
+    padding: 10px;
 }
 
 .menu-item-layout>img {
@@ -16,13 +19,14 @@
 }
 
 .item-name {
-    font-size: 18px;
-    font-weight: 500;
-    color: rgb(59, 59, 193);
+    font-size: 1rem;
+    font-weight: 900;
+    color: #242e30;
+    padding: 0 0 10px 0;
 }
 
 .menu-desc {
-    font-size: 1rem;
+    font-size: 12px;
     line-height: 1.5;
     padding: 0 10px 0 0;
 }

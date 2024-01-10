@@ -146,7 +146,7 @@
     }
     .chef-card-desktop {
         display: flex;
-        height: 180px;
+        height: 150px;
         width: 100%;
         margin-bottom: 5px;
     }
@@ -165,19 +165,20 @@
         margin: 0 10px;
     }
     .chef-coverPhoto-desktop {
-        height: 180px;
-        width: 40%;
+        height: 150px;
+        width: 300px;
+        margin-right: 10px;
     }
     .chef-coverPhoto-desktop>img {
-        max-width: 100%;
+        width: 300px;
         max-height: 100%;
         object-fit: cover;
         transition: 0.5s ease-in-out;
         border-radius: 10px;
     }
     .chef-info-desktop {
-        height: 180px;
-        width: 60%;
+        height: 150px;
+        width: 100%;
         display: flex;
         flex-direction: column;
     }
@@ -195,11 +196,15 @@
         padding: 5px;
     }
     .chef-name-desktop {
-        font-size: 20px;
+        font-size: 16px;
+        font-weight: 800;
     }
     .chef-cuisine-desktop {
         background-color: var(--light-background);
         padding: 5px;
         margin: 0 5px 0 0;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
     }
 }
