@@ -3,6 +3,7 @@ import { ContextService } from 'src/app/services/context.service';
 import { Router } from '@angular/router';
 import { ServiceLocation } from 'src/app/model/ServiceLocation';
 import { Utils } from 'src/app/services/utils';
+import { FoodOrderService } from 'src/app/services/food-order.service';
 
 @Component({
   selector: 'app-header',
@@ -17,21 +18,25 @@ export class HeaderComponent {
   itemsCount: number =0;
 
  
-	constructor(private contextService: ContextService,
+	constructor(
+    private orderService: FoodOrderService,
+    private ctxSvc: ContextService,
     private router: Router) {
     }
 
   ngOnInit(): void{
-    this.contextService.orderSubject.subscribe(foodOrder => {
-      if (foodOrder !== null && foodOrder !== undefined){
-        this.cartTotal = foodOrder.subTotal;
-        this.itemsCount = foodOrder.items.length;
+    const foodOrder = this.orderService.orderSubject$.asObservable();
+    foodOrder.subscribe(e=>{
+      if (e !== null && e !== undefined){
+        this.cartTotal = e.subTotal;
+        this.itemsCount = e.items.length;
       }else{
         this.cartTotal = 0;
         this.itemsCount = 0;
       }
     });
-    const serviceLocation = this.contextService.serviceLocationSubject.asObservable();
+    
+    const serviceLocation = this.ctxSvc.serviceLocationSubject.asObservable();
     serviceLocation.subscribe(a=>{
       this.serviceLocation = a;
     })

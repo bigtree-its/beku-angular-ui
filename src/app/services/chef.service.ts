@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Location } from '../model/location';
 import { ChefSearchQuery } from '../model/ChefSearchQuery';
 import { Calendar, Collection, Food, LocalChef, Menu } from '../model/localchef';
 import { ServiceLocator } from './service.locator';
+import { LocalService } from './local.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,11 @@ export class ChefService {
   
   ipAddress: string | undefined;
   configUrl = 'assets/static/location.json';
+  private storageItem = "c_chef";
+  chefSubject$: BehaviorSubject<LocalChef>;
 
   constructor(private http:HttpClient,
+    private localService: LocalService,
     private serviceLocator: ServiceLocator) { 
   }
 
@@ -47,9 +51,14 @@ export class ChefService {
   }
 
   getChef(id: string): Observable<LocalChef> {
-    console.log('Retrieving Supplier '+ id)
+    console.log('Retrieving Chef '+ id)
     var url = this.serviceLocator.chefsUrl+ "/" + id;
-    return this.http.get<LocalChef>(url);
+    return this.http.get<LocalChef>(url)
+    .pipe(
+      tap(data => {
+        this.setChef(data);
+      })
+    );
   }
 
   getMenusForChef(chefId: string): Observable<Menu[]> {
@@ -101,5 +110,24 @@ export class ChefService {
 
   getLocations() {
     return this.http.get<Location[]>(this.configUrl);
+  }
+
+  setChef(chef: LocalChef) {
+    this.localService.saveData(this.storageItem, JSON.stringify(chef));
+  }
+
+  purgeChef(){
+    console.log('Purging chef.');
+    this.localService.removeData(this.storageItem);
+    this.chefSubject$.next(null);
+  }
+
+  getCurrentChef(): LocalChef {
+    var json = this.localService.getData(this.storageItem);
+    if ( json !== "" && json !== null && json !== undefined){
+      var obj = JSON.parse(json);
+      return obj.constructor.name === 'Array'? obj[0]: obj;
+    }
+    return null;
   }
 }

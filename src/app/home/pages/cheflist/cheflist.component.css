@@ -199,6 +199,11 @@
         font-size: 16px;
         font-weight: 800;
     }
+    .chef-name-desktop:hover{
+        cursor: pointer;
+        color: darkorange;
+        text-decoration: underline;
+    }
     .chef-cuisine-desktop {
         background-color: var(--light-background);
         padding: 5px;

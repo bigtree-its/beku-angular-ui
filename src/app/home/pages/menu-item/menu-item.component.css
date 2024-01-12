@@ -29,6 +29,7 @@
     font-size: 12px;
     line-height: 1.5;
     padding: 0 10px 0 0;
+    text-align: center;
 }
 
 .price {
@@ -78,6 +79,60 @@
     opacity: 1.0;
 }
 
+::ng-deep .modal-content {
+    border-radius: 18px;
+    border: none;
+}
+::ng-deep .modal-body{
+    overflow-y: auto;
+}
+
+.modal-title {
+    text-align: center;
+}
+
+.qty-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    border: 2px solid #fff;
+}
+.qty-btn-container:hover {
+    cursor: pointer;
+    border: 2px solid var(--green);
+}
+
+.qty-btn {
+    user-select: none;
+    outline: 0;
+    overflow: visible;
+    font-weight: 700;
+    height: 20px;
+    width: 20px;
+}
+
+.qty-value {
+    font-size: 16px;
+    margin: 0 10px;
+    font-weight: 600;
+}
+
+.btn-add-to-order {
+    background-color: #46bb4c;
+    border-radius: 25px;
+    width: 100%;
+    padding: 0 20px;
+    color: #fff;
+}
+
+.btn-add-to-order:hover {
+    cursor: pointer;
+    background-color: #2fad35;
+}
 
 /* Desktop */
 
@@ -87,12 +142,14 @@
         word-wrap: break-word;
         padding: 0;
     }
+
     .menu-item-layout>img {
         display: inline-block;
         height: 100px;
         object-fit: cover;
         transition: 0.5s ease-in-out;
     }
+
     .menu-item-layout>img:hover {
         cursor: pointer;
         transform: scale(1.08);

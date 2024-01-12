@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FoodOrderItem } from 'src/app/model/localchef';
 import { ContextService } from 'src/app/services/context.service';
+import { FoodOrderService } from 'src/app/services/food-order.service';
 
 @Component({
   selector: 'app-order-item',
@@ -16,7 +17,7 @@ export class OrderItemComponent {
   quantity: number = 1;
   price: number = 0.00;
 
-  constructor(private contextService: ContextService) { }
+  constructor(private orderService: FoodOrderService) { }
 
   ngOnInit(): void {
     this.price = this.item.price;
@@ -40,12 +41,12 @@ export class OrderItemComponent {
 
   private calculatePrice() {
     if ( this.quantity === 0){
-        this.contextService.removeItem(this.item);
+        this.orderService.removeItem(this.item);
     }else{
       this.item.subTotal = this.item.price * this.quantity;
       this.item.subTotal = +(+this.item.subTotal).toFixed(2);
       this.item.quantity = this.quantity;
-      this.contextService.updateItem(this.item);
+      this.orderService.updateItem(this.item);
     }
     
   }

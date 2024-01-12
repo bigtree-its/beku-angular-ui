@@ -128,8 +128,6 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
     }
     this.activatedRoute.params.subscribe((params) => {
       const supplierId = params['id'];
-      this.chefService.getCollections(supplierId);
-
       let observable = this.chefService.getCollections(supplierId);
       observable.pipe(takeUntil(this.destroy$)).subscribe({
         next: (data) => {
@@ -140,35 +138,19 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
         },
       });
 
-      var chefOnCtx: LocalChef = this.contextService.retrieveChef();
-      if (
-        chefOnCtx === null ||
-        chefOnCtx == undefined ||
-        chefOnCtx._id !== supplierId
-      ) {
-        this.chefService.getChef(supplierId).subscribe((d: LocalChef) => {
-          this.chef = d;
-          this.contextService.selectChef(d);
-          this.display_picture = this.chef.coverPhoto;
-          this.gallery = d.gallery;
-          this.chef.gallery.forEach((p) => {
-            this.gallery.push(p);
-          });
-          this.fetchItems(supplierId);
-          this.fetchCalendars(supplierId);
-          var order: CustomerOrder = this.orderService.createOrder();
-          this.contextService.publishOrder(order);
-        });
-      } else if (
-        (chefOnCtx === null && chefOnCtx === undefined) ||
-        chefOnCtx._id === supplierId
-      ) {
-        this.chef = chefOnCtx;
-        this.fetchItems(supplierId);
-        this.fetchCalendars(supplierId);
-      }
+      let observable1 = this.chefService.getChef(supplierId);
+      observable1.pipe(takeUntil(this.destroy$)).subscribe({
+        next: (data) => {
+          this.chef = data;
+          this.fetchItems(this.chef._id);
+          this.fetchCalendars(this.chef._id);
+        },
+        error: (err) => {
+          console.error('Errors when getting chef from server. '+ JSON.stringify(err));
+        },
+      });
     });
-    this.contextService.orderSubject.subscribe((theOrder) => {
+    this.orderService.orderSubject$.subscribe((theOrder) => {
       if (this.utils.isValid(theOrder) && theOrder.status === 'Completed') {
         return;
       }

@@ -9,12 +9,39 @@
 
 </div>
 
+<ng-template #example>
+    <div  class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</ng-template>
+
+
 <ng-template #content let-modal>
+    
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">{{menu.name}}</h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        <!-- <h4 class="modal-title" id="modal-basic-title">{{menu.name}}</h4> -->
+        <span></span>
+        <button type="button" class="btn-modal-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
     </div>
     <div class="modal-body">
+        <h4 class="modal-title" id="modal-basic-title">{{menu.name}}</h4>
+        <span class="flex-row justify-content-center" style="font-size: 15px;font-weight: normal;margin: 10px 0;"><b>{{menu.price | currency: 'GBP'}}</b></span>
         <p class="menu-desc">{{menu.description}}</p>
         <div class="flex-row-space-between">
             <div style="width: 50px;">
@@ -34,8 +61,8 @@
                 <img src="/assets/icons/jalapeno.png" [class.selectedSpice]="menu.spice > 2" class="spice" placement="top" ngbTooltip="Extra Hot">
             </div>
         </div>
-        <div class="flex-column section" *ngIf="menu.choices !== null && menu.choices !== undefined && menu.choices.length > 0">
-            <span class="section-header">Choose One</span>
+        <div class="flex-column" *ngIf="menu.choices !== null && menu.choices !== undefined && menu.choices.length > 0">
+            <span style="background-color: #efedea;padding: 10px;font-weight: 600;margin: 10px 0;">Choose One</span>
             <div class="flex-column" *ngFor="let choice of menu.choices">
                 <div class="flex-row-space-between" style="margin: 5px 0;">
                     <div class="ng-form-control">
@@ -48,8 +75,8 @@
         </div>
 
         <!-- Extras -->
-        <div class="flex-column section" *ngIf="menu.extras !== null && menu.extras !== undefined && menu.extras.length > 0">
-            <span class="section-header">Add Extra</span>
+        <div class="flex-column" *ngIf="menu.extras !== null && menu.extras !== undefined && menu.extras.length > 0">
+            <span style="background-color: #efedea;padding: 10px;font-weight: 600;margin: 10px 0;">Add Extras</span>
             <div class="flex-column" *ngFor="let extra of menu.extras">
                 <div class="flex-row-space-between" style="margin: 5px 0;">
                     <div class="ng-form-control">
@@ -62,21 +89,25 @@
             </div>
         </div>
 
-        <div style="display: flex;justify-content: center;">
-            <div style="border: 1px solid var(--border);padding: 5px;display: flex;justify-content: space-around;">
-                <button style="border:none;margin-right: 5px;" (click)="decreaseQuantity()"> - </button>
-                <span class="qty-value">{{quantity}}</span>
-                <button style="border:none;margin-left: 5px;" (click)="increaseQuantity()">+</button>
-            </div>
-        </div>
-
-        <div style="display: flex;justify-content: center;">
-            <span class="text-center" style="font-size: large;margin: 10px;"><b>{{price | currency: 'GBP'}}</b></span>
-        </div>
     </div>
     <!-- <div class="modal-footer"> -->
     <div class="modal-footer flex-column" style="margin: 10px;padding: 10px;gap:.6rem;">
-        <button (click)="addToOrder()" class="n-button" style="width: 200px;">Add to Cart</button>
+        <div style="display: flex;justify-content: center;">
+            <div style="padding: 5px;display: flex;justify-content: space-around;align-items: center;">
+                <div class="qty-btn-container">
+                    <img src="/assets/icons/minus.png" class="qty-btn" (click)="decreaseQuantity()">
+                </div>
+                <span class="qty-value">{{quantity}}</span>
+                <div class="qty-btn-container">
+                    <img src="/assets/icons/plus.png" class="qty-btn" (click)="increaseQuantity()">
+                </div>
+            </div>
+        </div>
+        <div class="flex-row-space-between btn-add-to-order" (click)="addToOrder()">
+            <span style="font-weight: 500;font-size: large;">Add to order</span>
+            <span class="text-center" style="font-size: large;margin: 10px;"><b>{{price | currency: 'GBP'}}</b></span>
+        </div>
+        <!-- <button (click)="addToOrder()" class="n-button" style="width: 200px;">Add to Cart</button> -->
     </div>
     <!-- </div> -->
 </ng-template>

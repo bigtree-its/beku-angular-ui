@@ -71,7 +71,7 @@
                 </div>
             </div>
             <div class="col-3 order-section">
-                <button class="n-button my-1 mx-1" style="width: 100%;font-weight: 900;" [routerLink]="[ '/checkout'] " [disabled]="!(order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0)">
+                <button class="btn-block my-1 mx-1" [routerLink]="[ '/checkout'] " [disabled]="!(order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0)">
                     CHECKOUT</button>
                 <!-- <div class="btn-wrapper " style="width: 100%; " [routerLink]="[ '/checkout'] ">
                     <div style="display: flex; justify-content: space-between; ">

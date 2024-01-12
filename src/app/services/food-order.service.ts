@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { tap, Observable, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import {
   CustomerOrder,
@@ -11,14 +11,14 @@ import {
   OrderSearchQuery,
   OrderTracking,
   OrderUpdateRequest,
-  SupplierOrder,
   SupplierOrders,
 } from '../model/localchef';
 import { UserSession } from '../model/common-models';
 import { PaymentIntentRequest, PaymentIntentResponse } from '../model/order';
-import { ContextService } from './context.service';
 import { Utils } from './utils';
 import { ServiceLocator } from './service.locator';
+import { LocalService } from './local.service';
+import { ChefService } from './chef.service';
 
 @Injectable({
   providedIn: 'root',
@@ -29,15 +29,15 @@ export class FoodOrderService {
   ipAddress: any;
   supplier: LocalChef;
   foodOrderKey: string;
+  private storageItem = "c_order";
+  public orderSubject$: BehaviorSubject<CustomerOrder>;
 
   constructor(
     private http: HttpClient,
-    private contextService: ContextService,
+    private chefService: ChefService,
+    private localService: LocalService,
     private serviceLocator: ServiceLocator
   ) {
-    this.contextService.chefSubject.subscribe((supplier) => {
-      this.supplier = supplier;
-    });
   }
 
   updateStatus(orderTracking: OrderTracking) {
@@ -47,12 +47,23 @@ export class FoodOrderService {
   }
 
   saveOrder(order: CustomerOrder): Observable<CustomerOrder> {
-    return this.http.post<CustomerOrder>(this.serviceLocator.CustomerOrdersUrl, order);
+    return this.http
+      .post<CustomerOrder>(this.serviceLocator.CustomerOrdersUrl, order)
+      .pipe(
+        tap(result => {
+          this.setData(result);
+        })
+      );
   }
 
   retrieveOrder(reference: string): Observable<CustomerOrder> {
     var url = this.serviceLocator.CustomerOrdersUrl + '/reference/' + reference;
-    return this.http.get<CustomerOrder>(url);
+    return this.http.get<CustomerOrder>(url)
+      .pipe(
+        tap(data => {
+          this.setData(data[0]);
+        })
+      );
   }
 
   retrievePaymentIntent(orderId: string): Observable<PaymentIntentResponse> {
@@ -181,20 +192,12 @@ export class FoodOrderService {
     });
   }
 
-  getOrder(): CustomerOrder {
-    var orderJson = sessionStorage.getItem('order');
-    console.log('Order in session storage: ' + JSON.stringify(orderJson));
-    var order: CustomerOrder = null;
-    if (orderJson === null || orderJson === undefined) {
-      order = this.createOrder();
-    } else {
-      order = JSON.parse(orderJson);
-    }
-    return order;
-  }
 
   public addToOrder(foodOrderItem: FoodOrderItem) {
-    var order = this.getOrder();
+    var order = this.getData();
+    if ( order === undefined){
+      this.createOrder();
+    }
     if (order.items === null) {
       order.items = [];
     }
@@ -203,7 +206,7 @@ export class FoodOrderService {
   }
 
   removeItem(itemToDelete: FoodOrderItem) {
-    var order = this.getOrder();
+    var order = this.getData();
     for (var i = 0; i < order.items.length; i++) {
       var item = order.items[i];
       if (item._tempId === itemToDelete._tempId) {
@@ -211,6 +214,19 @@ export class FoodOrderService {
       }
     }
     this.calculateTotal(order);
+  }
+
+  updateItem(item: FoodOrderItem) {
+    var order = this.getData();
+    for (var i = 0; i < order.items.length; i++) {
+      var fi = order.items[i];
+      if (fi._tempId === item._tempId) {
+        order.items.splice(i, 1);
+        order.items.push(item);
+        this.calculateTotal(order);
+        break;
+      }
+    }
   }
 
   public calculateTotal(order: CustomerOrder) {
@@ -242,12 +258,9 @@ export class FoodOrderService {
     order.total = totalToPay;
     order.total = +(+order.total).toFixed(2);
     console.log('The calculated order total: ' + order.total);
-    this.publishOrder(order);
+    this.setData(order);
   }
 
-  private publishOrder(order: CustomerOrder) {
-    this.contextService.publishOrder(order);
-  }
 
   createPaymentIntentForOrder(
     customerOrder: CustomerOrder
@@ -282,7 +295,7 @@ export class FoodOrderService {
   public createOrder(): CustomerOrder {
     console.log('Creating empty new order');
     if (Utils.isValid(this.supplier)) {
-      this.supplier = this.contextService.retrieveChef();
+      this.supplier = this.chefService.getCurrentChef();
     }
 
     var customerOrder = {
@@ -387,5 +400,29 @@ export class FoodOrderService {
     //   },
     //   error: e => { console.error('Error when creating order ' + e) }
     // });
+  }
+
+  setData(data: CustomerOrder) {
+    console.info('Storing customer order..')
+    this.localService.saveData(this.storageItem, JSON.stringify(data));
+    this.orderSubject$.next(data);
+  }
+
+  purgeData(){
+    console.log('Purging order.');
+    this.localService.removeData(this.storageItem);
+    this.orderSubject$.next(null);
+  }
+
+  getData(): CustomerOrder {
+    var json = this.localService.getData(this.storageItem);
+    if ( json === undefined){
+      return undefined;
+    }
+    if ( json !== "" && json !== null && json !== undefined){
+      var obj = JSON.parse(json);
+      return obj.constructor.name === 'Array'? obj[0]: obj;
+    }
+    return null;
   }
 }

@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RapidApiByPostcodeResponse, RapidApiByPostcodeResponseSummary } from 'src/app/model/address';
@@ -9,18 +9,20 @@ import { RapidApiService } from 'src/app/services/rapid-api.service';
 import { Utils } from 'src/app/services/utils';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StripeService } from 'src/app/services/stripe.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import {crypto} from 'crypto-js';
 import { PaymentIntentResponse } from 'src/app/model/order';
 import { Address } from 'src/app/model/common-models';
 import { FoodOrderService } from 'src/app/services/food-order.service';
+import { LocalService } from 'src/app/services/local.service';
+import { ChefService } from 'src/app/services/chef.service';
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css']
 })
-export class CheckoutComponent {
+export class CheckoutComponent implements OnDestroy{
 
   @ViewChild('stripeContent', { read: ElementRef }) public stripeContent: ElementRef<any>;
   @ViewChild('cardInfo', { read: ElementRef }) public cardInfo: ElementRef<any>;
@@ -62,6 +64,7 @@ export class CheckoutComponent {
   stripeElements: any;
   cardElement: any;
   paymentIntent: PaymentIntentResponse;
+  destroy$ = new Subject<void>();
 
   constructor(private contextService: ContextService,
     private utils: Utils,
@@ -70,15 +73,19 @@ export class CheckoutComponent {
     private _location: Location,
     private modalService: NgbModal,
     private orderService: FoodOrderService,
+    private chefService: ChefService,
     private router: Router) {
   }
 
   public loadStripe$: Observable<any> = this.stripeService.LoadStripe();
 
+
   ngOnInit(): void {
     this.loadStripe$.subscribe(s => {
       console.log('Loaded stripe: ' + s)
     });
+
+    this.chef = this.chefService.getCurrentChef();
 
     this.contextService.orderSubject.subscribe(theOrder => {
       if ( this.utils.isValid(theOrder) && theOrder.status === "Completed"){
@@ -96,14 +103,6 @@ export class CheckoutComponent {
       } else {
         this.order = this.getOrder();
         this.cartTotal = this.order.subTotal;
-      }
-    });
-    this.contextService.chefSubject.subscribe(theChef => {
-      this.chef = theChef;
-      if (theChef !== null && theChef !== undefined) {
-        console.log('The chef: ' + JSON.stringify(theChef))
-      } else {
-        this.chef = this.getChef();
       }
     });
   }
@@ -218,7 +217,6 @@ export class CheckoutComponent {
     this.order.notes = this.notesToChef;
     this.orderService.saveOrder(this.order).subscribe(e => {
       if (this.utils.isStringValid(e.reference)) {
-        this.contextService.publishOrder(e);
         this.orderService.createPaymentIntentForOrder(e).subscribe(pi => {
           this.paymentIntent = pi;
           this.open(content)
@@ -273,6 +271,8 @@ export class CheckoutComponent {
         this.cardElement.destroy();
       });
     }
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   selectPickup() {

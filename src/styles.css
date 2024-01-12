@@ -134,6 +134,21 @@ select {
     gap: .75rem;
 }
 
+.btn-block {
+    background-color: #46bb4c;
+    border-radius: 25px;
+    width: 100%;
+    padding: 10px 20px;
+    color: #fff;
+    border: none;
+}
+
+.btn-block:hover {
+    cursor: pointer;
+    background-color: #2fad35;
+}
+
+
 .btn-wrapper {
     background-color: var(--section-background);
 }
@@ -321,7 +336,16 @@ select {
     color: var(--white);
 }
 
-
+.btn-modal-close{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background: none;
+}
+.btn-modal-close:hover{
+   cursor: pointer;
+   background-color: #81ab32;
+}
 /* Margins */
 
 .mx-1 {

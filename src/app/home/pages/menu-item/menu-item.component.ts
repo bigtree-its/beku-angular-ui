@@ -36,7 +36,7 @@ export class MenuItemComponent {
   }
 
   open(content) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title',  windowClass: 'custom-class' }).result.then(
       (result) => {
       },
       (reason) => {
