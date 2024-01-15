@@ -3,10 +3,9 @@
         <img src="/assets/icons/left-arrow.png" loading="lazy" class="scroll-left" (click)="goback()"><span style="font-size: x-large;">Your Basket</span>
     </div>
     <div class="basket-container">
-        <!-- <span class="basket-header">YOUR BASKET</span> -->
-        <!-- <span class="chef-name" [routerLink]="['/cooks', chef._id]"
-            routerLinkActive="router-link-active">{{chef.displayName}}</span> -->
-        <div *ngIf="order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0; then thenBlock else elseBlock">
+        <div class="content-body">
+            <div *ngIf="order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0; then thenBlock else elseBlock">
+            </div>
         </div>
     </div>
 </div>
@@ -23,7 +22,10 @@
 
 <ng-template #thenBlock>
     <div class="basket-with-items">
-        <strong style="font-size: 20px;" [routerLink]="['/cooks', chef._id]" routerLinkActive="router-link-active">{{chef.kitchenName}}</strong>
+        <div class="chef-profile-image-container">
+            <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg" class="chef-profile-image">
+        </div>
+        <strong class="chef-name" [routerLink]="['/cooks', chef._id]" routerLinkActive="router-link-active">{{chef.kitchenName}}</strong>
         <span class="chef-address">{{getAddress()}}</span>
         <div class="btn-wrapper" style="width: 100%;">
             <div style="display: flex; justify-content: space-between;">
@@ -31,7 +33,8 @@
                 <span style="font-weight: bolder;font-size: 15px;">{{cartTotal | currency: 'GBP'}}</span>
             </div>
         </div>
-        <button class="n-button" style="width: 100%;" [routerLink]="['/checkout']">Checkout</button>
+        <button class="btn-block my-1 mx-1" [routerLink]="[ '/checkout'] " [disabled]="!(order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0)">
+            CHECKOUT</button>
         <div class="items-container">
             <div *ngIf="order !== null && order !== undefined">
                 <app-order-item *ngFor="let item of order.items" [item]="item"></app-order-item>

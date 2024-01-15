@@ -187,6 +187,9 @@
         flex-direction: column;
         padding: 10px;
         width: 15%;
+        background-repeat: repeat-y;
+        overflow: hidden;
+        height: auto;
     }
     .dish {
         border: 1px solid #e3e9ed;
@@ -196,10 +199,10 @@
         padding: 5px;
     }
     .chef-name-desktop {
-        font-size: 16px;
-        font-weight: 800;
+        font-size: 14px;
+        font-weight: 600;
     }
-    .chef-name-desktop:hover{
+    .chef-name-desktop:hover {
         cursor: pointer;
         color: darkorange;
         text-decoration: underline;

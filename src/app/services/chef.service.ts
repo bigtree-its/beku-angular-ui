@@ -16,7 +16,8 @@ export class ChefService {
   ipAddress: string | undefined;
   configUrl = 'assets/static/location.json';
   private storageItem = "c_chef";
-  chefSubject$: BehaviorSubject<LocalChef>;
+  private chef: LocalChef = undefined;
+  public chefSubject$ = new BehaviorSubject(this.chef);
 
   constructor(private http:HttpClient,
     private localService: LocalService,
@@ -113,21 +114,28 @@ export class ChefService {
   }
 
   setChef(chef: LocalChef) {
+    this.chef = chef;
     this.localService.saveData(this.storageItem, JSON.stringify(chef));
   }
 
   purgeChef(){
     console.log('Purging chef.');
     this.localService.removeData(this.storageItem);
+    this.chef = null;
     this.chefSubject$.next(null);
   }
 
-  getCurrentChef(): LocalChef {
+  getData(): LocalChef {
     var json = this.localService.getData(this.storageItem);
-    if ( json !== "" && json !== null && json !== undefined){
-      var obj = JSON.parse(json);
-      return obj.constructor.name === 'Array'? obj[0]: obj;
+    if (json === undefined) {
+      return undefined;
     }
-    return null;
+    if (json !== '' && json !== null && json !== undefined) {
+      var obj = JSON.parse(json);
+      this.chef = obj.constructor.name === 'Array' ? obj[0] : obj;
+      this.chefSubject$.next(this.chef);
+      
+    }
+    return this.chef;
   }
 }

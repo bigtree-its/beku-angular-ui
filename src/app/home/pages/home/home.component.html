@@ -1,25 +1,21 @@
 <div class="home-wrapper">
-    <div class="home-container">
-        <strong style="padding-top: 100px;font-size: 32px;font-weight: 900;text-transform: uppercase;">Order online now</strong>
-        <span style="padding: 10px 0;font-size: 22px;color: var(--green);">Craving for home food?</span>
-        <div class="search-container">
-            <img src="/assets/icons/target.png" height="25px" width="25px" style="margin-right: 20px; opacity: 0.5;">
-            <input type="text" placeholder="Enter your location" class="search-box" [(ngModel)]="serviceLocationSearchText" (keyup.enter)="onEnter()">
-            <!-- <div class="btn-wrapper " (click)="onEnter()">
-                <div>
-                    <span>Find</span>
-                </div>
-            </div> -->
-            <span *ngIf="showServiceLocations" (click)="closeServiceLocations()" style="font-weight: 900;color: var(--green);cursor: pointer;padding: 0 10px;">Clear</span>
-            <button class="n-button" (click)="onEnter()">Find</button>
-        </div>
-        <div *ngIf="showServiceLocations" class="locations-container">
-            <!-- <div class="close-bar">
-                <strong title="Close" (click)="closeServiceLocations()">X</strong>
-            </div> -->
-            <div class="locations">
-                <span class="location" *ngFor="let sl of serviceLocations" (click)="onSelectServiceLocation(sl)">{{ sl.name }}, {{sl.city}}</span>
+    <div class="banner">
+        <div class="banner-left">
+            <strong style="padding-top: 100px;font-size: 32px;font-weight: 900;text-transform: uppercase;">Order online now</strong>
+            <span style="padding: 10px 0;font-size: 22px;">Family dishes from our neighbourhood</span>
+            <div class="search-container">
+                <img src="/assets/icons/target.png" height="25px" width="25px" style="margin-right: 20px; opacity: 0.5;">
+                <input type="text" placeholder="Enter your location" class="search-box" [(ngModel)]="serviceLocationSearchText" (keyup.enter)="onEnter()">
+                <span *ngIf="showServiceLocations" (click)="closeServiceLocations()" style="font-weight: 900;color: var(--green);cursor: pointer;padding: 0 10px;">Clear</span>
+                <button class="n-button" (click)="onEnter()">Find</button>
             </div>
+            <div *ngIf="showServiceLocations" class="locations-container">
+                <div class="locations">
+                    <span class="location" *ngFor="let sl of serviceLocations" (click)="onSelectServiceLocation(sl)">{{ sl.name }}, {{sl.city}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="banner-right">
         </div>
     </div>
 
@@ -45,13 +41,13 @@
     </div>
     <div class="section">
         <strong class="section-header">How It Works!</strong>
-        <div style="display: flex;flex-wrap: wrap;gap:1rem;">
+        <div class="flex-row justify-content-center" style="margin: 10px 0;">
             <div class="how-it-works-section">
                 <div class="flex-row justify-content-center  align-items-center">
                     <span style="font-size: 40px;opacity: 0.5;">1</span>
                     <img src="/assets/icons/chef.png" height="100px" width="100px">
                 </div>
-                <strong>Find a home chef</strong>
+                <strong style="text-align: center;font-size: 18px;padding: 10px 0;">Find</strong>
                 <small>Find a home chef nearest to your home</small>
             </div>
             <div class="how-it-works-section">
@@ -59,7 +55,7 @@
                     <span style="font-size: 40px;opacity: 0.5;">2</span>
                     <img src="/assets/icons/order.png" height="100px" width="100px">
                 </div>
-                <strong>Place your order</strong>
+                <strong style="text-align: center;font-size: 18px;padding: 10px 0;">Order</strong>
                 <small>Order in for yourself or for the group, 
                     with no restrictions on order value</small>
             </div>
@@ -68,11 +64,37 @@
                     <span style="font-size: 40px;opacity: 0.5;">3</span>
                     <img src="/assets/icons/eating.png" height="100px" width="100px">
                 </div>
-                <strong>Enjoy the home cooked food</strong>
+                <strong style="text-align: center;font-size: 18px;padding: 10px 0;">Eat</strong>
                 <small>Enjoy the home cooked food at your home</small>
             </div>
         </div>
 
 
+    </div>
+    <div class="flex-column justify-content-center align-items-center" style="margin: 10px 0;">
+        <span style="font-weight: 900;font-size: 25px;padding: 10px 0;">Join us</span>
+        <span style="margin-bottom: 10px;">Be a part of Lunchie Munchie</span>
+        <div class="join-us-body">
+            <div class="flex-row" style="border: 1px solid #e2e2e2;margin: 10px;border-radius: 10px;">
+                <div class="join-us-img-div">
+                    <img src="/assets/images/become-a-partner.webp">
+                </div>
+                <div class="flex-column align-items-center justify-content-center" style="padding: 10px;">
+                    <span style="font-weight: 900;font-size: 20px;padding: 10px 0;">Become a family chef</span>
+                    <p style="margin: 10px 0; word-wrap: break-word;padding: 0 20px;">Reach more customers and achieve growth with us</p>
+                    <button style="border: none;padding: 8px; background-color: var(--orange);color: #fff; border-radius: 10px;">Find our more</button>
+                </div>
+            </div>
+            <div class="flex-row" style="border: 1px solid #e2e2e2;margin: 10px 0;border-radius: 10px;">
+                <div class="join-us-img-div">
+                    <img src="/assets/images/career-with-us.webp">
+                </div>
+                <div class="flex-column align-items-center justify-content-center" style="padding: 10px;">
+                    <span style="font-weight: 900;font-size: 20px;padding: 10px 0;">Build your career</span>
+                    <p style="margin: 10px 0; word-wrap: break-word;padding: 0 20px;">oin the dynamic team that makes it all happen</p>
+                    <button style="border: none;padding: 8px; background-color: var(--orange);color: #fff; border-radius: 10px;">Find our more</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

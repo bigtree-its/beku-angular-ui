@@ -165,6 +165,21 @@
     cursor: pointer;
 }
 
+.scroll-left {
+    margin: 10px;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    align-items: center;
+    padding: 10px;
+    background-color: transparent;
+}
+
+.scroll-left:hover {
+    cursor: pointer;
+    background-color: var(--gd_g);
+}
+
 @media (min-width: 600px) {
     .customer-address-container {
         display: flex;
@@ -173,7 +188,7 @@
     .left {
         display: flex;
         overflow: hidden;
-        background-image: url('/assets/images/photo-3.jpeg');
+        background-image: url('/assets/images/photo-3-removebg-preview.png');
         background-repeat: no-repeat;
         background-position: center;
         position: relative;

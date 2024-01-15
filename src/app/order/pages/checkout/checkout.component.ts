@@ -85,28 +85,40 @@ export class CheckoutComponent implements OnDestroy{
       console.log('Loaded stripe: ' + s)
     });
 
-    this.chef = this.chefService.getCurrentChef();
+    this.chef = this.chefService.getData();
 
-    this.contextService.orderSubject.subscribe(theOrder => {
-      if ( this.utils.isValid(theOrder) && theOrder.status === "Completed"){
-        return;
-      }
-      this.order = theOrder;
-      if (theOrder !== null && theOrder !== undefined) {
-        this.cartTotal = theOrder.subTotal;
-        this.notesToChef= theOrder.notes;
-        if (theOrder.items === null || theOrder.items === undefined || theOrder.items.length === 0) {
-          if (this.chef !== null && this.chef !== undefined) {
-            this.router.navigate(['cooks', this.chef._id]).then();
-          }
-        }
-      } else {
-        this.order = this.getOrder();
-        this.cartTotal = this.order.subTotal;
-      }
+    this.orderService.getData();
+    this.orderService.orderSubject$.subscribe({
+      next: (value) => {
+        var customerOrder: CustomerOrder = value;
+        this.extractOrder(customerOrder);
+      },
+      error: (err) => console.error('OrderSubject emitted an error: ' + err),
+      complete: () =>
+        console.log('OrderSubject emitted the complete notification'),
     });
+
   }
 
+
+  extractOrder(theOrder: CustomerOrder){
+    if ( this.utils.isValid(theOrder) && theOrder.status === "Completed"){
+      return;
+    }
+    this.order = theOrder;
+    if (theOrder !== null && theOrder !== undefined) {
+      this.cartTotal = theOrder.subTotal;
+      this.notesToChef= theOrder.notes;
+      if (theOrder.items === null || theOrder.items === undefined || theOrder.items.length === 0) {
+        if (this.chef !== null && this.chef !== undefined) {
+          this.router.navigate(['cooks', this.chef._id]).then();
+        }
+      }
+    } else {
+      this.order = this.getOrder();
+      this.cartTotal = this.order.subTotal;
+    }
+  }
   ngAfterViewInit(): void {
     if (this.stripeService.stripe === undefined) {
       this.stripeService.getStripe().subscribe(s => {

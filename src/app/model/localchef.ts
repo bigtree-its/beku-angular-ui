@@ -56,6 +56,8 @@ export interface LocalChef {
     deliveryFee: number;
     deliveryDistance: number;
     minimumPartyOrder: number;
+    open: boolean;
+    preOrderOnly: boolean;
 }
 
 export interface Slot {

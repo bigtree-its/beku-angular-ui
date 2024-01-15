@@ -94,6 +94,7 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
   weekDays: Day[];
   destroy$ = new Subject<void>();
   collections: Collection[];
+  activeLayout: string = "Menu";
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -159,6 +160,10 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
         this.cartTotal = theOrder.total;
       }
     });
+  }
+
+  selectLayout(layout: string){
+    this.activeLayout = layout;
   }
 
   private fetchCalendars(supplierId: string) {

@@ -5,7 +5,10 @@
     --green: #08DE9E;
     /* --green: coral; */
     --black: rgb(0, 0, 0);
+    --grey: #001f3f;
     --light-color: #e1e1e1;
+    --gd_p: rgb(253, 233, 219);
+    --gd_g: rgb(216, 239, 239);
     --section-background: rgb(238, 238, 238);
     --aquamarine: aquamarine;
     --orange: coral;
@@ -45,17 +48,6 @@ html {
     font-family: 'Handlee', cursive;
 }
 
-.special-title {}
-
-.modal {
-    overflow-y: auto;
-}
-
-.modal-open {
-    overflow: auto;
-    padding-right: 0px !important;
-}
-
 *,
 *::before,
 *::after {
@@ -70,7 +62,18 @@ img {
 body {
     margin: 0;
     padding: 0;
+    font-size: 14px;
     /* background: rgb(248, 247, 247); */
+}
+
+::ng-deep .modal-content {
+    border-radius: 25px;
+    border: none;
+    z-index: 9999999;
+}
+
+::ng-deep .modal-body {
+    overflow-y: auto;
 }
 
 select {
@@ -115,6 +118,14 @@ select {
     align-items: center;
 }
 
+.space-between {
+    justify-content: space-between;
+}
+
+.space-around {
+    justify-content: space-around;
+}
+
 .flex-row-justify-center {
     display: flex;
     justify-content: center;
@@ -127,6 +138,14 @@ select {
 
 .justify-content-center {
     justify-content: center;
+}
+
+.gap-1 {
+    gap: 10px;
+}
+
+.flex-grow {
+    flex-grow: 1;
 }
 
 .grid {
@@ -147,7 +166,6 @@ select {
     cursor: pointer;
     background-color: #2fad35;
 }
-
 
 .btn-wrapper {
     background-color: var(--section-background);
@@ -336,16 +354,19 @@ select {
     color: var(--white);
 }
 
-.btn-modal-close{
+.btn-modal-close {
     height: 30px;
     width: 30px;
     border-radius: 50%;
     background: none;
 }
-.btn-modal-close:hover{
-   cursor: pointer;
-   background-color: #81ab32;
+
+.btn-modal-close:hover {
+    cursor: pointer;
+    background-color: #81ab32;
 }
+
+
 /* Margins */
 
 .mx-1 {

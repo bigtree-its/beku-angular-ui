@@ -1,41 +1,20 @@
 <div *ngIf="menu !== null && menu !== undefined" class="menu-item-layout" (click)="open(content)">
     <!-- <img src="/assets/images/menu-items/chicken-tikka-kebab.jpg" loading="lazy"> -->
-    <div class="menu-item-main">
-        <span class="item-name">{{menu.name}}</span>
+    <div class="menu-item-main" style="width: 100%;">
+        <div class="flex-row space-between">
+            <span class="item-name">{{menu.name}}</span>
+            <span class="price"><b>from {{menu.price | currency: 'GBP'}}</b></span>
+        </div>
         <p *ngIf="displayDescription" class="menu-desc">{{menu.description}}</p>
-        <span class="price"><b>from {{menu.price | currency: 'GBP'}}</b></span>
         <small *ngIf="displayOrderBy">Order By: {{orderBy | date : 'EE d LLL'}}</small>
     </div>
 
 </div>
 
-<ng-template #example>
-    <div  class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Modal body text goes here.</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary">Save changes</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-</ng-template>
-
 
 <ng-template #content let-modal>
-    
+
     <div class="modal-header">
-        <!-- <h4 class="modal-title" id="modal-basic-title">{{menu.name}}</h4> -->
         <span></span>
         <button type="button" class="btn-modal-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
     </div>

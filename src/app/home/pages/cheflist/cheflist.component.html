@@ -27,7 +27,11 @@
                         <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg">
                     </div>
                     <div class="chef-info-desktop">
-                        <span class="chef-name-desktop">{{chef.kitchenName}}</span>
+                        <div class="flex-row-space-between">
+                            <span class="chef-name-desktop">{{chef.kitchenName}}</span>
+                            <span [ngStyle]="{'color': chef.open ? 'green' :  'red'}">{{chef.open? "Open":"Closed"}}</span>
+                        </div>
+
                         <div class="flex-row space-between">
                             <div class="flex-column" style="padding: 10px 0;margin: 0 10px 0 0;width:400px;">
                                 <div style="display: flex;align-items: center;margin: 5px 0;">
@@ -37,6 +41,11 @@
                                 <div class="flex-row">
                                     <ng-container *ngFor="let cuisine of chef.cuisines | slice:0:3">
                                         <div class="chef-cuisine-desktop">{{ cuisine.name }}</div>
+                                    </ng-container>
+                                </div>
+                                <div class="flex-row" style="margin-top: 5px;">
+                                    <ng-container *ngFor="let spl of chef.specials | slice:0:3">
+                                        <div class="chef-cuisine-desktop">{{ spl }}</div>
                                     </ng-container>
                                 </div>
                             </div>
