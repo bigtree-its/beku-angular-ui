@@ -22,6 +22,8 @@
     --mild-white: rgb(233, 230, 230);
     --form-control-color: rebeccapurple;
     --box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+    --light-green: #eafbf2;
+    --light-blue: #EBF5FF;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
