@@ -12,11 +12,25 @@
             </div>
         </div>
         <div class="right-container">
-            <img src="/assets/icons/user.png" height="20px" width="20px" style="margin: 0 10px;">
+            <div ngbDropdown class="d-inline-block" *ngIf="user !== null">
+                <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+                    {{user.email}}
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem>Orders</button>
+                    <div class="dropdown-divider"></div>
+                    <button type="button" ngbDropdownItem>Profile</button>
+                    <button type="button" ngbDropdownItem (click)="logout()">Logout</button>
+                </div>
+
+            </div>
+            <span *ngIf="user === null" class="sign-in" routerLink="/login">Sign In</span>
+            <img title="{{user.name}}" *ngIf="user !== null" src="/assets/icons/user.png" height="20px" width="20px" style="margin: 0 10px;">
             <img src="/assets/icons/shopping-basket.png" height="20px" width="20px" style="margin: 0 1px;" [routerLink]="['/basket']">
             <div (click)="onClickBasket()">
                 <span class="cart-items-count" style="margin-right: 10px;">{{itemsCount}}</span>
             </div>
         </div>
     </div>
+
 </div>

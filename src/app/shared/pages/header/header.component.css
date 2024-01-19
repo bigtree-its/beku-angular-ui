@@ -8,6 +8,20 @@
     z-index: 99;
 }
 
+.sign-in {
+    border: 1px solid orangered;
+    border-radius: 8px;
+    padding: 7px;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.sign-in:hover {
+    cursor: pointer;
+    background-color: orangered;
+    color: #fff;
+}
+
 
 /* Mobile First */
 

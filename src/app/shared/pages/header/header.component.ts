@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { ContextService } from 'src/app/services/context.service';
 import { Router } from '@angular/router';
 import { ServiceLocation } from 'src/app/model/ServiceLocation';
-import { Utils } from 'src/app/services/utils';
 import { FoodOrderService } from 'src/app/services/food-order.service';
 import { CustomerOrder } from 'src/app/model/localchef';
+import { AccountService } from 'src/app/services/account.service';
+import { User } from 'src/app/model/auth-model';
 
 @Component({
   selector: 'app-header',
@@ -16,9 +17,11 @@ export class HeaderComponent {
   serviceLocation: ServiceLocation;
   displayableServiceLocation: string = '';
   itemsCount: number = 0;
+  user: User;
 
   constructor(
     private orderService: FoodOrderService,
+    private accountService: AccountService,
     private ctxSvc: ContextService,
     private router: Router
   ) {}
@@ -35,10 +38,26 @@ export class HeaderComponent {
         console.log('OrderSubject emitted the complete notification'),
     });
 
+    this.accountService.getData();
+    this.accountService.loginSession$.subscribe({
+      next: (value) => {
+        console.log('User subscribed '+ JSON.stringify(value))
+        var user: User = value;
+        this.extractUser(user);
+      },
+      error: (err) => console.error('OrderSubject emitted an error: ' + err),
+      complete: () =>
+        console.log('OrderSubject emitted the complete notification'),
+    });
+
     const serviceLocation = this.ctxSvc.serviceLocationSubject.asObservable();
     serviceLocation.subscribe((a) => {
       this.serviceLocation = a;
     });
+  }
+
+  extractUser(user: User) {
+    this.user = user;
   }
 
   private extractData(customerOrder: CustomerOrder) {
@@ -53,5 +72,9 @@ export class HeaderComponent {
 
   onClickBasket() {
     this.router.navigate(['basket']).then();
+  }
+
+  logout(){
+    this.accountService.logout();
   }
 }

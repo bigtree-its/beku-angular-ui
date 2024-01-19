@@ -8,19 +8,50 @@ export const environment = {
   CURRENCY: 'GBP',
   CURRENCY_SYMBOL: '£',
 
+  CollectionsUrl:
+    'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/collections',
+  ChefsUrl: 'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/chefs',
+  CuisinesUrl: 'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/cuisines',
+  DishesUrl: 'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/dishes',
+  ServiceAreasUrl:
+    'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/serviceareas',
+  MenusUrl: 'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/menus',
+  CalendersUrl:
+    'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/calendars',
+  OrderTrackingUrl:
+    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/order-tracking',
+  CustomerOrdersUrl:
+    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders',
+  CustomerOrderSearchUrl:
+    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders/search',
+  StripePaymentsUrl:
+    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments',
+  PaymentIntentUrl:
+    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments/payment-intent',
+  // Auth URLs
 
-  CollectionsUrl: "http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/collections",
-  ChefsUrl: "http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/chefs",
-  CuisinesUrl: "http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/cuisines",
-  DishesUrl: "http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/dishes",
-  ServiceAreasUrl: "http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/serviceareas",
-  MenusUrl: "http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/menus",
-  CalendersUrl: "http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/calendars",
-  OrderTrackingUrl: "https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/order-tracking",
-  CustomerOrdersUrl: "https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders",
-  CustomerOrderSearchUrl: "https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders/search",
-  StripePaymentsUrl: "https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments",
-  PaymentIntentUrl: "https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments/payment-intent",
+  // Local
+  // LoginUrl:'http://localhost:8081/api/auth/login',
+  // LogoutUrl: 'http://localhost:8081/api/auth/logout',
+  // RegisterUrl: 'http://localhost:8081/api/users/register',
+  // PasswordResetInitiateUrl:
+  //   'http://localhost:8081/api/users/password-reset/initiate',
+  // PasswordResetSubmitUrl:
+  //   'http://localhost:8081/api/users/password-reset/submit',
+  // Heroku
+  LoginUrl:
+    'https://stormy-stream-36548-96356ce4833c.herokuapp.com/api/oauth/token',
+  LogoutUrl:
+    'https://stormy-stream-36548-96356ce4833c.herokuapp.com/api/oauth/logout',
+  RegisterUrl:
+    'https://stormy-stream-36548-96356ce4833c.herokuapp.com/api/users/register',
+  PasswordResetInitiateUrl:
+    'https://stormy-stream-36548-96356ce4833c.herokuapp.com/api/users/password-reset/initiate',
+  PasswordResetSubmitUrl:
+    'https://stormy-stream-36548-96356ce4833c.herokuapp.com/api/users/password-reset/submit',
+
+  // Auth Server: https://stormy-stream-36548-96356ce4833c.herokuapp.com
+  // Order Server: https://polar-fortress-28097-08459456d8d7.herokuapp.com
 
 
   // CollectionsUrl: "http://localhost:8083/ads/v1/collections",
@@ -48,7 +79,8 @@ export const environment = {
   X_RapidAPI_Key:
     window['env']['X_RapidAPI_Key'] ||
     '249a5c6ab3mshce3cf38f2ca8130p195a93jsn3ad1c6002c20',
-  CUSTOMER_APP_ACCESS_TOKEN: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2MtY2FwcC0zMTUyNjQiLCJpc3MiOiJ3d3cuYXV0aC5ob2MuY29tIiwiaWF0IjoxNzAzODc3MDI0LCJleHAiOjE3MzUzNDQwMDB9.Mdw14EyUbfIZkWh5Td5EuJRg_avzI6NM6D9tStM_64g3pm49fAl2Jt9DgZgtfCH4vt1VVxwkudikybCD5Eap2w"
+  CUSTOMER_APP_ACCESS_TOKEN:
+    'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2MtY2FwcC0zMTUyNjQiLCJpc3MiOiJ3d3cuYXV0aC5ob2MuY29tIiwiaWF0IjoxNzAzODc3MDI0LCJleHAiOjE3MzUzNDQwMDB9.Mdw14EyUbfIZkWh5Td5EuJRg_avzI6NM6D9tStM_64g3pm49fAl2Jt9DgZgtfCH4vt1VVxwkudikybCD5Eap2w',
 };
 
 /*

@@ -146,9 +146,15 @@
     }
     .chef-card-desktop {
         display: flex;
-        height: 150px;
+        height: 170px;
         width: 100%;
-        margin-bottom: 5px;
+        padding: 10px;
+        border-radius: 8px;
+    }
+    .chef-card-desktop:hover {
+        cursor: pointer;
+        background: #f9f9f9;
+        box-shadow: 0 8px 8px -4px lightblue;
     }
     .chef-card-mobile {
         display: none;

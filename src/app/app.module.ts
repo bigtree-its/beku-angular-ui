@@ -9,8 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from './shared';
 import { OrderModule } from './order';
 import { AuthInterceptor } from './services/auth.interceptor';
-
-
+import { AuthModule } from './auth';
+import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -21,10 +21,13 @@ import { AuthInterceptor } from './services/auth.interceptor';
     AppRoutingModule,
     HttpClientModule,
     HomeModule,
+    AuthModule,
     AdminModule,
     SharedModule,
     OrderModule,
-    FormsModule
+    FormsModule,
+    NgbModule,
+    NgbDropdownModule
   ],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

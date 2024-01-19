@@ -1,0 +1,37 @@
+<div class="main">
+    <div class="left"></div>
+    <div class="right">
+        <div style="width: 500px;height: 500px;">
+            <div class="y-flex">
+                <div class="d-flex justify-content-center">
+                    <span style="font-weight: 900;font-size: 30px;height: 40px;line-height: 40px;cursor: pointer;">Forgot Password?</span>
+                </div>
+                <div style="padding: 20px 0;">
+                    <p>
+                        Enter the email address you used when you joined and we’ll send you instructions to reset your password.
+                    </p>
+                    <p>
+                        For security reasons, we do NOT store your password. So rest assured that we will never send your password via email
+                    </p>
+                </div>
+                <div class="y-flex" style="margin: 10px 0;">
+                    <div class="input-div">
+                        <input class="_381fS" type="email" name="email" id="email" tabindex="1" autocomplete="off" value="" [(ngModel)]="email" #ctrl="ngModel">
+                        <div class="_2EeI1 _26LFr"></div>
+                        <label class="_1Cvlf _2tL9P" for="email">Email Address</label>
+                    </div>
+                    <br>
+                    <button class="big-black-btn" (click)="submit()">Send Reset Instructions</button>
+                </div>
+                <div *ngIf="error !== undefined" style="font-weight: normal;text-align: center;display: block;background-color: rgb(241, 215, 215);height: 45px;line-height: 45px;color: #bc3737;">
+                    <p>{{error}}</p>
+                </div>
+                <div *ngIf="onSubmission" style="background-color: darkseagreen;padding: 30px 20px;">
+                    <p>If this email address was used to create an account, instructions to reset your password will be sent to you. Please check your email.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
