@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Climate+Crisis&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
 .home-wrapper {
     /* /* display: flex; */
     /* flex-direction: column; */
@@ -5,31 +7,48 @@
     /* align-items: center;  */
 }
 
-.banner {
-    height: 365px;
-    width: 100%;
-    margin-top: 55px;
+.hero {
+    height: 500px;
+    /* border-radius: 18px; */
+    background-color: var(--light-blue);
+    margin: 80px 20px 20px 20px;
     display: flex;
     justify-content: space-between;
-    gap: 1rem;
+    align-items: center;
 }
 
-.banner-left {
-    width: 100%;
-    height: 100%;
+.hero-left {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px;
+    flex-grow: 1;
 }
 
-.banner-right {
+.hero-right {
     display: none;
 }
 
+.hero-title {
+    font-family: "Cinzel", serif;
+    font-optical-sizing: auto;
+    /* font-style: normal; */
+    font-size: 25px;
+    color: #3C4043;
+    font-weight: 900;
+    margin: 20px 0;
+}
+
+.hero-text {
+    font-family: "Cinzel", serif;
+    font-weight: 700;
+    font-size: medium;
+    margin-bottom: 20px;
+}
+
 .search-container {
-    min-width: 375px;
+    min-width: 350px;
     max-width: 820px;
     width: 100%;
     padding: 10px;
@@ -38,8 +57,7 @@
     display: flex;
     align-items: center;
     background-color: var(--light-background);
-    border: 1px solid var(--green);
-    border-radius: 7px;
+    border: 1px solid var(--light-background);
 }
 
 .search-box {
@@ -57,8 +75,8 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    border: 1px solid var(--green);
-    border-top: none;
+    border-radius: 12px;
+    box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
 .locations {
@@ -70,29 +88,11 @@
     flex-direction: column;
 }
 
-.close-bar {
-    float: right;
-    display: flex;
-    width: 30px;
-    height: 30px;
-    line-height: 20px;
-    border: 1px solid var(--green);
-    align-items: center;
-    justify-content: center;
-}
-
-.close-bar:hover {
-    background-color: var(--green);
-}
-
-.close-bar>strong {
-    float: right;
-    margin: 0 10px;
-    font-size: 17px;
-}
-
-.close-bar>strong:hover {
+.clear-search {
+    font-weight: 900;
+    color: var(--blue);
     cursor: pointer;
+    padding: 0 10px;
 }
 
 .location {
@@ -104,7 +104,8 @@
 
 .location:hover {
     cursor: pointer;
-    background-color: var(--green);
+    /* background-color: var(--blue); */
+    color: var(--blue);
 }
 
 .section {
@@ -184,7 +185,7 @@
 }
 
 .top-locations-data {
-    border: 1px solid #17b15a;
+    border: 1px solid var(--blue);
     line-height: 45px;
     text-align: center;
     height: 45px;
@@ -196,7 +197,8 @@
 
 .top-locations-data:hover {
     cursor: pointer;
-    background-color: #17b15a;
+    color: #fff;
+    background-color: var(--blue);
 }
 
 .section-header {
@@ -232,51 +234,18 @@
     gap: 0.5rem;
 }
 
-.popular-list {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-flow: row wrap;
-    gap: 2rem;
-    margin-top: 30px;
-}
-
-.popular-div>div {
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-    margin: 30px 0;
-    background-color: #fff;
-}
-
-.popular-l {
-    border: 1px solid var(--green);
-    line-height: 45px;
-    text-align: center;
-    height: 45px;
-    padding: 0 25px;
-    font-weight: 500;
-    border-radius: 7px;
-    /* box-shadow: 0.5rem 0.5rem black, -0.5rem -0.5rem #ccc; */
-}
-
-.popular-l:hover {
-    cursor: pointer;
-    background-color: var(--green);
-}
-
 .how-it-works-section {
     margin: 10px;
     padding: 20px;
     /* max-width: 350px; */
-    border: 1px solid #17b15a;
+    background-color: var(--light-blue);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     flex-grow: 1;
     max-width: 480px;
-    border-radius: 7px;
+    border-radius: 12px;
 }
 
 .how-it-works-section img {
@@ -301,48 +270,57 @@
     transform: scaleX(-1);
 }
 
+@mixin saw-tooth($width: 12px,
+$bg: #fff) {
+    background-image: /* Top jagged */
+    linear-gradient(135deg, $bg 50%, transparent 50%), linear-gradient(225deg, $bg 50%, transparent 50%), /* Bottom jagged */
+    linear-gradient(45deg, $bg 50%, transparent 50%), linear-gradient(-45deg, $bg 50%, transparent 50%), /* Left jagged */
+    linear-gradient(135deg, $bg 50%, transparent 50%), linear-gradient(45deg, $bg 50%, transparent 50%), /* Right jagged */
+    linear-gradient(-135deg, $bg 50%, transparent 50%), linear-gradient(-45deg, $bg 50%, transparent 50%);
+    background-position: /* Top jagged */
+    top left, top left, /* Bottom jagged */
+    bottom left, bottom left, /* Left jagged */
+    top left, top left, /* Right jagged */
+    top right, top right;
+    background-size: $width $width;
+    background-repeat: repeat-x, repeat-x, repeat-x, repeat-x, repeat-y, repeat-y, repeat-y, repeat-y;
+}
+
+.banner {
+    background-color: skyblue;
+    @include saw-tooth();
+}
+
 @media (min-width: 700px) {
-    .banner {
-        height: 365px;
-        width: 100%;
-        margin-top: 55px;
-        display: flex;
-        justify-content: space-between;
-        gap: 1rem;
+    .hero-right {
+        display: inline-block;
+        flex-grow: 1;
     }
-    .banner-left {
-        width: 50%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+    .hero-title {
+        font-family: "Cinzel", serif;
+        font-optical-sizing: auto;
+        /* font-style: normal; */
+        font-size: 40px;
+        letter-spacing: -2px;
+        line-height: 68px;
+        color: #3C4043;
+        padding: 0 20px;
+        font-weight: 900;
+    }
+    .hero-img-div {
         padding: 20px;
-    }
-    .banner-right {
-        width: 50%;
         height: 100%;
-        display: flex;
-        justify-content: flex-end;
-        align-items: flex-end;
-        background-image: url("/assets/images/thali.jpeg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-    }
-    .big-text {
-        font-weight: 600;
-        font-size: 35px;
-        padding-bottom: 20px;
-    }
-    .popular-div {
-        display: flex;
-        flex-flow: column wrap;
-        justify-content: center;
-        align-items: center;
-        min-width: 590px;
-        max-width: 820px;
         width: 100%;
+        position: relative;
+        right: 0;
+    }
+    .hero-img {
+        background-repeat: no-repeat;
+        object-fit: contain;
+        height: 100%;
+        width: 100%;
+        float: right;
+        border-radius: 20px;
     }
     .join-us-body {
         display: flex;

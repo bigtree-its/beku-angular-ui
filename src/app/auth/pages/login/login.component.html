@@ -3,20 +3,20 @@
         <!-- <img src="/assets/images/home-cooking.jpeg"> -->
     </div>
     <div class="right">
-        <div style="width: 500px;height: 500px;padding: 20px;">
-            <div class="y-flex">
+        <div style="min-width: 480px;height: 500px;padding: 20px;">
+            <div class="flex-column">
                 <span style="font-weight: 900;font-size: 30px;padding: 10px 0;">Login</span>
                 <div class="input-div">
                     <input class="_381fS" type="email" name="email" id="email" tabindex="1" autocomplete="off" value="" [(ngModel)]="email" #ctrl="ngModel">
                     <div class="_2EeI1 _26LFr"></div>
                     <label class="_1Cvlf _2tL9P" for="email">Email</label>
                 </div>
-                <span style="text-align: right;" class="clickable" [routerLink]="['/password_reset/new']">Forgot?</span>
                 <div class="input-div">
                     <input class="_381fS" type="password" name="password" id="password" tabindex="1" autocomplete="off" value="" [(ngModel)]="password" #ctrl="ngModel">
                     <div class="_2EeI1 _26LFr"></div>
                     <label class="_1Cvlf _2tL9P" for="password">Password</label>
                 </div>
+                <span class="clickable" [routerLink]="['/password_reset/new']">Forgot?</span>
                 <br>
                 <button class="big-black-btn" (click)="submit()">Sign In</button>
 

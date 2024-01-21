@@ -30,6 +30,8 @@ export interface LoginResponse {
 
 export class User{
     id: string;
+    firstName: string;
+    lastName: string;
     name: string;
     email: string;
     mobile: string;

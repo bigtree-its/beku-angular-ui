@@ -26,6 +26,15 @@
     /* background-position: 50% 50%; */
 }
 
+.anchor {
+    align-items: flex-end;
+}
+
+.anchor:hover {
+    cursor: pointer;
+    color: var(--blue);
+}
+
 @media (min-width: 500px) {
     /* .main {
         width: 100%;

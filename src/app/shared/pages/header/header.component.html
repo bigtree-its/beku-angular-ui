@@ -1,9 +1,9 @@
-<div class="application-header">
-    <div class="top-row">
+<div class="page">
+    <div class="container-div">
         <div class="left-container">
             <div class="flex-row justify-content-center align-items-center" style="padding: 10px;">
-                <img src="/assets/icons/home.png" height="20px" width="20px" style="margin-right: 5px;" alt="">
-                <div [routerLink]="['/']" routerLinkActive="router-link-active" class="logo">Lunchie Munchie</div>
+                <!-- <img src="/assets/icons/home.png" height="20px" width="20px" style="margin-right: 5px;" alt=""> -->
+                <div [routerLink]="['/']" routerLinkActive="router-link-active" class="logo">Zomato</div>
             </div>
 
             <div class="location-container" *ngIf="serviceLocation != null && serviceLocation !== undefined">
@@ -12,27 +12,33 @@
             </div>
         </div>
         <div class="right-container">
-            <span id="dropdownBasic1" title="{{user.name}}" *ngIf="user !== null" style="line-height: 40px;text-align: center; margin:  0 10px;height:40px;width:40px;border-radius: 50%;border:1px solid #f3f3f3;font-size: 18px;">A</span> 
-            <div ngbDropdown class="d-inline-block" *ngIf="user !== null">
-                <span id="dropdownBasic1" title="{{user.name}}" *ngIf="user !== null" style="margin: 0 10px;">{{user.name | slice:0:1}}</span> 
-                <!-- <button type="button" class="btn btn-outline-primary"  ngbDropdownToggle>
-                    {{user.email}}
-                </button> -->
-                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                    <button ngbDropdownItem>Orders</button>
-                    <div class="dropdown-divider"></div>
-                    <button type="button" ngbDropdownItem>Profile</button>
-                    <button type="button" ngbDropdownItem (click)="logout()">Logout</button>
-                </div>
 
+            <div ngbDropdown>
+                <button type="button" ngbDropdownToggle class="user-icon-button">
+                    <!-- {{user.firstName | slice:0:1}}{{user.lastName | slice:0:1}} -->
+                    <img src="/assets/icons/user.png" height="20px" width="20px">
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style="z-index: 9999;">
+                    <div ngbDropdownItem *ngIf="user !== null" class="flex-row justify-content-center align-items-center" style="background-color: var(--light-blue);">
+                        <img src="/assets/icons/user.png" height="20px" width="20px">
+                        <div class="flex-column" style="margin-left: 10px;">
+                            <span>{{user.name}}</span>
+                            <span>{{user.email}}</span>
+                        </div>
+                    </div>
+                    <!-- <button ngbDropdownItem *ngIf="user !== null">{{user.email}}</button> -->
+                    <button ngbDropdownItem *ngIf="user !== null">Orders</button>
+                    <button ngbDropdownItem *ngIf="user === null" routerLink="/login">Sign In</button>
+                    <button ngbDropdownItem *ngIf="user === null" routerLink="/register">Sign Up</button>
+                    <div *ngIf="user !== null" class="dropdown-divider"></div>
+                    <button *ngIf="user !== null" type="button" ngbDropdownItem>Profile</button>
+                    <button *ngIf="user !== null" type="button" ngbDropdownItem (click)="logout()">Logout</button>
+                </div>
             </div>
-            <span *ngIf="user === null" class="sign-in" routerLink="/login">Sign In</span>
-            <!-- <img title="{{user.name}}" *ngIf="user !== null" src="/assets/icons/user.png" height="20px" width="20px" style="margin: 0 10px;"> -->
-            <img src="/assets/icons/shopping-basket.png" height="20px" width="20px" style="margin: 0 1px;" [routerLink]="['/basket']">
-            <div (click)="onClickBasket()">
-                <span class="cart-items-count" style="margin-right: 10px;">{{itemsCount}}</span>
+            <div class="cart-div" (click)="onClickBasket()">
+                <img src="/assets/icons/shopping-basket.png" height="20px" width="20px" style="margin: 0 1px;" [routerLink]="['/basket']">
+                <span class="cart-items-count">{{itemsCount}}</span>
             </div>
         </div>
     </div>
-
 </div>

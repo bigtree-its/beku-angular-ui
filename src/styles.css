@@ -1,12 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import url('https://fonts.googleapis.com/css2?family=Handlee&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap');
 :root {
     --green: #08DE9E;
     /* --green: coral; */
+    --blue: #1967d2;
     --black: rgb(0, 0, 0);
-    --grey: #001f3f;
-    --light-color: #e1e1e1;
+    --grey: #d9d9d9;
+    --light-color: #f8f8f8;
     --gd_p: rgb(253, 233, 219);
     --gd_g: rgb(216, 239, 239);
     --section-background: rgb(238, 238, 238);
@@ -14,16 +15,17 @@
     --orange: coral;
     --white: #fff;
     --warning: #ffc107;
-    /* --border: #e3e9ed; */
+    --yellow: #fd0;
+    --pink: #ff8cb2;
     --border: #bbbaba;
     --light-border: #e2e2e2;
-    --v-border: chartreuse;
     --light-background: #fafafa;
     --mild-white: rgb(233, 230, 230);
     --form-control-color: rebeccapurple;
     --box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
     --light-green: #eafbf2;
     --light-blue: #EBF5FF;
+    --light-grey: #f5f5f5;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -37,23 +39,31 @@
     font-weight: 300;
     overflow-y: scroll;
     box-sizing: content-box;
-    font-family: 'Handlee', cursive;
 }
 
 html {
     font-size: 70%;
     overflow-x: hidden;
     overflow-y: scroll;
-    scroll-padding-top: 5.5.rem;
+    /* scroll-padding-top: 5.5.rem; */
     scroll-behavior: smooth;
     text-size-adjust: 100%;
-    font-family: 'Handlee', cursive;
+    background-color: #fff;
+    font-family: "Julius Sans One", sans-serif;
+    scrollbar-width: none;
+    font-weight: 600;
 }
 
 *,
 *::before,
 *::after {
     box-sizing: border-box;
+}
+
+@supports(scrollbar-width: none) {
+    .no-support {
+        display: none;
+    }
 }
 
 img {
@@ -65,7 +75,9 @@ body {
     margin: 0;
     padding: 0;
     font-size: 14px;
-    /* background: rgb(248, 247, 247); */
+    background-color: #fff;
+    font-family: "Julius Sans One", sans-serif;
+    scrollbar-width: none;
 }
 
 ::ng-deep .modal-content {
@@ -80,6 +92,19 @@ body {
 
 select {
     width: 100%;
+}
+
+.background-img-div {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-self: center;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex-shrink: 0;
+    transition: all .25s ease-in;
+    transition-property: background;
 }
 
 .ng-form-control {
@@ -156,8 +181,7 @@ select {
 }
 
 .btn-block {
-    background-color: #46bb4c;
-    border-radius: 25px;
+    background-color: var(--blue);
     width: 100%;
     padding: 10px 20px;
     color: #fff;
@@ -212,74 +236,24 @@ select {
     width: 100%;
 }
 
-.n-button,
-.ok-button,
-.cancel-button {
-    line-height: 40px;
-    padding: 0 10px;
-    font-size: 15px;
-    font-weight: 500;
-    color: #000;
-    background-color: #fff;
-    border: none;
-    border-radius: 18px;
-    /* box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); */
-}
-
-.n-button:hover {
-    /* --box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1); */
-    --box-shadow: #33BCFF;
-}
-
-.ok-button {
-    background-color: salmon;
-    color: #fff;
-}
-
-.cancel-button {}
-
-.ok-button:hover {
-    background-color: 1px solid rgb(255, 67, 46);
-}
-
-.cancel-button:hover {}
-
 .n-button {
-    border: 1px solid var(--border);
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-    border-radius: 7px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     text-align: center;
+    padding: 10px 20px;
+    border: none;
 }
 
 .n-button:hover {
     cursor: pointer;
-    background-color: var(--green);
-    /* border: 1px solid #66E7E7;
-    background-color: var(--light-background); */
-}
-
-.fb-btn {
-    font-weight: 500;
-    border: 1px solid var(--border);
-    background-color: var(--light-color);
-    padding: 10px;
-}
-
-.fb-btn:hover {
-    background-color: var(--green);
-    cursor: pointer;
-}
-
-.fb-btn-selected {
-    border: 1px solid darkgray;
+    background-color: var(--blue);
+    color: #fff;
 }
 
 .fb-input {
     width: 100%;
     outline: none;
     padding: 6px;
-    border: 1px solid var(--light-border);
-    border-radius: 6px;
+    border: 1px solid var(--grey);
 }
 
 .my-checkbox {
@@ -373,14 +347,49 @@ select {
     display: block;
     background-color: black;
     border: none;
-    border-radius: 32px;
     color: #fff;
     font-weight: 600;
-    width: 400px;
+    min-width: 450px;
 }
 
 .big-black-btn:hover {
     opacity: 0.8;
+}
+
+.clickable {
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+.clickable:hover {
+    cursor: pointer;
+    color: #5d8ed5;
+}
+
+.clickableDiv {
+    border: 1px solid #e2e2e2;
+    padding: 10px;
+    text-align: center;
+    border-radius: 6px;
+    background-color: var(--focus-color);
+}
+
+.clickableDiv:hover {
+    cursor: pointer;
+    background-color: #27ae60;
+    color: #fff;
+}
+
+.unClickableDiv {
+    border: 1px solid #e2e2e2;
+    padding: 10px;
+    text-align: center;
+    border-radius: 6px;
+    background-color: var(--focus-color);
+}
+
+.unClickableDiv:hover {
+    background-color: #e2e2e2;
 }
 
 
@@ -393,8 +402,7 @@ select {
     display: block;
     position: relative;
     transform: translateZ(0);
-    margin: 5px 0;
-    border-radius: 6px;
+    margin: 2px 0;
 }
 
 .input-div:hover {
@@ -405,12 +413,12 @@ select {
     background-color: transparent;
     line-height: normal;
     outline: none;
-    height: 70px;
+    height: 65px;
     width: 100%;
     font-size: 15px;
     margin: 0;
     padding: 0 20px;
-    padding-top: 22px;
+    padding-top: 12px;
     box-shadow: none;
     box-sizing: border-box;
     border-radius: 5px;

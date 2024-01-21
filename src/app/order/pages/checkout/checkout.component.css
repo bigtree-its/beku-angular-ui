@@ -1,33 +1,107 @@
-.main {
-    /* width: 100%;
-    height: 100vh; */
-    display: flex;
-    overflow-y: hidden;
-    padding: 50px 0 0 0;
-}
-
-.left {
-    display: none;
-    width: 50%;
-}
-
-.right {
+@import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap');
+.page {
     display: flex;
     flex-direction: column;
+    overflow-y: hidden;
+    margin-top: 60px;
+    font-family: "Julius Sans One", sans-serif;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    background-color: var(--light-grey);
+    height: 40px;
+    font-family: "Julius Sans One", sans-serif;
+    width: 30%;
+}
+
+.page-header-icon {
+    background-color: var(--light-background);
+    display: flex;
     justify-content: center;
     align-items: center;
-    overflow-x: hidden;
-    width: 100%;
+    height: 40px;
+    width: 40px;
+}
+
+.page-header-icon:hover {
+    cursor: pointer;
+    background-color: var(--yellow);
+}
+
+.page-header-icon>img {
+    height: 20px;
+    width: 20px;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-content {
+    display: none;
+}
+
+.right-content {
+    height: 500px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 480px;
+}
+
+.right-content-data {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px;
+    overflow-y: none;
+    height: 500px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    z-index: 99;
+    height: 50px;
+    padding: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-container {
+    display: none;
+}
+
+.right-container {
+    flex-grow: 1;
+    border: 1px solid #1d32a7;
+    max-height: 500px;
+    overflow-y: auto;
+    align-items: start;
 }
 
 .data-section {
-    padding: 20px;
     min-width: 500px;
+    max-height: 450px;
+    border: 1px solid #921d1d;
+    margin-bottom: 70px;
 }
 
 .delivery-mode-container {
     background-color: #efedea;
-    border-radius: 50rem;
     display: flex;
     height: 50px;
     justify-content: space-around;
@@ -40,16 +114,14 @@
 }
 
 .service-mode-option {
-    border-radius: 50rem;
     border: none;
     padding: 5px 10px;
     background: transparent;
 }
 
 .service-mode-option-selected {
-    background: var(--green);
+    background: var(--yellow);
     box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
-    border: 1px solid var(--border);
 }
 
 .customer-details-container {
@@ -88,6 +160,14 @@
 
 .postcode-lookup-container input {
     line-height: 30px;
+}
+
+.postcode-results-container {
+    border: 1px solid var(--light-border);
+    overflow-y: auto;
+    height: 100px;
+    margin-top: 5px;
+    padding: 5px;
 }
 
 .order-details-container {
@@ -135,6 +215,9 @@
 .items-container {
     display: flex;
     flex-direction: column;
+    height: 380px;
+    overflow: auto;
+    padding-bottom: 10px;
 }
 
 .checkout-button-container {
@@ -153,7 +236,6 @@
     margin-top: 8px;
     padding: 8px 12px;
     border: 1px solid var(--border);
-    border-radius: 3px;
 }
 
 .address-item {
@@ -161,7 +243,7 @@
 }
 
 .address-item:hover {
-    background-color: var(--green);
+    color: var(--blue);
     cursor: pointer;
 }
 
@@ -180,27 +262,38 @@
     background-color: var(--gd_g);
 }
 
-@media (min-width: 600px) {
+@media (min-width: 700px) {
     .customer-address-container {
         display: flex;
         flex-direction: row;
     }
-    .left {
+    .left-content {
         display: flex;
-        overflow: hidden;
-        background-image: url('/assets/images/photo-3-removebg-preview.png');
-        background-repeat: no-repeat;
-        background-position: center;
-        position: relative;
-        height: 90vh;
+        background-color: var(--grey);
+        flex-grow: 1;
+        margin-left: 20px;
     }
-    .right {
+    .right-container {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 50%;
         height: 90vh;
+    }
+    .left-img-div {
+        padding: 20px;
+        height: 100%;
+        width: 100%;
+        position: relative;
+        right: 0;
+    }
+    .left-img {
+        background-repeat: no-repeat;
+        object-fit: contain;
+        height: 100%;
+        width: 100%;
+        float: right;
+        border-radius: 20px;
     }
     /* .left img {
         display: block;

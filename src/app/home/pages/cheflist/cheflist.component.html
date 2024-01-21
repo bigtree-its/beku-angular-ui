@@ -1,100 +1,33 @@
-<div class="flex-column" style="margin: 50px 0 ;">
-    <div style="width: 100%;display: flex;">
-        <div class="cuisines-container">
-            <div *ngFor="let cuisine of cuisines" class="cuisine" (click)="onSelectCuisine(cuisine)" [class.selectedCuisine]="isSelectedCuisine(cuisine)">
-                <img src={{cuisine.logo}} class="cuisine-logo" height="90px" width="120px">
-                <span>{{cuisine.name}}</span>
-            </div>
+<div class="page">
+    <div class="cuisines-container">
+        <div *ngFor="let cuisine of cuisines" class="cuisine" (click)="onSelectCuisine(cuisine)" [class.selectedCuisine]="isSelectedCuisine(cuisine)">
+            <img src={{cuisine.logo}} class="cuisine-logo" height="90px" width="120px">
+            <span>{{cuisine.name}}</span>
         </div>
     </div>
     <div class="location-container" *ngIf="serviceLocation != null && serviceLocation !== undefined">
-        <span class="location-slug">{{serviceLocation.name}}, {{serviceLocation.city}}</span>
+        <span>{{serviceLocation.name}}, {{serviceLocation.city}}</span>
         <span class="change-area" routerLink="/">Change</span>
     </div>
-    <div class="right-container">
+    <div class="container-div">
         <div class="dish-container">
             <span style="font-weight: 900;padding: 10px 0;">Popular Dishes</span>
             <div *ngFor="let dish of dishes" class="dish">
                 <span>{{dish.name}}</span>
             </div>
         </div>
-
         <div class="chef-container">
-            <div *ngFor="let chef of filteredChefs " [routerLink]="[ '/cooks', chef._id] ">
-
-                <div class="chef-card-desktop">
-                    <div class="chef-coverPhoto-desktop">
-                        <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg">
-                    </div>
-                    <div class="chef-info-desktop">
-                        <div class="flex-row-space-between">
-                            <span class="chef-name-desktop">{{chef.kitchenName}}</span>
-                            <span [ngStyle]="{'color': chef.open ? 'green' :  'red'}">{{chef.open? "Open":"Closed"}}</span>
-                        </div>
-
-                        <div class="flex-row space-between">
-                            <div class="flex-column" style="padding: 10px 0;margin: 0 10px 0 0;width:400px;">
-                                <div style="display: flex;align-items: center;margin: 5px 0;">
-                                    <img [src]="star" style="width: 15px;height: 15px;">
-                                    <span style="margin-left: 5px;font-weight: 500;font-size: 12px;">{{chef.rating}}/5</span>
-                                </div>
-                                <div class="flex-row">
-                                    <ng-container *ngFor="let cuisine of chef.cuisines | slice:0:3">
-                                        <div class="chef-cuisine-desktop">{{ cuisine.name }}</div>
-                                    </ng-container>
-                                </div>
-                                <div class="flex-row" style="margin-top: 5px;">
-                                    <ng-container *ngFor="let spl of chef.specials | slice:0:3">
-                                        <div class="chef-cuisine-desktop">{{ spl }}</div>
-                                    </ng-container>
-                                </div>
-                            </div>
-                            <div class="flex-column" style="padding: 10px 0;width:300px;font-size: 13px;">
-                                <div class="flex-row">
-                                    <ng-container *ngFor="let slot of chef.slots | slice:0:3">
-                                        <div class="chef-cuisine-desktop">{{ slot.name }}</div>
-                                    </ng-container>
-                                </div>
-                                <div class="flex-column" *ngIf="chef.doDelivery">
-                                    <div class="flex-row" style="padding: 5px;">
-                                        <img src="/assets/icons/motorbike.png" alt="" height="20px" width="20px" style="margin-right: 5px;">
-                                        <span>I do delivery upto {{chef.deliveryDistance}} miles</span>
-                                    </div>
-                                    <div class="flex-row" *ngIf="chef.freeDeliveryOver > 0" style="padding: 5px;">
-                                        <img src="/assets/icons/free-shipping.png" alt="" height="20px" width="20px" style="margin-right: 5px;">
-                                        <span>Free Delivery order over {{chef.freeDeliveryOver | currency: 'GBP'}}</span>
-                                    </div>
-                                </div>
-                                <div class="flex-row"></div>
-                            </div>
-                        </div>
+            <div class="chef-card" *ngFor="let chef of filteredChefs " [routerLink]="[ '/cooks', chef._id] ">
+                <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg">
+                <div class="chef-card-info-div">
+                    <span class="chef-name">{{chef.kitchenName}}</span>
+                    <div style="display: flex;align-items: center;">
+                        <img [src]="star" style="width: 15px;height: 15px;">
+                        <span>{{chef.rating}}</span>
                     </div>
                 </div>
-
-                <div class="chef-card-mobile">
-                    <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg" class="chef-coverPhoto">
-                    <div class="chef-data-container ">
-                        <div class="flex-row-space-between">
-                            <span class="chef-name ">{{chef.name}}</span>
-                            <div style="display: flex;align-items: center;">
-                                <img [src]="star" style="width: 15px;height: 15px;">
-                                <span>{{chef.rating}}</span>
-                            </div>
-                        </div>
-                        <div class="chef-cuisines-container">
-                            <!-- <span *ngFor="let cuisine of chef.cuisines" class="cuisine">
-                                {{cuisine.name}}
-                            </span> -->
-                            <!-- If chef has big list of cuisines, then Iterate only few items from array -->
-                            <ng-container *ngFor="let cuisine of chef.cuisines | slice:0:3">
-                                <div class="cuisine">{{ cuisine.name }}</div>
-                            </ng-container>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
-
+    <app-footer></app-footer>
 </div>

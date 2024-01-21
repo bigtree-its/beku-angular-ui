@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ChefSearchQuery } from 'src/app/model/ChefSearchQuery';
 import { Cuisine, LocalChef } from 'src/app/model/localchef';
 import { ServiceLocation } from 'src/app/model/ServiceLocation';
 import { ChefService } from 'src/app/services/chef.service';

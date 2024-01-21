@@ -1,0 +1,19 @@
+.footer {
+    height: 100px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 20px;
+    background-color: blanchedalmond;
+}
+
+.copyright-div {
+    display: flex;
+    align-items: flex-end;
+}
+
+.copyright-div>img {
+    height: 20px;
+    width: 20px;
+}

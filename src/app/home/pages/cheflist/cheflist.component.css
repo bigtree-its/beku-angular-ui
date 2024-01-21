@@ -1,53 +1,7 @@
-.chef-container {
-    display: flex;
-    justify-content: center;
-    gap: 2em;
-    padding: 10px;
-    margin-bottom: 100px;
-    flex-direction: column;
-}
-
-.chef-card {
+.page {
     display: flex;
     flex-direction: column;
-    -webkit-box-shadow: 0 3px 12px -1px rgba(7, 10, 25, 0.1), 0 22px 27px -30px rgba(7, 10, 25, 0.1);
-    box-shadow: 0 3px 12px -1px rgba(7, 10, 25, 0.1), 0 22px 27px -30px rgba(7, 10, 25, 0.1);
-    min-width: 28rem;
-    background-color: #fff;
-    margin: 10px;
-}
-
-.chef-card>img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    /* border-top-left-radius: 17px; */
-    /* border-top-right-radius: 17px; */
-    transition: 0.5s ease-in-out;
-}
-
-.chef-card>img:hover {
-    cursor: pointer;
-    transform: scale(1.08);
-}
-
-.chef-name {
-    font-size: 16px;
-    font-weight: 400;
-}
-
-.chef-data-container {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-}
-
-.chef-ratings-container {
-    display: flex;
-}
-
-.chef-cuisines-container {
-    display: flex;
+    margin-top: 60px;
 }
 
 .cuisines-container {
@@ -62,20 +16,17 @@
     flex-direction: column;
     margin: 5px;
     padding: 10px;
-    border-radius: 10px;
-    border: 2px solid #fff;
 }
 
 .cuisine:hover {
     cursor: pointer;
-    border: 2px solid var(--green);
+    background-color: var(--grey);
 }
 
 .cuisine-logo {
     width: 120px;
     height: 90px;
     object-fit: cover;
-    border-radius: 7px;
 }
 
 .cuisine-logo:hover {
@@ -83,11 +34,86 @@
 }
 
 .selectedCuisine {
-    border: 2px solid var(--green);
+    border: 2px solid var(--blue);
+}
+
+.location-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #e3e9ed;
+    margin: 5px 10px;
+    max-width: 450px;
+}
+
+.change-area {
+    cursor: pointer;
+    font-weight: 800;
+}
+
+.container-div {
+    display: flex;
+    justify-content: center;
 }
 
 .dish-container {
     display: none;
+}
+
+.chef-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    padding-bottom: 50px;
+}
+
+.chef-card {
+    display: flex;
+    flex-direction: column;
+    max-width: 450px;
+    min-width: 390px;
+    height: 220px;
+    background-color: var(--grey);
+    margin: 5px 0;
+}
+
+.chef-card>img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    /* transition: 0.5s ease-in-out; */
+}
+
+.chef-card>img:hover {
+    cursor: pointer;
+    /* transform: scale(1.08); */
+}
+
+.chef-card-info-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.chef-name {
+    font-size: 16px;
+}
+
+.chef-data-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.chef-ratings-container {
+    display: flex;
+}
+
+.chef-cuisines-container {
+    display: flex;
 }
 
 .scroll-right,
@@ -114,20 +140,6 @@
     /* border: 2px solid rgb(0, 0, 0); */
 }
 
-.location-container {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 20px;
-    border-radius: 20px;
-    background-color: #e3e9ed;
-    margin: 10px;
-}
-
-.change-area {
-    cursor: pointer;
-    font-weight: 800;
-}
-
 .chef-card-desktop {
     display: none;
 }
@@ -149,12 +161,12 @@
         height: 170px;
         width: 100%;
         padding: 10px;
-        border-radius: 8px;
     }
     .chef-card-desktop:hover {
         cursor: pointer;
-        transform: translateY(-3px);
-        box-shadow: 0 10px 15px rgb(0 0 0/10%);
+        /* transform: translateY(-3px); */
+        /* box-shadow: 0 10px 15px rgb(0 0 0/10%); */
+        /* box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px; */
     }
     .chef-card-mobile {
         display: none;
@@ -180,7 +192,6 @@
         max-height: 100%;
         object-fit: cover;
         transition: 0.5s ease-in-out;
-        border-radius: 10px;
     }
     .chef-info-desktop {
         height: 150px;
@@ -210,15 +221,16 @@
     }
     .chef-name-desktop:hover {
         cursor: pointer;
-        color: darkorange;
+        color: var(--blue);
         text-decoration: underline;
     }
     .chef-cuisine-desktop {
         background-color: var(--light-background);
-        padding: 5px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        padding: 5px 10px;
         margin: 0 5px 0 0;
-        border-radius: 12px;
         font-size: 12px;
         font-weight: 500;
+        opacity: 0.7;
     }
 }

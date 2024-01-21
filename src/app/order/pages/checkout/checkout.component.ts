@@ -37,7 +37,7 @@ export class CheckoutComponent implements OnDestroy{
   customerName: string = "";
   notesToChef: string = "";
 
-  divHeader: string = "";
+  divHeader: string = "YOUR INFORMATION";
   nextButtonText: string = "Next";
   showCustomerDetailsSection: boolean = true;
   showServiceModeSection: boolean = false;

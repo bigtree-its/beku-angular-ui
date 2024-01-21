@@ -5,7 +5,7 @@
     padding: 5px 10px;
     margin: 1px 0;
     align-items: center;
-    background-color: var(--light-background);
+    border: 1px solid var(--grey);
 }
 
 .order-item-wrapper {

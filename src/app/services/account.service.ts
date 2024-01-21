@@ -115,6 +115,8 @@ export class AccountService {
     var tokenClaims = this.jwtService.getDecodedAccessToken(token);
     var user: User = {
       id: tokenClaims.clientId,
+      firstName: tokenClaims.firstName,
+      lastName: tokenClaims.lastName,
       name: tokenClaims.firstName + ' ' + tokenClaims.lastName,
       email: tokenClaims.email,
       mobile: tokenClaims.mobile,
@@ -147,7 +149,7 @@ export class AccountService {
     var token = this.jwtService.getIdToken();
     var claims = this.jwtService.getDecodedAccessToken(token);
     this.purgeAuth();
-    void this.router.navigate(['/login']);
+    void this.router.navigate(['/']);
     const req: LogoutRequest = {
       userId: claims.userId,
     };

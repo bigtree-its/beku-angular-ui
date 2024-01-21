@@ -172,7 +172,7 @@ export class StripeformComponent {
 
   async confirmPaymentIntent() {
     const elements = this.stripeElements;
-    const clientScret = this.paymentIntent.clientSecret;
+    const clientSecret = this.paymentIntent.clientSecret;
     this.stripeService.stripe.confirmPayment({
       elements,
       confirmParams: {
