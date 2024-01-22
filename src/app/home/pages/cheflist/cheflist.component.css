@@ -151,16 +151,25 @@
 
 /* Desktop */
 
-@media (min-width: 700px) {
-    .right-container {
-        width: 100%;
+@media (min-width: 500px) {
+    .chef-container {
         display: flex;
-    }
-    .chef-card-desktop {
-        display: flex;
-        height: 170px;
-        width: 100%;
+        flex-direction: row;
         padding: 10px;
+        padding-bottom: 50px;
+        flex-wrap: wrap;
+        border: 1px solid salmon;
+        gap: 0.5rem;
+    }
+    .chef-card {
+        height: 200px;
+        width: 150px;
+        background-color: aqua;
+        margin: 10px;
+    }
+    .chef-card>img {
+        height: 170px;
+        width: 150px;
     }
     .chef-card-desktop:hover {
         cursor: pointer;
@@ -204,9 +213,9 @@
         flex-direction: column;
         padding: 10px;
         width: 15%;
-        background-repeat: repeat-y;
         overflow: hidden;
         height: auto;
+        border: 1px solid saddlebrown;
     }
     .dish {
         border: 1px solid #e3e9ed;

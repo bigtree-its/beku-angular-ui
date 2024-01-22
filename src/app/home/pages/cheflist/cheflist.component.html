@@ -17,7 +17,10 @@
             </div>
         </div>
         <div class="chef-container">
-            <div class="chef-card" *ngFor="let chef of filteredChefs " [routerLink]="[ '/cooks', chef._id] ">
+            <div class="chef-card" *ngFor="let chef of filteredChefs ">
+
+            </div>
+            <!-- <div class="chef-card" *ngFor="let chef of filteredChefs " [routerLink]="[ '/cooks', chef._id] ">
                 <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg">
                 <div class="chef-card-info-div">
                     <span class="chef-name">{{chef.kitchenName}}</span>
@@ -26,7 +29,7 @@
                         <span>{{chef.rating}}</span>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <app-footer></app-footer>
