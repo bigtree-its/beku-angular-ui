@@ -1,10 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 :root {
-    --green: #08DE9E;
-    /* --green: coral; */
-    --blue: #1967d2;
+    --green: #00b852;
+    --mid-grey: #555;
+    --blue: #06e;
     --black: rgb(0, 0, 0);
     --grey: #d9d9d9;
     --light-color: #f8f8f8;
@@ -25,7 +26,10 @@
     --box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
     --light-green: #eafbf2;
     --light-blue: #EBF5FF;
-    --light-grey: #f5f5f5;
+    --light-grey: #f9f9f9;
+    --happygreen: #dcfd52;
+    --happygreen-light: #e8fc9c;
+    --happygreen-dark: #c8e820;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -36,28 +40,56 @@
     /* font-size: clamp(.5rem, 0.5rem + 10vw, .8rem); */
     font-size: 0.9rem;
     letter-spacing: .1px;
-    font-weight: 300;
-    overflow-y: scroll;
     box-sizing: content-box;
 }
 
 html {
     font-size: 70%;
     overflow-x: hidden;
-    overflow-y: scroll;
-    /* scroll-padding-top: 5.5.rem; */
+    overflow-y: auto;
     scroll-behavior: smooth;
     text-size-adjust: 100%;
     background-color: #fff;
-    font-family: "Julius Sans One", sans-serif;
+    /* font-family: "Julius Sans One", sans-serif; */
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
     scrollbar-width: none;
-    font-weight: 600;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    /* Remove scrollbar space */
+    background: transparent;
+    /* Optional: just make scrollbar invisible */
+}
+
+
+/* Optional: show position indicator in red */
+
+::-webkit-scrollbar-thumb {
+    background: transparent;
 }
 
 *,
 *::before,
 *::after {
     box-sizing: border-box;
+}
+
+.container {
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    overflow: -moz-scrollbars-none;
+    /* Firefox */
+}
+
+.container::-webkit-scrollbar {
+    display: none;
+    /* Safari and Chrome */
 }
 
 @supports(scrollbar-width: none) {
@@ -74,9 +106,13 @@ img {
 body {
     margin: 0;
     padding: 0;
-    font-size: 14px;
+    font-size: 12px;
     background-color: #fff;
-    font-family: "Julius Sans One", sans-serif;
+    /* font-family: "Julius Sans One", sans-serif; */
+    font-family: "Poppins", sans-serif;
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
     scrollbar-width: none;
 }
 
@@ -92,6 +128,30 @@ body {
 
 select {
     width: 100%;
+}
+
+.scroll-right,
+.scroll-left {
+    margin: 10px;
+    height: 40px;
+    width: 40px;
+    /* border: 2px solid rgb(238, 238, 238); */
+    border-radius: 50%;
+    align-items: center;
+    padding: 10px;
+    background-color: transparent;
+}
+
+.scroll-right:hover {
+    cursor: pointer;
+    /* border: 2px solid rgb(0, 0, 0); */
+    background-color: var(--white);
+}
+
+.scroll-left:hover {
+    cursor: pointer;
+    background-color: var(--white);
+    /* border: 2px solid rgb(0, 0, 0); */
 }
 
 .background-img-div {
@@ -132,6 +192,13 @@ select {
 
 .flex-row {
     display: flex;
+    flex-direction: row;
+}
+
+.flex-row-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .flex-column {
@@ -139,10 +206,17 @@ select {
     flex-direction: column;
 }
 
-.flex-row-space-between {
+.flex-between {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    flex-direction: row;
+}
+
+.flex-row-space-between {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .space-between {
@@ -354,6 +428,16 @@ select {
 
 .big-black-btn:hover {
     opacity: 0.8;
+}
+
+.link-button {
+    color: #222;
+    font-weight: 700;
+}
+
+.link-button:hover {
+    cursor: pointer;
+    color: #1967d2;
 }
 
 .clickable {

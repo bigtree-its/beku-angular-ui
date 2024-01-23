@@ -24,12 +24,12 @@ import {
   User,
 } from '../model/auth-model';
 import { ServiceLocator } from './service.locator';
+import { Constants } from './constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AccountService {
-  private storageItem: string = 'User';
 
   public loginSession$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   user: User;
@@ -39,6 +39,7 @@ export class AccountService {
     private jwtService: JwtService,
     private localService: LocalService,
     private serviceLocator: ServiceLocator,
+    private readonly constants: Constants,
     private readonly router: Router
   ) {}
 
@@ -106,7 +107,7 @@ export class AccountService {
     this.jwtService.saveAccessToken(loginResp.accessToken);
     this.jwtService.saveIdToken(loginResp.idToken);
     var user: User = this.buildUser(loginResp.idToken);
-    this.localService.saveData(this.storageItem, JSON.stringify(user));
+    this.localService.saveData(this.constants.StorageItem_C_User, JSON.stringify(user));
     this.user = user;
     this.loginSession$.next(this.user);
   }
@@ -146,27 +147,29 @@ export class AccountService {
 
   public logout() {
     console.log('Logout...');
-    var token = this.jwtService.getIdToken();
-    var claims = this.jwtService.getDecodedAccessToken(token);
+    // var token = this.jwtService.getIdToken();
+    // var claims = this.jwtService.getDecodedAccessToken(token);
     this.purgeAuth();
     void this.router.navigate(['/']);
-    const req: LogoutRequest = {
-      userId: claims.userId,
-    };
-    return this.http.post<void>(this.serviceLocator.LogoutUrl, req, {
-      headers: { skip: 'true' },
-    });
+    // const req: LogoutRequest = {
+    //   userId: claims.userId,
+    // };
+    // return this.http.post<void>(this.serviceLocator.LogoutUrl, req, {
+    //   headers: { skip: 'true' },
+    // });
   }
 
   purgeAuth(): void {
     console.log('Purging auth...');
     this.jwtService.destroyToken();
     this.loginSession$.next(null);
-    this.localService.clearData();
+    this.localService.removeData(this.constants.StorageItem_C_User);
+    this.localService.removeData(this.constants.StorageItem_C_Order);
+    this.localService.removeData(this.constants.StorageItem_C_Chef);
   }
 
   getData() {
-    var json = this.localService.getData(this.storageItem);
+    var json = this.localService.getData(this.constants.StorageItem_C_User);
     if (json === undefined) {
       return undefined;
     }

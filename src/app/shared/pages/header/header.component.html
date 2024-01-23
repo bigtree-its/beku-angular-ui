@@ -1,10 +1,7 @@
 <div class="page">
     <div class="container-div">
         <div class="left-container">
-            <div class="flex-row justify-content-center align-items-center" style="padding: 10px;">
-                <!-- <img src="/assets/icons/home.png" height="20px" width="20px" style="margin-right: 5px;" alt=""> -->
-                <div [routerLink]="['/']" routerLinkActive="router-link-active" class="logo">Zomato</div>
-            </div>
+            <div [routerLink]="['/']" routerLinkActive="router-link-active" class="logo">T</div><span style="margin-left: 5px;">heeni</span>
 
             <div class="location-container" *ngIf="serviceLocation != null && serviceLocation !== undefined">
                 <span class="location-slug" [routerLink]="['cooks']" [queryParams]="{location: serviceLocation.slug}">#{{serviceLocation.name}}, {{serviceLocation.city}}</span>

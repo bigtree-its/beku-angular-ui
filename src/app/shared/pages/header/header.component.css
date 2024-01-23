@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Moirai+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Climate+Crisis&display=swap');
 .page {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    background: #fff;
 }
 
 .container-div {
@@ -34,12 +34,11 @@
 .left-container {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
     background-color: var(--grey);
     margin: 10px;
     height: 40px;
-    width: 50%;
     z-index: 999;
+    padding: 0 10px;
 }
 
 .right-container {
@@ -48,13 +47,14 @@
     margin: 10px;
     height: 40px;
     width: 20%;
-    z-index: 99999;
+    z-index: 999;
 }
 
 .logo {
     font-size: 35px;
     cursor: pointer;
-    font-family: "Racing Sans One", sans-serif;
+    /* font-family: "Moirai One", system-ui; */
+    font-family: "Climate Crisis", sans-serif;
 }
 
 .change-location {
@@ -80,7 +80,7 @@
 .user-icon-button {
     padding: 4px 8px;
     border-radius: 0;
-    background-color: var(--grey);
+    background-color: var(--green);
     border: none;
     height: 40px;
     align-self: flex-end;
@@ -92,6 +92,7 @@
     align-items: center;
     align-self: self-end;
     height: 40px;
+    padding: 0 5px;
     background-color: var(--yellow);
 }
 

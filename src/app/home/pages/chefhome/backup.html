@@ -1,0 +1,192 @@
+<div *ngIf="chef !== null && chef !== undefined">
+
+    <div class="page">
+        <!-- Chef-Details -->
+        <div class="flex-row gap-1 justify-content-center" style="padding:10px; border-bottom: 1px solid #f6f0f0;height: 160px;">
+            <div style="height: 200px;width: 200px;" class="chef-profile-image-div">
+                <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg" class="chef-profile-image">
+            </div>
+            <div class="flex-column flex-grow" style="padding: 0 10px;max-width: 300px;">
+                <div class="flex-row space-between">
+                    <span style="font-size: 20px;">{{chef.kitchenName}}</span>
+                    <span [ngStyle]="{'color': chef.open ? 'green' :  'red'}">{{chef.open?
+                        "Open":"Closed"}}</span>
+                </div>
+
+                <span style="font-size: 9px;padding: 5px 0;margin: 7px 0;">{{chef.description}}</span>
+                <div class="flex-row ">
+                    <div class="ratings-div ">
+                        <img [src]="chef.rating> 0 ? starSelected : star" style="width: 10px;height: 10px;">
+                        <img [src]="chef.rating > 1 ? starSelected : star" style="width: 10px;height: 10px;">
+                        <img [src]="chef.rating > 2 ? starSelected : star" style="width: 10px;height: 10px;">
+                        <img [src]="chef.rating > 3 ? starSelected : star" style="width: 10px;height: 10px;">
+                        <img [src]="chef.rating > 4 ? starSelected : star" style="width: 10px;height: 10px;">
+                    </div>
+                </div>
+                <div class="flex-row">
+                    <ng-container *ngFor="let cuisine of chef.cuisines | slice:0:3">
+                        <div style="margin-right: 2px;background-color: #f6f0f0;padding: 1px 5px;opacity: 0.5;font-size: 10px;">{{ cuisine.name }}</div>
+                    </ng-container>
+                </div>
+                <div class="flex-row" style="margin-top: 5px;">
+                    <!-- <span *ngFor="let spl of chef.specials | slice:0:3; let i = index">
+                        {{spl.trimStart()}} {{i === 2 ? '' : ','
+                        }}
+                    </span> -->
+                    <ng-container *ngFor="let spl of chef.specials | slice:0:3">
+                        <div style="margin-right: 2px;background-color: #f6f0f0;padding: 1px 5px;opacity: 0.5;font-size: 10px;">{{ spl }}</div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="flex-column flex-grow" style="padding: 0 10px;max-width: 300px;">
+                <div class="flex-row" style="margin: 10px 0;">
+                    <div style="margin-right: 2px;background-color: #f6f0f0; padding: 1px 10px;opacity: 0.9;font-size: 12px;">{{!chef.preOrderOnly? "PreOrder Only": ""}}</div>
+                </div>
+                <div class="flex-row">
+                    <ng-container *ngFor="let slot of chef.slots | slice:0:3">
+                        <div style="margin-right: 2px;background-color: #f6f0f0;padding: 1px 5px;opacity: 0.5;font-size: 10px;">{{ slot.name }}</div>
+                    </ng-container>
+                </div>
+                <div class="flex-column" *ngIf="chef.doDelivery" style="margin-top: 10px;">
+                    <div class="flex-row" style="padding: 5px;">
+                        <img src="/assets/icons/motorbike.png" alt height="16px" width="16px" style="margin-right: 5px;">
+                        <span style="font-size: 10px;">I do delivery upto {{chef.deliveryDistance}}
+                            miles</span>
+                    </div>
+                    <div class="flex-row" *ngIf="chef.freeDeliveryOver > 0" style="padding: 5px;font-size: 13px;">
+                        <img src="/assets/icons/free-shipping.png" alt height="16px" width="16px" style="margin-right: 5px;">
+                        <span style="font-size: 10px;">Free Delivery order over {{chef.freeDeliveryOver |
+                            currency: 'GBP'}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-row justify-content-center main-container" style="padding: 20px;">
+            <!-- Menu Details -->
+            <div class="flex-column main-section">
+                <div class="flex-row space-between justify-content-center" style="border-bottom:1px solid #e2e2e2">
+                    <div class="main-section-container-hdr" [class.selected-hdr]="activeLayout === 'Menu'">
+                        <img src="/assets/icons/recipe-book.png" height="15px" width="15px">
+                        <span (click)="selectLayout('Menu')">Menu</span>
+                    </div>
+                    <div class="main-section-container-hdr" [class.selected-hdr]="activeLayout === 'Reviews'">
+                        <img src="/assets/icons/favourite.png" height="15px" width="15px">
+                        <span (click)="selectLayout('Reviews')">Reviews</span>
+                    </div>
+                    <div class="main-section-container-hdr" [class.selected-hdr]="activeLayout === 'Info'">
+                        <img src="/assets/icons/info.png" height="15px" width="15px">
+                        <span (click)="selectLayout('Info')">Info</span>
+                    </div>
+                </div>
+                <ng-container [ngSwitch]="activeLayout">
+                    <ng-container *ngSwitchCase="'Menu'" [ngTemplateOutlet]="menuLayout"></ng-container>
+                    <ng-container *ngSwitchCase="'Reviews'" [ngTemplateOutlet]="reviewsLayout"></ng-container>
+                    <ng-container *ngSwitchCase="'Info'" [ngTemplateOutlet]="infoLayout"></ng-container>
+                </ng-container>
+            </div>
+            <!-- Cart Details -->
+            <div class="flex-column order-section" style="width: 30%;">
+                <button class="btn-block my-1 mx-1" [routerLink]="[ '/checkout'] " [disabled]="!(order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0)">
+                    CHECKOUT</button>
+                <div *ngIf="order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0; then itemsBlock else noItemsBlock">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #noItemsBlock>
+    <div class="order-no-items">
+        <img src="/assets/icons/shopping-basket.png" height="50px" width="50px" class="empty-bag">
+        <span style="margin-top: 10px;font-weight: 900;">
+            YOUR BASKET IS EMPTY
+        </span>
+        <br>
+        <span>What are you feeling today?</span>
+        <span>Checkout our Home Cooks</span>
+    </div>
+</ng-template>
+
+<ng-template #itemsBlock>
+    <div class="order-with-items">
+        <div class="order-summary-section">
+            <div class="flex-row-space-between">
+                <span>Subtotal</span>
+                <span>{{order.subTotal | currency: 'GBP'}}</span>
+            </div>
+            <div class="flex-row-space-between">
+                <span>Delivery fee</span>
+                <span>{{order.deliveryFee | currency: 'GBP'}}</span>
+            </div>
+            <div class="flex-row-space-between">
+                <span>Packing fee</span>
+                <span>{{order.packingFee | currency: 'GBP'}}</span>
+            </div>
+            <div class="flex-row-space-between">
+                <span>Service Fee</span>
+                <span>{{order.serviceFee | currency: 'GBP'}}</span>
+            </div>
+            <div class="flex-row-space-between" style="margin-top: 10px;">
+                <span style="font-weight: 900;">TOTAL</span>
+                <span style="font-weight: 900;">{{order.total | currency:
+                    'GBP'}}</span>
+            </div>
+        </div>
+        <div class="order-items-section">
+            <div *ngIf="order !== null && order !== undefined && order.items !== null && order.items !== undefined && order.items.length > 0">
+                <app-order-item *ngFor="let item of order.items" [item]="item"></app-order-item>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #NoItemsInCategory>
+    <span style="margin-top: 10px;font-weight: 900;align-self: center;opacity: 0.5;">
+        NO ITEMS TO DISPLAY
+    </span>
+</ng-template>
+<ng-template #ItemsInCategory>
+    <div class="menu-items-container">
+        <app-menu-item *ngFor="let menu of items_to_display" [menu]="menu" [displayDescription]="true">
+        </app-menu-item>
+    </div>
+</ng-template>
+
+<ng-template #reviewsLayout>
+    <div class="flex-column">
+    </div>
+</ng-template>
+<ng-template #infoLayout>
+    <div class="flex-column">
+    </div>
+</ng-template>
+
+<ng-template #menuLayout>
+    <div class="flex-column justify-content-center align-items-center">
+        <div class="scroll-container">
+            <div style="float: left">
+                <img src="/assets/icons/left-arrow.png" alt loading="lazy" class="scroll-left" (click)="scrollLeft()">
+            </div>
+
+            <div #widgetsContent class="middle">
+                <span *ngFor="let c of collections" class="select-span" (click)="onSelectCategory(c)" [class.selectedSpan]="isSelectedCategory(c)">{{c.name}}</span>
+            </div>
+
+            <div style="float: right">
+                <!-- <button (click)="scrollRight()">right</button> -->
+                <img src="/assets/icons/right-arrow.png" alt loading="lazy" class="scroll-right" (click)="scrollRight()">
+            </div>
+        </div>
+        <div *ngIf="items_to_display !== null && items_to_display !== undefined &&  items_to_display.length > 0; then ItemsInCategory else NoItemsInCategory">
+        </div>
+
+        <div *ngIf="displayCal && calendarsToDisplay !== null && calendarsToDisplay !== undefined && calendarsToDisplay.length > 0">
+            <div *ngFor="let calendar of calendarsToDisplay;  let i = index">
+                <div *ngIf="calendar.menus !== null && calendar.menus !== undefined" class="thisweek">
+                    <app-menu-item *ngFor="let menu of calendar.menus" [menu]="menu" [orderBy]="calendar.orderBefore" [displayDescription]="false"></app-menu-item>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

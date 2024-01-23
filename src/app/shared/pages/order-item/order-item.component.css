@@ -5,10 +5,14 @@
     padding: 5px 10px;
     margin: 1px 0;
     align-items: center;
-    border: 1px solid var(--grey);
+    border: 1px solid var(--mid-grey);
 }
 
 .order-item-wrapper {
     display: block;
     width: auto;
+}
+
+.qty-value {
+    padding: 0 5px;
 }

@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap, Observable, BehaviorSubject, of } from 'rxjs';
-import { Router } from '@angular/router';
 import {
   CustomerOrder,
   CustomerOrderList,
@@ -19,6 +18,7 @@ import { Utils } from './utils';
 import { ServiceLocator } from './service.locator';
 import { LocalService } from './local.service';
 import { ChefService } from './chef.service';
+import { Constants } from './constants';
 
 @Injectable({
   providedIn: 'root',
@@ -28,15 +28,15 @@ export class FoodOrderService {
   ipAddress: any;
   supplier: LocalChef;
   foodOrderKey: string;
-  private storageItem = 'c_order';
-  private customerOrder: CustomerOrder = undefined;
+  private customerOrder?: CustomerOrder;
   public orderSubject$ = new BehaviorSubject(this.customerOrder);
 
   constructor(
     private http: HttpClient,
     private chefService: ChefService,
     private localService: LocalService,
-    private serviceLocator: ServiceLocator
+    private serviceLocator: ServiceLocator,
+    private constants: Constants
   ) {}
 
   updateStatus(orderTracking: OrderTracking) {
@@ -204,24 +204,19 @@ export class FoodOrderService {
   }
 
   public addToOrder(foodOrderItem: FoodOrderItem) {
-    var order = this.customerOrder;
-    if ( order === null || order === undefined){
+    console.log('Adding item to order '+ JSON.stringify(this.customerOrder))
+    if (this.customerOrder === null || this.customerOrder === undefined) {
       this.getData();
-      order = this.customerOrder;
     }
-    if (order === undefined || order === null) {
-      order = this.createOrder();
-      console.log('New order ' + JSON.stringify(order));
+    if (this.customerOrder != null && this.customerOrder !== undefined && this.customerOrder.items === null) {
+      this.customerOrder.items = [];
     }
-    if (order.items === null) {
-      order.items = [];
-    }
-    order.items.push(foodOrderItem);
-    this.calculateTotal(order);
+    this.customerOrder.items.push(foodOrderItem);
+    this.calculateTotal();
   }
 
   removeItem(itemToDelete: FoodOrderItem) {
-    if ( this.customerOrder !== null && this.customerOrder !== undefined){
+    if (this.customerOrder !== null && this.customerOrder !== undefined) {
       for (var i = 0; i < this.customerOrder.items.length; i++) {
         var item = this.customerOrder.items[i];
         if (item._tempId === itemToDelete._tempId) {
@@ -229,54 +224,66 @@ export class FoodOrderService {
         }
       }
     }
-    this.calculateTotal(this.customerOrder);
+    this.calculateTotal();
   }
 
   updateItem(item: FoodOrderItem) {
-    if ( this.customerOrder !== null && this.customerOrder !== undefined){
+    var idx = -1;
+    console.log('Updating item ' + JSON.stringify(item));
+    if (this.customerOrder !== null && this.customerOrder !== undefined) {
       for (var i = 0; i < this.customerOrder.items.length; i++) {
         var fi = this.customerOrder.items[i];
         if (fi._tempId === item._tempId) {
-          this.customerOrder.items.splice(i, 1);
-          this.customerOrder.items.push(item);
-          this.calculateTotal(this.customerOrder);
+          console.log('Found existing item at index ' + i);
+          idx = i;
           break;
         }
       }
+
+      if (idx != -1) {
+        const newItems = [
+          ...this.customerOrder.items.slice(0, idx),
+          item,
+          ...this.customerOrder.items.slice(idx + 1),
+        ];
+        this.customerOrder.items = newItems;
+        // this.customerOrder.items.splice(i, 1);
+        // this.customerOrder.items.push(item);
+        this.calculateTotal();
+      }
     }
-    
   }
 
-  public calculateTotal(order: CustomerOrder) {
+  public calculateTotal() {
     var subTotal: number = 0.0;
     if (
-      order.items !== null &&
-      order.items !== undefined &&
-      order.items.length > 0
+      this.customerOrder.items !== null &&
+      this.customerOrder.items !== undefined &&
+      this.customerOrder.items.length > 0
     ) {
-      order.items.forEach((item) => {
+      this.customerOrder.items.forEach((item) => {
         subTotal = subTotal + item.subTotal;
       });
     }
-    order.deliveryFee = 0.0;
-    order.packingFee = 0.0;
-    order.serviceFee = 0.0;
-    order.subTotal = subTotal;
+    this.customerOrder.deliveryFee = 0.0;
+    this.customerOrder.packingFee = 0.0;
+    this.customerOrder.serviceFee = 0.0;
+    this.customerOrder.subTotal = subTotal;
     if (subTotal !== 0) {
-      order.serviceFee = 0.5;
-      if (order.serviceMode === 'DELIVERY') {
-        order.deliveryFee = 0.5;
+      this.customerOrder.serviceFee = 0.5;
+      if (this.customerOrder.serviceMode === 'DELIVERY') {
+        this.customerOrder.deliveryFee = 0.5;
       }
     }
 
     var totalToPay: number =
-      order.subTotal + order.deliveryFee + order.packingFee + order.serviceFee;
+    this.customerOrder.subTotal + this.customerOrder.deliveryFee + this.customerOrder.packingFee + this.customerOrder.serviceFee;
     console.log('Calculating SubTotal: ' + subTotal);
     console.log('Calculating TotalPay: ' + totalToPay);
-    order.total = totalToPay;
-    order.total = +(+order.total).toFixed(2);
-    console.log('The calculated order total: ' + order.total);
-    this.setData(order);
+    this.customerOrder.total = totalToPay;
+    this.customerOrder.total = +(+this.customerOrder.total).toFixed(2);
+    console.log('The calculated order total: ' + this.customerOrder.total);
+    this.setData(this.customerOrder);
   }
 
   createPaymentIntentForOrder(
@@ -315,13 +322,13 @@ export class FoodOrderService {
     );
   }
 
-  public createOrder(): CustomerOrder {
+  public createOrder() {
     console.log('Creating empty new order');
     if (Utils.isValid(this.supplier)) {
       this.supplier = this.chefService.getData();
     }
 
-    var customerOrder = {
+    this.customerOrder = {
       id: '',
       items: [],
       supplier: {
@@ -372,8 +379,9 @@ export class FoodOrderService {
       status: 'CREATED',
       notes: '',
     };
-    console.log('Created a brand new Order ' + JSON.stringify(customerOrder));
-    return customerOrder;
+    console.log(
+      'Created a brand new Order ' + JSON.stringify(this.customerOrder)
+    );
   }
 
   getDeliveryFee(): number {
@@ -438,24 +446,25 @@ export class FoodOrderService {
 
   setData(data: CustomerOrder) {
     console.info('Storing customer order..');
-    this.localService.saveData(this.storageItem, JSON.stringify(data));
-    this.customerOrder = data;
+    this.localService.saveData(
+      this.constants.StorageItem_C_Order,
+      JSON.stringify(data)
+    );
     this.orderSubject$.next(this.customerOrder);
   }
 
   purgeData() {
     console.log('Purging order.');
-    this.localService.removeData(this.storageItem);
+    this.localService.removeData(this.constants.StorageItem_C_Order);
     this.customerOrder = null;
     this.orderSubject$.next(this.customerOrder);
   }
 
   getData() {
-    var json = this.localService.getData(this.storageItem);
-    if (json === undefined) {
-      return undefined;
-    }
-    if (json !== '' && json !== null && json !== undefined) {
+    var json = this.localService.getData(this.constants.StorageItem_C_Order);
+    if (json === undefined || json === null || json.length === 0) {
+      this.createOrder();
+    } else if (json !== '' && json !== null && json !== undefined) {
       var obj = JSON.parse(json);
       this.customerOrder = obj.constructor.name === 'Array' ? obj[0] : obj;
       this.orderSubject$.next(this.customerOrder);

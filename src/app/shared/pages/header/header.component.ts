@@ -30,6 +30,7 @@ export class HeaderComponent {
     this.orderService.getData();
     this.orderService.orderSubject$.subscribe({
       next: (value) => {
+        console.log('Order emitted '+ JSON.stringify(value ))
         var customerOrder: CustomerOrder = value;
         this.extractData(customerOrder);
       },
@@ -63,7 +64,7 @@ export class HeaderComponent {
   private extractData(customerOrder: CustomerOrder) {
     if (customerOrder !== null && customerOrder !== undefined) {
       this.cartTotal = customerOrder.subTotal;
-      this.itemsCount = customerOrder.items.length;
+      this.itemsCount = customerOrder.items?.length;
     } else {
       this.cartTotal = 0;
       this.itemsCount = 0;

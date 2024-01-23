@@ -32,7 +32,6 @@ export class OrderItemComponent {
   }
 
   decreaseQuantity() {
-    console.log(this.quantity)
     if (this.quantity > 0) {
       this.quantity = this.quantity - 1;
       this.calculatePrice();

@@ -25,6 +25,7 @@ export class LocalService {
   }
 
   public clearData() {
-    localStorage.clear();
+    console.log('Clearing all items from storage..')
+    localStorage.clear
   }
 }

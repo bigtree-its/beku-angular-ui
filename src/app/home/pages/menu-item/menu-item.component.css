@@ -4,7 +4,6 @@
     width: 500px;
     background-color: var(--light-background);
     border: 1px solid #efedea;
-    border-radius: 12px;
     margin: 5px 0;
     padding: 10px;
 }
@@ -80,7 +79,7 @@
 }
 
 ::ng-deep .modal-content {
-    border-radius: 25px;
+    /* border-radius: 25px; */
     border: none;
     z-index: 9999999;
 }
