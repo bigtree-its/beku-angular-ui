@@ -333,7 +333,7 @@ export class FoodOrderService {
       items: [],
       supplier: {
         _id: this.supplier._id,
-        name: this.supplier.name,
+        name: this.supplier.kitchenName,
         image: this.supplier.coverPhoto,
         mobile: this.supplier.contact.mobile,
         email: this.supplier.contact.email,

@@ -8,6 +8,7 @@
                         <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg" height="170px" width="150px">
                     </div>
                     <div class="flex-column gap-1" style="padding: 5px;width: 100%;">
+                        <span class="chef-name">{{chef.kitchenName}}</span>
                         <div class="flex-between" style="margin-bottom: 5px;">
                             <span [ngStyle]="{'color': chef.open ? 'green' :  'red'}">{{chef.open?
                                 "Open":"Closed"}}</span>
@@ -40,7 +41,7 @@
                 </div>
 
                 <div class="chef-card-info-div">
-                    <span class="chef-name">{{chef.kitchenName}}</span>
+                    <span class="chef-desc">{{chef.description}}</span>
                     <div style="display: flex;align-items: center;">
                         <img [src]="star" style="width: 15px;height: 15px;">
                         <span style="padding-left: 6px;">{{chef.rating}}</span>
@@ -61,9 +62,14 @@
         <div class="page-right">
             <div class="cart">
                 <div class="cart-header">
-                    <span style="font-size: 20px;">Your Cart</span>
+                    <span style="font-size: 20px;">Your Order</span>
                     <span *ngIf="order != null" style="font-size: 20px;">{{order.total | currency:
                         'GBP'}}</span>
+                </div>
+                <div class="cart-chef" *ngIf="order !== null && order.supplier !== null">
+                    <span style="font-weight: 500;font-size: 16px;padding-right: 10px;">{{order.supplier.name}}</span>
+                    <span style="padding-right: 10px;">{{order.supplier.address.addressLine1}},</span>
+                    <span>{{order.supplier.address.city}}, {{order.supplier.address.postcode}}</span>
                 </div>
 
                 <div *ngIf="order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0; then itemsBlock else noItemsBlock">
@@ -71,7 +77,7 @@
             </div>
             <div class="footer">
                 <div class="footer-body">
-                    <button class="btn-block">Checkout</button>
+                    <button class="btn-block" [routerLink]="[ '/checkout'] " [disabled]="(order === null || order === undefined ||  order.items === null ||  order.items === undefined || order.items.length === 0)">Checkout</button>
                     <!-- <button class="big-black-btn">Checkout</button> -->
                 </div>
             </div>

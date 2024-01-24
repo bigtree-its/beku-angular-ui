@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
 .page {
     height: 100vh;
     display: flex;
@@ -37,6 +38,7 @@
     overflow-y: hidden;
     width: 100%;
     margin: 70px 20px 20px 20px;
+    font-family: 'Anonymous Pro', monospace;
 }
 
 .cart-header {
@@ -48,18 +50,19 @@
     background-color: var(--grey);
 }
 
+.cart-chef {
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    padding: 5px;
+}
+
 .chef-card {
     width: 100%;
     min-width: 450px;
     height: 200px;
-    border: 1px solid var(--grey);
+    border: 3px solid var(--yellow);
     margin-top: 60px;
     background-color: #fff;
-}
-
-.chef-card:hover {
-    cursor: pointer;
-    border: 1px solid var(--black);
 }
 
 .chef-img-div {
@@ -85,6 +88,10 @@
     font-size: 16px;
 }
 
+.chef-desc {
+    font-size: 12px;
+}
+
 .chef-cuisine {
     background-color: var(--light-background);
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
@@ -102,7 +109,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 3px;
     padding: 5px;
     width: 100%;
 }

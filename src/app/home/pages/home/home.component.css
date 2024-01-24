@@ -263,25 +263,43 @@
     transform: scaleX(-1);
 }
 
-@mixin saw-tooth($width: 12px,
-$bg: #fff) {
-    background-image: /* Top jagged */
-    linear-gradient(135deg, $bg 50%, transparent 50%), linear-gradient(225deg, $bg 50%, transparent 50%), /* Bottom jagged */
-    linear-gradient(45deg, $bg 50%, transparent 50%), linear-gradient(-45deg, $bg 50%, transparent 50%), /* Left jagged */
-    linear-gradient(135deg, $bg 50%, transparent 50%), linear-gradient(45deg, $bg 50%, transparent 50%), /* Right jagged */
-    linear-gradient(-135deg, $bg 50%, transparent 50%), linear-gradient(-45deg, $bg 50%, transparent 50%);
-    background-position: /* Top jagged */
-    top left, top left, /* Bottom jagged */
-    bottom left, bottom left, /* Left jagged */
-    top left, top left, /* Right jagged */
-    top right, top right;
-    background-size: $width $width;
-    background-repeat: repeat-x, repeat-x, repeat-x, repeat-x, repeat-y, repeat-y, repeat-y, repeat-y;
+.typewriter h1 {
+    overflow: hidden;
+    /* Ensures the content is not revealed until the animation */
+    border-right: .15em solid orange;
+    /* The typwriter cursor */
+    white-space: nowrap;
+    /* Keeps the content on a single line */
+    margin: 0 auto;
+    /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .15em;
+    /* Adjust as needed */
+    animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
 }
 
-.banner {
-    background-color: skyblue;
-    @include saw-tooth();
+
+/* The typing effect */
+
+@keyframes typing {
+    from {
+        width: 0
+    }
+    to {
+        width: 100%
+    }
+}
+
+
+/* The typewriter cursor effect */
+
+@keyframes blink-caret {
+    from,
+    to {
+        border-color: transparent
+    }
+    50% {
+        border-color: orange;
+    }
 }
 
 @media (min-width: 700px) {
