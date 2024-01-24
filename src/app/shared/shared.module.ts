@@ -6,6 +6,7 @@ import { NgbDropdownModule,NgbDatepickerModule } from '@ng-bootstrap/ng-bootstra
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from '../home';
 import { FooterComponent } from './pages/footer/footer.component';
+import { PopupComponent } from './pages/popup/popup.component';
 const routes: Routes = [
   { path: '', component: HomeComponent }
 ]
@@ -15,7 +16,8 @@ const routes: Routes = [
     HeaderComponent,
     FooterComponent,
     OrderItemComponent,
-    FooterComponent
+    FooterComponent,
+    PopupComponent
   ],
   imports: [
     CommonModule,

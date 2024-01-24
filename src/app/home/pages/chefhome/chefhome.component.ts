@@ -95,6 +95,7 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
   destroy$ = new Subject<void>();
   collections: Collection[];
   activeLayout: string = "Menu";
+  supplierId: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -128,8 +129,9 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
       this.weekDays = this.computeDays();
     }
     this.activatedRoute.params.subscribe((params) => {
-      const supplierId = params['id'];
-      let observable = this.chefService.getCollections(supplierId);
+      this.supplierId = params['id'];
+      console.log('Chef-home for supplier '+ this.supplierId)
+      let observable = this.chefService.getCollections(this.supplierId);
       observable.pipe(takeUntil(this.destroy$)).subscribe({
         next: (data) => {
           this.collections = data;
@@ -139,7 +141,7 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
         },
       });
 
-      let observable1 = this.chefService.getChef(supplierId);
+      let observable1 = this.chefService.getChef(this.supplierId);
       observable1.pipe(takeUntil(this.destroy$)).subscribe({
         next: (data) => {
           this.chef = data;
@@ -152,12 +154,18 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
       });
     });
     this.orderService.orderSubject$.subscribe((theOrder) => {
+     
       if (this.utils.isValid(theOrder) && theOrder.status === 'Completed') {
         return;
       }
       this.order = theOrder;
       if (theOrder !== null && theOrder !== undefined) {
-        this.cartTotal = theOrder.total;
+        if ( theOrder.supplier._id !== this.supplierId){
+          console.info('Chef changed. Destroying previous order')
+          this.orderService.destroy();
+        }else{
+          this.cartTotal = theOrder.total;
+        }
       }
     });
   }

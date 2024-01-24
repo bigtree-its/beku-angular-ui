@@ -22,7 +22,7 @@ export class MenuItemComponent {
   selectedchoice?: Extra;
   selectedExtras: Extra[] = [];
   quantity: number = 1;
-  ordeByDate: Day;
+  orderByDate: Day;
 
   constructor(private foodOrderService: FoodOrderService,
     private utils: Utils,

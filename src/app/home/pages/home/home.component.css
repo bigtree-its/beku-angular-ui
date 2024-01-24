@@ -263,42 +263,37 @@
     transform: scaleX(-1);
 }
 
-.typewriter h1 {
+.scroller {
+    height: 4.2em;
+    line-height: 4.2em;
+    position: relative;
     overflow: hidden;
-    /* Ensures the content is not revealed until the animation */
-    border-right: .15em solid orange;
-    /* The typwriter cursor */
-    white-space: nowrap;
-    /* Keeps the content on a single line */
-    margin: 0 auto;
-    /* Gives that scrolling effect as the typing happens */
-    letter-spacing: .15em;
-    /* Adjust as needed */
-    animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+    width: 100%;
+    border: 1px solid salmon;
+    display: flex;
+    justify-content: center;
 }
 
-
-/* The typing effect */
-
-@keyframes typing {
-    from {
-        width: 0
-    }
-    to {
-        width: 100%
-    }
+.scroller>span {
+    position: absolute;
+    top: 0;
+    animation: slide 5s infinite;
+    font-weight: bold;
+    font-size: 30px;
 }
 
-
-/* The typewriter cursor effect */
-
-@keyframes blink-caret {
-    from,
-    to {
-        border-color: transparent
+@keyframes slide {
+    0% {
+        top: 0;
+    }
+    25% {
+        top: -2.5em;
     }
     50% {
-        border-color: orange;
+        top: -5.0em;
+    }
+    75% {
+        top: -9.6em;
     }
 }
 

@@ -24,6 +24,7 @@ import { Constants } from './constants';
   providedIn: 'root',
 })
 export class FoodOrderService {
+  
   userSession: UserSession;
   ipAddress: any;
   supplier: LocalChef;
@@ -207,6 +208,11 @@ export class FoodOrderService {
     console.log('Adding item to order '+ JSON.stringify(this.customerOrder))
     if (this.customerOrder === null || this.customerOrder === undefined) {
       this.getData();
+    }
+    if (this.customerOrder != null && this.customerOrder !== undefined){
+      if ( this.customerOrder.supplier._id !== this.supplier._id){
+
+      }
     }
     if (this.customerOrder != null && this.customerOrder !== undefined && this.customerOrder.items === null) {
       this.customerOrder.items = [];
@@ -469,5 +475,9 @@ export class FoodOrderService {
       this.customerOrder = obj.constructor.name === 'Array' ? obj[0] : obj;
       this.orderSubject$.next(this.customerOrder);
     }
+  }
+
+  destroy() {
+    this.purgeData();
   }
 }

@@ -30,7 +30,6 @@ export class HeaderComponent {
     this.orderService.getData();
     this.orderService.orderSubject$.subscribe({
       next: (value) => {
-        console.log('Order emitted '+ JSON.stringify(value ))
         var customerOrder: CustomerOrder = value;
         this.extractData(customerOrder);
       },
@@ -42,7 +41,6 @@ export class HeaderComponent {
     this.accountService.getData();
     this.accountService.loginSession$.subscribe({
       next: (value) => {
-        console.log('User subscribed '+ JSON.stringify(value))
         var user: User = value;
         this.extractUser(user);
       },

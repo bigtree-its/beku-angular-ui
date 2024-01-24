@@ -66,7 +66,7 @@
                     <span *ngIf="order != null" style="font-size: 20px;">{{order.total | currency:
                         'GBP'}}</span>
                 </div>
-                <div class="cart-chef" *ngIf="order !== null && order.supplier !== null">
+                <div class="cart-chef" *ngIf="order !== null && order !== undefined && order.supplier !== null">
                     <span style="font-weight: 500;font-size: 16px;padding-right: 10px;">{{order.supplier.name}}</span>
                     <span style="padding-right: 10px;">{{order.supplier.address.addressLine1}},</span>
                     <span>{{order.supplier.address.city}}, {{order.supplier.address.postcode}}</span>
