@@ -1,14 +1,17 @@
 <div class="page">
-    <div class="page-header">
-        <div class="page-header-icon" (click)="goback()">
-            <img src="/assets/icons/left-arrow.png" loading="lazy" height="20px" width="20px">
+    <div class="page-body">
+        <div class="page-header">
+            <div class="page-header-icon" (click)="goback()">
+                <img src="/assets/icons/left-arrow.png" loading="lazy" height="20px" width="20px">
+            </div>
+            <span style="padding: 0 10px;">YOUR BASKET</span>
         </div>
-        <span style="padding: 0 10px;">YOUR BASKET</span>
-    </div>
-    <div class="page-container">
-        <div *ngIf="order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0; then thenBlock else elseBlock">
+        <div class="page-container">
+            <div *ngIf="order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0; then thenBlock else elseBlock">
+            </div>
         </div>
     </div>
+   
 </div>
 
 <ng-template #elseBlock>

@@ -13,9 +13,9 @@
 }
 
 .page-left {
-    width: 65%;
+    width: 100%;
     height: 100vh;
-    background-color: var(--light-grey);
+    /* background-color: var(--light-grey); */
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -24,10 +24,7 @@
 }
 
 .page-right {
-    width: 35%;
-    background-color: var(--grey);
-    display: flex;
-    overflow-y: auto;
+    display: none;
 }
 
 .cart {
@@ -47,7 +44,7 @@
     justify-content: space-between;
     height: 40px;
     max-height: 40px;
-    background-color: var(--grey);
+    /* background-color: var(--grey); */
 }
 
 .cart-chef {
@@ -299,6 +296,22 @@
 /* Desktop/laptop */
 
 @media (min-width: 900px) {
+    .page-left {
+        width: 65%;
+        height: 100vh;
+        /* background-color: var(--light-grey); */
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        align-items: center;
+        overflow: auto;
+    }
+    .page-right{
+        width: 35%;
+        /* background-color: var(--grey); */
+        display: flex;
+        overflow-y: auto;
+    }
     .chef-profile-image-div {
         display: block;
     }
