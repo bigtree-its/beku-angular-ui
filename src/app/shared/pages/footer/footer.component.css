@@ -1,19 +1,19 @@
-.footer {
+.page {
     height: 100px;
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     padding: 20px;
-    background-color: blanchedalmond;
 }
 
 .copyright-div {
     display: flex;
     align-items: flex-end;
+    align-items: center;
 }
 
 .copyright-div>img {
-    height: 20px;
-    width: 20px;
+    height: 10px;
+    width: 10px;
 }
