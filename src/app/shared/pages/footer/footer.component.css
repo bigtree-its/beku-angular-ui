@@ -2,18 +2,27 @@
     height: 100px;
     margin-top: 20px;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    flex-direction: row;
+    align-items: center;
     padding: 20px;
+    background-color: #333;
+    color: #fff;
 }
 
 .copyright-div {
     display: flex;
-    align-items: flex-end;
     align-items: center;
+    margin-right: 10px;
 }
 
 .copyright-div>img {
     height: 10px;
     width: 10px;
+}
+.contat-us{
+
+}
+.contact-us:hover{
+    cursor: pointer;
+    color: chartreuse;
 }

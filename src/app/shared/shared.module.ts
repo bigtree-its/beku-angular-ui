@@ -7,6 +7,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from '../home';
 import { FooterComponent } from './pages/footer/footer.component';
 import { PopupComponent } from './pages/popup/popup.component';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { faCopyright, fas } from '@fortawesome/free-solid-svg-icons';
+
 const routes: Routes = [
   { path: '', component: HomeComponent }
 ]
@@ -23,6 +26,7 @@ const routes: Routes = [
     CommonModule,
     NgbDropdownModule,
     NgbDatepickerModule,
+    FontAwesomeModule,
     RouterModule.forChild(routes)
   ],
   exports: [
@@ -31,4 +35,9 @@ const routes: Routes = [
     OrderItemComponent
   ]
 })
-export class SharedModule { }
+export class SharedModule { 
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas);
+    library.addIcons(faCopyright);
+  }
+}

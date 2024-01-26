@@ -25,3 +25,10 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+# Dependencines
+
+### How did I install Font Awsome.
+Current NG Version is : 16
+The compatible Font Awsome version is 0.13.x
+Command: ng add @fortawesome/angular-fontawesome@0.13.x

@@ -11,6 +11,7 @@ import { OrderModule } from './order';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { AuthModule } from './auth';
 import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
     OrderModule,
     FormsModule,
     NgbModule,
-    NgbDropdownModule
+    NgbDropdownModule,
+    FontAwesomeModule
   ],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

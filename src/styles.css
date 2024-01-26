@@ -129,6 +129,12 @@ body {
 select {
     width: 100%;
 }
+.border{
+    border: 1px solid #333;
+}
+.w-half-screen{
+    width: 50%;
+}
 
 .footer {
     position: fixed;

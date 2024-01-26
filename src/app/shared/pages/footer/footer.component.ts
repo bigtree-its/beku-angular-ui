@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { faCopyright } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-footer',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent {
+  faCopyright = faCopyright;
 
 }
