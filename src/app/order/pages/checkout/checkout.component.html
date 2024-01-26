@@ -2,19 +2,23 @@
 
 
 <div class="page">
-    <div class="content">
-        <div class="left-content">
-            <div class="page-header">
-                <div class="page-header-icon" (click)="goback()">
-                    <img src="/assets/icons/left-arrow.png" loading="lazy" height="20px" width="20px">
-                </div>
-                <span style="padding: 0 10px;">CHECKOUT</span>
-            </div>
+    <div class="page-header">
+        <div class="page-header-icon" (click)="goback()">
+            <img src="/assets/icons/left-arrow.png" loading="lazy" height="20px" width="20px">
         </div>
-        <div class="right-content">
+        <span style="padding: 0 10px;">CHECKOUT</span>
+    </div>
+    <div class="flex-row-space-between">
+        <div class="left-content">
+            <div style=" height: 100%;width: 100%;padding: 30px;">
+                <img src="/assets/images/food.jpeg" style="object-fit: cover;max-height: 100%;max-width: 100%;">
+            </div>
+
+        </div>
+        <div style="height: 500px;flex-grow: 1;display: flex;flex-direction: column;max-width: 480px;min-width: 480px;">
             <div style="height: 40px;border-bottom: 1px solid #333;text-align: center;line-height: 40px;">{{divHeader}}</div>
 
-            <div *ngIf="showCustomerDetailsSection" class="right-content-data">
+            <div *ngIf="showCustomerDetailsSection" class="flex-column m-2">
                 <div class="flex-column mb-3">
                     <label for="customerName">Your name on order (for when you collect)<small
                             style="color: red;">**</small></label>
@@ -29,22 +33,22 @@
                     <input class="fb-input" type="email" name="customerEmail" tabindex="2" autocomplete="off" value="" [(ngModel)]="customerEmail" #ctrl="ngModel" required="true">
                 </div>
             </div>
-            <div *ngIf="showServiceModeSection" class="right-content-data">
-                <div class="delivery-mode-container" style="margin-bottom: 30px;">
-                    <button style="display: inline-block;" class="service-mode-option" (click)="selectPickup()" [class.service-mode-option-selected]="serviceMode==='COLLECTION'"><img src="/assets/icons/bike.png" width="20" height="20" class="mr-1">Collection</button>
-                    <button style="display: inline-block;" class="service-mode-option" (click)="selectDelivery()" [class.service-mode-option-selected]="serviceMode==='DELIVERY'" [disabled]="!chef.doDelivery"><img src="/assets/icons/shopping-basket.png" width="20" height="20" class="mr-1">Delivery</button>
+            <div *ngIf="showServiceModeSection" class="flex-column m-2">
+                <div style="margin-bottom: 30px;background-color: #efedea;display: flex;height: 50px;justify-content: space-around;margin: 8px 0 16px;padding: 3px;">
+                    <button class="service-mode" (click)="selectPickup()" [class.service-mode-option-selected]="serviceMode==='COLLECTION'"><img src="/assets/icons/bike.png" width="20" height="20" class="mr-1">Collection</button>
+                    <button class="service-mode" (click)="selectDelivery()" [class.service-mode-option-selected]="serviceMode==='DELIVERY'" [disabled]="!chef.doDelivery"><img src="/assets/icons/shopping-basket.png" width="20" height="20" class="mr-1">Delivery</button>
                 </div>
-                <div *ngIf="serviceMode === 'COLLECTION'" class="customer-address-section">
+                <div *ngIf="serviceMode === 'COLLECTION'" style=" padding: 1rem;display: flex;flex-direction: column;background-color: var(--light-background);flex-grow: 1;margin-right: 10px;">
                     <strong style="display: block;">Please collect at</strong>
                     <span style="display: block;">{{chef.address.addressLine1}}</span>
                     <span style="display: block;">{{chef.address.addressLine2}}</span>
                     <span style="display: block;">{{chef.address.city}}</span>
                     <span style="display: block;">{{chef.address.postcode}}</span>
                 </div>
-                <div class="customer-delivery-address-container" *ngIf="chef.doDelivery  && serviceMode === 'DELIVERY'">
+                <div style=" display: flex;flex-direction: column;min-width: 450px;" *ngIf="chef.doDelivery  && serviceMode === 'DELIVERY'">
                     <strong>Where should we send your order?</strong>
-                    <div class="customer-address-container" *ngIf="customerAddress !== null && customerAddress !== undefined && customerAddress.addressLine1 !== null && customerAddress.addressLine1 !== undefined &&  customerAddress.addressLine1.length > 0">
-                        <div class="customer-address-section">
+                    <div class="flex-row-space-between align-items-center" *ngIf="customerAddress !== null && customerAddress !== undefined && customerAddress.addressLine1 !== null && customerAddress.addressLine1 !== undefined &&  customerAddress.addressLine1.length > 0">
+                        <div style=" padding: 1rem;display: flex;flex-direction: column;background-color: var(--light-background);flex-grow: 1;margin-right: 10px;">
                             <span *ngIf="customerAddress.addressLine1 !== undefined &&  customerAddress.addressLine1.length > 0">{{
                                 customerAddress.addressLine1
                                 }}</span>
@@ -66,7 +70,7 @@
                         <button class="n-button" (click)="findAddress()" style="margin-right: 8px;">Find</button>
                     </div>
                     <div *ngIf="postcodeAddressList !== undefined && postcodeAddressList.length > 0 && !addressSelected">
-                        <div class="postcode-results-container">
+                        <div style="border: 1px solid var(--light-border);overflow-y: auto;height: 100px;margin-top: 5px;padding: 5px;">
                             <div class="address-item" *ngFor="let add of postcodeAddressList" (click)="onSelectDeliveryAddress(add)">
                                 <span> {{add.StreetAddress }}, {{add.Place}}</span>
                             </div>
@@ -75,16 +79,16 @@
                 </div>
 
             </div>
-            <div *ngIf="showItemsSection" class="right-content-data">
+            <div *ngIf="showItemsSection" class="flex-column m-2">
                 <div style="margin-bottom: 6px;">
                     <label for="notesToChef">Notes to chef</label>
                     <input class="fb-input" type="text" name="notesToChef" tabindex="2" autocomplete="off" value="" [(ngModel)]="notesToChef" #ctrl="ngModel" required="true">
                 </div>
-                <div class="items-container" *ngIf="order !== null && order !== undefined">
+                <div style="display: flex;flex-direction: column;height: 380px;overflow: auto;padding-bottom: 10px;" *ngIf="order !== null && order !== undefined">
                     <app-order-item *ngFor="let item of order.items" [item]="item"></app-order-item>
                 </div>
             </div>
-            <div *ngIf="showPaymentSection" class="right-content-data">
+            <div *ngIf="showPaymentSection" class="flex-column m-2">
                 <div class="flex-row-space-between">
                     <strong>Subtotal</strong>
                     <strong>{{order.subTotal| currency: 'GBP'}}</strong>
@@ -122,15 +126,17 @@
                     <img src="/assets/icons/secure-stripe-payment-logo.png" class="stripe-logo" />
                 </div>
             </div>
+            <div class="footer flex-row space-between align-items-center p-1 h-5">
+                <span *ngIf="showCustomerDetailsSection"></span>
+                <button *ngIf="!showCustomerDetailsSection" class="n-button n-w-100" (click)="previous()" tabindex="4" style="float: left;">Previous</button>
+                <strong class="order-total">{{order.total| currency: 'GBP'}}</strong>
+                <button *ngIf="!showPlaceOrderButton" class="n-button" style="min-width: 100px;float: right;max-width: 100%;" (click)="next()" tabindex="5">Next</button>
+                <button *ngIf="showPlaceOrderButton" class="n-button" style="min-width: 100px;float: right;" (click)="placeOrder(stripeContent)" tabindex="5">Proceed to Pay</button>
+            </div>
         </div>
+
     </div>
-    <div class="footer flex-row space-between">
-        <span *ngIf="showCustomerDetailsSection"></span>
-        <button *ngIf="!showCustomerDetailsSection" class="n-button n-w-100" (click)="previous()" tabindex="4" style="float: left;">Previous</button>
-        <strong style="font-size: 30px;">{{order.total| currency: 'GBP'}}</strong>
-        <button *ngIf="!showPlaceOrderButton" class="n-button" style="min-width: 100px;float: right;max-width: 100%;" (click)="next()" tabindex="5">Next</button>
-        <button *ngIf="showPlaceOrderButton" class="n-button" style="min-width: 100px;float: right;" (click)="placeOrder(stripeContent)" tabindex="5">Proceed to Pay</button>
-    </div>
+
 </div>
 
 
@@ -140,7 +146,7 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <div class="items-container">
+        <div style="display: flex;flex-direction: column;height: 380px;overflow: auto;padding-bottom: 10px;">
             <div *ngIf="order !== null && order !== undefined">
                 <app-order-item *ngFor="let item of order.items" [item]="item"></app-order-item>
             </div>

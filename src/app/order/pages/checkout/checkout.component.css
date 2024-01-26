@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
 .page {
     display: flex;
     flex-direction: column;
@@ -10,14 +11,15 @@
 .page-header {
     display: flex;
     align-items: center;
-    background-color: var(--light-grey);
     height: 40px;
+    font-size: 15px;
     font-family: "Julius Sans One", sans-serif;
-    width: 30%;
+    font-weight: 200;
+    margin-left: 10px;
 }
 
 .page-header-icon {
-    background-color: var(--light-background);
+    background-color: var(--yellow);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,120 +37,21 @@
     width: 20px;
 }
 
-.content {
-    display: flex;
-    justify-content: space-between;
-}
-
 .left-content {
     display: none;
 }
 
-.right-content {
-    height: 500px;
+.service-mode {
+    display: inline-block;
     flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    max-width: 480px;
-}
-
-.right-content-data {
-    margin: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-.main-container {
-    display: flex;
-    justify-content: space-between;
-    margin: 0 20px;
-    overflow-y: none;
-    height: 500px;
-}
-
-.footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #fff;
-    z-index: 99;
-    height: 50px;
-    padding: 10px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.left-container {
-    display: none;
-}
-
-.right-container {
-    flex-grow: 1;
-    border: 1px solid #1d32a7;
-    max-height: 500px;
-    overflow-y: auto;
-    align-items: start;
-}
-
-.data-section {
-    min-width: 500px;
-    max-height: 450px;
-    border: 1px solid #921d1d;
-    margin-bottom: 70px;
-}
-
-.delivery-mode-container {
-    background-color: #efedea;
-    display: flex;
-    height: 50px;
-    justify-content: space-around;
-    margin: 8px 0 16px;
-    padding: 3px;
-}
-
-.delivery-mode-container>button {
-    flex-grow: 1;
-}
-
-.service-mode-option {
     border: none;
     padding: 5px 10px;
     background: transparent;
 }
 
 .service-mode-option-selected {
-    background: var(--yellow);
+    background-color: var(--yellow);
     box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
-}
-
-.customer-details-container {
-    display: flex;
-    flex-direction: column;
-    min-width: 450px;
-}
-
-.customer-delivery-address-container {
-    display: flex;
-    flex-direction: column;
-    min-width: 450px;
-}
-
-.customer-address-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.customer-address-section {
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--light-background);
-    flex-grow: 1;
-    margin-right: 10px;
 }
 
 .postcode-lookup-container {
@@ -162,82 +65,6 @@
     line-height: 30px;
 }
 
-.postcode-results-container {
-    border: 1px solid var(--light-border);
-    overflow-y: auto;
-    height: 100px;
-    margin-top: 5px;
-    padding: 5px;
-}
-
-.order-details-container {
-    display: flex;
-    flex-direction: column;
-    min-width: 450px;
-    border-left: 5px dotted #eee;
-    padding: 10px;
-}
-
-.order-details-header,
-.customer-details-header {
-    display: flex;
-    flex-direction: column;
-    min-width: 450px;
-    border-left: 5px dotted #eee;
-    font-weight: 700;
-    padding: 10px;
-}
-
-.order-details-header:hover {
-    background-color: var(--warning);
-    cursor: pointer;
-}
-
-.chef-name {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-.chef-name:hover {
-    cursor: pointer;
-}
-
-.chef-info-container {
-    display: flex;
-    flex-flow: row;
-}
-
-.accordian-container {
-    min-width: 400px;
-    max-width: 1100px;
-}
-
-.items-container {
-    display: flex;
-    flex-direction: column;
-    height: 380px;
-    overflow: auto;
-    padding-bottom: 10px;
-}
-
-.checkout-button-container {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: aquamarine;
-}
-
-.btn-selected {
-    background-color: #eee;
-}
-
-.msg {
-    /* display: block; */
-    margin-top: 8px;
-    padding: 8px 12px;
-    border: 1px solid var(--border);
-}
-
 .address-item {
     padding: 0 6px;
 }
@@ -247,19 +74,9 @@
     cursor: pointer;
 }
 
-.scroll-left {
-    margin: 10px;
-    height: 35px;
-    width: 35px;
-    border-radius: 50%;
-    align-items: center;
-    padding: 10px;
-    background-color: transparent;
-}
-
-.scroll-left:hover {
-    cursor: pointer;
-    background-color: var(--gd_g);
+.order-total {
+    font-size: 30px;
+    font-family: " Poiret One ", sans-serif;
 }
 
 @media (min-width: 700px) {
@@ -269,41 +86,7 @@
     }
     .left-content {
         display: flex;
-        background-color: var(--grey);
         flex-grow: 1;
         margin-left: 20px;
     }
-    .right-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 90vh;
-    }
-    .left-img-div {
-        padding: 20px;
-        height: 100%;
-        width: 100%;
-        position: relative;
-        right: 0;
-    }
-    .left-img {
-        background-repeat: no-repeat;
-        object-fit: contain;
-        height: 100%;
-        width: 100%;
-        float: right;
-        border-radius: 20px;
-    }
-    /* .left img {
-        display: block;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        min-height: 100%;
-        min-width: 100%;
-        transform: translate(-50%, -50%);
-        object-fit: contain;
-        height: 100vh;
-    } */
 }

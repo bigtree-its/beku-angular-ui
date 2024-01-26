@@ -1,22 +1,17 @@
 .page {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     margin-top: 60px;
     height: 100vh;
 }
 
-.cuisines-container {
-    display: flex;
-    overflow-x: auto;
-    padding: 10px;
-    overflow: -moz-scrollbars-none;
+.cuisines-div {
+    display: none;
 }
 
 .cuisine {
     display: flex;
     flex-direction: column;
-    margin: 5px;
     padding: 10px;
 }
 
@@ -26,8 +21,8 @@
 }
 
 .cuisine-logo {
-    width: 120px;
-    height: 90px;
+    width: 100px;
+    height: 70px;
     object-fit: cover;
 }
 
@@ -39,13 +34,18 @@
     border: 2px solid var(--blue);
 }
 
+.location-div {
+    display: flex;
+    justify-content: center;
+}
+
 .location-container {
     display: flex;
     justify-content: space-between;
     padding: 10px 20px;
-    background-color: #e3e9ed;
-    margin: 5px 10px;
     max-width: 450px;
+    min-width: 450px;
+    background-color: var(--light-grey);
 }
 
 .change-area {
@@ -57,10 +57,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-}
-
-.dish-container {
-    display: none;
 }
 
 .chef-container {
@@ -119,6 +115,30 @@
     text-transform: lowercase;
 }
 
+.footer-div {
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    margin-top: 50px;
+    padding-bottom: 10px;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.copyright-div {
+    display: flex;
+    align-items: center;
+}
+
+.copyright-div>img {
+    height: 10px;
+    width: 10px;
+}
+
 
 /* Desktop */
 
@@ -129,24 +149,22 @@
         padding-bottom: 50px;
         flex-wrap: wrap;
         gap: 0.5rem;
-        width: 80%;
+        width: 75%;
     }
-    .dish-container {
+    .cuisines-div {
         display: flex;
         flex-direction: column;
+        width: 25%;
+    }
+    .cuisines-list-div {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
         padding: 10px;
-        width: 20%;
-        overflow: hidden;
-        height: auto;
+        max-height: 500px;
+        overflow-y: auto;
     }
     .location-container {
         display: none;
-    }
-    .dish {
-        border: 1px solid #e3e9ed;
-        border-radius: 7px;
-        margin: 5px;
-        text-align: center;
-        padding: 5px;
     }
 }

@@ -161,6 +161,8 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
       this.order = theOrder;
       if (theOrder !== null && theOrder !== undefined) {
         if ( theOrder.supplier._id !== this.supplierId){
+          console.info('Supplier: '+ this.supplierId)
+          console.info('Supplier On Order: '+ theOrder.supplier._id)
           console.info('Chef changed. Destroying previous order')
           this.orderService.destroy();
         }else{

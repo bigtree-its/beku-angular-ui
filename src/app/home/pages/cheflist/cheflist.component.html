@@ -1,21 +1,23 @@
 <div class="page">
-    <div class="cuisines-container">
-        <div *ngFor="let cuisine of cuisines" class="cuisine" (click)="onSelectCuisine(cuisine)" [class.selectedCuisine]="isSelectedCuisine(cuisine)">
-            <img src={{cuisine.logo}} class="cuisine-logo" height="90px" width="120px">
-            <span>{{cuisine.name}}</span>
+    <div class="location-div">
+        <div class="location-container" *ngIf="serviceLocation != null && serviceLocation !== undefined">
+            <span>{{serviceLocation.name}}, {{serviceLocation.city}}</span>
+            <span class="change-area" routerLink="/">Change</span>
         </div>
     </div>
-    <div class="location-container" *ngIf="serviceLocation != null && serviceLocation !== undefined">
-        <span>{{serviceLocation.name}}, {{serviceLocation.city}}</span>
-        <span class="change-area" routerLink="/">Change</span>
-    </div>
+
     <div class="container-div">
-        <div class="dish-container">
-            <span style="font-weight: 900;padding: 10px 0;">Popular Dishes</span>
-            <div *ngFor="let dish of dishes" class="dish">
-                <span>{{dish.name}}</span>
+        <div class="cuisines-div">
+            <span style="font-weight: 900;padding: 10px 20px;">Popular Cuisines</span>
+            <div class="cuisines-list-div">
+                <div *ngFor="let cuisine of cuisines" class="cuisine" (click)="onSelectCuisine(cuisine)" [class.selectedCuisine]="isSelectedCuisine(cuisine)">
+                    <img src={{cuisine.logo}} class="cuisine-logo" height="90px" width="120px">
+                    <span>{{cuisine.name}}</span>
+                </div>
             </div>
+
         </div>
+
         <div class="chef-container">
             <!-- <div class="chef-card" *ngFor="let chef of filteredChefs ">
                 <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg">
@@ -59,6 +61,17 @@
                         <span>{{chef.rating}}</span>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-div">
+        <div class="footer-container">
+            <span>For any support or help you can contact us</span>
+            <span>customersupport.bigtree@gmail.com</span>
+            <div class="copyright-div">
+                <img src="/assets/icons/copyright.png" class="copyright-logo" />
+                <span>2024 Thadka</span>
             </div>
         </div>
     </div>

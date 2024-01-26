@@ -45,7 +45,6 @@ export class CheflistComponent implements OnDestroy{
     private locationService: LocationService,
     private utils: Utils,
     private cuisinesService: CuisinesService,
-    private dishService: DishService,
     private router: Router) {
   }
 
@@ -85,20 +84,24 @@ export class CheflistComponent implements OnDestroy{
       }
     });
 
-    let observable = this.dishService.getDishes()
-    observable.pipe(takeUntil(this.destroy$)).subscribe({
-      next: (data) => {
-        console.log('Retrieved dishes from server')
-        this.dishes = data;
-      },
-      error: (err) => {
-        console.error('Errors when loading Dishes'+ JSON.stringify(err))
-        this.errors = err;
-        this.errorMessage = err.error.detail;
-      },
-    });
+    // this.loadDishes();
   }
 
+
+  private loadDishes() {
+    // let observable = this.dishService.getDishes();
+    // observable.pipe(takeUntil(this.destroy$)).subscribe({
+    //   next: (data) => {
+    //     console.log('Retrieved dishes from server');
+    //     this.dishes = data;
+    //   },
+    //   error: (err) => {
+    //     console.error('Errors when loading Dishes' + JSON.stringify(err));
+    //     this.errors = err;
+    //     this.errorMessage = err.error.detail;
+    //   },
+    // });
+  }
 
   onSelectCuisine(c: Cuisine) {
     console.log('You clicked '+ JSON.stringify(c));

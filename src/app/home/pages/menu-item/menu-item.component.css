@@ -2,7 +2,7 @@
     display: flex;
     gap: 1rem;
     width: 500px;
-    background-color: var(--light-background);
+    background-color: var(--light-grey);
     border: 1px solid #efedea;
     margin: 5px 0;
     padding: 10px;

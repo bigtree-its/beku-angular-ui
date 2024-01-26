@@ -5,7 +5,8 @@
     margin-top: 60px;
     height: 100vh;
 }
-.page-body{
+
+.page-body {
     display: flex;
     flex-direction: column;
     width: 480px;
@@ -19,11 +20,10 @@
     font-family: "Julius Sans One", sans-serif;
     font-weight: 200;
     margin-left: 10px;
-    background-color: var(--grey);
 }
 
 .page-header-icon {
-    background-color: var(--light-background);
+    background-color: var(--yellow);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -65,7 +65,7 @@
 
 .checkout-button:hover {
     cursor: pointer;
-    background-color: chartreuse;
+    background-color: var(--green);
 }
 
 .content-body {
