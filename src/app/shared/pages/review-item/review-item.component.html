@@ -1,0 +1,15 @@
+<div class="flex-column">
+    <div class="d-flex flex-start" style="padding: 10px 10px 0 10px;">
+        <fa-icon [icon]="faStar" [ngStyle]="{'background-color': review.rating > 0  ? 'var(--yellow)' :  'var(--grey)'}"></fa-icon>
+        <fa-icon [icon]="faStar" [ngStyle]="{'background-color': review.rating > 1  ? 'var(--yellow)' :  'var(--grey)'}"></fa-icon>
+        <fa-icon [icon]="faStar" [ngStyle]="{'background-color': review.rating > 2  ? 'var(--yellow)' :  'var(--grey)'}"></fa-icon>
+        <fa-icon [icon]="faStar" [ngStyle]="{'background-color': review.rating > 3  ? 'var(--yellow)' :  'var(--grey)'}"></fa-icon>
+        <fa-icon [icon]="faStar" [ngStyle]="{'background-color': review.rating > 4  ? 'var(--yellow)' :  'var(--grey)'}"></fa-icon>
+    </div>
+    <div class="flex-row-space-between">
+        <span>{{review.customer.name}}</span>
+        <span>{{review.date  | date : 'EE d LLL'}}</span>
+    </div>
+    <span>{{review.title}}</span>
+    <span>{{review.comment}}</span>
+</div>

@@ -17,10 +17,12 @@ import {
   LocalChef,
   Menu,
 } from 'src/app/model/localchef';
+import { Review } from 'src/app/model/review';
 import { ChefService } from 'src/app/services/chef.service';
 import { ContextService } from 'src/app/services/context.service';
 import { DataService } from 'src/app/services/data.service';
 import { FoodOrderService } from 'src/app/services/food-order.service';
+import { ReviewService } from 'src/app/services/review.service';
 import { Utils } from 'src/app/services/utils';
 
 @Component({
@@ -96,12 +98,13 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
   collections: Collection[];
   activeLayout: string = "Menu";
   supplierId: any;
+  reviews: Review[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private orderService: FoodOrderService,
     private chefService: ChefService,
-    private contextService: ContextService,
+    private reviewService: ReviewService,
     private _location: Location,
     private utils: Utils
   ) {}
@@ -147,6 +150,7 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
           this.chef = data;
           this.fetchItems(this.chef._id);
           this.fetchCalendars(this.chef._id);
+          this.fetchReviews(this.chef._id);
         },
         error: (err) => {
           console.error('Errors when getting chef from server. '+ JSON.stringify(err));
@@ -169,6 +173,12 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
           this.cartTotal = theOrder.total;
         }
       }
+    });
+  }
+  fetchReviews(supplierId: string) {
+    this.reviewService.getReviews(supplierId).subscribe((reviews: Review[]) => {
+      this.reviews = reviews;
+      console.log('Reviews fetched: ' + this.reviews.length);
     });
   }
 

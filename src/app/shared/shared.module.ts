@@ -9,6 +9,7 @@ import { FooterComponent } from './pages/footer/footer.component';
 import { PopupComponent } from './pages/popup/popup.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faCopyright, fas } from '@fortawesome/free-solid-svg-icons';
+import { ReviewItemComponent } from './pages/review-item/review-item.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent }
@@ -20,7 +21,8 @@ const routes: Routes = [
     FooterComponent,
     OrderItemComponent,
     FooterComponent,
-    PopupComponent
+    PopupComponent,
+    ReviewItemComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ const routes: Routes = [
   exports: [
     HeaderComponent,
     FooterComponent,
-    OrderItemComponent
+    OrderItemComponent,
+    ReviewItemComponent
   ]
 })
 export class SharedModule { 

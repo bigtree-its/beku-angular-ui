@@ -9,6 +9,7 @@ export const environment = {
   ChefsUrl: 'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/chefs',
   CuisinesUrl: 'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/cuisines',
   DishesUrl: 'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/dishes',
+  ReviewsUrl: 'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/reviews',
   ServiceAreasUrl:
     'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/serviceareas',
   MenusUrl: 'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/menus',

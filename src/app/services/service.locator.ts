@@ -22,6 +22,7 @@ export class ServiceLocator {
   RegisterUrl: string;
   PasswordResetInitiateUrl: string;
   PasswordResetSubmitUrl: string;
+  ReviewsUrl: string;
 
   constructor() {
     this.collectionsUrl = environment.CollectionsUrl;
@@ -41,5 +42,6 @@ export class ServiceLocator {
     this.RegisterUrl = environment.RegisterUrl;
     this.PasswordResetInitiateUrl = environment.PasswordResetInitiateUrl;
     this.PasswordResetSubmitUrl = environment.PasswordResetSubmitUrl;
+    this.ReviewsUrl = environment.ReviewsUrl;
   }
 }

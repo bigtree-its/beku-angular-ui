@@ -53,20 +53,6 @@ export interface ApiResponse {
     message: string;
 }
 
-export class Review {
-    _id: string;
-    chefId: string;
-    customerName: string;
-    customerEmail: string;
-    title: string;
-    comment: string;
-    orderReference: string;
-    overAllRating: number;
-    quantityRating: number;
-    qualityRating: number;
-    hygieneRating: number;
-}
-
 export class Supplier {
     _id: string;
     name: string;
