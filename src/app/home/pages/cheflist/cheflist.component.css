@@ -72,13 +72,12 @@
     max-width: 450px;
     min-width: 450px;
     height: 200px;
-    border: 1px solid var(--grey);
+    background: var(--light-bg);
     margin: 10px;
 }
 
 .chef-card:hover {
     cursor: pointer;
-    border: 1px solid var(--black);
 }
 
 .chef-img-div {

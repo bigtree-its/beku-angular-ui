@@ -10,6 +10,7 @@ import { PopupComponent } from './pages/popup/popup.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faCopyright, fas } from '@fortawesome/free-solid-svg-icons';
 import { ReviewItemComponent } from './pages/review-item/review-item.component';
+import { DateAgoPipe } from '../pipes/date-ago.pipe';
 
 const routes: Routes = [
   { path: '', component: HomeComponent }
@@ -22,7 +23,8 @@ const routes: Routes = [
     OrderItemComponent,
     FooterComponent,
     PopupComponent,
-    ReviewItemComponent
+    ReviewItemComponent,
+    DateAgoPipe
   ],
   imports: [
     CommonModule,

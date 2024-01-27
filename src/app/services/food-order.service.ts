@@ -209,11 +209,6 @@ export class FoodOrderService {
     if (this.customerOrder === null || this.customerOrder === undefined) {
       this.getData();
     }
-    if (this.customerOrder != null && this.customerOrder !== undefined){
-      if ( this.customerOrder.supplier._id !== this.supplier._id){
-
-      }
-    }
     if (this.customerOrder != null && this.customerOrder !== undefined && this.customerOrder.items === null) {
       this.customerOrder.items = [];
     }

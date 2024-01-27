@@ -27,6 +27,7 @@
     --light-green: #eafbf2;
     --light-blue: #EBF5FF;
     --light-grey: #f0f0f0;
+    --light-bg: rgb(241, 242, 243);
     --happygreen: #dcfd52;
     --happygreen-light: #e8fc9c;
     --happygreen-dark: #c8e820;
@@ -129,10 +130,12 @@ body {
 select {
     width: 100%;
 }
-.border{
+
+.border {
     border: 1px solid #333;
 }
-.w-half-screen{
+
+.w-half-screen {
     width: 50%;
 }
 
