@@ -201,7 +201,7 @@
 <ng-template #reviewsLayout>
     <div class="flex-column">
         <div *ngIf="reviews !== null && reviews !== undefined &&  reviews.length > 0">
-            <app-review-item *ngFor="let r or reviews" [review]="r"></app-review-item>
+            <app-review-item *ngFor="let r of reviews" [review]="r"></app-review-item>
         </div>
         <div *ngIf="reviews === null || reviews === undefined ||  reviews.length === 0">
             <span>No Reviews Yet</span>
