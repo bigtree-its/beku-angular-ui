@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import {
   catchError,
   distinctUntilChanged,
@@ -43,7 +43,7 @@ export class AccountService {
     private readonly router: Router
   ) {}
 
-  isAuthenticated(): boolean {
+  isAuthenticated(): Observable<boolean> {
     console.log('Checking isAuthenticated');
     var s = this.jwtService.getIdToken();
     var found =
@@ -55,7 +55,7 @@ export class AccountService {
       console.error('User not authenticated.');
     }
     console.log('User found in storage : ' + found);
-    return found;
+    return of(found);
   }
 
   getCurrentUser(): User {

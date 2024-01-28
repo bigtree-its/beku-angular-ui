@@ -1,7 +1,7 @@
 <div class="page">
     <div class="container-div">
         <div class="left-container">
-            <div [routerLink]="['/']" routerLinkActive="router-link-active" class="logo">T</div><span style="margin-left: 5px;">heeni</span>
+            <div [routerLink]="['/']" routerLinkActive="router-link-active" class="logo">Open</div><span style="margin-left: 5px;"> Kitchen</span>
 
             <div class="location-container" *ngIf="serviceLocation != null && serviceLocation !== undefined">
                 <span class="location-slug" [routerLink]="['cooks']" [queryParams]="{location: serviceLocation.slug}">#{{serviceLocation.name}}, {{serviceLocation.city}}</span>

@@ -198,6 +198,10 @@
 
 <ng-template #reviewsLayout>
     <div class="flex-column">
+        <div class="flex-row">
+            <strong class="mr-2">Want to review ? </strong>
+            <button class="btn-g" [routerLink]="['/write_review']" [queryParams]="{chef: supplierId}">Write Review</button>
+        </div>
         <div *ngIf="reviews !== null && reviews !== undefined &&  reviews.length > 0">
             <app-review-item *ngFor="let r of reviews" [review]="r"></app-review-item>
         </div>

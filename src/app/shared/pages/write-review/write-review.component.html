@@ -1,0 +1,54 @@
+<div class="page">
+    <div class="page-main">
+        <div class="page-left w-half-screen">
+            <span *ngIf="chef !== null && chef !== undefined" style="font-size: 20px;">You are reviewing {{chef.kitchenName}} </span>
+            <div style="max-height: 100%;max-width: 100%;padding: 30px;">
+                <!-- <img src="/assets/images/food.jpeg" style="object-fit: cover;max-height: 100%;max-width: 100%;"> -->
+                <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg" style="object-fit: cover;max-height: 100%;max-width: 100%;">
+            </div>
+
+        </div>
+        <div class="flex-column align-items-center w-half-screen" id="contentDiv">
+            <div class="flex-column">
+                <span style="font-weight: 900;font-size: 30px;padding: 10px 0;">Write
+                    your review</span>
+                <div class="flex-row" style="padding: 10px 0;cursor: pointer;">
+                    <fa-icon (click)="setRating(1)" [icon]="faStar" [ngStyle]="{'color': rating > 0  ? 'var(--orange)' :  'var(--grey)'}" style="margin-right: 3px;"></fa-icon>
+                    <fa-icon (click)="setRating(2)" [icon]="faStar" [ngStyle]="{'color': rating > 1  ? 'var(--orange)' :  'var(--grey)'}" style="margin-right: 3px;"></fa-icon>
+                    <fa-icon (click)="setRating(3)" [icon]="faStar" [ngStyle]="{'color': rating > 2  ? 'var(--orange)' :  'var(--grey)'}" style="margin-right: 3px;"></fa-icon>
+                    <fa-icon (click)="setRating(4)" [icon]="faStar" [ngStyle]="{'color': rating > 3  ? 'var(--orange)' :  'var(--grey)'}" style="margin-right: 3px;"></fa-icon>
+                    <fa-icon (click)="setRating(5)" [icon]="faStar" [ngStyle]="{'color': rating > 4  ? 'var(--orange)' :  'var(--grey)'}"></fa-icon>
+                </div>
+
+                <div class="input-div" *ngIf="orderNotSupplied">
+                    <input class="_381fS" type="text" name="orderReference" id="orderReference" tabindex="1" autocomplete="off" value [(ngModel)]="orderReference" #ctrl="ngModel">
+                    <div class="_2EeI1 _26LFr"></div>
+                    <label class="_1Cvlf _2tL9P" for="orderReference">What's your order reference?</label>
+                </div>
+
+                <div class="input-div">
+                    <input class="_381fS" type="text" name="headline" id="headline" tabindex="1" autocomplete="off" value [(ngModel)]="headline" #ctrl="ngModel">
+                    <div class="_2EeI1 _26LFr"></div>
+                    <label class="_1Cvlf _2tL9P" for="headline">What's your thought on this?</label>
+                </div>
+                <div class="input-div">
+                    <input class="_381fS" type="text" name="comment" id="comment" tabindex="1" autocomplete="off" value [(ngModel)]="comment" #ctrl="ngModel">
+                    <div class="_2EeI1 _26LFr"></div>
+                    <label class="_1Cvlf _2tL9P" for="comment">What you like and dislike?</label>
+                </div>
+
+                <button class="big-black-btn mt-3" (click)="onSubmitReview()">Post your review</button>
+
+                <div *ngIf="errorMessage !== undefined" style="margin-top: 10px;font-weight: normal;text-align: center;display: block;background-color: rgb(241, 215, 215);color: #bc3737;padding: 20px;">
+                    <p>{{errorMessage}}</p>
+                </div>
+                <div *ngIf="loading">
+                    <span>Submitting....</span>
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

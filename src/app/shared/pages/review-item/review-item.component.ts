@@ -10,5 +10,6 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 export class ReviewItemComponent {
 
   faStar= faStar;
+  
   @Input() review: Review;
 }

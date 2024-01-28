@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './pages/header/header.component';
 import { OrderItemComponent } from './pages/order-item/order-item.component';
-import { NgbDropdownModule,NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule,NgbDatepickerModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from '../home';
 import { FooterComponent } from './pages/footer/footer.component';
@@ -11,9 +11,15 @@ import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontaweso
 import { faCopyright, fas } from '@fortawesome/free-solid-svg-icons';
 import { ReviewItemComponent } from './pages/review-item/review-item.component';
 import { DateAgoPipe } from '../pipes/date-ago.pipe';
+import { WriteReviewComponent } from './pages/write-review/write-review.component';
+import { AuthGuard } from '../services/auth-guard.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastComponent } from './pages/toast/toast.component';
+import { ToastContainerComponent } from './pages/toast-container/toast-container.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent }
+  { path: '', component: HomeComponent },
+  { path: 'write_review', component: WriteReviewComponent, canActivate: [AuthGuard] }
 ]
 
 @NgModule({
@@ -24,13 +30,19 @@ const routes: Routes = [
     FooterComponent,
     PopupComponent,
     ReviewItemComponent,
-    DateAgoPipe
+    DateAgoPipe,
+    WriteReviewComponent,
+    ToastComponent,
+    ToastContainerComponent
   ],
   imports: [
+    NgbToastModule,
     CommonModule,
     NgbDropdownModule,
     NgbDatepickerModule,
     FontAwesomeModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
   exports: [

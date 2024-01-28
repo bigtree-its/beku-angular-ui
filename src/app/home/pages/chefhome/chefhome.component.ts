@@ -6,7 +6,7 @@ import {
   OnDestroy,
   ViewChild,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { Day } from 'src/app/model/common-models';
 import {
@@ -106,6 +106,7 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
     private chefService: ChefService,
     private reviewService: ReviewService,
     private _location: Location,
+    private router: Router,
     private utils: Utils
   ) {}
 
@@ -174,6 +175,14 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
         }
       }
     });
+  }
+
+  writeReview(){
+    this.router
+    .navigate(['write_review'], {
+      queryParams: { chef: this.supplierId },
+    })
+    .then();
   }
   fetchReviews(supplierId: string) {
     this.reviewService.getReviews(supplierId).subscribe((reviews: Review[]) => {

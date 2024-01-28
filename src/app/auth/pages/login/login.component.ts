@@ -1,11 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NgIf } from '@angular/common';
-import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Utils } from 'src/app/helpers/utils';
 import { AccountService } from 'src/app/services/account.service';
 import { ContextService } from 'src/app/services/context.service';
-import { Subject, takeUntil, tap } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { Errors } from 'src/app/model/auth-model';
 
 @Component({
@@ -27,7 +25,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   errorMessage: any;
 
   constructor(
-    private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private utils: Utils,
