@@ -12,13 +12,14 @@ import { AuthInterceptor } from './services/auth.interceptor';
 import { AuthModule } from './auth';
 import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     HomeModule,
@@ -29,7 +30,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FormsModule,
     NgbModule,
     NgbDropdownModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000, // Time to close the toaster (in milliseconds)
+      positionClass: 'toast-top-right', // Toast position
+      closeButton: false, // Show close button
+      progressBar: false, // Show progress bar
+    }),
   ],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

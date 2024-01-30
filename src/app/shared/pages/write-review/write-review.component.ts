@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
@@ -10,6 +10,7 @@ import { Utils } from 'src/app/services/utils';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { ChefService } from 'src/app/services/chef.service';
 import { LocalChef } from 'src/app/model/localchef';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-write-review',
@@ -37,7 +38,9 @@ export class WriteReviewComponent implements OnInit, OnDestroy {
   orderNotSupplied: boolean;
   chefNotSupplied: boolean;
   customerNotLoggedIn: boolean;
-  chef: import("/Users/maan/projects/bigtree/project-beku/customer-app/src/app/model/localchef").LocalChef;
+  chef: LocalChef;
+
+  toasterService = inject(ToastService);
 
   constructor(
     private reviewService: ReviewService,
@@ -158,6 +161,7 @@ export class WriteReviewComponent implements OnInit, OnDestroy {
       next: () => {
         this.errorMessage = undefined;
         console.log('Review submitted');
+        this.toasterService.info('Your review has been submitted!');
         void this.router.navigate(['/']);
       },
       error: (err) => {

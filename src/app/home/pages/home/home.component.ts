@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cuisine, LocalChef } from 'src/app/model/localchef';
 import { ServiceLocation } from 'src/app/model/ServiceLocation';
@@ -22,6 +22,7 @@ export class HomeComponent {
   popularLocations: ServiceLocation[];
   cuisines: Cuisine[] = [];
   cuisineMap: Map<String, Cuisine> = new Map<String, Cuisine>();
+
 
   constructor(
     private locationService: LocationService,
@@ -62,7 +63,7 @@ export class HomeComponent {
         (error) => {
           console.log(
             'Popular Locations Lookup resulted an error.' +
-              JSON.stringify(error)
+            JSON.stringify(error)
           );
         }
       );
@@ -81,7 +82,7 @@ export class HomeComponent {
           this.showServiceLocations = true;
           console.log(
             'The service location List: ' +
-              JSON.stringify(this.serviceLocations)
+            JSON.stringify(this.serviceLocations)
           );
         },
         (error) => {
@@ -102,7 +103,7 @@ export class HomeComponent {
           this.showServiceLocations = true;
           console.log(
             'The service location List: ' +
-              JSON.stringify(this.showServiceLocations)
+            JSON.stringify(this.showServiceLocations)
           );
         },
         (error) => {
@@ -145,5 +146,5 @@ export class HomeComponent {
     this.lookupServiceLocation(this.serviceLocationSearchText);
   }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() { }
 }

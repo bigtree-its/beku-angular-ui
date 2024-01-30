@@ -19,8 +19,6 @@ import {
 } from 'src/app/model/localchef';
 import { Review } from 'src/app/model/review';
 import { ChefService } from 'src/app/services/chef.service';
-import { ContextService } from 'src/app/services/context.service';
-import { DataService } from 'src/app/services/data.service';
 import { FoodOrderService } from 'src/app/services/food-order.service';
 import { ReviewService } from 'src/app/services/review.service';
 import { Utils } from 'src/app/services/utils';

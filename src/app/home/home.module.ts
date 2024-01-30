@@ -5,7 +5,7 @@ import { CheflistComponent } from './pages/cheflist/cheflist.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared';
-import { NgbDropdownModule,NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule,NgbDatepickerModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { ChefHomeComponent } from './pages/chefhome/chefhome.component';
 import { MenuItemComponent } from './pages/menu-item/menu-item.component';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
@@ -43,6 +43,7 @@ const routes: Routes = [
     NgbDatepickerModule,
     NgbDropdownModule,
     NgbAccordionModule,
+    NgbToastModule,
     RouterModule.forChild(routes)
   ],
   // The HomeModule do not expose any services, hence we keep the providers array empty

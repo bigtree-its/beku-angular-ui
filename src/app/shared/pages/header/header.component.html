@@ -1,7 +1,7 @@
 <div class="page">
     <div class="container-div">
         <div class="left-container">
-            <div [routerLink]="['/']" routerLinkActive="router-link-active" class="logo">Open</div><span style="margin-left: 5px;"> Kitchen</span>
+            <div [routerLink]="['/']" routerLinkActive="router-link-active" class="logo">Open Kitchen</div>
 
             <div class="location-container" *ngIf="serviceLocation != null && serviceLocation !== undefined">
                 <span class="location-slug" [routerLink]="['cooks']" [queryParams]="{location: serviceLocation.slug}">#{{serviceLocation.name}}, {{serviceLocation.city}}</span>
@@ -15,7 +15,7 @@
                     <!-- {{user.firstName | slice:0:1}}{{user.lastName | slice:0:1}} -->
                     <img src="/assets/icons/user.png" height="20px" width="20px">
                 </button>
-                <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style="z-index: 9999;">
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                     <div ngbDropdownItem *ngIf="user !== null" class="flex-row justify-content-center align-items-center" style="background-color: var(--light-blue);">
                         <img src="/assets/icons/user.png" height="20px" width="20px">
                         <div class="flex-column" style="margin-left: 10px;">

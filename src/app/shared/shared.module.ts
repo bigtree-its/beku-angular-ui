@@ -14,8 +14,6 @@ import { DateAgoPipe } from '../pipes/date-ago.pipe';
 import { WriteReviewComponent } from './pages/write-review/write-review.component';
 import { AuthGuard } from '../services/auth-guard.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ToastComponent } from './pages/toast/toast.component';
-import { ToastContainerComponent } from './pages/toast-container/toast-container.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -31,9 +29,7 @@ const routes: Routes = [
     PopupComponent,
     ReviewItemComponent,
     DateAgoPipe,
-    WriteReviewComponent,
-    ToastComponent,
-    ToastContainerComponent
+    WriteReviewComponent
   ],
   imports: [
     NgbToastModule,

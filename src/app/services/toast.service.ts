@@ -1,24 +1,24 @@
-import { Injectable, TemplateRef } from '@angular/core';
-
-export interface Toast {
-	template: TemplateRef<any>;
-	classname?: string;
-	delay?: number;
-}
+import { Injectable, inject } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({ providedIn: 'root' })
 export class ToastService {
-	toasts: Toast[] = [];
 
-	show(toast: Toast) {
-		this.toasts.push(toast);
+	toastr = inject(ToastrService);
+
+	success(message: string, title?: string) {
+		this.toastr.success(message, title);
 	}
 
-	remove(toast: Toast) {
-		this.toasts = this.toasts.filter((t) => t !== toast);
+	error(message: string, title?: string) {
+		this.toastr.error(message, title);
 	}
 
-	clear() {
-		this.toasts.splice(0, this.toasts.length);
+	warning(message: string, title?: string) {
+		this.toastr.warning(message, title);
+	}
+
+	info(message: string, title?: string) {
+		this.toastr.info(message, title);
 	}
 }
