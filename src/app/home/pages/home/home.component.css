@@ -24,22 +24,26 @@
 }
 
 .hero-title {
-    font-family: "Cinzel", serif;
-    font-optical-sizing: auto;
-    /* font-style: normal; */
-    font-size: 25px;
-    color: #3C4043;
-    font-weight: 900;
-    margin: 20px 0;
+     /* font-family: "Cinzel", serif; */
+     font-optical-sizing: auto;
+     /* font-style: normal; */
+     font-size: 20px;
+     /* letter-spacing: -2px; */
+     line-height: 68px;
+     color: #3C4043;
+     padding: 20px;
+     font-weight: 500;
+     word-wrap: break-word;
 }
 
 .top-cuisines-data {
-    border: 1px solid #0be1d3;
+    border: 1px solid #333;
     line-height: 45px;
     text-align: center;
     height: 45px;
     padding: 0 25px;
     font-weight: 500;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
 .top-cuisines-data:hover {
@@ -48,14 +52,15 @@
 }
 
 .top-locations-data {
-    border: 1px solid var(--blue);
+    border: 1px solid #333;
     line-height: 45px;
     text-align: center;
     height: 45px;
     padding: 0 25px;
     font-weight: 500;
     border-radius: 7px;
-    /* box-shadow: 0.5rem 0.5rem black, -0.5rem -0.5rem #ccc; */
+    box-shadow: 0 0.25em 0 rgb(195, 198, 209);
+    /* box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; */
 }
 
 .top-locations-data:hover {
@@ -116,15 +121,16 @@
     }
 
     .hero-title {
-        font-family: "Cinzel", serif;
+        /* font-family: "Cinzel", serif; */
         font-optical-sizing: auto;
         /* font-style: normal; */
         font-size: 40px;
-        letter-spacing: -2px;
+        /* letter-spacing: -2px; */
         line-height: 68px;
         color: #3C4043;
         padding: 0 20px;
-        font-weight: 900;
+        font-weight: 500;
+        word-wrap: break-word;
     }
 
     .hero-img-div {

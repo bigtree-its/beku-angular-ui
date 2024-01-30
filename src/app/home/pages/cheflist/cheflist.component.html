@@ -22,7 +22,7 @@
             <!-- <div class="chef-card" *ngFor="let chef of filteredChefs ">
                 <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg">
             </div> -->
-            <div class="chef-card" *ngFor="let chef of filteredChefs " [routerLink]="[ '/cooks', chef._id] ">
+            <div class="chef-card border-navy-grey br-7" *ngFor="let chef of filteredChefs " [routerLink]="[ '/cooks', chef._id] ">
                 <div class="flex-row">
                     <div class="chef-img-div">
                         <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg" height="170px" width="150px">

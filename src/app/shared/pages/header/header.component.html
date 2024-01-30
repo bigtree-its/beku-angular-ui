@@ -1,39 +1,33 @@
 <div class="page">
     <div class="container-div">
         <div class="left-container">
-            <div [routerLink]="['/']" routerLinkActive="router-link-active" class="logo">Open Kitchen</div>
 
+            <fa-icon [icon]="faBars" (click)="toggleSideNav()" class="menu-icon material-icons"></fa-icon>
+
+            <!-- <div class="flex-row align-items-center" style="border: 1px solid red;padding: 1px;padding-left: 5px;">
+                <fa-icon [icon]="faKitchenSet" class="logo-icon"></fa-icon>
+                <div class="flex-column align-items-center" style="background-color:  red; color: #fff;">
+                    <div [routerLink]="['/']" routerLinkActive="router-link-active" class="logo">Open Kitchen</div>
+                    <small style="font-size: 8px;padding: 0 10px;">Home food from neighbourhood</small>
+                </div>
+            </div> -->
+            <fa-icon [icon]="faCircle" class="logo-icon"></fa-icon>
+            <div class="flex-column align-items-center" [routerLink]="['/']" routerLinkActive="router-link-active">
+                <div class="logo">Doodle</div>
+                <!-- <small class="bold">Kitchen</small> -->
+            </div>
+            
             <div class="location-container" *ngIf="serviceLocation != null && serviceLocation !== undefined">
-                <span class="location-slug" [routerLink]="['cooks']" [queryParams]="{location: serviceLocation.slug}">#{{serviceLocation.name}}, {{serviceLocation.city}}</span>
+                <span class="location-slug" [routerLink]="['cooks']"
+                    [queryParams]="{location: serviceLocation.slug}">#{{serviceLocation.name}},
+                    {{serviceLocation.city}}</span>
                 <span class="change-area" routerLink="/">Change</span>
             </div>
         </div>
         <div class="right-container">
-
-            <div ngbDropdown>
-                <button type="button" ngbDropdownToggle class="user-icon-button">
-                    <!-- {{user.firstName | slice:0:1}}{{user.lastName | slice:0:1}} -->
-                    <img src="/assets/icons/user.png" height="20px" width="20px">
-                </button>
-                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                    <div ngbDropdownItem *ngIf="user !== null" class="flex-row justify-content-center align-items-center" style="background-color: var(--light-blue);">
-                        <img src="/assets/icons/user.png" height="20px" width="20px">
-                        <div class="flex-column" style="margin-left: 10px;">
-                            <span>{{user.name}}</span>
-                            <span>{{user.email}}</span>
-                        </div>
-                    </div>
-                    <!-- <button ngbDropdownItem *ngIf="user !== null">{{user.email}}</button> -->
-                    <button ngbDropdownItem *ngIf="user !== null">Orders</button>
-                    <button ngbDropdownItem *ngIf="user === null" routerLink="/login">Sign In</button>
-                    <button ngbDropdownItem *ngIf="user === null" routerLink="/register">Sign Up</button>
-                    <div *ngIf="user !== null" class="dropdown-divider"></div>
-                    <button *ngIf="user !== null" type="button" ngbDropdownItem>Profile</button>
-                    <button *ngIf="user !== null" type="button" ngbDropdownItem (click)="logout()">Logout</button>
-                </div>
-            </div>
             <div class="cart-div" (click)="onClickBasket()">
-                <img src="/assets/icons/shopping-basket.png" height="20px" width="20px" style="margin: 0 1px;" [routerLink]="['/basket']">
+                <img src="/assets/icons/shopping-basket.png" height="20px" width="20px" style="margin: 0 1px;"
+                    [routerLink]="['/basket']">
                 <span class="cart-items-count">{{itemsCount}}</span>
             </div>
         </div>

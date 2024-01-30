@@ -29,13 +29,16 @@
                 <div class="input-div">
                     <input class="_381fS" type="text" name="headline" id="headline" tabindex="1" autocomplete="off" value [(ngModel)]="headline" #ctrl="ngModel">
                     <div class="_2EeI1 _26LFr"></div>
-                    <label class="_1Cvlf _2tL9P" for="headline">What's your thought on this?</label>
+                    <label class="_1Cvlf _2tL9P" for="headline">Headline</label>
                 </div>
-                <div class="input-div">
+                <span class="my-2">Whats your thoughts on this?</span>
+                <textarea name="comment" id="comment" value [(ngModel)]="comment" #ctrl="ngModel" style="height: 100px;"></textarea>
+                <!-- <div class="input-div" style="height: 100px;">
+                    <textarea name="comment" id="comment" value [(ngModel)]="comment" #ctrl="ngModel"></textarea>
                     <input class="_381fS" type="text" name="comment" id="comment" tabindex="1" autocomplete="off" value [(ngModel)]="comment" #ctrl="ngModel">
                     <div class="_2EeI1 _26LFr"></div>
                     <label class="_1Cvlf _2tL9P" for="comment">What you like and dislike?</label>
-                </div>
+                </div> -->
 
                 <button class="big-black-btn mt-3" (click)="onSubmitReview()">Post your review</button>
 

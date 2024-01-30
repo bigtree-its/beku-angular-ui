@@ -34,6 +34,8 @@ export class AccountService {
   public loginSession$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   user: User;
 
+  public redirectUrl: string = null;
+
   constructor(
     private http: HttpClient,
     private jwtService: JwtService,
@@ -82,6 +84,14 @@ export class AccountService {
       .pipe(
         tap((result) => {
           console.log('Login response ' + JSON.stringify(result));
+          if (this.redirectUrl) {
+            console.log('redirecting to '+ this.redirectUrl)
+            // this.router.navigate([this.redirectUrl]);
+            this.router.navigateByUrl(this.redirectUrl);
+            this.redirectUrl = null;
+          }else{
+            this.router.navigate(["/"])
+          }
           this.setUser(result);
         })
       );

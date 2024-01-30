@@ -129,17 +129,14 @@
                 </div>
                 <div class="footer flex-row space-between align-items-center p-1 h-5">
                     <span *ngIf="showCustomerDetailsSection"></span>
-                    <button *ngIf="!showCustomerDetailsSection" class="n-button n-w-100" (click)="previous()" tabindex="4" style="float: left;">Previous</button>
+                    <button *ngIf="!showCustomerDetailsSection" class="btn-ylw n-w-100" (click)="previous()" tabindex="4" style="float: left;">Previous</button>
                     <strong class="order-total">{{order.total| currency: 'GBP'}}</strong>
-                    <button *ngIf="!showPlaceOrderButton" class="n-button" style="min-width: 100px;float: right;max-width: 100%;" (click)="next()" tabindex="5">Next</button>
-                    <button *ngIf="showPlaceOrderButton" class="n-button" style="min-width: 100px;float: right;" (click)="placeOrder(stripeContent)" tabindex="5">Proceed to Pay</button>
+                    <button *ngIf="!showPlaceOrderButton" class="btn-blu" style="min-width: 100px;float: right;max-width: 100%;" (click)="next()" tabindex="5">Next</button>
+                    <button *ngIf="showPlaceOrderButton" class="btn-grn" style="min-width: 100px;float: right;" (click)="placeOrder(stripeContent)" tabindex="5">Proceed to Pay</button>
                 </div>
             </div>
         </div>
-        
-
     </div>
-
 </div>
 
 

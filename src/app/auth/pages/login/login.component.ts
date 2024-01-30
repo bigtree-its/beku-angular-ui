@@ -60,8 +60,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     observable.pipe(takeUntil(this.destroy$)).subscribe({
       next: () => {
         this.errorMessage = undefined;
-        console.log('Login success. Redirecting to home...')
-        void this.router.navigate(["/"])
       },
       error: (err) => {
         console.error('Errors from reset submit.'+ JSON.stringify(err))

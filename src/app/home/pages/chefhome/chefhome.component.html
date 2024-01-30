@@ -2,10 +2,10 @@
 
     <div class="page">
         <div class="page-left">
-            <div style=" width: 100%;
+            <div class="border" style=" width: 100%;
             min-width: 450px;
             height: 200px;
-            margin-top: 60px;display: flex;flex-direction: column;box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;background: var(--light-bg);">
+            margin-top: 60px;display: flex;flex-direction: column;">
                 <div class="flex-row">
                     <div style=" height: 170px;
                     width: 140px;">
@@ -16,7 +16,15 @@
                         max-width: 130px;">
                     </div>
                     <div class="flex-column gap-1" style="padding: 5px 10px;width: 100%;">
-                        <span class="chef-name">{{chef.kitchenName}}</span>
+                        <div class="flex-row align-items-center py-1">
+                            <span class="chef-name mr-2">{{chef.kitchenName}}</span>
+                            <div style="display: flex;align-items: center;">
+                                <img [src]="star" style="width: 15px;height: 15px;">
+                                <span style="padding-left: 6px;">{{chef.rating}}</span>
+                            </div>
+                        </div>
+
+                        
                         <div class="flex-between" style="margin-bottom: 5px;">
                             <span [ngStyle]="{'color': chef.open ? 'green' :  'red'}">{{chef.open?
                                 "Open":"Closed"}}</span>
@@ -31,12 +39,15 @@
                         </div>
                         <div class="flex-column" *ngIf="chef.doDelivery">
                             <div class="flex-row" style="padding: 5px;align-items: center;">
-                                <img src="/assets/icons/motorbike.png" alt height="10px" width="10px" style="margin-right: 5px;">
+                                <img src="/assets/icons/motorbike.png" alt height="10px" width="10px"
+                                    style="margin-right: 5px;">
                                 <span style="font-size: 12px;">I do delivery
                                     upto {{chef.deliveryDistance}} miles</span>
                             </div>
-                            <div class="flex-row" *ngIf="chef.freeDeliveryOver > 0" style="padding: 5px;align-items: center;">
-                                <img src="/assets/icons/free-shipping.png" alt height="10px" width="10px" style="margin-right: 5px;">
+                            <div class="flex-row" *ngIf="chef.freeDeliveryOver > 0"
+                                style="padding: 5px;align-items: center;">
+                                <img src="/assets/icons/free-shipping.png" alt height="10px" width="10px"
+                                    style="margin-right: 5px;">
                                 <span style="font-size: 12px;">Free Delivery
                                     order over {{chef.freeDeliveryOver |
                                     currency: 'GBP'}}</span>
@@ -47,29 +58,13 @@
                         </div>
                     </div>
                 </div>
-
-                <div style=" display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 0 10px;
-                height: 40px;">
-                    <span style="font-size: 12px;">{{chef.description}}</span>
-                    <div style="display: flex;align-items: center;">
-                        <img [src]="star" style="width: 15px;height: 15px;">
-                        <span style="padding-left: 6px;">{{chef.rating}}</span>
-                    </div>
-                </div>
+                <span class="py-1 px-1 bold">{{chef.description}}</span>
             </div>
-            <div style=" max-height: 40px;box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            margin-top: 3px;
-            padding: 5px;
-            width: 100%;">
-                <span (click)="selectLayout('Menu')" class="link-button mx-2">Menu</span>
-                <span (click)="selectLayout('Reviews')" class="link-button mx-2">Reviews</span>
-                <span (click)="selectLayout('Info')" class="link-button mx-2">Info</span>
+            <div class="justify-content-center"
+                style="display: flex;flex-direction: row;align-items: center; margin-top: 3px;padding: 10px 5px;width: 100%;">
+                <button (click)="selectLayout('Menu')" class="btn-ylw mx-2 px-5">Menu</button>
+                <button (click)="selectLayout('Reviews')" class="btn-grn mx-2 px-5">Reviews</button>
+                <button (click)="selectLayout('Info')" class="btn-blu mx-2 px-5">Info</button>
             </div>
             <ng-container [ngSwitch]="activeLayout">
                 <ng-container *ngSwitchCase="'Menu'" [ngTemplateOutlet]="menuLayout"></ng-container>
@@ -78,47 +73,23 @@
             </ng-container>
         </div>
         <div class="page-right">
-            <div style="flex-direction: column;
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            overflow-y: hidden;
-            width: 100%;
-            margin: 70px 20px 20px 20px;
-            font-family: 'Anonymous Pro', monospace;">
-                <div style="width: 100%;
-                display: flex;
-                justify-content: space-between;
-                height: 40px;
-                max-height: 40px;">
+            <div style="flex-direction: column;position: sticky;top: 0;height: 100vh;overflow-y: hidden;width: 100%;margin: 70px 20px 20px 20px;font-family: 'Anonymous Pro', monospace;">
+                <div style="width: 100%;display: flex;justify-content: space-between;height: 40px;max-height: 40px;">
                     <span style="font-size: 20px;">Your Order</span>
-                    <span *ngIf="order != null" style="font-size: 20px;">{{order.total | currency:
-                        'GBP'}}</span>
+                    <span *ngIf="order != null" style="font-size: 20px;">{{order.total | currency:'GBP'}}</span>
                 </div>
-                <div style=" border-top: 1px solid #333;
-                border-bottom: 1px solid #333;
-                padding: 5px;" *ngIf="order !== null && order !== undefined && order.supplier !== null">
+                <div style=" border-top: 1px solid #333;border-bottom: 1px solid #333;padding: 5px;"
+                    *ngIf="order !== null && order !== undefined && order.supplier !== null">
                     <span style="font-weight: 500;font-size: 16px;padding-right: 10px;">{{order.supplier.name}}</span>
                     <span style="padding-right: 10px;">{{order.supplier.address.addressLine1}},</span>
-                    <span>{{order.supplier.address.city}},
-                        {{order.supplier.address.postcode}}</span>
+                    <span>{{order.supplier.address.city}},{{order.supplier.address.postcode}}</span>
                 </div>
-
-                <div *ngIf="order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0; then itemsBlock else noItemsBlock">
+                <div
+                    *ngIf="order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0; then itemsBlock else noItemsBlock">
                 </div>
-            </div>
-            <div style="position: fixed;
-            bottom: 0;
-            height: 60px;
-            width: 100%;
-            box-sizing: content-box;">
-                <div style=" display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 420px;
-                margin: 10px 20px;">
-                    <button class="btn-block" [routerLink]="[ '/checkout'] " [disabled]="(order === null || order === undefined ||  order.items === null ||  order.items === undefined || order.items.length === 0)">Checkout</button>
-                    <!-- <button class="big-black-btn">Checkout</button> -->
+                <div class="d-flex justify-content-center align-items-center my-2 mx-3"  >
+                    <button class="btn-grn flex-grow py-2 f-size-md" [routerLink]="[ '/checkout'] "
+                        *ngIf="(order !== null && order !== undefined &&  order.items !== null && order.items.length > 0)">Checkout</button>
                 </div>
             </div>
         </div>
@@ -177,7 +148,8 @@
         flex-direction: column;
         width: 100%;
         padding: 5px;">
-            <div *ngIf="order !== null && order !== undefined && order.items !== null && order.items !== undefined && order.items.length > 0">
+            <div
+                *ngIf="order !== null && order !== undefined && order.items !== null && order.items !== undefined && order.items.length > 0">
                 <app-order-item *ngFor="let item of order.items" [item]="item"></app-order-item>
             </div>
         </div>
@@ -198,11 +170,13 @@
 
 <ng-template #reviewsLayout>
     <div class="flex-column">
-        <div class="flex-row">
-            <strong class="mr-2">Want to review ? </strong>
-            <button class="btn-g" [routerLink]="['/write_review']" [queryParams]="{chef: supplierId}">Write Review</button>
+        <div class="flex-row my-2 align-items-center">
+            <strong class="ml-2">Want to review ? </strong>
+            <button class="btn-ylw mx-1" [routerLink]="['/write_review']" [queryParams]="{chef: supplierId}">Write
+                Review</button>
         </div>
-        <div *ngIf="reviews !== null && reviews !== undefined &&  reviews.length > 0">
+        <div *ngIf="reviews !== null && reviews !== undefined &&  reviews.length > 0"
+            style="max-height: 500px;overflow-y: auto;">
             <app-review-item *ngFor="let r of reviews" [review]="r"></app-review-item>
         </div>
         <div *ngIf="reviews === null || reviews === undefined ||  reviews.length === 0">
@@ -227,21 +201,26 @@
             padding: 10px;
             overflow-x: hidden;
             white-space: nowrap;">
-                <span *ngFor="let c of collections" class="select-span" (click)="onSelectCategory(c)" [class.selectedSpan]="isSelectedCategory(c)">{{c.name}}</span>
+                <span *ngFor="let c of collections" class="select-span" (click)="onSelectCategory(c)"
+                    [class.selectedSpan]="isSelectedCategory(c)">{{c.name}}</span>
             </div>
 
             <div style="float: right">
                 <!-- <button (click)="scrollRight()">right</button> -->
-                <img src="/assets/icons/right-arrow.png" alt loading="lazy" class="scroll-right" (click)="scrollRight()">
+                <img src="/assets/icons/right-arrow.png" alt loading="lazy" class="scroll-right"
+                    (click)="scrollRight()">
             </div>
         </div>
-        <div *ngIf="items_to_display !== null && items_to_display !== undefined &&  items_to_display.length > 0; then ItemsInCategory else NoItemsInCategory">
+        <div
+            *ngIf="items_to_display !== null && items_to_display !== undefined &&  items_to_display.length > 0; then ItemsInCategory else NoItemsInCategory">
         </div>
 
-        <div *ngIf="displayCal && calendarsToDisplay !== null && calendarsToDisplay !== undefined && calendarsToDisplay.length > 0">
+        <div
+            *ngIf="displayCal && calendarsToDisplay !== null && calendarsToDisplay !== undefined && calendarsToDisplay.length > 0">
             <div *ngFor="let calendar of calendarsToDisplay;  let i = index">
                 <div *ngIf="calendar.menus !== null && calendar.menus !== undefined" class="thisweek">
-                    <app-menu-item *ngFor="let menu of calendar.menus" [menu]="menu" [orderBy]="calendar.orderBefore" [displayDescription]="false"></app-menu-item>
+                    <app-menu-item *ngFor="let menu of calendar.menus" [menu]="menu" [orderBy]="calendar.orderBefore"
+                        [displayDescription]="false"></app-menu-item>
                 </div>
             </div>
         </div>

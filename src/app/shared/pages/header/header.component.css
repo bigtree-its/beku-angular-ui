@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Moirai+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Climate+Crisis&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
 .page {
     position: fixed;
     top: 0;
@@ -34,7 +34,6 @@
 .left-container {
     display: flex;
     align-items: center;
-    background-color: var(--grey);
     margin: 10px;
     height: 40px;
     z-index: 999;
@@ -50,12 +49,25 @@
     z-index: 999;
 }
 
-.logo {
-    font-size: 20px;
+.menu-icon {
+    font-size: 2em;
+    padding: 18px;
     cursor: pointer;
-    /* font-family: "Moirai One", system-ui; */
-    font-family: "Climate Crisis", sans-serif;
-    font-weight: 100;
+}
+.menu-icon:hover{
+    cursor: pointer;
+    color:var(--red);
+}
+
+.logo {
+    cursor: pointer;
+    color: red;
+    font-size: 25px;
+    font-family: 'Limelight', sans-serif;
+}
+.logo-icon{
+    font-size: 20px;
+    color: red;
 }
 
 .change-location {

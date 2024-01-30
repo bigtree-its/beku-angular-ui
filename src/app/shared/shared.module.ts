@@ -29,7 +29,7 @@ const routes: Routes = [
     PopupComponent,
     ReviewItemComponent,
     DateAgoPipe,
-    WriteReviewComponent
+    WriteReviewComponent,
   ],
   imports: [
     NgbToastModule,

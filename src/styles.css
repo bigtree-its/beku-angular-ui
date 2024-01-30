@@ -4,9 +4,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
-    --green: #00b852;
+    --l-teal: #7ed5d0;
+    --teal: #0be1d3;
+    --d-teal: #00c8bb;
+    --l-green: #63e6be;
+    --green: #268c55;
+    --d-green: #0ca678;
     --mid-grey: #555;
-    --blue: #06e;
+    --l-blue: #d6edff;
+    --blue: rgb(33, 119, 231);
+    --d-blue: rgb(0, 110, 255);
+    --l-red: #ffe3e2;
+    --red: #e52f28;
+    --d-red: #fd0800;
     --black: rgb(0, 0, 0);
     --grey: #d9d9d9;
     --light-color: #f0f0f0;
@@ -17,8 +27,12 @@
     --orange: coral;
     --white: #fff;
     --warning: #ffc107;
+    --l-yellow:rgb(249, 204, 112);
+    --d-yellow:rgb(255, 175, 16);
     --yellow: #fd0;
+    --l-pink: #ffeef1;
     --pink: #ff8cb2;
+    --d-pink: #fc5d7d;
     --border: #bbbaba;
     --light-border: #e2e2e2;
     --light-background: #fafafa;
@@ -32,6 +46,7 @@
     --happygreen: #dcfd52;
     --happygreen-light: #e8fc9c;
     --happygreen-dark: #c8e820;
+    --navy-grey: rgb(24 49 83);
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -52,6 +67,7 @@ html {
     scroll-behavior: smooth;
     text-size-adjust: 100%;
     background-color: #fff;
+    color: #222;
     /* font-family: "Julius Sans One", sans-serif; */
     font-family: "Poppins", sans-serif;
     font-weight: 100;
@@ -110,6 +126,7 @@ body {
     padding: 0;
     font-size: 12px;
     background-color: #fff;
+    color: #222;
     /* font-family: "Julius Sans One", sans-serif; */
     font-family: "Poppins", sans-serif;
     overflow: -moz-scrollbars-none;
@@ -123,6 +140,20 @@ body {
     border: none;
     z-index: 9999999;
 }
+
+.f-size-xs{
+    font-size: 12px;
+}
+.f-size-sm{
+    font-size: 14px;
+}
+.f-size-md{
+    font-size: 18px;
+}
+.f-size-lg{
+    font-size: 20px;
+}
+
 
 ::ng-deep .modal-body {
     overflow-y: auto;
@@ -141,8 +172,8 @@ body {
     border-radius: 22px !important;
     box-shadow: -5px 8px 16px 0px rgba(0, 0, 0, 0.3) !important;
     margin-bottom: 2px !important;
-   
-   
+
+
 }
 
 .toast-container .toast {
@@ -219,6 +250,12 @@ select {
     cursor: pointer;
     background-color: var(--white);
     /* border: 2px solid rgb(0, 0, 0); */
+}
+.border-navy-grey{
+    border: 2px solid var(--navy-grey);
+}
+.br-7{
+    border-radius: 7px;
 }
 
 .hp-search-container {
@@ -388,6 +425,61 @@ select {
 .grid {
     display: grid;
     gap: .75rem;
+}
+.bold{
+    font-weight: 500;
+}
+.bolder{
+    font-weight: 900;
+}
+
+.btn-ylw, .btn-grn, .btn-blu, .btn-red, .btn-teal {
+    padding: 5px 10px;
+    border: none;
+    box-shadow: 0 0.25em 0 rgb(195, 198, 209);
+    border-radius: 7px;
+    background-color: var(--l-yellow);
+    border: 1px solid var(--navy-grey);
+    color: #222;
+}
+.btn-teal{
+    background-color: var(--teal);
+}
+.btn-red{
+    border: 1px solid var(--d-red);
+    background-color: var(--l-red);
+}
+.btn-grn{
+    border: 1px solid var(--d-green);
+    background-color: var(--l-green);
+}
+.btn-blu{
+    /* border: 1px solid var(--d-blue); */
+    background-color: var(--l-blue);
+}
+.btn-ylw:hover{
+    cursor: pointer;
+    background-color: var(--d-yellow);
+}
+.btn-grn:hover{
+    cursor: pointer;
+    background-color: var(--d-green);
+    color: #fff;
+}
+.btn-blu:hover{
+    cursor: pointer;
+    background-color: var(--blue);
+    color: #fff;
+}
+.btn-red:hover{
+    cursor: pointer;
+    background-color: var(--red);
+    color: #fff;
+}
+.btn-teal:hover{
+    cursor: pointer;
+    background-color: var(--d-teal);
+    color: #222;
 }
 
 .btn-block {

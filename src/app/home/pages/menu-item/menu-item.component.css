@@ -3,6 +3,7 @@
     gap: 1rem;
     width: 500px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border: 1px solid var(--navy-grey);
     margin: 5px 0;
     padding: 10px;
 }

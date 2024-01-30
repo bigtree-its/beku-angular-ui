@@ -14,10 +14,14 @@ import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SideNavComponent } from './shared/side-nav/side-nav.component';
+import { SideNavContentComponent } from './shared/side-nav-content/side-nav-content.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SideNavComponent,
+    SideNavContentComponent,
   ],
   imports: [
     AppRoutingModule,

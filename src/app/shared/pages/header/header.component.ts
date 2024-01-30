@@ -6,6 +6,8 @@ import { FoodOrderService } from 'src/app/services/food-order.service';
 import { CustomerOrder } from 'src/app/model/localchef';
 import { AccountService } from 'src/app/services/account.service';
 import { User } from 'src/app/model/auth-model';
+import { NavigationService } from 'src/app/services/navigation.service';
+import { faBars, faUtensils, faKitchenSet, faCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header',
@@ -18,11 +20,16 @@ export class HeaderComponent {
   displayableServiceLocation: string = '';
   itemsCount: number = 0;
   user: User;
+  faBars = faBars;
+  faUtensils = faUtensils;
+  faKitchenSet = faKitchenSet;
+  faCircle = faCircle;
 
   constructor(
     private orderService: FoodOrderService,
     private accountService: AccountService,
     private ctxSvc: ContextService,
+    private navigationService: NavigationService,
     private router: Router
   ) {}
 
@@ -38,25 +45,10 @@ export class HeaderComponent {
         console.log('OrderSubject emitted the complete notification'),
     });
 
-    this.accountService.getData();
-    this.accountService.loginSession$.subscribe({
-      next: (value) => {
-        var user: User = value;
-        this.extractUser(user);
-      },
-      error: (err) => console.error('OrderSubject emitted an error: ' + err),
-      complete: () =>
-        console.log('OrderSubject emitted the complete notification'),
-    });
-
     const serviceLocation = this.ctxSvc.serviceLocationSubject.asObservable();
     serviceLocation.subscribe((a) => {
       this.serviceLocation = a;
     });
-  }
-
-  extractUser(user: User) {
-    this.user = user;
   }
 
   private extractData(customerOrder: CustomerOrder) {
@@ -67,6 +59,10 @@ export class HeaderComponent {
       this.cartTotal = 0;
       this.itemsCount = 0;
     }
+  }
+
+  toggleSideNav() {
+    this.navigationService.setShowNav(true);
   }
 
   onClickBasket() {
