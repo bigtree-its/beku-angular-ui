@@ -32,9 +32,9 @@ export class SideNavContentComponent implements OnInit {
       next: (value) => {
         this.user = value;
       },
-      error: (err) => console.error('OrderSubject emitted an error: ' + err),
+      error: (err) => console.error('CustomerObject emitted an error: ' + err),
       complete: () =>
-        console.log('OrderSubject emitted the complete notification'),
+        console.log('CustomerObject emitted the complete notification'),
     });
   }
 

@@ -17,9 +17,9 @@
         </div>
         <div class="flex-column align-items-center w-half-screen" id="contentDiv">
             <div style="max-height: 500px;flex-grow: 1;display: flex;flex-direction: column;max-width: 480px;min-width: 480px;">
-                <div style="height: 40px;border-bottom: 1px solid #333;text-align: center;line-height: 40px;">{{divHeader}}</div>
+                <div class="sub-header">{{divHeader}}</div>
     
-                <div *ngIf="showCustomerDetailsSection" class="flex-column m-2">
+                <div *ngIf="showCustomerDetailsSection" class="flex-column mt-5">
                     <div class="flex-column mb-3">
                         <label for="customerName">Your name on order (for when you collect)<small
                                 style="color: red;">**</small></label>
@@ -68,7 +68,7 @@
                         </div>
                         <div class="postcode-lookup-container" *ngIf="lookupAddress">
                             <input class="fb-input" type="text" name="postcode" id="postcode" tabindex="4" autocomplete="off" value="" [(ngModel)]="addressLookupPostcode" #ctrl="ngModel" placeholder="Enter your postcode">
-                            <button class="n-button" (click)="findAddress()" style="margin-right: 8px;">Find</button>
+                            <button class="btn-grn" (click)="findAddress()" style="margin-right: 8px;">Find</button>
                         </div>
                         <div *ngIf="postcodeAddressList !== undefined && postcodeAddressList.length > 0 && !addressSelected">
                             <div style="border: 1px solid var(--light-border);overflow-y: auto;height: 100px;margin-top: 5px;padding: 5px;">
@@ -80,7 +80,7 @@
                     </div>
     
                 </div>
-                <div *ngIf="showItemsSection" class="flex-column m-2">
+                <div *ngIf="showItemsSection" class="flex-column mt-4">
                     <div style="margin-bottom: 6px;">
                         <label for="notesToChef">Notes to chef</label>
                         <input class="fb-input" type="text" name="notesToChef" tabindex="2" autocomplete="off" value="" [(ngModel)]="notesToChef" #ctrl="ngModel" required="true">
