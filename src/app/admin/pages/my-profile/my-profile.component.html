@@ -1,0 +1,87 @@
+<div class="a-page flex-column">
+    <span class="a-page-header f-size-lg">My Profile</span>
+    <div class="flex-row justify-content-center align-items-center py-2">
+        <span class="btn-ylw mr-2" (click)="selectLayout('Profile')">Profile</span>
+        <span class="btn-ylw mr-2" (click)="selectLayout('Security')">Security</span>
+        <span class="btn-ylw mr-2" (click)="selectLayout('Preferences')">Preferences</span>
+    </div>
+    <div>
+        <ng-container [ngSwitch]="activeLayout">
+            <ng-container *ngSwitchCase="'Profile'" [ngTemplateOutlet]="profileLayout"></ng-container>
+            <ng-container *ngSwitchCase="'Security'" [ngTemplateOutlet]="securityLayout"></ng-container>
+            <ng-container *ngSwitchCase="'Preferences'" [ngTemplateOutlet]="preferenceLayout"></ng-container>
+        </ng-container>
+    </div>
+</div>
+<ng-template #profileLayout>
+    <div class="d-flex justify-content-center">
+        
+        <div class="flex-column  mobile-w">
+            <span class="sub-header mb-3">Update Personal Details</span>
+            <div class="input-div">
+                <input class="_381fS" type="text" name="firstName" id="firstName" tabindex="1" autocomplete="off" value="" [(ngModel)]="firstName" #ctrl="ngModel">
+                <div class="_2EeI1 _26LFr"></div>
+                <label class="_1Cvlf _2tL9P" for="firstName">Firstname</label>
+            </div>
+            <div class="input-div">
+                <input class="_381fS" type="text" name="lastName" id="lastName" tabindex="2" autocomplete="off" value="" [(ngModel)]="lastName" #ctrl="ngModel">
+                <div class="_2EeI1 _26LFr"></div>
+                <label class="_1Cvlf _2tL9P" for="lastName">Lastname</label>
+            </div>
+            <div class="input-div">
+                <input class="_381fS" type="email" name="email" id="email" tabindex="3" autocomplete="off" value="" [(ngModel)]="email" #ctrl="ngModel">
+                <div class="_2EeI1 _26LFr"></div>
+                <label class="_1Cvlf _2tL9P" for="email">Email</label>
+            </div>
+            <div class="input-div">
+                <input class="_381fS" type="text" name="mobile" id="mobile" tabindex="4" autocomplete="off" value="" [(ngModel)]="mobile" #ctrl="ngModel">
+                <div class="_2EeI1 _26LFr"></div>
+                <label class="_1Cvlf _2tL9P" for="email">Mobile</label>
+            </div>
+            <div class="input-div">
+                <input class="_381fS" type="password" name="password" id="password" tabindex="1" autocomplete="off" value="" [(ngModel)]="password" #ctrl="ngModel">
+                <div class="_2EeI1 _26LFr"></div>
+                <label class="_1Cvlf _2tL9P" for="password">Password</label>
+            </div>
+            <br>
+            <button class="big-grn-btn" (click)="changePersonal()">Update Personal Details</button>
+        </div>
+    </div>
+</ng-template>
+<ng-template #securityLayout>
+    <div class="d-flex justify-content-center">
+        <div class="flex-column  mobile-w">
+            <span class="sub-header mb-3">Update Security Details</span>
+            <div class="input-div">
+                <input class="_381fS" type="password" name="newPassword" id="newPassword" tabindex="1" autocomplete="off" value="" [(ngModel)]="newPassword" #ctrl="ngModel">
+                <div class="_2EeI1 _26LFr"></div>
+                <label class="_1Cvlf _2tL9P" for="password">New Password</label>
+            </div>
+            <div class="input-div">
+                <input class="_381fS" type="password" name="password" id="password" tabindex="1" autocomplete="off" value="" [(ngModel)]="password" #ctrl="ngModel">
+                <div class="_2EeI1 _26LFr"></div>
+                <label class="_1Cvlf _2tL9P" for="password">Current Password</label>
+            </div>
+            <br>
+            <button class="big-grn-btn" (click)="changePassword()">Update Security Details</button>
+        </div>
+    </div>
+</ng-template>
+<ng-template #preferenceLayout>
+    <div class="d-flex justify-content-center">
+        <div class="flex-column  mobile-w ">
+            <span class="sub-header mb-5">Update Preferences</span>
+            <div class="flex-between mb-3  border b-r-6 p-3">
+                <span class="word-wrap">Receive communications for Offers, Promotions via email</span>
+                <input type="checkbox" id="receiveEmailComms">
+            </div>
+            <div class="input-div">
+                <input class="_381fS" type="password" name="password" id="password" tabindex="1" autocomplete="off" value="" [(ngModel)]="password" #ctrl="ngModel">
+                <div class="_2EeI1 _26LFr"></div>
+                <label class="_1Cvlf _2tL9P" for="password">Current Password</label>
+            </div>
+            <br>
+            <button class="big-grn-btn" (click)="changePreferences()">Update Preferences</button>
+        </div>
+    </div>
+</ng-template>

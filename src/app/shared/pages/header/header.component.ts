@@ -7,7 +7,7 @@ import { CustomerOrder } from 'src/app/model/localchef';
 import { AccountService } from 'src/app/services/account.service';
 import { User } from 'src/app/model/auth-model';
 import { NavigationService } from 'src/app/services/navigation.service';
-import { faBars, faUtensils, faKitchenSet, faCircle } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faStarOfLife, faUtensils, faCircle, faMugHot } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header',
@@ -21,8 +21,8 @@ export class HeaderComponent {
   itemsCount: number = 0;
   user: User;
   faBars = faBars;
+  faMugHot = faMugHot;
   faUtensils = faUtensils;
-  faKitchenSet = faKitchenSet;
   faCircle = faCircle;
 
   constructor(

@@ -1,11 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
 .page {
     display: flex;
     flex-direction: column;
     overflow-y: hidden;
     margin-top: 60px;
-    font-family: "Julius Sans One", sans-serif;
     padding: 10px 0;
     justify-content: center;
 }
@@ -14,8 +12,7 @@
     display: flex;
     align-items: center;
     height: 40px;
-    font-size: 15px;
-    font-family: "Julius Sans One", sans-serif;
+    font-size: 20px;
     font-weight: 200;
     margin-left: 10px;
 }

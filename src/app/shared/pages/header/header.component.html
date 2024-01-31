@@ -11,11 +11,15 @@
                     <small style="font-size: 8px;padding: 0 10px;">Home food from neighbourhood</small>
                 </div>
             </div> -->
-            <fa-icon [icon]="faCircle" class="logo-icon"></fa-icon>
             <div class="flex-column align-items-center" [routerLink]="['/']" routerLinkActive="router-link-active">
-                <div class="logo">Doodle</div>
-                <!-- <small class="bold">Kitchen</small> -->
+                <div class="flex-row">
+                    <fa-icon [icon]="faUtensils" class="logo-icon"></fa-icon>
+                    <div class="logo">Doodle</div>
+                </div>
+                <small style="font-size: 8px;border-top: 1px solid #f1f1f1;padding-top: 2px;">A Home food company</small>
             </div>
+            
+            
             
             <div class="location-container" *ngIf="serviceLocation != null && serviceLocation !== undefined">
                 <span class="location-slug" [routerLink]="['cooks']"

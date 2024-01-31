@@ -1,26 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsersComponent } from './pages/users/users.component';
-import { SuppliersComponent } from './pages/suppliers/suppliers.component';
-import { PartnersComponent } from './pages/partners/partners.component';
 import { RouterModule, Routes } from '@angular/router';
+import { MyOrdersComponent } from './pages/my-orders/my-orders.component';
+import { MyProfileComponent } from './pages/my-profile/my-profile.component';
+import { BecomeAPartnerComponent } from './pages/become-a-partner/become-a-partner.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
-  { path: 'admin', component: UsersComponent },
-  { path: 'users', component: UsersComponent },
-  { path: 'suppliers', component: SuppliersComponent },
-  { path: 'partners', component: PartnersComponent }
+  { path: 'my_orders', component: MyOrdersComponent },
+  { path: 'my_profile', component: MyProfileComponent },
+  { path: 'become_a_partner', component: BecomeAPartnerComponent }
 ]
 
 
 @NgModule({
   declarations: [
-    UsersComponent,
-    SuppliersComponent,
-    PartnersComponent
+    MyOrdersComponent,
+    MyProfileComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ]
 })

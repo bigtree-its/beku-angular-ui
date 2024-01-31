@@ -196,11 +196,7 @@
                 <img src="/assets/icons/left-arrow.png" alt loading="lazy" class="scroll-left" (click)="scrollLeft()">
             </div>
 
-            <div #widgetsContent style="display: flex;
-            width: 415px;
-            padding: 10px;
-            overflow-x: hidden;
-            white-space: nowrap;">
+            <div #widgetsContent style="display: flex;width: 415px;padding: 10px;overflow-x: hidden;white-space: nowrap;">
                 <span *ngFor="let c of collections" class="select-span" (click)="onSelectCategory(c)"
                     [class.selectedSpan]="isSelectedCategory(c)">{{c.name}}</span>
             </div>

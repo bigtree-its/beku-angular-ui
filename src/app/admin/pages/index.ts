@@ -1,3 +1,3 @@
-export * from './partners/partners.component';
-export * from './suppliers/suppliers.component';
-export * from './users/users.component';
+export * from './become-a-partner/become-a-partner.component';
+export * from './my-profile/my-profile.component';
+export * from './my-orders/my-orders.component';
