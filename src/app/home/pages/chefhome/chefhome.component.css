@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Anonymous+Pro');
 @import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
-
 .page {
     height: 100vh;
     display: flex;
@@ -25,8 +24,9 @@
 }
 
 .chef-name {
-    font-size: 16px;
-    font-family: 'Limelight', sans-serif;
+    font-size: 18px;
+    font-weight: 900;
+    /* font-family: 'Limelight', sans-serif; */
 }
 
 .select-span {
@@ -68,12 +68,27 @@
 
 .scroll-right:hover {
     cursor: pointer;
-    background-color: var(--white);
+    background-color: #f2f2f2;
 }
 
 .scroll-left:hover {
     cursor: pointer;
-    background-color: var(--white);
+    background-color: #f2f2f2;
+}
+
+::ng-deep .modal-content {
+    border: none;
+    z-index: 9999999;
+    border-radius: 0;
+}
+
+::ng-deep .modal-dialog {
+    min-width: 800px;
+}
+
+.nav-icon:hover {
+    cursor: pointer;
+    background-color: #f1f1f1;
 }
 
 

@@ -1,5 +1,5 @@
 <div class="side-nav-bar-content">
-    <div *ngIf="user !== null" class="flex-column justify-content-center align-items-center mb-2">
+    <div *ngIf="user !== null" class="flex-column justify-content-center align-items-center mb-5">
         <div class="flex-column justify-content-center align-items-center" style="height: 100px;width:100px;background-color: var(--yellow);border-radius:50%;justify-content:center;">
             <span style="font-size: 30px;">{{user.firstName | slice:0:1}}{{user.lastName | slice:0:1}}</span>
         </div>
@@ -13,7 +13,7 @@
         <span class="navItem">Become a partner</span>
         <span *ngIf="user !== null" class="navItem" routerLink="/my_profile">Profile</span>
     </div>
-    
+
     <!-- <ul class="side-nav-bar-menu">
         <li *ngFor="let navItem of navItems" (click)="onNavigationSelection(navItem)" class="navItem">{{ navItem.label }}</li>
     </ul> -->

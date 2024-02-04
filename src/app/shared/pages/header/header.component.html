@@ -12,26 +12,24 @@
                 </div>
             </div> -->
             <div class="flex-column align-items-center" [routerLink]="['/']" routerLinkActive="router-link-active">
-                <div class="flex-row">
-                    <fa-icon [icon]="faUtensils" class="logo-icon"></fa-icon>
-                    <div class="logo">Dudul</div>
+                <div class="flex-row align-items-center">
+                    <!-- <fa-icon [icon]="logoIcon" class="logo-icon"></fa-icon> -->
+                    <div class="logo">Doodle</div>
                 </div>
-                <small style="font-size: 8px;border-top: 1px solid #f1f1f1;padding-top: 2px;">A Home food company</small>
+                <!-- <small style="color: var(--d-orange);">A Home food company</small> -->
             </div>
-            
-            
-            
+
+
+
             <div class="location-container" *ngIf="serviceLocation != null && serviceLocation !== undefined">
-                <span class="location-slug" [routerLink]="['cooks']"
-                    [queryParams]="{location: serviceLocation.slug}">#{{serviceLocation.name}},
+                <span class="location-slug" [routerLink]="['cooks']" [queryParams]="{location: serviceLocation.slug}">#{{serviceLocation.name}},
                     {{serviceLocation.city}}</span>
                 <span class="change-area" routerLink="/">Change</span>
             </div>
         </div>
         <div class="right-container">
             <div class="cart-div" (click)="onClickBasket()">
-                <img src="/assets/icons/shopping-basket.png" height="20px" width="20px" style="margin: 0 1px;"
-                    [routerLink]="['/basket']">
+                <img src="/assets/icons/shopping-basket.png" height="20px" width="20px" style="margin: 0 1px;" [routerLink]="['/basket']">
                 <span class="cart-items-count">{{itemsCount}}</span>
             </div>
         </div>

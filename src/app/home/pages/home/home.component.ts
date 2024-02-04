@@ -47,8 +47,9 @@ export class HomeComponent {
 
   closeServiceLocations() {
     this.showServiceLocations = false;
-    this.serviceLocationSearchText = '';
+    this.serviceLocationSearchText = undefined;
   }
+
   fetchPopularLocations(searchString: string) {
     if (searchString === null && searchString === undefined) {
       return;
@@ -143,7 +144,10 @@ export class HomeComponent {
   // }
 
   onEnter() {
-    this.lookupServiceLocation(this.serviceLocationSearchText);
+    if ( this.serviceLocationSearchText !== undefined){
+      this.lookupServiceLocation(this.serviceLocationSearchText);
+    }
+   
   }
 
   ngAfterViewInit() { }

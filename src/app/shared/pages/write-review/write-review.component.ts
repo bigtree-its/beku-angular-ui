@@ -155,6 +155,7 @@ export class WriteReviewComponent implements OnInit, OnDestroy {
       address: null,
     };
 
+    this.toasterService = undefined;
     console.log('Submitting review '+ JSON.stringify(review));
     let observable = this.reviewService.createReview(review);
     observable.pipe(takeUntil(this.destroy$)).subscribe({
@@ -165,10 +166,10 @@ export class WriteReviewComponent implements OnInit, OnDestroy {
         void this.router.navigate(['/']);
       },
       error: (err) => {
-        console.error('Errors from submitting review' + JSON.stringify(err));
         this.errors = err;
         this.loading = false;
-        this.errorMessage = err.error.detail;
+        this.errorMessage = err.error.message;
+        this.toasterService.error(this.errorMessage);
       },
     });
   }

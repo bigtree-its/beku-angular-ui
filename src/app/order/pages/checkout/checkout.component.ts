@@ -16,6 +16,8 @@ import { Address } from 'src/app/model/common-models';
 import { FoodOrderService } from 'src/app/services/food-order.service';
 import { LocalService } from 'src/app/services/local.service';
 import { ChefService } from 'src/app/services/chef.service';
+import { faPersonBiking, faBox } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-checkout',
@@ -29,6 +31,9 @@ export class CheckoutComponent implements OnDestroy{
   @ViewChild('#payment-element', { read: ElementRef }) public paymentOptions: ElementRef<any>;
   @ViewChild('cardErrors', { read: ElementRef }) public cardErrors: ElementRef<any>;
   @ViewChild('payment-message', { read: ElementRef }) public paymentMessage: ElementRef<any>;
+
+  faPersonBiking = faPersonBiking;
+  faBox = faBox;
 
   enablePayButton: boolean = false;
 

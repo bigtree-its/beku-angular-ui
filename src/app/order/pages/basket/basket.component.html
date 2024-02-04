@@ -8,21 +8,18 @@
         </div> -->
         <span class="a-page-header">YOUR BASKET</span>
         <div class="flex-column justify-content-center align-items-center p-1 pb-3">
-            <div
-                *ngIf="order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0; then thenBlock else elseBlock">
+            <div *ngIf="order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0; then thenBlock else elseBlock">
             </div>
         </div>
         <div style="height: 60px; width: 100%;display: flex;justify-content: center;align-items: center;padding: 10px;">
-            <button class="big-grn-btn" [routerLink]="[ '/checkout'] "
-                [disabled]="!(order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0)">
+            <button class="big-org-btn" [routerLink]="[ '/checkout'] " [disabled]="!(order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0)">
                 Checkout</button>
         </div>
     </div>
 </div>
 
 <ng-template #elseBlock>
-    <div
-        style="margin-top: 100px;display: flex;flex-direction: column;gap: 1rem;justify-content: center;align-items: center;width: 100%;">
+    <div style="margin-top: 100px;display: flex;flex-direction: column;gap: 1rem;justify-content: center;align-items: center;width: 100%;">
         <img src="/assets/icons/shopping-basket.png" height="100px" width="100px" style="opacity: 0.1;">
         <span style="margin-top: 50px;font-weight: 900;">
             YOUR BASKET IS EMPTY
@@ -33,13 +30,10 @@
 
 <ng-template #thenBlock>
     <div class="flex-column justify-content-center align-items-center">
-        <div
-            style="height: 200px;width: 480px; display: flex;justify-content: center;align-items: center;margin-top: 30px;">
-            <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg"
-                style="object-fit: contain;width: 100%;height: 100%;max-width: 100%; max-height: 100%;">
+        <div style="height: 200px;width: 480px; display: flex;justify-content: center;align-items: center;margin-top: 30px;">
+            <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg" style="object-fit: contain;width: 100%;height: 100%;max-width: 100%; max-height: 100%;">
         </div>
-        <strong class="chef-name" [routerLink]="['/cooks', chef._id]"
-            routerLinkActive="router-link-active">{{chef.kitchenName}}</strong>
+        <strong class="chef-name" [routerLink]="['/cooks', chef._id]" routerLinkActive="router-link-active">{{chef.kitchenName}}</strong>
         <span>{{getAddress()}}</span>
         <div class="btn-wrapper mt-3" style="width: 100%;">
             <div style="display: flex; justify-content: space-between;">

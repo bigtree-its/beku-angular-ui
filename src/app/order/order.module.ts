@@ -9,6 +9,7 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StripeformComponent } from './pages/stripeform/stripeform.component';
 import { OrderConfirmationComponent } from './pages/order-confirmation/order-confirmation.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const routes: Routes = [
   { path: 'basket', component: BasketComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     NgbAccordionModule,
+    FontAwesomeModule,
     RouterModule.forChild(routes)
   ]
 })

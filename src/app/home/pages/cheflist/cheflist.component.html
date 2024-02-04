@@ -8,7 +8,7 @@
 
     <div class="container-div">
         <div class="cuisines-div">
-            <span style="font-weight: 900;padding: 10px 20px;">Popular Cuisines</span>
+            <span style="font-weight: 800;font-size: 20px;padding: 10px 20px;color: #555;">Popular Cuisines</span>
             <div class="cuisines-list-div">
                 <div *ngFor="let cuisine of cuisines" class="cuisine" (click)="onSelectCuisine(cuisine)" [class.selectedCuisine]="isSelectedCuisine(cuisine)">
                     <img src={{cuisine.logo}} class="cuisine-logo" height="90px" width="120px">
@@ -30,12 +30,12 @@
                     <div class="flex-column gap-1" style="padding: 5px;width: 100%;">
                         <div class="flex-between" style="margin-bottom: 5px;">
                             <span [ngStyle]="{'color': chef.open ? 'green' :  'red'}">{{chef.open? "Open":"Closed"}}</span>
-                            <span *ngIf="chef.preOrderOnly" class="chef-cuisine">PreOrder Only</span>
+                            <span *ngIf="chef.preOrderOnly" class="attribute">PreOrder Only</span>
                         </div>
 
                         <div class="flex-row-wrap">
                             <ng-container *ngFor="let cuisine of chef.cuisines | slice:0:3">
-                                <div class="chef-cuisine">{{ cuisine.name }}</div>
+                                <div class="attribute">{{ cuisine.name }}</div>
                             </ng-container>
                         </div>
                         <div class="flex-column" *ngIf="chef.doDelivery">
@@ -54,11 +54,12 @@
                     </div>
                 </div>
 
-                <div class="chef-card-info-div">
+                <div class="flex-row align-items-center px-2">
                     <span class="chef-name">{{chef.kitchenName}}</span>
-                    <div style="display: flex;align-items: center;">
-                        <img [src]="star" style="width: 15px;height: 15px;">
+                    <div class="flex-row align-items-center">
+                        <fa-icon [icon]="faStar" class="fa-xs" style="margin-left: 10px;color: goldenrod;"></fa-icon>
                         <span>{{chef.rating}}</span>
+                        <span style="margin-left: 10px;">({{chef.reviews? chef.reviews : 0}} reviews)</span>
                     </div>
                 </div>
             </div>

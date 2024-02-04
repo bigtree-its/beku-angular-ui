@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     // reset alerts on submit
     this.loading = true;
     console.log('Submitting login..')
-    let observable = this.accountService.login(this.email, this.password);
+    let observable = this.accountService.customerLogin(this.email, this.password);
     observable.pipe(takeUntil(this.destroy$)).subscribe({
       next: () => {
         this.errorMessage = undefined;

@@ -22,10 +22,7 @@ export interface Errors {
 }
 
 export interface LoginResponse {
-    idToken: string;
     accessToken: string;
-    message: string;
-    success: Boolean;
 }
 
 export class User{

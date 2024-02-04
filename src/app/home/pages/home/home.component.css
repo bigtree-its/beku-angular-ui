@@ -1,10 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Climate+Crisis&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
-
 .hero {
     height: 500px;
-    background-color: var(--light-grey);
     margin: 80px 20px 20px 20px;
     display: flex;
     justify-content: space-between;
@@ -25,16 +20,16 @@
 }
 
 .hero-title {
-     /* font-family: "Cinzel", serif; */
-     font-optical-sizing: auto;
-     /* font-style: normal; */
-     font-size: 20px;
-     /* letter-spacing: -2px; */
-     line-height: 68px;
-     color: #3C4043;
-     padding: 20px;
-     font-weight: 500;
-     word-wrap: break-word;
+    /* font-family: "Train One", system-ui; */
+    font-optical-sizing: auto;
+    /* font-style: normal; */
+    font-size: 20px;
+    /* letter-spacing: -2px; */
+    line-height: 68px;
+    color: black;
+    padding: 20px;
+    font-weight: 900;
+    word-wrap: break-word;
 }
 
 .top-cuisines-data {
@@ -93,21 +88,38 @@
     font-size: 30px;
 }
 
+.animated-text p {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+.text1 {
+    animation-name: example;
+    animation-delay: 0s;
+}
+
+.text2 {
+    animation-name: example;
+    animation-delay: 1s;
+}
+
+.text3 {
+    animation-name: example;
+    animation-delay: 2s;
+}
+
 @keyframes slide {
     0% {
         top: 0;
     }
-
     25% {
-        top: -2.5em;
+        top: -3.5em;
     }
-
     50% {
         top: -5.0em;
     }
-
     75% {
-        top: -9.6em;
+        top: -10.0em;
     }
 }
 
@@ -120,20 +132,18 @@
         padding: 20px;
         flex-grow: 1;
     }
-
     .hero-title {
         /* font-family: "Cinzel", serif; */
         font-optical-sizing: auto;
         /* font-style: normal; */
-        font-size: 40px;
+        font-size: 30px;
         /* letter-spacing: -2px; */
         line-height: 68px;
-        color: #3C4043;
+        color: #fff;
         padding: 0 20px;
         font-weight: 500;
         word-wrap: break-word;
     }
-
     .hero-img-div {
         padding: 20px;
         max-height: 100%;
@@ -141,7 +151,6 @@
         position: relative;
         right: 0;
     }
-
     .hero-img {
         background-repeat: no-repeat;
         object-fit: cover;

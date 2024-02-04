@@ -16,7 +16,7 @@ export const AuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
   const jwtService = inject(JwtService);
   // Store the attempted URL for redirecting
   loginService.redirectUrl = state.url;
-  var s = jwtService.getIdToken();
+  var s = jwtService.getAccessToken();
   var found = s !== null && s !== undefined && jwtService.validateToken(s);
   if (found) {
     console.log('User logged in')

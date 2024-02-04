@@ -10,6 +10,7 @@ import { ChefHomeComponent } from './pages/chefhome/chefhome.component';
 import { MenuItemComponent } from './pages/menu-item/menu-item.component';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { SandboxComponent } from './pages/sandbox/sandbox.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -44,6 +45,7 @@ const routes: Routes = [
     NgbDropdownModule,
     NgbAccordionModule,
     NgbToastModule,
+    FontAwesomeModule,
     RouterModule.forChild(routes)
   ],
   // The HomeModule do not expose any services, hence we keep the providers array empty

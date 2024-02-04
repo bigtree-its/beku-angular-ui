@@ -68,6 +68,31 @@ export class AccountService {
     return null;
   }
 
+  customerLogin(email: string, password: string): Observable<LoginResponse> {
+    var req = {
+      "username" : email,
+      "password" : password,
+    }
+    console.log('Submitting login credentials to server..');
+    return this.http
+      .post<LoginResponse>(this.serviceLocator.LoginUrl, req, {
+        headers: { skip: 'true' },
+      })
+      .pipe(
+        tap((result) => {
+          console.log('Login response ' + JSON.stringify(result));
+          if (this.redirectUrl) {
+            console.log('redirecting to '+ this.redirectUrl)
+            this.router.navigateByUrl(this.redirectUrl);
+            this.redirectUrl = null;
+          }else{
+            this.router.navigate(["/"])
+          }
+          this.setUser(result);
+        })
+      );
+  }
+
   login(email: string, password: string): Observable<LoginResponse> {
     let body = new URLSearchParams();
     body.set('username', email);
@@ -115,8 +140,7 @@ export class AccountService {
 
   private setUser(loginResp: LoginResponse) {
     this.jwtService.saveAccessToken(loginResp.accessToken);
-    this.jwtService.saveIdToken(loginResp.idToken);
-    var user: User = this.buildUser(loginResp.idToken);
+    var user: User = this.buildUser(loginResp.accessToken);
     this.localService.saveData(this.constants.StorageItem_C_User, JSON.stringify(user));
     this.user = user;
     this.loginSession$.next(this.user);

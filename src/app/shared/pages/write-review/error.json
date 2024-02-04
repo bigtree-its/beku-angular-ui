@@ -1,0 +1,15 @@
+{
+    "headers": {
+        "normalizedNames": {},
+        "lazyUpdate": null
+    },
+    "status": 400,
+    "statusText": "Bad Request",
+    "url": "http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/reviews",
+    "ok": false,
+    "name": "HttpErrorResponse",
+    "message": "Http failure response for http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/reviews: 400 Bad Request",
+    "error": {
+        "message": "Review already exist for order abc"
+    }
+}

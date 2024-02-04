@@ -41,7 +41,7 @@ export const environment = {
   //   'http://localhost:8081/api/users/password-reset/submit',
   // Heroku
   LoginUrl:
-    'https://stormy-stream-36548-96356ce4833c.herokuapp.com/api/oauth/token',
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/customer/token',
   LogoutUrl:
     'https://stormy-stream-36548-96356ce4833c.herokuapp.com/api/oauth/logout',
   RegisterUrl:
