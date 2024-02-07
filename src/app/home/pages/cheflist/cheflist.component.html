@@ -10,7 +10,8 @@
         <div class="cuisines-div">
             <span style="font-weight: 800;font-size: 20px;padding: 10px 20px;color: #555;">Popular Cuisines</span>
             <div class="cuisines-list-div">
-                <div *ngFor="let cuisine of cuisines" class="cuisine" (click)="onSelectCuisine(cuisine)" [class.selectedCuisine]="isSelectedCuisine(cuisine)">
+                <div *ngFor="let cuisine of cuisines" class="cuisine" (click)="onSelectCuisine(cuisine)"
+                    [class.selectedCuisine]="isSelectedCuisine(cuisine)">
                     <img src={{cuisine.logo}} class="cuisine-logo" height="90px" width="120px">
                     <span>{{cuisine.name}}</span>
                 </div>
@@ -22,44 +23,54 @@
             <!-- <div class="chef-card" *ngFor="let chef of filteredChefs ">
                 <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg">
             </div> -->
-            <div class="chef-card br-7" *ngFor="let chef of filteredChefs " [routerLink]="[ '/cooks', chef._id] ">
-                <div class="flex-row">
-                    <div class="chef-img-div">
-                        <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg" height="170px" width="150px">
-                    </div>
-                    <div class="flex-column gap-1" style="padding: 5px;width: 100%;">
-                        <div class="flex-between" style="margin-bottom: 5px;">
-                            <span [ngStyle]="{'color': chef.open ? 'green' :  'red'}">{{chef.open? "Open":"Closed"}}</span>
-                            <span *ngIf="chef.preOrderOnly" class="attribute">PreOrder Only</span>
+            <div *ngFor="let chef of filteredChefs " [routerLink]="[ '/cooks', chef._id] ">
+                <div class="chef-card">
+                    <div class="flex-row">
+                        <div style="height: 200px;width: 170px;">
+                            <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg" style="object-fit: cover;
+                        max-height: 196px;
+                        height: 196px;
+                        width: 170px;
+                        max-width: 170px;">
                         </div>
-
-                        <div class="flex-row-wrap">
-                            <ng-container *ngFor="let cuisine of chef.cuisines | slice:0:3">
-                                <div class="attribute">{{ cuisine.name }}</div>
-                            </ng-container>
-                        </div>
-                        <div class="flex-column" *ngIf="chef.doDelivery">
-                            <div class="flex-row" style="padding: 5px;align-items: center;">
-                                <img src="/assets/icons/motorbike.png" alt="" height="10px" width="10px" style="margin-right: 5px;">
-                                <span style="font-size: 12px;">I do delivery upto {{chef.deliveryDistance}} miles</span>
+                        <div class="flex-column gap-1" style="padding: 5px 20px;width: 100%;">
+                            <span class="chef-name mr-2">{{chef.kitchenName}}</span>
+                            <div class="clickable-row" style="font-size: 12px;">
+                                <fa-icon [icon]="faStar"></fa-icon>
+                                <span style="padding-left: 2px;">{{chef.rating}}</span>
+                                <span style="padding-left: 2px;">({{chef.reviews}} reviews)</span>
                             </div>
-                            <div class="flex-row" *ngIf="chef.freeDeliveryOver > 0" style="padding: 5px;align-items: center;">
-                                <img src="/assets/icons/free-shipping.png" alt="" height="10px" width="10px" style="margin-right: 5px;">
-                                <span style="font-size: 12px;">Free Delivery order over {{chef.freeDeliveryOver | currency: 'GBP'}}</span>
+                            <div class="flex-row">
+                                <span class="atribute" [ngStyle]="{'color': chef.open ? 'green' :  'red'}">{{chef.open?
+                                    "Open":"Closed"}}</span>
+                                <span *ngIf="chef.preOrderOnly" class="attribute">PreOrder Only</span>
+                            </div>
+                            <div class="flex-row-wrap">
+                                <ng-container *ngFor="let cuisine of chef.cuisines | slice:0:3">
+                                    <div class="attribute">{{ cuisine.name }}
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div class="flex-column" *ngIf="chef.doDelivery">
+                                <div class="flex-row" style="padding: 5px;align-items: center;">
+                                    <img src="/assets/icons/motorbike.png" alt height="10px" width="10px"
+                                        style="margin-right: 5px;">
+                                    <span style="font-size: 12px;">I do delivery
+                                        upto {{chef.deliveryDistance}} miles</span>
+                                </div>
+                                <div class="flex-row" *ngIf="chef.freeDeliveryOver > 0"
+                                    style="padding: 5px;align-items: center;">
+                                    <img src="/assets/icons/free-shipping.png" alt height="10px" width="10px"
+                                        style="margin-right: 5px;">
+                                    <span style="font-size: 12px;">Free Delivery
+                                        order over {{chef.freeDeliveryOver |
+                                        currency: 'GBP'}}</span>
+                                </div>
+                            </div>
+                            <div *ngIf="!chef.doDelivery" style="padding: 5px 0;">
+                                <span class="attribute">Collection Only</span>
                             </div>
                         </div>
-                        <div *ngIf="!chef.doDelivery" style="padding: 5px 0;">
-                            <span>Collection Only</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex-row align-items-center px-2">
-                    <span class="chef-name">{{chef.kitchenName}}</span>
-                    <div class="flex-row align-items-center">
-                        <fa-icon [icon]="faStar" class="fa-xs" style="margin-left: 10px;color: goldenrod;"></fa-icon>
-                        <span>{{chef.rating}}</span>
-                        <span style="margin-left: 10px;">({{chef.reviews? chef.reviews : 0}} reviews)</span>
                     </div>
                 </div>
             </div>
@@ -67,12 +78,12 @@
     </div>
 
     <div class="footer-div">
-        <div class="footer-container">
+        <div class="footer-container f-size-xs">
             <span>For any support or help you can contact us</span>
-            <span>customersupport.bigtree@gmail.com</span>
+            <span>contact.chumma@gmail.com</span>
             <div class="copyright-div">
-                <img src="/assets/icons/copyright.png" class="copyright-logo" />
-                <span>2024 Thadka</span>
+                <fa-icon [icon]="faCopyright"></fa-icon>
+                <span>2024 Chumma</span>
             </div>
         </div>
     </div>

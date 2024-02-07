@@ -43,13 +43,13 @@ export const environment = {
   LoginUrl:
     'https://bigtree-auth-service-672f06320174.herokuapp.com/customer/token',
   LogoutUrl:
-    'https://stormy-stream-36548-96356ce4833c.herokuapp.com/api/oauth/logout',
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/api/oauth/logout',
   RegisterUrl:
-    'https://stormy-stream-36548-96356ce4833c.herokuapp.com/api/users/register',
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/api/users/register',
   PasswordResetInitiateUrl:
-    'https://stormy-stream-36548-96356ce4833c.herokuapp.com/api/users/password-reset/initiate',
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/api/users/password-reset/initiate',
   PasswordResetSubmitUrl:
-    'https://stormy-stream-36548-96356ce4833c.herokuapp.com/api/users/password-reset/submit',
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/api/users/password-reset/submit',
 
   // Auth Server: https://stormy-stream-36548-96356ce4833c.herokuapp.com
   // Order Server: https://polar-fortress-28097-08459456d8d7.herokuapp.com

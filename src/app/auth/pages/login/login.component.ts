@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Utils } from 'src/app/helpers/utils';
 import { AccountService } from 'src/app/services/account.service';
-import { ContextService } from 'src/app/services/context.service';
 import { Subject, takeUntil } from 'rxjs';
 import { Errors } from 'src/app/model/auth-model';
 
@@ -28,9 +27,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private utils: Utils,
-    private accountService: AccountService,
-    
-    private ctxSvc: ContextService
+    private accountService: AccountService
   ) { }
 
   ngOnInit(): void {

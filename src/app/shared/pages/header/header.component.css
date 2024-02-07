@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Yatra+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap');;
 .page {
     position: fixed;
     top: 0;
@@ -34,7 +34,7 @@
     display: flex;
     align-items: center;
     margin: 10px;
-    height: 40px;
+    height: 48px;
     z-index: 999;
     padding: 0 10px;
 }
@@ -62,14 +62,20 @@
 .logo {
     cursor: pointer;
     font-size: 30px;
-    font-family: "Yatra One", system-ui;
+    font-family: 'Protest Guerrilla', sans-serif;
+    padding: 0 20px;
 }
 
-.logo-icon {
+.logo-icon, .cart-icon {
     font-size: 20px;
+}
+.cart-icon{
+    margin-right: 5px;
+}
+.cart-icon:hover{
+    cursor: pointer;
     color: var(--d-orange);
 }
-
 .change-location {
     cursor: pointer;
     border: 1px solid black;
@@ -106,12 +112,10 @@
     align-self: self-end;
     height: 40px;
     padding: 0 5px;
-    background-color: var(--yellow);
 }
 
 .cart-div:hover {
     cursor: pointer;
-    background-color: var(--yellow);
 }
 
 @media (min-width: 800px) {

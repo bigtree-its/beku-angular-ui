@@ -1,1 +1,48 @@
-<p>become-a-partner works!</p>
+<div class="main">
+    <div class="left">
+        <!-- <img src="/assets/images/home-cooking.jpeg"> -->
+    </div>
+    <div class="right">
+        <div style="min-width: 480px;height: 500px;padding: 20px;">
+            <div class="flex-column">
+                <span style="font-weight: 900;font-size: 30px;padding: 10px 0;">Contact Us</span>
+                <select class="form-select py-3 my-1" aria-label="Default select example">
+                    <option selected>How can we help you? *</option>
+                    <option value="1">I found incorrect outdated/information on a page</option>
+                    <option value="1">I would like to give feedback/suggestions</option>
+                    <option value="2">I would like to become a partner</option>
+                    <option value="3">Other</option>
+                  </select>
+                <div class="input-div">
+                    <input class="_381fS" type="text" name="fullName" id="fullName" tabindex="1" autocomplete="off" value="" [(ngModel)]="fullName" #ctrl="ngModel">
+                    <div class="_2EeI1 _26LFr"></div>
+                    <label class="_1Cvlf _2tL9P" for="fullName">Fullname</label>
+                </div>
+                <div class="input-div">
+                    <input class="_381fS" type="email" name="email" id="email" tabindex="1" autocomplete="off" value="" [(ngModel)]="email" #ctrl="ngModel">
+                    <div class="_2EeI1 _26LFr"></div>
+                    <label class="_1Cvlf _2tL9P" for="email">Email</label>
+                </div>
+                <div class="input-div">
+                    <input class="_381fS" type="email" name="mobile" id="mobile" tabindex="1" autocomplete="off" value="" [(ngModel)]="mobile" #ctrl="ngModel">
+                    <div class="_2EeI1 _26LFr"></div>
+                    <label class="_1Cvlf _2tL9P" for="email">Mobile</label>
+                </div>
+                <div class="input-div">
+                    <textarea class="_381tA" name="message" id="message" value [(ngModel)]="message" tabindex="3" #ctrl="ngModel" style="height: 100px;"></textarea>
+                    <div class="_2EeI1 _26LFr"></div>
+                    <label class="_1CvtA _2tL9P" for="message">Your Message</label>
+                </div>
+               
+                <br>
+                <button class="big-black-btn" (click)="submit()">Send to us</button>
+                <div *ngIf="loading">
+                    <span>Sending....</span>
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

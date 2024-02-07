@@ -1,26 +1,11 @@
 <div class="page">
     <div class="container-div">
         <div class="left-container">
-
             <fa-icon [icon]="faBars" (click)="toggleSideNav()" class="menu-icon material-icons"></fa-icon>
-
-            <!-- <div class="flex-row align-items-center" style="border: 1px solid red;padding: 1px;padding-left: 5px;">
-                <fa-icon [icon]="faKitchenSet" class="logo-icon"></fa-icon>
-                <div class="flex-column align-items-center" style="background-color:  red; color: #fff;">
-                    <div [routerLink]="['/']" routerLinkActive="router-link-active" class="logo">Open Kitchen</div>
-                    <small style="font-size: 8px;padding: 0 10px;">Home food from neighbourhood</small>
-                </div>
-            </div> -->
-            <div class="flex-column align-items-center" [routerLink]="['/']" routerLinkActive="router-link-active">
-                <div class="flex-row align-items-center">
-                    <!-- <fa-icon [icon]="logoIcon" class="logo-icon"></fa-icon> -->
-                    <div class="logo">Doodle</div>
-                </div>
-                <!-- <small style="color: var(--d-orange);">A Home food company</small> -->
-            </div>
-
-
-
+            <p [routerLink]="['/']" routerLinkActive="router-link-active" style="height: 48px;line-height: 9px;text-align: center;margin-top: 21px;padding-top: 11px;padding-left: 20px;padding-right: 20px;">
+                <span class="logo-text" style="font-size: 40px;">Chumma</span><br/>
+                <small style="font-size: 9px;">A Homefood Company</small>
+            </p>
             <div class="location-container" *ngIf="serviceLocation != null && serviceLocation !== undefined">
                 <span class="location-slug" [routerLink]="['cooks']" [queryParams]="{location: serviceLocation.slug}">#{{serviceLocation.name}},
                     {{serviceLocation.city}}</span>
@@ -29,8 +14,8 @@
         </div>
         <div class="right-container">
             <div class="cart-div" (click)="onClickBasket()">
-                <img src="/assets/icons/shopping-basket.png" height="20px" width="20px" style="margin: 0 1px;" [routerLink]="['/basket']">
-                <span class="cart-items-count">{{itemsCount}}</span>
+                <fa-icon [icon]="cartIcon" class="cart-icon" [routerLink]="['/basket']"></fa-icon>
+                <span style="padding-right: 5px;">{{itemsCount}}</span>
             </div>
         </div>
     </div>

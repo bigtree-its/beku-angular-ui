@@ -7,7 +7,7 @@ import { CustomerOrder } from 'src/app/model/localchef';
 import { AccountService } from 'src/app/services/account.service';
 import { User } from 'src/app/model/auth-model';
 import { NavigationService } from 'src/app/services/navigation.service';
-import { faBars, faKitchenSet, faCircle, faMugHot } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faKitchenSet, faBagShopping, faMugHot } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header',
@@ -22,6 +22,7 @@ export class HeaderComponent {
   user: User;
   faBars = faBars;
   logoIcon = faKitchenSet;
+  cartIcon = faBagShopping;
 
   constructor(
     private orderService: FoodOrderService,

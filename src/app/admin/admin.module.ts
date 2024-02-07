@@ -16,7 +16,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     MyOrdersComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    BecomeAPartnerComponent
   ],
   imports: [
     CommonModule,

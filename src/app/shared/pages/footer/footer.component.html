@@ -1,10 +1,23 @@
-<div class="page">
-    <div class="copyright-div">
-        <fa-icon [icon]="faCopyright" style="color: #fff"></fa-icon>
-        <!-- <img src="/assets/icons/copyright.png" class="copyright-logo" /> -->
-        <span>2024 Dudul</span>
+<div class="flex-column p-5 bg-light">
+    <span class="logo-text f-size-xl mb-3">Chumma</span>
+    <div class="flex-row gap-1">
+        <div class="flex-column mr-5">
+            <span class="ls-4">ABOUT CHUMMA</span>
+            <span class="clickable-text f-size-sm">Who we are</span>
+            <span class="clickable-text f-size-sm">Blog</span>
+            <span class="clickable-text f-size-sm" [routerLink]="['/become_a_partner']">Work With Us</span>
+            <span class="clickable-text f-size-sm" [routerLink]="['/become_a_partner']">Contact Us</span>
+        </div>
+
+        <div class="flex-column">
+            <span>LEARN MORE</span>
+            <span class="clickable-text f-size-sm">Privacy</span>
+            <span class="f-size-sm clickable-text">Security</span>
+            <span class="f-size-sm clickable-text">Terms</span>
+            <span class="f-size-sm clickable-text">Sitemap</span>
+        </div>
     </div>
-    <span class="contact-us">Become Partner</span>
-    <span class="contact-us">Contact Us</span>
-    <span class="contact-us">Terms</span>
+    <p class="mt-4 f-size-xs">By continuing past this page, you agree to our Terms of Service, 
+        Cookie Policy, Privacy Policy and Content Policies. 
+        All trademarks are properties of their respective owners. 2024 © Chumma™ Ltd. All rights reserved</p>
 </div>

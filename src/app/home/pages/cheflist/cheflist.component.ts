@@ -9,7 +9,7 @@ import { ContextService } from 'src/app/services/context.service';
 import { CuisinesService } from 'src/app/services/cusines.service';
 import { LocationService } from 'src/app/services/location.service';
 import { Utils } from 'src/app/services/utils';
-import { faStar, faMosque, faGopuram, faFish } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faCopyright } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -40,6 +40,7 @@ export class CheflistComponent implements OnDestroy{
   dishes: Dish[] = [];
   cuisine: Cuisine;
   faStar= faStar;
+  faCopyright= faCopyright;
 
   constructor(private activatedRoute: ActivatedRoute,
     private chefService: ChefService,

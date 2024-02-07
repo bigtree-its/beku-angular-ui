@@ -22,6 +22,7 @@ import { ChefService } from 'src/app/services/chef.service';
 import { FoodOrderService } from 'src/app/services/food-order.service';
 import { ReviewService } from 'src/app/services/review.service';
 import { Utils } from 'src/app/services/utils';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-chefhome',
@@ -43,6 +44,7 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
   displayCal: boolean = true;
   displayAllDays: boolean = false;
   displayWeeklyCals: boolean = false;
+  faStar = faStar;
 
   days: string[] = [
     'Sunday',
