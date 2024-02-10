@@ -16,7 +16,7 @@ import { Address } from 'src/app/model/common-models';
 import { FoodOrderService } from 'src/app/services/food-order.service';
 import { LocalService } from 'src/app/services/local.service';
 import { ChefService } from 'src/app/services/chef.service';
-import { faPersonBiking, faBox } from '@fortawesome/free-solid-svg-icons';
+import { faPersonBiking, faBox, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -34,6 +34,7 @@ export class CheckoutComponent implements OnDestroy{
 
   faPersonBiking = faPersonBiking;
   faBox = faBox;
+  faArrowLeft = faArrowLeft;
 
   enablePayButton: boolean = false;
 

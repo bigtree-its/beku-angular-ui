@@ -27,7 +27,9 @@ export class SideNavContentComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    console.log('Fetching logged in customer...')
     this.accountService.getData();
+    this.accountService.getCustomerPreferences();
     this.accountService.loginSession$.subscribe({
       next: (value) => {
         this.user = value;

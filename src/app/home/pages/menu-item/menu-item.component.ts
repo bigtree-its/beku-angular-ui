@@ -4,45 +4,51 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Utils } from 'src/app/services/utils';
 import { Day } from 'src/app/model/common-models';
 import { FoodOrderService } from 'src/app/services/food-order.service';
-
+import { faMinus, faPepperHot, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-menu-item',
   templateUrl: './menu-item.component.html',
-  styleUrls: ['./menu-item.component.css']
+  styleUrls: ['./menu-item.component.css'],
 })
 export class MenuItemComponent {
-
   @Input() menu?: Menu;
   @Input() displayOrderBy?: Boolean = false;
   @Input() displayDescription?: Boolean = false;
   @Input() orderBy?: Date = new Date();
-  price: number = 0.00;
+  price: number = 0.0;
   specialInstruction: string | undefined;
   selectedchoice?: Extra;
   selectedExtras: Extra[] = [];
   quantity: number = 1;
   orderByDate: Day;
 
-  constructor(private foodOrderService: FoodOrderService,
-    private utils: Utils,
-    private modalService: NgbModal) { 
-      
-    }
+  faPlus = faPlus;
+  faMinus = faMinus;
+  faPepperHot = faPepperHot;
 
+  constructor(
+    private foodOrderService: FoodOrderService,
+    private utils: Utils,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit() {
     this.price = this.menu.price;
   }
 
   open(content) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title',  windowClass: 'custom-class' }).result.then(
-      (result) => {
-      },
-      (reason) => {
-        // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      },
-    );
+    this.modalService
+      .open(content, {
+        ariaLabelledBy: 'modal-basic-title',
+        windowClass: 'custom-class',
+      })
+      .result.then(
+        (result) => {},
+        (reason) => {
+          // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
   }
 
   close() {
@@ -51,46 +57,49 @@ export class MenuItemComponent {
 
   handleChoiceSelection(e: any) {
     if (this.menu !== null && this.menu !== undefined) {
-      this.menu.choices.forEach(choice => {
+      this.menu.choices.forEach((choice) => {
         if (choice.name === e.target.value) {
-          if (this.selectedchoice === null || this.selectedchoice === undefined) {
+          if (
+            this.selectedchoice === null ||
+            this.selectedchoice === undefined
+          ) {
             this.selectedchoice = choice;
-            this.price = this.price + (this.selectedchoice.price * this.quantity);
+            this.price = this.price + this.selectedchoice.price * this.quantity;
             this.price = +(+this.price).toFixed(2);
           } else {
             // Remore Previously Added Choice
-            this.price = this.price - (this.selectedchoice.price * this.quantity);
+            this.price = this.price - this.selectedchoice.price * this.quantity;
             this.price = +(+this.price).toFixed(2);
             // Add New Choice
             this.selectedchoice = choice;
-            this.price = this.price + (this.selectedchoice.price * this.quantity);
+            this.price = this.price + this.selectedchoice.price * this.quantity;
             this.price = +(+this.price).toFixed(2);
           }
         }
-      })
+      });
     }
   }
 
   selectExtra(extraClicked: string, e: any) {
     if (this.menu !== null && this.menu !== undefined) {
-      this.menu.extras.forEach(item => {
+      this.menu.extras.forEach((item) => {
         if (item.name === extraClicked) {
           if (e.target.checked) {
             this.selectedExtras.push(item);
-            this.price = this.price + (item.price * this.quantity);
+            this.price = this.price + item.price * this.quantity;
             this.price = +(+this.price).toFixed(2);
           } else {
             for (var i = 0; i < this.selectedExtras.length; i++) {
               var ex = this.selectedExtras[i];
               if (ex.name === extraClicked) {
                 this.selectedExtras.splice(i, 1);
-                this.price = this.price - (ex.price * this.quantity);
+                this.price = this.price - ex.price * this.quantity;
                 this.price = +(+this.price).toFixed(2);
               }
             }
           }
         }
-      })
+      });
     }
   }
   increaseQuantity() {
@@ -119,7 +128,6 @@ export class MenuItemComponent {
       this.price = (this.menu.price + extraTotal) * this.quantity;
       this.price = +(+this.price).toFixed(2);
     }
-
   }
 
   addToOrder() {
@@ -134,7 +142,7 @@ export class MenuItemComponent {
       subTotal: this.price,
       extras: this.selectedExtras,
       choice: this.selectedchoice,
-      specialInstruction: this.specialInstruction
+      specialInstruction: this.specialInstruction,
     };
     this.foodOrderService.addToOrder(foodOrderItem);
     this.close();

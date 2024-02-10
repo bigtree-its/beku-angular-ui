@@ -27,15 +27,20 @@ export const environment = {
     'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments/payment-intent',
 
   LoginUrl:
-    'https://stormy-stream-36548-96356ce4833c.herokuapp.com/api/auth/login',
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/authenticate/customer/token',
   LogoutUrl:
-    'https://stormy-stream-36548-96356ce4833c.herokuapp.com/api/auth/logout',
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/api/auth/logout',
   RegisterUrl:
-    'https://stormy-stream-36548-96356ce4833c.herokuapp.com/api/users/register',
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/api/users/signup',
   PasswordResetInitiateUrl:
-    'https://stormy-stream-36548-96356ce4833c.herokuapp.com/api/users/password-reset/initiate',
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/passwords/reset_initiate',
   PasswordResetSubmitUrl:
-    'https://stormy-stream-36548-96356ce4833c.herokuapp.com/api/users/password-reset/submit',
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/passwords/reset_submit',
+
+  GetCustomerPreferencesUrl:
+    'http://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/replace-me/preferences',
+  CreateOrUpdateCustomerPreferencesUrl:
+    'http://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/preferences',
 
   debug: window['env']['debug'] || false,
 
@@ -46,5 +51,5 @@ export const environment = {
   X_RapidAPI_Username: window['env']['X_RapidAPI_Username'],
   X_RapidAPI_Host: window['env']['X_RapidAPI_Host'],
   CUSTOMER_APP_ACCESS_TOKEN:
-    'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2MtY2FwcC0zMTUyNjQiLCJpc3MiOiJ3d3cuYXV0aC5ob2MuY29tIiwiaWF0IjoxNzAzODc3MDI0LCJleHAiOjE3MzUzNDQwMDB9.Mdw14EyUbfIZkWh5Td5EuJRg_avzI6NM6D9tStM_64g3pm49fAl2Jt9DgZgtfCH4vt1VVxwkudikybCD5Eap2w',
+    'eyJhbGciOiJIUzUxMiJ9.eyJmaXJzdE5hbWUiOiJDdXN0b21lckFwcCIsImxhc3ROYW1lIjoiQ3VzdG9tZXJBcHAiLCJjbGllbnRUeXBlIjoiQ3VzdG9tZXJBcHAiLCJtb2JpbGUiOiIwNzk3OTE5MTE3NiIsImN1c3RvbWVySWQiOiI2NThlY2YxYjUyOTAyNDI0OTc2MzYxMDUiLCJleHAiOjE3MzkwNDg0NDIsInN1YiI6IlRoZUN1c3RvbWVyQXBwQGdtYWlsLmNvbSJ9.k0sPPCwRHRjZjh20koEAOSY1UNdNaggQJaqc0TfcmdbhpNIiHOHmtcZxu2Jp3kDSMNCfmoKyQX51eTF71jWWfQ',
 };

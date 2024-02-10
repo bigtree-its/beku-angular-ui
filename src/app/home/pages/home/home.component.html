@@ -5,13 +5,12 @@
             <!-- <span style="font-weight: 900;font-size: 30px;letter-spacing: 20px;">ORDER</span> -->
             <span class="hero-phrase">Discover a Homechef</span>
             <span class="hero-phrase">you'll love to eat</span>
-            <div class="scroller">
-                <span>
-                    Homemade<br/>
-                    Delicious<br/>
-                    Hygiene<br/>
-                    Healthy Food
-                </span>
+            <div class="content">
+                <div class="slider">
+                    <div class="slider-text1">Freshly Made</div>
+                    <div class="slider-text2">Home Cooked</div>
+                    <div class="slider-text3">Healthy Food</div>
+                </div>
             </div>
             <div class="hp-search-container">
                 <div class="flex-row" style="width: 80%;">
@@ -38,27 +37,24 @@
             </div>
         </div>
     </div>
-
-    <div class="flex-column justify-content-center align-items-center my-5">
-        <strong style="font-size: 22px;font-weight: 800;">Top Locations</strong>
-        <span style="font-size: 15px;text-align: center;">Choose from popular locations</span>
-        <div class="flex-column justify-content-center align-items-center">
-            <strong style="font-size: 15px;margin: 10px 0;">Glasgow</strong>
-            <div style="display: flex;justify-content: center;align-items: center;flex-flow: row wrap;gap: 0.5rem;" *ngIf="popularLocations !== null && popularLocations !== undefined">
-                <span class="btn-blu px-3 py-2" *ngFor="let pl of popularLocations" [routerLink]="['cooks']" [queryParams]="{location: pl.slug}">{{pl.name}}</span>
+    <div class="flex-column justify-content-center align-items-center p-4">
+        <div class="flex-row flex-wrap gap-1">
+            <div class="flex-column bg-light width-m align-items-center p-3">
+                <strong style="font-size: 22px;font-weight: 800;">Top Locations</strong>
+                <strong style="font-size: 15px;margin: 10px 0;">Glasgow</strong>
+                <div class="flex-column gap-1" *ngIf="popularLocations !== null && popularLocations !== undefined">
+                    <span class="clickable-text my-2" *ngFor="let pl of popularLocations" [routerLink]="['cooks']" [queryParams]="{location: pl.slug}">{{pl.name}}</span>
+                </div>
+            </div>
+            <div class="flex-column bg-light width-m  align-items-center p-3">
+                <strong style="font-size: 22px;font-weight: 800;">Top Cuisines</strong>
+                <div class="flex-column gap-1" *ngIf="popularLocations !== null && popularLocations !== undefined">
+                    <span class="clickable-text my-2" *ngFor="let cuisine of cuisines" [routerLink]="['cooks']" [queryParams]="{cuisine: cuisine.slug}">{{cuisine.name}}</span>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="flex-column justify-content-center align-items-center my-5">
-        <strong style="font-size: 22px;font-weight: 800;">Top Cuisines</strong>
-        <span style="font-size: 15px;text-align: center;">Browse popular cuisines from home chefs</span>
-        <div style=" display: flex; flex-direction: column;padding: 20px;width: 100%;margin-top: 10px;">
-            <div style="display: flex;justify-content: center;align-items: center;flex-flow: row wrap;gap: 0.5rem;" *ngIf="cuisines !== null && cuisines !== undefined">
-                <span class="btn-teal px-3 py-2" *ngFor="let cuisine of cuisines" [routerLink]="['cooks']" [queryParams]="{cuisine: cuisine.slug}">{{cuisine.name}}</span>
-            </div>
-        </div>
-    </div>
 
     <div class="flex-column justify-content-center align-items-center my-5 mx-3">
         <strong style="font-size: 22px;font-weight: 800;">How It Works!</strong>
@@ -89,34 +85,35 @@
                 <small>Enjoy the home cooked food at your home</small>
             </div>
         </div>
-
     </div>
+
 
     <div class="flex-column justify-content-center align-items-center" style="margin: 10px 0;">
         <span style="font-weight: 900;font-size: 25px;padding: 10px 0;">Join
             us</span>
         <div style="margin-bottom: 10px;">Be a part of <span class="logo-text">Chumma</span></div>
-        <div style="display: flex;flex-direction: row;gap: 1rem;flex-wrap: wrap;">
-            <div class="flex-row" style="background-color: var(--light-blue);margin: 10px;">
-                <div style=" height: 150px;width: 180px;margin-right: 10px;">
-                    <img src="/assets/images/become-a-partner.webp" style="width: 180px;max-height: 100%;object-fit: cover;transition: 0.5s ease-in-out;">
+        <div class="flex-row flex-wrap gap-1">
+            <div class="flex-row width-m bg-light" style="height: 200px;">
+                <div style="height: 200px;width:200px;">
+                    <img src="/assets/images/become-a-partner.webp" style="object-fit: cover;" height="100%" width="200px">
                 </div>
-                <div class="flex-column align-items-center justify-content-center" style="padding: 10px;">
+                <div class="flex-column justify-content-center align-items-center" style="height: 200px;width:100%;">
                     <span style="font-weight: 900;font-size: 20px;padding: 10px 0;">Become
                         a family chef</span>
-                    <p style="margin: 10px 0; word-wrap: break-word;padding: 0 20px;">Reach more customers and achieve growth with us</p>
+                    <p style="margin: 10px 0; word-wrap: break-word;padding: 0 20px;text-align: center;">Reach more customers and achieve growth with us</p>
                     <button style="border: none;padding: 8px; background-color: var(--orange);color: #fff;">Find
                         our more</button>
                 </div>
             </div>
-            <div class="flex-row" style="background-color: var(--light-blue);margin: 10px;">
-                <div style=" height: 150px;width: 180px;margin-right: 10px;">
-                    <img src="/assets/images/career-with-us.webp" style="  width: 180px;max-height: 100%;object-fit: cover;transition: 0.5s ease-in-out;">
+            <div class="flex-row width-m bg-light" style="height: 200px;">
+                <div style="height: 200px;width:200px;">
+                    <img src="/assets/images/career-with-us.webp" style="object-fit: cover;" height="100%" width="200px">
                 </div>
-                <div class="flex-column align-items-center justify-content-center" style="padding: 10px;">
+                <div class="flex-column justify-content-center align-items-center" style="height: 200px;width:100%;">
                     <span style="font-weight: 900;font-size: 20px;padding: 10px 0;">Build your career</span>
-                    <p style="margin: 10px 0; word-wrap: break-word;padding: 0 20px;">Join the dynamic team that makes it all happen</p>
-                    <button style="border: none;padding: 8px; background-color: var(--orange);color: #fff;">Find our more</button>
+                    <p style="margin: 10px 0; word-wrap: break-word;padding: 0 20px;text-align: center;">Join the dynamic team that makes it all happen</p>
+                    <button style="border: none;padding: 8px; background-color: var(--orange);color: #fff;">Find
+                        our more</button>
                 </div>
             </div>
         </div>

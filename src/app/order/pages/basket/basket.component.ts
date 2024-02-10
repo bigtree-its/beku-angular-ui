@@ -1,11 +1,13 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { faArrowLeft, faBatteryEmpty } from '@fortawesome/free-solid-svg-icons';
 import { CustomerOrder, FoodOrder, LocalChef } from 'src/app/model/localchef';
 import { ChefService } from 'src/app/services/chef.service';
 import { ContextService } from 'src/app/services/context.service';
 import { FoodOrderService } from 'src/app/services/food-order.service';
 import { Utils } from 'src/app/services/utils';
+
 
 @Component({
   selector: 'app-basket',
@@ -13,6 +15,9 @@ import { Utils } from 'src/app/services/utils';
   styleUrls: ['./basket.component.css']
 })
 export class BasketComponent {
+
+  faArrowLeft = faArrowLeft;
+  faBatteryEmpty = faBatteryEmpty;
 
   cartTotal: number = 0;
   order: CustomerOrder;

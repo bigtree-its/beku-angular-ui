@@ -36,10 +36,20 @@ export class ResetSubmitComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const qs = this.activatedRoute.snapshot.queryParamMap.get('qs');
-    var decryptedQS = this.cryptoService.decrypt(qs);
-    var params = decryptedQS.split("&");
-    this.oneTimePasscode = params[0].split("=")[1];
-    this.email = params[1].split("=")[1];
+    if ( this.utils.isEmpty(qs)){
+      this.errorMessage = "Something went wrong. Retry again."
+    }else{
+      var decryptedQS = this.cryptoService.decrypt(qs);
+      var params = decryptedQS.split("&");
+      this.oneTimePasscode = params[0].split("=")[1];
+      this.email = params[1].split("=")[1];
+      if ( this.utils.isEmpty(this.oneTimePasscode)){
+        this.errorMessage = "Something went wrong. Retry again."
+      }else  if ( this.utils.isEmpty(this.email)){
+        this.errorMessage = "Something went wrong. Retry again."
+      }
+     
+    }
 
   }
   submit() {

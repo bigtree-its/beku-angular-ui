@@ -32,24 +32,27 @@ export const environment = {
   // Auth URLs
 
   // Local
-  // LoginUrl:'http://localhost:8081/api/auth/login',
-  // LogoutUrl: 'http://localhost:8081/api/auth/logout',
-  // RegisterUrl: 'http://localhost:8081/api/users/register',
-  // PasswordResetInitiateUrl:
-  //   'http://localhost:8081/api/users/password-reset/initiate',
-  // PasswordResetSubmitUrl:
-  //   'http://localhost:8081/api/users/password-reset/submit',
-  // Heroku
-  LoginUrl:
-    'https://bigtree-auth-service-672f06320174.herokuapp.com/customer/token',
-  LogoutUrl:
-    'https://bigtree-auth-service-672f06320174.herokuapp.com/api/oauth/logout',
-  RegisterUrl:
-    'https://bigtree-auth-service-672f06320174.herokuapp.com/api/users/register',
+  LoginUrl:'http://localhost:8081/authenticate/customer/token',
+  LogoutUrl: 'http://localhost:8081/api/auth/logout',
+  RegisterUrl: 'http://localhost:8081/api/users/signup',
   PasswordResetInitiateUrl:
-    'https://bigtree-auth-service-672f06320174.herokuapp.com/api/users/password-reset/initiate',
-  PasswordResetSubmitUrl:
-    'https://bigtree-auth-service-672f06320174.herokuapp.com/api/users/password-reset/submit',
+    'http://localhost:8081/passwords/reset_initiate',
+  PasswordResetSubmitUrl:'http://localhost:8081/passwords/reset_submit',
+  GetCustomerPreferencesUrl:'http://localhost:8081/api/customers/replace-me/preferences',
+  CreateOrUpdateCustomerPreferencesUrl:'http://localhost:8081/api/customers/preferences',
+  // Heroku
+  // LoginUrl:
+  //   'https://bigtree-auth-service-672f06320174.herokuapp.com/authenticate/customer/token',
+  // LogoutUrl:
+  //   'https://bigtree-auth-service-672f06320174.herokuapp.com/api/oauth/logout',
+  // RegisterUrl:
+  //   'https://bigtree-auth-service-672f06320174.herokuapp.com/api/users/signup',
+  // PasswordResetInitiateUrl:
+  //   'https://bigtree-auth-service-672f06320174.herokuapp.com/passwords/reset_initiate',
+  // PasswordResetSubmitUrl:
+  //   'https://bigtree-auth-service-672f06320174.herokuapp.com/passwords/reset_submit',
+  // GetCustomerPreferencesUrl:'http://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/replace-me/preferences',
+  // CreateOrUpdateCustomerPreferencesUrl:'http://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/preferences',
 
   // Auth Server: https://stormy-stream-36548-96356ce4833c.herokuapp.com
   // Order Server: https://polar-fortress-28097-08459456d8d7.herokuapp.com
@@ -81,7 +84,7 @@ export const environment = {
     window['env']['X_RapidAPI_Key'] ||
     '249a5c6ab3mshce3cf38f2ca8130p195a93jsn3ad1c6002c20',
   CUSTOMER_APP_ACCESS_TOKEN:
-    'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2MtY2FwcC0zMTUyNjQiLCJpc3MiOiJ3d3cuYXV0aC5ob2MuY29tIiwiaWF0IjoxNzAzODc3MDI0LCJleHAiOjE3MzUzNDQwMDB9.Mdw14EyUbfIZkWh5Td5EuJRg_avzI6NM6D9tStM_64g3pm49fAl2Jt9DgZgtfCH4vt1VVxwkudikybCD5Eap2w',
+    'eyJhbGciOiJIUzUxMiJ9.eyJmaXJzdE5hbWUiOiJDdXN0b21lckFwcCIsImxhc3ROYW1lIjoiQ3VzdG9tZXJBcHAiLCJjbGllbnRUeXBlIjoiQ3VzdG9tZXJBcHAiLCJtb2JpbGUiOiIwNzk3OTE5MTE3NiIsImN1c3RvbWVySWQiOiI2NThlY2YxYjUyOTAyNDI0OTc2MzYxMDUiLCJleHAiOjE3MzkwNDg0NDIsInN1YiI6IlRoZUN1c3RvbWVyQXBwQGdtYWlsLmNvbSJ9.k0sPPCwRHRjZjh20koEAOSY1UNdNaggQJaqc0TfcmdbhpNIiHOHmtcZxu2Jp3kDSMNCfmoKyQX51eTF71jWWfQ',
 };
 
 /*

@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import {
-  catchError,
-  distinctUntilChanged,
-  map,
-  retry,
-  shareReplay,
   tap,
 } from 'rxjs/operators';
 
@@ -15,9 +10,7 @@ import { Router } from '@angular/router';
 import { LocalService } from './local.service';
 import {
   ApiResponse,
-  LoginRequest,
   LoginResponse,
-  LogoutRequest,
   PasswordResetInitiate,
   PasswordResetSubmit,
   RegisterRequest,
@@ -25,16 +18,20 @@ import {
 } from '../model/auth-model';
 import { ServiceLocator } from './service.locator';
 import { Constants } from './constants';
+import { CustomerPreferences } from '../model/CustomerPreferences';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AccountService {
-
+  
   public loginSession$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  public customerPreferences$: BehaviorSubject<CustomerPreferences> =
+    new BehaviorSubject<CustomerPreferences>(null);
   user: User;
 
   public redirectUrl: string = null;
+  customerPreferences: CustomerPreferences;
 
   constructor(
     private http: HttpClient,
@@ -70,27 +67,68 @@ export class AccountService {
 
   customerLogin(email: string, password: string): Observable<LoginResponse> {
     var req = {
-      "username" : email,
-      "password" : password,
-    }
+      username: email,
+      password: password,
+    };
     console.log('Submitting login credentials to server..');
     return this.http
-      .post<LoginResponse>(this.serviceLocator.LoginUrl, req, {
-        headers: { skip: 'true' },
-      })
+      .post<LoginResponse>(this.serviceLocator.LoginUrl, req)
       .pipe(
         tap((result) => {
           console.log('Login response ' + JSON.stringify(result));
           if (this.redirectUrl) {
-            console.log('redirecting to '+ this.redirectUrl)
+            console.log('redirecting to ' + this.redirectUrl);
             this.router.navigateByUrl(this.redirectUrl);
             this.redirectUrl = null;
-          }else{
-            this.router.navigate(["/"])
+          } else {
+            this.router.navigate(['/']);
           }
           this.setUser(result);
+          
         })
       );
+  }
+
+  retrievePreferences(): Observable<CustomerPreferences>{
+    console.log('Retrieving CustomerPreferences directly ');
+    return this.http.get<CustomerPreferences>("http://localhost:8081/api/customers/65c628d4ecf11762a007f412/preferences");
+  }
+
+  public updatePreferences(req: CustomerPreferences): Observable<CustomerPreferences> {
+    return this.http.post<CustomerPreferences>(this.serviceLocator.CreateOrUpdateCustomerPreferencesUrl,req, {
+      headers: {
+        useCustomerToken: 'true'
+      },
+    });
+  }
+
+  fetchCustomerPreferences(customerId: string): Observable<CustomerPreferences> {
+   
+    var url = this.serviceLocator.GetCustomerPreferencesUrl.replaceAll(
+      'replace-me',
+      customerId
+    );
+    console.log('Retrieving CustomerPreferences '+ url);
+    return this.http.get<CustomerPreferences>(url,{
+      headers: {
+        useCustomerToken: 'true'
+      },
+    }
+      ).pipe(
+      tap((data) => {
+        console.log('Customer preference response '+ JSON.stringify(data))
+        this.setCustomerPreferences(data);
+      })
+    );
+  }
+
+  setCustomerPreferences(data: CustomerPreferences) {
+    this.localService.saveData(
+      this.constants.StorageItem_C_Preferences,
+      JSON.stringify(data)
+    );
+    this.customerPreferences = data;
+    this.customerPreferences$.next(this.customerPreferences);
   }
 
   login(email: string, password: string): Observable<LoginResponse> {
@@ -100,37 +138,33 @@ export class AccountService {
     body.set('grant_type', 'password');
     body.set('client_type', 'Customer');
 
-    
     console.log('Submitting login credentials to server..');
     return this.http
       .post<LoginResponse>(this.serviceLocator.LoginUrl, body, {
-        headers: { skip: 'true', 'Content-Type':'application/x-www-form-urlencoded' },
+        headers: {
+          skip: 'true',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
       })
       .pipe(
         tap((result) => {
           console.log('Login response ' + JSON.stringify(result));
           if (this.redirectUrl) {
-            console.log('redirecting to '+ this.redirectUrl)
+            console.log('redirecting to ' + this.redirectUrl);
             // this.router.navigate([this.redirectUrl]);
             this.router.navigateByUrl(this.redirectUrl);
             this.redirectUrl = null;
-          }else{
-            this.router.navigate(["/"])
+          } else {
+            this.router.navigate(['/']);
           }
           this.setUser(result);
         })
       );
   }
 
-  register(
-    registerReq: RegisterRequest
-  ): Observable<{ loginResp: LoginResponse }> {
+  register(registerReq: RegisterRequest): Observable<{ loginResp: LoginResponse }> {
     return this.http
-      .post<{ loginResp: LoginResponse }>(
-        this.serviceLocator.RegisterUrl,
-        registerReq,
-        { headers: { skip: 'true' } }
-      )
+      .post<{ loginResp: LoginResponse }>(this.serviceLocator.RegisterUrl,registerReq)
       .pipe(
         tap(({ loginResp }) => {
           this.setUser(loginResp);
@@ -141,56 +175,40 @@ export class AccountService {
   private setUser(loginResp: LoginResponse) {
     this.jwtService.saveAccessToken(loginResp.accessToken);
     var user: User = this.buildUser(loginResp.accessToken);
-    this.localService.saveData(this.constants.StorageItem_C_User, JSON.stringify(user));
+    this.localService.saveData(
+      this.constants.StorageItem_C_User,
+      JSON.stringify(user)
+    );
     this.user = user;
+    // this.fetchCustomerPreferences(user.id);
     this.loginSession$.next(this.user);
   }
 
   private buildUser(token: string) {
     var tokenClaims = this.jwtService.getDecodedAccessToken(token);
     var user: User = {
-      id: tokenClaims.clientId,
+      id: tokenClaims.customerId,
       firstName: tokenClaims.firstName,
       lastName: tokenClaims.lastName,
       name: tokenClaims.firstName + ' ' + tokenClaims.lastName,
-      email: tokenClaims.email,
+      email: tokenClaims.sub,
       mobile: tokenClaims.mobile,
     };
     return user;
   }
 
-  public passwordResetInitiate(
-    req: PasswordResetInitiate
-  ): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(
-      this.serviceLocator.PasswordResetInitiateUrl,
-      req,
-      { headers: { skip: 'true' } }
-    );
+  public passwordResetInitiate(req: PasswordResetInitiate): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(this.serviceLocator.PasswordResetInitiateUrl,req);
   }
 
-  public passwordResetSubmit(
-    req: PasswordResetSubmit
-  ): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(
-      this.serviceLocator.PasswordResetSubmitUrl,
-      req,
-      { headers: { skip: 'true' } }
-    );
+  public passwordResetSubmit(req: PasswordResetSubmit): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(this.serviceLocator.PasswordResetSubmitUrl,req);
   }
 
   public logout() {
     console.log('Logout...');
-    // var token = this.jwtService.getIdToken();
-    // var claims = this.jwtService.getDecodedAccessToken(token);
     this.purgeAuth();
     void this.router.navigate(['/']);
-    // const req: LogoutRequest = {
-    //   userId: claims.userId,
-    // };
-    // return this.http.post<void>(this.serviceLocator.LogoutUrl, req, {
-    //   headers: { skip: 'true' },
-    // });
   }
 
   purgeAuth(): void {
@@ -211,6 +229,24 @@ export class AccountService {
       var obj = JSON.parse(json);
       this.user = obj.constructor.name === 'Array' ? obj[0] : obj;
       this.loginSession$.next(this.user);
+    }
+  }
+
+  getCustomerPreferences() {
+    var json = this.localService.getData(
+      this.constants.StorageItem_C_Preferences
+    );
+    console.log('Customer preferences in storage '+ json)
+    if (json === undefined || json === null || json === '') {
+      if ( this.user !== null && this.user !== undefined){
+        this.fetchCustomerPreferences(this.user.id);
+      }
+    }
+    if (json !== '' && json !== null && json !== undefined) {
+      var obj = JSON.parse(json);
+      this.customerPreferences =
+        obj.constructor.name === 'Array' ? obj[0] : obj;
+      this.customerPreferences$.next(this.customerPreferences);
     }
   }
 }

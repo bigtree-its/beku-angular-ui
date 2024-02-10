@@ -7,7 +7,7 @@
     </div>
     <div class="flex-column">
         <span *ngIf="user === null" class="navItem" routerLink="/login">Login</span>
-        <span *ngIf="user === null" class="navItem">Signup</span>
+        <span *ngIf="user === null" class="navItem" routerLink="/register">Signup</span>
         <span *ngIf="user !== null" class="navItem" (click)="logout()">Logout</span>
         <span *ngIf="user !== null" class="navItem">Orders</span>
         <span class="navItem">Become a partner</span>

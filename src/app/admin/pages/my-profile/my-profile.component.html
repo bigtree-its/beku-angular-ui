@@ -52,7 +52,7 @@
     <div class="d-flex justify-content-center">
         <div class="flex-column  mobile-w">
             <span class="sub-header mb-3">Update Security Details</span>
-            <div class="input-div">
+            <!-- <div class="input-div">
                 <input class="_381fS" type="password" name="newPassword" id="newPassword" tabindex="1" autocomplete="off" value="" [(ngModel)]="newPassword" #ctrl="ngModel">
                 <div class="_2EeI1 _26LFr"></div>
                 <label class="_1Cvlf _2tL9P" for="password">New Password</label>
@@ -61,9 +61,9 @@
                 <input class="_381fS" type="password" name="password" id="password" tabindex="1" autocomplete="off" value="" [(ngModel)]="password" #ctrl="ngModel">
                 <div class="_2EeI1 _26LFr"></div>
                 <label class="_1Cvlf _2tL9P" for="password">Current Password</label>
-            </div>
+            </div> -->
             <br>
-            <button class="big-grn-btn" (click)="changePassword()">Update Security Details</button>
+            <button class="big-grn-btn" [routerLink]="['/password_reset/new']">Reset your password</button>
         </div>
     </div>
 </ng-template>
@@ -71,14 +71,13 @@
     <div class="d-flex justify-content-center">
         <div class="flex-column  mobile-w ">
             <span class="sub-header mb-5">Update Preferences</span>
-            <div class="flex-between mb-3  border b-r-6 p-3">
-                <span class="word-wrap">Receive communications for Offers, Promotions via email</span>
+            <div class="flex-between mb-3 gap-1 border br-7 p-3">
+                <span class="word-wrap mr-1">Receive communications for Offers, Promotions via email</span>
                 <input type="checkbox" id="receiveEmailComms">
             </div>
-            <div class="input-div">
-                <input class="_381fS" type="password" name="password" id="password" tabindex="1" autocomplete="off" value="" [(ngModel)]="password" #ctrl="ngModel">
-                <div class="_2EeI1 _26LFr"></div>
-                <label class="_1Cvlf _2tL9P" for="password">Current Password</label>
+            <div class="flex-between mb-3 gap-1 border br-7 p-3">
+                <span class="word-wrap mr-1">Receive communications for Offers, Promotions via mobile</span>
+                <input type="checkbox" id="receiveMobileComms">
             </div>
             <br>
             <button class="big-grn-btn" (click)="changePreferences()">Update Preferences</button>

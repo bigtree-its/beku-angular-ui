@@ -1,19 +1,21 @@
-<div class="page">
-    <div class="container-div">
-        <div class="left-container">
-            <fa-icon [icon]="faBars" (click)="toggleSideNav()" class="menu-icon material-icons"></fa-icon>
-            <p [routerLink]="['/']" routerLinkActive="router-link-active" style="height: 48px;line-height: 9px;text-align: center;margin-top: 21px;padding-top: 11px;padding-left: 20px;padding-right: 20px;">
+<div class="page bg-light">
+    <div class="flex-row-space-between align-items-center" style="height: 50px;">
+        <div class="flex-row flex-start align-items-center">
+            <fa-icon [icon]="faBars" (click)="toggleSideNav()" class="menu-icon"></fa-icon>
+            <p [routerLink]="['/']" routerLinkActive="router-link-active" style="height: 50px;line-height: 9px;text-align: center;margin-top: 5px;padding-top: 20px;padding-left: 10px;padding-right: 20px;">
                 <span class="logo-text" style="font-size: 40px;">Chumma</span><br/>
                 <small style="font-size: 9px;">A Homefood Company</small>
             </p>
-            <div class="location-container" *ngIf="serviceLocation != null && serviceLocation !== undefined">
+            <div class="flex-row lg gap-1 align-items-center" *ngIf="serviceLocation != null && serviceLocation !== undefined">
                 <span class="location-slug" [routerLink]="['cooks']" [queryParams]="{location: serviceLocation.slug}">#{{serviceLocation.name}},
                     {{serviceLocation.city}}</span>
-                <span class="change-area" routerLink="/">Change</span>
+                <small class="clickable-text" routerLink="/">Change</small>
             </div>
         </div>
-        <div class="right-container">
-            <div class="cart-div" (click)="onClickBasket()">
+        <div class="flex-row flex-end align-items-center">
+            <button *ngIf="user === null" class="btn-outline-blue mr-1 lg" routerLink="/login">Login</button>
+            <button *ngIf="user === null" class="btn-blue lg" routerLink="/register">Create Account</button>
+            <div class="flex-row mr-1 ml-3 align-items-center" (click)="onClickBasket()">
                 <fa-icon [icon]="cartIcon" class="cart-icon" [routerLink]="['/basket']"></fa-icon>
                 <span style="padding-right: 5px;">{{itemsCount}}</span>
             </div>

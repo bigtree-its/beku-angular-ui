@@ -1,4 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
+import { CustomerPreferences } from 'src/app/model/CustomerPreferences';
 import { User } from 'src/app/model/auth-model';
 import { AccountService } from 'src/app/services/account.service';
 import { ToastService } from 'src/app/services/toast.service';
@@ -9,8 +11,10 @@ import { Utils } from 'src/app/services/utils';
   templateUrl: './my-profile.component.html',
   styleUrls: ['./my-profile.component.css']
 })
-export class MyProfileComponent implements OnInit{
+export class MyProfileComponent implements OnInit, OnDestroy{
 
+
+  destroy$ = new Subject<void>();
 
   accountService = inject(AccountService);
   utils = inject(Utils);
@@ -29,6 +33,12 @@ export class MyProfileComponent implements OnInit{
   newPassword: string;
   error: boolean;
   message: string;
+  customerPreferences: CustomerPreferences;
+  communicationViaEmail: Boolean;
+  communicationViaMobile: Boolean;
+  cuisines: string[] = [];
+  chefs: string[] = [];
+  foods: string[] = [];
 
   ngOnInit(): void {
     this.accountService.getData();
@@ -45,6 +55,23 @@ export class MyProfileComponent implements OnInit{
       error: (err) => console.error('CustomerObject emitted an error: ' + err),
       complete: () =>
         console.log('CustomerObject emitted the complete notification'),
+    });
+
+    this.accountService.getCustomerPreferences();
+    this.accountService.customerPreferences$.subscribe({
+      next: (value) => {
+        this.customerPreferences = value;
+        if ( this.customerPreferences !== null && this.customerPreferences !== undefined){
+          this.communicationViaEmail = this.customerPreferences.communicationViaEmail;
+          this.communicationViaMobile = this.customerPreferences.communicationViaMobile;
+          this.cuisines = this.customerPreferences.cuisines;
+          this.chefs = this.customerPreferences.chefs;
+          this.foods = this.customerPreferences.foods;
+        }
+      },
+      error: (err) => console.error('CustomerPreferences emitted an error: ' + err),
+      complete: () =>
+        console.log('CustomerPreferences emitted the complete notification'),
     });
   }
 
@@ -95,7 +122,34 @@ export class MyProfileComponent implements OnInit{
 
 
   changePreferences() {
-    throw new Error('Method not implemented.');
+    if (this.customerPreferences === null || this.customerPreferences === undefined){
+      this.customerPreferences = {
+        "customerId": this.user.id,
+        "communicationViaEmail": this.communicationViaEmail,
+        "communicationViaMobile": this.communicationViaMobile,
+        "chefs": [],
+        "cuisines": [],
+        "foods": [],
+      }
+    }else{
+      this.customerPreferences.communicationViaEmail = this.communicationViaEmail;
+      this.customerPreferences.communicationViaMobile = this.communicationViaMobile;
+    }
+    let observable = this.accountService.updatePreferences(this.customerPreferences)
+    observable.pipe(takeUntil(this.destroy$)).subscribe({
+      next: () => {
+        console.log('Your preferences have been updated')
+        this.toastService.info('Your preferences have been updated')
+      },
+      error: (err) => {
+        this.toastService.info('Something went wrong. Please tray later.')
+      },
+    });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }

@@ -49,9 +49,9 @@
             </div>
 
             <div style="margin-left: 15px;width: 50px;" class="flex-row">
-                <img src="/assets/icons/jalapeno.png" [class.selectedSpice]="menu.spice > 0" class="spice" placement="top" ngbTooltip="Mild">
-                <img src="/assets/icons/jalapeno.png" [class.selectedSpice]="menu.spice > 1" class="spice" placement="top" ngbTooltip="Hot">
-                <img src="/assets/icons/jalapeno.png" [class.selectedSpice]="menu.spice > 2" class="spice" placement="top" ngbTooltip="Extra Hot">
+                <fa-icon [icon]="faPepperHot" [class.selectedSpice]="menu.spice > 0" class="spice" placement="top" ngbTooltip="Mild"></fa-icon>
+                <fa-icon [icon]="faPepperHot" [class.selectedSpice]="menu.spice > 1" class="spice" placement="top" ngbTooltip="Hot"></fa-icon>
+                <fa-icon [icon]="faPepperHot" [class.selectedSpice]="menu.spice > 2" class="spice" placement="top" ngbTooltip="Extra Hot"></fa-icon>
             </div>
         </div>
         <div class="flex-column" *ngIf="menu.choices !== null && menu.choices !== undefined && menu.choices.length > 0">
@@ -87,12 +87,12 @@
     <div class="modal-footer flex-column" style="margin: 10px;padding: 10px;gap:.6rem;">
         <div style="display: flex;justify-content: center;">
             <div style="padding: 5px;display: flex;justify-content: space-around;align-items: center;">
-                <div class="qty-btn-container">
-                    <img src="/assets/icons/minus.png" class="qty-btn" (click)="decreaseQuantity()">
+                <div class="qty-btn-container" (click)="decreaseQuantity()">
+                    <fa-icon [icon]="faMinus"></fa-icon>
                 </div>
                 <span class="qty-value">{{quantity}}</span>
-                <div class="qty-btn-container">
-                    <img src="/assets/icons/plus.png" class="qty-btn" (click)="increaseQuantity()">
+                <div class="qty-btn-container" (click)="increaseQuantity()">
+                    <fa-icon [icon]="faPlus"></fa-icon>
                 </div>
             </div>
         </div>

@@ -22,7 +22,7 @@ import { ChefService } from 'src/app/services/chef.service';
 import { FoodOrderService } from 'src/app/services/food-order.service';
 import { ReviewService } from 'src/app/services/review.service';
 import { Utils } from 'src/app/services/utils';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faArrowRight, faFaceSmile, faPeopleArrows, faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-chefhome',
@@ -32,6 +32,11 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 export class ChefHomeComponent implements AfterViewInit, OnDestroy {
   @ViewChild('widgetsContent', { read: ElementRef })
   public widgetsContent: ElementRef<any>;
+
+  faArrowLeft = faArrowLeft;
+  faArrowRight = faArrowRight;
+  faPeopleArrows= faPeopleArrows;
+  faFaceSmile = faFaceSmile;
 
   chef: LocalChef | undefined;
   display_picture: any;

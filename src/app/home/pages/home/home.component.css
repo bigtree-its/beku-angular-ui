@@ -1,4 +1,4 @@
-.home-wrapper{
+.home-wrapper {
     width: 397px;
     display: flex;
     flex-direction: column;
@@ -55,9 +55,71 @@
     background-color: #0be1d3;
 }
 
-
 .flip-image img {
     transform: scaleX(-1);
+}
+
+.slider-wrapper {
+    font-size: 40px;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider {
+    height: 50px;
+    line-height: 50px;
+    overflow: hidden;
+    align-items: center;
+    text-align: center;
+    background-color: aliceblue;
+    margin: 10px 0;
+    border-radius: 20px;
+}
+
+.slider div {
+    height: 50px;
+    margin-bottom: 50px;
+    padding: 2px 15px;
+    text-align: center;
+    box-sizing: border-box;
+    font-weight: 900;
+    font-size: 30px;
+}
+
+.slider-text1 {
+    animation: slide 5s linear infinite;
+}
+
+.slider-text2 {}
+
+.slider-text3 {}
+
+@keyframes slide {
+    0% {
+        margin-top: -300px;
+    }
+    5% {
+        margin-top: -200px;
+    }
+    33% {
+        margin-top: -200px;
+    }
+    38% {
+        margin-top: -100px;
+    }
+    66% {
+        margin-top: -100px;
+    }
+    71% {
+        margin-top: 0;
+    }
+    100% {
+        margin-top: 0;
+    }
 }
 
 .scroller {
@@ -79,27 +141,21 @@
     font-size: 30px;
 }
 
-.animated-text p {
-    animation-duration: 1s;
-    animation-fill-mode: both;
+.slider {
+    overflow-y: hidden;
+    max-height: 500px;
+    /* approximate max height */
+    transition-property: all;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 }
 
-.text1 {
-    animation-name: example;
-    animation-delay: 0s;
+.slider.closed {
+    max-height: 0;
 }
 
-.text2 {
-    animation-name: example;
-    animation-delay: 1s;
-}
 
-.text3 {
-    animation-name: example;
-    animation-delay: 2s;
-}
-
-@keyframes slide {
+/* @keyframes slide {
     0% {
         top: 0;
     }
@@ -112,17 +168,17 @@
     75% {
         top: -10.0em;
     }
-}
+} */
 
 @media (min-width: 700px) {
-    .home-wrapper{
+    .home-wrapper {
         width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         margin-top: 80px;
     }
-    .hero-left{
+    .hero-left {
         display: flex;
         flex-direction: column;
         justify-content: center;

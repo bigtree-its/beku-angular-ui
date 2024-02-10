@@ -1,12 +1,9 @@
 .page {
     display: flex;
     flex-direction: column;
-    margin-top: 100px;
+    margin-top: 60px;
     height: 100vh;
-}
-
-.cuisines-div {
-    display: none;
+    align-items: center;
 }
 
 .cuisine {
@@ -36,12 +33,6 @@
 .selectedCuisine {
     background-color: var(--gold);
     color: #fff;
-}
-
-.location-div {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
 }
 
 .location-container {
@@ -122,32 +113,83 @@
     width: 10px;
 }
 
+article {
+    --img-scale: 1.001;
+    --title-color: black;
+    --link-icon-translate: -20px;
+    --link-icon-opacity: 0;
+    border-radius: 16px;
+    box-shadow: none;
+    background: #fff;
+    transform-origin: center;
+    transition: all 0.4s ease-in-out;
+    overflow: hidden;
+    width: 300px;
+    margin: 10px;
+}
 
-/* Desktop */
+article a::after {
+    /* position: absolute; */
+    inset-block: 0;
+    inset-inline: 0;
+    cursor: pointer;
+    content: "";
+}
 
-@media (min-width: 700px) {
-    .chef-container {
-        display: flex;
-        flex-direction: row;
-        padding-bottom: 50px;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        width: 75%;
-    }
-    .cuisines-div {
-        display: flex;
-        flex-direction: column;
-        width: 25%;
-    }
-    .cuisines-list-div {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        padding: 10px;
-        max-height: 500px;
-        overflow-y: auto;
-    }
-    .location-container {
-        display: none;
-    }
+article h2 {
+    margin: 0 0 18px 0;
+    font-size: 20px;
+    letter-spacing: 0.06em;
+    color: var(--title-color);
+    transition: color 0.3s ease-out;
+}
+
+figure {
+    margin: 0;
+    padding: 0;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+
+article img {
+    max-width: 100%;
+    transform-origin: center;
+    transform: scale(var(--img-scale));
+    transition: transform 0.4s ease-in-out;
+}
+
+.article-body {
+    padding: 24px;
+}
+
+article a {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: #28666e;
+}
+
+article a:focus {
+    outline: 1px dotted #28666e;
+}
+
+article a .icon {
+    min-width: 24px;
+    width: 24px;
+    height: 24px;
+    margin-left: 5px;
+    transform: translateX(var(--link-icon-translate));
+    opacity: var(--link-icon-opacity);
+    transition: all 0.3s;
+}
+
+
+/* using the has() relational pseudo selector to update our custom properties */
+
+article:has(:hover, :focus) {
+    --img-scale: 1.1;
+    --title-color: #28666e;
+    --link-icon-translate: 0;
+    --link-icon-opacity: 1;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }

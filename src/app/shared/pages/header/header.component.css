@@ -1,57 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap');;
+@import url('https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap');
 .page {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-}
-
-.container-div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.dropdown-toggle::after {
-    display: none;
-}
-
-.location-container {
-    display: none;
-}
-
-.location-slug {
-    font-weight: 500;
-}
-
-.location-slug:hover {
-    text-decoration: underline;
-    cursor: pointer;
-    color: var(--black);
-}
-
-.left-container {
-    display: flex;
-    align-items: center;
-    margin: 10px;
-    height: 48px;
-    z-index: 999;
-    padding: 0 10px;
-}
-
-.right-container {
-    display: flex;
-    justify-content: flex-end;
-    margin: 10px;
-    height: 40px;
-    width: 20%;
-    z-index: 999;
+    height: 50px;
 }
 
 .menu-icon {
-    font-size: 1.5em;
-    padding: 18px;
-    cursor: pointer;
+    padding: 0 6px;
+    font-size: 15px;
 }
 
 .menu-icon:hover {
@@ -66,65 +24,16 @@
     padding: 0 20px;
 }
 
-.logo-icon, .cart-icon {
+.logo-icon,
+.cart-icon {
     font-size: 20px;
 }
-.cart-icon{
+
+.cart-icon {
     margin-right: 5px;
 }
-.cart-icon:hover{
+
+.cart-icon:hover {
     cursor: pointer;
     color: var(--d-orange);
-}
-.change-location {
-    cursor: pointer;
-    border: 1px solid black;
-    text-decoration: underline;
-}
-
-.change-location:hover {
-    cursor: pointer;
-    background-color: aqua;
-    color: white;
-}
-
-.cart-items-count {
-    padding-right: 5px;
-}
-
-.cart-section {
-    display: flex;
-}
-
-.user-icon-button {
-    padding: 4px 8px;
-    border-radius: 0;
-    background-color: var(--green);
-    border: none;
-    height: 40px;
-    align-self: flex-end;
-}
-
-.cart-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-self: self-end;
-    height: 40px;
-    padding: 0 5px;
-}
-
-.cart-div:hover {
-    cursor: pointer;
-}
-
-@media (min-width: 800px) {
-    .location-container {
-        display: flex;
-        justify-content: space-between;
-        gap: 0.8rem;
-        align-items: center;
-        padding: 5px;
-        margin-left: 10px;
-    }
 }
