@@ -1,15 +1,29 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { Subject, takeUntil } from 'rxjs';
 import { Utils } from 'src/app/helpers/utils';
 import { Errors } from 'src/app/model/auth-model';
+import { Contacts } from 'src/app/model/common-models';
 import { AccountService } from 'src/app/services/account.service';
+import { ContactsService } from 'src/app/services/contacts.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-become-a-partner',
   templateUrl: './become-a-partner.component.html',
-  styleUrls: ['./become-a-partner.component.css']
+  styleUrls: ['./become-a-partner.component.css'],
 })
-export class BecomeAPartnerComponent implements OnInit, OnDestroy{
+export class BecomeAPartnerComponent implements OnInit, OnDestroy {
+  @ViewChild('aboutSelection') aboutSelection!: ElementRef;
+
+  faPaperPlane = faPaperPlane;
 
   submitted: boolean = false;
   loading: boolean = false;
@@ -20,12 +34,16 @@ export class BecomeAPartnerComponent implements OnInit, OnDestroy{
   mobile: string;
   message: string;
   returnUrl: string;
+  about: string = 'Other';
   destroy$ = new Subject<void>();
   errors: Errors = { errors: {} };
-  errorMessage: any;
+  errorMessage: string = null;
 
   private utils = inject(Utils);
-  private accountService = inject(AccountService)
+  private contactService = inject(ContactsService);
+  private toastService = inject(ToastService);
+
+  response: string = null;
 
   ngOnInit(): void {
     this.loading = false;
@@ -52,22 +70,38 @@ export class BecomeAPartnerComponent implements OnInit, OnDestroy{
       return;
     }
     this.submitted = true;
+    this.response = null;
+    this.errorMessage = null;
     // reset alerts on submit
     this.loading = true;
-    console.log('Submitting login..')
-    let observable = this.accountService.customerLogin(this.email, this.fullName);
+    var c: Contacts = {
+      fullName: this.fullName,
+      email: this.email,
+      mobile: this.mobile,
+      about: this.about,
+      message: this.message,
+    };
+    console.log('Submitting your message..');
+    let observable = this.contactService.createContact(c);
     observable.pipe(takeUntil(this.destroy$)).subscribe({
       next: () => {
-        this.errorMessage = undefined;
+        this.loading = false;
+        this.errorMessage = null;
+        this.toastService.info("Your message has been sent. The customer support team will get in touch with you shortly.");
+        // this.response =
+          // 'Your message has been sent. The customer support team will get in touch with you shortly.';
       },
       error: (err) => {
-        console.error('Errors from reset submit.'+ JSON.stringify(err))
+        console.error('Error when sending your message.' + JSON.stringify(err));
         this.errors = err;
         this.loading = false;
         this.errorMessage = err.error.detail;
       },
     });
+  }
 
+  onChangeAbout() {
+    this.about = this.aboutSelection.nativeElement.value;
   }
 
   ngOnDestroy() {

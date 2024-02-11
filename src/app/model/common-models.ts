@@ -1,3 +1,20 @@
+
+export interface Contacts {
+    _id?: string;
+    fullName: string;
+    email: string;
+    mobile: string;
+    about: string;
+    message: string;
+}
+
+export interface PersonalDetails {
+    customerId: string;
+    firstName: string;
+    lastName: string;
+    mobile: string;
+}
+
 export interface ProductQuestion {
     _id: string;
     entity: string;

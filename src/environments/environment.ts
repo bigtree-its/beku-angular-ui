@@ -32,14 +32,17 @@ export const environment = {
   // Auth URLs
 
   // Local
-  LoginUrl:'http://localhost:8081/authenticate/customer/token',
+  LoginUrl: 'http://localhost:8081/authenticate/customer/token',
   LogoutUrl: 'http://localhost:8081/api/auth/logout',
   RegisterUrl: 'http://localhost:8081/api/users/signup',
-  PasswordResetInitiateUrl:
-    'http://localhost:8081/passwords/reset_initiate',
-  PasswordResetSubmitUrl:'http://localhost:8081/passwords/reset_submit',
-  GetCustomerPreferencesUrl:'http://localhost:8081/api/customers/replace-me/preferences',
-  CreateOrUpdateCustomerPreferencesUrl:'http://localhost:8081/api/customers/preferences',
+  PasswordResetInitiateUrl: 'http://localhost:8081/passwords/reset_initiate',
+  PasswordResetSubmitUrl: 'http://localhost:8081/passwords/reset_submit',
+  GetCustomerPreferencesUrl:
+    'http://localhost:8081/api/customers/replace-me/preferences',
+  CreateOrUpdateCustomerPreferencesUrl:
+    'http://localhost:8081/api/customers/preferences',
+  CreateContactsUrl: 'http://localhost:8081/api/contacts',
+  UpdatePersonalDetails: 'http://localhost:8081/api/users/update_personal',
   // Heroku
   // LoginUrl:
   //   'https://bigtree-auth-service-672f06320174.herokuapp.com/authenticate/customer/token',
@@ -56,7 +59,6 @@ export const environment = {
 
   // Auth Server: https://stormy-stream-36548-96356ce4833c.herokuapp.com
   // Order Server: https://polar-fortress-28097-08459456d8d7.herokuapp.com
-
 
   // CollectionsUrl: "http://localhost:8083/ads/v1/collections",
   // ChefsUrl: "http://localhost:8083/ads/v1/chefs",

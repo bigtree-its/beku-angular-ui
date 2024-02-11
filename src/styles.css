@@ -247,6 +247,13 @@ body {
     box-shadow: none !important;
     border-radius: 7px !important;
     background-color: #333 !important;
+    border-bottom: 3px solid #1b202c;
+}
+
+.toast-info {
+    background-color: var(--l-blue) !important;
+    border: 1px solid var(--d-blue) !important;
+    border-radius: 7px !important;
 }
 
 .toast-success {
@@ -267,19 +274,17 @@ body {
     content: '\f00c' !important;
     font-family: 'FontAwesome' !important;
     position: absolute !important;
-    top: 14px !important;
+    top: 1px !important;
     left: 15px !important;
     color: #1b202c;
     font-size: 1.5em !important;
 }
 
 .toast-title {
-    color: purple !important;
     font-size: 16px !important;
 }
 
 .toast-message {
-    /* color: #1b202c; */
     font-size: 13px;
     padding: 10px 40px;
 }
@@ -1260,6 +1265,22 @@ select {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: auto;
+    overflow-y: auto;
+}
+
+.info {
+    background-color: lightcyan;
+    padding: 20px 10px;
+}
+
+.error {
+    background-color: lightpink;
+    padding: 20px 10px;
+}
+
+.overflow-y {
+    overflow-y: auto;
 }
 
 @media (min-width: 600px) {

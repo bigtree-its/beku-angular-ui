@@ -18,33 +18,23 @@
 
         <div class="flex-column  mobile-w">
             <span class="sub-header mb-3">Update Personal Details</span>
-            <div class="input-div">
-                <input class="_381fS" type="text" name="firstName" id="firstName" tabindex="1" autocomplete="off" value="" [(ngModel)]="firstName" #ctrl="ngModel">
+            <div class="input-div br-7">
+                <input class="_381fS" type="text" name="firstName" id="firstName" tabindex="1" autocomplete="off" value [(ngModel)]="firstName" #ctrl="ngModel">
                 <div class="_2EeI1 _26LFr"></div>
-                <label class="_1Cvlf _2tL9P" for="firstName">Firstname</label>
+                <label class="_1Cvlf _2tL9P" for="firstName">First name</label>
             </div>
-            <div class="input-div">
-                <input class="_381fS" type="text" name="lastName" id="lastName" tabindex="2" autocomplete="off" value="" [(ngModel)]="lastName" #ctrl="ngModel">
+            <div class="input-div  br-7">
+                <input class="_381fS" type="text" name="lastName" id="lastName" tabindex="2" autocomplete="off" value [(ngModel)]="lastName" #ctrl="ngModel">
                 <div class="_2EeI1 _26LFr"></div>
-                <label class="_1Cvlf _2tL9P" for="lastName">Lastname</label>
+                <label class="_1Cvlf _2tL9P" for="lastName">Last name</label>
             </div>
-            <div class="input-div">
-                <input class="_381fS" type="email" name="email" id="email" tabindex="3" autocomplete="off" value="" [(ngModel)]="email" #ctrl="ngModel">
-                <div class="_2EeI1 _26LFr"></div>
-                <label class="_1Cvlf _2tL9P" for="email">Email</label>
-            </div>
-            <div class="input-div">
-                <input class="_381fS" type="text" name="mobile" id="mobile" tabindex="4" autocomplete="off" value="" [(ngModel)]="mobile" #ctrl="ngModel">
+            <div class="input-div br-7">
+                <input class="_381fS" type="text" name="mobile" id="mobile" tabindex="4" autocomplete="off" value [(ngModel)]="mobile" #ctrl="ngModel">
                 <div class="_2EeI1 _26LFr"></div>
                 <label class="_1Cvlf _2tL9P" for="email">Mobile</label>
             </div>
-            <div class="input-div">
-                <input class="_381fS" type="password" name="password" id="password" tabindex="1" autocomplete="off" value="" [(ngModel)]="password" #ctrl="ngModel">
-                <div class="_2EeI1 _26LFr"></div>
-                <label class="_1Cvlf _2tL9P" for="password">Password</label>
-            </div>
-            <br>
-            <button class="big-grn-btn" (click)="changePersonal()">Update Personal Details</button>
+            <button class="big-grn-btn mt-1" (click)="changePersonal()">Update
+                Personal Details</button>
         </div>
     </div>
 </ng-template>
@@ -63,7 +53,8 @@
                 <label class="_1Cvlf _2tL9P" for="password">Current Password</label>
             </div> -->
             <br>
-            <button class="big-grn-btn" [routerLink]="['/password_reset/new']">Reset your password</button>
+            <button class="big-grn-btn" [routerLink]="['/password_reset/new']">Reset your
+                password</button>
         </div>
     </div>
 </ng-template>
@@ -72,15 +63,18 @@
         <div class="flex-column  mobile-w ">
             <span class="sub-header mb-5">Update Preferences</span>
             <div class="flex-between mb-3 gap-1 border br-7 p-3">
-                <span class="word-wrap mr-1">Receive communications for Offers, Promotions via email</span>
+                <span class="word-wrap mr-1">Receive communications for Offers,
+                    Promotions via email</span>
                 <input type="checkbox" id="receiveEmailComms">
             </div>
             <div class="flex-between mb-3 gap-1 border br-7 p-3">
-                <span class="word-wrap mr-1">Receive communications for Offers, Promotions via mobile</span>
+                <span class="word-wrap mr-1">Receive communications for Offers,
+                    Promotions via mobile</span>
                 <input type="checkbox" id="receiveMobileComms">
             </div>
             <br>
-            <button class="big-grn-btn" (click)="changePreferences()">Update Preferences</button>
+            <button class="big-grn-btn" (click)="changePreferences()">Update
+                Preferences</button>
         </div>
     </div>
 </ng-template>

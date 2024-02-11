@@ -41,6 +41,10 @@ export const environment = {
     'http://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/replace-me/preferences',
   CreateOrUpdateCustomerPreferencesUrl:
     'http://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/preferences',
+  CreateContactsUrl:
+    'http://bigtree-auth-service-672f06320174.herokuapp.com/api/contacts',
+  UpdatePersonalDetails:
+    'http://http://bigtree-auth-service-672f06320174.herokuapp.com/api/users/update_personal',
 
   debug: window['env']['debug'] || false,
 

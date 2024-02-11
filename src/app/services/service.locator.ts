@@ -25,6 +25,8 @@ export class ServiceLocator {
   ReviewsUrl: string;
   GetCustomerPreferencesUrl: string;
   CreateOrUpdateCustomerPreferencesUrl: string;
+  CreateContactsUrl: string;
+  UpdatePersonalDetails: string;
 
   constructor() {
     this.collectionsUrl = environment.CollectionsUrl;
@@ -47,5 +49,7 @@ export class ServiceLocator {
     this.ReviewsUrl = environment.ReviewsUrl;
     this.GetCustomerPreferencesUrl = environment.GetCustomerPreferencesUrl;
     this.CreateOrUpdateCustomerPreferencesUrl = environment.CreateOrUpdateCustomerPreferencesUrl;
+    this.CreateContactsUrl = environment.CreateContactsUrl;
+    this.UpdatePersonalDetails = environment.UpdatePersonalDetails;
   }
 }

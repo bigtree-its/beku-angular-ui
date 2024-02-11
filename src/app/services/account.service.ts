@@ -19,11 +19,13 @@ import {
 import { ServiceLocator } from './service.locator';
 import { Constants } from './constants';
 import { CustomerPreferences } from '../model/CustomerPreferences';
+import { PersonalDetails } from '../model/common-models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AccountService {
+  
   
   public loginSession$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   public customerPreferences$: BehaviorSubject<CustomerPreferences> =
@@ -101,6 +103,15 @@ export class AccountService {
       },
     });
   }
+
+  public updatePersonal(req: PersonalDetails): Observable<PersonalDetails> {
+    return this.http.post<PersonalDetails>(this.serviceLocator.UpdatePersonalDetails,req, {
+      headers: {
+        useCustomerToken: 'true'
+      },
+    });
+  }
+
 
   fetchCustomerPreferences(customerId: string): Observable<CustomerPreferences> {
    

@@ -1,7 +1,9 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { CustomerPreferences } from 'src/app/model/CustomerPreferences';
 import { User } from 'src/app/model/auth-model';
+import { PersonalDetails } from 'src/app/model/common-models';
 import { AccountService } from 'src/app/services/account.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { Utils } from 'src/app/services/utils';
@@ -19,6 +21,8 @@ export class MyProfileComponent implements OnInit, OnDestroy{
   accountService = inject(AccountService);
   utils = inject(Utils);
   toastService = inject(ToastService);
+  router = inject(Router);
+
   user: User;
 
   @ViewChild('widgetsContent', { read: ElementRef })
@@ -94,26 +98,29 @@ export class MyProfileComponent implements OnInit, OnDestroy{
   }
 
   changePersonal() {
-    if ( this.utils.isEmpty(this.password)){
-      this.toastService.warning("Enter your current password");
-      return;
+    
+    var pd: PersonalDetails = {
+      "customerId": this.user.id,
+      "firstName": this.firstName,
+      "lastName": this.lastName,
+      "mobile": this.mobile,
     }
-    if ( this.utils.isEmpty(this.firstName)){
-      this.toastService.warning("Enter your first name");
-      return;
-    }
-    if ( this.utils.isEmpty(this.lastName)){
-      this.toastService.warning("Enter your last name");
-      return;
-    }
-    if ( this.utils.isEmpty(this.email)){
-      this.toastService.warning("Enter your email");
-      return;
-    }
-    if ( this.utils.isEmpty(this.mobile)){
-      this.toastService.warning("Enter your mobile");
-      return;
-    }
+    
+    let observable = this.accountService.updatePersonal(pd)
+    observable.pipe(takeUntil(this.destroy$)).subscribe({
+      next: () => {
+        console.log('Your details have been updated')
+        this.toastService.info('Your details have been updated')
+      },
+      error: (err) => {
+       
+        if (err.status === 401){
+          this.toastService.warning('Your login session has been expired. Login and try again');
+          this.accountService.redirectUrl = "my_profile";
+          this.router.navigate(['/login']);
+        }
+      },
+    });
   }
 
   changePassword() {
