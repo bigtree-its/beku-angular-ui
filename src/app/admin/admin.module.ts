@@ -10,7 +10,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 const routes: Routes = [
   { path: 'my_orders', component: MyOrdersComponent },
   { path: 'my_profile', component: MyProfileComponent },
-  { path: 'become_a_partner', component: BecomeAPartnerComponent }
+  { path: 'contact_us', component: BecomeAPartnerComponent }
 ]
 
 

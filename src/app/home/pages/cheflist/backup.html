@@ -1,0 +1,48 @@
+<div *ngFor="let chef of filteredChefs " [routerLink]="[ '/cooks', chef._id] ">
+    <div class="chef-card">
+        <div class="flex-row">
+            <div style="height: 200px;width: 170px;">
+                <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg" style="object-fit: cover;
+            max-height: 196px;
+            height: 196px;
+            width: 170px;
+            max-width: 170px;">
+            </div>
+            <div class="flex-column gap-1" style="padding: 5px 20px;width: 100%;">
+                <span class="chef-name mr-2">{{chef.kitchenName}}</span>
+                <div class="clickable-row" style="font-size: 12px;">
+                    <fa-icon [icon]="faStar"></fa-icon>
+                    <span style="padding-left: 2px;">{{chef.rating}}</span>
+                    <span style="padding-left: 2px;">({{chef.reviews}} reviews)</span>
+                </div>
+                <div class="flex-row">
+                    <span class="atribute" [ngStyle]="{'color': chef.open ? 'green' :  'red'}">{{chef.open?
+                        "Open":"Closed"}}</span>
+                    <span *ngIf="chef.preOrderOnly" class="attribute">PreOrder Only</span>
+                </div>
+                <div class="flex-row-wrap">
+                    <ng-container *ngFor="let cuisine of chef.cuisines | slice:0:3">
+                        <div class="attribute">{{ cuisine.name }}
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="flex-column" *ngIf="chef.doDelivery">
+                    <div class="flex-row" style="padding: 5px;align-items: center;">
+                        <img src="/assets/icons/motorbike.png" alt height="10px" width="10px" style="margin-right: 5px;">
+                        <span style="font-size: 12px;">I do delivery
+                            upto {{chef.deliveryDistance}} miles</span>
+                    </div>
+                    <div class="flex-row" *ngIf="chef.freeDeliveryOver > 0" style="padding: 5px;align-items: center;">
+                        <img src="/assets/icons/free-shipping.png" alt height="10px" width="10px" style="margin-right: 5px;">
+                        <span style="font-size: 12px;">Free Delivery
+                            order over {{chef.freeDeliveryOver |
+                            currency: 'GBP'}}</span>
+                    </div>
+                </div>
+                <div *ngIf="!chef.doDelivery" style="padding: 5px 0;">
+                    <span class="attribute">Collection Only</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

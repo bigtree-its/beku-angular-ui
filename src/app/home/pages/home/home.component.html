@@ -2,38 +2,40 @@
 
     <div class="hero">
         <div class="hero-left">
-            <!-- <span style="font-weight: 900;font-size: 30px;letter-spacing: 20px;">ORDER</span> -->
-            <span class="hero-phrase">Discover a Homechef</span>
-            <span class="hero-phrase">you'll love to eat</span>
-            <div class="content">
-                <div class="slider">
-                    <div class="slider-text1">Freshly Made</div>
-                    <div class="slider-text2">Home Cooked</div>
-                    <div class="slider-text3">Healthy Food</div>
+            <div class="flex-column">
+                <span class="hero-phrase">Discover a Homechef</span>
+                <span class="hero-phrase">you'll love to eat</span>
+                <div class="content">
+                    <div class="slider">
+                        <div class="slider-text1">Food that makes you nostalgic</div>
+                        <div class="slider-text2">A taste of home</div>
+                        <div class="slider-text3">Made with love</div>
+                    </div>
                 </div>
-            </div>
-            <div class="hp-search-container">
-                <div class="flex-row" style="width: 80%;">
-                    <!-- <img src="/assets/icons/target.png" height="25px" width="25px" style="margin-right: 20px; opacity: 0.5;"> -->
-                    <input type="text" placeholder="Enter your location" class="hp-search-box" [(ngModel)]="serviceLocationSearchText" (keyup.enter)="onEnter()">
-                </div>
-                <div class="flex-row align-items-center">
-                    <span *ngIf="showServiceLocations" (click)="closeServiceLocations()" style="color: var(--d-orange);cursor: pointer;padding: 0 10px;">Clear</span>
-                    <button class="btn-red bolder float-right" (click)="onEnter()">Find</button>
-                </div>
+                <div class="hp-search-container">
+                    <div class="flex-row" style="width: 80%;">
+                        <!-- <img src="/assets/icons/target.png" height="25px" width="25px" style="margin-right: 20px; opacity: 0.5;"> -->
+                        <input type="text" placeholder="Enter your location" class="hp-search-box" [(ngModel)]="serviceLocationSearchText" (keyup.enter)="onEnter()">
+                    </div>
+                    <div class="flex-row align-items-center">
+                        <span *ngIf="showServiceLocations" (click)="closeServiceLocations()" style="color: var(--d-orange);cursor: pointer;padding: 0 10px;">Clear</span>
+                        <button class="btn-red bolder float-right" (click)="onEnter()">Find</button>
+                    </div>
 
-            </div>
-            <div *ngIf="showServiceLocations" class="hp-locations-container">
-                <div class="hp-locations">
-                    <span class="hp-location" *ngFor="let sl of serviceLocations" (click)="onSelectServiceLocation(sl)">{{ sl.name }},
-                        {{sl.city}}</span>
+                </div>
+                <div *ngIf="showServiceLocations" class="hp-locations-container">
+                    <div class="hp-locations">
+                        <span class="hp-location" *ngFor="let sl of serviceLocations" (click)="onSelectServiceLocation(sl)">{{ sl.name }},
+                            {{sl.city}}</span>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="hero-right">
             <div class="hero-img-div">
                 <!-- <img src="/assets/images/photo-3-removebg-preview.png" class="hero-img"> -->
-                <img src="/assets/images/food.jpeg" class="hero-img">
+                <!-- <img src="/assets/images/food.jpeg" class="hero-img"> -->
+                <img src="/assets/images/wall-art-indian.jpg" class="hero-img">
             </div>
         </div>
     </div>

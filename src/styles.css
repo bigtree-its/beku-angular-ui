@@ -7,7 +7,7 @@
     --l-teal: #7ed5d0;
     --teal: #0be1d3;
     --d-teal: #00ffee;
-    --l-green: #63e6be;
+    --l-green: #DFF7AF;
     --green: #268c55;
     --d-green: #0ca678;
     --mid-grey: #555;
@@ -126,7 +126,7 @@ img {
 body {
     margin: 0px;
     padding: 0px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
     background-color: #fff;
     font-family: "Noto Sans Display", sans-serif;
@@ -134,6 +134,7 @@ body {
     -ms-overflow-style: none;
     color: #1b202c;
     scrollbar-width: none;
+    overflow-x: hidden;
 }
 
 ::ng-deep .modal-content {
@@ -514,6 +515,7 @@ select {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    overflow-wrap: normal;
 }
 
 .flex-column {
@@ -589,10 +591,11 @@ select {
 .btn-blu,
 .btn-red,
 .btn-teal {
-    padding: 10px 20px;
+    padding: 5px 20px;
     border: none;
     background-color: var(--l-yellow);
     color: #222;
+    border-radius: 24px;
 }
 
 .btn-blk {
@@ -942,6 +945,7 @@ select {
     position: relative;
     transform: translateZ(0);
     margin: 2px 0;
+    border-radius: 7px;
 }
 
 .input-div:hover {
@@ -971,6 +975,7 @@ select {
 
 ._381tA {
     padding-top: 30px;
+    white-space: pre-wrap;
 }
 
 ._26LFr {
@@ -1250,6 +1255,11 @@ select {
 .left {
     flex: 50%;
     background-color: #f1f1f1;
+    background-image: url("/assets/images/wall-art-indian.jpg");
+}
+
+.full-screen-width {
+    width: 100%;
 }
 
 .center {
@@ -1283,7 +1293,7 @@ select {
     overflow-y: auto;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 700px) {
     .lg {
         display: flex;
     }

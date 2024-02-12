@@ -84,7 +84,7 @@
 }
 
 ::ng-deep .modal-dialog {
-    min-width: 800px;
+    /* min-width: 800px; */
 }
 
 .nav-icon:hover {

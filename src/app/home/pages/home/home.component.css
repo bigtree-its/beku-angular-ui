@@ -1,15 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 .home-wrapper {
     width: 397px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     margin-top: 80px;
 }
 
 .hero {
     height: 500px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
 }
 
@@ -75,7 +77,6 @@
     overflow: hidden;
     align-items: center;
     text-align: center;
-    background-color: aliceblue;
     margin: 10px 0;
     border-radius: 20px;
 }
@@ -83,11 +84,12 @@
 .slider div {
     height: 50px;
     margin-bottom: 50px;
-    padding: 2px 15px;
+    padding: 0 15px;
     text-align: center;
     box-sizing: border-box;
     font-weight: 900;
-    font-size: 30px;
+    font-size: 40px;
+    font-family: "Anton", sans-serif;
 }
 
 .slider-text1 {
@@ -184,8 +186,7 @@
         justify-content: center;
         align-items: center;
         padding: 20px;
-        flex-grow: 1;
-        width: 30%;
+        width: 50%;
     }
     .hero-right {
         display: flex;
@@ -193,8 +194,7 @@
         justify-content: center;
         align-items: center;
         padding: 20px;
-        flex-grow: 1;
-        width: 70%;
+        width: 50%;
     }
     .hero-title {
         /* font-family: "Cinzel", serif; */

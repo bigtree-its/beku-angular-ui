@@ -19,7 +19,7 @@ export class HeaderComponent {
   serviceLocation: ServiceLocation;
   displayableServiceLocation: string = '';
   itemsCount: number = 0;
-  user: User;
+  user: User = null;
   faBars = faBars;
   logoIcon = faKitchenSet;
   cartIcon = faBagShopping;
@@ -47,6 +47,17 @@ export class HeaderComponent {
     const serviceLocation = this.ctxSvc.serviceLocationSubject.asObservable();
     serviceLocation.subscribe((a) => {
       this.serviceLocation = a;
+    });
+
+    this.accountService.getData();
+    this.accountService.getCustomerPreferences();
+    this.accountService.loginSession$.subscribe({
+      next: (value) => {
+        this.user = value;
+      },
+      error: (err) => console.error('CustomerObject emitted an error: ' + err),
+      complete: () =>
+        console.log('CustomerObject emitted the complete notification'),
     });
   }
 

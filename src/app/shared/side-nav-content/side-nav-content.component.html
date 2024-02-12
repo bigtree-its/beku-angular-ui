@@ -10,7 +10,7 @@
         <span *ngIf="user === null" class="navItem" routerLink="/register">Signup</span>
         <span *ngIf="user !== null" class="navItem" (click)="logout()">Logout</span>
         <span *ngIf="user !== null" class="navItem">Orders</span>
-        <span class="navItem">Become a partner</span>
+        <span class="navItem" routerLink="/contact_us">Become a partner</span>
         <span *ngIf="user !== null" class="navItem" routerLink="/my_profile">Profile</span>
     </div>
 
