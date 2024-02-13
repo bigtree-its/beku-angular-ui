@@ -5,6 +5,9 @@
 export const environment = {
   production: false,
 
+  AUTH_SERVER: 'bigtree-auth-service-672f06320174.herokuapp.com',
+  ORDER_SERVER: 'polar-fortress-28097-08459456d8d7.herokuapp.com',
+  CHEF_SERVER: 'chef-service-1b2023ebc956.herokuapp.com',
   CURRENCY: 'GBP',
   CURRENCY_SYMBOL: '£',
 
@@ -32,17 +35,17 @@ export const environment = {
   // Auth URLs
 
   // Local
-  LoginUrl: 'http://localhost:8081/authenticate/customer/token',
-  LogoutUrl: 'http://localhost:8081/api/auth/logout',
-  RegisterUrl: 'http://localhost:8081/api/users/signup',
-  PasswordResetInitiateUrl: 'http://localhost:8081/passwords/reset_initiate',
-  PasswordResetSubmitUrl: 'http://localhost:8081/passwords/reset_submit',
+  LoginUrl: 'http://bigtree-auth-service-672f06320174.herokuapp.com/authenticate/customer/token',
+  LogoutUrl: 'http://bigtree-auth-service-672f06320174.herokuapp.com/api/auth/logout',
+  RegisterUrl: 'http://bigtree-auth-service-672f06320174.herokuapp.com/api/users/signup',
+  PasswordResetInitiateUrl: 'http://bigtree-auth-service-672f06320174.herokuapp.com/passwords/reset_initiate',
+  PasswordResetSubmitUrl: 'http://bigtree-auth-service-672f06320174.herokuapp.com/passwords/reset_submit',
   GetCustomerPreferencesUrl:
-    'http://localhost:8081/api/customers/replace-me/preferences',
+    'http://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/replace-me/preferences',
   CreateOrUpdateCustomerPreferencesUrl:
-    'http://localhost:8081/api/customers/preferences',
-  CreateContactsUrl: 'http://localhost:8081/api/contacts',
-  UpdatePersonalDetails: 'http://localhost:8081/api/users/update_personal',
+    'http://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/preferences',
+  CreateContactsUrl: 'http://bigtree-auth-service-672f06320174.herokuapp.com/api/contacts',
+  UpdatePersonalDetails: 'http://bigtree-auth-service-672f06320174.herokuapp.com/api/users/update_personal',
   // Heroku
   // LoginUrl:
   //   'https://bigtree-auth-service-672f06320174.herokuapp.com/authenticate/customer/token',
