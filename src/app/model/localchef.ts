@@ -36,6 +36,7 @@ export interface LocalChef {
     days: string[];
     description: string[];
     cuisines: Cuisine[];
+    dishes: Dish[];
     slots: Slot[];
     serviceAreas: LocalArea[];
     categories: string[];
@@ -77,6 +78,7 @@ export interface Cuisine {
 export interface Dish {
     _id: string;
     name: string;
+    slug: string;
     logo: string;
 }
 

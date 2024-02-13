@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ContextService } from 'src/app/services/context.service';
 import { Router } from '@angular/router';
 import { ServiceLocation } from 'src/app/model/ServiceLocation';
@@ -8,6 +8,8 @@ import { AccountService } from 'src/app/services/account.service';
 import { User } from 'src/app/model/auth-model';
 import { NavigationService } from 'src/app/services/navigation.service';
 import { faBars, faKitchenSet, faBagShopping, faMugHot } from '@fortawesome/free-solid-svg-icons';
+import { LocalService } from 'src/app/services/local.service';
+import { Constants } from 'src/app/services/constants';
 
 @Component({
   selector: 'app-header',
@@ -23,6 +25,9 @@ export class HeaderComponent {
   faBars = faBars;
   logoIcon = faKitchenSet;
   cartIcon = faBagShopping;
+
+  localService = inject(LocalService);
+  constants = inject(Constants);
 
   constructor(
     private orderService: FoodOrderService,
@@ -44,10 +49,10 @@ export class HeaderComponent {
         console.log('OrderSubject emitted the complete notification'),
     });
 
-    const serviceLocation = this.ctxSvc.serviceLocationSubject.asObservable();
-    serviceLocation.subscribe((a) => {
-      this.serviceLocation = a;
-    });
+    var json = this.localService.getData(Constants.StorageItem_Location);
+    if ( json !== null && json !== '' && json !== undefined){
+      this.serviceLocation = JSON.parse(json);
+    }
 
     this.accountService.getData();
     this.accountService.getCustomerPreferences();

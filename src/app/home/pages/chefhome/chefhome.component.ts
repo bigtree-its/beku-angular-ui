@@ -22,7 +22,13 @@ import { ChefService } from 'src/app/services/chef.service';
 import { FoodOrderService } from 'src/app/services/food-order.service';
 import { ReviewService } from 'src/app/services/review.service';
 import { Utils } from 'src/app/services/utils';
-import { faArrowLeft, faArrowRight, faFaceSmile, faPeopleArrows, faStar } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowLeft,
+  faArrowRight,
+  faFaceSmile,
+  faPeopleArrows,
+  faStar,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-chefhome',
@@ -35,7 +41,7 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
 
   faArrowLeft = faArrowLeft;
   faArrowRight = faArrowRight;
-  faPeopleArrows= faPeopleArrows;
+  faPeopleArrows = faPeopleArrows;
   faFaceSmile = faFaceSmile;
 
   chef: LocalChef | undefined;
@@ -101,7 +107,7 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
   weekDays: Day[];
   destroy$ = new Subject<void>();
   collections: Collection[];
-  activeLayout: string = "Menu";
+  activeLayout: string = 'Menu';
   supplierId: any;
   reviews: Review[] = [];
 
@@ -137,9 +143,20 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
     if (this.weekDays == null || this.weekDays.length == 0) {
       this.weekDays = this.computeDays();
     }
+    this.orderService.orderSubject$.subscribe({
+      next: (value) => {
+        console.log('OrderSubject emitted a change'),
+        this.order = value;
+        this.cartTotal = this.order.total;
+      },
+      error: (err) => console.error('OrderSubject emitted an error: ' + err),
+      complete: () =>
+        console.log('OrderSubject emitted the complete notification'),
+    });
+
     this.activatedRoute.params.subscribe((params) => {
       this.supplierId = params['id'];
-      console.log('Chef-home for supplier '+ this.supplierId)
+      console.log('Chef-home for supplier ' + this.supplierId);
       let observable = this.chefService.getCollections(this.supplierId);
       observable.pipe(takeUntil(this.destroy$)).subscribe({
         next: (data) => {
@@ -159,35 +176,27 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
           this.fetchReviews(this.chef._id);
         },
         error: (err) => {
-          console.error('Errors when getting chef from server. '+ JSON.stringify(err));
+          console.error(
+            'Errors when getting chef from server. ' + JSON.stringify(err)
+          );
         },
       });
     });
-    this.orderService.orderSubject$.subscribe((theOrder) => {
-     
-      if (this.utils.isValid(theOrder) && theOrder.status === 'Completed') {
-        return;
-      }
-      this.order = theOrder;
-      if (theOrder !== null && theOrder !== undefined) {
-        if ( theOrder.supplier._id !== this.supplierId){
-          console.info('Supplier: '+ this.supplierId)
-          console.info('Supplier On Order: '+ theOrder.supplier._id)
-          console.info('Chef changed. Destroying previous order')
-          this.orderService.destroy();
-        }else{
-          this.cartTotal = theOrder.total;
-        }
-      }
-    });
+
+    
+
+  }
+  checkOrder() {
+    this.orderService.getData();
+    
   }
 
-  writeReview(){
+  writeReview() {
     this.router
-    .navigate(['write_review'], {
-      queryParams: { chef: this.supplierId },
-    })
-    .then();
+      .navigate(['write_review'], {
+        queryParams: { chef: this.supplierId },
+      })
+      .then();
   }
   fetchReviews(supplierId: string) {
     this.reviewService.getReviews(supplierId).subscribe((reviews: Review[]) => {
@@ -196,7 +205,7 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  selectLayout(layout: string){
+  selectLayout(layout: string) {
     this.activeLayout = layout;
   }
 
@@ -261,7 +270,11 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
     this.chefService.getMenusForChef(supplierId).subscribe((items: Menu[]) => {
       this.items = items;
       console.log('Menus fetched: ' + this.items.length);
-      if ( this.collections !== null && this.collections !== undefined && this.collections.length > 0){
+      if (
+        this.collections !== null &&
+        this.collections !== undefined &&
+        this.collections.length > 0
+      ) {
         this.onSelectCategory(this.collections[0]);
       }
     });

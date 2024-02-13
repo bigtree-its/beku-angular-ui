@@ -65,6 +65,7 @@ export class MyProfileComponent implements OnInit, OnDestroy{
     this.accountService.customerPreferences$.subscribe({
       next: (value) => {
         this.customerPreferences = value;
+        console.log('CustomerPreferences emitted '+ JSON.stringify(this.customerPreferences));
         if ( this.customerPreferences !== null && this.customerPreferences !== undefined){
           this.communicationViaEmail = this.customerPreferences.communicationViaEmail;
           this.communicationViaMobile = this.customerPreferences.communicationViaMobile;

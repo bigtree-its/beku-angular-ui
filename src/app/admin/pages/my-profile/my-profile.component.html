@@ -65,12 +65,12 @@
             <div class="flex-between mb-3 gap-1 border br-7 p-3">
                 <span class="word-wrap mr-1">Receive communications for Offers,
                     Promotions via email</span>
-                <input type="checkbox" id="receiveEmailComms">
+                <input type="checkbox" id="receiveEmailComms" [checked]="communicationViaEmail">
             </div>
             <div class="flex-between mb-3 gap-1 border br-7 p-3">
                 <span class="word-wrap mr-1">Receive communications for Offers,
                     Promotions via mobile</span>
-                <input type="checkbox" id="receiveMobileComms">
+                <input type="checkbox" id="receiveMobileComms" [checked]="communicationViaMobile">
             </div>
             <br>
             <button class="big-grn-btn" (click)="changePreferences()">Update

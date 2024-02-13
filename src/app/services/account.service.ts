@@ -20,6 +20,7 @@ import { ServiceLocator } from './service.locator';
 import { Constants } from './constants';
 import { CustomerPreferences } from '../model/CustomerPreferences';
 import { PersonalDetails } from '../model/common-models';
+import { FoodOrderService } from './food-order.service';
 
 @Injectable({
   providedIn: 'root',
@@ -39,8 +40,8 @@ export class AccountService {
     private http: HttpClient,
     private jwtService: JwtService,
     private localService: LocalService,
+    private orderService: FoodOrderService,
     private serviceLocator: ServiceLocator,
-    private readonly constants: Constants,
     private readonly router: Router
   ) {}
 
@@ -86,7 +87,7 @@ export class AccountService {
             this.router.navigate(['/']);
           }
           this.setUser(result);
-          
+         
         })
       );
   }
@@ -135,7 +136,7 @@ export class AccountService {
 
   setCustomerPreferences(data: CustomerPreferences) {
     this.localService.saveData(
-      this.constants.StorageItem_C_Preferences,
+      Constants.StorageItem_C_Preferences,
       JSON.stringify(data)
     );
     this.customerPreferences = data;
@@ -187,12 +188,13 @@ export class AccountService {
     this.jwtService.saveAccessToken(loginResp.accessToken);
     var user: User = this.buildUser(loginResp.accessToken);
     this.localService.saveData(
-      this.constants.StorageItem_C_User,
+      Constants.StorageItem_C_User,
       JSON.stringify(user)
     );
     this.user = user;
     // this.fetchCustomerPreferences(user.id);
     this.loginSession$.next(this.user);
+    this.orderService.retrieveCustomerOrders(this.user.id);
   }
 
   private buildUser(token: string) {
@@ -226,13 +228,13 @@ export class AccountService {
     console.log('Purging auth...');
     this.jwtService.destroyToken();
     this.loginSession$.next(null);
-    this.localService.removeData(this.constants.StorageItem_C_User);
-    this.localService.removeData(this.constants.StorageItem_C_Order);
-    this.localService.removeData(this.constants.StorageItem_C_Chef);
+    this.localService.removeData(Constants.StorageItem_C_User);
+    this.localService.removeData(Constants.StorageItem_C_Order);
+    this.localService.removeData(Constants.StorageItem_C_Chef);
   }
 
   getData() {
-    var json = this.localService.getData(this.constants.StorageItem_C_User);
+    var json = this.localService.getData(Constants.StorageItem_C_User);
     if (json === undefined) {
       return undefined;
     }
@@ -245,7 +247,7 @@ export class AccountService {
 
   getCustomerPreferences() {
     var json = this.localService.getData(
-      this.constants.StorageItem_C_Preferences
+      Constants.StorageItem_C_Preferences
     );
     console.log('Customer preferences in storage '+ json)
     if (json === undefined || json === null || json === '') {

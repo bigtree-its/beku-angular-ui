@@ -9,7 +9,7 @@
 .cuisine {
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 5px;
     border-radius: 12px;
 }
 
@@ -21,7 +21,7 @@
 
 .cuisine-logo {
     width: 100px;
-    height: 70px;
+    height: 60px;
     object-fit: cover;
     border-radius: 12px;
 }
@@ -78,6 +78,7 @@
 .chef-name {
     font-size: 16px;
     font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif
 }
 
 .footer-div {

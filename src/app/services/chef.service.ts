@@ -30,6 +30,9 @@ export class ChefService {
     if (query.cuisines !== undefined && query.cuisines !== null) {
       params = params.set('cuisines', query.cuisines);
     }
+    if (query.dishes !== undefined && query.dishes !== null) {
+      params = params.set('dishes', query.dishes);
+    }
     if (query.slots !== undefined && query.slots !== null) {
       params = params.set('slots', query.slots);
     }
@@ -116,6 +119,7 @@ export class ChefService {
   setChef(chef: LocalChef) {
     this.chef = chef;
     this.localService.saveData(this.storageItem, JSON.stringify(chef));
+    this.chefSubject$.next(chef);
   }
 
   purgeChef(){

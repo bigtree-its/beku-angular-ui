@@ -1,0 +1,461 @@
+{
+    "address": {
+        "addressLine1": "359, Glasgow Road",
+        "addressLine2": "Eagleshan",
+        "city": "Glasgow",
+        "postcode": "G755SF",
+        "latitude": 1234,
+        "longitude": 23232,
+        "country": "UK"
+    },
+    "contact": {
+        "person": "Aarna",
+        "email": "nava.arul@gmail.com",
+        "mobile": "07979191176",
+        "telephone": "01417654242"
+    },
+    "description": [
+        "Excellent south indian foods made at home"
+    ],
+    "specials": [
+        "Briyani",
+        "Curry",
+        "Rice"
+    ],
+    "cuisines": [],
+    "slots": [{
+            "_id": "fa07420c-afbd-41d5-9429-261d09bbd265",
+            "name": "Lunch",
+            "slug": "lunch",
+            "createdAt": "2023-12-10T13:46:21.399Z",
+            "updatedAt": "2023-12-10T13:46:21.399Z",
+            "__v": 0
+        },
+        {
+            "_id": "60e8f518-5d85-47a5-8b71-d3802d8d29a4",
+            "name": "AllDay",
+            "slug": "allday",
+            "createdAt": "2023-12-10T13:46:41.612Z",
+            "updatedAt": "2023-12-10T13:46:41.612Z",
+            "__v": 0
+        }
+    ],
+    "gallery": [],
+    "serviceAreas": [{
+            "_id": "200dfe76-9b80-412f-b0d6-476902adf024",
+            "name": "Newton Mearns",
+            "city": "Glasgow",
+            "country": "Scotland",
+            "slug": "newton-mearns-glasgow",
+            "createdAt": "2022-03-08T20:12:56.565Z",
+            "updatedAt": "2022-03-08T20:12:56.565Z",
+            "__v": 0
+        },
+        {
+            "_id": "9646ac57-b0fb-4a60-ba4a-a8fb70a72b75",
+            "name": "Maidenhill",
+            "city": "Glasgow",
+            "country": "Scotland",
+            "slug": "maidenhill-glasgow",
+            "createdAt": "2022-06-01T18:25:07.078Z",
+            "updatedAt": "2022-06-01T18:25:07.078Z",
+            "__v": 0
+        },
+        {
+            "_id": "9ccb28a1-9108-462e-bb0d-ed31af10dccb",
+            "name": "Eaglesham",
+            "city": "Glasgow",
+            "country": "Scotland",
+            "slug": "eaglesham-glasgow",
+            "createdAt": "2022-03-08T20:13:19.955Z",
+            "updatedAt": "2022-03-08T20:13:19.955Z",
+            "__v": 0
+        },
+        {
+            "_id": "a524f36c-6dd1-4a65-968c-5691a5e59991",
+            "name": "Clarkston",
+            "city": "Glasgow",
+            "country": "Scotland",
+            "slug": "clarkston-glasgow",
+            "createdAt": "2022-03-08T20:13:07.994Z",
+            "updatedAt": "2022-03-08T20:13:07.994Z",
+            "__v": 0
+        }
+    ],
+    "categories": [],
+    "keywords": [],
+    "_id": "f7155e59-01b7-412f-9747-c9759dca7770",
+    "name": "Madhusmita",
+    "slug": "aarna",
+    "email": "nava.arul@gmail.com",
+    "active": true,
+    "deliveryMinimum": 10.5,
+    "deliveryFee": 0.5,
+    "packagingFee": 2.5,
+    "minimumOrder": 3.5,
+    "createdAt": "2023-10-10T23:00:15.244Z",
+    "updatedAt": "2024-02-12T16:11:36.944Z",
+    "__v": 0,
+    "kitchenName": "Desi Kitchen",
+    "deliveryDistance": 5,
+    "freeDeliveryOver": 20,
+    "doDelivery": true,
+    "doPartyOrders": true,
+    "coverPhoto": "/assets/images/chefs/f7155e59-01b7-412f-9747-c9759dca7770.jpeg",
+    "rating": 4.1,
+    "reviews": 29,
+    "dishes": [
+        "ff31dff9-dac5-4e38-91cf-faf0ff8793f6"
+    ]
+}, {
+    "address": {
+        "addressLine1": "14, Kirkhill Avenue",
+        "addressLine2": "Newton Mearns",
+        "city": "Glasgow",
+        "postcode": "G755SF",
+        "latitude": 1234,
+        "longitude": 23232,
+        "country": "UK"
+    },
+    "contact": {
+        "person": "Sujatha Borker",
+        "email": "sujatha.borker@gmail.com",
+        "mobile": "07979191176",
+        "telephone": "01417654242"
+    },
+    "description": [
+        "Excellent Central indian foods made at home"
+    ],
+    "specials": [
+        "Briyani",
+        "Curry",
+        "Rice",
+        "Vada Pav"
+    ],
+    "cuisines": [{
+        "_id": "5425019f-da45-42ac-a117-3cb76c7224f8",
+        "name": "Western Indian",
+        "slug": "western-indian-food",
+        "logo": "/assets/images/cuisines/western-indian-food.jpeg",
+        "createdAt": "2024-01-03T20:41:23.100Z",
+        "updatedAt": "2024-01-03T20:41:23.100Z",
+        "__v": 0
+    }],
+    "slots": [{
+            "_id": "fa07420c-afbd-41d5-9429-261d09bbd265",
+            "name": "Lunch",
+            "slug": "lunch",
+            "createdAt": "2023-12-10T13:46:21.399Z",
+            "updatedAt": "2023-12-10T13:46:21.399Z",
+            "__v": 0
+        },
+        {
+            "_id": "1e68a9d3-ff91-462c-b9d1-adcc607b6e0c",
+            "name": "Dinner",
+            "slug": "dinner",
+            "createdAt": "2023-12-10T13:46:35.282Z",
+            "updatedAt": "2023-12-10T13:46:35.282Z",
+            "__v": 0
+        }
+    ],
+    "gallery": [],
+    "serviceAreas": [{
+            "_id": "200dfe76-9b80-412f-b0d6-476902adf024",
+            "name": "Newton Mearns",
+            "city": "Glasgow",
+            "country": "Scotland",
+            "slug": "newton-mearns-glasgow",
+            "createdAt": "2022-03-08T20:12:56.565Z",
+            "updatedAt": "2022-03-08T20:12:56.565Z",
+            "__v": 0
+        },
+        {
+            "_id": "9646ac57-b0fb-4a60-ba4a-a8fb70a72b75",
+            "name": "Maidenhill",
+            "city": "Glasgow",
+            "country": "Scotland",
+            "slug": "maidenhill-glasgow",
+            "createdAt": "2022-06-01T18:25:07.078Z",
+            "updatedAt": "2022-06-01T18:25:07.078Z",
+            "__v": 0
+        },
+        {
+            "_id": "9ccb28a1-9108-462e-bb0d-ed31af10dccb",
+            "name": "Eaglesham",
+            "city": "Glasgow",
+            "country": "Scotland",
+            "slug": "eaglesham-glasgow",
+            "createdAt": "2022-03-08T20:13:19.955Z",
+            "updatedAt": "2022-03-08T20:13:19.955Z",
+            "__v": 0
+        },
+        {
+            "_id": "a524f36c-6dd1-4a65-968c-5691a5e59991",
+            "name": "Clarkston",
+            "city": "Glasgow",
+            "country": "Scotland",
+            "slug": "clarkston-glasgow",
+            "createdAt": "2022-03-08T20:13:07.994Z",
+            "updatedAt": "2022-03-08T20:13:07.994Z",
+            "__v": 0
+        }
+    ],
+    "categories": [],
+    "keywords": [
+        "Marathi",
+        "Vada Pav",
+        " Briyani"
+    ],
+    "_id": "d102f210-1e6d-4fd9-b0bc-28002aa2e337",
+    "name": "Sujatha Borker",
+    "kitchenName": "Desi Swad Kitchen",
+    "slug": "desi-swad-kitchen",
+    "email": "sujatha.borker@gmail.com",
+    "active": true,
+    "doDelivery": false,
+    "deliveryDistance": 5,
+    "deliveryMinimum": 10.5,
+    "deliveryFee": 0.5,
+    "freeDeliveryOver": 20,
+    "packagingFee": 2.5,
+    "minimumOrder": 3.5,
+    "doPartyOrders": true,
+    "createdAt": "2024-01-04T17:36:54.515Z",
+    "updatedAt": "2024-02-04T18:53:36.948Z",
+    "__v": 0,
+    "rating": 2.6,
+    "open": true,
+    "preOrderOnly": true,
+    "reviews": 3
+}, {
+    "address": {
+        "addressLine1": "45, Kirkhill Apartments",
+        "addressLine2": "Newton Mearns",
+        "city": "Glasgow",
+        "postcode": "G657CX",
+        "latitude": 1234,
+        "longitude": 23232,
+        "country": "UK"
+    },
+    "contact": {
+        "person": "Anitha",
+        "email": "anitha@gmail.com",
+        "mobile": "07979191176",
+        "telephone": "01417654242"
+    },
+    "description": [
+        "Excellent Marathi and South indian foods made at home"
+    ],
+    "specials": [
+        "Vegetarian",
+        "Curry",
+        "Rice",
+        "Vada Pav"
+    ],
+    "cuisines": [{
+            "_id": "fb612fc2-998e-4899-9160-c7e90740c95b",
+            "name": "North Indian",
+            "slug": "north-indian-food",
+            "logo": "/assets/images/cuisines/north-indian-food.jpeg",
+            "createdAt": "2024-01-03T20:36:39.247Z",
+            "updatedAt": "2024-01-03T20:36:39.247Z",
+            "__v": 0
+        },
+        {
+            "_id": "a788520d-53ba-4b5a-9aad-d90c6e64935e",
+            "name": "South Indian",
+            "slug": "south-indian-food",
+            "logo": "/assets/images/cuisines/south-indian-food.jpeg",
+            "createdAt": "2024-01-03T20:36:12.644Z",
+            "updatedAt": "2024-01-03T21:46:52.036Z",
+            "__v": 0
+        },
+        {
+            "_id": "5425019f-da45-42ac-a117-3cb76c7224f8",
+            "name": "Western Indian",
+            "slug": "western-indian-food",
+            "logo": "/assets/images/cuisines/western-indian-food.jpeg",
+            "createdAt": "2024-01-03T20:41:23.100Z",
+            "updatedAt": "2024-01-03T20:41:23.100Z",
+            "__v": 0
+        }
+    ],
+    "slots": [{
+            "_id": "fa07420c-afbd-41d5-9429-261d09bbd265",
+            "name": "Lunch",
+            "slug": "lunch",
+            "createdAt": "2023-12-10T13:46:21.399Z",
+            "updatedAt": "2023-12-10T13:46:21.399Z",
+            "__v": 0
+        },
+        {
+            "_id": "1e68a9d3-ff91-462c-b9d1-adcc607b6e0c",
+            "name": "Dinner",
+            "slug": "dinner",
+            "createdAt": "2023-12-10T13:46:35.282Z",
+            "updatedAt": "2023-12-10T13:46:35.282Z",
+            "__v": 0
+        }
+    ],
+    "gallery": [],
+    "serviceAreas": [{
+            "_id": "9ccb28a1-9108-462e-bb0d-ed31af10dccb",
+            "name": "Eaglesham",
+            "city": "Glasgow",
+            "country": "Scotland",
+            "slug": "eaglesham-glasgow",
+            "createdAt": "2022-03-08T20:13:19.955Z",
+            "updatedAt": "2022-03-08T20:13:19.955Z",
+            "__v": 0
+        },
+        {
+            "_id": "200dfe76-9b80-412f-b0d6-476902adf024",
+            "name": "Newton Mearns",
+            "city": "Glasgow",
+            "country": "Scotland",
+            "slug": "newton-mearns-glasgow",
+            "createdAt": "2022-03-08T20:12:56.565Z",
+            "updatedAt": "2022-03-08T20:12:56.565Z",
+            "__v": 0
+        }
+    ],
+    "categories": [],
+    "keywords": [
+        "North Indian",
+        "Snacks",
+        "Jain"
+    ],
+    "_id": "4934eef8-ee76-4573-8cfe-054dc00ad078",
+    "name": "Anitha",
+    "kitchenName": "Anitha Kitchen",
+    "slug": "anitha-kitchen",
+    "email": "anitha@gmail.com",
+    "active": true,
+    "doDelivery": true,
+    "deliveryDistance": 5,
+    "deliveryMinimum": 10.5,
+    "deliveryFee": 0.5,
+    "freeDeliveryOver": 15,
+    "packagingFee": 2.5,
+    "minimumOrder": 3.5,
+    "doPartyOrders": true,
+    "createdAt": "2024-01-10T21:36:55.698Z",
+    "updatedAt": "2024-01-10T21:36:55.698Z",
+    "__v": 0
+}, {
+    "address": {
+        "addressLine1": "13, MaidenHill ",
+        "addressLine2": "MaidenHill",
+        "city": "Glasgow",
+        "postcode": "G657CX",
+        "latitude": 1234,
+        "longitude": 23232,
+        "country": "UK"
+    },
+    "contact": {
+        "person": "Raji",
+        "email": "raji@gmail.com",
+        "mobile": "07979191176",
+        "telephone": "01417654242"
+    },
+    "description": [
+        "Excellent Tamil  foods made at home"
+    ],
+    "specials": [
+        "Vegetarian",
+        "Curry",
+        "Rice",
+        "Vada Pav"
+    ],
+    "cuisines": [{
+            "_id": "fb612fc2-998e-4899-9160-c7e90740c95b",
+            "name": "North Indian",
+            "slug": "north-indian-food",
+            "logo": "/assets/images/cuisines/north-indian-food.jpeg",
+            "createdAt": "2024-01-03T20:36:39.247Z",
+            "updatedAt": "2024-01-03T20:36:39.247Z",
+            "__v": 0
+        },
+        {
+            "_id": "a788520d-53ba-4b5a-9aad-d90c6e64935e",
+            "name": "South Indian",
+            "slug": "south-indian-food",
+            "logo": "/assets/images/cuisines/south-indian-food.jpeg",
+            "createdAt": "2024-01-03T20:36:12.644Z",
+            "updatedAt": "2024-01-03T21:46:52.036Z",
+            "__v": 0
+        },
+        {
+            "_id": "5425019f-da45-42ac-a117-3cb76c7224f8",
+            "name": "Western Indian",
+            "slug": "western-indian-food",
+            "logo": "/assets/images/cuisines/western-indian-food.jpeg",
+            "createdAt": "2024-01-03T20:41:23.100Z",
+            "updatedAt": "2024-01-03T20:41:23.100Z",
+            "__v": 0
+        }
+    ],
+    "slots": [{
+            "_id": "fa07420c-afbd-41d5-9429-261d09bbd265",
+            "name": "Lunch",
+            "slug": "lunch",
+            "createdAt": "2023-12-10T13:46:21.399Z",
+            "updatedAt": "2023-12-10T13:46:21.399Z",
+            "__v": 0
+        },
+        {
+            "_id": "1e68a9d3-ff91-462c-b9d1-adcc607b6e0c",
+            "name": "Dinner",
+            "slug": "dinner",
+            "createdAt": "2023-12-10T13:46:35.282Z",
+            "updatedAt": "2023-12-10T13:46:35.282Z",
+            "__v": 0
+        }
+    ],
+    "gallery": [],
+    "serviceAreas": [{
+            "_id": "9ccb28a1-9108-462e-bb0d-ed31af10dccb",
+            "name": "Eaglesham",
+            "city": "Glasgow",
+            "country": "Scotland",
+            "slug": "eaglesham-glasgow",
+            "createdAt": "2022-03-08T20:13:19.955Z",
+            "updatedAt": "2022-03-08T20:13:19.955Z",
+            "__v": 0
+        },
+        {
+            "_id": "200dfe76-9b80-412f-b0d6-476902adf024",
+            "name": "Newton Mearns",
+            "city": "Glasgow",
+            "country": "Scotland",
+            "slug": "newton-mearns-glasgow",
+            "createdAt": "2022-03-08T20:12:56.565Z",
+            "updatedAt": "2022-03-08T20:12:56.565Z",
+            "__v": 0
+        }
+    ],
+    "categories": [],
+    "keywords": [
+        "North Indian",
+        "Snacks",
+        "Jain"
+    ],
+    "_id": "6840c749-60b8-4d01-9997-0225315c39d9",
+    "name": "Raji",
+    "kitchenName": "Raji Kitchen",
+    "slug": "raji-kitchen",
+    "email": "anitha@gmail.com",
+    "active": true,
+    "doDelivery": true,
+    "deliveryDistance": 5,
+    "deliveryMinimum": 10.5,
+    "deliveryFee": 0.5,
+    "freeDeliveryOver": 15,
+    "packagingFee": 2.5,
+    "minimumOrder": 3.5,
+    "doPartyOrders": true,
+    "open": true,
+    "createdAt": "2024-01-13T18:52:04.513Z",
+    "updatedAt": "2024-01-13T18:52:04.513Z",
+    "__v": 0
+}]
