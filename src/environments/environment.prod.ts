@@ -5,16 +5,16 @@ export const environment = {
   CURRENCY_SYMBOL: '£',
 
   CollectionsUrl:
-    'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/collections',
-  ChefsUrl: 'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/chefs',
-  CuisinesUrl: 'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/cuisines',
-  DishesUrl: 'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/dishes',
-  ReviewsUrl: 'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/reviews',
+    'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/collections',
+  ChefsUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/chefs',
+  CuisinesUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/cuisines',
+  DishesUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/dishes',
+  ReviewsUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/reviews',
   ServiceAreasUrl:
-    'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/serviceareas',
-  MenusUrl: 'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/menus',
+    'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/serviceareas',
+  MenusUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/menus',
   CalendersUrl:
-    'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/calendars',
+    'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/calendars',
   OrderTrackingUrl:
     'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/order-tracking',
   CustomerOrdersUrl:
@@ -38,13 +38,13 @@ export const environment = {
     'https://bigtree-auth-service-672f06320174.herokuapp.com/passwords/reset_submit',
 
   GetCustomerPreferencesUrl:
-    'http://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/replace-me/preferences',
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/replace-me/preferences',
   CreateOrUpdateCustomerPreferencesUrl:
-    'http://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/preferences',
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/preferences',
   CreateContactsUrl:
-    'http://bigtree-auth-service-672f06320174.herokuapp.com/api/contacts',
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/api/contacts',
   UpdatePersonalDetails:
-    'http://http://bigtree-auth-service-672f06320174.herokuapp.com/api/users/update_personal',
+    'https://https://bigtree-auth-service-672f06320174.herokuapp.com/api/users/update_personal',
 
   debug: window['env']['debug'] || false,
 

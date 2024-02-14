@@ -12,16 +12,16 @@ export const environment = {
   CURRENCY_SYMBOL: '£',
 
   CollectionsUrl:
-    'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/collections',
-  ChefsUrl: 'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/chefs',
-  CuisinesUrl: 'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/cuisines',
-  DishesUrl: 'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/dishes',
-  ReviewsUrl: 'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/reviews',
+    'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/collections',
+  ChefsUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/chefs',
+  CuisinesUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/cuisines',
+  DishesUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/dishes',
+  ReviewsUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/reviews',
   ServiceAreasUrl:
-    'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/serviceareas',
-  MenusUrl: 'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/menus',
+    'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/serviceareas',
+  MenusUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/menus',
   CalendersUrl:
-    'http://chef-service-1b2023ebc956.herokuapp.com/ads/v1/calendars',
+    'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/calendars',
   OrderTrackingUrl:
     'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/order-tracking',
   CustomerOrdersUrl:
@@ -35,17 +35,17 @@ export const environment = {
   // Auth URLs
 
   // Local
-  LoginUrl: 'http://bigtree-auth-service-672f06320174.herokuapp.com/authenticate/customer/token',
-  LogoutUrl: 'http://bigtree-auth-service-672f06320174.herokuapp.com/api/auth/logout',
-  RegisterUrl: 'http://bigtree-auth-service-672f06320174.herokuapp.com/api/users/signup',
-  PasswordResetInitiateUrl: 'http://bigtree-auth-service-672f06320174.herokuapp.com/passwords/reset_initiate',
-  PasswordResetSubmitUrl: 'http://bigtree-auth-service-672f06320174.herokuapp.com/passwords/reset_submit',
+  LoginUrl: 'https://bigtree-auth-service-672f06320174.herokuapp.com/authenticate/customer/token',
+  LogoutUrl: 'https://bigtree-auth-service-672f06320174.herokuapp.com/api/auth/logout',
+  RegisterUrl: 'https://bigtree-auth-service-672f06320174.herokuapp.com/api/users/signup',
+  PasswordResetInitiateUrl: 'https://bigtree-auth-service-672f06320174.herokuapp.com/passwords/reset_initiate',
+  PasswordResetSubmitUrl: 'https://bigtree-auth-service-672f06320174.herokuapp.com/passwords/reset_submit',
   GetCustomerPreferencesUrl:
-    'http://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/replace-me/preferences',
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/replace-me/preferences',
   CreateOrUpdateCustomerPreferencesUrl:
-    'http://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/preferences',
-  CreateContactsUrl: 'http://bigtree-auth-service-672f06320174.herokuapp.com/api/contacts',
-  UpdatePersonalDetails: 'http://bigtree-auth-service-672f06320174.herokuapp.com/api/users/update_personal',
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/preferences',
+  CreateContactsUrl: 'https://bigtree-auth-service-672f06320174.herokuapp.com/api/contacts',
+  UpdatePersonalDetails: 'https://bigtree-auth-service-672f06320174.herokuapp.com/api/users/update_personal',
   // Heroku
   // LoginUrl:
   //   'https://bigtree-auth-service-672f06320174.herokuapp.com/authenticate/customer/token',
@@ -57,13 +57,13 @@ export const environment = {
   //   'https://bigtree-auth-service-672f06320174.herokuapp.com/passwords/reset_initiate',
   // PasswordResetSubmitUrl:
   //   'https://bigtree-auth-service-672f06320174.herokuapp.com/passwords/reset_submit',
-  // GetCustomerPreferencesUrl:'http://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/replace-me/preferences',
-  // CreateOrUpdateCustomerPreferencesUrl:'http://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/preferences',
+  // GetCustomerPreferencesUrl:'https://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/replace-me/preferences',
+  // CreateOrUpdateCustomerPreferencesUrl:'https://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/preferences',
 
   // Auth Server: https://stormy-stream-36548-96356ce4833c.herokuapp.com
   // Order Server: https://polar-fortress-28097-08459456d8d7.herokuapp.com
 
-  // CollectionsUrl: "http://localhost:8083/ads/v1/collections",
+  // CollectionsUrl: "https://localhost:8083/ads/v1/collections",
   // ChefsUrl: "http://localhost:8083/ads/v1/chefs",
   // CuisinesUrl: "http://localhost:8083/ads/v1/cuisines",
   // DishesUrl: "http://localhost:8083/ads/v1/dishes",
