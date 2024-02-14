@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { faHandshake } from '@fortawesome/free-solid-svg-icons';
 import { Cuisine, LocalChef } from 'src/app/model/localchef';
 import { ServiceLocation } from 'src/app/model/ServiceLocation';
 import { ChefService } from 'src/app/services/chef.service';
@@ -22,7 +23,7 @@ export class HomeComponent {
   popularLocations: ServiceLocation[];
   cuisines: Cuisine[] = [];
   cuisineMap: Map<String, Cuisine> = new Map<String, Cuisine>();
-
+  faHandshake = faHandshake;
 
   constructor(
     private locationService: LocationService,

@@ -96,14 +96,15 @@
         <div style="margin-bottom: 10px;">Be a part of <span class="logo-text">Chumma</span></div>
         <div class="flex-row flex-wrap gap-1">
             <div class="flex-row width-m bg-light" style="height: 200px;">
-                <div style="height: 200px;width:200px;">
-                    <img src="/assets/images/become-a-partner.webp" style="object-fit: cover;" height="100%" width="200px">
+                <div style="height: 200px;width:200px;display: flex;justify-content: center;align-items: center;color: var(--d-orange);">
+                    <fa-icon [icon]="faHandshake" style="font-size: 50px;"></fa-icon>
+                    <!-- <img src="/assets/images/become-a-partner.webp" style="object-fit: cover;" height="100%" width="200px"> -->
                 </div>
                 <div class="flex-column justify-content-center align-items-center" style="height: 200px;width:100%;">
                     <span style="font-weight: 900;font-size: 20px;padding: 10px 0;">Become
                         a family chef</span>
                     <p style="margin: 10px 0; word-wrap: break-word;padding: 0 20px;text-align: center;">Reach more customers and achieve growth with us</p>
-                    <button style="border: none;padding: 8px; background-color: var(--orange);color: #fff;">Find
+                    <button style="border: none;padding: 8px; background-color: var(--orange);color: #fff;" routerLink="/contact_us">Find
                         our more</button>
                 </div>
             </div>

@@ -402,7 +402,7 @@ select {
 }
 
 .width-m {
-    width: 480px;
+    min-width: fit-content;
 }
 
 .spice {
