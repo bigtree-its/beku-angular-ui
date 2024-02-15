@@ -41,7 +41,7 @@
                     </div>
                     <div class="flex-column">
                         <label for="customerEmail">Your email<small style="color: red;">**</small></label>
-                        <input class="fb-input" type="email" name="customerEmail" tabindex="2" autocomplete="off" value="" [(ngModel)]="customerEmail" #ctrl="ngModel" required="true">
+                        <input class="fb-input" type="email" name="customerEmail" tabindex="2" autocomplete="off" value="" [(ngModel)]="customerEmail" #ctrl="ngModel" required="true" readonly>
                     </div>
                 </div>
                 <div *ngIf="showServiceModeSection" class="flex-column m-2">
