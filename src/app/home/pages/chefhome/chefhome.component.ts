@@ -25,6 +25,7 @@ import { Utils } from 'src/app/services/utils';
 import {
   faArrowLeft,
   faArrowRight,
+  faBatteryEmpty,
   faFaceSmile,
   faPeopleArrows,
   faStar,
@@ -56,6 +57,7 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
   displayAllDays: boolean = false;
   displayWeeklyCals: boolean = false;
   faStar = faStar;
+  faBatteryEmpty = faBatteryEmpty;
 
   days: string[] = [
     'Sunday',

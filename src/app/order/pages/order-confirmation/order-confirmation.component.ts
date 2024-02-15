@@ -18,7 +18,7 @@ import { Utils } from 'src/app/services/utils';
 })
 export class OrderConfirmationComponent {
   order: CustomerOrder;
-  redirect_status: any;
+  redirectStatus: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -35,31 +35,28 @@ export class OrderConfirmationComponent {
   //redirect_status=succeeded
 
   ngOnInit() {
-    
-    this.activatedRoute.queryParams.subscribe((params) => {
-      this.redirect_status = params['redirect_status'];
-      this.activatedRoute.params.subscribe((params) => {
-        const reference = params['reference'];
-        this.ctxService.destroyOrder();
-        this.orderService.retrieveOrder(reference).subscribe((o) => {
-          this.order = o;
-          if (this.utils.isValid(this.order)) {
-            if (this.redirect_status === 'succeeded' && o.status === 'CREATED') {
-              const tracking: OrderTracking = {
-                reference: reference,
-                status: OrderStatus.paid,
-              };
-              console.log(
-                'Order tracking updating : ' + JSON.stringify(tracking)
-              );
-              this.orderService.updateStatus(tracking);
-            }
-          } else {
-            console.log('Order not found');
-          }
-        });
-      });
+    this.redirectStatus = this.activatedRoute.snapshot.queryParamMap.get('redirect_status');
+    const reference = this.activatedRoute.snapshot.queryParamMap.get('reference');
+    console.log('reference '+ reference)
+    console.log('redirect_status '+ this.redirectStatus)
+    this.ctxService.destroyOrder();
+    this.orderService.retrieveOrder(reference).subscribe((o) => {
+      this.order = o;
+      if (this.utils.isValid(this.order)) {
+        if (this.redirectStatus === 'succeeded' && o.status === 'CREATED') {
+          const tracking: OrderTracking = {
+            reference: reference,
+            status: OrderStatus.paid,
+          };
+          console.log(
+            'Order tracking updating : ' + JSON.stringify(tracking)
+          );
+          this.orderService.updateStatus(tracking);
+        }
+      } else {
+        console.log('Order not found');
+      }
     });
-
+    
   }
 }

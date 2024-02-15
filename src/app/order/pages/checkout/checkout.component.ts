@@ -17,6 +17,8 @@ import { FoodOrderService } from 'src/app/services/food-order.service';
 import { LocalService } from 'src/app/services/local.service';
 import { ChefService } from 'src/app/services/chef.service';
 import { faPersonBiking, faBox, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { AccountService } from 'src/app/services/account.service';
+import { User } from 'src/app/model/auth-model';
 
 
 @Component({
@@ -43,9 +45,10 @@ export class CheckoutComponent implements OnDestroy{
   customerName: string = "";
   notesToChef: string = "";
 
-  divHeader: string = "YOUR INFORMATION";
+  divHeader: string = "";
   nextButtonText: string = "Next";
-  showCustomerDetailsSection: boolean = true;
+  showHomeScreen: boolean = true;
+  showCustomerDetailsSection: boolean = false;
   showServiceModeSection: boolean = false;
   showItemsSection: boolean = false;
   showPaymentSection: boolean = false;
@@ -71,6 +74,8 @@ export class CheckoutComponent implements OnDestroy{
   cardElement: any;
   paymentIntent: PaymentIntentResponse;
   destroy$ = new Subject<void>();
+  customerLoggedIn: boolean;
+  customer: User;
 
   constructor(private contextService: ContextService,
     private utils: Utils,
@@ -80,6 +85,7 @@ export class CheckoutComponent implements OnDestroy{
     private modalService: NgbModal,
     private orderService: FoodOrderService,
     private chefService: ChefService,
+    private accountService: AccountService,
     private router: Router) {
   }
 
@@ -102,6 +108,27 @@ export class CheckoutComponent implements OnDestroy{
       error: (err) => console.error('OrderSubject emitted an error: ' + err),
       complete: () =>
         console.log('OrderSubject emitted the complete notification'),
+    });
+
+    this.accountService.getData();
+    this.accountService.loginSession$.subscribe({
+      next: (value) => {
+        console.log('Customer subject '+ JSON.stringify(value))
+        this.customer = value;
+        if ( this.customer !== null && this.customer !== undefined){
+          this.customerName = this.customer.firstName + this.customer.lastName;
+          this.customerEmail = this.customer.email ;
+          this.customerMobile = this.customer.mobile ;
+          this.showCustomerDetailsSection = true;
+          this.showHomeScreen = false;
+        }else{
+          this.showHomeScreen = true;
+          this.showCustomerDetailsSection = false;
+        }
+      },
+      error: (err) => console.error('CustomerSubject emitted an error: ' + err),
+      complete: () =>
+        console.log('CustomerSubject emitted the complete notification'),
     });
 
   }
@@ -135,7 +162,8 @@ export class CheckoutComponent implements OnDestroy{
 
   previous() {
     if (this.showCustomerDetailsSection) {
-      return;
+      this.divHeader = "";
+      this.nextButtonText = "Next";
     } else if (this.showServiceModeSection) {
       this.showCustomerDetailsSection = true;
       this.showServiceModeSection = false;

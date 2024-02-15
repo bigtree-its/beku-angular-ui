@@ -36,7 +36,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.successful = false;
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'];
-   
+    if ( this.returnUrl !== null && this.returnUrl !== undefined){
+      this.accountService.redirectUrl = this.returnUrl;
+    }
   }
 
   submit() {

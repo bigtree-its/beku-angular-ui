@@ -4,7 +4,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Utils } from 'src/app/services/utils';
 import { Day } from 'src/app/model/common-models';
 import { FoodOrderService } from 'src/app/services/food-order.service';
-import { faMinus, faPepperHot, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCircle, faMinus, faPepperHot, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-menu-item',
@@ -26,6 +26,7 @@ export class MenuItemComponent {
   faPlus = faPlus;
   faMinus = faMinus;
   faPepperHot = faPepperHot;
+  faCircle = faCircle;
 
   constructor(
     private foodOrderService: FoodOrderService,

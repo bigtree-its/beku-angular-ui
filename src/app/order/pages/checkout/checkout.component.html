@@ -18,6 +18,16 @@
         <div class="flex-column align-items-center w-half-screen" id="contentDiv">
             <div style="max-height: 500px;flex-grow: 1;display: flex;flex-direction: column;max-width: 480px;min-width: 480px;">
                 <div class="sub-header">{{divHeader}}</div>
+                <div *ngIf="showHomeScreen" class="flex-column mt-5">
+                    <div class="flex-row mb-2">
+                        <span>Do you have an account?</span>
+                        <span [routerLink]="['/login']" [queryParams]="{returnUrl: 'checkout'}" class="clickable ml-2">Login</span>
+                    </div>
+                    <div class="flex-row">
+                        <span>Don't have an account?</span>
+                        <span [routerLink]="['/register']" class="clickable ml-2">Signup</span>
+                    </div>
+                </div>
 
                 <div *ngIf="showCustomerDetailsSection" class="flex-column mt-5">
                     <div class="flex-column mb-3">
@@ -128,10 +138,10 @@
                     </div>
                 </div>
                 <div class="footer flex-row space-between align-items-center p-1 h-5">
-                    <span *ngIf="showCustomerDetailsSection"></span>
-                    <button *ngIf="!showCustomerDetailsSection" class="btn-red n-w-100" (click)="previous()" tabindex="4" style="float: left;">Previous</button>
-                    <strong class="order-total">{{order.total| currency: 'GBP'}}</strong>
-                    <button *ngIf="!showPlaceOrderButton" class="btn-red" style="min-width: 100px;float: right;max-width: 100%;" (click)="next()" tabindex="5">Next</button>
+                    <span *ngIf="showHomeScreen || showCustomerDetailsSection"></span>
+                    <button *ngIf="!showHomeScreen && !showCustomerDetailsSection " class="btn-red n-w-100" (click)="previous()" tabindex="4" style="float: left;">Previous</button>
+                    <strong *ngIf="!showHomeScreen && order" class="order-total">{{order.total| currency: 'GBP'}}</strong>
+                    <button *ngIf="!showPlaceOrderButton &&  !showHomeScreen" class="btn-red" style="min-width: 100px;float: right;max-width: 100%;" (click)="next()" tabindex="5">Next</button>
                     <button *ngIf="showPlaceOrderButton" class="btn-grn" style="min-width: 100px;float: right;" (click)="placeOrder(stripeContent)" tabindex="5">Proceed to Pay</button>
                 </div>
             </div>

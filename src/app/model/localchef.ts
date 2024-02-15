@@ -135,9 +135,11 @@ export class Menu {
     chefId: string;
     collectionId: string;
     image: string;
+    preOrder: boolean;
     vegetarian: boolean;
     special: boolean;
     discounted: boolean;
+    collectionOnly: boolean;
     spice: number;
     extras: Extra[];
     choices: Extra[];
@@ -148,6 +150,9 @@ export class Menu {
     active: boolean;
     createdAt: Date;
     updatedAt: Date;
+    orderBy: Date;
+    readyBy: Date;
+    
 }
 
 export interface Calendar {

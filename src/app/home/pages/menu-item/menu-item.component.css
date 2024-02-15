@@ -5,28 +5,17 @@
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     border: 1px solid var(--navy-grey);
     margin: 5px 0;
-    padding: 10px;
+    /* padding: 10px; */
 }
 
 .menu-item-layout>img {
     display: none;
 }
 
-.menu-item-main {
-    display: flex;
-    flex-direction: column;
-}
-
 .item-name {
     font-weight: 500;
     color: #242e30;
     padding: 0 0 10px 0;
-}
-
-.menu-desc {
-    line-height: 1.5;
-    padding: 0 10px 0 0;
-    text-align: center;
 }
 
 .price {
