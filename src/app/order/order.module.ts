@@ -14,7 +14,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 const routes: Routes = [
   { path: 'basket', component: BasketComponent },
   { path: 'checkout', component: CheckoutComponent },
-  { path: 'order-confirmation/:reference', component: OrderConfirmationComponent }
+  { path: 'order-confirmation', component: OrderConfirmationComponent }
 ]
 
 @NgModule({

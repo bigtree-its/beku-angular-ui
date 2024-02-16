@@ -350,20 +350,16 @@ export class FoodOrderService {
     this.setData(this.customerOrder);
   }
 
-  createPaymentIntentForOrder(
-    customerOrder: CustomerOrder
-  ): Observable<PaymentIntentResponse> {
+  createPaymentIntentForOrder(customerOrder: CustomerOrder): Observable<PaymentIntentResponse> {
     console.log('Creating intent for order: ' + JSON.stringify(customerOrder));
     const paymentIntentRequest: PaymentIntentRequest = {
       currency: 'GBP',
       amount: customerOrder.total,
       orderReference: customerOrder.reference,
+      customerEmail: customerOrder.customer.email,
     };
     console.log(
-      'Creating payment intent: ' +
-        this.serviceLocator.PaymentIntentUrl +
-        ', ' +
-        JSON.stringify(paymentIntentRequest)
+      'Creating payment intent: ' +this.serviceLocator.PaymentIntentUrl +', ' +JSON.stringify(paymentIntentRequest)
     );
     return this.http.post<PaymentIntentResponse>(
       this.serviceLocator.PaymentIntentUrl,

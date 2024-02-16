@@ -36,27 +36,27 @@ export class OrderConfirmationComponent {
 
   ngOnInit() {
     this.redirectStatus = this.activatedRoute.snapshot.queryParamMap.get('redirect_status');
-    const reference = this.activatedRoute.snapshot.queryParamMap.get('reference');
-    console.log('reference '+ reference)
+    const paymentIntent = this.activatedRoute.snapshot.queryParamMap.get('payment_intent');
+    console.log('paymentIntent '+ paymentIntent)
     console.log('redirect_status '+ this.redirectStatus)
-    this.ctxService.destroyOrder();
-    this.orderService.retrieveOrder(reference).subscribe((o) => {
-      this.order = o;
-      if (this.utils.isValid(this.order)) {
-        if (this.redirectStatus === 'succeeded' && o.status === 'CREATED') {
-          const tracking: OrderTracking = {
-            reference: reference,
-            status: OrderStatus.paid,
-          };
-          console.log(
-            'Order tracking updating : ' + JSON.stringify(tracking)
-          );
-          this.orderService.updateStatus(tracking);
-        }
-      } else {
-        console.log('Order not found');
-      }
-    });
+    // this.ctxService.destroyOrder();
+    // this.orderService.retrieveOrder(reference).subscribe((o) => {
+    //   this.order = o;
+    //   if (this.utils.isValid(this.order)) {
+    //     if (this.redirectStatus === 'succeeded' && o.status === 'CREATED') {
+    //       const tracking: OrderTracking = {
+    //         reference: reference,
+    //         status: OrderStatus.paid,
+    //       };
+    //       console.log(
+    //         'Order tracking updating : ' + JSON.stringify(tracking)
+    //       );
+    //       this.orderService.updateStatus(tracking);
+    //     }
+    //   } else {
+    //     console.log('Order not found');
+    //   }
+    // });
     
   }
 }

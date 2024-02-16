@@ -177,7 +177,7 @@ export class StripeformComponent {
       elements,
       confirmParams: {
         // Return URL where the customer should be redirected after the PaymentIntent is confirmed.
-        return_url: 'http://localhost:4200/order-confirmation/'+ this.order.reference,
+        return_url: 'http://localhost:4200/order-confirmation',
         receipt_email: "nava.arul@gmail.com",
       },
     })
@@ -197,7 +197,7 @@ export class StripeformComponent {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:5200/order-complete",
+        return_url: "http://localhost:4200/order-confirmation",
         receipt_email: "nava.arul@gmail.com",
       },
     });

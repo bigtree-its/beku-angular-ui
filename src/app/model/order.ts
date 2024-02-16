@@ -44,6 +44,7 @@ export class PaymentIntentRequest {
     currency: string;
     amount: number;
     orderReference: string;
+    customerEmail: string;
 }
 
 export class PaymentIntentResponse {

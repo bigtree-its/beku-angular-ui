@@ -14,7 +14,8 @@ export const environment = {
   CollectionsUrl:
     'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/collections',
   ChefsUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/chefs',
-  CuisinesUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/cuisines',
+  CuisinesUrl:
+    'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/cuisines',
   DishesUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/dishes',
   ReviewsUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/reviews',
   ServiceAreasUrl:
@@ -22,30 +23,48 @@ export const environment = {
   MenusUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/menus',
   CalendersUrl:
     'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/calendars',
-  OrderTrackingUrl:
-    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/order-tracking',
-  CustomerOrdersUrl:
-    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders',
-  CustomerOrderSearchUrl:
-    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders/search',
-  StripePaymentsUrl:
-    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments',
-  PaymentIntentUrl:
-    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments/payment-intent',
+
+  // Order Service Remote
+
+  // OrderTrackingUrl:
+  //   'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/order-tracking',
+  // CustomerOrdersUrl:
+  //   'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders',
+  // CustomerOrderSearchUrl:
+  //   'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders/search',
+  // StripePaymentsUrl:
+  //   'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments',
+  // PaymentIntentUrl:
+  //   'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments/payment-intent',
+
+  // Order Service Local
+  OrderTrackingUrl: 'http://localhost:8080/api/order-tracking',
+  CustomerOrdersUrl: 'http://localhost:8080/api/customer-orders',
+  CustomerOrderSearchUrl: 'http://localhost:8080/api/customer-orders/search',
+  StripePaymentsUrl: 'http://localhost:8080/api/stripe-payments',
+  PaymentIntentUrl: 'http://localhost:8080/api/stripe-payments/payment-intent',
+
   // Auth URLs
 
   // Local
-  LoginUrl: 'https://bigtree-auth-service-672f06320174.herokuapp.com/authenticate/customer/token',
-  LogoutUrl: 'https://bigtree-auth-service-672f06320174.herokuapp.com/api/auth/logout',
-  RegisterUrl: 'https://bigtree-auth-service-672f06320174.herokuapp.com/api/users/signup',
-  PasswordResetInitiateUrl: 'https://bigtree-auth-service-672f06320174.herokuapp.com/passwords/reset_initiate',
-  PasswordResetSubmitUrl: 'https://bigtree-auth-service-672f06320174.herokuapp.com/passwords/reset_submit',
+  LoginUrl:
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/authenticate/customer/token',
+  LogoutUrl:
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/api/auth/logout',
+  RegisterUrl:
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/api/users/signup',
+  PasswordResetInitiateUrl:
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/passwords/reset_initiate',
+  PasswordResetSubmitUrl:
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/passwords/reset_submit',
   GetCustomerPreferencesUrl:
     'https://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/replace-me/preferences',
   CreateOrUpdateCustomerPreferencesUrl:
     'https://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/preferences',
-  CreateContactsUrl: 'https://bigtree-auth-service-672f06320174.herokuapp.com/api/contacts',
-  UpdatePersonalDetails: 'https://bigtree-auth-service-672f06320174.herokuapp.com/api/users/update_personal',
+  CreateContactsUrl:
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/api/contacts',
+  UpdatePersonalDetails:
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/api/users/update_personal',
   // Heroku
   // LoginUrl:
   //   'https://bigtree-auth-service-672f06320174.herokuapp.com/authenticate/customer/token',
@@ -70,11 +89,6 @@ export const environment = {
   // ServiceAreasUrl: "http://localhost:8083/ads/v1/serviceareas",
   // MenusUrl: "http://localhost:8083/ads/v1/menus",
   // CalendersUrl: "http://localhost:8083/ads/v1/calendars",
-  // OrderTrackingUrl: "http://localhost:8080/api/order-tracking",
-  // CustomerOrdersUrl: "http://localhost:8080/api/customer-orders",
-  // CustomerOrderSearchUrl: "http://localhost:8080/api/customer-orders/search",
-  // StripePaymentsUrl: "http://localhost:8080/api/stripe-payments",
-  // PaymentIntentUrl: "http://localhost:8080/api/stripe-payments/payment-intent",
 
   debug: window['env']['debug'] || false,
 
