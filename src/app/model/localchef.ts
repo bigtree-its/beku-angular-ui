@@ -298,14 +298,16 @@ export interface OrderTracking{
 }
 
 export interface OrderUpdateRequest {
-    reference: string;
-    id: string;
-    status: string;
-    chefNotes: string;
-    customerComments: string;
-    expectedCollectionDate: Date;
-    expectedDeliveryDate: Date;
-    customerRating: number;
+    reference?: string;
+    id?: string;
+    paymentIntentId?: string;
+    paymentStatus?: string;
+    status?: string;
+    chefNotes?: string;
+    customerComments?: string;
+    expectedCollectionDate?: Date;
+    expectedDeliveryDate?: Date;
+    customerRating?: number;
 }
 
 export interface CustomerReview {

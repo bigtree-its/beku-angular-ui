@@ -54,6 +54,7 @@ export class PaymentIntentResponse {
     orderReference: string;
     clientSecret: string;
     currency: string;
+    status: string;
     error: Boolean;
     liveMode: Boolean;
     errorMessage: string;

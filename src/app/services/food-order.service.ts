@@ -460,27 +460,24 @@ export class FoodOrderService {
     return packagingFee;
   }
 
-  updateOrder(orderUpdateRequest: OrderUpdateRequest) {
+  updateOrder(orderUpdateRequest: OrderUpdateRequest): Observable<CustomerOrder> {
     console.log(
       'Updating Order: ' +
         this.serviceLocator.CustomerOrdersUrl +
         ', ' +
         JSON.stringify(orderUpdateRequest)
     );
-    this.http
-      .put<OrderUpdateRequest>(
+    return this.http
+      .put<CustomerOrder>(
         this.serviceLocator.CustomerOrdersUrl,
         orderUpdateRequest
       )
-      .subscribe({
-        next: (data) => {
-          var response = JSON.stringify(data);
-          console.log('Order Updated: ' + response);
-        },
-        error: (e) => {
-          console.error('Error when updating order ' + e);
-        },
-      });
+      .pipe(
+        tap((result) => {
+          console.log('Order update response ' + JSON.stringify(result));
+        })
+      );
+      
   }
 
   placeOrder(customerOrder: CustomerOrder): Observable<CustomerOrder> {

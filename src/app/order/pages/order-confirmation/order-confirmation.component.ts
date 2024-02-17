@@ -6,6 +6,7 @@ import {
   CustomerOrder,
   OrderStatus,
   OrderTracking,
+  OrderUpdateRequest,
 } from 'src/app/model/localchef';
 import { ContextService } from 'src/app/services/context.service';
 import { FoodOrderService } from 'src/app/services/food-order.service';
@@ -23,8 +24,7 @@ export class OrderConfirmationComponent {
   constructor(
     private activatedRoute: ActivatedRoute,
     private orderService: FoodOrderService,
-    private ctxService: ContextService,
-    private utils: Utils
+    private utils: Utils,
   ) {
   }
 
@@ -37,26 +37,22 @@ export class OrderConfirmationComponent {
   ngOnInit() {
     this.redirectStatus = this.activatedRoute.snapshot.queryParamMap.get('redirect_status');
     const paymentIntent = this.activatedRoute.snapshot.queryParamMap.get('payment_intent');
-    console.log('paymentIntent '+ paymentIntent)
-    console.log('redirect_status '+ this.redirectStatus)
-    // this.ctxService.destroyOrder();
-    // this.orderService.retrieveOrder(reference).subscribe((o) => {
-    //   this.order = o;
-    //   if (this.utils.isValid(this.order)) {
-    //     if (this.redirectStatus === 'succeeded' && o.status === 'CREATED') {
-    //       const tracking: OrderTracking = {
-    //         reference: reference,
-    //         status: OrderStatus.paid,
-    //       };
-    //       console.log(
-    //         'Order tracking updating : ' + JSON.stringify(tracking)
-    //       );
-    //       this.orderService.updateStatus(tracking);
-    //     }
-    //   } else {
-    //     console.log('Order not found');
-    //   }
-    // });
+    console.log('paymentIntent '+ paymentIntent);
+    console.log('redirect_status '+ this.redirectStatus);
+    var obj : OrderUpdateRequest = {
+      "paymentIntentId": paymentIntent,
+      "paymentStatus": this.redirectStatus
+    }
+    this.orderService.updateOrder(obj ).subscribe((o) => {
+      this.order = o;
+      if (this.utils.isValid(this.order)) {
+        if (this.redirectStatus === 'succeeded' && o.status === 'PAID') {
+          
+        }
+      } else {
+        console.log('Order not found');
+      }
+    });
     
   }
 }

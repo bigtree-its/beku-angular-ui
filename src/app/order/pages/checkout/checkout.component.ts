@@ -2,7 +2,10 @@ import { Location } from '@angular/common';
 import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RapidApiByPostcodeResponse, RapidApiByPostcodeResponseSummary } from 'src/app/model/address';
+import {
+  RapidApiByPostcodeResponse,
+  RapidApiByPostcodeResponseSummary,
+} from 'src/app/model/address';
 import { CustomerOrder, FoodOrder, LocalChef } from 'src/app/model/localchef';
 import { ContextService } from 'src/app/services/context.service';
 import { RapidApiService } from 'src/app/services/rapid-api.service';
@@ -10,29 +13,36 @@ import { Utils } from 'src/app/services/utils';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StripeService } from 'src/app/services/stripe.service';
 import { Observable, Subject, takeUntil } from 'rxjs';
-import {crypto} from 'crypto-js';
+import { crypto } from 'crypto-js';
 import { PaymentIntentResponse } from 'src/app/model/order';
 import { Address } from 'src/app/model/common-models';
 import { FoodOrderService } from 'src/app/services/food-order.service';
 import { LocalService } from 'src/app/services/local.service';
 import { ChefService } from 'src/app/services/chef.service';
-import { faPersonBiking, faBox, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPersonBiking,
+  faBox,
+  faArrowLeft,
+} from '@fortawesome/free-solid-svg-icons';
 import { AccountService } from 'src/app/services/account.service';
 import { User } from 'src/app/model/auth-model';
-
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.css']
+  styleUrls: ['./checkout.component.css'],
 })
-export class CheckoutComponent implements OnDestroy{
-
-  @ViewChild('stripeContent', { read: ElementRef }) public stripeContent: ElementRef<any>;
+export class CheckoutComponent implements OnDestroy {
+  @ViewChild('stripeContent', { read: ElementRef })
+  public stripeContent: ElementRef<any>;
   @ViewChild('cardInfo', { read: ElementRef }) public cardInfo: ElementRef<any>;
-  @ViewChild('#payment-element', { read: ElementRef }) public paymentOptions: ElementRef<any>;
-  @ViewChild('cardErrors', { read: ElementRef }) public cardErrors: ElementRef<any>;
-  @ViewChild('payment-message', { read: ElementRef }) public paymentMessage: ElementRef<any>;
+  @ViewChild('#payment-element', { read: ElementRef })
+  public paymentOptions: ElementRef<any>;
+  @ViewChild('cardErrors', { read: ElementRef })
+  public cardErrors: ElementRef<any>;
+  @ViewChild('payment-message', { read: ElementRef })
+  public paymentMessage: ElementRef<any>;
 
   faPersonBiking = faPersonBiking;
   faBox = faBox;
@@ -40,13 +50,13 @@ export class CheckoutComponent implements OnDestroy{
 
   enablePayButton: boolean = false;
 
-  customerMobile: string = "";
-  customerEmail: string = "";
-  customerName: string = "";
-  notesToChef: string = "";
+  customerMobile: string = '';
+  customerEmail: string = '';
+  customerName: string = '';
+  notesToChef: string = '';
 
-  divHeader: string = "";
-  nextButtonText: string = "Next";
+  divHeader: string = '';
+  nextButtonText: string = 'Next';
   showHomeScreen: boolean = true;
   showCustomerDetailsSection: boolean = false;
   showServiceModeSection: boolean = false;
@@ -55,7 +65,7 @@ export class CheckoutComponent implements OnDestroy{
   showStripeSection: boolean = false;
   showPlaceOrderButton: boolean = false;
 
-  serviceMode: string = "COLLECTION";
+  serviceMode: string = 'COLLECTION';
   customerAddress: Address;
   addressLookupPostcode: string;
   hidePostcodeLookupForm: boolean;
@@ -68,7 +78,7 @@ export class CheckoutComponent implements OnDestroy{
   cartTotal: number = 0;
   order: CustomerOrder;
   chef: LocalChef;
-  price: number = 0.00;
+  price: number = 0.0;
 
   stripeElements: any;
   cardElement: any;
@@ -77,7 +87,7 @@ export class CheckoutComponent implements OnDestroy{
   customerLoggedIn: boolean;
   customer: User;
 
-  constructor(private contextService: ContextService,
+  constructor(
     private utils: Utils,
     private rapidApiService: RapidApiService,
     private stripeService: StripeService,
@@ -86,15 +96,15 @@ export class CheckoutComponent implements OnDestroy{
     private orderService: FoodOrderService,
     private chefService: ChefService,
     private accountService: AccountService,
-    private router: Router) {
-  }
+    private toastService: ToastService,
+    private router: Router
+  ) {}
 
   public loadStripe$: Observable<any> = this.stripeService.LoadStripe();
 
-
   ngOnInit(): void {
-    this.loadStripe$.subscribe(s => {
-      console.log('Loaded stripe: ' + s)
+    this.loadStripe$.subscribe((s) => {
+      console.log('Loaded stripe: ' + s);
     });
 
     this.chef = this.chefService.getData();
@@ -113,15 +123,15 @@ export class CheckoutComponent implements OnDestroy{
     this.accountService.getData();
     this.accountService.loginSession$.subscribe({
       next: (value) => {
-        console.log('Customer subject '+ JSON.stringify(value))
+        console.log('Customer subject ' + JSON.stringify(value));
         this.customer = value;
-        if ( this.customer !== null && this.customer !== undefined){
+        if (this.customer !== null && this.customer !== undefined) {
           this.customerName = this.customer.firstName + this.customer.lastName;
-          this.customerEmail = this.customer.email ;
-          this.customerMobile = this.customer.mobile ;
+          this.customerEmail = this.customer.email;
+          this.customerMobile = this.customer.mobile;
           this.showCustomerDetailsSection = true;
           this.showHomeScreen = false;
-        }else{
+        } else {
           this.showHomeScreen = true;
           this.showCustomerDetailsSection = false;
         }
@@ -130,40 +140,50 @@ export class CheckoutComponent implements OnDestroy{
       complete: () =>
         console.log('CustomerSubject emitted the complete notification'),
     });
-
   }
 
-
-  extractOrder(theOrder: CustomerOrder){
-    if ( this.utils.isValid(theOrder) && theOrder.status === "Completed"){
+  extractOrder(theOrder: CustomerOrder) {
+    if (this.utils.isValid(theOrder) && theOrder.status === 'Completed') {
       return;
     }
     this.order = theOrder;
     if (theOrder !== null && theOrder !== undefined) {
       this.cartTotal = theOrder.subTotal;
-      this.notesToChef= theOrder.notes;
-      if (theOrder.items === null || theOrder.items === undefined || theOrder.items.length === 0) {
+      this.notesToChef = theOrder.notes;
+      if (
+        theOrder.items === null ||
+        theOrder.items === undefined ||
+        theOrder.items.length === 0
+      ) {
         if (this.chef !== null && this.chef !== undefined) {
           this.router.navigate(['cooks', this.chef._id]).then();
         }
       }
     } else {
       this.order = this.getOrder();
-      this.cartTotal = this.order.subTotal;
+      if ( this.order === null || this.order === undefined){
+        this.router.navigateByUrl("/")
+      }else{
+        this.cartTotal = this.order.subTotal;
+      }
+      
     }
   }
   ngAfterViewInit(): void {
     if (this.stripeService.stripe === undefined) {
-      this.stripeService.getStripe().subscribe(s => {
-        console.log('Initializing Stripe card element inside form: ' + this.stripeService.stripe);
+      this.stripeService.getStripe().subscribe((s) => {
+        console.log(
+          'Initializing Stripe card element inside form: ' +
+            this.stripeService.stripe
+        );
       });
-    } 
+    }
   }
 
   previous() {
     if (this.showCustomerDetailsSection) {
-      this.divHeader = "";
-      this.nextButtonText = "Next";
+      this.divHeader = '';
+      this.nextButtonText = 'Next';
     } else if (this.showServiceModeSection) {
       this.showCustomerDetailsSection = true;
       this.showServiceModeSection = false;
@@ -171,8 +191,8 @@ export class CheckoutComponent implements OnDestroy{
       this.showPaymentSection = false;
       this.showStripeSection = false;
       this.showPlaceOrderButton = false;
-      this.divHeader = "Your Details";
-      this.nextButtonText = "Next";
+      this.divHeader = 'Your Details';
+      this.nextButtonText = 'Next';
     } else if (this.showItemsSection) {
       this.showCustomerDetailsSection = false;
       this.showServiceModeSection = true;
@@ -180,8 +200,8 @@ export class CheckoutComponent implements OnDestroy{
       this.showPaymentSection = false;
       this.showStripeSection = false;
       this.showPlaceOrderButton = false;
-      this.divHeader = "Choose service mode";
-      this.nextButtonText = "Next";
+      this.divHeader = 'Choose service mode';
+      this.nextButtonText = 'Next';
     } else if (this.showPaymentSection) {
       this.showCustomerDetailsSection = false;
       this.showServiceModeSection = false;
@@ -189,8 +209,8 @@ export class CheckoutComponent implements OnDestroy{
       this.showPaymentSection = false;
       this.showStripeSection = false;
       this.showPlaceOrderButton = false;
-      this.divHeader = "Review Your Items";
-      this.nextButtonText = "Next";
+      this.divHeader = 'Review Your Items';
+      this.nextButtonText = 'Next';
     } else if (this.showStripeSection) {
       this.showCustomerDetailsSection = false;
       this.showServiceModeSection = false;
@@ -208,8 +228,8 @@ export class CheckoutComponent implements OnDestroy{
       this.showPaymentSection = false;
       this.showStripeSection = false;
       this.showPlaceOrderButton = false;
-      this.divHeader = "Choose service mode";
-      this.nextButtonText = "Next";
+      this.divHeader = 'Choose service mode';
+      this.nextButtonText = 'Next';
     } else if (this.showServiceModeSection && this.validateServiceMode()) {
       this.showCustomerDetailsSection = false;
       this.showServiceModeSection = false;
@@ -217,8 +237,8 @@ export class CheckoutComponent implements OnDestroy{
       this.showPaymentSection = false;
       this.showStripeSection = false;
       this.showPlaceOrderButton = false;
-      this.divHeader = "Review Your Items";
-      this.nextButtonText = "Next";
+      this.divHeader = 'Review Your Items';
+      this.nextButtonText = 'Next';
     } else if (this.showItemsSection) {
       this.showCustomerDetailsSection = false;
       this.showServiceModeSection = false;
@@ -226,16 +246,17 @@ export class CheckoutComponent implements OnDestroy{
       this.showPaymentSection = true;
       this.showStripeSection = false;
       this.showPlaceOrderButton = true;
-      this.divHeader = "You Pay";
-      this.nextButtonText = "Proceed to Pay";
+      this.divHeader = 'You Pay';
+      this.nextButtonText = 'Proceed to Pay';
     } else if (this.showPaymentSection) {
       return;
     }
   }
   validateCustomerDetails(): boolean {
-    if (this.utils.isEmpty(this.customerName)
-      || this.utils.isEmpty(this.customerEmail)
-      || this.utils.isEmpty(this.customerMobile)
+    if (
+      this.utils.isEmpty(this.customerName) ||
+      this.utils.isEmpty(this.customerEmail) ||
+      this.utils.isEmpty(this.customerMobile)
     ) {
       return false;
     }
@@ -243,8 +264,11 @@ export class CheckoutComponent implements OnDestroy{
   }
 
   validateServiceMode(): boolean {
-    if (this.serviceMode === 'DELIVERY' && this.addressSelected &&
-      this.utils.isValid(this.customerAddress) && !this.utils.isEmpty(this.customerAddress.addressLine1)
+    if (
+      this.serviceMode === 'DELIVERY' &&
+      this.addressSelected &&
+      this.utils.isValid(this.customerAddress) &&
+      !this.utils.isEmpty(this.customerAddress.addressLine1)
     ) {
       return true;
     }
@@ -261,18 +285,34 @@ export class CheckoutComponent implements OnDestroy{
     this.order.customer.address = this.customerAddress;
     this.order.serviceMode = this.serviceMode;
     this.order.notes = this.notesToChef;
-    this.orderService.saveOrder(this.order).subscribe(e => {
+    this.orderService.saveOrder(this.order).subscribe((e) => {
       if (this.utils.isStringValid(e.reference)) {
-        this.orderService.createPaymentIntentForOrder(e).subscribe(pi => {
+        this.orderService.createPaymentIntentForOrder(e).subscribe((pi) => {
           this.paymentIntent = pi;
-          this.open(content)
+          console.log('Payment intent ' + JSON.stringify(pi));
+          if (this.paymentIntent.error || this.paymentIntent.status === 'succeeded') {
+            this.toastService.error(
+              'Something is not right. Cannot proceed with this order. Please create new order.'
+            );
+            this.orderService.destroy();
+          } else if (
+            this.paymentIntent != null &&
+            this.paymentIntent.clientSecret != null &&
+            this.paymentIntent.status === 'requires_payment_method'
+          ) {
+            console.log('Payment intent: ' + this.paymentIntent.id);
+            console.log(
+              'Payment intent secret: ' + this.paymentIntent.clientSecret
+            );
+            console.log('Payment intent status: ' + this.paymentIntent.status);
+            this.open(content);
+          }
         });
       }
     });
   }
 
   private createCardElement() {
-
     const style = {
       base: {
         color: '#303238',
@@ -283,7 +323,6 @@ export class CheckoutComponent implements OnDestroy{
         '::placeholder': {
           color: '#CFD7DF',
         },
-
       },
       invalid: {
         color: '#e5424d',
@@ -295,24 +334,27 @@ export class CheckoutComponent implements OnDestroy{
 
     this.cardElement = this.stripeElements.create('card', style);
     this.cardElement.mount(this.cardInfo.nativeElement);
-    this.cardElement.addEventListener("change", (result: any) => {
-      this.enablePayButton = (result.complete) ? true : false;
+    this.cardElement.addEventListener('change', (result: any) => {
+      this.enablePayButton = result.complete ? true : false;
       this.cardErrors = result.error && result.error.message;
     });
   }
 
-  createPaymentOptions(){
+  createPaymentOptions() {
     const paymentElementOptions = {
-      layout: "tabs",
+      layout: 'tabs',
     };
-  
-    const paymentElement = this.stripeElements.create("payment", paymentElementOptions);
+
+    const paymentElement = this.stripeElements.create(
+      'payment',
+      paymentElementOptions
+    );
     paymentElement.mount(this.paymentOptions.nativeElement);
   }
 
   ngOnDestroy() {
     if (this.cardElement) {
-      this.cardElement.removeEventListener("change", (result: any) => {
+      this.cardElement.removeEventListener('change', (result: any) => {
         this.cardErrors = result.error && result.error.message;
         this.cardElement.destroy();
       });
@@ -322,29 +364,28 @@ export class CheckoutComponent implements OnDestroy{
   }
 
   selectPickup() {
-    this.serviceMode = "COLLECTION";
-    this.order.serviceMode = "COLLECTION";
-    if ( this.order.deliveryFee > 0){
+    this.serviceMode = 'COLLECTION';
+    this.order.serviceMode = 'COLLECTION';
+    if (this.order.deliveryFee > 0) {
       this.order.deliveryFee = 0;
       this.order.total = this.order.total - this.chef.deliveryFee;
     }
   }
 
   selectDelivery() {
-    this.serviceMode = "DELIVERY";
-    this.order.serviceMode = "DELIVERY";
+    this.serviceMode = 'DELIVERY';
+    this.order.serviceMode = 'DELIVERY';
     this.order.deliveryFee = this.chef.deliveryFee;
     this.order.total = this.order.total + this.chef.deliveryFee;
   }
 
   getAddress(): string {
-    var address: string = ""
+    var address: string = '';
     if (this.chef !== null && this.chef !== undefined) {
       return this.utils.getChefAddress(this.chef);
     }
     return address;
   }
-
 
   getOrder(): CustomerOrder {
     var orderJson = localStorage.getItem('order');
@@ -365,7 +406,7 @@ export class CheckoutComponent implements OnDestroy{
   }
 
   onSubmitPostcodeLookup(postcodeLookupForm: NgForm) {
-    console.log('Search address form submitted..')
+    console.log('Search address form submitted..');
     if (postcodeLookupForm.valid) {
       this.doPostcodeLookup(this.addressLookupPostcode);
     }
@@ -382,10 +423,15 @@ export class CheckoutComponent implements OnDestroy{
         (data: RapidApiByPostcodeResponse) => {
           this.postcodeAddressList = data.Summaries;
           this.addressSelected = false;
-          console.log('Address Lookup response ' + JSON.stringify(this.postcodeAddressList))
+          console.log(
+            'Address Lookup response ' +
+              JSON.stringify(this.postcodeAddressList)
+          );
         },
         (error) => {
-          console.log('Address Lookup resulted an error.' + JSON.stringify(error));
+          console.log(
+            'Address Lookup resulted an error.' + JSON.stringify(error)
+          );
         }
       );
   }
@@ -394,12 +440,12 @@ export class CheckoutComponent implements OnDestroy{
     var city = selectAddress.Place.split(/[\s ]+/).pop();
     this.customerAddress = {
       city: city,
-      addressLine1 :selectAddress.StreetAddress,
-      addressLine2 : selectAddress.Place,
+      addressLine1: selectAddress.StreetAddress,
+      addressLine2: selectAddress.Place,
       country: 'UK',
       postcode: this.addressLookupPostcode,
       latitude: '',
-      longitude: ''
+      longitude: '',
     };
     this.addressSelected = true;
     this.lookupAddress = false;
@@ -411,7 +457,11 @@ export class CheckoutComponent implements OnDestroy{
   }
 
   findAddress() {
-    if (this.addressLookupPostcode !== null && this.addressLookupPostcode !== undefined && this.addressLookupPostcode.length > 2) {
+    if (
+      this.addressLookupPostcode !== null &&
+      this.addressLookupPostcode !== undefined &&
+      this.addressLookupPostcode.length > 2
+    ) {
       this.doPostcodeLookup(this.addressLookupPostcode);
     }
   }
@@ -425,13 +475,14 @@ export class CheckoutComponent implements OnDestroy{
   }
 
   open(content) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
-      (result) => {
-      },
-      (reason) => {
-        // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      },
-    );
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {},
+        (reason) => {
+          // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
   }
 
   close() {
@@ -446,8 +497,9 @@ export class CheckoutComponent implements OnDestroy{
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:5200/order-confirmation/"+ this.order.reference,
-        receipt_email: "nava.arul@gmail.com",
+        return_url:
+          'http://localhost:5200/order-confirmation/' + this.order.reference,
+        receipt_email: 'nava.arul@gmail.com',
       },
     });
 
@@ -467,9 +519,7 @@ export class CheckoutComponent implements OnDestroy{
     // setLoading(false);
   }
 
-  goback(){
+  goback() {
     this._location.back();
   }
-
 }
-

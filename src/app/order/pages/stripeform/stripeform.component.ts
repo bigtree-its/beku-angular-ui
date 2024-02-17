@@ -1,21 +1,28 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { CustomerOrder } from 'src/app/model/localchef';
-import { PaymentIntentRequest, PaymentIntentResponse } from 'src/app/model/order';
+import {
+  PaymentIntentRequest,
+  PaymentIntentResponse,
+} from 'src/app/model/order';
 import { FoodOrderService } from 'src/app/services/food-order.service';
 import { StripeService } from 'src/app/services/stripe.service';
+import { ToastService } from 'src/app/services/toast.service';
 import { Utils } from 'src/app/services/utils';
 
 @Component({
   selector: 'app-stripeform',
   templateUrl: './stripeform.component.html',
-  styleUrls: ['./stripeform.component.css']
+  styleUrls: ['./stripeform.component.css'],
 })
 export class StripeformComponent {
-
-  @ViewChild('linkAuthenticationInfo', { read: ElementRef }) public linkAuthenticationInfo: ElementRef<any>;
-  @ViewChild('payment-element', { read: ElementRef }) public paymentElement: ElementRef<any>;
-  @ViewChild('cardErrors', { read: ElementRef }) public cardErrors: ElementRef<any>;
-  @ViewChild('payment-message', { read: ElementRef }) public paymentMessage: ElementRef<any>;
+  @ViewChild('linkAuthenticationInfo', { read: ElementRef })
+  public linkAuthenticationInfo: ElementRef<any>;
+  @ViewChild('payment-element', { read: ElementRef })
+  public paymentElement: ElementRef<any>;
+  @ViewChild('cardErrors', { read: ElementRef })
+  public cardErrors: ElementRef<any>;
+  @ViewChild('payment-message', { read: ElementRef })
+  public paymentMessage: ElementRef<any>;
 
   enablePayButton: boolean = false;
   @Input() order: CustomerOrder;
@@ -28,18 +35,21 @@ export class StripeformComponent {
   constructor(
     private stripeService: StripeService,
     private orderService: FoodOrderService,
-    private utils: Utils,
-  ) {
-
-  }
+    private toastService: ToastService,
+    private utils: Utils
+  ) {}
 
   ngOnInit() {
+    // this.toastService.error();
   }
 
   ngAfterViewInit(): void {
     if (this.stripeService.stripe === undefined) {
-      this.stripeService.getStripe().subscribe(s => {
-        console.log('Initializing Stripe card element inside form: ' + this.stripeService.stripe);
+      this.stripeService.getStripe().subscribe((s) => {
+        console.log(
+          'Initializing Stripe card element inside form: ' +
+            this.stripeService.stripe
+        );
         this.initializeStripe();
       });
     } else {
@@ -47,14 +57,18 @@ export class StripeformComponent {
     }
   }
 
-
   initializeStripe() {
     const appearance = {
       theme: 'stripe',
     };
     var clientSecret = this.paymentIntent.clientSecret;
-    console.log('Initialising stripe elements with clientScret: ' + clientSecret)
-    this.stripeElements = this.stripeService.stripe.elements({ appearance, clientSecret });
+    console.log(
+      'Initializing stripe elements with clientSecret: ' + clientSecret
+    );
+    this.stripeElements = this.stripeService.stripe.elements({
+      appearance,
+      clientSecret,
+    });
 
     // var linkAuthentication = this.stripeElements.create("linkAuthentication");
     // linkAuthentication.mount(this.linkAuthenticationInfo.nativeElement);
@@ -63,20 +77,23 @@ export class StripeformComponent {
     //   const emailAddress: string = event.value.email;
     // });
     // linkAuthentication.addEventListener("change", (result: any) => {
-      // this.enablePayButton = (result.complete) ? true : false;
-      // this.cardErrors = result.error && result.error.message;
-      // const emailAddress: string = result.email;
-      // console.log('The customer email: ' + emailAddress)
+    // this.enablePayButton = (result.complete) ? true : false;
+    // this.cardErrors = result.error && result.error.message;
+    // const emailAddress: string = result.email;
+    // console.log('The customer email: ' + emailAddress)
     // });
 
     const paymentElementOptions = {
-      layout: "tabs",
+      layout: 'tabs',
     };
 
-    const paymentElement = this.stripeElements.create('payment', paymentElementOptions);   
-    paymentElement.mount("#payment-info");
-    paymentElement.addEventListener("change", (result: any) => {
-      this.enablePayButton = (result.complete) ? true : false;
+    const paymentElement = this.stripeElements.create(
+      'payment',
+      paymentElementOptions
+    );
+    paymentElement.mount('#payment-info');
+    paymentElement.addEventListener('change', (result: any) => {
+      this.enablePayButton = result.complete ? true : false;
       this.cardErrors = result.error && result.error.message;
     });
     // const paymentElement = this.stripeElements.create("payment", paymentElementOptions);
@@ -85,10 +102,7 @@ export class StripeformComponent {
     // this.createCardElement();
   }
 
-
-
   private createCardElement() {
-
     const style = {
       base: {
         color: '#303238',
@@ -99,7 +113,6 @@ export class StripeformComponent {
         '::placeholder': {
           color: '#CFD7DF',
         },
-
       },
       invalid: {
         color: '#e5424d',
@@ -111,15 +124,15 @@ export class StripeformComponent {
 
     this.cardElement = this.stripeElements.create('card', style);
     // this.cardElement.mount(this.cardInfo.nativeElement);
-    this.cardElement.addEventListener("change", (result: any) => {
-      this.enablePayButton = (result.complete) ? true : false;
+    this.cardElement.addEventListener('change', (result: any) => {
+      this.enablePayButton = result.complete ? true : false;
       this.cardErrors = result.error && result.error.message;
     });
   }
 
   ngOnDestroy() {
     if (this.cardElement) {
-      this.cardElement.removeEventListener("change", (result: any) => {
+      this.cardElement.removeEventListener('change', (result: any) => {
         this.cardErrors = result.error && result.error.message;
         this.cardElement.destroy();
       });
@@ -131,37 +144,39 @@ export class StripeformComponent {
       if (response.error) {
         this.stripeConfirmationError = response.error.message;
       } else {
-        this.confirmPurchase()
+        this.confirmPurchase();
       }
     }
   }
 
   confirmPurchase() {
-    console.log('Confirming order..')
+    console.log('Confirming order..');
     this.orderService.placeOrder(this.order);
   }
 
   makePayment() {
     console.log('Confirming Payment');
     var paymentIntentRequest = new PaymentIntentRequest();
-    paymentIntentRequest.currency = "GBP";
+    paymentIntentRequest.currency = 'GBP';
     paymentIntentRequest.amount = this.order.total;
     paymentIntentRequest.orderReference = this.order.reference;
-    this.orderService.createPaymentIntent(paymentIntentRequest).subscribe((result: PaymentIntentResponse) => {
-      var paymentIntentResponse = result;
-      var customerEmail = "";
-      if (
-        paymentIntentResponse !== null &&
-        paymentIntentResponse !== undefined &&
-        paymentIntentResponse.clientSecret !== null &&
-        paymentIntentResponse.clientSecret !== undefined
-      ) {
-        // var stripeElements = (<any>window).getStripeElements();
-        // (<any>window).pay(stripeElements.stripe, stripeElements.card, this.paymentIntentResponse.clientSecret, this);
-      } else {
-        console.log('Unable to collect payment from your card.')
-      }
-    });
+    this.orderService
+      .createPaymentIntent(paymentIntentRequest)
+      .subscribe((result: PaymentIntentResponse) => {
+        var paymentIntentResponse = result;
+        var customerEmail = '';
+        if (
+          paymentIntentResponse !== null &&
+          paymentIntentResponse !== undefined &&
+          paymentIntentResponse.clientSecret !== null &&
+          paymentIntentResponse.clientSecret !== undefined
+        ) {
+          // var stripeElements = (<any>window).getStripeElements();
+          // (<any>window).pay(stripeElements.stripe, stripeElements.card, this.paymentIntentResponse.clientSecret, this);
+        } else {
+          console.log('Unable to collect payment from your card.');
+        }
+      });
   }
 
   // Stripe returns to this url:
@@ -170,24 +185,50 @@ export class StripeformComponent {
   //payment_intent_client_secret=pi_3Nkt1IJtRMxkXWc31hypLmHB_secret_zD9W7MrKPXyS2awWy2vUQVnvp&
   //redirect_status=succeeded
 
-  async confirmPaymentIntent() {
+  confirmPaymentIntent() {
+    console.log('Confirming payment intent');
     const elements = this.stripeElements;
     const clientSecret = this.paymentIntent.clientSecret;
-    this.stripeService.stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        // Return URL where the customer should be redirected after the PaymentIntent is confirmed.
-        return_url: 'http://localhost:4200/order-confirmation',
-        receipt_email: "nava.arul@gmail.com",
-      },
-    })
+    // const {paymentIntent, error} = await this.stripeService.stripe.confirmCardPayment({
+    //   elements,
+    //   confirmParams: {
+    //     // Return URL where the customer should be redirected after the PaymentIntent is confirmed.
+    //     return_url: 'http://localhost:4200/order-confirmation',
+    //     receipt_email: "nava.arul@gmail.com",
+    //   },
+    // });
+    // if (error) {
+    //   if ( error.payment_intent.status === 'succeeded'){
+    //     var er = 'Something is not right. Looks this order has already been paid. Please contact customer support';
+    //     this.toastService.error(er);
+    //   }else{
+    //     this.toastService.error('Something went wrong, Please contact customer support.');
+    //   }
+    // } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+    //   this.toastService.info('You payment is successful')
+    // }
+
+    this.stripeService.stripe
+      .confirmPayment({
+        elements,
+        confirmParams: {
+          // Return URL where the customer should be redirected after the PaymentIntent is confirmed.
+          return_url: 'http://localhost:4200/order-confirmation',
+          receipt_email: 'nava.arul@gmail.com',
+        },
+      })
       .then(function (result) {
         if (result.error) {
-          console.log('Error while confirming payment');
+          if (result.error.payment_intent.status === 'succeeded') {
+           console.log('Something is not right. Looks this order has already been paid. Please contact customer support');
+          } else {
+            console.log(
+              'Something went wrong, Please contact customer support.'
+            );
+          }
         }
       });
   }
-
 
   async confirmPayment() {
     // e.preventDefault();
@@ -197,8 +238,8 @@ export class StripeformComponent {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:4200/order-confirmation",
-        receipt_email: "nava.arul@gmail.com",
+        return_url: 'http://localhost:4200/order-confirmation',
+        receipt_email: 'nava.arul@gmail.com',
       },
     });
 
@@ -221,30 +262,29 @@ export class StripeformComponent {
   // Fetches the payment intent status after payment submission
   async checkStatus() {
     const clientSecret = new URLSearchParams(window.location.search).get(
-      "payment_intent_client_secret"
+      'payment_intent_client_secret'
     );
 
     if (!clientSecret) {
       return;
     }
 
-    const { paymentIntent } = await this.stripeService.stripe.retrievePaymentIntent(clientSecret);
+    const { paymentIntent } =
+      await this.stripeService.stripe.retrievePaymentIntent(clientSecret);
 
     switch (paymentIntent.status) {
-      case "succeeded":
-        console.log("Payment succeeded!");
+      case 'succeeded':
+        console.log('Payment succeeded!');
         break;
-      case "processing":
-        console.log("Your payment is processing.");
+      case 'processing':
+        console.log('Your payment is processing.');
         break;
-      case "requires_payment_method":
-        console.log("Your payment was not successful, please try again.");
+      case 'requires_payment_method':
+        console.log('Your payment was not successful, please try again.');
         break;
       default:
-        console.log("Something went wrong.");
+        console.log('Something went wrong.');
         break;
     }
   }
-
-
 }

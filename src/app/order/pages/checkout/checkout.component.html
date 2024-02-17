@@ -96,25 +96,25 @@
                         <input class="fb-input" type="text" name="notesToChef" tabindex="2" autocomplete="off" value="" [(ngModel)]="notesToChef" #ctrl="ngModel" required="true">
                     </div>
                     <div style="display: flex;flex-direction: column;height: 380px;overflow: auto;padding-bottom: 10px;" *ngIf="order !== null && order !== undefined">
-                        <app-order-item *ngFor="let item of order.items" [item]="item"></app-order-item>
+                        <app-order-item *ngFor="let item of order?.items" [item]="item"></app-order-item>
                     </div>
                 </div>
                 <div *ngIf="showPaymentSection" class="flex-column m-2">
                     <div class="flex-row-space-between">
                         <strong>Subtotal</strong>
-                        <strong>{{order.subTotal| currency: 'GBP'}}</strong>
+                        <strong>{{order?.subTotal| currency: 'GBP'}}</strong>
                     </div>
                     <div class="flex-row-space-between">
                         <span>Delivery fee</span>
-                        <span>{{order.deliveryFee| currency: 'GBP'}}</span>
+                        <span>{{order?.deliveryFee| currency: 'GBP'}}</span>
                     </div>
                     <div class="flex-row-space-between">
                         <span>Service Fee</span>
-                        <span>{{order.serviceFee| currency: 'GBP'}}</span>
+                        <span>{{order?.serviceFee| currency: 'GBP'}}</span>
                     </div>
                     <div class="flex-row-space-between" style="margin-top: 10px;">
                         <strong>Total</strong>
-                        <strong>{{order.total| currency: 'GBP'}}</strong>
+                        <strong>{{order?.total| currency: 'GBP'}}</strong>
                     </div>
                 </div>
                 <div *ngIf="showStripeSection">
@@ -125,7 +125,7 @@
                         <!--Stripe.js injects the Payment Element-->
                     </div>
                     <button id="paywithCardButton" [disabled]="!enablePayButton" class="n-button" (click)="confirmPayment()">Pay {{
-                        order.subTotal| currency: 'GBP'}}</button>
+                        order?.subTotal| currency: 'GBP'}}</button>
                     <small class="text-muted">By selecting this button, you agree to the Terms of
                         Sale.</small>
 
@@ -140,7 +140,7 @@
                 <div class="footer flex-row space-between align-items-center p-1 h-5">
                     <span *ngIf="showHomeScreen || showCustomerDetailsSection"></span>
                     <button *ngIf="!showHomeScreen && !showCustomerDetailsSection " class="btn-red n-w-100" (click)="previous()" tabindex="4" style="float: left;">Previous</button>
-                    <strong *ngIf="!showHomeScreen && order" class="order-total">{{order.total| currency: 'GBP'}}</strong>
+                    <strong *ngIf="!showHomeScreen && order" class="order-total">{{order?.total| currency: 'GBP'}}</strong>
                     <button *ngIf="!showPlaceOrderButton &&  !showHomeScreen" class="btn-red" style="min-width: 100px;float: right;max-width: 100%;" (click)="next()" tabindex="5">Next</button>
                     <button *ngIf="showPlaceOrderButton" class="btn-grn" style="min-width: 100px;float: right;" (click)="placeOrder(stripeContent)" tabindex="5">Proceed to Pay</button>
                 </div>
@@ -158,7 +158,7 @@
     <div class="modal-body">
         <div style="display: flex;flex-direction: column;height: 380px;overflow: auto;padding-bottom: 10px;">
             <div *ngIf="order !== null && order !== undefined">
-                <app-order-item *ngFor="let item of order.items" [item]="item"></app-order-item>
+                <app-order-item *ngFor="let item of order?.items" [item]="item"></app-order-item>
             </div>
         </div>
     </div>
