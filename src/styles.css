@@ -289,6 +289,11 @@ body {
     padding: 10px 40px;
 }
 
+.toast-error {
+    background-color: #f3dede !important;
+    padding: 10px 40px;
+}
+
 .toast-success::after {
     content: "\f00c" !important;
     font-family: "FontAwesome" !important;
@@ -313,23 +318,23 @@ select {
 }
 
 .border {
-    border: 1px solid #333;
+    border: 1px solid #f6f4f4;
 }
 
 .border-bottom {
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #f6f4f4;
 }
 
 .border-top {
-    border-top: 1px solid #333;
+    border-top: 1px solid #f6f4f4;
 }
 
 .border-left {
-    border-left: 1px solid #333;
+    border-left: 1px solid #f6f4f4;
 }
 
 .border-right {
-    border-right: 1px solid #333;
+    border-right: 1px solid #f6f4f4;
 }
 
 .bg-l-grey {
@@ -343,6 +348,10 @@ select {
 .font-abril-fatface {
     font-family: "Abril Fatface", serif;
     color: #162127;
+}
+
+.color-red {
+    color: var(--d-red);
 }
 
 .font-playfair-display {

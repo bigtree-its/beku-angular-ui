@@ -47,7 +47,7 @@ export class OrderConfirmationComponent {
       this.order = o;
       if (this.utils.isValid(this.order)) {
         if (this.redirectStatus === 'succeeded' && o.status === 'PAID') {
-          
+          this.orderService.destroy();
         }
       } else {
         console.log('Order not found');
