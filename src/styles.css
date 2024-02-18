@@ -3,6 +3,7 @@
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Protest+Riot&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
 :root {
     --l-teal: #7ed5d0;
     --teal: #0be1d3;
@@ -17,7 +18,7 @@
     --l-red: #ffe3e2;
     --gold: #f9812a;
     --red: #e52f28;
-    --d-red: #fd0800;
+    --d-red: #f90202;
     --black: rgb(0, 0, 0);
     --grey: #d9d9d9;
     --light-color: #f0f0f0;
@@ -77,6 +78,7 @@ html {
     overflow: -moz-scrollbars-none;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    -webkit-text-size-adjust: 100%;
 }
 
 ::-webkit-scrollbar {
@@ -128,13 +130,18 @@ body {
     padding: 0px;
     font-size: 14px;
     font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: .1px;
     background-color: #fff;
-    font-family: "Noto Sans Display", sans-serif;
+    /* font-family: "Noto Sans Display", sans-serif; */
+    font-family: Helvetica Neue, Helvetica, sans-serif;
     overflow: -moz-scrollbars-none;
     -ms-overflow-style: none;
-    color: #1b202c;
+    color: #162127;
     scrollbar-width: none;
     overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
 }
 
 ::ng-deep .modal-content {
@@ -146,9 +153,11 @@ body {
 .hero-phrase {
     font-size: 50px;
     font-weight: 900;
-    color: #ebe5ce;
-    text-shadow: 0 0px 5px rgba(0, 0, 0, 1);
     text-align: center;
+}
+
+.text-shadow {
+    text-shadow: 0 0px 5px rgba(0, 0, 0, 1);
 }
 
 .clickable-row {
@@ -311,12 +320,42 @@ select {
     border-bottom: 1px solid #333;
 }
 
+.border-top {
+    border-top: 1px solid #333;
+}
+
+.border-left {
+    border-left: 1px solid #333;
+}
+
+.border-right {
+    border-right: 1px solid #333;
+}
+
 .bg-l-grey {
     background-color: #f5f5f6;
 }
 
 .w-half-screen {
     width: 50%;
+}
+
+.font-abril-fatface {
+    font-family: "Abril Fatface", serif;
+    color: #162127;
+}
+
+.font-playfair-display {
+    font-family: Playfair Display, "Playfair Display-fallback", Lora, "Lora-fallback", Georgia, serif;
+}
+
+.title {
+    font-size: 30px;
+}
+
+.title-section {
+    display: flex;
+    flex-direction: column;
 }
 
 .footer {
@@ -1389,7 +1428,8 @@ select {
 
 .selectable:hover {
     cursor: pointer;
-    background-color: #ffd4d4;
+    color: #fff;
+    background-color: var(--d-red);
 }
 
 .selectable :first-child {
@@ -1526,11 +1566,18 @@ select {
     /* text-shadow: 0 0px 5px rgba(0, 0, 0, 1); */
 }
 
-@media (min-width: 700px) {
+@media (min-width: 767px) {
     .lg {
         display: flex;
     }
     .md {
         display: none;
+    }
+    .title {
+        font-size: 44px;
+    }
+    .title-section {
+        display: flex;
+        flex-direction: row;
     }
 }

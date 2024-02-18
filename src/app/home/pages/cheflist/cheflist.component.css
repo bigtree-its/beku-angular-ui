@@ -78,7 +78,6 @@
 .chef-name {
     font-size: 16px;
     font-weight: 700;
-    font-family: Arial, Helvetica, sans-serif
 }
 
 .footer-div {
@@ -110,7 +109,7 @@ article {
     --title-color: black;
     --link-icon-translate: -20px;
     --link-icon-opacity: 0;
-    border-radius: 16px;
+    border-radius: 5px;
     box-shadow: none;
     background: #fff;
     transform-origin: center;
@@ -131,7 +130,8 @@ article a::after {
 article h2 {
     margin: 0 0 18px 0;
     font-size: 20px;
-    letter-spacing: 0.06em;
+    font-weight: 400;
+    /* letter-spacing: 0.06em; */
     color: var(--title-color);
     transition: color 0.3s ease-out;
 }
@@ -158,11 +158,10 @@ article a {
     display: inline-flex;
     align-items: center;
     text-decoration: none;
-    color: #28666e;
 }
 
 article a:focus {
-    outline: 1px dotted #28666e;
+    outline: 1px dotted var(--d-red);
 }
 
 article a .icon {
@@ -180,7 +179,7 @@ article a .icon {
 
 article:has(:hover, :focus) {
     --img-scale: 1.1;
-    --title-color: #28666e;
+    --title-color: var(--d-red);
     --link-icon-translate: 0;
     --link-icon-opacity: 1;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;

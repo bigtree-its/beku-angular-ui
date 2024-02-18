@@ -1,28 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 .home-wrapper {
-    width: 397px;
+    /* width: 397px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 80px;
+    padding: 20px;
 }
 
 .hero {
     height: 500px;
     display: flex;
+    flex-direction: row;
     justify-content: center;
-    width: 100%;
 }
 
 .hero-left {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     padding: 20px;
-    flex-grow: 1;
-    width: 100%;
 }
 
 .hero-right {
@@ -61,16 +59,6 @@
     transform: scaleX(-1);
 }
 
-.slider-wrapper {
-    font-size: 40px;
-    font-weight: bold;
-    color: #fff;
-    text-transform: uppercase;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .slider {
     height: 50px;
     line-height: 50px;
@@ -90,6 +78,7 @@
     font-weight: 900;
     font-size: 40px;
     font-family: "Anton", sans-serif;
+    color: #f90202;
 }
 
 .slider-text1 {
@@ -172,7 +161,7 @@
     }
 } */
 
-@media (min-width: 700px) {
+@media (min-width: 767px) {
     .home-wrapper {
         width: 100%;
         display: flex;

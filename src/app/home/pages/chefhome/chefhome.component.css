@@ -22,9 +22,9 @@
 }
 
 .chef-name {
-    font-size: 18px;
     font-weight: 900;
-
+    line-height: 1.3;
+    letter-spacing: 1px;
 }
 
 .select-span {
