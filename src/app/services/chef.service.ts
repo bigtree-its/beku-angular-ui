@@ -65,6 +65,17 @@ export class ChefService {
     );
   }
 
+  retrieveSupplier(id: string): Observable<LocalChef> {
+    console.log('Retrieving supplier '+ id)
+    var url = this.serviceLocator.chefsUrl+ "/" + id;
+    return this.http.get<LocalChef>(url)
+    .pipe(
+      tap(data => {
+        this.setChef(data);
+      })
+    );
+  }
+
   getMenusForChef(chefId: string): Observable<Menu[]> {
 
     var params = new HttpParams();

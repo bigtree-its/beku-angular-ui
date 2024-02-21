@@ -133,7 +133,6 @@ body {
     line-height: 1.4;
     letter-spacing: .1px;
     background-color: #fff;
-    /* font-family: "Noto Sans Display", sans-serif; */
     font-family: Helvetica Neue, Helvetica, sans-serif;
     overflow: -moz-scrollbars-none;
     -ms-overflow-style: none;
@@ -168,6 +167,10 @@ body {
 .clickable-row:hover {
     cursor: pointer;
     color: #1967d2;
+}
+
+.height-full {
+    height: 100vh;
 }
 
 .color-light {
@@ -205,6 +208,10 @@ body {
 .bg-blk {
     background-color: #1b202c;
     color: #fff;
+}
+
+.bg-light {
+    background-color: #b0c3f4;
 }
 
 .text-blue {
@@ -489,7 +496,7 @@ select {
 .a-page {
     display: flex;
     flex-direction: column;
-    margin-top: 70px;
+    margin-top: 60px;
     height: 100vh;
 }
 
@@ -1506,6 +1513,10 @@ select {
     width: 100%;
 }
 
+.width-50 {
+    width: 50%;
+}
+
 .full-screen {
     width: 100%;
     transition: height 0.2s ease, padding 0.2s ease;
@@ -1583,7 +1594,7 @@ select {
         display: none;
     }
     .title {
-        font-size: 44px;
+        font-size: 35px;
     }
     .title-section {
         display: flex;

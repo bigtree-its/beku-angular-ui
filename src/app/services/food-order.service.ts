@@ -122,6 +122,11 @@ export class FoodOrderService {
       })
     );
   }
+
+  retrieveSinglePaymentIntent(intentId: string): Observable<PaymentIntentResponse> {
+    return this.http.get<PaymentIntentResponse>(
+      this.serviceLocator.PaymentIntentUrl+"/"+ intentId);
+  }
   
   retrievePaymentIntent(orderId: string): Observable<PaymentIntentResponse> {
     var params = new HttpParams();

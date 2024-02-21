@@ -25,9 +25,10 @@ export class StripeformComponent {
   public paymentMessage: ElementRef<any>;
 
   enablePayButton: boolean = false;
+  // @Input() order: CustomerOrder;
+  // @Input() paymentIntent: PaymentIntentResponse;
   @Input() order: CustomerOrder;
   @Input() paymentIntent: PaymentIntentResponse;
-
   stripeConfirmationError: string;
   stripeElements: any;
   cardElement: any;

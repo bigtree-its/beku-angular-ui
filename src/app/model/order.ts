@@ -49,6 +49,7 @@ export class PaymentIntentRequest {
 
 export class PaymentIntentResponse {
     id: string;
+    intentId: string;
     object: string;
     amount: string;
     orderReference: string;
@@ -60,5 +61,6 @@ export class PaymentIntentResponse {
     errorMessage: string;
     paymentMethod: string;
     chargesUrl: string;
+    supplier: string;
     metaData: Map<string, string>;
 }

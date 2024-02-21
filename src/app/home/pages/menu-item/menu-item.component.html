@@ -1,4 +1,4 @@
-<div *ngIf="menu !== null && menu !== undefined" class="menu-item-layout" (click)="open(content)">
+<div *ngIf="menu !== null && menu !== undefined" class="menu-item-layout border" (click)="open(content)">
     <!-- <img src="/assets/images/menu-items/chicken-tikka-kebab.jpg" loading="lazy"> -->
 
     <div class="flex-column" style="width: 100%;">
@@ -15,7 +15,7 @@
             <div class="flex-row align-items-center">
                 <span *ngIf="menu.preOrder" class="attribute">PreOrder Only</span>
                 <span *ngIf="menu.collectionOnly" class="attribute">CollectionOnly</span>
-                <small *ngIf="menu.preOrder" class="ml-2 blinker text-blue">OrderBy {{menu.orderBy | date: 'EEEE'}}</small>
+                <small *ngIf="menu.orderBy" class="ml-2 blinker text-blue">OrderBy {{menu.orderBy | date: 'EEEE'}}</small>
             </div>
         </div>
     </div>

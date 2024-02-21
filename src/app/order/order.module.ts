@@ -7,9 +7,10 @@ import { SharedModule } from '../shared';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { StripeformComponent } from './pages/stripeform/stripeform.component';
+import { StripeformComponent } from '../payments/pages/stripeform/stripeform.component';
 import { OrderConfirmationComponent } from './pages/order-confirmation/order-confirmation.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { PaymentsModule } from '../payments';
 
 const routes: Routes = [
   { path: 'basket', component: BasketComponent },
@@ -21,7 +22,6 @@ const routes: Routes = [
   declarations: [
     BasketComponent,
     CheckoutComponent,
-    StripeformComponent,
     OrderConfirmationComponent,
   ],
   imports: [
@@ -29,6 +29,7 @@ const routes: Routes = [
     RouterModule,
     SharedModule,
     FormsModule,
+    PaymentsModule,
     ReactiveFormsModule,
     NgbAccordionModule,
     FontAwesomeModule,

@@ -1,0 +1,59 @@
+<!-- <ng-container *ngIf="(loadStripe$ | async) as stripe; else loadingStripe"></ng-container> -->
+
+
+<div class="a-page">
+    <div class="flex-row-space-between py-2">
+        <div class="flex-column bg-light height-full width-50 p-3">
+            <div class="flex-row">
+                <div style="height: 200px;width: 170px;">
+                    <img src="/assets/images/chefs/{{supplier._id}}/cover-photo.jpg" style="object-fit: cover;
+                    max-height: 198px;
+                    height: 198px;
+                    width: 170px;
+                    max-width: 170px;">
+                </div>
+                <div class="flex-column" style="padding: 0 20px;width: 100%;">
+                    <div class="title-section">
+                        <span class="chef-name font-abril-fatface title mr-2">{{supplier.kitchenName}}</span>
+                        <div class="clickable-row" style="font-size: 12px;">
+                            <fa-icon [icon]="faStar"></fa-icon>
+                            <span style="padding-left: 6px;">{{supplier.rating}}</span>
+                            <span style="padding-left: 6px;">({{supplier.reviews}}
+                                reviews)</span>
+                        </div>
+                    </div>
+                    <span class="py-1 px-1 f-size-xs">{{supplier.description}}</span>
+                    <div class="flex-row-wrap">
+                        <ng-container *ngFor="let cuisine of supplier.cuisines | slice:0:3">
+                            <div class="attribute">{{ cuisine.name }}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="flex-column" *ngIf="supplier.doDelivery">
+                        <div class="flex-row" style="padding: 5px;align-items: center;">
+                            <fa-icon [icon]="faPeopleArrows" class="mr-1"></fa-icon>
+                            <span style="font-size: 12px;">I do delivery
+                                upto {{supplier.deliveryDistance}} miles</span>
+                        </div>
+                        <div class="flex-row" *ngIf="supplier.freeDeliveryOver > 0" style="padding: 5px;align-items: center;">
+                            <fa-icon [icon]="faFaceSmile" class="mr-1"></fa-icon>
+                            <span style="font-size: 12px;">Free Delivery
+                                order over {{supplier.freeDeliveryOver |
+                                currency: 'GBP'}}</span>
+                        </div>
+                    </div>
+                    <div *ngIf="!supplier.doDelivery" style="padding: 5px 0;">
+                        <span class="attribute">Collection Only</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex-column align-items-center w-half-screen" id="contentDiv">
+            <app-stripeform [order]="customerOrder" [paymentIntent]="paymentIntent"></app-stripeform>
+        </div>
+    </div>
+</div>
+
+<ng-template #loadingStripe>
+    Loading.... Please wait!
+</ng-template>

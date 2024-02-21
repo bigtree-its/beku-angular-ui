@@ -13,11 +13,9 @@ import { Utils } from 'src/app/services/utils';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StripeService } from 'src/app/services/stripe.service';
 import { Observable, Subject, takeUntil } from 'rxjs';
-import { crypto } from 'crypto-js';
 import { PaymentIntentResponse } from 'src/app/model/order';
 import { Address } from 'src/app/model/common-models';
 import { FoodOrderService } from 'src/app/services/food-order.service';
-import { LocalService } from 'src/app/services/local.service';
 import { ChefService } from 'src/app/services/chef.service';
 import {
   faPersonBiking,

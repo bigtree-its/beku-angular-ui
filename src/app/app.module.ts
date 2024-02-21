@@ -16,6 +16,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SideNavComponent } from './shared/side-nav/side-nav.component';
 import { SideNavContentComponent } from './shared/side-nav-content/side-nav-content.component';
+import { PaymentsModule } from './payments';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { SideNavContentComponent } from './shared/side-nav-content/side-nav-cont
     AdminModule,
     SharedModule,
     OrderModule,
+    PaymentsModule,
     FormsModule,
     NgbModule,
     NgbDropdownModule,
