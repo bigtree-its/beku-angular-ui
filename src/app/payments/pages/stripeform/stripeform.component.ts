@@ -62,14 +62,32 @@ export class StripeformComponent {
     const appearance = {
       theme: 'stripe',
     };
-    var clientSecret = this.paymentIntent.clientSecret;
-    console.log(
-      'Initializing stripe elements with clientSecret: ' + clientSecret
-    );
-    this.stripeElements = this.stripeService.stripe.elements({
-      appearance,
-      clientSecret,
-    });
+    if ( this.utils.isValid(this.paymentIntent)){
+      var clientSecret = this.paymentIntent.clientSecret;
+      console.log(
+        'Initializing stripe elements with clientSecret: ' + clientSecret
+      );
+      this.stripeElements = this.stripeService.stripe.elements({
+        appearance,
+        clientSecret,
+      });
+      const paymentElementOptions = {
+        layout: 'tabs',
+      };
+  
+      const paymentElement = this.stripeElements.create(
+        'payment',
+        paymentElementOptions
+      );
+      paymentElement.mount('#payment-info');
+      paymentElement.addEventListener('change', (result: any) => {
+        this.enablePayButton = result.complete ? true : false;
+        this.cardErrors = result.error && result.error.message;
+      });
+    }else{
+      this.enablePayButton = false;
+    }
+    
 
     // var linkAuthentication = this.stripeElements.create("linkAuthentication");
     // linkAuthentication.mount(this.linkAuthenticationInfo.nativeElement);
@@ -84,19 +102,7 @@ export class StripeformComponent {
     // console.log('The customer email: ' + emailAddress)
     // });
 
-    const paymentElementOptions = {
-      layout: 'tabs',
-    };
-
-    const paymentElement = this.stripeElements.create(
-      'payment',
-      paymentElementOptions
-    );
-    paymentElement.mount('#payment-info');
-    paymentElement.addEventListener('change', (result: any) => {
-      this.enablePayButton = result.complete ? true : false;
-      this.cardErrors = result.error && result.error.message;
-    });
+    
     // const paymentElement = this.stripeElements.create("payment", paymentElementOptions);
     // paymentElement.mount(this.paymentElement.nativeElement);
 
@@ -187,6 +193,7 @@ export class StripeformComponent {
   //redirect_status=succeeded
 
   confirmPaymentIntent() {
+    this.orderService.getData();
     console.log('Confirming payment intent');
     const elements = this.stripeElements;
     const clientSecret = this.paymentIntent.clientSecret;
@@ -220,7 +227,8 @@ export class StripeformComponent {
       })
       .then(function (result) {
         if (result.error) {
-          if (result.error.payment_intent.status === 'succeeded') {
+          if (result.error.payment_intent?.status === 'succeeded') {
+            updatePaymentIntent();
            console.log('Something is not right. Looks this order has already been paid. Please contact customer support');
           } else {
             console.log(
@@ -229,6 +237,10 @@ export class StripeformComponent {
           }
         }
       });
+  }
+
+  async updatePaymentIntent(id: string, status: string){
+    this.orderService.updateSinglePaymentIntent(id,status);
   }
 
   async confirmPayment() {

@@ -13,8 +13,8 @@
     <label for="payment-info"></label>
     <div id="payment-info" #PaymentInfo></div>
 
-    <button id="paywithCardButton" [disabled]="!enablePayButton" class="n-button" (click)="confirmPaymentIntent()">Pay {{
-        order.total| currency: 'GBP'}}</button>
+    <button id="paywithCardButton" readonly="!enablePayButton" [disabled]="!enablePayButton" class="n-button" (click)="confirmPaymentIntent()">Pay {{
+        order?.total| currency: 'GBP'}}</button>
     <small class="text-muted">By selecting this button, you agree to the Terms of
         Sale.</small>
 

@@ -6,6 +6,14 @@ import { Injectable } from '@angular/core';
 export class Utils {
   constructor() {}
 
+  isJsonString(str) {
+    try {
+      JSON.parse(str);
+    } catch (e) {
+      return false;
+    }
+    return true;
+  }
 
   public isCollectionEmpty(data: any[]): Boolean {
     if ( data === null || data === undefined || data.length === 0){
