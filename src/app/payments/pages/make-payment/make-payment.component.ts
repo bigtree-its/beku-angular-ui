@@ -93,11 +93,8 @@ export class MakePaymentComponent implements OnInit, OnDestroy {
               this.error = true;
               this.errorMessage = 'This order has already been paid';
               this.toastService.warning('This order has already been paid');
-            } else if (
-              this.paymentIntent.status === 'requires_payment_method'
-            ) {
-              this.retrieveOrder(this.paymentIntent.orderReference);
             }
+            this.retrieveOrder(this.paymentIntent.orderReference);
           } else {
             this.error = true;
             this.errorMessage =
@@ -163,7 +160,6 @@ export class MakePaymentComponent implements OnInit, OnDestroy {
       next: (e) => {
         this.supplier = e;
         console.log('Supplier ' + JSON.stringify(e));
-        this.error = false;
       },
       error: (err) => {
         console.error(

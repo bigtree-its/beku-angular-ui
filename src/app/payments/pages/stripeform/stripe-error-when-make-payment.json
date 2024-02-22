@@ -1,43 +1,41 @@
 {
-    "error": {
-        "type": "invalid_request_error",
-        "code": "payment_intent_unexpected_state",
-        "doc_url": "https://stripe.com/docs/error-codes/payment-intent-unexpected-state",
-        "message": "A processing error occurred.",
-        "payment_intent": {
-            "id": "pi_3OkSTyJtRMxkXWc30P4KlJFj",
-            "object": "payment_intent",
-            "amount": 1900,
-            "amount_details": {
-                "tip": {}
-            },
-            "automatic_payment_methods": {
-                "allow_redirects": "always",
-                "enabled": true
-            },
-            "canceled_at": null,
-            "cancellation_reason": null,
-            "capture_method": "automatic",
-            "client_secret": "pi_3OkSTyJtRMxkXWc30P4KlJFj_secret_wHxoOFxbJIy6WRwlFIV2eo0gR",
-            "confirmation_method": "automatic",
-            "created": 1708094022,
-            "currency": "gbp",
-            "description": null,
-            "last_payment_error": null,
-            "livemode": false,
-            "next_action": null,
-            "payment_method": "pm_1OkTR7JtRMxkXWc3wc26kIwf",
-            "payment_method_configuration_details": null,
-            "payment_method_types": [
-                "card"
-            ],
-            "processing": null,
-            "receipt_email": "nava.arul@gmail.com",
-            "setup_future_usage": null,
-            "shipping": null,
-            "source": null,
-            "status": "succeeded"
+    "type": "invalid_request_error",
+    "code": "payment_intent_unexpected_state",
+    "doc_url": "https://stripe.com/docs/error-codes/payment-intent-unexpected-state",
+    "message": "A processing error occurred.",
+    "payment_intent": {
+        "id": "pi_3O9FE5JtRMxkXWc31mrb3S3n",
+        "object": "payment_intent",
+        "amount": 550,
+        "amount_details": {
+            "tip": {}
         },
-        "request_log_url": "https://dashboard.stripe.com/test/logs/req_pojCILA04ipRC3?t=1708156674"
-    }
+        "automatic_payment_methods": {
+            "allow_redirects": "always",
+            "enabled": true
+        },
+        "canceled_at": null,
+        "cancellation_reason": null,
+        "capture_method": "automatic",
+        "client_secret": "pi_3O9FE5JtRMxkXWc31mrb3S3n_secret_L7PfeOFYlkfgm2oVlnOjynci5",
+        "confirmation_method": "automatic",
+        "created": 1699224929,
+        "currency": "gbp",
+        "description": null,
+        "last_payment_error": null,
+        "livemode": false,
+        "next_action": null,
+        "payment_method": "pm_1O9FEGJtRMxkXWc31xhuJd9w",
+        "payment_method_configuration_details": null,
+        "payment_method_types": [
+            "card"
+        ],
+        "processing": null,
+        "receipt_email": "nava.arul@gmail.com",
+        "setup_future_usage": null,
+        "shipping": null,
+        "source": null,
+        "status": "succeeded"
+    },
+    "request_log_url": "https://dashboard.stripe.com/test/logs/req_aKoSBrOrbAK0hJ?t=1708628449"
 }

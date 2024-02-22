@@ -21,9 +21,10 @@
             <fa-icon *ngIf="showItems" [icon]="faMinus" (click)="openCloseItems()"></fa-icon>
         </div>
         <ng-container *ngIf="showItems" [ngTemplateOutlet]="itemsLayout"></ng-container>
+        <span class="bold f-size-lg font-abril-fatface">Payment</span>
         <div class="flex-column align-items-center flex-grow" id="contentDiv">
             <app-stripeform *ngIf="!error" [order]="customerOrder" [paymentIntent]="paymentIntent"></app-stripeform>
-            <span *ngIf="error">{{errorMessage}}</span>
+            <span *ngIf="error" style="background-color: rgb(180, 252, 228);padding: 40px;font-weight: bold;margin: 20px;width: 100%;text-align: center;">{{errorMessage}}</span>
         </div>
     </div>
 </div>

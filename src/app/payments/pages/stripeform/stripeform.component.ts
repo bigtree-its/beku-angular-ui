@@ -192,7 +192,7 @@ export class StripeformComponent {
   //payment_intent_client_secret=pi_3Nkt1IJtRMxkXWc31hypLmHB_secret_zD9W7MrKPXyS2awWy2vUQVnvp&
   //redirect_status=succeeded
 
-  confirmPaymentIntent() {
+  async confirmPaymentIntent() {
     this.orderService.getData();
     console.log('Confirming payment intent');
     const elements = this.stripeElements;
@@ -216,30 +216,45 @@ export class StripeformComponent {
     //   this.toastService.info('You payment is successful')
     // }
 
-    this.stripeService.stripe
-      .confirmPayment({
+    const {error} = await this.stripeService.stripe.confirmPayment(
+      {
         elements,
         confirmParams: {
           // Return URL where the customer should be redirected after the PaymentIntent is confirmed.
-          return_url: 'http://localhost:4200/order-confirmation',
-          receipt_email: 'nava.arul@gmail.com',
+        return_url: 'http://localhost:4200/order-confirmation',
+        receipt_email: 'nava.arul@gmail.com',
         },
-      })
-      .then(function (result) {
-        if (result.error) {
-          if (result.error.payment_intent?.status === 'succeeded') {
-            updatePaymentIntent();
-           console.log('Something is not right. Looks this order has already been paid. Please contact customer support');
-          } else {
-            console.log(
-              'Something went wrong, Please contact customer support.'
-            );
-          }
-        }
-      });
+      }
+    );
+    if (error) {
+      console.log(JSON.stringify(error))
+      this.orderService.updateSinglePaymentIntent(error.payment_intent.id,error.payment_intent.status);
+    }
+    
+
+    // this.stripeService.stripe
+    //   .confirmPayment({
+    //     elements,
+    //     confirmParams: {
+    //       // Return URL where the customer should be redirected after the PaymentIntent is confirmed.
+    //       return_url: 'http://localhost:4200/order-confirmation',
+    //       receipt_email: 'nava.arul@gmail.com',
+    //     },
+    //   })
+    //   .then(function (result) {
+    //     if (result.error) {
+    //       if (result.error.payment_intent?.status === 'succeeded') {
+    //        console.log('Something is not right. Looks this order has already been paid. Please contact customer support');
+    //       } else {
+    //         console.log(
+    //           'Something went wrong, Please contact customer support.'
+    //         );
+    //       }
+    //     }
+    //   });
   }
 
-  async updatePaymentIntent(id: string, status: string){
+  updatePaymentIntent(id: string, status: string){
     this.orderService.updateSinglePaymentIntent(id,status);
   }
 

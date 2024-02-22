@@ -138,8 +138,9 @@ export class FoodOrderService {
     if (status !== null && status !== undefined) {
       params = params.set('status', status);
     }
-    return this.http.put<PaymentIntentResponse>(
-      this.serviceLocator.PaymentIntentUrl + '/' + intentId, {params}
+    var url = this.serviceLocator.PaymentIntentUrl + '/' + intentId;
+    console.log('Updating payment intent '+ url)
+    return this.http.put<PaymentIntentResponse>(url, {params}
     );
   }
 
@@ -292,6 +293,7 @@ export class FoodOrderService {
     ) {
       this.customerOrder.items = [];
     }
+
     this.customerOrder.items.push(foodOrderItem);
     this.calculateTotal();
   }
@@ -554,12 +556,13 @@ export class FoodOrderService {
 
   getData() {
     var json = this.localService.getData(Constants.StorageItem_C_Order);
-    if (json === undefined || json === null || json.length === 0) {
-      this.createOrder();
-    } else if (this.isJsonString(json)) {
+    console.log('Order in local storage '+ json)
+    if (this.isJsonString(json)) {
       var obj = JSON.parse(json);
       this.customerOrder = obj.constructor.name === 'Array' ? obj[0] : obj;
       this.orderSubject$.next(this.customerOrder);
+    } else{
+      this.createOrder();
     }
   }
 

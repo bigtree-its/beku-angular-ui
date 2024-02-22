@@ -149,7 +149,9 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
       next: (value) => {
         console.log('OrderSubject emitted a change'),
         this.order = value;
-        this.cartTotal = this.order.total;
+        if ( this.utils.isValid(this.order)){
+          this.cartTotal = this.order.total;
+        }
       },
       error: (err) => console.error('OrderSubject emitted an error: ' + err),
       complete: () =>
