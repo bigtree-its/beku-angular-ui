@@ -59,6 +59,7 @@ export interface LocalChef {
     minimumPartyOrder: number;
     open: boolean;
     preOrderOnly: boolean;
+    paymentRequireApproval: boolean;
 }
 
 export interface Slot {

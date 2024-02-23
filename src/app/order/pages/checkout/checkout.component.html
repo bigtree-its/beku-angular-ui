@@ -116,6 +116,11 @@
                         <strong>Total</strong>
                         <strong>{{order?.total| currency: 'GBP'}}</strong>
                     </div>
+                    <div *ngIf="chef.paymentRequireApproval" style="font-weight: bold;background-color: rgb(166, 236, 213);padding: 30px;text-align: center;margin-top: 20px;">
+                        <span>This order need to be accepted by the chef before you can make a payment.</span>
+                        <br/>
+                        <span>Once order accepted a Payment link will be sent to your email address {{customerEmail}}.</span>
+                    </div>
                 </div>
                 <div *ngIf="showStripeSection">
                     <div id="cardInfo" #cardInfo style="border: 1px solid var(--v-border);padding: 12px 5px;">
@@ -137,12 +142,20 @@
                         <img src="/assets/icons/secure-stripe-payment-logo.png" class="stripe-logo" />
                     </div>
                 </div>
+                <div *ngIf="orderSubmitted">
+                    <div style="font-weight: bold;background-color: rgb(166, 236, 213);padding: 30px;text-align: center;margin-top: 20px;">
+                        <span class="f-size-xl">Your order has been submitted</span>
+                        <br/>
+                        <span>Once order accepted a Payment link will be sent to your email address {{customerEmail}}.</span>
+                    </div>
+                </div>
                 <div class="footer flex-row space-between align-items-center p-1 h-5">
                     <span *ngIf="showHomeScreen || showCustomerDetailsSection"></span>
                     <button *ngIf="!showHomeScreen && !showCustomerDetailsSection " class="btn-red n-w-100" (click)="previous()" tabindex="4" style="float: left;">Previous</button>
                     <strong *ngIf="!showHomeScreen && order" class="order-total">{{order?.total| currency: 'GBP'}}</strong>
                     <button *ngIf="!showPlaceOrderButton &&  !showHomeScreen" class="btn-red" style="min-width: 100px;float: right;max-width: 100%;" (click)="next()" tabindex="5">Next</button>
-                    <button *ngIf="showPlaceOrderButton" class="btn-grn" style="min-width: 100px;float: right;" (click)="placeOrder(stripeContent)" tabindex="5">Proceed to Pay</button>
+                    <button *ngIf="showPlaceOrderButton && !chef.paymentRequireApproval" class="btn-grn" style="min-width: 100px;float: right;" (click)="placeOrder(stripeContent)" tabindex="5">Proceed to Pay</button>
+                    <button *ngIf="showPlaceOrderButton && chef.paymentRequireApproval"  class="btn-grn" style="min-width: 100px;float: right;" (click)="placeOrder(null)" tabindex="5">Submit your order</button>
                 </div>
             </div>
         </div>

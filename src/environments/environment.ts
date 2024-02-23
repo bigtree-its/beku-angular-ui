@@ -26,23 +26,23 @@ export const environment = {
 
   // Order Service Remote
 
-  // OrderTrackingUrl:
-  //   'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/order-tracking',
-  // CustomerOrdersUrl:
-  //   'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders',
-  // CustomerOrderSearchUrl:
-  //   'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders/search',
-  // StripePaymentsUrl:
-  //   'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments',
-  // PaymentIntentUrl:
-  //   'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments/payment-intent',
+  OrderTrackingUrl:
+    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/order-tracking',
+  CustomerOrdersUrl:
+    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders',
+  CustomerOrderSearchUrl:
+    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders/search',
+  StripePaymentsUrl:
+    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments',
+  PaymentIntentUrl:
+    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments/payment-intent',
 
   // Order Service Local
-  OrderTrackingUrl: 'http://localhost:8080/api/order-tracking',
-  CustomerOrdersUrl: 'http://localhost:8080/api/customer-orders',
-  CustomerOrderSearchUrl: 'http://localhost:8080/api/customer-orders/search',
-  StripePaymentsUrl: 'http://localhost:8080/api/stripe-payments',
-  PaymentIntentUrl: 'http://localhost:8080/api/stripe-payments/payment-intent',
+  // OrderTrackingUrl: 'http://localhost:8080/api/order-tracking',
+  // CustomerOrdersUrl: 'http://localhost:8080/api/customer-orders',
+  // CustomerOrderSearchUrl: 'http://localhost:8080/api/customer-orders/search',
+  // StripePaymentsUrl: 'http://localhost:8080/api/stripe-payments',
+  // PaymentIntentUrl: 'http://localhost:8080/api/stripe-payments/payment-intent',
 
   // Auth URLs
 

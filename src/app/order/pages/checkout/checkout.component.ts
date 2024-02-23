@@ -84,6 +84,7 @@ export class CheckoutComponent implements OnDestroy {
   destroy$ = new Subject<void>();
   customerLoggedIn: boolean;
   customer: User;
+  orderSubmitted: boolean = false;
 
   constructor(
     private utils: Utils,
@@ -276,6 +277,10 @@ export class CheckoutComponent implements OnDestroy {
     return false;
   }
 
+  submitOrder(){
+
+  }
+
   placeOrder(content) {
     this.order.customer.name = this.customerName;
     this.order.customer.email = this.customerEmail;
@@ -285,27 +290,31 @@ export class CheckoutComponent implements OnDestroy {
     this.order.notes = this.notesToChef;
     this.orderService.saveOrder(this.order).subscribe((e) => {
       if (this.utils.isStringValid(e.reference)) {
-        this.orderService.createPaymentIntentForOrder(e).subscribe((pi) => {
-          this.paymentIntent = pi;
-          console.log('Payment intent ' + JSON.stringify(pi));
-          if (this.paymentIntent.error || this.paymentIntent.status === 'succeeded') {
-            this.toastService.error(
-              'Something is not right. Cannot proceed with this order. Please create new order.'
-            );
-            this.orderService.destroy();
-          } else if (
-            this.paymentIntent != null &&
-            this.paymentIntent.clientSecret != null &&
-            this.paymentIntent.status === 'requires_payment_method'
-          ) {
-            console.log('Payment intent: ' + this.paymentIntent.id);
-            console.log(
-              'Payment intent secret: ' + this.paymentIntent.clientSecret
-            );
-            console.log('Payment intent status: ' + this.paymentIntent.status);
-            this.open(content);
-          }
-        });
+
+        if ( content){
+          this.orderService.createPaymentIntentForOrder(e).subscribe((pi) => {
+            this.paymentIntent = pi;
+            console.log('Payment intent ' + JSON.stringify(pi));
+            if (this.paymentIntent.error || this.paymentIntent.status === 'succeeded') {
+              this.toastService.error(
+                'Something is not right. Cannot proceed with this order. Please create new order.'
+              );
+              this.orderService.destroy();
+            } else if (
+              this.paymentIntent != null &&
+              this.paymentIntent.clientSecret != null &&
+              this.paymentIntent.status === 'requires_payment_method'
+            ) {
+              console.log('Payment intent: ' + this.paymentIntent.id);
+              console.log('Payment intent secret: ' + this.paymentIntent.clientSecret);
+              console.log('Payment intent status: ' + this.paymentIntent.status);
+              this.open(content);
+            }
+          });
+        }else{
+          this.orderSubmitted = true;
+          this.order = e;
+        }
       }
     });
   }
