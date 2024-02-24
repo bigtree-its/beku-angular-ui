@@ -284,13 +284,13 @@ export interface SupplierSummary{
 }
 
 export interface OrderSearchQuery {
-    reference: string;
-    customerEmail: string;
-    chefId: string;
-    thisMonth: boolean;
-    thisYear: boolean;
-    all: boolean;
-    orderId: string;
+    reference?: string;
+    customerEmail?: string;
+    chefId?: string;
+    thisMonth?: boolean;
+    thisYear?: boolean;
+    all?: boolean;
+    orderId?: string;
 }
 
 export interface OrderTracking{

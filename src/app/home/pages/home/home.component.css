@@ -78,16 +78,20 @@
     font-weight: 900;
     font-size: 40px;
     font-family: "Anton", sans-serif;
-    color: #f90202;
 }
 
 .slider-text1 {
     animation: slide 5s linear infinite;
+    color: #f90202;
 }
 
-.slider-text2 {}
+.slider-text2 {
+    color: #07c217;
+}
 
-.slider-text3 {}
+.slider-text3 {
+    color: rgb(255, 225, 0);
+}
 
 @keyframes slide {
     0% {

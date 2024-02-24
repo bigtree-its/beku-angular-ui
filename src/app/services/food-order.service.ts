@@ -56,6 +56,25 @@ export class FoodOrderService {
       });
   }
 
+  action(reference: string, action: string): Observable<CustomerOrder> {
+    // var params = new HttpParams();
+    // if (reference !== null && reference !== undefined) {
+    //   params = params.set('ref', reference);
+    // }
+    // if (action !== null && action !== undefined) {
+    //   params = params.set('action', action);
+    // }
+    const params = new HttpParams({fromString: 'ref='+ reference+"&action="+ action});
+    // const options = params ? { params: params } : {};
+    var url = this.serviceLocator.CustomerOrdersUrl + '/action';
+    console.log('Action on order ' + url + '. Params: ' + params);
+    return this.http.put<CustomerOrder>(url, params).pipe(
+      tap((result) => {
+        // this.setData(result);
+      })
+    );
+  }
+
   saveOrder(order: CustomerOrder): Observable<CustomerOrder> {
     return this.http
       .post<CustomerOrder>(this.serviceLocator.CustomerOrdersUrl, order)
@@ -133,15 +152,17 @@ export class FoodOrderService {
     );
   }
 
-  updateSinglePaymentIntent(intentId: string, status: string): Observable<PaymentIntentResponse> {
+  updateSinglePaymentIntent(
+    intentId: string,
+    status: string
+  ): Observable<PaymentIntentResponse> {
     var params = new HttpParams();
     if (status !== null && status !== undefined) {
       params = params.set('status', status);
     }
     var url = this.serviceLocator.PaymentIntentUrl + '/' + intentId;
-    console.log('Updating payment intent '+ url)
-    return this.http.put<PaymentIntentResponse>(url, {params}
-    );
+    console.log('Updating payment intent ' + url);
+    return this.http.put<PaymentIntentResponse>(url, { params });
   }
 
   retrievePaymentIntent(orderId: string): Observable<PaymentIntentResponse> {
@@ -240,7 +261,10 @@ export class FoodOrderService {
 
   getCustomerOrders(
     orderSearchQuery: OrderSearchQuery
-  ): Observable<CustomerOrderList> {
+  ): Observable<CustomerOrder[]> {
+    console.log(
+      'Retrieving customer orders for ' + JSON.stringify(orderSearchQuery)
+    );
     var params = new HttpParams();
     if (
       orderSearchQuery.reference !== null &&
@@ -269,7 +293,7 @@ export class FoodOrderService {
     if (orderSearchQuery.all) {
       params = params.set('all', 'true');
     }
-    return this.http.get<CustomerOrderList>(
+    return this.http.get<CustomerOrder[]>(
       this.serviceLocator.CustomerOrderSearchUrl,
       { params }
     );
@@ -556,12 +580,12 @@ export class FoodOrderService {
 
   getData() {
     var json = this.localService.getData(Constants.StorageItem_C_Order);
-    console.log('Order in local storage '+ json)
+    console.log('Order in local storage ' + json);
     if (this.isJsonString(json)) {
       var obj = JSON.parse(json);
       this.customerOrder = obj.constructor.name === 'Array' ? obj[0] : obj;
       this.orderSubject$.next(this.customerOrder);
-    } else{
+    } else {
       this.createOrder();
     }
   }

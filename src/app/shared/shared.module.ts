@@ -45,7 +45,7 @@ const routes: Routes = [
     HeaderComponent,
     FooterComponent,
     OrderItemComponent,
-    ReviewItemComponent
+    ReviewItemComponent,
   ]
 })
 export class SharedModule { 

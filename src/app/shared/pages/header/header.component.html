@@ -3,8 +3,8 @@
         <div class="flex-row flex-start align-items-center">
             <fa-icon [icon]="faBars" (click)="toggleSideNav()" class="menu-icon"></fa-icon>
             <p [routerLink]="['/']" routerLinkActive="router-link-active" style="height: 50px;line-height: 9px;text-align: center;margin-top: 5px;padding-top: 20px;padding-left: 10px;padding-right: 20px;">
-                <span class="logo-text" style="font-size: 40px;">Zuvai</span><br/>
-                <small style="font-size: 9px;">A Homefood Company</small>
+                <span class="logo-text" style="font-size: 30px;">Zuvai</span><br/>
+                <small style="font-size: 9px;font-weight: 900;margin-top: 8px;">A HOMEFOOD COMPANY</small>
             </p>
             <div class="flex-row lg gap-1 align-items-center" *ngIf="serviceLocation != null && serviceLocation !== undefined">
                 <span class="location-slug" [routerLink]="['cooks']" [queryParams]="{location: serviceLocation.slug}">#{{serviceLocation.name}},

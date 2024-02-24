@@ -1,1 +1,73 @@
-<p>my-orders works!</p>
+<div class="container mt-7">
+    <div class="flex-column">
+        <div class="flex-row-space-between align-items-center border-bottom ">
+            <div class="flex-row align-items-center ">
+                <div *ngIf="viewOrder" class="arrow-icon-div" (click)="goBack()">
+                    <fa-icon [icon]="faArrowLeft"></fa-icon>
+                </div>
+                <span class="py-2 header-font f-size-md">{{viewOrder?
+                    viewOrder.reference: 'My Orders'}}</span>
+            </div>
+            <span class="color-red f-size-md bold" *ngIf="viewOrder">{{viewOrder.total | currency: 'GBP'}}</span>
+        </div>
+
+        <div class="overflow-y height-500" *ngIf="!viewOrder">
+            <table>
+                <tr>
+                    <th>Reference</th>
+                    <th>Total</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+                <tr (click)="open(order)" *ngFor="let order of orders | orderByDate:'dateCreated':'desc'">
+                    <td class="pl-2">{{order.reference}}</td>
+                    <td class="pl-2">{{order.total | currency: 'GBP'}}</td>
+                    <td class="pl-2">{{order.dateCreated | date }}</td>
+                    <td class="pl-2">{{order.status | titlecase}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="flex-column" *ngIf="viewOrder">
+
+            <div class="flex-column border p-3 mt-2">
+                <span class="bold f-size-lg header-font  py-2">Order
+                    Summary</span>
+                <div class="flex-row py-2 align-items-center">
+                    <span class="bold">{{viewOrder.status | titlecase}}</span>
+                    <button class=" btn-grn ml-2 " *ngIf="viewOrder?.status==='CREATED' " (click)="submit()">Submit</button>
+                    <button class=" btn-danger ml-2 " *ngIf="viewOrder?.status==='CREATED' " (click)="delete()">Delete</button>
+                    <button class=" btn-warning ml-2 " *ngIf="viewOrder?.status==='PENDING' " (click)="cancel()">Cancel</button>
+                    <button class=" btn-danger ml-2 " *ngIf="viewOrder?.status==='CANCELLED' " (click)="delete()">Delete</button>
+                </div>
+                <div class="flex-row py-2 align-items-center">
+                    <span></span>
+                </div>
+            </div>
+
+            <div class="flex-row-space-between border-bottom py-3 ">
+                <span class="bold f-size-lg font-abril-fatface ">Your
+                    Items</span>
+                <fa-icon *ngIf="!showItems " [icon]="faPlus " (click)="openCloseItems() " class="accordian-icon"></fa-icon>
+                <fa-icon *ngIf="showItems " [icon]="faMinus " (click)="openCloseItems() " class="accordian-icon"></fa-icon>
+            </div>
+            <ng-container *ngIf="showItems " [ngTemplateOutlet]="itemsLayout "></ng-container>
+
+        </div>
+
+    </div>
+</div>
+
+<ng-template #itemsLayout>
+    <table class="mt-1 mb-4 ">
+        <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>price</th>
+        </tr>
+        <tr class="border-bottom py-3 " *ngFor="let item of viewOrder?.items ">
+            <td>{{item.name}}</td>
+            <td class="pl-2 ">{{item.quantity}}</td>
+            <td>{{item.subTotal | currency: 'GBP'}}</td>
+        </tr>
+    </table>
+</ng-template>

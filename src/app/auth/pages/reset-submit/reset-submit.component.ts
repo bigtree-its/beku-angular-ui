@@ -94,7 +94,7 @@ export class ResetSubmitComponent implements OnInit, OnDestroy {
         void this.router.navigate(["/login"])
       },
       error: (err) => {
-        console.error('Erros from reset submit.'+ JSON.stringify(err))
+        console.error('Errors from reset submit.'+ JSON.stringify(err))
         this.errors = err;
         this.errorMessage = err.error.detail;
       },
