@@ -282,6 +282,7 @@ export class CheckoutComponent implements OnDestroy {
   }
 
   placeOrder(content) {
+    this.orderSubmitted = false;
     this.order.customer.name = this.customerName;
     this.order.customer.email = this.customerEmail;
     this.order.customer.mobile = this.customerMobile;
@@ -314,6 +315,7 @@ export class CheckoutComponent implements OnDestroy {
         }else{
           this.orderSubmitted = true;
           this.order = e;
+          this.orderService.destroy();
         }
       }
     });

@@ -53,9 +53,9 @@
                 </div>
             </div>
             <div class="justify-content-center" style="display: flex;flex-direction: row;align-items: center; margin-top: 3px;padding: 10px 5px;width: 100%;">
-                <button (click)="selectLayout('Menu')" class="btn-ylw mx-2 px-5">Menu</button>
-                <button (click)="selectLayout('Reviews')" class="btn-grn mx-2 px-5">Reviews</button>
-                <button (click)="selectLayout('Info')" class="btn-blu mx-2 px-5">Info</button>
+                <button (click)="selectLayout('Menu')" class="btn-warning mx-2 px-5">Menu</button>
+                <button (click)="selectLayout('Reviews')" class="btn-success mx-2 px-5">Reviews</button>
+                <button (click)="selectLayout('Info')" class="btn-primary mx-2 px-5">Info</button>
             </div>
             <ng-container [ngSwitch]="activeLayout">
                 <ng-container *ngSwitchCase="'Menu'" [ngTemplateOutlet]="menuLayout"></ng-container>

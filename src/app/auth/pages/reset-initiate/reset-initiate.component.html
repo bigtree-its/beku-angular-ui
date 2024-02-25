@@ -1,6 +1,6 @@
 <div class="main">
     <div class="left lg"></div>
-    <div class="right">
+    <div class="right p-5">
         <div class="flex-column width-m ustify-content-center">
             <span style="font-weight: 900;font-size: 30px;height: 40px;line-height: 40px;cursor: pointer;">Forgot Password?</span>
             <div style="padding: 20px 0;">
@@ -18,7 +18,7 @@
                     <label class="_1Cvlf _2tL9P" for="email">Email Address</label>
                 </div>
                 <br>
-                <button class="big-black-btn" (click)="submit()">Send Reset Instructions</button>
+                <button class="big-grn-btn" (click)="submit()">Send Reset Instructions</button>
             </div>
             <div *ngIf="error !== undefined" style="font-weight: normal;text-align: center;display: block;background-color: rgb(241, 215, 215);height: 45px;line-height: 45px;color: #bc3737;">
                 <p>{{error}}</p>

@@ -1,9 +1,9 @@
 <div class="a-page flex-column">
     <span class="a-page-header f-size-lg">My Profile</span>
     <div class="flex-row justify-content-center align-items-center py-2">
-        <span class="btn-ylw mr-2" (click)="selectLayout('Profile')">Profile</span>
-        <span class="btn-ylw mr-2" (click)="selectLayout('Security')">Security</span>
-        <span class="btn-ylw mr-2" (click)="selectLayout('Preferences')">Preferences</span>
+        <span class="btn-def mr-2" (click)="selectLayout('Profile')">Profile</span>
+        <span class="btn-def mr-2" (click)="selectLayout('Security')">Security</span>
+        <span class="btn-def mr-2" (click)="selectLayout('Preferences')">Preferences</span>
     </div>
     <div>
         <ng-container [ngSwitch]="activeLayout">

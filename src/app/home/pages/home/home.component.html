@@ -41,14 +41,14 @@
     </div>
     <div class="flex-column justify-content-center align-items-center p-4">
         <div class="flex-row flex-wrap gap-1">
-            <div class="flex-column bg-light width-m align-items-center p-3">
+            <div class="flex-column bg-light width-m align-items-center p-5 mx-2">
                 <strong style="font-size: 22px;font-weight: 800;">Top Locations</strong>
                 <strong style="font-size: 15px;margin: 10px 0;">Glasgow</strong>
                 <div class="flex-column gap-1" *ngIf="popularLocations !== null && popularLocations !== undefined">
                     <span class="clickable-text my-2" *ngFor="let pl of popularLocations" [routerLink]="['cooks']" [queryParams]="{location: pl.slug}">{{pl.name}}</span>
                 </div>
             </div>
-            <div class="flex-column bg-light width-m  align-items-center p-3">
+            <div class="flex-column bg-light width-m  align-items-center p-5 mx-2">
                 <strong style="font-size: 22px;font-weight: 800;">Top Cuisines</strong>
                 <div class="flex-column gap-1" *ngIf="popularLocations !== null && popularLocations !== undefined">
                     <span class="clickable-text my-2" *ngFor="let cuisine of cuisines" [routerLink]="['cooks']" [queryParams]="{cuisine: cuisine.slug}">{{cuisine.name}}</span>
@@ -61,7 +61,7 @@
     <div class="flex-column justify-content-center align-items-center my-5 mx-3">
         <strong style="font-size: 22px;font-weight: 800;">How It Works!</strong>
         <div class="flex-row flex-wrap justify-content-center" style="margin: 10px 0;">
-            <div class="flex-column justify-content-center align-items-center br-6 p-3 bg-l-grey mobile-w m-3">
+            <div class="flex-column justify-content-center align-items-center bg-light mobile-w m-3">
                 <div class="flex-row justify-content-center  align-items-center">
                     <span style="font-size: 40px;opacity: 0.5;">1</span>
                     <img src="/assets/icons/chef.png" height="100px" width="100px" style="object-fit: contain;">
@@ -69,7 +69,7 @@
                 <strong style="text-align: center;font-size: 30px;padding: 10px 0;color: #3C4043;">Find</strong>
                 <small>Find a home chef nearest to your home</small>
             </div>
-            <div class="flex-column justify-content-center align-items-center br-6 p-3 bg-l-grey mobile-w m-3">
+            <div class="flex-column justify-content-center align-items-center  bg-light mobile-w m-3">
                 <div class="flex-row justify-content-center align-items-center">
                     <span style="font-size: 40px;opacity: 0.5;">2</span>
                     <img src="/assets/icons/order.png" height="100px" width="100px" style="object-fit: contain;">
@@ -78,7 +78,7 @@
                 <small>Order in for yourself or for the group,
                     with no restrictions on order value</small>
             </div>
-            <div class="flex-column justify-content-center align-items-center br-6 p-3 bg-l-grey mobile-w m-3">
+            <div class="flex-column justify-content-center align-items-center bg-light mobile-w m-3">
                 <div class="flex-row justify-content-center  align-items-center">
                     <span style="font-size: 40px;opacity: 0.5;">3</span>
                     <img src="/assets/icons/eating.png" height="100px" width="100px" style="object-fit: contain;">
@@ -93,7 +93,7 @@
     <div class="flex-column justify-content-center align-items-center" style="margin: 10px 0;">
         <span style="font-weight: 900;font-size: 25px;padding: 10px 0;">Join
             us</span>
-        <div style="margin-bottom: 10px;">Be a part of <span class="logo-text">Chumma</span></div>
+        <div style="margin-bottom: 10px;">Be a part of <span class="logo-text">ZUVAI</span></div>
         <div class="flex-row flex-wrap gap-1">
             <div class="flex-row width-m bg-light" style="height: 200px;">
                 <div style="height: 200px;width:200px;display: flex;justify-content: center;align-items: center;color: var(--d-orange);">

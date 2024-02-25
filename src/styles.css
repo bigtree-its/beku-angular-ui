@@ -254,7 +254,9 @@ tr:nth-child(odd) {
 }
 
 .bg-light {
-    background-color: #b0c3f4;
+    background-color: #e7edfe;
+    border-radius: 6px;
+    border: 1px solid #979797;
 }
 
 .text-blue {
@@ -720,6 +722,40 @@ select {
     font-style: italic;
 }
 
+.bg-info {
+    background-color: #c3ebff;
+    color: #333;
+    border: 1px solid #222;
+    border-radius: 6px;
+}
+
+.bg-green {
+    background-color: #08de9e;
+    color: #333;
+    border: 1px solid #222;
+    border-radius: 6px;
+}
+
+.bg-primary {
+    background-color: #123ED8;
+    color: #fff;
+}
+
+.bg-success {
+    background-color: #08de9e;
+    color: #333;
+}
+
+.bg-warning {
+    background-color: #ffbd3a;
+    color: #222;
+}
+
+.bg-danger {
+    background-color: #ff6666;
+    color: #fff;
+}
+
 .btn-blk,
 .btn-ylw,
 .btn-grn,
@@ -728,16 +764,26 @@ select {
 .btn-def,
 .btn-danger,
 .btn-warning,
+.btn-success,
+.btn-primary,
 .btn-teal {
     padding: 5px 20px;
-    border: none;
+    border: 1px solid #444;
     background-color: #e7e0e0;
     color: #222;
+    border-radius: 6px;
+}
+
+.btn-def:hover {
+    background-color: #1f1f1f;
+    color: #f6f4f4;
+    cursor: pointer;
 }
 
 .btn-danger {
     background-color: #ff6666;
     color: #fff;
+    border-radius: 3px;
 }
 
 .btn-danger:hover {
@@ -746,16 +792,39 @@ select {
 }
 
 .btn-warning {
-    background-color: #fcf8e3;
-    border-color: #faebcc;
-    color: #ffbd3a;
+    background-color: #ffbd3a;
+    color: #222;
+    border-radius: 3px;
+    border: 1px solid #444;
 }
 
 .btn-warning:hover {
     cursor: pointer;
-    background-color: #ffbd3a;
+    background-color: #fca800;
     border-color: #fca800;
     color: #333;
+}
+
+.btn-success {
+    background-color: #08de9e!important;
+    color: #333;
+}
+
+.btn-success:hover {
+    cursor: pointer;
+    background-color: #008a61!important;
+    border-color: #008a61!important;
+}
+
+.btn-primary {
+    background-color: #123ED8;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    cursor: pointer;
+    background-color: #0238f9;
+    border-color: #123ED8;
 }
 
 .btn-blk {
@@ -1021,7 +1090,6 @@ select {
     background-color: var(--l-red);
     min-width: 450px;
     font-size: 14px;
-    border-radius: 25px;
     color: #fff;
 }
 
@@ -1034,11 +1102,11 @@ select {
     padding: 15px;
     display: block;
     border: none;
-    border: 1px solid var(--d-green);
-    background-color: var(--l-green);
-    border-bottom: 3px solid var(--navy-grey);
+    border: 1px solid #444;
+    background-color: #08de9e!important;
     min-width: 450px;
-    font-size: 14px;
+    border-radius: 3px;
+    font-size: 16px;
 }
 
 .big-grn-btn:hover {
@@ -1057,7 +1125,6 @@ select {
     font-weight: 600;
     min-width: 450px;
     font-size: 14px;
-    border-radius: 6px;
 }
 
 .big-black-btn:hover {

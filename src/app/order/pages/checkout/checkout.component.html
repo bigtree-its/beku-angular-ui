@@ -124,11 +124,11 @@
                         <strong>Total</strong>
                         <strong>{{order?.total| currency: 'GBP'}}</strong>
                     </div>
-                    <div *ngIf="chef.paymentRequireApproval" style="font-weight: bold;background-color: rgb(89, 33, 111);padding: 30px;margin-top: 20px;color: #fff;">
+                    <div *ngIf="chef.paymentRequireApproval" class="bg-info p-4 mt-4">
                         <div class="flex-column justify-content-start">
                             <span class="f-size-lg">Payment requires Pre-approval</span>
                             <span class="f-size-lg">Step 1. Submit your order.</span>
-                            <span class="f-size-lg">Step 2. Chef accepts your order.</span>
+                            <span class="f-size-lg">Step 2. YourChef accepts your order.</span>
                             <span class="f-size-lg">Step 3. You will make a payment.</span>
                             <small class="mt-2 normal">Once your order accepted by the Chef a Payment
                                 link will be sent to your email address
@@ -158,9 +158,9 @@
                         <img src="/assets/icons/secure-stripe-payment-logo.png" class="stripe-logo" />
                     </div>
                 </div>
-                <div *ngIf="orderSubmitted">
-                    <div style="font-weight: bold;background-color: rgb(166, 236, 213);padding: 30px;text-align: center;margin-top: 20px;">
-                        <span class="f-size-l">Your order has been
+                <div *ngIf="orderSubmitted" class="m-2">
+                    <div class="bg-green p-4 bold" style="text-align: center;">
+                        <span class="f-size-lg">Your order has been
                             submitted</span>
                         <br />
                         <span>{{order?.reference}}</span>
@@ -168,13 +168,13 @@
                 </div>
                 <div class="footer flex-row space-between align-items-center p-1 h-5">
                     <span *ngIf="showHomeScreen || showCustomerDetailsSection"></span>
-                    <button *ngIf="!showHomeScreen && !showCustomerDetailsSection " class="btn-red n-w-100" (click)="previous()" tabindex="4" style="float: left;">Previous</button>
-                    <strong *ngIf="!showHomeScreen && order" class="order-total">{{order?.total| currency:
+                    <button *ngIf="!showHomeScreen && !showCustomerDetailsSection && !orderSubmitted" class="btn-red n-w-100" (click)="previous()" tabindex="4" style="float: left;">Previous</button>
+                    <strong *ngIf="!showHomeScreen && order && !orderSubmitted" class="order-total">{{order?.total| currency:
                         'GBP'}}</strong>
-                    <button *ngIf="!showPlaceOrderButton &&  !showHomeScreen" class="btn-red" style="min-width: 100px;float: right;max-width: 100%;" (click)="next()" tabindex="5">Next</button>
-                    <button *ngIf="showPlaceOrderButton && !chef.paymentRequireApproval" class="btn-grn" style="min-width: 100px;float: right;" (click)="placeOrder(stripeContent)" tabindex="5">Proceed
+                    <button *ngIf="!showPlaceOrderButton &&  !showHomeScreen && !orderSubmitted" class="btn-red" style="min-width: 100px;float: right;max-width: 100%;" (click)="next()" tabindex="5">Next</button>
+                    <button *ngIf="showPlaceOrderButton && !chef.paymentRequireApproval && !orderSubmitted" class="btn-grn" style="min-width: 100px;float: right;" (click)="placeOrder(stripeContent)" tabindex="5">Proceed
                         to Pay</button>
-                    <button *ngIf="showPlaceOrderButton && chef.paymentRequireApproval" class="btn-grn" style="min-width: 100px;float: right;" (click)="placeOrder(null)" tabindex="5">Submit your
+                    <button *ngIf="showPlaceOrderButton && chef.paymentRequireApproval && !orderSubmitted" class="btn-grn" style="min-width: 100px;float: right;" (click)="placeOrder(null)" tabindex="5">Submit your
                         order</button>
                 </div>
             </div>
