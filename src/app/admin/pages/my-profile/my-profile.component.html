@@ -1,9 +1,9 @@
 <div class="a-page flex-column">
     <span class="a-page-header f-size-lg">My Profile</span>
     <div class="flex-row justify-content-center align-items-center py-2">
-        <span class="btn-def mr-2" (click)="selectLayout('Profile')">Profile</span>
-        <span class="btn-def mr-2" (click)="selectLayout('Security')">Security</span>
-        <span class="btn-def mr-2" (click)="selectLayout('Preferences')">Preferences</span>
+        <span class="clickable mr-2" (click)="selectLayout('Profile')">Profile</span>
+        <span class="clickable mr-2" (click)="selectLayout('Security')">Security</span>
+        <span class="clickable mr-2" (click)="selectLayout('Preferences')">Preferences</span>
     </div>
     <div>
         <ng-container [ngSwitch]="activeLayout">
@@ -33,7 +33,7 @@
                 <div class="_2EeI1 _26LFr"></div>
                 <label class="_1Cvlf _2tL9P" for="email">Mobile</label>
             </div>
-            <button class="big-grn-btn mt-1" (click)="changePersonal()">Update
+            <button class="btn-secondary mt-1" (click)="changePersonal()">Update
                 Personal Details</button>
         </div>
     </div>
@@ -53,7 +53,7 @@
                 <label class="_1Cvlf _2tL9P" for="password">Current Password</label>
             </div> -->
             <br>
-            <button class="big-grn-btn" [routerLink]="['/password_reset/new']">Reset your
+            <button class="btn-secondary" [routerLink]="['/password_reset/new']">Reset your
                 password</button>
         </div>
     </div>
@@ -73,7 +73,7 @@
                 <input type="checkbox" id="receiveMobileComms" [checked]="communicationViaMobile">
             </div>
             <br>
-            <button class="big-grn-btn" (click)="changePreferences()">Update
+            <button class="btn-secondary" (click)="changePreferences()">Update
                 Preferences</button>
         </div>
     </div>

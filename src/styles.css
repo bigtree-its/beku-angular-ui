@@ -2,13 +2,17 @@
 
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalnia:wght@100..700&display=swap');
+
 :root {
     --l-teal: #7ed5d0;
     --teal: #0be1d3;
     --d-teal: #00ffee;
-    --l-green: #b9d189;
+    --bg-green-100: #d1f0ee;
+    --bg-green-200: #a4e2dd;
+    --color-green-100: #37948d;
     --green: #268c55;
     --d-green: #0a9211;
     --mid-grey: #555;
@@ -39,8 +43,7 @@
     --d-pink: #fc5d7d;
     --l-orange: #ffbc8c;
     --d-orange: #ff4500;
-    --border: #bbbaba;
-    --light-border: #e2e2e2;
+    --border: #f1f1f1;
     --light-background: #fafafa;
     --mild-white: rgb(233, 230, 230);
     --form-control-color: rebeccapurple;
@@ -129,7 +132,7 @@ img {
 body {
     margin: 0px;
     padding: 0px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 1.4;
     letter-spacing: .1px;
@@ -194,7 +197,7 @@ table {
 }
 
 tr {
-    border: 1px solid rgb(229, 228, 228);
+    border: 1px solid #f2f2f2;
 }
 
 tr:hover {
@@ -202,12 +205,12 @@ tr:hover {
 }
 
 th {
-    background-color: rgb(246, 243, 243);
+    background-color: #fdfffe !important;
+    ;
     font-weight: 900;
     font-size: 16px;
     text-align: center;
     padding: 10px;
-    color: #191919;
 }
 
 td {
@@ -217,31 +220,46 @@ td {
 }
 
 tr:nth-child(odd) {
-    background-color: rgb(255, 251, 251);
+    background-color: #ffffff;
 }
 
-.btn-blue,
-.btn-outline-blue {
-    border: none;
-    border-radius: 0.6rem;
+
+.btn-info,
+.btn-outline-info {
+    border: 1px solid #0dcaf0;
     line-height: 30px;
     height: 30px;
     padding: 0 20px;
-    color: #fff;
-    background: border-box rgb(39, 129, 231);
-    border-color: rgb(39, 129, 231);
+    color: #222;
+    background: transparent;
     font-size: 12px;
 }
 
-.btn-primary:hover {
-    background-color: #1967d2;
+.btn-outline-info:hover {
+    border: 1px solid #0dcaf0;
+    background-color: #0dcaf0;
     cursor: pointer;
+}
+
+.btn-info {
+    background-color: #0dcaf0;
+}
+
+.btn-info:hover {
+    cursor: pointer;
+    background-color: #00d3fd;
 }
 
 .btn-outline-blue {
     color: #1b202c;
     border: 1px solid #1b202c;
     background-color: transparent;
+}
+
+.btn-outline-blue:hover {
+    color: #fff;
+    cursor: pointer;
+    background-color: #1b202c;
 }
 
 .bg-none {
@@ -255,8 +273,23 @@ tr:nth-child(odd) {
 
 .bg-light {
     background-color: #e7edfe;
-    border-radius: 6px;
-    border: 1px solid #979797;
+}
+
+.bg-white {
+    background-color: #fff;
+}
+
+.bg-green-100 {
+    background-color: var(--bg-green-100);
+}
+
+.bg-green-100 {
+    background-color: var(--bg-green-200);
+}
+
+.color-green-100 {
+    color: var(--color-green-100);
+    font-size: 24px;
 }
 
 .text-blue {
@@ -268,8 +301,18 @@ tr:nth-child(odd) {
 }
 
 .logo-text {
-    font-family: "Rammetto One", sans-serif;
-    color: #fa661c;
+    font-family: "Limelight", sans-serif;
+    /* font-family: "Kalnia", serif; */
+    font-weight: 100;
+}
+
+.title {
+    font-family: "Abril Fatface", serif;
+    font-size: larger;
+}
+
+.break-word {
+    word-wrap: break-word;
 }
 
 .f-size-xs {
@@ -374,28 +417,68 @@ select {
     width: 100%;
 }
 
-.border {
-    border: 1px solid #f6f4f4;
+.br {
+    border: 1px solid #fcf7f7;
 }
 
 .border-bottom {
-    border-bottom: 1px solid #f6f4f4;
+    border-bottom: 1px solid #fcf7f7;
 }
 
 .border-top {
-    border-top: 1px solid #f6f4f4;
+    border-top: 1px solid #fcf7f7;
 }
 
 .border-left {
-    border-left: 1px solid #f6f4f4;
+    border-left: 1px solid #fcf7f7;
 }
 
 .border-right {
-    border-right: 1px solid #f6f4f4;
+    border-right: 1px solid #fcf7f7;
 }
 
 .bg-l-grey {
-    background-color: #f5f5f6;
+    background-color: #c5c5e5;
+}
+
+.w-1 {
+    width: 10%;
+}
+
+.w-2 {
+    width: 20%;
+}
+
+.w-3 {
+    width: 30%;
+}
+
+.w-4 {
+    width: 40%;
+}
+
+.w-5 {
+    width: 50%;
+}
+
+.w-6 {
+    width: 60%;
+}
+
+.w-7 {
+    width: 70%;
+}
+
+.w-8 {
+    width: 80%;
+}
+
+.w-9 {
+    width: 90%;
+}
+
+.w-10 {
+    width: 100%;
 }
 
 .w-half-screen {
@@ -420,9 +503,6 @@ select {
     font-family: Playfair Display, "Playfair Display-fallback", Lora, "Lora-fallback", Georgia, serif;
 }
 
-.title {
-    font-size: 30px;
-}
 
 .title-section {
     display: flex;
@@ -460,10 +540,6 @@ select {
     cursor: pointer;
     background-color: var(--white);
     /* border: 2px solid rgb(0, 0, 0); */
-}
-
-.border-navy-grey {
-    border: 2px solid var(--navy-grey);
 }
 
 .br-7 {
@@ -525,7 +601,7 @@ select {
 }
 
 .width-m {
-    min-width: fit-content;
+    max-width: 450px;
 }
 
 .spice {
@@ -722,13 +798,6 @@ select {
     font-style: italic;
 }
 
-.bg-info {
-    background-color: #c3ebff;
-    color: #333;
-    border: 1px solid #222;
-    border-radius: 6px;
-}
-
 .bg-green {
     background-color: #08de9e;
     color: #333;
@@ -743,7 +812,7 @@ select {
 
 .bg-success {
     background-color: #08de9e;
-    color: #333;
+    color: #222;
 }
 
 .bg-warning {
@@ -756,34 +825,37 @@ select {
     color: #fff;
 }
 
-.btn-blk,
-.btn-ylw,
-.btn-grn,
-.btn-blu,
-.btn-red,
-.btn-def,
+
 .btn-danger,
 .btn-warning,
 .btn-success,
-.btn-primary,
-.btn-teal {
+.btn-secondary,
+.btn-outline-secondary,
+.btn-primary {
     padding: 5px 20px;
-    border: 1px solid #444;
-    background-color: #e7e0e0;
-    color: #222;
-    border-radius: 6px;
+    border: 1px solid #333;
+    background-color: #333;
+    color: #fff;
+    border-radius: 4px;
 }
 
-.btn-def:hover {
-    background-color: #1f1f1f;
-    color: #f6f4f4;
+.btn-outline-secondary {
+    border: 1px solid #333;
+    background-color: #fff;
+    color: #000a19;
+}
+
+.btn-outline-secondary:hover {
+    border: 1px solid #000a19;
+    background-color: #000a19;
+    color: #fff;
     cursor: pointer;
 }
 
 .btn-danger {
-    background-color: #ff6666;
-    color: #fff;
-    border-radius: 3px;
+    background-color: #ffd2d2;
+    color: #000a19;
+    border: none;
 }
 
 .btn-danger:hover {
@@ -792,97 +864,49 @@ select {
 }
 
 .btn-warning {
-    background-color: #ffbd3a;
-    color: #222;
-    border-radius: 3px;
-    border: 1px solid #444;
+    background-color: #f9e1b1;
 }
 
 .btn-warning:hover {
     cursor: pointer;
     background-color: #fca800;
-    border-color: #fca800;
-    color: #333;
+    color: #222;
 }
 
 .btn-success {
-    background-color: #08de9e!important;
-    color: #333;
+    background-color: #eef8f5 !important;
 }
 
 .btn-success:hover {
     cursor: pointer;
-    background-color: #008a61!important;
-    border-color: #008a61!important;
+    background-color: #05ce92 !important;
 }
 
 .btn-primary {
-    background-color: #123ED8;
-    color: #fff;
+    background-color: #b3b8ca;
 }
 
 .btn-primary:hover {
     cursor: pointer;
     background-color: #0238f9;
-    border-color: #123ED8;
-}
-
-.btn-blk {
-    background-color: #1b202c;
     color: #fff;
-}
-
-.btn-teal {
-    background-color: var(--teal);
-    border: 1px solid var(--l-teal);
 }
 
 .btn-red {
-    background-color: var(--d-red);
+    background-color: #dc3c31;
+    border-radius: 5px;
+    height: 35px;
+    padding: 0 20px;
     color: #fff;
-}
-
-.btn-grn {
-    background-color: var(--d-green);
-    color: #fff;
-}
-
-.btn-ylw {
-    background-color: var(--d-green);
-}
-
-.btn-blu {
-    background-color: var(--l-blue);
-}
-
-.btn-ylw:hover {
-    cursor: pointer;
-    background-color: var(--d-yellow);
-}
-
-.btn-grn:hover {
-    cursor: pointer;
-    background-color: #333;
-    color: #fff;
-}
-
-.btn-blu:hover {
-    cursor: pointer;
-    background-color: var(--blue);
-    color: #fff;
+    border: none;
+    font-weight: bold;
+    display: inline;
+    clear: both;
 }
 
 .btn-red:hover {
     cursor: pointer;
-    background-color: var(--red);
-    color: #fff;
-}
-
-.btn-teal:hover {
-    cursor: pointer;
-    background-color: var(--d-teal);
-    border: 1px solid var(--d-teal);
-    color: #222;
+    background-color: #f8594e;
 }
 
 .v-scrollable-data-container {
@@ -890,9 +914,10 @@ select {
     flex-direction: column;
     gap: 1rem;
     width: 100%;
-    max-height: 500px;
+    max-height: 350px;
     overflow-y: auto;
     padding: 5px 0;
+    background-color: #fcfcfd;
 }
 
 .btn-block {
@@ -969,6 +994,7 @@ select {
     outline: none;
     padding: 6px;
     border: 1px solid var(--grey);
+    border-radius: 4px;
 }
 
 .accordian-icon {
@@ -1103,7 +1129,7 @@ select {
     display: block;
     border: none;
     border: 1px solid #444;
-    background-color: #08de9e!important;
+    background-color: #08de9e !important;
     min-width: 450px;
     border-radius: 3px;
     font-size: 16px;
@@ -1142,13 +1168,26 @@ select {
 }
 
 .clickable {
-    font-weight: 500;
-    text-decoration: underline;
+    font-weight: 800;
+    border: 1px solid #fff;
+    padding: 5px 20px;
 }
 
 .clickable:hover {
     cursor: pointer;
-    color: #5d8ed5;
+    color: #000a19;
+    border: 1px solid #000a19;
+}
+
+.clickable-link {
+    border: none;
+    font-weight: 800;
+    padding: 10px;
+}
+
+.clickable-link:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .clickableDiv {
@@ -1588,6 +1627,9 @@ select {
 .h-5 {
     height: 50px;
 }
+.h-100{
+    height: 100vh;
+}
 
 .ls-3 {
     letter-spacing: 3;
@@ -1613,6 +1655,17 @@ select {
 .thumbnail-picture:hover {
     cursor: pointer;
     transform: scale(1.18);
+}
+
+.collapsible-icon {
+    background-color: transparent;
+    padding: 4px 8px;
+    border-radius: 50%;
+}
+
+.collapsible-icon:hover {
+    background-color: #f2f2f2;
+    cursor: pointer;
 }
 
 .selectable {
@@ -1682,10 +1735,10 @@ select {
 }
 
 .left {
-    padding: 20px;
+    padding: 50px;
     flex: 50%;
     background-color: #f1f1f1;
-    background-image: url("/assets/images/wall-art-taco.jpg");
+    /* background-image: url("/assets/images/wall-art-taco.jpg"); */
     object-fit: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -1756,9 +1809,11 @@ select {
     0% {
         opacity: 0
     }
+
     49% {
         opacity: 0
     }
+
     50% {
         opacity: 1
     }
@@ -1771,26 +1826,34 @@ select {
 
 .lg-row-sm-col {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    width: 100%;
+}
+.lg-row-sm-col> :nth-child() {
+    flex-grow: 1;
+}
+.sm{
+    display: flex;
 }
 
 @media (min-width: 767px) {
     .lg {
         display: flex;
     }
+    .sm{
+        display: none;
+    }
     .md {
         display: none;
     }
-    .title {
-        font-size: 35px;
-    }
+
     .title-section {
         display: flex;
         flex-direction: row;
     }
+
     .lg-row-sm-col {
         display: flex;
-        flex-direction: column;
-        width: 100%;
+        flex-direction: row;
     }
 }

@@ -1,5 +1,5 @@
 <div class="main">
-    <div class="left"></div>
+    <div class="left lg"></div>
     <div class="right">
         <div style="width: 500px;height: 500px;padding: 20px;">
             <div class="y-flex">
@@ -46,9 +46,9 @@
                         <div class="_2EeI1 _26LFr"></div>
                         <label class="_1Cvlf _2tL9P" for="repeatPassword">Repeat Password</label>
                     </div>
-                    <button type="submit" class="big-black-btn" style="width: 100%;">Create Account</button>
+                    <button type="submit" class="btn-secondary mt-3" style="width: 100%;">Create Account</button>
                     <div style="text-align: center;padding: 10px;font-weight: 600;">
-                        Already have an account? <span (click)="signIn()" class="clickable">Sign In</span>
+                        Already have an account? <span (click)="signIn()" class="clickable-link">Sign In</span>
                     </div>
                 </form>
                 <div *ngIf="errorMessage !== undefined"

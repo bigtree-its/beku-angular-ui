@@ -12,6 +12,7 @@ export class OrderItemComponent {
 
   @Input() item: FoodOrderItem;
   @Input() priceMode: String;
+  @Input() editable: boolean = true;
   @Input() displayImage: boolean = true;
   @Input() displayDeleteOption: boolean = false;
   quantity: number = 1;

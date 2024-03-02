@@ -100,6 +100,7 @@ export class FoodOrderService {
           console.log('Setting up supplier');
           this.changeSupplier();
           this.customerOrder.items = [];
+          this.customerOrder.status = "Draft";
           this.calculateTotal();
         }
       }
@@ -121,23 +122,27 @@ export class FoodOrderService {
     };
   }
 
-  retrieveOrder(reference: string): Observable<CustomerOrder> {
-    var url = this.serviceLocator.CustomerOrdersUrl + '/reference/' + reference;
-    return this.http.get<CustomerOrder>(url).pipe(
-      tap((data) => {
-        this.setData(data[0]);
-      })
-    );
-  }
-
-  retrieveCustomerOrders(customerId: string): Observable<CustomerOrder[]> {
+  retrieveSingleOrder(reference: string, intent: string): Observable<CustomerOrder[]> {
     var params = new HttpParams();
-    if (customerId !== null && customerId !== undefined) {
-      params = params.set('customerId', customerId);
+    if (reference !== null && reference !== undefined) {
+      params = params.set('ref', reference);
+    }
+    if (intent !== null && intent !== undefined) {
+      params = params.set('intent', intent);
     }
     var url = this.serviceLocator.CustomerOrdersUrl;
-    console.log('Fetching customer orders ' + customerId);
-    return this.http.get<CustomerOrder[]>(url, { params }).pipe(
+    console.log('Fetching customer orders ' + url);
+    return this.http.get<CustomerOrder[]>(url, { params: params });
+  }
+
+  retrieveCustomerOrders(email: string): Observable<CustomerOrder[]> {
+    var params = new HttpParams();
+    if (email !== null && email !== undefined) {
+      params = params.set('customer', email);
+    }
+    var url = this.serviceLocator.CustomerOrdersUrl;
+    console.log('Fetching customer orders ' + url);
+    return this.http.get<CustomerOrder[]>(url, { params: params }).pipe(
       tap((data) => {
         this.setCustomerOrders(data);
       })
@@ -150,6 +155,17 @@ export class FoodOrderService {
     return this.http.get<PaymentIntentResponse>(
       this.serviceLocator.PaymentIntentUrl + '/' + intentId
     );
+  }
+
+  fetchPaymentIntent(ref: string, intent: string): Observable<PaymentIntentResponse[]> {
+    var params = new HttpParams();
+    if (ref !== null && ref !== undefined) {
+      params = params.set('ref', ref);
+    }
+    if (intent !== null && intent !== undefined) {
+      params = params.set('intent', intent);
+    }
+    return this.http.get<PaymentIntentResponse[]>(this.serviceLocator.PaymentIntentUrl, {params: params} );
   }
 
   updateSinglePaymentIntent(
@@ -276,7 +292,7 @@ export class FoodOrderService {
       orderSearchQuery.customerEmail !== null &&
       orderSearchQuery.customerEmail !== undefined
     ) {
-      params = params.set('customerEmail', orderSearchQuery.customerEmail);
+      params = params.set('customer', orderSearchQuery.customerEmail);
     }
     if (
       orderSearchQuery.chefId !== null &&
@@ -294,7 +310,7 @@ export class FoodOrderService {
       params = params.set('all', 'true');
     }
     return this.http.get<CustomerOrder[]>(
-      this.serviceLocator.CustomerOrderSearchUrl,
+      this.serviceLocator.CustomerOrdersUrl,
       { params }
     );
   }
@@ -441,6 +457,7 @@ export class FoodOrderService {
 
     this.customerOrder = {
       id: '',
+      status: "Draft",
       items: [],
       supplier: {
         _id: this.supplier?._id,
@@ -487,7 +504,6 @@ export class FoodOrderService {
       collectBy: null,
       dateDeleted: null,
       serviceMode: 'COLLECTION',
-      status: 'CREATED',
       notes: '',
     };
     console.log(

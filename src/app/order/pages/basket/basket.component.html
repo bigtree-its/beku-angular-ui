@@ -1,25 +1,62 @@
-<div style="display: flex;justify-content: center;margin-top: 60px;height: 100vh;">
-    <div style="display: flex; flex-direction: column;max-width: 480px;min-width: 410px;">
-        <!-- <div style="display: flex;align-items: center;height: 40px;font-size: 15px;font-weight: 200;margin-left: 10px;">
-            <div style="background-color: var(--yellow);display: flex;justify-content: center;align-items: center;height: 40px;width: 40px;" (click)="goback()">
-                <img src="/assets/icons/left-arrow.png" loading="lazy" height="20px" width="20px">
-            </div>
-             <span style="padding: 10px;border-bottom: 1px solid var(--navy-grey);text-align: center;font-size: 20px;">YOUR BASKET</span>
-        </div> -->
-        <div class="flex-row align-items-center">
-            <div class="arrow-icon-div" (click)="goback()">
-                <fa-icon [icon]="faArrowLeft"></fa-icon>
-            </div>
-            <span class="a-page-header">YOUR BASKET</span>
+<div class="container">
+    <div class="flex-row align-items-center">
+        <div class="arrow-icon-div" (click)="goback()">
+            <fa-icon [icon]="faArrowLeft"></fa-icon>
         </div>
-
-        <div class="flex-column justify-content-center align-items-center p-1 pb-3">
+        <span class="a-page-header">YOUR BASKET</span>
+    </div>
+    <div class="lg-row-sm-col mt-4">
+        <div class="flex-row py-2">
+            <div style="height: 200px;width: 170px;">
+                <img src="/assets/images/chefs/{{chef?._id}}/cover-photo.jpg" style="object-fit: cover;
+                max-height: 198px;
+                height: 198px;
+                width: 170px;
+                max-width: 170px;">
+            </div>
+            <div class="flex-column" style="padding: 0 20px;width: 100%;">
+                <div class="title-section">
+                    <span class="chef-name  title mr-2"  [routerLink]="[ '/cooks', chef._id]">{{chef?.kitchenName}}</span>
+                    <div class="clickable-row" style="font-size: 12px;">
+                        <fa-icon [icon]="faStar"></fa-icon>
+                        <span style="padding-left: 6px;">{{chef?.rating}}</span>
+                        <span style="padding-left: 6px;">({{chef?.reviews}}
+                            reviews)</span>
+                    </div>
+                </div>
+                <span class="py-1 px-1 f-size-xs">{{chef?.description}}</span>
+                <div class="flex-row-wrap">
+                    <ng-container *ngFor="let cuisine of chef?.cuisines | slice:0:3">
+                        <div class="attribute">{{ cuisine.name }}
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="flex-column" *ngIf="chef?.doDelivery">
+                    <div class="flex-row" style="padding: 5px;align-items: center;">
+                        <fa-icon [icon]="faPeopleArrows" class="mr-1"></fa-icon>
+                        <span style="font-size: 12px;">I do delivery
+                            upto {{chef?.deliveryDistance}} miles</span>
+                    </div>
+                    <div class="flex-row" *ngIf="chef?.freeDeliveryOver > 0" style="padding: 5px;align-items: center;">
+                        <fa-icon [icon]="faFaceSmile" class="mr-1"></fa-icon>
+                        <span style="font-size: 12px;">Free Delivery
+                            order over {{chef?.freeDeliveryOver |
+                            currency: 'GBP'}}</span>
+                    </div>
+                </div>
+                <div *ngIf="!chef?.doDelivery" style="padding: 5px 0;">
+                    <span class="attribute">Collection Only</span>
+                </div>
+            </div>
+        </div>
+        <div class="flex-column w-100 mb-4">
             <div *ngIf="order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0; then thenBlock else elseBlock">
             </div>
         </div>
-        <div style="height: 60px; width: 100%;display: flex;justify-content: center;align-items: center;padding: 10px;">
-            <button class="big-grn-btn" [routerLink]="[ '/checkout'] " [disabled]="!(order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0)">
-                Checkout</button>
+    </div>
+    <div class="sm footer" *ngIf="order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0">
+        <div class="flex-row justify-content-center py-2 border-top w-100">
+            <button class="btn-red"  [routerLink]="[ '/checkout'] ">Go to checkout</button>
         </div>
     </div>
 </div>
@@ -36,22 +73,13 @@
 </ng-template>
 
 <ng-template #thenBlock>
-    <div class="flex-column justify-content-center align-items-center">
-        <div style="height: 200px;width: 480px; display: flex;justify-content: center;align-items: center;margin-top: 30px;">
-            <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg" style="object-fit: contain;width: 100%;height: 100%;max-width: 100%; max-height: 100%;">
-        </div>
-        <strong class="chef-name" [routerLink]="['/cooks', chef._id]" routerLinkActive="router-link-active">{{chef.kitchenName}}</strong>
-        <span>{{getAddress()}}</span>
-        <div class="btn-wrapper mt-3" style="width: 100%;">
-            <div style="display: flex; justify-content: space-between;">
-                <span>Total</span>
-                <span style="font-weight: bolder;font-size: 15px;">{{cartTotal | currency: 'GBP'}}</span>
-            </div>
-        </div>
+    <div class="flex-column border p-2">
+        <span style="font-weight: bolder;font-size: 35px;color: var(--d-red);">{{cartTotal | currency: 'GBP'}}</span>
         <div class="v-scrollable-data-container">
-            <div *ngIf="order !== null && order !== undefined">
-                <app-order-item *ngFor="let item of order.items" [item]="item"></app-order-item>
-            </div>
+            <app-order-item *ngFor="let item of order.items" [item]="item"></app-order-item>
+        </div>
+        <div class="lg">
+            <button class="btn-red py-2 f-size-md mt-3" [routerLink]="[ '/checkout'] ">Checkout</button>
         </div>
     </div>
 </ng-template>

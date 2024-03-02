@@ -10,7 +10,7 @@ export interface OrderSupplier{
 }
 
 export class OrderStatus{
-    static readonly created: string = "CREATED";
+    static readonly created: string = "DRAFT";
     static readonly accepted: string = "ACCEPTED";
     static readonly paid: string = "PAID";
     static readonly processing: string = "PROCESSING";
@@ -246,7 +246,7 @@ export interface CustomerOrder {
     supplier: OrderSupplier;
     customer: OrderCustomer;
     reference: string;
-    status: string;
+    status?: string;
     currency: string;
     serviceMode: string;
     items: FoodOrderItem[];

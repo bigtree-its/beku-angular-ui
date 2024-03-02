@@ -7,9 +7,11 @@ import { BecomeAPartnerComponent } from './pages/become-a-partner/become-a-partn
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { OrderByDatePipe } from '../pipes/order-by-date.pipe';
+import { ManageOrderComponent } from './pages/manage-order/manage-order.component';
 
 const routes: Routes = [
   { path: 'my_orders', component: MyOrdersComponent },
+  { path: 'my_orders/manage', component: ManageOrderComponent },
   { path: 'my_profile', component: MyProfileComponent },
   { path: 'contact_us', component: BecomeAPartnerComponent }
 ]
@@ -20,7 +22,8 @@ const routes: Routes = [
     MyOrdersComponent,
     MyProfileComponent,
     BecomeAPartnerComponent,
-    OrderByDatePipe
+    OrderByDatePipe,
+    ManageOrderComponent
   ],
   imports: [
     CommonModule,

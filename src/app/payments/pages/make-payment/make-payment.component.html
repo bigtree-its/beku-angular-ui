@@ -1,27 +1,60 @@
 <!-- <ng-container *ngIf="(loadStripe$ | async) as stripe; else loadingStripe"></ng-container> -->
 
 <div class="container mt-5">
+    <div class="page-header border-bottom mt-8">
+        <span class="f-size-xl bolder">Make Payment</span>
+    </div>
+   
     <div class="flex-column p-3">
         <div class="flex-row-space-between border-bottom py-3">
-            <span class="bold f-size-lg font-abril-fatface">Your Order</span>
-            <fa-icon *ngIf="!showOrder" [icon]="faPlus" (click)="openCloseOrder()"></fa-icon>
-            <fa-icon *ngIf="showOrder" [icon]="faMinus" (click)="openCloseOrder()"></fa-icon>
+            <span class="bold f-size-lg ">Your Order</span>
+            <fa-icon class="collapsible-icon" *ngIf="!showOrder" [icon]="faPlus" (click)="openCloseOrder()"></fa-icon>
+            <fa-icon class="collapsible-icon" *ngIf="showOrder" [icon]="faMinus" (click)="openCloseOrder()"></fa-icon>
         </div>
         <ng-container *ngIf="showOrder" [ngTemplateOutlet]="orderLayout"></ng-container>
         <div class="flex-row-space-between border-bottom py-3">
-            <span class="bold f-size-lg font-abril-fatface">Your Chef</span>
-            <fa-icon *ngIf="!showSupplier" [icon]="faPlus" (click)="openCloseSupplier()"></fa-icon>
-            <fa-icon *ngIf="showSupplier" [icon]="faMinus" (click)="openCloseSupplier()"></fa-icon>
+            <span class="bold f-size-lg ">Your Chef</span>
+            <fa-icon class="collapsible-icon" *ngIf="!showSupplier" [icon]="faPlus" (click)="openCloseSupplier()"></fa-icon>
+            <fa-icon class="collapsible-icon" *ngIf="showSupplier" [icon]="faMinus" (click)="openCloseSupplier()"></fa-icon>
         </div>
         <ng-container *ngIf="showSupplier" [ngTemplateOutlet]="supplierLayout"></ng-container>
 
         <div class="flex-row-space-between border-bottom py-3">
-            <span class="bold f-size-lg font-abril-fatface">Your Items</span>
-            <fa-icon *ngIf="!showItems" [icon]="faPlus" (click)="openCloseItems()"></fa-icon>
-            <fa-icon *ngIf="showItems" [icon]="faMinus" (click)="openCloseItems()"></fa-icon>
+            <span class="bold f-size-lg ">Your Items</span>
+            <fa-icon class="collapsible-icon" *ngIf="!showItems" [icon]="faPlus" (click)="openCloseItems()"></fa-icon>
+            <fa-icon class="collapsible-icon" *ngIf="showItems" [icon]="faMinus" (click)="openCloseItems()"></fa-icon>
         </div>
         <ng-container *ngIf="showItems" [ngTemplateOutlet]="itemsLayout"></ng-container>
-        <span class="bold f-size-lg font-abril-fatface">Payment</span>
+        <div style="background-color: aliceblue;border-radius: 7px;padding:20px;margin: 10px 0;">
+            <div class="flex-column justify-content-center align-items-center">
+                <div style=" display: flex; flex-direction: column;width: 100%;padding: 5px 30px;">
+                    <div class="flex-row-space-between">
+                        <span>Subtotal</span>
+                        <span>{{customerOrder?.subTotal | currency: 'GBP'}}</span>
+                    </div>
+                    <div class="flex-row-space-between">
+                        <span>Delivery fee</span>
+                        <span>{{customerOrder?.deliveryFee | currency: 'GBP'}}</span>
+                    </div>
+                    <div class="flex-row-space-between">
+                        <span>Packing fee</span>
+                        <span>{{customerOrder?.packingFee | currency: 'GBP'}}</span>
+                    </div>
+                    <div class="flex-row-space-between">
+                        <span>Service Fee</span>
+                        <span>{{customerOrder?.serviceFee | currency: 'GBP'}}</span>
+                    </div>
+                    <div class="flex-row-space-between" style="margin-top: 10px;">
+                        <span style="font-weight: 900;">TOTAL</span>
+                        <span style="font-weight: 900;">{{customerOrder?.total | currency:
+                            'GBP'}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-bottom py-2">
+            <span class="bold f-size-lg ">Payment</span>
+        </div>
         <div class="flex-column align-items-center flex-grow" id="contentDiv">
             <app-stripeform *ngIf="!error" [order]="customerOrder" [paymentIntent]="paymentIntent"></app-stripeform>
             <span *ngIf="error" style="background-color: rgb(180, 252, 228);padding: 40px;font-weight: bold;margin: 20px;width: 100%;text-align: center;">{{errorMessage}}</span>
@@ -40,7 +73,7 @@
         </div>
         <div class="flex-column" style="padding: 0 20px;width: 100%;">
             <div class="title-section">
-                <span class="chef-name font-abril-fatface title mr-2">{{supplier?.kitchenName}}</span>
+                <span class="chef-name  title mr-2">{{supplier?.kitchenName}}</span>
                 <div class="clickable-row" style="font-size: 12px;">
                     <fa-icon [icon]="faStar"></fa-icon>
                     <span style="padding-left: 6px;">{{supplier?.rating}}</span>
@@ -75,23 +108,19 @@
     </div>
 </ng-template>
 <ng-template #orderLayout>
-    <div class="flex-column py-2">
-        <table style="width: fit-content;">
-            <tr class="py-3" cellpadding="10px">
-                <th>Order Reference</th>
-                <td class="pl-5">{{customerOrder?.reference}}</td>
-            </tr>
-            <tr class="py-3" cellpadding="10px">
-                <th>Order Date</th>
-                <td class="pl-5">{{customerOrder?.dateCreated | date}}</td>
-            </tr>
-            <tr class="py-3" cellpadding="10px">
-                <th>Order Status</th>
-                <td class="pl-5">{{customerOrder?.status | titlecase}}</td>
-            </tr>
-            <tr class="py-3" cellpadding="10px">
+    <div class="py-2">
+        <table style="width: 100%;">
+            <tr>
+                <th>Ref#</th>
+                <th>Date</th>
+                <th>Status</th>
                 <th>Delivery Method</th>
-                <td class="pl-5">{{customerOrder?.serviceMode | titlecase}}</td>
+            </tr>
+            <tr>
+                <td>{{customerOrder?.reference}}</td>
+                <td>{{customerOrder?.dateCreated | date}}</td>
+                <td>{{customerOrder?.status | titlecase}}</td>
+                <td>{{customerOrder?.serviceMode | titlecase}}</td>
             </tr>
         </table>
     </div>

@@ -194,7 +194,7 @@ export class AccountService {
     this.user = user;
     // this.fetchCustomerPreferences(user.id);
     this.loginSession$.next(this.user);
-    this.orderService.retrieveCustomerOrders(this.user.id);
+    this.orderService.retrieveCustomerOrders(this.user.email);
   }
 
   private buildUser(token: string) {

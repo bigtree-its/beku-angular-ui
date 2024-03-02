@@ -1,4 +1,4 @@
-<div class="home-wrapper">
+<div class="container">
 
     <div class="hero">
         <div class="hero-left">
@@ -15,17 +15,20 @@
                 <div class="hp-search-container">
                     <div class="flex-row" style="width: 80%;">
                         <!-- <img src="/assets/icons/target.png" height="25px" width="25px" style="margin-right: 20px; opacity: 0.5;"> -->
-                        <input type="text" placeholder="Enter your location" class="hp-search-box" [(ngModel)]="serviceLocationSearchText" (keyup.enter)="onEnter()">
+                        <input type="text" placeholder="Enter your location" class="hp-search-box"
+                            [(ngModel)]="serviceLocationSearchText" (keyup.enter)="onEnter()">
                     </div>
                     <div class="flex-row align-items-center">
-                        <span *ngIf="showServiceLocations" (click)="closeServiceLocations()" style="color: var(--d-orange);cursor: pointer;padding: 0 10px;">Clear</span>
-                        <button class="btn-red bolder float-right" (click)="onEnter()">Find</button>
+                        <span *ngIf="showServiceLocations" (click)="closeServiceLocations()"
+                            style="color: var(--d-orange);cursor: pointer;padding: 0 10px;">Clear</span>
+                        <button class="btn-secondary bolder float-right" (click)="onEnter()">Find</button>
                     </div>
 
                 </div>
                 <div *ngIf="showServiceLocations" class="hp-locations-container">
                     <div class="hp-locations">
-                        <span class="hp-location" *ngFor="let sl of serviceLocations" (click)="onSelectServiceLocation(sl)">{{ sl.name }},
+                        <span class="hp-location" *ngFor="let sl of serviceLocations"
+                            (click)="onSelectServiceLocation(sl)">{{ sl.name }},
                             {{sl.city}}</span>
                     </div>
                 </div>
@@ -39,46 +42,48 @@
             </div>
         </div>
     </div>
-    <div class="flex-column justify-content-center align-items-center p-4">
-        <div class="flex-row flex-wrap gap-1">
-            <div class="flex-column bg-light width-m align-items-center p-5 mx-2">
-                <strong style="font-size: 22px;font-weight: 800;">Top Locations</strong>
-                <strong style="font-size: 15px;margin: 10px 0;">Glasgow</strong>
-                <div class="flex-column gap-1" *ngIf="popularLocations !== null && popularLocations !== undefined">
-                    <span class="clickable-text my-2" *ngFor="let pl of popularLocations" [routerLink]="['cooks']" [queryParams]="{location: pl.slug}">{{pl.name}}</span>
-                </div>
+
+    <div class="flex-row flex-wrap gap-1">
+        <div class="flex-column bg-light align-items-center p-3 flex-grow" >
+            <strong style="font-size: 22px;font-weight: 800;">Top Locations</strong>
+            <strong style="font-size: 15px;margin: 10px 0;">Glasgow</strong>
+            <div class="flex-column gap-1" *ngIf="popularLocations !== null && popularLocations !== undefined">
+                <span class="clickable-text my-2" *ngFor="let pl of popularLocations" [routerLink]="['cooks']"
+                    [queryParams]="{location: pl.slug}">{{pl.name}}</span>
             </div>
-            <div class="flex-column bg-light width-m  align-items-center p-5 mx-2">
-                <strong style="font-size: 22px;font-weight: 800;">Top Cuisines</strong>
-                <div class="flex-column gap-1" *ngIf="popularLocations !== null && popularLocations !== undefined">
-                    <span class="clickable-text my-2" *ngFor="let cuisine of cuisines" [routerLink]="['cooks']" [queryParams]="{cuisine: cuisine.slug}">{{cuisine.name}}</span>
-                </div>
+        </div>
+        <div class="flex-column bg-light align-items-center p-3 flex-grow">
+            <strong style="font-size: 22px;font-weight: 800;">Top Cuisines</strong>
+            <div class="flex-column gap-1" *ngIf="popularLocations !== null && popularLocations !== undefined">
+                <span class="clickable-text my-2" *ngFor="let cuisine of cuisines" [routerLink]="['cooks']"
+                    [queryParams]="{cuisine: cuisine.slug}">{{cuisine.name}}</span>
             </div>
         </div>
     </div>
 
 
-    <div class="flex-column justify-content-center align-items-center my-5 mx-3">
+
+    <div class="flex-column justify-content-center align-items-center bg-green-100 px-3 py-5">
         <strong style="font-size: 22px;font-weight: 800;">How It Works!</strong>
-        <div class="flex-row flex-wrap justify-content-center" style="margin: 10px 0;">
-            <div class="flex-column justify-content-center align-items-center bg-light mobile-w m-3">
-                <div class="flex-row justify-content-center  align-items-center">
+        <div class="flex-row flex-wrap">
+            <div class="flex-column justify-content-center align-items-center bg-white m-3 p-3 flex-grow">
+                <div class="flex-row justify-content-center align-items-center">
                     <span style="font-size: 40px;opacity: 0.5;">1</span>
                     <img src="/assets/icons/chef.png" height="100px" width="100px" style="object-fit: contain;">
                 </div>
                 <strong style="text-align: center;font-size: 30px;padding: 10px 0;color: #3C4043;">Find</strong>
                 <small>Find a home chef nearest to your home</small>
             </div>
-            <div class="flex-column justify-content-center align-items-center  bg-light mobile-w m-3">
+            <div class="flex-column justify-content-center align-items-center  bg-white  m-3 p-3 flex-grow">
                 <div class="flex-row justify-content-center align-items-center">
                     <span style="font-size: 40px;opacity: 0.5;">2</span>
                     <img src="/assets/icons/order.png" height="100px" width="100px" style="object-fit: contain;">
                 </div>
                 <strong style="text-align: center;font-size: 30px;padding: 10px 0;color: #3C4043;">Order</strong>
-                <small>Order in for yourself or for the group,
+                <small class="break-word">Order in for yourself or for the group,
                     with no restrictions on order value</small>
             </div>
-            <div class="flex-column justify-content-center align-items-center bg-light mobile-w m-3">
+            <div class="flex-column justify-content-center align-items-center bg-white  m-3 p-3 flex-grow">
                 <div class="flex-row justify-content-center  align-items-center">
                     <span style="font-size: 40px;opacity: 0.5;">3</span>
                     <img src="/assets/icons/eating.png" height="100px" width="100px" style="object-fit: contain;">
@@ -90,31 +95,35 @@
     </div>
 
 
-    <div class="flex-column justify-content-center align-items-center" style="margin: 10px 0;">
-        <span style="font-weight: 900;font-size: 25px;padding: 10px 0;">Join
-            us</span>
-        <div style="margin-bottom: 10px;">Be a part of <span class="logo-text">ZUVAI</span></div>
-        <div class="flex-row flex-wrap gap-1">
-            <div class="flex-row width-m bg-light" style="height: 200px;">
-                <div style="height: 200px;width:200px;display: flex;justify-content: center;align-items: center;color: var(--d-orange);">
+    <div class="flex-column justify-content-center align-items-center py-5">
+        <span style="font-weight: 900;font-size: 25px;padding: 10px 0;">Join us</span>
+        <div style="margin-bottom: 10px;">Be a part of <span class="logo-text">LOCAL EXPAT</span></div>
+        <div class="flex-row flex-wrap">
+            <div class="flex-row bg-light flex-grow mb-1" style="height: 200px;">
+                <div
+                    style="height: 200px;width:200px;display: flex;justify-content: center;align-items: center;color: var(--d-red);">
                     <fa-icon [icon]="faHandshake" style="font-size: 50px;"></fa-icon>
                 </div>
                 <div class="flex-column justify-content-center align-items-center" style="height: 200px;width:100%;">
                     <span style="font-weight: 900;font-size: 20px;padding: 10px 0;">Become
                         a family chef</span>
-                    <p style="margin: 10px 0; word-wrap: break-word;padding: 0 20px;text-align: center;">Reach more customers and achieve growth with us</p>
-                    <button style="border: none;padding: 8px; background-color: var(--orange);color: #fff;" routerLink="/contact_us">Find
+                    <p style="margin: 10px 0; word-wrap: break-word;padding: 0 20px;text-align: center;">Reach more
+                        customers and achieve growth with us</p>
+                    <button style="border-radius: 5px;border: none;padding: 8px; background-color: var(--d-red);color: #fff;"
+                        routerLink="/contact_us">Find
                         our more</button>
                 </div>
             </div>
-            <div class="flex-row width-m bg-light" style="height: 200px;">
-                <div style="height: 200px;width:200px;display: flex;justify-content: center;align-items: center;color: var(--d-orange);">
+            <div class="flex-row bg-light flex-grow " style="height: 200px;">
+                <div
+                    style="height: 200px;width:200px;display: flex;justify-content: center;align-items: center;color: var(--d-red);">
                     <fa-icon [icon]="faCode" style="font-size: 50px;"></fa-icon>
                 </div>
                 <div class="flex-column justify-content-center align-items-center" style="height: 200px;width:100%;">
                     <span style="font-weight: 900;font-size: 20px;padding: 10px 0;">Build your career</span>
-                    <p style="margin: 10px 0; word-wrap: break-word;padding: 0 20px;text-align: center;">Join the dynamic team that makes it all happen</p>
-                    <button style="border: none;padding: 8px; background-color: var(--orange);color: #fff;">Find
+                    <p style="margin: 10px 0; word-wrap: break-word;padding: 0 20px;text-align: center;">Join the
+                        dynamic team that makes it all happen</p>
+                    <button style="border-radius: 5px;border: none;padding: 8px; background-color: var(--d-red);color: #fff;">Find
                         our more</button>
                 </div>
             </div>

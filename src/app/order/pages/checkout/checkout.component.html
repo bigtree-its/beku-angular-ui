@@ -1,26 +1,53 @@
 <ng-container *ngIf="(loadStripe$ | async) as stripe; else loadingStripe"></ng-container>
 
-<div class="page">
-    <div class="page-header">
+<div class="container">
+    <div class="flex-row-space-between align-items-center">
         <div class="arrow-icon-div" (click)="goback()">
             <fa-icon [icon]="faArrowLeft"></fa-icon>
         </div>
         <span class="a-page-header">CHECKOUT</span>
+        <strong *ngIf="order && !orderSubmitted" class="f-size-lg color-red bolder">{{order?.total|
+            currency:
+            'GBP'}}</strong>
     </div>
-    <div class="flex-row-space-between py-2">
-        <div class="left-content w-half-screen">
-            <div style="max-height: 100%;max-width: 100%;padding: 30px;">
-                <img src="/assets/images/food.jpeg" style="object-fit: cover;max-height: 100%;max-width: 100%;">
+    <div class="flex-row-space-between align-items-start mt-3">
+        <div class="lg flex-column border-right w-10 h-100 px-2 bg-light">
+            <div class="py-3">
+                <app-order-item *ngFor="let item of order?.items" [item]="item" [editable]=false></app-order-item>
             </div>
+            <div class="flex-column mt-5 py-5">
+                <div class="flex-row-space-between">
+                    <strong>Subtotal</strong>
+                    <strong>{{order?.subTotal| currency: 'GBP'}}</strong>
+                </div>
+                <div class="flex-row-space-between">
+                    <span>Delivery fee</span>
+                    <span>{{order?.deliveryFee| currency: 'GBP'}}</span>
+                </div>
+                <div class="flex-row-space-between">
+                    <span>Service Fee</span>
+                    <span>{{order?.serviceFee| currency: 'GBP'}}</span>
+                </div>
+                <div class="flex-row-space-between" style="margin-top: 10px;">
+                    <strong>Total</strong>
+                    <strong>{{order?.total| currency: 'GBP'}}</strong>
+                </div>
+            </div>
+            <!-- The following image absolute works fine when screen resizing -->
+            <!-- <div style="max-height: 100%;max-width: 100%;padding: 30px;">
+               
+                <img src="/assets/images/food.jpeg" style="object-fit: cover;max-height: 100%;max-width: 100%;">
+            </div> -->
 
         </div>
-        <div class="flex-column align-items-center w-half-screen overflow-y" id="contentDiv">
-            <div style="max-height: 500px;flex-grow: 1;display: flex;flex-direction: column;max-width: 480px;min-width: 480px;">
+        <div class="w-100 overflow-y  p-4" id="contentDiv">
+            <div style="max-height: 500px;display: flex;flex-direction: column;">
                 <div class="sub-header">{{divHeader}}</div>
                 <div *ngIf="showHomeScreen" class="flex-column mt-5">
                     <div class="flex-row mb-2">
                         <span>Do you have an account?</span>
-                        <span [routerLink]="['/login']" [queryParams]="{returnUrl: 'checkout'}" class="clickable ml-2">Login</span>
+                        <span [routerLink]="['/login']" [queryParams]="{returnUrl: 'checkout'}"
+                            class="clickable ml-2">Login</span>
                     </div>
                     <div class="flex-row">
                         <span>Don't have an account?</span>
@@ -31,31 +58,34 @@
                 <div *ngIf="showCustomerDetailsSection" class="flex-column mt-5">
                     <div class="flex-column mb-3">
                         <label for="customerName">Your name on order (for when
-                            you collect)<small
-                                style="color: red;">**</small></label>
-                        <input class="fb-input" type="text" name="customerName" tabindex="0" autocomplete="off" value [(ngModel)]="customerName" #ctrl="ngModel" required="true">
+                            you collect)<small style="color: red;">**</small></label>
+                        <input class="fb-input" type="text" name="customerName" tabindex="0" autocomplete="off" value
+                            [(ngModel)]="customerName" #ctrl="ngModel" required="true">
                     </div>
                     <div class="flex-column mb-3">
-                        <label for="customerMobile">Your mobile<small
-                                style="color: red;">**</small></label>
-                        <input class="fb-input" type="mobile" name="customerMobile" tabindex="1" autocomplete="off" value [(ngModel)]="customerMobile" #ctrl="ngModel" required="true">
+                        <label for="customerMobile">Your mobile<small style="color: red;">**</small></label>
+                        <input class="fb-input" type="mobile" name="customerMobile" tabindex="1" autocomplete="off"
+                            value [(ngModel)]="customerMobile" #ctrl="ngModel" required="true">
                     </div>
                     <div class="flex-column">
-                        <label for="customerEmail">Your email<small
-                                style="color: red;">**</small></label>
-                        <input class="fb-input" type="email" name="customerEmail" tabindex="2" autocomplete="off" value [(ngModel)]="customerEmail" #ctrl="ngModel" required="true" readonly>
+                        <label for="customerEmail">Your email<small style="color: red;">**</small></label>
+                        <input class="fb-input" type="email" name="customerEmail" tabindex="2" autocomplete="off" value
+                            [(ngModel)]="customerEmail" #ctrl="ngModel" required="true" readonly>
                     </div>
                 </div>
                 <div *ngIf="showServiceModeSection" class="flex-column m-2">
-                    <div style="margin-bottom: 30px;background-color: #efedea;display: flex;height: 50px;justify-content: space-around;margin: 8px 0 16px;padding: 3px;">
-                        <button class="service-mode" (click)="selectPickup()" [class.service-mode-option-selected]="serviceMode==='COLLECTION'"><fa-icon
-                                [icon]="faPersonBiking"
-                                class="mr-1"></fa-icon>Collection</button>
-                        <button class="service-mode" (click)="selectDelivery()" [class.service-mode-option-selected]="serviceMode==='DELIVERY'" [disabled]="!chef.doDelivery"><fa-icon
-                                [icon]="faBox"
+                    <div
+                        style="margin-bottom: 30px;background-color: #efedea;display: flex;height: 50px;justify-content: space-around;margin: 8px 0 16px;padding: 3px;">
+                        <button class="service-mode" (click)="selectPickup()"
+                            [class.service-mode-option-selected]="serviceMode==='COLLECTION'"><fa-icon
+                                [icon]="faPersonBiking" class="mr-1"></fa-icon>Collection</button>
+                        <button class="service-mode" (click)="selectDelivery()"
+                            [class.service-mode-option-selected]="serviceMode==='DELIVERY'"
+                            [disabled]="!chef.doDelivery"><fa-icon [icon]="faBox"
                                 class="mr-1"></fa-icon>Delivery</button>
                     </div>
-                    <div *ngIf="serviceMode === 'COLLECTION'" style=" padding: 1rem;display: flex;flex-direction: column;background-color: var(--light-background);flex-grow: 1;margin-right: 10px;">
+                    <div *ngIf="serviceMode === 'COLLECTION'"
+                        style=" padding: 1rem;display: flex;flex-direction: column;background-color: var(--light-background);flex-grow: 1;margin-right: 10px;">
                         <strong style="display: block;">Please collect
                             at</strong>
                         <span style="display: block;">{{chef.address.addressLine1}}</span>
@@ -63,20 +93,26 @@
                         <span style="display: block;">{{chef.address.city}}</span>
                         <span style="display: block;">{{chef.address.postcode}}</span>
                     </div>
-                    <div style=" display: flex;flex-direction: column;min-width: 450px;" *ngIf="chef.doDelivery  && serviceMode === 'DELIVERY'">
+                    <div style=" display: flex;flex-direction: column;"
+                        *ngIf="chef.doDelivery  && serviceMode === 'DELIVERY'">
                         <strong>Where should we send your order?</strong>
-                        <div class="flex-row-space-between align-items-center" *ngIf="customerAddress !== null && customerAddress !== undefined && customerAddress.addressLine1 !== null && customerAddress.addressLine1 !== undefined &&  customerAddress.addressLine1.length > 0">
-                            <div style=" padding: 1rem;display: flex;flex-direction: column;background-color: var(--light-background);flex-grow: 1;margin-right: 10px;">
-                                <span *ngIf="customerAddress.addressLine1 !== undefined &&  customerAddress.addressLine1.length > 0">{{
+                        <div class="flex-row-space-between align-items-center"
+                            *ngIf="customerAddress !== null && customerAddress !== undefined && customerAddress.addressLine1 !== null && customerAddress.addressLine1 !== undefined &&  customerAddress.addressLine1.length > 0">
+                            <div
+                                style=" padding: 1rem;display: flex;flex-direction: column;background-color: var(--light-background);flex-grow: 1;margin-right: 10px;">
+                                <span
+                                    *ngIf="customerAddress.addressLine1 !== undefined &&  customerAddress.addressLine1.length > 0">{{
                                     customerAddress.addressLine1
                                     }}</span>
-                                <span *ngIf="customerAddress.addressLine2 !== undefined &&  customerAddress.addressLine2.length > 0">{{
+                                <span
+                                    *ngIf="customerAddress.addressLine2 !== undefined &&  customerAddress.addressLine2.length > 0">{{
                                     customerAddress.addressLine2
                                     }}</span>
                                 <span *ngIf="customerAddress.city !== undefined &&  customerAddress.city.length > 0">{{
                                     customerAddress.city
                                     }}</span>
-                                <span *ngIf="customerAddress.country !== undefined &&  customerAddress.country.length > 0">{{
+                                <span
+                                    *ngIf="customerAddress.country !== undefined &&  customerAddress.country.length > 0">{{
                                     customerAddress.country }}</span>
                             </div>
                             <div>
@@ -84,12 +120,18 @@
                             </div>
                         </div>
                         <div class="postcode-lookup-container" *ngIf="lookupAddress">
-                            <input class="fb-input" type="text" name="postcode" id="postcode" tabindex="4" autocomplete="off" value [(ngModel)]="addressLookupPostcode" #ctrl="ngModel" placeholder="Enter your postcode">
-                            <button class="btn-grn" (click)="findAddress()" style="margin-right: 8px;">Find</button>
+                            <input class="fb-input" type="text" name="postcode" id="postcode" tabindex="4"
+                                autocomplete="off" value [(ngModel)]="addressLookupPostcode" #ctrl="ngModel"
+                                placeholder="Enter your postcode">
+                            <button class="btn-outline-blue" (click)="findAddress()"
+                                style="margin-right: 8px;">Find</button>
                         </div>
-                        <div *ngIf="postcodeAddressList !== undefined && postcodeAddressList.length > 0 && !addressSelected">
-                            <div style="border: 1px solid var(--light-border);overflow-y: auto;height: 100px;margin-top: 5px;padding: 5px;">
-                                <div class="address-item" *ngFor="let add of postcodeAddressList" (click)="onSelectDeliveryAddress(add)">
+                        <div
+                            *ngIf="postcodeAddressList !== undefined && postcodeAddressList.length > 0 && !addressSelected">
+                            <div
+                                style="border: 1px solid var(--light-border);overflow-y: auto;height: 100px;margin-top: 5px;padding: 5px;">
+                                <div class="address-item" *ngFor="let add of postcodeAddressList"
+                                    (click)="onSelectDeliveryAddress(add)">
                                     <span> {{add.StreetAddress }},
                                         {{add.Place}}</span>
                                 </div>
@@ -101,9 +143,11 @@
                 <div *ngIf="showItemsSection" class="flex-column mt-4">
                     <div style="margin-bottom: 6px;">
                         <label for="notesToChef">Notes to chef</label>
-                        <input class="fb-input" type="text" name="notesToChef" tabindex="2" autocomplete="off" value [(ngModel)]="notesToChef" #ctrl="ngModel" required="true">
+                        <input class="fb-input" type="text" name="notesToChef" tabindex="2" autocomplete="off" value
+                            [(ngModel)]="notesToChef" #ctrl="ngModel" required="true">
                     </div>
-                    <div style="display: flex;flex-direction: column;height: 380px;overflow: auto;padding-bottom: 10px;" *ngIf="order !== null && order !== undefined">
+                    <div style="display: flex;flex-direction: column;max-height: 380px;overflow: auto;padding-bottom: 10px;"
+                        *ngIf="order !== null && order !== undefined">
                         <app-order-item *ngFor="let item of order?.items" [item]="item"></app-order-item>
                     </div>
                 </div>
@@ -144,7 +188,8 @@
                     <div id="payment-element">
                         <!--Stripe.js injects the Payment Element-->
                     </div>
-                    <button id="paywithCardButton" [disabled]="!enablePayButton" class="n-button" (click)="confirmPayment()">Pay {{
+                    <button id="paywithCardButton" [disabled]="!enablePayButton" class="n-button"
+                        (click)="confirmPayment()">Pay {{
                         order?.subTotal| currency: 'GBP'}}</button>
                     <small class="text-muted">By selecting this button, you
                         agree to the Terms of
@@ -166,18 +211,43 @@
                         <span>{{order?.reference}}</span>
                     </div>
                 </div>
-                <div class="footer flex-row space-between align-items-center p-1 h-5">
+                <div class="lg flex-row-space-between align-items-center p-1 h-5 mt-3 bg-light">
                     <span *ngIf="showHomeScreen || showCustomerDetailsSection"></span>
-                    <button *ngIf="!showHomeScreen && !showCustomerDetailsSection && !orderSubmitted" class="btn-red n-w-100" (click)="previous()" tabindex="4" style="float: left;">Previous</button>
-                    <strong *ngIf="!showHomeScreen && order && !orderSubmitted" class="order-total">{{order?.total| currency:
-                        'GBP'}}</strong>
-                    <button *ngIf="!showPlaceOrderButton &&  !showHomeScreen && !orderSubmitted" class="btn-red" style="min-width: 100px;float: right;max-width: 100%;" (click)="next()" tabindex="5">Next</button>
-                    <button *ngIf="showPlaceOrderButton && !chef.paymentRequireApproval && !orderSubmitted" class="btn-grn" style="min-width: 100px;float: right;" (click)="placeOrder(stripeContent)" tabindex="5">Proceed
+                    <button *ngIf="!showHomeScreen && !showCustomerDetailsSection && !orderSubmitted"
+                        class="btn-secondary n-w-100" (click)="previous()" tabindex="4"
+                        style="float: left;">Previous</button>
+                    <button *ngIf="!showPlaceOrderButton &&  !showHomeScreen && !orderSubmitted" class="btn-secondary"
+                        style="min-width: 100px;float: right;max-width: 100%;" (click)="next()"
+                        tabindex="5">Next</button>
+                    <button *ngIf="showPlaceOrderButton && !chef.paymentRequireApproval && !orderSubmitted"
+                        class="btn-secondary" style="min-width: 100px;float: right;" (click)="placeOrder(stripeContent)"
+                        tabindex="5">Proceed
                         to Pay</button>
-                    <button *ngIf="showPlaceOrderButton && chef.paymentRequireApproval && !orderSubmitted" class="btn-grn" style="min-width: 100px;float: right;" (click)="placeOrder(null)" tabindex="5">Submit your
+                    <button *ngIf="showPlaceOrderButton && chef.paymentRequireApproval && !orderSubmitted"
+                        class="btn-secondary" style="min-width: 100px;float: right;" (click)="placeOrder(null)"
+                        tabindex="5">Submit your
                         order</button>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="sm footer">
+        <div class="flex-row-space-between align-items-center p-1 h-5 mt-3 bg-light">
+            <span *ngIf="showHomeScreen || showCustomerDetailsSection"></span>
+            <button *ngIf="!showHomeScreen && !showCustomerDetailsSection && !orderSubmitted"
+                class="btn-secondary n-w-100" (click)="previous()" tabindex="4"
+                style="float: left;">Previous</button>
+            <button *ngIf="!showPlaceOrderButton &&  !showHomeScreen && !orderSubmitted" class="btn-secondary"
+                style="min-width: 100px;float: right;max-width: 100%;" (click)="next()"
+                tabindex="5">Next</button>
+            <button *ngIf="showPlaceOrderButton && !chef.paymentRequireApproval && !orderSubmitted"
+                class="btn-secondary" style="min-width: 100px;float: right;" (click)="placeOrder(stripeContent)"
+                tabindex="5">Proceed
+                to Pay</button>
+            <button *ngIf="showPlaceOrderButton && chef.paymentRequireApproval && !orderSubmitted"
+                class="btn-secondary" style="min-width: 100px;float: right;" (click)="placeOrder(null)"
+                tabindex="5">Submit your
+                order</button>
         </div>
     </div>
 </div>

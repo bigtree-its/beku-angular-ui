@@ -15,7 +15,7 @@
 
 .cuisine:hover {
     cursor: pointer;
-    background-color: var(--gold);
+    background-color: var(--d-red);
     color: #fff;
 }
 

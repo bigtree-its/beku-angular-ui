@@ -49,10 +49,7 @@
 }
 
 .service-mode-option-selected {
-    background-color: #08de9e;
-    color: #333;
-    border: 1px solid #222;
-    border-radius: 5px;
+    background-color: #0dcaf0;
 }
 
 .postcode-lookup-container {

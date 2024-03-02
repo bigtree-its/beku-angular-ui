@@ -1,44 +1,22 @@
-<div class="container mt-7">
-    <div class="flex-column">
-        <div class="flex-row-space-between align-items-center border-bottom ">
-            <div class="flex-row align-items-center ">
-                <div *ngIf="viewOrder" class="arrow-icon-div" (click)="goBack()">
-                    <fa-icon [icon]="faArrowLeft"></fa-icon>
-                </div>
-                <span class="py-2 f-size-lg bolder">{{viewOrder?
-                    viewOrder.reference: 'My Orders'}}</span>
-            </div>
-            <span class="color-red f-size-md bold" *ngIf="viewOrder">{{viewOrder.total | currency: 'GBP'}}</span>
-        </div>
+<!-- <ng-container *ngIf="(loadStripe$ | async) as stripe; else loadingStripe"></ng-container> -->
 
-        <div class="overflow-y height-500" *ngIf="!viewOrder">
-            <table class="mt-2">
-                <tr>
-                    <th>Reference</th>
-                    <th>Total</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                </tr>
-                <tr (click)="open(order)" *ngFor="let order of orders | orderByDate:'dateCreated':'desc'">
-                    <td class="pl-2">{{order.reference}}</td>
-                    <td class="pl-2">{{order.total | currency: 'GBP'}}</td>
-                    <td class="pl-2">{{order.dateCreated | date }}</td>
-                    <td class="pl-2">{{order.status | titlecase}}</td>
-                </tr>
-            </table>
-        </div>
-        <div class="flex-column" *ngIf="viewOrder">
+<div class="container mt-5">
 
-            <div class="bg-light p-3 my-2">
-                <span class="py-2 color-green-100">Order Summary</span>
-                <div class="flex-row py-2 align-items-center">
-                    <span class="bold">{{viewOrder.status | titlecase}}</span>
-                    <button class=" btn-secondary ml-2 " *ngIf="viewOrder?.status==='Draft' " (click)="submit()">Submit</button>
-                    <button class=" btn-danger ml-2 " *ngIf="viewOrder?.status==='Draft' " (click)="delete()">Delete</button>
-                    <button class=" btn-danger ml-2 " *ngIf="viewOrder?.status==='Pending' " (click)="cancel()">Cancel</button>
-                    <button class=" btn-danger ml-2 " *ngIf="viewOrder?.status==='Cancelled' " (click)="delete()">Delete</button>
-                    <button class=" btn-secondary ml-2 " *ngIf="viewOrder?.status==='Accepted' " (click)="pay()">Make Payment</button>
-                </div>
+    <div class="flex-column" *ngIf="insufficient_data">
+        <div class="ng-info">
+            Something is not right. The link you provided is not valid.
+        </div>
+    </div>
+    <div class="flex-column" *ngIf="!insufficient_data">
+        <div class="page-header border-bottom mt-8">
+            <span class="f-size-xl bolder">{{order?.reference}}</span>
+        </div>
+       
+        <div class="flex-column p-3">
+            <div class="flex-row-space-between border-bottom py-3">
+                <span class="bold f-size-lg ">Your Order</span>
+                <fa-icon class="collapsible-icon" *ngIf="!showOrder" [icon]="faPlus" (click)="openCloseOrder()"></fa-icon>
+                <fa-icon class="collapsible-icon" *ngIf="showOrder" [icon]="faMinus" (click)="openCloseOrder()"></fa-icon>
             </div>
             <ng-container *ngIf="showOrder" [ngTemplateOutlet]="orderLayout"></ng-container>
             <div class="flex-row-space-between border-bottom py-3">
@@ -54,37 +32,36 @@
                 <fa-icon class="collapsible-icon" *ngIf="showItems" [icon]="faMinus" (click)="openCloseItems()"></fa-icon>
             </div>
             <ng-container *ngIf="showItems" [ngTemplateOutlet]="itemsLayout"></ng-container>
-            <div style="background-color: #f2f2f2;padding:20px;margin: 10px 0;">
+            <div style="background-color: aliceblue;border-radius: 7px;padding:20px;margin: 10px 0;">
                 <div class="flex-column justify-content-center align-items-center">
                     <div style=" display: flex; flex-direction: column;width: 100%;padding: 5px 30px;">
                         <div class="flex-row-space-between">
                             <span>Subtotal</span>
-                            <span>{{viewOrder?.subTotal | currency: 'GBP'}}</span>
+                            <span>{{order?.subTotal | currency: 'GBP'}}</span>
                         </div>
                         <div class="flex-row-space-between">
                             <span>Delivery fee</span>
-                            <span>{{viewOrder?.deliveryFee | currency: 'GBP'}}</span>
+                            <span>{{order?.deliveryFee | currency: 'GBP'}}</span>
                         </div>
                         <div class="flex-row-space-between">
                             <span>Packing fee</span>
-                            <span>{{viewOrder?.packingFee | currency: 'GBP'}}</span>
+                            <span>{{order?.packingFee | currency: 'GBP'}}</span>
                         </div>
                         <div class="flex-row-space-between">
                             <span>Service Fee</span>
-                            <span>{{viewOrder?.serviceFee | currency: 'GBP'}}</span>
+                            <span>{{order?.serviceFee | currency: 'GBP'}}</span>
                         </div>
                         <div class="flex-row-space-between" style="margin-top: 10px;">
                             <span style="font-weight: 900;">TOTAL</span>
-                            <span style="font-weight: 900;">{{viewOrder?.total | currency:
+                            <span style="font-weight: 900;">{{order?.total | currency:
                                 'GBP'}}</span>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
+    
 </div>
 
 <ng-template #supplierLayout>
@@ -98,7 +75,7 @@
         </div>
         <div class="flex-column" style="padding: 0 20px;width: 100%;">
             <div class="title-section">
-                <span class="chef-name title mr-2">{{supplier?.kitchenName}}</span>
+                <span class="chef-name  title mr-2">{{supplier?.kitchenName}}</span>
                 <div class="clickable-row" style="font-size: 12px;">
                     <fa-icon [icon]="faStar"></fa-icon>
                     <span style="padding-left: 6px;">{{supplier?.rating}}</span>
@@ -106,7 +83,7 @@
                         reviews)</span>
                 </div>
             </div>
-            <span class="py-1 px-1 f-size-s">{{supplier?.description}}</span>
+            <span class="py-1 px-1 f-size-xs">{{supplier?.description}}</span>
             <div class="flex-row-wrap">
                 <ng-container *ngFor="let cuisine of supplier?.cuisines | slice:0:3">
                     <div class="attribute">{{ cuisine.name }}
@@ -129,10 +106,6 @@
             <div *ngIf="!supplier?.doDelivery" style="padding: 5px 0;">
                 <span class="attribute">Collection Only</span>
             </div>
-            <div class="flex-row">
-                <button class="btn-red">Order Again</button>
-            </div>
-            
         </div>
     </div>
 </ng-template>
@@ -146,10 +119,10 @@
                 <th>Delivery Method</th>
             </tr>
             <tr>
-                <td>{{viewOrder?.reference}}</td>
-                <td>{{viewOrder?.dateCreated | date}}</td>
-                <td>{{viewOrder?.status | titlecase}}</td>
-                <td>{{viewOrder?.serviceMode | titlecase}}</td>
+                <td>{{order?.reference}}</td>
+                <td>{{order?.dateCreated | date}}</td>
+                <td>{{order?.status | titlecase}}</td>
+                <td>{{order?.serviceMode | titlecase}}</td>
             </tr>
         </table>
     </div>
@@ -161,10 +134,13 @@
             <th>Quantity</th>
             <th>price</th>
         </tr>
-        <tr class="border-bottom py-3" *ngFor="let item of viewOrder?.items">
+        <tr class="border-bottom py-3" *ngFor="let item of order?.items">
             <td>{{item.name}}</td>
             <td class="pl-2">{{item.quantity}}</td>
             <td>{{item.subTotal | currency: 'GBP'}}</td>
         </tr>
     </table>
+</ng-template>
+<ng-template #loadingStripe>
+    Loading.... Please wait!
 </ng-template>

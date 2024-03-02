@@ -1,8 +1,12 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   faArrowLeft,
+  faFaceSmile,
   faMinus,
+  faPeopleArrows,
   faPlus,
+  faStar,
 } from '@fortawesome/free-solid-svg-icons';
 import { Subject, takeUntil } from 'rxjs';
 import { Utils } from 'src/app/helpers/utils';
@@ -10,9 +14,12 @@ import { User } from 'src/app/model/auth-model';
 import {
   CustomerOrder,
   CustomerOrderList,
+  LocalChef,
   OrderSearchQuery,
 } from 'src/app/model/localchef';
+import { PaymentIntentResponse } from 'src/app/model/order';
 import { AccountService } from 'src/app/services/account.service';
+import { ChefService } from 'src/app/services/chef.service';
 import { FoodOrderService } from 'src/app/services/food-order.service';
 import { ToastService } from 'src/app/services/toast.service';
 
@@ -25,17 +32,34 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
   accountService = inject(AccountService);
   orderService = inject(FoodOrderService);
   toastService = inject(ToastService);
+  supplierService = inject(ChefService);
+  router = inject(Router);
+
   utils = inject(Utils);
   user: User;
   destroy$ = new Subject<void>();
   orders: CustomerOrder[] = [];
   viewOrder: CustomerOrder;
   faArrowLeft = faArrowLeft;
+  faStar = faStar;
+  faPeopleArrows = faPeopleArrows;
+  faFaceSmile = faFaceSmile;
   faPlus = faPlus;
   faMinus = faMinus;
 
+  
+  openSupplier: boolean = true;
+  showSupplier: boolean = false;
+
+  openOrder: boolean = true;
+  showOrder: boolean = false;
+
   openItems: boolean = true;
   showItems: boolean = false;
+  supplier: LocalChef;
+  errors: any;
+  error: boolean;
+  errorMessage: any;
 
   ngOnInit() {
     console.log('Init. Customer orders');
@@ -67,13 +91,35 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
     }
   }
 
+  
+  openCloseSupplier() {
+    this.openSupplier = !this.openSupplier; //not equal to condition
+    this.showSupplier = !this.showSupplier;
+    this.openOrder = false; //not equal to condition
+    this.showOrder = false;
+    this.openItems = false; //not equal to condition
+    this.showItems = false;
+  }
+  openCloseOrder() {
+    this.openOrder = !this.openOrder; //not equal to condition
+    this.showOrder = !this.showOrder;
+    this.openSupplier = false; //not equal to condition
+    this.showSupplier = false;
+    this.openItems = false; //not equal to condition
+    this.showItems = false;
+  }
   openCloseItems() {
     this.openItems = !this.openItems; //not equal to condition
     this.showItems = !this.showItems;
+    this.openSupplier = false; //not equal to condition
+    this.showSupplier = false;
+    this.openOrder = false; //not equal to condition
+    this.showOrder = false;
   }
 
   open(order: CustomerOrder) {
     this.viewOrder = order;
+    this.retrieveSupplier(order.supplier._id);
   }
 
   goBack() {
@@ -93,7 +139,7 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
         }else{
           this.viewOrder = e;
         }
-        this.toastService.success('Order has been '+action);
+        this.toastService.success('Order has been '+this.viewOrder.status);
       },
       error: (err) => {
         console.error('Errors from reset submit.' + JSON.stringify(err));
@@ -115,11 +161,48 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
   update() {}
 
   pay() {
-
+    let observable = this.orderService.fetchPaymentIntent(this.viewOrder.reference, null);
+    observable.pipe(takeUntil(this.destroy$)).subscribe({
+      next: (e) => {
+        if (this.utils.isValid(e)){
+          var paymentIntent: PaymentIntentResponse[] = e;
+          this.router.navigateByUrl("/make_payment?intent="+paymentIntent[0].intentId);
+        }
+        console.log('Payment Intent ' + JSON.stringify(e));
+      },
+      error: (err) => {
+        console.error(
+          'Error occurred when retrieving payment intent.' + JSON.stringify(err)
+        );
+        this.errors = err;
+        this.error = true;
+        this.errorMessage = err.error.detail;
+        this.toastService.info(this.errorMessage);
+      },
+    });
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  retrieveSupplier(_id: string) {
+    let observable = this.supplierService.retrieveSupplier(_id);
+    observable.pipe(takeUntil(this.destroy$)).subscribe({
+      next: (e) => {
+        this.supplier = e;
+        console.log('Supplier ' + JSON.stringify(e));
+      },
+      error: (err) => {
+        console.error(
+          'Error occurred when retrieving supplier.' + JSON.stringify(err)
+        );
+        this.errors = err;
+        this.error = true;
+        this.errorMessage = err.error.detail;
+        this.toastService.info(this.errorMessage);
+      },
+    });
   }
 }

@@ -1,10 +1,12 @@
-<div class="page">
-    <div class="flex-row-space-between align-items-center" style="height: 50px;">
+<div class="container">
+    <div class="flex-row-space-between align-items-center border-bottom" style="height: 70px;">
         <div class="flex-row flex-start align-items-center">
             <fa-icon [icon]="faBars" (click)="toggleSideNav()" class="menu-icon"></fa-icon>
-            <p [routerLink]="['/']" routerLinkActive="router-link-active" style="height: 50px;line-height: 9px;text-align: center;margin-top: 5px;padding-top: 20px;padding-left: 10px;padding-right: 20px;">
-                <span class="logo-text" style="font-size: 30px;">ZUVAI</span><br/>
-                <small style="font-size: 9px;font-weight: 900;margin-top: 8px;">A HOMEFOOD COMPANY</small>
+            <p [routerLink]="['/']" routerLinkActive="router-link-active" style="height: 30px;line-height: 18px;text-align: center;margin-top: 1px;padding-top: 5px;padding-left: 10px;padding-right: 20px;">
+                <span class="logo-text" style="font-size: 30px;">LOCAL</span><br/>
+                <span class="logo-text" style="font-size: 30px;">EXPAT</span><br/>
+                <!-- <span class="logo-text" style="font-size: 30px;">LEVEL</span><br/> -->
+                <!-- <small style="font-size: 9px;font-weight: 900;margin-top: 8px;">A LOCAL COMPANY</small> -->
             </p>
             <div class="flex-row lg gap-1 align-items-center" *ngIf="serviceLocation != null && serviceLocation !== undefined">
                 <span class="location-slug" [routerLink]="['cooks']" [queryParams]="{location: serviceLocation.slug}">#{{serviceLocation.name}},
@@ -13,8 +15,8 @@
             </div>
         </div>
         <div class="flex-row flex-end align-items-center">
-            <button *ngIf="user === null" class="btn-outline-blue mr-1 lg" routerLink="/login">Login</button>
-            <button *ngIf="user === null" class="btn-blue lg" routerLink="/register">Create Account</button>
+            <button *ngIf="user === null" class="btn-outline-secondary mr-1 lg" routerLink="/login">Login</button>
+            <button *ngIf="user === null" class="btn-secondary lg" routerLink="/register">Create Account</button>
             <div class="flex-row mr-1 ml-3 align-items-center" (click)="onClickBasket()">
                 <fa-icon [icon]="cartIcon" class="cart-icon" [routerLink]="['/basket']"></fa-icon>
                 <span style="padding-right: 5px;">{{itemsCount}}</span>
