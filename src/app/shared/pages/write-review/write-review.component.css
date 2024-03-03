@@ -3,10 +3,6 @@
     color: rgba(0, 163, 136, var(--tw-text-opacity));
 }
 
-.page {
-    margin-top: 100px;
-}
-
 .page-main {
     display: flex;
     flex-direction: row;

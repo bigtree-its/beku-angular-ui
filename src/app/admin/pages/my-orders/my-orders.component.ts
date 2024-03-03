@@ -60,6 +60,7 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
   errors: any;
   error: boolean;
   errorMessage: any;
+  loading: boolean = false;
 
   ngOnInit() {
     console.log('Init. Customer orders');
@@ -131,6 +132,7 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
   }
 
   private performAction(action: string) {
+    this.loading = true;
     let observable = this.orderService.action(this.viewOrder.reference, action);
     observable.pipe(takeUntil(this.destroy$)).subscribe({
       next: (e) => {
@@ -139,9 +141,11 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
         }else{
           this.viewOrder = e;
         }
+        this.loading = false;
         this.toastService.success('Order has been '+this.viewOrder.status);
       },
       error: (err) => {
+        this.loading = false;
         console.error('Errors from reset submit.' + JSON.stringify(err));
         if (this.utils.isJsonString(err)) {
           this.toastService.error(err.error.detail);

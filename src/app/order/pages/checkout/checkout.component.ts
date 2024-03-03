@@ -1,4 +1,5 @@
 import { Location } from '@angular/common';
+import {Title} from "@angular/platform-browser";
 import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -85,6 +86,8 @@ export class CheckoutComponent implements OnDestroy {
   customerLoggedIn: boolean;
   customer: User;
   orderSubmitted: boolean = false;
+  showOrderConfirmation: boolean = false;
+loading: any;
 
   constructor(
     private utils: Utils,
@@ -96,12 +99,14 @@ export class CheckoutComponent implements OnDestroy {
     private chefService: ChefService,
     private accountService: AccountService,
     private toastService: ToastService,
-    private router: Router
+    private router: Router,
+    private titleService: Title
   ) {}
 
   public loadStripe$: Observable<any> = this.stripeService.LoadStripe();
 
   ngOnInit(): void {
+    this.titleService.setTitle("Checkout")
     this.loadStripe$.subscribe((s) => {
       console.log('Loaded stripe: ' + s);
     });
@@ -173,7 +178,7 @@ export class CheckoutComponent implements OnDestroy {
       this.stripeService.getStripe().subscribe((s) => {
         console.log(
           'Initializing Stripe card element inside form: ' +
-            this.stripeService.stripe
+            JSON.stringify(this.stripeService.stripe)
         );
       });
     }
@@ -190,6 +195,7 @@ export class CheckoutComponent implements OnDestroy {
       this.showPaymentSection = false;
       this.showStripeSection = false;
       this.showPlaceOrderButton = false;
+      this.showOrderConfirmation = false;
       this.divHeader = 'Your Details';
       this.nextButtonText = 'Next';
     } else if (this.showItemsSection) {
@@ -199,6 +205,7 @@ export class CheckoutComponent implements OnDestroy {
       this.showPaymentSection = false;
       this.showStripeSection = false;
       this.showPlaceOrderButton = false;
+      this.showOrderConfirmation = false;
       this.divHeader = 'Choose service mode';
       this.nextButtonText = 'Next';
     } else if (this.showPaymentSection) {
@@ -208,6 +215,7 @@ export class CheckoutComponent implements OnDestroy {
       this.showPaymentSection = false;
       this.showStripeSection = false;
       this.showPlaceOrderButton = false;
+      this.showOrderConfirmation = false;
       this.divHeader = 'Review Your Items';
       this.nextButtonText = 'Next';
     } else if (this.showStripeSection) {
@@ -216,6 +224,7 @@ export class CheckoutComponent implements OnDestroy {
       this.showItemsSection = false;
       this.showPaymentSection = true;
       this.showStripeSection = false;
+      this.showOrderConfirmation = false;
     }
   }
 
@@ -227,6 +236,7 @@ export class CheckoutComponent implements OnDestroy {
       this.showPaymentSection = false;
       this.showStripeSection = false;
       this.showPlaceOrderButton = false;
+      this.showOrderConfirmation = false;
       this.divHeader = 'Choose service mode';
       this.nextButtonText = 'Next';
     } else if (this.showServiceModeSection && this.validateServiceMode()) {
@@ -236,6 +246,7 @@ export class CheckoutComponent implements OnDestroy {
       this.showPaymentSection = false;
       this.showStripeSection = false;
       this.showPlaceOrderButton = false;
+      this.showOrderConfirmation = false;
       this.divHeader = 'Review Your Items';
       this.nextButtonText = 'Next';
     } else if (this.showItemsSection) {
@@ -245,6 +256,7 @@ export class CheckoutComponent implements OnDestroy {
       this.showPaymentSection = true;
       this.showStripeSection = false;
       this.showPlaceOrderButton = true;
+      this.showOrderConfirmation = false;
       this.divHeader = 'You Pay';
       this.nextButtonText = 'Proceed to Pay';
     } else if (this.showPaymentSection) {
@@ -282,6 +294,7 @@ export class CheckoutComponent implements OnDestroy {
   }
 
   placeOrder(content) {
+    this.loading = true;
     this.orderSubmitted = false;
     this.order.customer.name = this.customerName;
     this.order.customer.email = this.customerEmail;
@@ -300,6 +313,7 @@ export class CheckoutComponent implements OnDestroy {
               this.toastService.error(
                 'Something is not right. Cannot proceed with this order. Please create new order.'
               );
+              this.loading = false;
               this.orderService.destroy();
             } else if (
               this.paymentIntent != null &&
@@ -315,10 +329,21 @@ export class CheckoutComponent implements OnDestroy {
         }else{
           this.orderSubmitted = true;
           this.order = e;
-          this.orderService.destroy();
+          this.loading = false;
+          this.orderConfirmed();
+          // this.router.navigateByUrl("your_order?ref="+ );
+          // this.orderService.destroy();
         }
       }
     });
+  }
+
+  orderConfirmed() {
+    this.showCustomerDetailsSection = false;
+    this.showServiceModeSection = false;
+    this.showItemsSection = false;
+    this.showPaymentSection = false;
+    this.showOrderConfirmation = true;
   }
 
   private createCardElement() {

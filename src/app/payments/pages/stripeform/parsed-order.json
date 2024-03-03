@@ -38,8 +38,7 @@
             "Desi Swaad Foods are commited to provide quality foos"
         ],
         "specials": [],
-        "cuisines": [
-            {
+        "cuisines": [{
                 "_id": "82d5a813-bd8a-440d-b280-b9aa0bb235da",
                 "name": "Indian",
                 "slug": "indian",
@@ -62,16 +61,15 @@
             "http://cdn.cnn.com/cnnnext/dam/assets/140430115517-06-comfort-foods.jpg",
             "https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/slideshows/foods_for_healthy_supple_skin_slideshow/1800x1200_foods_for_healthy_supple_skin_slideshow.jpg",
             "https://ychef.files.bbci.co.uk/976x549/p09wrjyz.jpg",
-            "https://www.expatica.com/app/uploads/sites/2/2016/09/spanish-food.jpg",
+            "https://www.PALica.com/app/uploads/sites/2/2016/09/spanish-food.jpg",
             "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/20190503-delish-pineapple-baked-salmon-horizontal-ehg-450-1557771120.jpg",
             "https://www.refrigeratedfrozenfood.com/ext/resources/NEW_RD_Website/DefaultImages/default-pasta.jpg?1430942591",
             "http://cdn.cnn.com/cnnnext/dam/assets/140430115517-06-comfort-foods.jpg",
             "https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/slideshows/foods_for_healthy_supple_skin_slideshow/1800x1200_foods_for_healthy_supple_skin_slideshow.jpg",
             "https://ychef.files.bbci.co.uk/976x549/p09wrjyz.jpg",
-            "https://www.expatica.com/app/uploads/sites/2/2016/09/spanish-food.jpg"
+            "https://www.PALica.com/app/uploads/sites/2/2016/09/spanish-food.jpg"
         ],
-        "serviceAreas": [
-            {
+        "serviceAreas": [{
                 "_id": "19ddeaeb-a097-4815-b222-9558e1bf100c",
                 "name": "Waterfoot",
                 "city": "Glasgow",

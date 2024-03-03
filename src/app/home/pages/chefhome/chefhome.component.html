@@ -62,7 +62,7 @@
             </ng-container>
         </div>
         <div class="page-right border-left">
-            <div style="flex-direction: column;position: sticky;top: 0;height: 100vh;overflow-y: hidden;width: 100%;margin: 70px 20px 20px 20px;">
+            <div style="flex-direction: column;position: sticky;top: 0;min-height: 100vh;overflow-y: auto;width: 100%; padding: 10px;">
                 <div style="width: 100%;display: flex;justify-content: space-between;height: 40px;max-height: 40px;">
                     <span style="font-size: 20px;">Your Order</span>
                     <span *ngIf="order != null" class="font-abril-fatface color-red f-size-lg">{{order.total |
@@ -75,7 +75,7 @@
                 </div> -->
                 <div *ngIf="order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0; then itemsBlock else noItemsBlock">
                 </div>
-                <div class="d-flex justify-content-center align-items-center my-2 mx-3">
+                <div class="d-flex jcc aic">
                     <button class="btn-secondary flex-grow py-2 f-size-md" [routerLink]="[ '/checkout'] " *ngIf="(order !== null && order !== undefined &&  order.items !== null && order.items.length > 0)">Checkout</button>
                 </div>
             </div>

@@ -1,14 +1,3 @@
-.page {
-    height: 100px;
-    margin-top: 20px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 20px;
-    background-color: #333;
-    color: #fff;
-}
-
 .copyright-div {
     display: flex;
     align-items: center;

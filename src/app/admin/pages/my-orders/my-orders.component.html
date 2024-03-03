@@ -1,4 +1,4 @@
-<div class="container mt-7">
+<div class="container">
     <div class="flex-column">
         <div class="flex-row-space-between align-items-center border-bottom ">
             <div class="flex-row align-items-center ">
@@ -32,7 +32,10 @@
             <div class="bg-light p-3 my-2">
                 <span class="py-2 color-green-100">Order Summary</span>
                 <div class="flex-row py-2 align-items-center">
-                    <span class="bold">{{viewOrder.status | titlecase}}</span>
+                    <span *ngIf="!loading" class="bold">{{viewOrder.status | titlecase}}</span>
+                    <div *ngIf="loading" class="d-flex jcc aic p-3">
+                        <div class="loader"></div>
+                    </div>
                     <button class=" btn-secondary ml-2 " *ngIf="viewOrder?.status==='Draft' " (click)="submit()">Submit</button>
                     <button class=" btn-danger ml-2 " *ngIf="viewOrder?.status==='Draft' " (click)="delete()">Delete</button>
                     <button class=" btn-danger ml-2 " *ngIf="viewOrder?.status==='Pending' " (click)="cancel()">Cancel</button>
@@ -47,7 +50,7 @@
                 <fa-icon class="collapsible-icon" *ngIf="showSupplier" [icon]="faMinus" (click)="openCloseSupplier()"></fa-icon>
             </div>
             <ng-container *ngIf="showSupplier" [ngTemplateOutlet]="supplierLayout"></ng-container>
-    
+
             <div class="flex-row-space-between border-bottom py-3">
                 <span class="bold f-size-lg ">Your Items</span>
                 <fa-icon class="collapsible-icon" *ngIf="!showItems" [icon]="faPlus" (click)="openCloseItems()"></fa-icon>
@@ -130,9 +133,9 @@
                 <span class="attribute">Collection Only</span>
             </div>
             <div class="flex-row">
-                <button class="btn-red">Order Again</button>
+                <button class="btn-red" [routerLink]="[ '/cooks', supplier?._id] ">Order Again</button>
             </div>
-            
+
         </div>
     </div>
 </ng-template>

@@ -6,6 +6,7 @@ import {
   ViewChild,
   inject,
 } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ChefSearchQuery } from 'src/app/model/ChefSearchQuery';
@@ -16,7 +17,11 @@ import { ContextService } from 'src/app/services/context.service';
 import { CuisinesService } from 'src/app/services/cusines.service';
 import { LocationService } from 'src/app/services/location.service';
 import { Utils } from 'src/app/services/utils';
-import { faStar, faCopyright, faCheck } from '@fortawesome/free-solid-svg-icons';
+import {
+  faStar,
+  faCopyright,
+  faCheck,
+} from '@fortawesome/free-solid-svg-icons';
 import { LocalService } from 'src/app/services/local.service';
 import { Constants } from 'src/app/services/constants';
 import { DishService } from 'src/app/services/dish.service';
@@ -32,6 +37,7 @@ export class CheflistComponent implements OnDestroy {
 
   localService = inject(LocalService);
   dishService = inject(DishService);
+  titleService = inject(Title);
 
   destroy$ = new Subject<void>();
   serviceLocation: ServiceLocation;
@@ -75,9 +81,9 @@ export class CheflistComponent implements OnDestroy {
       this.locationService.getLocation(location).subscribe((sl) => {
         if (this.utils.isValid(sl)) {
           this.serviceLocation = sl;
+          this.titleService.setTitle(sl.slug.toLocaleUpperCase())
           this.localService.saveData(
-            Constants.StorageItem_Location,
-            JSON.stringify(this.serviceLocation)
+            Constants.StorageItem_Location,JSON.stringify(this.serviceLocation)
           );
           this.contextService.selectLocation(sl);
           this.fetchChefsByServiceLocation(this.serviceLocation);
@@ -205,7 +211,7 @@ export class CheflistComponent implements OnDestroy {
   }
 
   filterByDish() {
-    console.log('Chefs: '+ JSON.stringify(this.localChefs))
+    console.log('Chefs: ' + JSON.stringify(this.localChefs));
     console.log('Selected dish: ' + JSON.stringify(this.selectedDishes));
     if (this.selectedDishes.length === 0) {
       this.filteredChefs = this.localChefs;
