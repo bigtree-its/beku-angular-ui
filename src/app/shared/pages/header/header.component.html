@@ -2,16 +2,33 @@
     <div class="flex-column">
         <div class="flex-row jcsb aic py-2 border-bottom">
             <fa-icon [icon]="faBars" (click)="toggleSideNav()" class="menu-icon"></fa-icon>
-            <span [routerLink]="['/']" routerLinkActive="router-link-active" class="tc logo-text f-size-lg">LOCAL PAL</span>
-            <span *ngIf="user !== null">Hi, {{user.name}}</span>
+            <span [routerLink]="['/']" routerLinkActive="router-link-active" class="tc logo-text f-size-xl">DESI TIMES</span>
+            <div class="flex-row">
+                <span *ngIf="user !== null">Hi, {{user.name}}</span>
+                <button *ngIf="user === null" class="btn-outline-secondary mr-1 lg" routerLink="/login">Login</button>
+                <button *ngIf="user === null" class="btn-success lg" routerLink="/register">Create Account</button>
+            </div>
         </div>
 
         <div class="flex-row jcsb aic py-2 border-bottom">
-            <div class="flex-row">
-                <span class="mx-2">Foods</span>
-                <span class="mx-2">Fashion</span>
-                <span class="mx-2">Properties</span>
-            </div>
+            <nav>
+                <ul>
+                  <li><a href="#">Foods</a></li>
+                  <li><a href="#">Services</a>
+                    <ul>
+                      <li><a href="#">Graphic</a></li>
+                      <li><a href="#">Web</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="#">Goods</a>
+                    <ul>
+                      <li><a href="#">Clothing</a></li>
+                      <li><a href="#">Jewellery</a></li>
+                      <li><a href="#">Home Decor</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
             <div class="flex-row mr-1 ml-3 align-items-center" (click)="onClickBasket()">
                 <fa-icon [icon]="cartIcon" class="cart-icon" [routerLink]="['/basket']"></fa-icon>
                 <span style="padding-right: 5px;">{{itemsCount}}</span>

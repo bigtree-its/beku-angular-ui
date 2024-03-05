@@ -3,34 +3,35 @@
         <!-- <img src="/assets/images/home-cooking.jpeg"> -->
     </div>
     <div class="right">
-        <div style="width: 500px;;height: 500px;padding: 20px 30px;">
-            <div class="flex-column">
-                <span style="font-weight: 900;font-size: 30px;padding: 10px 0;">Login</span>
-                <div class="input-div">
-                    <input class="_381fS" type="email" name="email" id="email" tabindex="1" autocomplete="off" value="" [(ngModel)]="email" #ctrl="ngModel">
-                    <div class="_2EeI1 _26LFr"></div>
-                    <label class="_1Cvlf _2tL9P" for="email">Email</label>
-                </div>
-                <div class="input-div">
-                    <input class="_381fS" type="password" name="password" id="password" tabindex="1" autocomplete="off" value="" [(ngModel)]="password" #ctrl="ngModel">
-                    <div class="_2EeI1 _26LFr"></div>
-                    <label class="_1Cvlf _2tL9P" for="password">Password</label>
-                </div>
-                <span class="clickable-link" [routerLink]="['/password_reset/new']">Forgot?</span>
-                <br>
-                <button class="btn-secondary mt-3" (click)="submit()">Sign In</button>
+        <div class="flex-column px-3 w-100 jcs">
+            <span style="font-weight: 900;font-size: 30px;padding: 10px 0;">Login</span>
+            <div class="input-div">
+                <input class="_381fS" type="email" name="email" id="email" tabindex="1" autocomplete="off" value=""
+                    [(ngModel)]="email" #ctrl="ngModel">
+                <div class="_2EeI1 _26LFr"></div>
+                <label class="_1Cvlf _2tL9P" for="email">Email</label>
+            </div>
+            <div class="input-div">
+                <input class="_381fS" type="password" name="password" id="password" tabindex="1" autocomplete="off"
+                    value="" [(ngModel)]="password" #ctrl="ngModel">
+                <div class="_2EeI1 _26LFr"></div>
+                <label class="_1Cvlf _2tL9P" for="password">Password</label>
+            </div>
+            <span class="clickable-link" [routerLink]="['/password_reset/new']">Forgot?</span>
+            <br>
+            <button class="btn-secondary mt-3" (click)="submit()">Sign In</button>
 
-                <div style="text-align: center;padding: 10px;font-weight: 600;">
-                    Don't have an account? <span (click)="joinUs()" class="clickable-link">Sign up</span>
-                </div>
-                <div *ngIf="errorMessage !== undefined" style="font-weight: normal;text-align: center;display: block;background-color: rgb(241, 215, 215);color: #bc3737;padding: 20px;">
-                    <p>{{errorMessage}}</p>
-                </div>
-                <div *ngIf="loading">
-                    <span>Authenticating....</span>
-                    <div class="spinner-border text-primary" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
+            <div style="text-align: center;padding: 10px;font-weight: 600;">
+                Don't have an account? <span (click)="joinUs()" class="clickable-link">Sign up</span>
+            </div>
+            <div *ngIf="errorMessage !== undefined"
+                style="font-weight: normal;text-align: center;display: block;background-color: rgb(241, 215, 215);color: #bc3737;padding: 20px;">
+                <p>{{errorMessage}}</p>
+            </div>
+            <div *ngIf="loading">
+                <span>Authenticating....</span>
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
                 </div>
             </div>
         </div>

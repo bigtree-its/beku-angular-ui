@@ -14,9 +14,11 @@ import { DateAgoPipe } from '../pipes/date-ago.pipe';
 import { WriteReviewComponent } from './pages/write-review/write-review.component';
 import { AuthGuard } from '../services/auth-guard.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'about_us', component: AboutUsComponent },
   { path: 'write_review', component: WriteReviewComponent, canActivate: [AuthGuard] }
 ]
 
@@ -30,6 +32,7 @@ const routes: Routes = [
     ReviewItemComponent,
     DateAgoPipe,
     WriteReviewComponent,
+    AboutUsComponent,
   ],
   imports: [
     NgbToastModule,

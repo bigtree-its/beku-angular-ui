@@ -1,60 +1,56 @@
 <div class="main">
     <div class="left lg"></div>
     <div class="right">
-        <div style="width: 500px;height: 500px;padding: 20px;">
-            <div class="y-flex">
-                <span style="font-weight: 900;font-size: 30px;padding: 10px 0;">Signup</span>
-                <form (ngSubmit)="registerUser()" [formGroup]="registerForm">
-                    <div class="h-flex">
-                        <div class="input-div">
-                            <input type="text" id="firstName" class="form-control _381fS" formControlName="firstName"
-                                required />
-                            <div class="_2EeI1 _26LFr"></div>
-                            <label class="_1Cvlf _2tL9P" for="firstName">First name</label>
-                        </div>
-                        <div class="input-div">
-                            <input type="text" id="lastName" class="form-control _381fS" formControlName="lastName"
-                                required />
-                            <div class="_2EeI1 _26LFr"></div>
-                            <label class="_1Cvlf _2tL9P" for="firstName">Last name</label>
-                        </div>
-                    </div>
-                    <div class="h-flex">
-                        <div class="input-div">
-                            <input type="text" id="email" class="form-control _381fS" formControlName="email"
-                                required />
-                            <div class="_2EeI1 _26LFr"></div>
-                            <label class="_1Cvlf _2tL9P" for="email">Email</label>
-                        </div>
-                        <div class="input-div">
-                            <input type="text" id="mobile" class="form-control _381fS" formControlName="mobile"
-                                required />
-                            <div class="_2EeI1 _26LFr"></div>
-                            <label class="_1Cvlf _2tL9P" for="mobile">Mobile</label>
-                        </div>
-                    </div>
-
+        <div class="flex-column px-3 w-100 jcs">
+            <span style="font-weight: 900;font-size: 30px;padding: 10px 0;">Signup</span>
+            <form (ngSubmit)="registerUser()" [formGroup]="registerForm">
+                <div class="h-flex">
                     <div class="input-div">
-                        <input type="password" id="password" class="form-control _381fS" formControlName="password"
+                        <input type="text" id="firstName" class="form-control _381fS" formControlName="firstName"
                             required />
                         <div class="_2EeI1 _26LFr"></div>
-                        <label class="_1Cvlf _2tL9P" for="mobile">Password</label>
+                        <label class="_1Cvlf _2tL9P" for="firstName">First name</label>
                     </div>
                     <div class="input-div">
-                        <input type="password" id="repeatPassword" class="form-control _381fS"
-                            formControlName="repeatPassword" required />
+                        <input type="text" id="lastName" class="form-control _381fS" formControlName="lastName"
+                            required />
                         <div class="_2EeI1 _26LFr"></div>
-                        <label class="_1Cvlf _2tL9P" for="repeatPassword">Repeat Password</label>
+                        <label class="_1Cvlf _2tL9P" for="firstName">Last name</label>
                     </div>
-                    <button type="submit" class="btn-secondary mt-3" style="width: 100%;">Create Account</button>
-                    <div style="text-align: center;padding: 10px;font-weight: 600;">
-                        Already have an account? <span (click)="signIn()" class="clickable-link">Sign In</span>
-                    </div>
-                </form>
-                <div *ngIf="errorMessage !== undefined"
-                    style="font-weight: normal;text-align: center;display: block;background-color: rgb(241, 215, 215);color: #bc3737;padding: 20px;">
-                    <p>{{errorMessage}}</p>
                 </div>
+                <div class="h-flex">
+                    <div class="input-div">
+                        <input type="text" id="email" class="form-control _381fS" formControlName="email" required />
+                        <div class="_2EeI1 _26LFr"></div>
+                        <label class="_1Cvlf _2tL9P" for="email">Email</label>
+                    </div>
+                    <div class="input-div">
+                        <input type="text" id="mobile" class="form-control _381fS" formControlName="mobile" required />
+                        <div class="_2EeI1 _26LFr"></div>
+                        <label class="_1Cvlf _2tL9P" for="mobile">Mobile</label>
+                    </div>
+                </div>
+
+                <div class="input-div">
+                    <input type="password" id="password" class="form-control _381fS" formControlName="password"
+                        required />
+                    <div class="_2EeI1 _26LFr"></div>
+                    <label class="_1Cvlf _2tL9P" for="mobile">Password</label>
+                </div>
+                <div class="input-div">
+                    <input type="password" id="repeatPassword" class="form-control _381fS"
+                        formControlName="repeatPassword" required />
+                    <div class="_2EeI1 _26LFr"></div>
+                    <label class="_1Cvlf _2tL9P" for="repeatPassword">Repeat Password</label>
+                </div>
+                <button type="submit" class="btn-secondary mt-3" style="width: 100%;">Create Account</button>
+                <div style="text-align: center;padding: 10px;font-weight: 600;">
+                    Already have an account? <span (click)="signIn()" class="clickable-link">Sign In</span>
+                </div>
+            </form>
+            <div *ngIf="errorMessage !== undefined"
+                style="font-weight: normal;text-align: center;display: block;background-color: rgb(241, 215, 215);color: #bc3737;padding: 20px;">
+                <p>{{errorMessage}}</p>
             </div>
         </div>
     </div>

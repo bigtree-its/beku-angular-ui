@@ -30,7 +30,7 @@
         <div class="flex-column" *ngIf="viewOrder">
 
             <div class="bg-light p-3 my-2">
-                <span class="py-2 color-green-100">Order Summary</span>
+                <span class="bolder f-size-md">Order Summary</span>
                 <div class="flex-row py-2 align-items-center">
                     <span *ngIf="!loading" class="bold">{{viewOrder.status | titlecase}}</span>
                     <div *ngIf="loading" class="d-flex jcc aic p-3">
@@ -57,7 +57,7 @@
                 <fa-icon class="collapsible-icon" *ngIf="showItems" [icon]="faMinus" (click)="openCloseItems()"></fa-icon>
             </div>
             <ng-container *ngIf="showItems" [ngTemplateOutlet]="itemsLayout"></ng-container>
-            <div style="background-color: #f2f2f2;padding:20px;margin: 10px 0;">
+            <div class="bg-light p-3 my-2">
                 <div class="flex-column justify-content-center align-items-center">
                     <div style=" display: flex; flex-direction: column;width: 100%;padding: 5px 30px;">
                         <div class="flex-row-space-between">
@@ -101,7 +101,7 @@
         </div>
         <div class="flex-column" style="padding: 0 20px;width: 100%;">
             <div class="title-section">
-                <span class="chef-name title mr-2">{{supplier?.kitchenName}}</span>
+                <span class="bolder f-size-md mr-2">{{supplier?.kitchenName}}</span>
                 <div class="clickable-row" style="font-size: 12px;">
                     <fa-icon [icon]="faStar"></fa-icon>
                     <span style="padding-left: 6px;">{{supplier?.rating}}</span>

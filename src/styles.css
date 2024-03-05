@@ -47,8 +47,8 @@ html {
     overflow-y: auto;
     scroll-behavior: smooth;
     text-size-adjust: 100%;
-    /* background-color: #fff; */
-    background-color: #f9f7f1;
+    background-color: #fff;
+    /* background-color: #f9f7f1; */
     font-weight: 100;
     overflow: -moz-scrollbars-none;
     -ms-overflow-style: none;
@@ -107,7 +107,7 @@ body {
     font-weight: 400;
     line-height: 1.4;
     letter-spacing: 0.1px;
-    background-color: #f9f7f1;
+    /* background-color: #f9f7f1; */
     font-family: Helvetica Neue, Helvetica, sans-serif;
     overflow: -moz-scrollbars-none;
     -ms-overflow-style: none;
@@ -242,7 +242,7 @@ tr:nth-child(odd) {
 }
 
 .bg-light {
-    background-color: #e7edfe;
+    background-color: #f9f7f1;
 }
 
 .bg-white {
@@ -263,7 +263,7 @@ tr:nth-child(odd) {
 }
 
 .text-blue {
-    color: #1967d2;
+    color: var(--blue);
 }
 
 .border-none {
@@ -817,8 +817,13 @@ select {
 }
 
 .bg-success {
-    background-color: #08de9e;
-    color: var(--white);
+    background-color: rgb(242, 247, 244);
+}
+
+.bg-alert-success{
+    background-color: rgb(242, 247, 244);
+    border-color: rgb(27, 161, 88);
+    border-left: 3px solid rgb(27, 161, 88);
 }
 
 .bg-warning {
@@ -879,7 +884,9 @@ select {
 }
 
 .btn-success {
-    background-color: #eef8f5 !important;
+    background:#37bc9b;
+    border: none;
+    color: #fff;
 }
 
 .btn-success:hover {
@@ -1173,15 +1180,20 @@ select {
 }
 
 .clickable {
-    font-weight: 800;
-    border: 1px solid #fff;
-    padding: 5px 20px;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    padding: 3px 10px;
+    font-weight: bold;
 }
 
 .clickable:hover {
     cursor: pointer;
-    color: #000a19;
-    border: 1px solid #000a19;
+    background-color: #000a19;
+    color: #fff;
+}
+.clickable-selected{
+    background-color: #000a19;
+    color: #fff;
 }
 
 .clickable-link {
@@ -1634,7 +1646,7 @@ select {
 }
 
 .h-100 {
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .ls-3 {
@@ -1785,8 +1797,6 @@ select {
 .right {
     flex: 50%;
     display: flex;
-    justify-content: center;
-    align-items: center;
     height: auto;
     overflow-y: auto;
 }

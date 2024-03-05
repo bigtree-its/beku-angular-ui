@@ -14,7 +14,7 @@
 
     </div>
     <div class="flex-row jcsb ais my-3">
-        <div class="lg flex-column w-10 border">
+        <div class="lg flex-column w-10 bg-light h-100 overflow-y">
             <div class="p-3">
                 <app-order-item *ngFor="let item of order?.items" [item]="item" [editable]=false></app-order-item>
             </div>
@@ -43,7 +43,7 @@
             </div> -->
 
         </div>
-        <div class="w-100 overflow-y border" id="contentDiv">
+        <div class="w-100 overflow-y" id="contentDiv">
             <div style="min-width: 100%;display: flex;flex-direction: column;">
                 <div *ngIf="!showOrderConfirmation" class="sub-header">{{divHeader}}</div>
                 <div *ngIf="showHomeScreen" class="flex-column p-3">

@@ -3,10 +3,7 @@
 }
 
 .navItem {
-    color: #000;
-    text-decoration: none;
-    font-size: 1.25em;
-    margin-bottom: 32px;
+    padding: 10px 0;
 }
 
 .navItem:hover {

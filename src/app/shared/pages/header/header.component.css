@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap');
+
 .page {
     position: fixed;
     top: 0;
@@ -37,3 +38,62 @@
     cursor: pointer;
     color: var(--d-orange);
 }
+
+nav {
+    margin:0 auto;
+    width:100%;
+    height:auto;
+    display:inline-block;
+    /* background:#37bc9b; */
+  }
+  
+  nav ul {
+    margin:0;padding:0;
+    list-style-type:none;
+    float:left;
+    display:inline-block;
+  }
+  
+  nav ul li {
+    position:relative;
+    margin:0 20px 0 0;
+    float:left;
+    display:inline-block;
+  }
+  
+  li > a:after { content: ' »'; } /* Change this in order to change the Dropdown symbol */
+  
+  li > a:only-child:after { content: ''; }
+  
+  nav ul li a {
+    padding:5px;
+    display:inline-block;
+    color:#222;
+    text-decoration:none;
+  }
+  
+  nav ul li a:hover {
+    opacity:0.5;
+  }
+  
+  nav ul li ul {
+    display:none;
+    position:absolute;
+    left:0;
+    /* background:#37bc9b; */
+    background:#fadbdbfc;
+    color: black;
+    float:left;
+    width:200px;
+  }
+  
+  nav ul li ul li {
+    width:200px;
+    display: block;
+    padding: 5px 0;
+    border:1px solid rgba(251, 240, 240, 0.466);
+  }
+  
+  nav ul li:hover ul {
+    display:block;
+  }
