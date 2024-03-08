@@ -11,6 +11,11 @@ export const environment = {
   CURRENCY: 'GBP',
   CURRENCY_SYMBOL: '£',
 
+
+  // GroupsUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/groups',
+  // ProductsUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/products',
+  // FeedbacksUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/feedbacks',
+
   CollectionsUrl:
     'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/collections',
   ChefsUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/chefs',
@@ -89,6 +94,9 @@ export const environment = {
   // ServiceAreasUrl: "http://localhost:8083/ads/v1/serviceareas",
   // MenusUrl: "http://localhost:8083/ads/v1/menus",
   // CalendersUrl: "http://localhost:8083/ads/v1/calendars",
+  GroupsUrl: 'http://localhost:8083/ads/v1/groups',
+  ProductsUrl: 'http://localhost:8083/ads/v1/products',
+  FeedbacksUrl: 'http://localhost:8083/ads/v1/feedbacks',
 
   debug: window['env']['debug'] || false,
 

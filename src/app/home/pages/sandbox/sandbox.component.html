@@ -1,33 +1,22 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-3 profile-section">
-            <div class="section-header">
-                Profile
-            </div>
+<ngb-carousel [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+    <ng-template ngbSlide *ngFor="let image of images">
+        <div class="picsum-img-wrapper">
+            <img [src]="image" alt="Random slide" />
         </div>
-        <div class="col-6 main-section">
-            <div class="main-profile-section">
-                <img src="/assets/images/users/user1.jpg" width="100px" height="100">
-                <div class="main-profile-info-section">
-                    <strong>KFC</strong>
-                    <span>Collect at</span>
-                    <span>Nitshill Rd, Glasgow G53 7Rs</span>
+        <div class="carousel-caption">
+            <h3>No mouse navigation</h3>
+            <p>This carousel hides navigation arrows and indicators.</p>
+        </div>
+    </ng-template>
+</ngb-carousel>
 
-                    <div class="flex-row">
-                        <span style="margin-right: 20px;">Service options:</span>
-                        <span style="margin: 0 5px;">Collection</span>
-                        <span style="margin: 0 5px;">Delivery</span>
-                    </div>
-                </div>
-            </div>
-            <div class="section-header">
-                Menu
-            </div>
-        </div>
-        <div class="col-3 order-section">
-            <div class="section-header">
-                Order
-            </div>
-        </div>
-    </div>
+
+<div class="btn-group" role="group" aria-label="Carousel toggle controls">
+    <button type="button" (click)="showNavigationArrows = !showNavigationArrows" class="btn btn-outline-dark btn-sm">
+        Toggle navigation arrows
+    </button>
+    <button type="button" (click)="showNavigationIndicators = !showNavigationIndicators"
+        class="btn btn-outline-dark btn-sm">
+        Toggle navigation indicators
+    </button>
 </div>

@@ -1,38 +1,64 @@
 <div class="container">
-    <div class="flex-column">
-        <div class="flex-row jcsb aic py-2 border-bottom">
-            <fa-icon [icon]="faBars" (click)="toggleSideNav()" class="menu-icon"></fa-icon>
-            <span [routerLink]="['/']" routerLinkActive="router-link-active" class="tc logo-text f-size-xl">DESI TIMES</span>
-            <div class="flex-row">
-                <span *ngIf="user !== null">Hi, {{user.name}}</span>
-                <button *ngIf="user === null" class="btn-outline-secondary mr-1 lg" routerLink="/login">Login</button>
-                <button *ngIf="user === null" class="btn-success lg" routerLink="/register">Create Account</button>
-            </div>
-        </div>
-
-        <div class="flex-row jcsb aic py-2 border-bottom">
-            <nav>
-                <ul>
-                  <li><a href="#">Foods</a></li>
-                  <li><a href="#">Services</a>
-                    <ul>
-                      <li><a href="#">Graphic</a></li>
-                      <li><a href="#">Web</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="#">Goods</a>
-                    <ul>
-                      <li><a href="#">Clothing</a></li>
-                      <li><a href="#">Jewellery</a></li>
-                      <li><a href="#">Home Decor</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </nav>
-            <div class="flex-row mr-1 ml-3 align-items-center" (click)="onClickBasket()">
-                <fa-icon [icon]="cartIcon" class="cart-icon" [routerLink]="['/basket']"></fa-icon>
-                <span style="padding-right: 5px;">{{itemsCount}}</span>
-            </div>
-        </div>
+  <div class="flex-column">
+    <div class="flex-row jcsb aic py-2 border-bottom">
+      <fa-icon [icon]="faBars" (click)="toggleSideNav()" class="menu-icon"></fa-icon>
+      <span [routerLink]="['/']" routerLinkActive="router-link-active" class="tc logo-text f-size-xl">DESI TIMES</span>
+      <div class="flex-row">
+        <span *ngIf="user !== null">Hi, {{user.name}}</span>
+        <button *ngIf="user === null" class="btn btn-outline-secondary btn-sm mr-1 lg" routerLink="/login">Login</button>
+        <button *ngIf="user === null" class="btn btn-success btn-sm lg" routerLink="/register">Create Account</button>
+      </div>
     </div>
+
+    <div class="flex-row jcsb aic py-2 border-bottom">
+      <nav>
+        <ul>
+          <li><a href="#">Foods</a></li>
+          <li><a href="#">Services</a>
+            <ul>
+              <li><a href="#">Graphic</a></li>
+              <li><a href="#">Web</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Clothing</a>
+            <ul>
+              <li><a href="#">Shirts</a></li>
+              <li><a href="#">Bottoms</a></li>
+              <li><a href="#">Kurtas</a></li>
+              <li><a href="#">Sarees</a></li>
+              <li><a href="#">Dupatas</a></li>
+              <li><a href="#">Ethnic Tops</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Misc</a>
+            <ul>
+              <li>
+                <table style="width: 600px;height: 500px;">
+                  <tr>
+                    <td>
+                      <ul>
+                        <li><a href="#">Graphic</a></li>
+                        <li><a href="#">Web</a></li>
+                      </ul>
+                    </td>
+                    <td>
+                      <ul>
+                        <li><a href="#">Ethinic Wear</a></li>
+                        <li><a href="#">Shirts</a></li>
+                      </ul>
+                    </td>
+                  </tr>
+                </table>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <div class="flex-row mr-1 ml-3 align-items-center" (click)="onClickBasket()">
+        <fa-icon [icon]="cartIcon" class="cart-icon" [routerLink]="['/basket']"></fa-icon>
+        <span style="padding-right: 5px;">{{itemsCount}}</span>
+      </div>
+    </div>
+  </div>
 </div>
+

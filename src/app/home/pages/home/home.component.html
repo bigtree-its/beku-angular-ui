@@ -74,7 +74,7 @@
                     <div class="flex-row align-items-center">
                         <span *ngIf="showServiceLocations" (click)="closeServiceLocations()"
                             style="color: var(--d-orange);cursor: pointer;padding: 0 10px;">Clear</span>
-                        <button class="btn-secondary bolder float-right" (click)="onEnter()">Find</button>
+                        <button type="button" class="btn btn-success btn-sm float-right" (click)="onEnter()">Find</button>
                     </div>
 
                 </div>
@@ -88,14 +88,16 @@
             </div>
         </div>
         <div class="hero-right">
-            <div class="hero-img-div">
-                <div class="image-slider">
-                    <div class="slider-text1"><img src="/assets/images/wall-art-indian.jpg" class="hero-img"></div>
-                    <div class="slider-text2"><img src="/assets/images/wall-art-taco.jpg" class="hero-img"></div>
-                    <div class="slider-text3"><img src="/assets/images/thali.jpeg" class="hero-img"></div>
-                </div>
-                
-            </div>
+            <ngb-carousel>
+                <ng-template ngbSlide *ngFor="let image of images">
+                    <div class="picsum-img-wrapper">
+                        <img [src]="image" alt="Random slide"  class="hero-img-div "/>
+                    </div>
+                    <div class="carousel-caption">
+                       <p>Home made foods for sale</p>>
+                    </div>
+                </ng-template>
+            </ngb-carousel>
         </div>
     </div>
 

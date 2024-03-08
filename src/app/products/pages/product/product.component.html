@@ -1,0 +1,70 @@
+<div class="container">
+    <div *ngIf="error" class="error-page alert alert-warning p-5 m-5">
+        <span>{{errorMessage}}</span>
+    </div>
+    <div *ngIf="!error" class="lg-row-sm-col">
+        <div class="left flex-column aic">
+            <h2 class="py-3 sm">{{product?.name}}</h2>
+            <div class="image my-2">
+                <img src="{{productImage}}" alt="" style="width: 100%;height: 100%;">
+            </div>
+            
+            <div class="flex-row">
+                <div class="gallery" *ngFor="let gallery of product.gallery">
+                    <img src="{{gallery}}" alt="" style="width: 100%;height: 100%;" (click)="showImage(gallery)">
+                </div>
+            </div>
+        </div>
+        <div class="right h-100">
+            <div class="flex-column">
+                <h2 class="py-3">{{product?.name}}</h2>
+                <div class="flex-row gap-1">
+                    <h3 class="py-3">{{product?.price | currency : 'GBP'}}</h3>
+                    <h5 *ngIf="product?.priceOld > 0" class="py-3 text-danger text-decoration-line-through ">{{product?.priceOld | currency : 'GBP'}}</h5>
+                    <!-- <h5 *ngIf="product?.priceOld > 0" class="py-3 text-muted">{{ product?.price / product?.priceOld | percent:'2.0-2' }}</h5> -->
+                    <h5 *ngIf="product?.priceOld > 0" class="py-3 text-muted">Save {{ product?.priceOld - product?.price | currency : 'GBP' }}</h5>
+                </div>
+                <div class="flex-column my-1">
+                    <b>Size</b>
+                    <div class="flex-row gap-1">
+                            <span *ngFor="let Size of product.sizes" class="px-3 py-1 border clickable" (click)="selectSize(Size)">{{Size.name}}</span>
+                    </div>
+                </div>
+                <div class="flex-column my-1">
+                    <b>Color</b>
+                    <div class="flex-row gap-1">
+                            <span *ngFor="let color of product.colors" class="px-3 py-1 border clickable" (click)="selectColor(color)">{{color.name}}</span>
+                    </div>
+                </div>
+                <div class="flex-column">
+                    <b>Quantity</b>
+                    <div class="flex-row aic">
+                        <div class="py-1 px-2 border clickable" (click)="decreaseQuantity()">
+                            <fa-icon [icon]="faMinus"></fa-icon>
+                        </div>
+                        <span class="bold p-2 f-size-lg ">{{quantity}}</span>
+                        <div class="py-1 p-2 border clickable" (click)="increaseQuantity()">
+                            <fa-icon [icon]="faPlus"></fa-icon>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-row my-3">
+                    <button class="bold btn btn-primary">Add to order</button>
+                </div>
+                <div class="flex-column py-2">
+                    <span class="bold border-bottom f-size-lg py-1 mb-2">Description</span>
+                    <p *ngFor="let desc of product.description">{{desc}}</p>
+                </div>
+                <div class="flex-column py-2">
+                    <span class="bold border-bottom f-size-lg py-1 mb-2">Details</span>
+                    <p *ngFor="let det of product.details">{{det}}</p>
+                </div>
+                <div class="flex-column py-2" *ngIf="product.shippingAndReturns">
+                    <span class="bold border-bottom f-size-lg py-1 mb-2">Shipping & Returns</span>
+                    <span>{{product.shippingAndReturns}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

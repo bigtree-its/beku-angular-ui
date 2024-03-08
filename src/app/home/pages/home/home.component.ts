@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { faCode, faHandshake } from '@fortawesome/free-solid-svg-icons';
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Cuisine, LocalChef } from 'src/app/model/localchef';
 import { ServiceLocation } from 'src/app/model/ServiceLocation';
 import { ChefService } from 'src/app/services/chef.service';
@@ -26,14 +27,19 @@ export class HomeComponent {
   faHandshake = faHandshake;
   faCode = faCode;
 
+  images = ['wall-art-indian.jpg', 'wall-art-taco.jpg', 'thali.jpeg'].map((name) => `/assets/images/${name}`);
+
   constructor(
     private locationService: LocationService,
     private chefService: ChefService,
     private contextService: ContextService,
     private cuisinesService: CuisinesService,
-    private router: Router
+    private router: Router,
+    config: NgbCarouselConfig
   ) {
     this.subtitle = 'This is some text within a card block.';
+    config.showNavigationArrows = false;
+		config.showNavigationIndicators = false;
   }
 
   ngOnInit() {

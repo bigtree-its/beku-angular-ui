@@ -1,0 +1,10 @@
+.image{
+    height: 500px;
+    width: 576px;
+    border: 1px solid #f2f2f2;
+}
+.gallery{
+    height: 100px;
+    width: 100px;
+    margin: 10px;
+}

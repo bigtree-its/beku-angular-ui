@@ -126,7 +126,7 @@ body {
 }
 
 .hero-phrase {
-    font-size: 50px;
+    font-size: 40px;
     font-weight: 900;
     text-align: center;
 }
@@ -804,123 +804,11 @@ select {
     font-style: italic;
 }
 
-.bg-green {
-    background-color: #08de9e;
-    color: #333;
-    border: 1px solid #222;
-    border-radius: 6px;
-}
-
-.bg-primary {
-    background-color: #123ed8;
-    color: #fff;
-}
-
-.bg-success {
-    background-color: rgb(242, 247, 244);
-}
-
 .bg-alert-success{
     background-color: rgb(242, 247, 244);
     border-color: rgb(27, 161, 88);
     border-left: 3px solid rgb(27, 161, 88);
 }
-
-.bg-warning {
-    background-color: #ffbd3a;
-    color: #222;
-}
-
-.bg-danger {
-    background-color: #ff6666;
-    color: #fff;
-}
-
-.btn-danger,
-.btn-warning,
-.btn-success,
-.btn-secondary,
-.btn-outline-secondary,
-.btn-primary {
-    padding: 5px 20px;
-    border: 1px solid #333;
-    background-color: #333;
-    color: #fff;
-    border-radius: 4px;
-}
-
-.btn-outline-secondary {
-    border: 1px solid #333;
-    background-color: #fff;
-    color: #000a19;
-}
-
-.btn-outline-secondary:hover {
-    border: 1px solid #000a19;
-    background-color: #000a19;
-    color: #fff;
-    cursor: pointer;
-}
-
-.btn-danger {
-    background-color: #ffd2d2;
-    color: #000a19;
-    border: none;
-}
-
-.btn-danger:hover {
-    background-color: #ff4848;
-    color: #fff;
-}
-
-.btn-warning {
-    background-color: #f9e1b1;
-}
-
-.btn-warning:hover {
-    cursor: pointer;
-    background-color: #fca800;
-    color: #222;
-}
-
-.btn-success {
-    background:#37bc9b;
-    border: none;
-    color: #fff;
-}
-
-.btn-success:hover {
-    cursor: pointer;
-    background-color: #05ce92 !important;
-}
-
-.btn-primary {
-    background-color: #b3b8ca;
-}
-
-.btn-primary:hover {
-    cursor: pointer;
-    background-color: #0238f9;
-    color: #fff;
-}
-
-.btn-red {
-    background-color: #dc3c31;
-    border-radius: 5px;
-    height: 35px;
-    padding: 0 20px;
-    color: #fff;
-    border: none;
-    font-weight: bold;
-    display: inline;
-    clear: both;
-}
-
-.btn-red:hover {
-    cursor: pointer;
-    background-color: #f8594e;
-}
-
 .v-scrollable-data-container {
     display: flex;
     flex-direction: column;
@@ -1182,7 +1070,6 @@ select {
 .clickable {
     background-color: #f1f1f1;
     border-radius: 4px;
-    padding: 3px 10px;
     font-weight: bold;
 }
 
@@ -1752,17 +1639,19 @@ select {
     overflow-y: hidden;
 }
 
-.left {
+/* .left {
     padding: 50px;
     flex: 50%;
     background-color: #f1f1f1;
-    /* background-image: url("/assets/images/wall-art-taco.jpg"); */
     object-fit: contain;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-}
+} */
 
+.left{
+    flex: 50%;
+}
 .width-100 {
     width: 100%;
 }

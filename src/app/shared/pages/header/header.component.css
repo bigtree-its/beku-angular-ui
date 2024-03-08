@@ -47,24 +47,25 @@ nav {
     /* background:#37bc9b; */
   }
   
+  /* Nav */
   nav ul {
     margin:0;padding:0;
     list-style-type:none;
     float:left;
-    display:inline-block;
   }
   
+   /* Nav items */
   nav ul li {
     position:relative;
     margin:0 20px 0 0;
     float:left;
-    display:inline-block;
   }
   
   li > a:after { content: ' »'; } /* Change this in order to change the Dropdown symbol */
   
   li > a:only-child:after { content: ''; }
   
+  /* Nav item text */
   nav ul li a {
     padding:5px;
     display:inline-block;
@@ -76,6 +77,7 @@ nav {
     opacity:0.5;
   }
   
+  /* Nav Item Dropdown*/
   nav ul li ul {
     display:none;
     position:absolute;
@@ -84,16 +86,24 @@ nav {
     background:#fadbdbfc;
     color: black;
     float:left;
-    width:200px;
+    min-width:200px;
   }
   
+  /* Nav->Item->Dropdown->Item*/
   nav ul li ul li {
-    width:200px;
     display: block;
+    clear: both;
     padding: 5px 0;
     border:1px solid rgba(251, 240, 240, 0.466);
   }
   
+  nav ul li ul li div{
+    display: block;
+    clear: both;
+    padding: 5px 0;
+   background-color: aqua;
+  }
+  /* Display the Menu Content when hovering Nav Item */
   nav ul li:hover ul {
     display:block;
   }

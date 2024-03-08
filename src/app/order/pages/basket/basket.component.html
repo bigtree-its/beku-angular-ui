@@ -56,7 +56,7 @@
     </div>
     <div class="sm footer" *ngIf="order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0">
         <div class="flex-row justify-content-center py-2 border-top w-100">
-            <button class="btn-red"  [routerLink]="[ '/checkout'] ">Go to checkout</button>
+            <button class="btn btn-primary btn-sm"  [routerLink]="[ '/checkout'] ">Go to checkout</button>
         </div>
     </div>
 </div>
@@ -79,7 +79,7 @@
             <app-order-item *ngFor="let item of order.items" [item]="item"></app-order-item>
         </div>
         <div class="lg">
-            <button class="btn-red py-2 f-size-md mt-3" [routerLink]="[ '/checkout'] ">Checkout</button>
+            <button class="btn btn-primary btn-sm py-2 f-size-md mt-3" [routerLink]="[ '/checkout'] ">Checkout</button>
         </div>
     </div>
 </ng-template>

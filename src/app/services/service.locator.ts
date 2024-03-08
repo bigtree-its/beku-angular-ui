@@ -5,7 +5,10 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class ServiceLocator {
-  collectionsUrl: string = '';
+  groupsUrl: string;
+  productsUrl: string;
+  feedbacksUrl: string;
+  collectionsUrl: string;
   chefsUrl: string;
   cuisinesUrl: string;
   DishesUrl: string;
@@ -29,6 +32,9 @@ export class ServiceLocator {
   UpdatePersonalDetails: string;
 
   constructor() {
+    this.groupsUrl = environment.GroupsUrl;
+    this.productsUrl = environment.ProductsUrl;
+    this.feedbacksUrl = environment.FeedbacksUrl;
     this.collectionsUrl = environment.CollectionsUrl;
     this.chefsUrl = environment.ChefsUrl;
     this.cuisinesUrl = environment.CuisinesUrl;
