@@ -804,11 +804,12 @@ select {
     font-style: italic;
 }
 
-.bg-alert-success{
+.bg-alert-success {
     background-color: rgb(242, 247, 244);
     border-color: rgb(27, 161, 88);
     border-left: 3px solid rgb(27, 161, 88);
 }
+
 .v-scrollable-data-container {
     display: flex;
     flex-direction: column;
@@ -1078,7 +1079,8 @@ select {
     background-color: #000a19;
     color: #fff;
 }
-.clickable-selected{
+
+.clickable-selected {
     background-color: #000a19;
     color: #fff;
 }
@@ -1589,6 +1591,12 @@ select {
     background-color: var(--info);
 }
 
+.clicked {
+    color: #fff;
+    border: 1px solid var(--pink);
+    background-color: var(--pink);
+}
+
 .selectable :first-child {
     opacity: 0;
 }
@@ -1639,6 +1647,7 @@ select {
     overflow-y: hidden;
 }
 
+
 /* .left {
     padding: 50px;
     flex: 50%;
@@ -1649,9 +1658,10 @@ select {
     background-size: contain;
 } */
 
-.left{
+.left {
     flex: 50%;
 }
+
 .width-100 {
     width: 100%;
 }

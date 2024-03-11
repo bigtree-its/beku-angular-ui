@@ -49,6 +49,9 @@ export const environment = {
   StripePaymentsUrl: 'http://localhost:8082/api/stripe-payments',
   PaymentIntentUrl: 'http://localhost:8082/api/stripe-payments/payment-intent',
 
+  // Products Local
+  OrdersUrl: 'http://localhost:8082/orders/v1',
+  PaymentsUrl: 'http://localhost:8082/payments/v1',
   // Auth URLs
 
   // Local

@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Subject, takeUntil } from 'rxjs';
 import { Utils } from 'src/app/helpers/utils';
-import { Extra, Product, Size } from 'src/app/model/products/all';
+import { Extra, Product, Size, Variant } from 'src/app/model/products/all';
 import { ProductService } from 'src/app/services/products/product.service';
 
 @Component({
@@ -63,10 +63,15 @@ export class ProductComponent {
   selectSize(_t31: Size) {
     this.selectedSize = _t31;
   }
+  isSelectedSize(s: Size){
+    return s.name === this.selectedSize.name;
+  }
   selectColor(_t38: Extra) {
     this.selectedColor = _t38;
   }
-
+  isSelectedColor(c: Variant){
+    return c.name === this.selectedColor.name;
+  }
   increaseQuantity() {
     if (this.quantity < 10) {
       this.quantity = this.quantity + 1;

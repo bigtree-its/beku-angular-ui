@@ -46,6 +46,12 @@ export const environment = {
   UpdatePersonalDetails:
     'https://https://bigtree-auth-service-672f06320174.herokuapp.com/api/users/update_personal',
 
+
+  // Products Local
+  OrdersUrl: 'https://polar-fortress-28097-08459456d8d7.herokuapp.com/orders/v1',
+  PaymentsUrl: 'https://polar-fortress-28097-08459456d8d7.herokuapp.com/payments/v1',
+
+
   debug: window['env']['debug'] || false,
 
   /** RapidAPI  */
