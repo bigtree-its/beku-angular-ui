@@ -3,20 +3,23 @@ import { ActivatedRoute } from '@angular/router';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Subject, takeUntil } from 'rxjs';
 import { Utils } from 'src/app/helpers/utils';
-import { Extra, Product, Size, Variant } from 'src/app/model/products/all';
+import { OrderItem, Product, Variant } from 'src/app/model/products/all';
+import { BasketService } from 'src/app/services/basket.service';
+import { OrderService } from 'src/app/services/products/order.service';
 import { ProductService } from 'src/app/services/products/product.service';
 
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  selector: 'app-product-detail',
+  templateUrl: './product-detail.component.html',
+  styleUrls: ['./product-detail.component.css']
 })
-export class ProductComponent {
-
-
+export class ProductDetailComponent {
 
   productService = inject(ProductService)
   activatedRoute = inject(ActivatedRoute);
+  orderService = inject(OrderService);
+  basketService = inject(BasketService);
+
   utils = inject(Utils);
   destroy$ = new Subject<void>();
   product: Product;
@@ -26,9 +29,10 @@ export class ProductComponent {
 
   faPlus = faPlus;
   faMinus = faMinus;
+  selectedSize: Variant;
+  selectedColor: Variant;
   quantity: number = 1;
-  selectedSize: Size;
-  selectedColor: Extra;
+  subTotal: number = 0.00;
 
   ngOnInit(): void {
 
@@ -60,34 +64,75 @@ export class ProductComponent {
     }
   }
 
-  selectSize(_t31: Size) {
+  selectSize(_t31: Variant) {
     this.selectedSize = _t31;
   }
-  isSelectedSize(s: Size){
+  isSelectedSize(s: Variant) {
     return s.name === this.selectedSize.name;
   }
-  selectColor(_t38: Extra) {
+  selectColor(_t38: Variant) {
     this.selectedColor = _t38;
   }
-  isSelectedColor(c: Variant){
+  isSelectedColor(c: Variant) {
     return c.name === this.selectedColor.name;
   }
+
   increaseQuantity() {
     if (this.quantity < 10) {
       this.quantity = this.quantity + 1;
+      this.calculateSubTotal();
     }
   }
 
   decreaseQuantity() {
-    if (this.quantity > 1) {
+    if (this.quantity > 0) {
       this.quantity = this.quantity - 1;
+      this.calculateSubTotal();
     }
   }
 
   showImage(_t15: string) {
     this.productImage = _t15;
   }
+
+  addToOrder() {
+    if ( this.quantity === 0){
+      return;
+    }
+    this.calculateSubTotal();
+    var item: OrderItem = {
+      _tempId: Date.now(),
+      productId: this.product._id,
+      supplier: this.product.supplier,
+      image: this.product.image,
+      productName: this.product.name,
+      quantity: this.quantity,
+      size: this.selectedSize,
+      color: this.selectedColor,
+      price: this.product.price,
+      subTotal: this.subTotal,
+    };
+    console.log('Adding item '+ JSON.stringify(item))
+    this.basketService.addToProductOrder(item);
+  }
+
+  private calculateSubTotal() {
+
+    this.subTotal = 0;
+    this.subTotal = this.subTotal + (this.product.price * this.quantity);
+    if (this.selectedColor !== null && this.selectedColor !== undefined) {
+      this.subTotal = this.subTotal + this.selectedColor.price;
+    }
+    if (this.selectedSize !== null && this.selectedSize !== undefined) {
+      this.subTotal = this.subTotal + this.selectedSize.price;
+    }
+    this.subTotal = +(+this.subTotal).toFixed(2);
+    console.log('Sub total ' + this.subTotal)
+  }
+
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    console.log('Destrying component...')
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

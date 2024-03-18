@@ -7,7 +7,7 @@ import {
   RapidApiByPostcodeResponse,
   RapidApiByPostcodeResponseSummary,
 } from 'src/app/model/address';
-import { CustomerOrder, FoodOrder, LocalChef } from 'src/app/model/localchef';
+import { FoodOrder,  LocalChef } from 'src/app/model/localchef';
 import { ContextService } from 'src/app/services/context.service';
 import { RapidApiService } from 'src/app/services/rapid-api.service';
 import { Utils } from 'src/app/services/utils';
@@ -75,7 +75,7 @@ export class CheckoutComponent implements OnDestroy {
   lookupAddress: boolean = true;
 
   cartTotal: number = 0;
-  order: CustomerOrder;
+  order: FoodOrder;
   chef: LocalChef;
   price: number = 0.0;
 
@@ -116,8 +116,8 @@ loading: any;
     this.orderService.getData();
     this.orderService.orderSubject$.subscribe({
       next: (value) => {
-        var customerOrder: CustomerOrder = value;
-        this.extractOrder(customerOrder);
+        var FoodOrder: FoodOrder = value;
+        this.extractOrder(FoodOrder);
       },
       error: (err) => console.error('OrderSubject emitted an error: ' + err),
       complete: () =>
@@ -146,7 +146,7 @@ loading: any;
     });
   }
 
-  extractOrder(theOrder: CustomerOrder) {
+  extractOrder(theOrder: FoodOrder) {
     if (this.utils.isValid(theOrder) && theOrder.status === 'Completed') {
       return;
     }
@@ -421,9 +421,9 @@ loading: any;
     return address;
   }
 
-  getOrder(): CustomerOrder {
+  getOrder(): FoodOrder {
     var orderJson = localStorage.getItem('order');
-    var order: CustomerOrder = null;
+    var order: FoodOrder = null;
     if (orderJson !== null && orderJson !== undefined) {
       order = JSON.parse(orderJson);
     }

@@ -32,6 +32,7 @@ export interface LocalChef {
     coverPhoto: string | undefined;
     name: string;
     email: string;
+    image: string;
     kitchenName: string;
     days: string[];
     description: string[];
@@ -181,32 +182,6 @@ export interface LocalChefSearchQuery {
     takingOrdersNow: boolean;
 }
 
-export interface FoodOrder {
-    id: string;
-    chefId: string;
-    customerEmail: string;
-    customerMobile: string;
-    reference: string;
-    currency: string;
-    paymentReference: string;
-    status: string;
-    items: FoodOrderItem[];
-    subTotal: number;
-    total: number;
-    deliveryFee: number;
-    packagingFee: number;
-    saleTax: number;
-    orderTime: Date;
-    delivery: boolean;
-    pickup: boolean;
-    pickupTime: Date;
-    deliveryTime: Date;
-    customer: User;
-    chef: Chef;
-    review: Review;
-    serviceMode: string;
-}
-
 export interface SupplierOrder{
     id: string;
     chefId: string;
@@ -241,7 +216,7 @@ export interface SupplierOrder{
     notes: string;
 }
 
-export interface CustomerOrder {
+export interface FoodOrder {
     id: string;
     supplier: OrderSupplier;
     customer: OrderCustomer;
@@ -326,8 +301,8 @@ export interface Review {
     rating: number;
 }
 
-export interface CustomerOrderList {
-    orders: CustomerOrder[]
+export interface FoodOrderList {
+    orders: FoodOrder[]
 }
 
 export interface Orders {

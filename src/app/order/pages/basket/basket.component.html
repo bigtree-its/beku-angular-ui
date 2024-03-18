@@ -3,9 +3,14 @@
         <div class="arrow-icon-div" (click)="goback()">
             <fa-icon [icon]="faArrowLeft"></fa-icon>
         </div>
-        <span class="a-page-header">YOUR BASKET</span>
+        <span class="a-page-header">Your Basket</span>
     </div>
-    <div class="lg-row-sm-col mt-4">
+    <div class="" *ngIf="!order">
+        <div class="alert alert-info p-5">
+            Your basket is empty. Please explore our home <a href="/">Home Chefs</a>
+        </div>
+    </div>
+    <div class="lg-row-sm-col mt-4" *ngIf="order">
         <div class="flex-row py-2">
             <div style="height: 200px;width: 170px;">
                 <img src="/assets/images/chefs/{{chef?._id}}/cover-photo.jpg" style="object-fit: cover;

@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="flex-row py-2 gap-1">
+    <a [routerLink]="[ '/p/groups', dept | lowercase] ">{{dept | titlecase}}</a>
+    <span>/</span>
+    <a>{{grp | titlecase}}</a>
+  </div>
+  <div class="row">
+    <div class="col-sm-1 col-md-2 col-lg-3 col-xl-4" *ngFor="let product of products" [routerLink]="[ '/p/product-detail', product._id ] ">
+      <div class="col">
+        <div class="el-wrapper">
+          <div class="box-up">
+            <img class="img" src="{{product.image}}" alt="">
+            <div class="img-info">
+              <div class="info-inner">
+                <span class="p-name">{{product.name}}</span>
+                <span class="p-company">{{product.supplier.tradingName}}</span>
+              </div>
+              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
+            </div>
+          </div>
+
+          <div class="box-down">
+            <div class="h-bg">
+              <div class="h-bg-inner"></div>
+            </div>
+
+            <a class="cart"> 
+              <span class="price">{{product.price | currency : 'GBP'}}</span>
+              <span class="add-to-cart">
+                <span class="txt">Add to cart</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

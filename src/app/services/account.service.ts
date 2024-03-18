@@ -40,7 +40,7 @@ export class AccountService {
     private http: HttpClient,
     private jwtService: JwtService,
     private localService: LocalService,
-    private orderService: FoodOrderService,
+    private foodOrderSvc: FoodOrderService,
     private serviceLocator: ServiceLocator,
     private readonly router: Router
   ) {}
@@ -194,7 +194,7 @@ export class AccountService {
     this.user = user;
     // this.fetchCustomerPreferences(user.id);
     this.loginSession$.next(this.user);
-    this.orderService.retrieveCustomerOrders(this.user.email);
+    this.foodOrderSvc.retrieveFoodOrders(this.user.email);
   }
 
   private buildUser(token: string) {
@@ -229,7 +229,8 @@ export class AccountService {
     this.jwtService.destroyToken();
     this.loginSession$.next(null);
     this.localService.removeData(Constants.StorageItem_C_User);
-    this.localService.removeData(Constants.StorageItem_C_Order);
+    this.localService.removeData(Constants.StorageItem_P_Order);
+    this.localService.removeData(Constants.StorageItem_F_Order);
     this.localService.removeData(Constants.StorageItem_C_Chef);
   }
 

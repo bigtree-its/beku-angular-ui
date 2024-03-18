@@ -12,8 +12,8 @@ import { Subject, takeUntil } from 'rxjs';
 import { Utils } from 'src/app/helpers/utils';
 import { User } from 'src/app/model/auth-model';
 import {
-  CustomerOrder,
-  CustomerOrderList,
+  FoodOrder,
+  FoodOrderList,
   LocalChef,
   OrderSearchQuery,
 } from 'src/app/model/localchef';
@@ -38,8 +38,8 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
   utils = inject(Utils);
   user: User;
   destroy$ = new Subject<void>();
-  orders: CustomerOrder[] = [];
-  viewOrder: CustomerOrder;
+  orders: FoodOrder[] = [];
+  viewOrder: FoodOrder;
   faArrowLeft = faArrowLeft;
   faStar = faStar;
   faPeopleArrows = faPeopleArrows;
@@ -69,7 +69,7 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
       next: (value) => {
         this.user = value;
         console.log('CustomerObject. emitted ' + JSON.stringify(value));
-        this.fetchCustomerOrders();
+        this.fetchFoodOrders();
       },
       error: (err) => console.error('CustomerObject emitted an error: ' + err),
       complete: () =>
@@ -77,12 +77,12 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
     });
   }
 
-  fetchCustomerOrders() {
+  fetchFoodOrders() {
     if (this.utils.isValid(this.user)) {
       let orderSearchQuery: OrderSearchQuery = {
         customerEmail: this.user.email,
       };
-      let observable = this.orderService.getCustomerOrders(orderSearchQuery);
+      let observable = this.orderService.getFoodOrders(orderSearchQuery);
       observable.subscribe((e) => {
         if (this.utils.isValid(e)) {
           this.orders = e;
@@ -118,7 +118,7 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
     this.showOrder = false;
   }
 
-  open(order: CustomerOrder) {
+  open(order: FoodOrder) {
     this.viewOrder = order;
     this.retrieveSupplier(order.supplier._id);
   }

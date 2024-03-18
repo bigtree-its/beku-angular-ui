@@ -3,61 +3,50 @@
         <span>{{errorMessage}}</span>
     </div>
     <div *ngIf="!error" class="lg-row-sm-col">
-        <!-- <div class="left flex-column aic px-2" style="max-width: 570px;">
-            <h2 class="py-3 sm">{{product?.name}}</h2>
-            <div class="image my-2">
-                <img src="{{productImage}}" alt
-                    style="width: 100%;height: 100%;">
-            </div>
-
-            <div class="flex-row" style="max-width: 570px;">
-                <div class="gallery" *ngFor="let gallery of product.gallery">
-                    <img src="{{gallery}}" alt style="width: 100%;height: 100%;"
-                        (click)="showImage(gallery)">
-                </div>
-            </div>
-        </div> -->
         <div class="left p-3 ">
             <div id="carouselExample" class="carousel slide">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img src="{{productImage}}" class="d-block w-100" alt="...">
                     </div>
-                    <div class="carousel-item" *ngFor="let gallery of product.gallery">
+                    <div class="carousel-item" *ngFor="let gallery of product?.gallery">
                         <img src="{{gallery}}" class="d-block w-100" alt="...">
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon"
+                <button class="carousel-control-prev " type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon circle-button"
                         aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                    <span class="carousel-control-next-icon"
+                    <span class="carousel-control-next-icon  circle-button"
                        ></span>
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
         </div>
-        <div class="right h-100">
+        <div class="right h-100 p-3">
             <div class="flex-column">
-                <h2 class="py-3 lg">{{product?.name}}</h2>
+                <h3 class="py-2 lg">{{product?.name}}</h3>
+                <div class="flex-row">
+                    <span class="product-seller">{{product?.supplier?.tradingName}}</span>
+                </div>
                 <div class="flex-row gap-1">
-                    <h3 class="py-3">{{product?.price | currency : 'GBP'}}</h3>
+                    <h3 class="py-3 product-price">{{product?.price | currency : 'GBP'}}</h3>
                     <h5 *ngIf="product?.priceOld > 0" class="py-3 text-danger text-decoration-line-through ">{{product?.priceOld | currency : 'GBP'}}</h5>
                     <!-- <h5 *ngIf="product?.priceOld > 0" class="py-3 text-muted">{{ product?.price / product?.priceOld | percent:'2.0-2' }}</h5> -->
                     <h5 *ngIf="product?.priceOld > 0" class="py-3 text-muted">Save {{ product?.priceOld - product?.price | currency : 'GBP' }}</h5>
                 </div>
-                <div class="flex-column my-1">
+                <div class="flex-column my-1" *ngIf="product.size">
                     <b>Size</b>
                     <div class="flex-row gap-1">
-                        <button type="button" *ngFor="let Size of product.sizes" [class.clicked]="isSelectedSize(Size)" class="btn btn-outline-dark btn-sm" (click)="selectSize(Size)">{{Size.name}}</button>
+                        <button type="button" *ngFor="let Size of product?.sizes" [class.clicked]="isSelectedSize(Size)" class="btn btn-outline-dark btn-sm" (click)="selectSize(Size)">{{Size.name}}</button>
                     </div>
                 </div>
-                <div class="flex-column my-1">
+                <div class="flex-column my-1"  *ngIf="product.color">
                     <b>Color</b>
                     <div class="flex-row gap-1">
-                        <button type="button" *ngFor="let color of product.colors" [class.clicked]="isSelectedColor(color)" class="btn btn-outline-dark btn-sm" (click)="selectColor(color)">{{color.name}}</button>
+                        <button type="button" *ngFor="let color of product?.colors" [class.clicked]="isSelectedColor(color)" class="btn btn-outline-dark btn-sm" (click)="selectColor(color)">{{color.name}}</button>
                     </div>
                 </div>
                 <div class="flex-column">
@@ -73,20 +62,26 @@
                     </div>
                 </div>
                 <div class="flex-row my-3">
-                    <button class="bold btn btn-primary">Add to order</button>
+                    <button class="bold btn btn-primary" (click)="addToOrder()">Add to order</button>
                 </div>
-                <div class="flex-column py-2">
-                    <span class="bold border-bottom f-size-lg py-1 mb-2">Description</span>
-                    <p *ngFor="let desc of product.description">{{desc}}</p>
+                <div class="flex-column py-2" *ngFor="let productInfo of product?.productInfo">
+                    <span class="bold border-bottom f-size-lg py-1 mb-2">{{productInfo.title}}</span>
+                    <div *ngIf="productInfo.details">
+                        <p *ngFor="let desc of productInfo.details">{{desc}}</p>
+                    </div>
+                    <div *ngIf="productInfo.moreInfo">
+                        <div class="flex-column">
+                            <div class="flex-row" *ngFor="let nameValue of productInfo.moreInfo">
+                                <span class="bold">{{nameValue.name}}: </span>
+                                <span class="pl-1">{{nameValue.value}}</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="flex-column py-2">
-                    <span class="bold border-bottom f-size-lg py-1 mb-2">Details</span>
-                    <p *ngFor="let det of product.details">{{det}}</p>
-                </div>
-                <div class="flex-column py-2" *ngIf="product.shippingAndReturns">
+                <div class="flex-column py-2" *ngIf="product?.shippingAndReturns">
                     <span class="bold border-bottom f-size-lg py-1 mb-2">Shipping
                         & Returns</span>
-                    <span>{{product.shippingAndReturns}}</span>
+                    <span>{{product?.shippingAndReturns}}</span>
                 </div>
             </div>
         </div>

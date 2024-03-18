@@ -5,7 +5,7 @@
         <div class="arrow-icon-div" (click)="goback()">
             <fa-icon [icon]="faArrowLeft"></fa-icon>
         </div>
-        <span class="a-page-header">CHECKOUT</span>
+        <span class="a-page-header">Checkout</span>
         <div>
             <strong *ngIf="order && !orderSubmitted" class="f-size-lg color-red bolder">{{order?.total|
                 currency:
@@ -76,10 +76,10 @@
                 </div>
                 <div *ngIf="showServiceModeSection" class="flex-column p-3">
                     <div style="margin-bottom: 30px;background-color: #efedea;display: flex;height: 50px;justify-content: space-around;margin: 8px 0 16px;padding: 3px;">
-                        <button class="service-mode" (click)="selectPickup()" [class.service-mode-option-selected]="serviceMode==='COLLECTION'"><fa-icon
+                        <button class="service-mode" (click)="selectPickup()" [class.bg-warning]="serviceMode==='COLLECTION'"><fa-icon
                                 [icon]="faPersonBiking"
                                 class="mr-1"></fa-icon>Collection</button>
-                        <button class="service-mode" (click)="selectDelivery()" [class.service-mode-option-selected]="serviceMode==='DELIVERY'" [disabled]="!chef.doDelivery"><fa-icon
+                        <button class="service-mode" (click)="selectDelivery()" [class.bg-warning]="serviceMode==='DELIVERY'" [disabled]="!chef.doDelivery"><fa-icon
                                 [icon]="faBox"
                                 class="mr-1"></fa-icon>Delivery</button>
                     </div>
@@ -152,15 +152,15 @@
                         <strong>Total</strong>
                         <strong>{{order?.total| currency: 'GBP'}}</strong>
                     </div>
-                    <div *ngIf="chef.paymentRequireApproval" class="bg-info p-4 mt-4">
+                    <div *ngIf="chef.paymentRequireApproval" class="alert alert-info p-4 mt-4">
                         <div class="flex-column justify-content-start">
-                            <span class="f-size-lg">Payment requires
+                            <span >Payment requires
                                 Pre-approval</span>
-                            <span class="f-size-lg">Step 1. You submit your
+                            <span >Step 1. You submit your
                                 order.</span>
-                            <span class="f-size-lg">Step 2. YourChef will accept
+                            <span >Step 2. YourChef will accept
                                 your order.</span>
-                            <span class="f-size-lg">Step 3. You will then make a
+                            <span >Step 3. You will then make a
                                 payment.</span>
                             <small class="mt-2 normal">Once your order accepted
                                 by the Chef a Payment
@@ -193,7 +193,7 @@
                 </div>
                 <div *ngIf="showOrderConfirmation">
                     <div class="flex-column jcc  aic bg-light p-4">
-                        <span class="f-size-lg">Your order has been
+                        <span >Your order has been
                             submitted</span>
                         <span class="f-size-xl mt-4 bolder">{{order?.reference}}</span>
                     </div>
@@ -204,12 +204,11 @@
 
                 <div *ngIf="!showOrderConfirmation" class="lg flex-row jcsb p-1 h-5 px-3 my-3">
                     <span *ngIf="showHomeScreen || showCustomerDetailsSection"></span>
-                    <button *ngIf="!showHomeScreen && !showCustomerDetailsSection && !orderSubmitted" class="btn-secondary n-w-100" (click)="previous()" tabindex="4" style="float: left;">Previous</button>
-                    <button *ngIf="!showPlaceOrderButton &&  !showHomeScreen && !orderSubmitted" class="btn-secondary" style="min-width: 100px;float: right;max-width: 100%;" (click)="next()" tabindex="5">Next</button>
-                    <button *ngIf="showPlaceOrderButton && !chef.paymentRequireApproval && !orderSubmitted" class="btn-secondary" style="min-width: 100px;float: right;" (click)="placeOrder(stripeContent)" tabindex="5">Proceed
+                    <button type="button" *ngIf="!showHomeScreen && !showCustomerDetailsSection && !orderSubmitted" class="btn btn-dark btn-xs" (click)="previous()" tabindex="4" style="float: left;min-width: 100px;">Previous</button>
+                    <button type="button" *ngIf="!showPlaceOrderButton &&  !showHomeScreen && !orderSubmitted" class="btn btn-primary btn-xs" style="float: right;min-width: 100px;" (click)="next()" tabindex="5">Next</button>
+                    <button type="button" *ngIf="showPlaceOrderButton && !chef.paymentRequireApproval && !orderSubmitted" class="btn btn-primary btn-xs" style="float: right;min-width: 100px;" (click)="placeOrder(stripeContent)" tabindex="5">Proceed
                         to Pay</button>
-                    <button *ngIf="showPlaceOrderButton && chef.paymentRequireApproval && !orderSubmitted" class="btn-secondary" style="min-width: 100px;float: right;" (click)="placeOrder(null)" tabindex="5">Submit your
-                        order</button>
+                    <button type="button" [disabled]="loading" *ngIf="showPlaceOrderButton && chef.paymentRequireApproval && !orderSubmitted" class="btn btn-primary btn-xs" style="float: right;min-width: 100px;" (click)="placeOrder(null)" tabindex="5">Submit your order</button>
                 </div>
             </div>
         </div>
@@ -217,11 +216,11 @@
     <div class="sm footer " *ngIf="!showOrderConfirmation">
         <div class="flex-row-space-between align-items-center p-1 h-5 mt-3 bg-light">
             <span *ngIf="showHomeScreen || showCustomerDetailsSection"></span>
-            <button *ngIf="!showHomeScreen && !showCustomerDetailsSection && !orderSubmitted" class="btn-secondary n-w-100" (click)="previous()" tabindex="4" style="float: left;">Previous</button>
-            <button *ngIf="!showPlaceOrderButton &&  !showHomeScreen && !orderSubmitted" class="btn-secondary" style="min-width: 100px;float: right;max-width: 100%;" (click)="next()" tabindex="5">Next</button>
-            <button *ngIf="showPlaceOrderButton && !chef.paymentRequireApproval && !orderSubmitted" class="btn-secondary" style="min-width: 100px;float: right;" (click)="placeOrder(stripeContent)" tabindex="5">Proceed
+            <button type="button" *ngIf="!showHomeScreen && !showCustomerDetailsSection && !orderSubmitted" class="btn btn-dark btn-xs" (click)="previous()" tabindex="4" style="float: left;min-width: 100px;">Previous</button>
+            <button type="button" *ngIf="!showPlaceOrderButton &&  !showHomeScreen && !orderSubmitted" class="btn btn-primary btn-xs" style="float: right;min-width: 100px;" (click)="next()" tabindex="5">Next</button>
+            <button type="button" *ngIf="showPlaceOrderButton && !chef.paymentRequireApproval && !orderSubmitted" class="btn btn-success btn-xs" style="float: right;min-width: 100px;" (click)="placeOrder(stripeContent)" tabindex="5">Proceed
                 to Pay</button>
-            <button *ngIf="showPlaceOrderButton && chef.paymentRequireApproval && !orderSubmitted" class="btn-secondary" style="min-width: 100px;float: right;" (click)="placeOrder(null)" tabindex="5">Submit your
+            <button type="button"  [disabled]="loading" *ngIf="showPlaceOrderButton && chef.paymentRequireApproval && !orderSubmitted" class="btn btn-primary btn-xs" style="float: right;min-width: 100px;" (click)="placeOrder(null)" tabindex="5">Submit your
                 order</button>
         </div>
     </div>

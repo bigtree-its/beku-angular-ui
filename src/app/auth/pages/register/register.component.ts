@@ -27,26 +27,19 @@ export class RegisterComponent {
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(4),
-      ]),
-      repeatPassword: new FormControl('', [
-        Validators.required,
-        Validators.minLength(4),
-      ]),
+      ])
     });
   }
 
   registerUser() {
     if (this.registerForm.valid) {
-      if (this.registerForm.get('password').value !== this.registerForm.get('repeatPassword').value){
-        return;
-      }
       this.register = {
         firstName: this.registerForm.get('firstName').value,
         lastName: this.registerForm.get('lastName').value,
         email: this.registerForm.get('email').value,
         password: this.registerForm.get('password').value,
         mobile: this.registerForm.get('mobile').value,
-        userType: 'SUPPLIER',
+        userType: 'Customer',
       };
       console.log('Registering '+ JSON.stringify(this.register))
 

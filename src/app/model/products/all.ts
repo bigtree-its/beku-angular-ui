@@ -6,16 +6,37 @@ export interface Group {
   active: Boolean;
 }
 
+export interface NameValue {
+  name: string;
+  value: string;
+}
+
+export interface ProductInfo{
+  title: string,
+  details: string[],
+  moreInfo: NameValue[]
+}
+
+export interface SupplierBasic{
+  _id: string,
+  name: string,
+  tradingName: string,
+  email: string,
+  mobile: string,
+  telephone: string,
+}
+
+
 export interface Product {
   _id: string;
   name: string;
-  description: string[];
+  productInfo: ProductInfo[];
   image: string;
   slug: string;
   group: string;
-  supplier: string;
-  size: Size;
-  sizes: Size[];
+  supplier: SupplierBasic;
+  size: Variant;
+  sizes: Variant[];
   color: Variant;
   colors: Variant[];
   variants: Variant[];
@@ -72,14 +93,13 @@ export interface OrderItem {
   _tempId: number;
   image: string;
   productId: string;
-  supplierId: string;
+  supplier: SupplierBasic;
   productName: string;
   quantity: number;
   price: number;
   size: Variant;
   color: Variant;
   subTotal: number;
-  specialInstruction: string;
 }
 
 export interface Feedback {
@@ -148,8 +168,3 @@ export interface Variant {
   detail: string;
 }
 
-export interface Size {
-  name: string;
-  price: number;
-  details: string[];
-}

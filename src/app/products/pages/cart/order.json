@@ -1,0 +1,92 @@
+{
+    "id": "",
+    "status": "Draft",
+    "items": [
+        {
+            "_tempId": 1710361192520,
+            "productId": "65ef5a25484f4c7fdaebfc77",
+            "supplierId": "331a578b-400e-4c42-91db-2254677d23f2",
+            "image": "/assets/images/p/p/shirts/garden-shirt.jpeg",
+            "productName": "Mughal Garden Shirt",
+            "quantity": 1,
+            "size": {
+                "name": "S",
+                "price": 16.21
+            },
+            "color": {
+                "name": "Blue",
+                "price": 15.21
+            },
+            "price": 15.21,
+            "subTotal": null
+        },
+        {
+            "_tempId": 1710370314683,
+            "productId": "65ef5a25484f4c7fdaebfc77",
+            "supplierId": "331a578b-400e-4c42-91db-2254677d23f2",
+            "image": "/assets/images/p/p/shirts/garden-shirt.jpeg",
+            "productName": "Mughal Garden Shirt",
+            "quantity": 3,
+            "size": {
+                "name": "S",
+                "price": 16.21
+            },
+            "color": {
+                "name": "Blue",
+                "price": 15.21
+            },
+            "price": 15.21,
+            "subTotal": null
+        },
+        {
+            "_tempId": 1710370343146,
+            "productId": "65ef5a25484f4c7fdaebfc77",
+            "supplierId": "331a578b-400e-4c42-91db-2254677d23f2",
+            "image": "/assets/images/p/p/shirts/garden-shirt.jpeg",
+            "productName": "Mughal Garden Shirt",
+            "quantity": 4,
+            "size": {
+                "name": "S",
+                "price": 16.21
+            },
+            "color": {
+                "name": "Blue",
+                "price": 15.21
+            },
+            "price": 15.21,
+            "subTotal": 0
+        }
+    ],
+    "customer": {
+        "_id": "",
+        "name": "",
+        "mobile": "",
+        "email": "",
+        "telephone": "",
+        "address": {
+            "line1": "",
+            "line2": "",
+            "city": "",
+            "country": "",
+            "postcode": "",
+            "latitude": "",
+            "longitude": ""
+        }
+    },
+    "currency": "GBP",
+    "reference": "",
+    "subTotal": 0,
+    "total": 0,
+    "deliveryFee": 0,
+    "packingFee": 0,
+    "serviceFee": 0,
+    "dateCreated": "2024-03-13T20:19:50.273Z",
+    "dateAccepted": null,
+    "expectedDeliveryDate": null,
+    "dateCollected": null,
+    "dateDelivered": null,
+    "collectBy": null,
+    "dateDeleted": null,
+    "serviceMode": "COLLECTION",
+    "notes": ""
+}

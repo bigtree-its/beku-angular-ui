@@ -5,6 +5,7 @@ import { Utils } from 'src/app/services/utils';
 import { Day } from 'src/app/model/common-models';
 import { FoodOrderService } from 'src/app/services/food-order.service';
 import { faCircle, faMinus, faPepperHot, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { BasketService } from 'src/app/services/basket.service';
 
 @Component({
   selector: 'app-menu-item',
@@ -30,6 +31,7 @@ export class MenuItemComponent {
 
   constructor(
     private foodOrderService: FoodOrderService,
+    private basketService: BasketService,
     private utils: Utils,
     private modalService: NgbModal
   ) {}
@@ -145,7 +147,7 @@ export class MenuItemComponent {
       choice: this.selectedchoice,
       specialInstruction: this.specialInstruction,
     };
-    this.foodOrderService.addToOrder(foodOrderItem);
+    this.basketService.addToFoodOrder(foodOrderItem);
     this.close();
   }
 }

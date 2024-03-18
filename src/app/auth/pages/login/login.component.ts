@@ -4,6 +4,7 @@ import { Utils } from 'src/app/helpers/utils';
 import { AccountService } from 'src/app/services/account.service';
 import { Subject, takeUntil } from 'rxjs';
 import { Errors } from 'src/app/model/auth-model';
+import { faDochub } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   destroy$ = new Subject<void>();
   errors: Errors = { errors: {} };
   errorMessage: any;
-
+  faDocHub = faDochub;
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,

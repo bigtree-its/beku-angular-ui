@@ -10,8 +10,6 @@ article {
     transform-origin: center;
     transition: all 0.4s ease-in-out;
     overflow: hidden;
-    width: 300px;
-    margin: 10px;
 }
 
 article a::after {
@@ -46,7 +44,7 @@ article img {
 }
 
 .article-body {
-    padding: 24px;
+    padding: 10px;
 }
 
 article a {

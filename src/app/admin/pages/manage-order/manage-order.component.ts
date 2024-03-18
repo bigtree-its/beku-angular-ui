@@ -4,7 +4,7 @@ import { faFaceSmile, faMinus, faPeopleArrows, faPlus, faStar } from '@fortaweso
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { Utils } from 'src/app/helpers/utils';
 import { Errors } from 'src/app/model/auth-model';
-import { CustomerOrder, LocalChef } from 'src/app/model/localchef';
+import { FoodOrder, LocalChef } from 'src/app/model/localchef';
 import { PaymentIntentResponse } from 'src/app/model/order';
 import { ChefService } from 'src/app/services/chef.service';
 import { FoodOrderService } from 'src/app/services/food-order.service';
@@ -31,7 +31,7 @@ export class ManageOrderComponent implements OnInit, OnDestroy{
   paymentIntent: PaymentIntentResponse;
   errors: Errors = { errors: {} };
   errorMessage: any;
-  order: CustomerOrder;
+  order: FoodOrder;
   supplier: LocalChef;
 
 

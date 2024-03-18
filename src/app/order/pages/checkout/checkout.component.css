@@ -48,10 +48,6 @@
     background: transparent;
 }
 
-.service-mode-option-selected {
-    background-color: #0dcaf0;
-}
-
 .postcode-lookup-container {
     display: flex;
     justify-content: space-between;

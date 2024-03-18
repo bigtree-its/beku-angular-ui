@@ -1,15 +1,17 @@
 import { Component, inject } from '@angular/core';
-import { ContextService } from 'src/app/services/context.service';
 import { Router } from '@angular/router';
 import { ServiceLocation } from 'src/app/model/ServiceLocation';
 import { FoodOrderService } from 'src/app/services/food-order.service';
-import { CustomerOrder } from 'src/app/model/localchef';
+import { FoodOrder } from 'src/app/model/localchef';
 import { AccountService } from 'src/app/services/account.service';
 import { User } from 'src/app/model/auth-model';
 import { NavigationService } from 'src/app/services/navigation.service';
 import { faBars, faKitchenSet, faBagShopping, faMugHot } from '@fortawesome/free-solid-svg-icons';
 import { LocalService } from 'src/app/services/local.service';
 import { Constants } from 'src/app/services/constants';
+import { OrderService } from 'src/app/services/products/order.service';
+import { Order } from 'src/app/model/products/all';
+import { Utils } from 'src/app/helpers/utils';
 
 @Component({
   selector: 'app-header',
@@ -17,36 +19,56 @@ import { Constants } from 'src/app/services/constants';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-  cartTotal: number = 0;
+  
   serviceLocation: ServiceLocation;
   displayableServiceLocation: string = '';
-  itemsCount: number = 0;
+
+  productsTotal: number = 0;
+  foodTotal: number = 0;
+  productItems: number = 0;
+  foodItems: number = 0;
+
   user: User = null;
   faBars = faBars;
   logoIcon = faKitchenSet;
   cartIcon = faBagShopping;
+  pOrder: Order = null;
+  fOrder: FoodOrder = null;
 
+  pOrderSvc = inject(OrderService);
   localService = inject(LocalService);
   constants = inject(Constants);
 
   constructor(
-    private orderService: FoodOrderService,
+    private fOrderSvc: FoodOrderService,
     private accountService: AccountService,
-    private ctxSvc: ContextService,
     private navigationService: NavigationService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.orderService.getData();
-    this.orderService.orderSubject$.subscribe({
+    this.fOrderSvc.getData();
+    this.fOrderSvc.orderSubject$.subscribe({
       next: (value) => {
-        var customerOrder: CustomerOrder = value;
-        this.extractData(customerOrder);
+        this.fOrder = value;
+        console.log('FoodOrder rx emitted a notification. '+ JSON.stringify(this.fOrder))
+        this.extractFoodOrder();
       },
       error: (err) => console.error('OrderSubject emitted an error: ' + err),
       complete: () =>
         console.log('OrderSubject emitted the complete notification'),
+    });
+
+    this.pOrderSvc.getData();
+    this.pOrderSvc.orderSubject$.subscribe({
+      next: (value) => {
+        this.pOrder = value;
+        console.log('ProductOrder rx emitted a notification. '+ JSON.stringify(this.pOrder))
+        this.extractProductOrder();
+      },
+      error: (err) => console.error('Product order emitted an error: ' + err),
+      complete: () =>
+        console.log('Product order emitted the complete notification'),
     });
 
     var json = this.localService.getData(Constants.StorageItem_Location);
@@ -66,13 +88,25 @@ export class HeaderComponent {
     });
   }
 
-  private extractData(customerOrder: CustomerOrder) {
-    if (customerOrder !== null && customerOrder !== undefined) {
-      this.cartTotal = customerOrder.subTotal;
-      this.itemsCount = customerOrder.items?.length;
+  extractProductOrder() {
+    if (this.pOrder !== null && this.pOrder !== undefined) {
+      this.productsTotal = this.pOrder.subTotal;
+      this.productItems = this.pOrder.items?.length;
     } else {
-      this.cartTotal = 0;
-      this.itemsCount = 0;
+      this.productsTotal = 0;
+      this.productItems = 0;
+    }
+  }
+
+  private extractFoodOrder() {
+    if (Utils.isValid(this.fOrder)) {
+      this.foodTotal = this.fOrder.subTotal;
+      this.foodItems = this.fOrder.items?.length;
+      console.log('Food total '+ this.foodTotal)
+      console.log('Food Items '+ this.foodItems)
+    } else {
+      this.foodTotal = 0;
+      this.foodItems = 0;
     }
   }
 
@@ -80,7 +114,7 @@ export class HeaderComponent {
     this.navigationService.setShowNav(true);
   }
 
-  onClickBasket() {
+  gotoBasket() {
     this.router.navigate(['basket']).then();
   }
 

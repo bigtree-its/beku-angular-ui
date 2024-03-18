@@ -2,7 +2,8 @@
 
     <div class="full-screen mb-2 px-3">
         <div class="flex-row-scrollable">
-            <div *ngFor="let cuisine of cuisines" class="cuisine" (click)="onSelectCuisine(cuisine)" [class.selectedCuisine]="isSelectedCuisine(cuisine)">
+            <div *ngFor="let cuisine of cuisines" class="cuisine" (click)="onSelectCuisine(cuisine)"
+                [class.selectedCuisine]="isSelectedCuisine(cuisine)">
                 <img src={{cuisine.logo}} class="cuisine-logo" height="90px" width="120px">
                 <span>{{cuisine.name}}</span>
             </div>
@@ -12,7 +13,8 @@
     <div class="full-screen mb-2 px-3">
         <h4>Whats on your mind ?</h4>
         <div class="flex-row-scrollable">
-            <div *ngFor="let d of dishes" class="selectable mr_0.5" (click)="onSelectDish(d)" [class.selected]="isDishSelected(d)">
+            <div *ngFor="let d of dishes" class="selectable mr_0.5" (click)="onSelectDish(d)"
+                [class.selected]="isDishSelected(d)">
                 <fa-icon [icon]="faCheck"></fa-icon>
                 <span class="pl-1">{{d.name}}</span>
             </div>
@@ -20,7 +22,8 @@
     </div>
 
     <div class="full-screen mb-2 px-3">
-        <div class="flex-row-space-between mb-1 md bg-light p-2 mx-1" *ngIf="serviceLocation != null && serviceLocation !== undefined">
+        <div class="flex-row-space-between mb-1 md bg-light p-2 mx-1"
+            *ngIf="serviceLocation != null && serviceLocation !== undefined">
             <span>{{serviceLocation.name}}, {{serviceLocation.city}}</span>
             <span class="change-area" routerLink="/">Change</span>
         </div>
@@ -28,7 +31,18 @@
 
     <!-- <span class="f-size-xl bold lg">{{serviceLocation.name}}</span> -->
 
-    <div class="flex-row-wrap justify-content-center">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+        <div class="col mb-4" *ngFor="let chef of filteredChefs " [routerLink]="[ '/cooks', chef._id] ">
+            <div class="card">
+                <img src="{{chef.image}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{chef.kitchenName}}</h5>
+                    <p class="card-text"> {{chef.description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
         <article *ngFor="let chef of filteredChefs " [routerLink]="[ '/cooks', chef._id] ">
             <div>
                 <figure>
@@ -53,10 +67,37 @@
                 </div>
             </div>
         </article>
-        <!-- <div class="chef-card " *ngFor="let chef of filteredChefs ">
+    </div> -->
+
+    <!-- <div class="flex-row-wrap justify-content-center">
+        <article *ngFor="let chef of filteredChefs " [routerLink]="[ '/cooks', chef._id] ">
+            <div>
+                <figure>
+                    <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg">
+                </figure>
+                <div class="article-body">
+                    <h2 class="chef-name font-abril-fatface ">{{chef.kitchenName}}</h2>
+                    <p>
+                        {{chef.description}}
+                    </p>
+                    <a class="clickable">
+                        Order now <span class="sr-only ">about this is
+                            some title</span>
+                        <svg xmlns="http://www.w3.org/2000/svg "
+                            class="icon " viewBox="0 0 20 20 "
+                            fill="currentColor ">
+                            <path fill-rule="evenodd "
+                                d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z "
+                                clip-rule="evenodd " />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+         <div class="chef-card " *ngFor="let chef of filteredChefs ">
             <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg ">
         </div> -->
-        <!-- <article *ngFor="let chef of filteredChefs " [routerLink]="[ '/cooks', chef._id] ">
+    <!-- <article *ngFor="let chef of filteredChefs " [routerLink]="[ '/cooks', chef._id] ">
             <div>
                 <figure>
                     <img src="/assets/images/chefs/{{chef._id}}/cover-photo.jpg ">
@@ -79,8 +120,8 @@
                         </a>
                 </div>
             </div>
-        </article> -->
-    </div>
+        </article> 
+    </div> -->
 
     <div class="footer-div ">
         <div class="footer-container f-size-xs ">

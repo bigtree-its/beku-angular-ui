@@ -17,7 +17,7 @@ import {
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { Utils } from 'src/app/helpers/utils';
 import { Errors } from 'src/app/model/auth-model';
-import { CustomerOrder, LocalChef } from 'src/app/model/localchef';
+import { FoodOrder, LocalChef } from 'src/app/model/localchef';
 import { PaymentIntentResponse } from 'src/app/model/order';
 import { ChefService } from 'src/app/services/chef.service';
 import { FoodOrderService } from 'src/app/services/food-order.service';
@@ -57,7 +57,7 @@ export class MakePaymentComponent implements OnInit, OnDestroy {
   paymentIntent: PaymentIntentResponse;
   errors: Errors = { errors: {} };
   errorMessage: any;
-  customerOrder: CustomerOrder;
+  foodOrder: FoodOrder;
   supplier: LocalChef;
 
   faStar = faStar;
@@ -131,9 +131,9 @@ export class MakePaymentComponent implements OnInit, OnDestroy {
     observable.pipe(takeUntil(this.destroy$)).subscribe({
       next: (e) => {
         if (this.utils.isValid(e)) {
-          this.customerOrder = e[0];
+          this.foodOrder = e[0];
           console.log('Customer order ' + JSON.stringify(e));
-          this.retrieveSupplier(this.customerOrder.supplier._id);
+          this.retrieveSupplier(this.foodOrder.supplier._id);
         }
 
       },

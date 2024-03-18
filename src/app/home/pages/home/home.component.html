@@ -101,21 +101,19 @@
         </div>
     </div>
 
-    <div class="flex-row flex-wrap gap-1 border-bottom">
-        <div class="flex-column align-items-center p-3 flex-grow border-right">
-            <strong style="font-size: 22px;font-weight: 800;">Top Locations</strong>
-            <strong style="font-size: 15px;margin: 10px 0;">Glasgow</strong>
-            <div class="flex-column gap-1" *ngIf="popularLocations !== null && popularLocations !== undefined">
-                <span class="clickable-text my-2" *ngFor="let pl of popularLocations" [routerLink]="['cooks']"
+    <div class="flex-column jcc aic border my-2 br-7 p-4">
+        <strong style="font-size: 22px;font-weight: 800;">Top Locations</strong>
+        <div class="flex-row flex-wrap aic gap-1 jcc aic">
+            <span class="clickable my-2" *ngFor="let pl of popularLocations" [routerLink]="['cooks']"
                     [queryParams]="{location: pl.slug}">{{pl.name}}</span>
-            </div>
         </div>
-        <div class="flex-column align-items-center p-3 flex-grow">
-            <strong style="font-size: 22px;font-weight: 800;">Top Cuisines</strong>
-            <div class="flex-column gap-1" *ngIf="popularLocations !== null && popularLocations !== undefined">
-                <span class="clickable-text my-2" *ngFor="let cuisine of cuisines" [routerLink]="['cooks']"
-                    [queryParams]="{cuisine: cuisine.slug}">{{cuisine.name}}</span>
-            </div>
+    </div>
+
+    <div class="flex-column jcc aic border my-2 br-7 p-4">
+        <strong style="font-size: 22px;font-weight: 800;">Top Cuisines</strong>
+        <div class="flex-row flex-wrap aic gap-1 jcc aic">
+            <span class="clickable my-2" *ngFor="let cuisine of cuisines" [routerLink]="['cooks']"
+                [queryParams]="{cuisine: cuisine.slug}">{{cuisine.name}}</span>
         </div>
     </div>
 
@@ -164,18 +162,18 @@
     </div>
 
 
-    <div class="flex-column jcc aic py-5 border">
+    <div class="flex-column jcc aic py-5">
         <span style="font-weight: 900;font-size: 25px;padding: 10px 0;">Join us</span>
         <div style="margin-bottom: 10px;">Be a part of <span class="logo-text">DESI TIMES</span></div>
-        <div class="flex-row">
-            <div class="flex-row" style="height: 200px;">
+        <div class="flex-row gap-1">
+            <div class="flex-row bg-light br-25" style="height: 200px;">
                 <div
                     style="height: 200px;width:200px;display: flex;justify-content: center;align-items: center;color: var(--d-red);">
                     <fa-icon [icon]="faHandshake" style="font-size: 50px;"></fa-icon>
                 </div>
                 <div class="flex-column justify-content-center align-items-center" style="height: 200px;width:100%;">
                     <span style="font-weight: 900;font-size: 20px;padding: 10px 0;">Become
-                        a family chef</span>
+                        a Partner</span>
                     <p style="margin: 10px 0; word-wrap: break-word;padding: 0 20px;text-align: center;">Reach more
                         customers and achieve growth with us</p>
                     <button
@@ -184,7 +182,7 @@
                         our more</button>
                 </div>
             </div>
-            <div class="flex-row" style="height: 200px;">
+            <div class="flex-row bg-light br-25" style="height: 200px;">
                 <div
                     style="height: 200px;width:200px;display: flex;justify-content: center;align-items: center;color: var(--d-red);">
                     <fa-icon [icon]="faCode" style="font-size: 50px;"></fa-icon>

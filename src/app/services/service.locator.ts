@@ -16,10 +16,10 @@ export class ServiceLocator {
   ServiceAreasUrl: string;
   calendersUrl: string;
   OrderTrackingUrl: string;
-  CustomerOrdersUrl: string;
+  FoodOrdersUrl: string;
   PaymentIntentUrl: string;
   StripePaymentsUrl: string;
-  CustomerOrderSearchUrl: string;
+  FoodOrderSearchUrl: string;
   LoginUrl: string;
   LogoutUrl: string;
   RegisterUrl: string;
@@ -45,8 +45,8 @@ export class ServiceLocator {
     this.menusUrl = environment.MenusUrl;
     this.calendersUrl = environment.CalendersUrl;
     this.OrderTrackingUrl = environment.OrderTrackingUrl;
-    this.CustomerOrdersUrl = environment.CustomerOrdersUrl;
-    this.CustomerOrderSearchUrl = environment.CustomerOrderSearchUrl;
+    this.FoodOrdersUrl = environment.FoodOrdersUrl;
+    this.FoodOrderSearchUrl = environment.FoodOrderSearchUrl;
     this.PaymentIntentUrl = environment.PaymentIntentUrl;
     this.StripePaymentsUrl = environment.StripePaymentsUrl;
     this.LoginUrl = environment.LoginUrl;

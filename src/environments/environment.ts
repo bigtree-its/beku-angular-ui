@@ -7,54 +7,59 @@ export const environment = {
 
   AUTH_SERVER: 'bigtree-auth-service-672f06320174.herokuapp.com',
   ORDER_SERVER: 'polar-fortress-28097-08459456d8d7.herokuapp.com',
-  CHEF_SERVER: 'chef-service-1b2023ebc956.herokuapp.com',
+  ADS_SERVER_REMOTE: 'chef-service-1b2023ebc956.herokuapp.com',
+  ADS_SERVER_LOCAL: 'http://localhost:8082',
   CURRENCY: 'GBP',
   CURRENCY_SYMBOL: '£',
 
-
+  // ====================
+  // Ads Service Remote
+  // ====================
   // GroupsUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/groups',
   // ProductsUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/products',
   // FeedbacksUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/feedbacks',
+  // CollectionsUrl:
+  //   'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/collections',
+  // ChefsUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/chefs',
+  // CuisinesUrl:
+  //   'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/cuisines',
+  // DishesUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/dishes',
+  // ReviewsUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/reviews',
+  // ServiceAreasUrl:
+  //   'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/serviceareas',
+  // MenusUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/menus',
+  // CalendersUrl:
+  //   'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/calendars',
 
-  CollectionsUrl:
-    'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/collections',
-  ChefsUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/chefs',
-  CuisinesUrl:
-    'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/cuisines',
-  DishesUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/dishes',
-  ReviewsUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/reviews',
-  ServiceAreasUrl:
-    'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/serviceareas',
-  MenusUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/menus',
-  CalendersUrl:
-    'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/calendars',
-
+  // ====================
   // Order Service Remote
-
+  // ====================
   // OrderTrackingUrl:
   //   'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/order-tracking',
-  // CustomerOrdersUrl:
+  // FoodOrdersUrl:
   //   'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders',
-  // CustomerOrderSearchUrl:
+  // FoodOrderSearchUrl:
   //   'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders/search',
   // StripePaymentsUrl:
   //   'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments',
   // PaymentIntentUrl:
   //   'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments/payment-intent',
 
-  // Order Service Local
+  // ====================
+  // Order Service Remote
+  // ====================
   OrderTrackingUrl: 'http://localhost:8082/api/order-tracking',
-  CustomerOrdersUrl: 'http://localhost:8082/api/customer-orders',
-  CustomerOrderSearchUrl: 'http://localhost:8082/api/customer-orders/search',
+  FoodOrdersUrl: 'http://localhost:8082/api/customer-orders',
+  FoodOrderSearchUrl: 'http://localhost:8082/api/customer-orders/search',
   StripePaymentsUrl: 'http://localhost:8082/api/stripe-payments',
   PaymentIntentUrl: 'http://localhost:8082/api/stripe-payments/payment-intent',
-
-  // Products Local
   OrdersUrl: 'http://localhost:8082/orders/v1',
   PaymentsUrl: 'http://localhost:8082/payments/v1',
-  // Auth URLs
 
-  // Local
+
+  // ====================
+  // Auth Service Remote
+  // ====================
   LoginUrl:
     'https://bigtree-auth-service-672f06320174.herokuapp.com/authenticate/customer/token',
   LogoutUrl:
@@ -73,33 +78,23 @@ export const environment = {
     'https://bigtree-auth-service-672f06320174.herokuapp.com/api/contacts',
   UpdatePersonalDetails:
     'https://bigtree-auth-service-672f06320174.herokuapp.com/api/users/update_personal',
-  // Heroku
-  // LoginUrl:
-  //   'https://bigtree-auth-service-672f06320174.herokuapp.com/authenticate/customer/token',
-  // LogoutUrl:
-  //   'https://bigtree-auth-service-672f06320174.herokuapp.com/api/oauth/logout',
-  // RegisterUrl:
-  //   'https://bigtree-auth-service-672f06320174.herokuapp.com/api/users/signup',
-  // PasswordResetInitiateUrl:
-  //   'https://bigtree-auth-service-672f06320174.herokuapp.com/passwords/reset_initiate',
-  // PasswordResetSubmitUrl:
-  //   'https://bigtree-auth-service-672f06320174.herokuapp.com/passwords/reset_submit',
-  // GetCustomerPreferencesUrl:'https://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/replace-me/preferences',
-  // CreateOrUpdateCustomerPreferencesUrl:'https://bigtree-auth-service-672f06320174.herokuapp.com/api/customers/preferences',
+ 
 
-  // Auth Server: https://stormy-stream-36548-96356ce4833c.herokuapp.com
-  // Order Server: https://polar-fortress-28097-08459456d8d7.herokuapp.com
-
-  // CollectionsUrl: "https://localhost:8083/ads/v1/collections",
-  // ChefsUrl: "http://localhost:8083/ads/v1/chefs",
-  // CuisinesUrl: "http://localhost:8083/ads/v1/cuisines",
-  // DishesUrl: "http://localhost:8083/ads/v1/dishes",
-  // ServiceAreasUrl: "http://localhost:8083/ads/v1/serviceareas",
-  // MenusUrl: "http://localhost:8083/ads/v1/menus",
-  // CalendersUrl: "http://localhost:8083/ads/v1/calendars",
+  // ====================
+  // Ads Service Remote
+  // ====================
+  CollectionsUrl: "http://localhost:8083/ads/v1/collections",
+  ChefsUrl: "http://localhost:8083/ads/v1/chefs",
+  CuisinesUrl: "http://localhost:8083/ads/v1/cuisines",
+  DishesUrl: "http://localhost:8083/ads/v1/dishes",
+  ReviewsUrl: "http://localhost:8083/ads/v1/reviews",
+  ServiceAreasUrl: "http://localhost:8083/ads/v1/serviceareas",
+  MenusUrl: "http://localhost:8083/ads/v1/menus",
+  CalendersUrl: "http://localhost:8083/ads/v1/calendars",
   GroupsUrl: 'http://localhost:8083/ads/v1/groups',
   ProductsUrl: 'http://localhost:8083/ads/v1/products',
   FeedbacksUrl: 'http://localhost:8083/ads/v1/feedbacks',
+  
 
   debug: window['env']['debug'] || false,
 

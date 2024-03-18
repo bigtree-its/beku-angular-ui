@@ -30,23 +30,23 @@
                 <div style=" display: flex; flex-direction: column;width: 100%;padding: 5px 30px;">
                     <div class="flex-row-space-between">
                         <span>Subtotal</span>
-                        <span>{{customerOrder?.subTotal | currency: 'GBP'}}</span>
+                        <span>{{foodOrder?.subTotal | currency: 'GBP'}}</span>
                     </div>
                     <div class="flex-row-space-between">
                         <span>Delivery fee</span>
-                        <span>{{customerOrder?.deliveryFee | currency: 'GBP'}}</span>
+                        <span>{{foodOrder?.deliveryFee | currency: 'GBP'}}</span>
                     </div>
                     <div class="flex-row-space-between">
                         <span>Packing fee</span>
-                        <span>{{customerOrder?.packingFee | currency: 'GBP'}}</span>
+                        <span>{{foodOrder?.packingFee | currency: 'GBP'}}</span>
                     </div>
                     <div class="flex-row-space-between">
                         <span>Service Fee</span>
-                        <span>{{customerOrder?.serviceFee | currency: 'GBP'}}</span>
+                        <span>{{foodOrder?.serviceFee | currency: 'GBP'}}</span>
                     </div>
                     <div class="flex-row-space-between" style="margin-top: 10px;">
                         <span style="font-weight: 900;">TOTAL</span>
-                        <span style="font-weight: 900;">{{customerOrder?.total | currency:
+                        <span style="font-weight: 900;">{{foodOrder?.total | currency:
                             'GBP'}}</span>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
             <span class="bold f-size-lg ">Payment</span>
         </div>
         <div class="flex-column align-items-center flex-grow" id="contentDiv">
-            <app-stripeform *ngIf="!error" [order]="customerOrder" [paymentIntent]="paymentIntent"></app-stripeform>
+            <app-stripeform *ngIf="!error" [order]="foodOrder" [paymentIntent]="paymentIntent"></app-stripeform>
             <span *ngIf="error" class="bg-alert-success p-5 jcc aic f-size-lg bolder w-100 mt-3 ">{{errorMessage}}</span>
         </div>
     </div> 
@@ -117,10 +117,10 @@
                 <th>Delivery Method</th>
             </tr>
             <tr>
-                <td>{{customerOrder?.reference}}</td>
-                <td>{{customerOrder?.dateCreated | date}}</td>
-                <td>{{customerOrder?.status | titlecase}}</td>
-                <td>{{customerOrder?.serviceMode | titlecase}}</td>
+                <td>{{foodOrder?.reference}}</td>
+                <td>{{foodOrder?.dateCreated | date}}</td>
+                <td>{{foodOrder?.status | titlecase}}</td>
+                <td>{{foodOrder?.serviceMode | titlecase}}</td>
             </tr>
         </table>
     </div>
@@ -132,7 +132,7 @@
             <th>Quantity</th>
             <th>price</th>
         </tr>
-        <tr class="border-bottom py-3" *ngFor="let item of customerOrder?.items">
+        <tr class="border-bottom py-3" *ngFor="let item of foodOrder?.items">
             <td>{{item.name}}</td>
             <td class="pl-2">{{item.quantity}}</td>
             <td>{{item.subTotal | currency: 'GBP'}}</td>

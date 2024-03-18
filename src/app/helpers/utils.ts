@@ -36,6 +36,13 @@ export class Utils {
     return true;
   }
 
+  public static isValid(data: any): Boolean {
+    if ( data === null || data === undefined ){
+        return false;
+    }
+    return true;
+  }
+
   public isEquals(data1: string, data2: string): Boolean {
     console.log('Comparing '+ data1+" and "+ data2)
     return data1 === data2;

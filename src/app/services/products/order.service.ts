@@ -1,18 +1,18 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap, Observable, BehaviorSubject, of } from 'rxjs';
-import { UserSession } from '../model/common-models';
-import { PaymentIntentRequest, PaymentIntentResponse } from '../model/order';
-import { Utils } from './utils';
-import { ServiceLocator } from './service.locator';
-import { LocalService } from './local.service';
-import { Constants } from './constants';
-import { Order, OrderItem, OrderQuery } from '../model/products/all';
+import { UserSession } from '../../model/common-models';
+import { PaymentIntentRequest, PaymentIntentResponse } from '../../model/order';
+import { Utils } from '../utils';
+import { ServiceLocator } from '../service.locator';
+import { LocalService } from '../local.service';
+import { Constants } from '../constants';
+import { Order, OrderItem, OrderQuery } from '../../model/products/all';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FoodOrderService {
+export class OrderService {
   userSession: UserSession;
   ipAddress: any;
   private order?: Order;
@@ -79,7 +79,8 @@ export class FoodOrderService {
   }
 
   public addToOrder(item: OrderItem) {
-    console.log('Adding item to order ' + JSON.stringify(this.order));
+    console.log('Adding item ' + JSON.stringify(item));
+    console.log('To order ' + JSON.stringify(this.order));
     if (this.order === null || this.order === undefined) {
       this.getData();
     }
@@ -246,27 +247,33 @@ export class FoodOrderService {
     };
     console.log('Created a brand new Order ' + JSON.stringify(this.order));
   }
+  
+  getPackagingFee(): number {
+   return 0.5;
+  }
 
-
+  getDeliveryFee(): number {
+    return 2.00;
+  }
 
   setData(data: Order) {
-    console.info('Storing customer order..');
+    console.info('Storing product order..');
     this.localService.saveData(
-      Constants.StorageItem_C_Order,
+      Constants.StorageItem_P_Order,
       JSON.stringify(data)
     );
     this.orderSubject$.next(this.order);
   }
 
   purgeData() {
-    console.log('Purging order.');
-    this.localService.removeData(Constants.StorageItem_C_Order);
+    console.log('Purging product and service order.');
+    this.localService.removeData(Constants.StorageItem_P_Order);
     this.order = null;
-    this.orderSubject$.next(this.order);
+    this.orderSubject$.next(null);
   }
 
   getData() {
-    var json = this.localService.getData(Constants.StorageItem_C_Order);
+    var json = this.localService.getData(Constants.StorageItem_P_Order);
     console.log('Order in local storage ' + json);
     if (this.isJsonString(json)) {
       var obj = JSON.parse(json);

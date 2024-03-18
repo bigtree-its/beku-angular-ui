@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { CustomerOrder } from 'src/app/model/localchef';
+import { FoodOrder } from 'src/app/model/localchef';
 import {
   PaymentIntentRequest,
   PaymentIntentResponse,
@@ -25,9 +25,9 @@ export class StripeformComponent {
   public paymentMessage: ElementRef<any>;
 
   enablePayButton: boolean = false;
-  // @Input() order: CustomerOrder;
+  // @Input() order: FoodOrder;
   // @Input() paymentIntent: PaymentIntentResponse;
-  @Input() order: CustomerOrder;
+  @Input() order: FoodOrder;
   @Input() paymentIntent: PaymentIntentResponse;
   stripeConfirmationError: string;
   stripeElements: any;

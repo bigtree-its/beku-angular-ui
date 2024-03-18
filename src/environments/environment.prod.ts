@@ -17,9 +17,9 @@ export const environment = {
     'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/calendars',
   OrderTrackingUrl:
     'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/order-tracking',
-  CustomerOrdersUrl:
+    FoodOrdersUrl:
     'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders',
-  CustomerOrderSearchUrl:
+  FoodOrderSearchUrl:
     'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders/search',
   StripePaymentsUrl:
     'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments',

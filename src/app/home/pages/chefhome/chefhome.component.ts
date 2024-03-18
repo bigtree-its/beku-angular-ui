@@ -12,8 +12,7 @@ import { Day } from 'src/app/model/common-models';
 import {
   Calendar,
   Collection,
-  CustomerOrder,
-  Food,
+  FoodOrder,
   LocalChef,
   Menu,
 } from 'src/app/model/localchef';
@@ -104,7 +103,7 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
   selectedCategory: Collection;
   starSelected: string = '/assets/icons/star2.png';
   star: string = '/assets/icons/star1.png';
-  order: CustomerOrder;
+  order: FoodOrder;
   cartTotal: number = 0.0;
   weekDays: Day[];
   destroy$ = new Subject<void>();

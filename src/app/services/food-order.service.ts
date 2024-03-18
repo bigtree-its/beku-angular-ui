@@ -2,8 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap, Observable, BehaviorSubject, of } from 'rxjs';
 import {
-  CustomerOrder,
-  CustomerOrderList,
+  FoodOrder,
   FoodOrderItem,
   LocalChef,
   Orders,
@@ -19,7 +18,6 @@ import { ServiceLocator } from './service.locator';
 import { LocalService } from './local.service';
 import { ChefService } from './chef.service';
 import { Constants } from './constants';
-import { Customer } from '../model/auth-model';
 
 @Injectable({
   providedIn: 'root',
@@ -29,12 +27,13 @@ export class FoodOrderService {
   ipAddress: any;
   supplier: LocalChef;
   foodOrderKey: string;
-  private customerOrder?: CustomerOrder;
-  public orderSubject$ = new BehaviorSubject(this.customerOrder);
+  private foodOrder?: FoodOrder;
+  public orderSubject$ = new BehaviorSubject(this.foodOrder);
   public orderListSubject$ = new BehaviorSubject(null);
 
   constructor(
     private http: HttpClient,
+    private utils: Utils,
     private chefService: ChefService,
     private localService: LocalService,
     private serviceLocator: ServiceLocator
@@ -56,7 +55,7 @@ export class FoodOrderService {
       });
   }
 
-  action(reference: string, action: string): Observable<CustomerOrder> {
+  action(reference: string, action: string): Observable<FoodOrder> {
     // var params = new HttpParams();
     // if (reference !== null && reference !== undefined) {
     //   params = params.set('ref', reference);
@@ -66,18 +65,18 @@ export class FoodOrderService {
     // }
     const params = new HttpParams({fromString: 'ref='+ reference+"&action="+ action});
     // const options = params ? { params: params } : {};
-    var url = this.serviceLocator.CustomerOrdersUrl + '/action';
+    var url = this.serviceLocator.FoodOrdersUrl + '/action';
     console.log('Action on order ' + url + '. Params: ' + params);
-    return this.http.put<CustomerOrder>(url, params).pipe(
+    return this.http.put<FoodOrder>(url, params).pipe(
       tap((result) => {
         // this.setData(result);
       })
     );
   }
 
-  saveOrder(order: CustomerOrder): Observable<CustomerOrder> {
+  saveOrder(order: FoodOrder): Observable<FoodOrder> {
     return this.http
-      .post<CustomerOrder>(this.serviceLocator.CustomerOrdersUrl, order)
+      .post<FoodOrder>(this.serviceLocator.FoodOrdersUrl, order)
       .pipe(
         tap((result) => {
           this.setData(result);
@@ -88,19 +87,19 @@ export class FoodOrderService {
   setupSupplier() {
     if (this.supplier !== null && this.supplier !== undefined) {
       console.log('Current supplier ' + this.supplier._id);
-      if (this.customerOrder !== null && this.customerOrder !== undefined) {
-        if (this.customerOrder.status === 'Completed') {
+      if (this.foodOrder !== null && this.foodOrder !== undefined) {
+        if (this.foodOrder.status === 'Completed') {
           return;
         }
         if (
-          this.customerOrder.supplier === null ||
-          this.customerOrder.supplier._id === undefined ||
-          this.customerOrder.supplier._id !== this.supplier._id
+          this.foodOrder.supplier === null ||
+          this.foodOrder.supplier._id === undefined ||
+          this.foodOrder.supplier._id !== this.supplier._id
         ) {
           console.log('Setting up supplier');
           this.changeSupplier();
-          this.customerOrder.items = [];
-          this.customerOrder.status = "Draft";
+          this.foodOrder.items = [];
+          this.foodOrder.status = "Draft";
           this.calculateTotal();
         }
       }
@@ -112,7 +111,7 @@ export class FoodOrderService {
   }
 
   private changeSupplier() {
-    this.customerOrder.supplier = {
+    this.foodOrder.supplier = {
       _id: this.supplier._id,
       name: this.supplier.name,
       image: this.supplier.coverPhoto,
@@ -122,7 +121,7 @@ export class FoodOrderService {
     };
   }
 
-  retrieveSingleOrder(reference: string, intent: string): Observable<CustomerOrder[]> {
+  retrieveSingleOrder(reference: string, intent: string): Observable<FoodOrder[]> {
     var params = new HttpParams();
     if (reference !== null && reference !== undefined) {
       params = params.set('ref', reference);
@@ -130,21 +129,21 @@ export class FoodOrderService {
     if (intent !== null && intent !== undefined) {
       params = params.set('intent', intent);
     }
-    var url = this.serviceLocator.CustomerOrdersUrl;
-    console.log('Fetching customer orders ' + url);
-    return this.http.get<CustomerOrder[]>(url, { params: params });
+    var url = this.serviceLocator.FoodOrdersUrl;
+    console.log('Fetching food orders ' + url);
+    return this.http.get<FoodOrder[]>(url, { params: params });
   }
 
-  retrieveCustomerOrders(email: string): Observable<CustomerOrder[]> {
+  retrieveFoodOrders(email: string): Observable<FoodOrder[]> {
     var params = new HttpParams();
     if (email !== null && email !== undefined) {
       params = params.set('customer', email);
     }
-    var url = this.serviceLocator.CustomerOrdersUrl;
-    console.log('Fetching customer orders ' + url);
-    return this.http.get<CustomerOrder[]>(url, { params: params }).pipe(
+    var url = this.serviceLocator.FoodOrdersUrl;
+    console.log('Fetching food orders ' + url);
+    return this.http.get<FoodOrder[]>(url, { params: params }).pipe(
       tap((data) => {
-        this.setCustomerOrders(data);
+        this.setFoodOrders(data);
       })
     );
   }
@@ -230,7 +229,7 @@ export class FoodOrderService {
       params = params.set('all', 'true');
     }
     return this.http.get<SupplierOrders>(
-      this.serviceLocator.CustomerOrderSearchUrl,
+      this.serviceLocator.FoodOrderSearchUrl,
       { params }
     );
   }
@@ -270,16 +269,16 @@ export class FoodOrderService {
     if (orderSearchQuery.all) {
       params = params.set('all', 'true');
     }
-    return this.http.get<Orders>(this.serviceLocator.CustomerOrderSearchUrl, {
+    return this.http.get<Orders>(this.serviceLocator.FoodOrderSearchUrl, {
       params,
     });
   }
 
-  getCustomerOrders(
+  getFoodOrders(
     orderSearchQuery: OrderSearchQuery
-  ): Observable<CustomerOrder[]> {
+  ): Observable<FoodOrder[]> {
     console.log(
-      'Retrieving customer orders for ' + JSON.stringify(orderSearchQuery)
+      'Retrieving food orders for ' + JSON.stringify(orderSearchQuery)
     );
     var params = new HttpParams();
     if (
@@ -309,8 +308,8 @@ export class FoodOrderService {
     if (orderSearchQuery.all) {
       params = params.set('all', 'true');
     }
-    return this.http.get<CustomerOrder[]>(
-      this.serviceLocator.CustomerOrdersUrl,
+    return this.http.get<FoodOrder[]>(
+      this.serviceLocator.FoodOrdersUrl,
       { params }
     );
   }
@@ -322,28 +321,28 @@ export class FoodOrderService {
   }
 
   public addToOrder(foodOrderItem: FoodOrderItem) {
-    console.log('Adding item to order ' + JSON.stringify(this.customerOrder));
-    if (this.customerOrder === null || this.customerOrder === undefined) {
+    console.log('Adding item to food order ' + JSON.stringify(this.foodOrder));
+    if (this.foodOrder === null || this.foodOrder === undefined) {
       this.getData();
     }
     if (
-      this.customerOrder != null &&
-      this.customerOrder !== undefined &&
-      this.customerOrder.items === null
+      this.foodOrder != null &&
+      this.foodOrder !== undefined &&
+      this.foodOrder.items === null
     ) {
-      this.customerOrder.items = [];
+      this.foodOrder.items = [];
     }
 
-    this.customerOrder.items.push(foodOrderItem);
+    this.foodOrder.items.push(foodOrderItem);
     this.calculateTotal();
   }
 
   removeItem(itemToDelete: FoodOrderItem) {
-    if (this.customerOrder !== null && this.customerOrder !== undefined) {
-      for (var i = 0; i < this.customerOrder.items.length; i++) {
-        var item = this.customerOrder.items[i];
+    if (this.foodOrder !== null && this.foodOrder !== undefined) {
+      for (var i = 0; i < this.foodOrder.items.length; i++) {
+        var item = this.foodOrder.items[i];
         if (item._tempId === itemToDelete._tempId) {
-          this.customerOrder.items.splice(i, 1);
+          this.foodOrder.items.splice(i, 1);
         }
       }
     }
@@ -353,9 +352,9 @@ export class FoodOrderService {
   updateItem(item: FoodOrderItem) {
     var idx = -1;
     console.log('Updating item ' + JSON.stringify(item));
-    if (this.customerOrder !== null && this.customerOrder !== undefined) {
-      for (var i = 0; i < this.customerOrder.items.length; i++) {
-        var fi = this.customerOrder.items[i];
+    if (this.foodOrder !== null && this.foodOrder !== undefined) {
+      for (var i = 0; i < this.foodOrder.items.length; i++) {
+        var fi = this.foodOrder.items[i];
         if (fi._tempId === item._tempId) {
           console.log('Found existing item at index ' + i);
           idx = i;
@@ -365,13 +364,13 @@ export class FoodOrderService {
 
       if (idx != -1) {
         const newItems = [
-          ...this.customerOrder.items.slice(0, idx),
+          ...this.foodOrder.items.slice(0, idx),
           item,
-          ...this.customerOrder.items.slice(idx + 1),
+          ...this.foodOrder.items.slice(idx + 1),
         ];
-        this.customerOrder.items = newItems;
-        // this.customerOrder.items.splice(i, 1);
-        // this.customerOrder.items.push(item);
+        this.foodOrder.items = newItems;
+        // this.foodOrder.items.splice(i, 1);
+        // this.foodOrder.items.push(item);
         this.calculateTotal();
       }
     }
@@ -380,47 +379,47 @@ export class FoodOrderService {
   public calculateTotal() {
     var subTotal: number = 0.0;
     if (
-      this.customerOrder.items !== null &&
-      this.customerOrder.items !== undefined &&
-      this.customerOrder.items.length > 0
+      this.foodOrder.items !== null &&
+      this.foodOrder.items !== undefined &&
+      this.foodOrder.items.length > 0
     ) {
-      this.customerOrder.items.forEach((item) => {
+      this.foodOrder.items.forEach((item) => {
         subTotal = subTotal + item.subTotal;
       });
     }
-    this.customerOrder.deliveryFee = 0.0;
-    this.customerOrder.packingFee = 0.0;
-    this.customerOrder.serviceFee = 0.0;
-    this.customerOrder.subTotal = subTotal;
+    this.foodOrder.deliveryFee = 0.0;
+    this.foodOrder.packingFee = 0.0;
+    this.foodOrder.serviceFee = 0.0;
+    this.foodOrder.subTotal = subTotal;
     if (subTotal !== 0) {
-      this.customerOrder.serviceFee = 0.5;
-      if (this.customerOrder.serviceMode === 'DELIVERY') {
-        this.customerOrder.deliveryFee = 0.5;
+      this.foodOrder.serviceFee = 0.5;
+      if (this.foodOrder.serviceMode === 'DELIVERY') {
+        this.foodOrder.deliveryFee = 0.5;
       }
     }
 
     var totalToPay: number =
-      this.customerOrder.subTotal +
-      this.customerOrder.deliveryFee +
-      this.customerOrder.packingFee +
-      this.customerOrder.serviceFee;
+      this.foodOrder.subTotal +
+      this.foodOrder.deliveryFee +
+      this.foodOrder.packingFee +
+      this.foodOrder.serviceFee;
     console.log('Calculating SubTotal: ' + subTotal);
     console.log('Calculating TotalPay: ' + totalToPay);
-    this.customerOrder.total = totalToPay;
-    this.customerOrder.total = +(+this.customerOrder.total).toFixed(2);
-    console.log('The calculated order total: ' + this.customerOrder.total);
-    this.setData(this.customerOrder);
+    this.foodOrder.total = totalToPay;
+    this.foodOrder.total = +(+this.foodOrder.total).toFixed(2);
+    console.log('The calculated order total: ' + this.foodOrder.total);
+    this.setData(this.foodOrder);
   }
 
   createPaymentIntentForOrder(
-    customerOrder: CustomerOrder
+    FoodOrder: FoodOrder
   ): Observable<PaymentIntentResponse> {
-    console.log('Creating intent for order: ' + JSON.stringify(customerOrder));
+    console.log('Creating intent for order: ' + JSON.stringify(FoodOrder));
     const paymentIntentRequest: PaymentIntentRequest = {
       currency: 'GBP',
-      amount: customerOrder.total,
-      orderReference: customerOrder.reference,
-      customerEmail: customerOrder.customer.email,
+      amount: FoodOrder.total,
+      orderReference: FoodOrder.reference,
+      customerEmail: FoodOrder.customer.email,
     };
     console.log(
       'Creating payment intent: ' +
@@ -455,7 +454,7 @@ export class FoodOrderService {
       this.supplier = this.chefService.getData();
     }
 
-    this.customerOrder = {
+    this.foodOrder = {
       id: '',
       status: "Draft",
       items: [],
@@ -507,7 +506,7 @@ export class FoodOrderService {
       notes: '',
     };
     console.log(
-      'Created a brand new Order ' + JSON.stringify(this.customerOrder)
+      'Created a brand new Order ' + JSON.stringify(this.foodOrder)
     );
   }
 
@@ -529,16 +528,16 @@ export class FoodOrderService {
 
   updateOrder(
     orderUpdateRequest: OrderUpdateRequest
-  ): Observable<CustomerOrder> {
+  ): Observable<FoodOrder> {
     console.log(
       'Updating Order: ' +
-        this.serviceLocator.CustomerOrdersUrl +
+        this.serviceLocator.FoodOrdersUrl +
         ', ' +
         JSON.stringify(orderUpdateRequest)
     );
     return this.http
-      .put<CustomerOrder>(
-        this.serviceLocator.CustomerOrdersUrl,
+      .put<FoodOrder>(
+        this.serviceLocator.FoodOrdersUrl,
         orderUpdateRequest
       )
       .pipe(
@@ -548,16 +547,16 @@ export class FoodOrderService {
       );
   }
 
-  placeOrder(customerOrder: CustomerOrder): Observable<CustomerOrder> {
+  placeOrder(FoodOrder: FoodOrder): Observable<FoodOrder> {
     console.log(
       'Placing an order for LocalChef : ' +
-        this.serviceLocator.CustomerOrdersUrl +
+        this.serviceLocator.FoodOrdersUrl +
         ', ' +
-        JSON.stringify(customerOrder)
+        JSON.stringify(FoodOrder)
     );
-    return this.http.post<CustomerOrder>(
-      this.serviceLocator.CustomerOrdersUrl,
-      customerOrder
+    return this.http.post<FoodOrder>(
+      this.serviceLocator.FoodOrdersUrl,
+      FoodOrder
     );
     // .subscribe({
     //   next: data => {
@@ -569,38 +568,39 @@ export class FoodOrderService {
     // });
   }
 
-  setData(data: CustomerOrder) {
-    console.info('Storing customer order..');
+  setData(data: FoodOrder) {
+    console.info('Storing food order..');
     this.localService.saveData(
-      Constants.StorageItem_C_Order,
+      Constants.StorageItem_F_Order,
       JSON.stringify(data)
     );
-    this.orderSubject$.next(this.customerOrder);
+    this.orderSubject$.next(this.foodOrder);
   }
 
-  setCustomerOrders(customerOrders: CustomerOrder[]) {
-    console.info('Storing customer orders..');
+  setFoodOrders(FoodOrders: FoodOrder[]) {
+    console.info('Storing food orders..');
     this.localService.saveData(
-      Constants.StorageItem_C_OrderList,
-      JSON.stringify(customerOrders)
+      Constants.StorageItem_F_OrderList,
+      JSON.stringify(FoodOrders)
     );
-    this.orderListSubject$.next(customerOrders);
+    this.orderListSubject$.next(FoodOrders);
   }
 
   purgeData() {
-    console.log('Purging order.');
-    this.localService.removeData(Constants.StorageItem_C_Order);
-    this.customerOrder = null;
-    this.orderSubject$.next(this.customerOrder);
+    console.log('Purging food order.');
+    this.localService.removeData(Constants.StorageItem_F_Order);
+    this.foodOrder = null;
+    this.orderSubject$.next(null);
   }
 
   getData() {
-    var json = this.localService.getData(Constants.StorageItem_C_Order);
-    console.log('Order in local storage ' + json);
-    if (this.isJsonString(json)) {
+    var json = this.localService.getData(Constants.StorageItem_F_Order);
+    console.log('FoodOrder in storage ' + json);
+    if (this.utils.isValid(json) &&  this.isJsonString(json)) {
       var obj = JSON.parse(json);
-      this.customerOrder = obj.constructor.name === 'Array' ? obj[0] : obj;
-      this.orderSubject$.next(this.customerOrder);
+      this.foodOrder = obj.constructor.name === 'Array' ? obj[0] : obj;
+      console.log('FoodOrder object' + JSON.stringify(this.foodOrder));
+      this.orderSubject$.next(this.foodOrder);
     } else {
       this.createOrder();
     }

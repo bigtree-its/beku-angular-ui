@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import {
-  CustomerOrder,
+  FoodOrder,
   OrderStatus,
   OrderTracking,
   OrderUpdateRequest,
@@ -18,7 +18,7 @@ import { Utils } from 'src/app/services/utils';
   styleUrls: ['./order-confirmation.component.css'],
 })
 export class OrderConfirmationComponent {
-  order: CustomerOrder;
+  order: FoodOrder;
   redirectStatus: any;
 
   constructor(

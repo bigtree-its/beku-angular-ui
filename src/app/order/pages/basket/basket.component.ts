@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { faArrowLeft, faBatteryEmpty, faFaceSmile, faPeopleArrows, faStar } from '@fortawesome/free-solid-svg-icons';
-import { CustomerOrder, FoodOrder, LocalChef } from 'src/app/model/localchef';
+import { FoodOrder, LocalChef } from 'src/app/model/localchef';
 import { ChefService } from 'src/app/services/chef.service';
 import { ContextService } from 'src/app/services/context.service';
 import { FoodOrderService } from 'src/app/services/food-order.service';
@@ -23,7 +23,7 @@ export class BasketComponent {
   faFaceSmile = faFaceSmile;
 
   cartTotal: number = 0;
-  order: CustomerOrder;
+  order: FoodOrder;
   chef: LocalChef;
   price: number = 0.00;
   panels = ['Your Order', 'Second', 'Third'];
@@ -41,18 +41,18 @@ export class BasketComponent {
     this.orderService.getData();
     this.orderService.orderSubject$.subscribe({
       next: (value) => {
-        var customerOrder: CustomerOrder = value;
-        this.extractData(customerOrder);
+        var FoodOrder: FoodOrder = value;
+        this.extractData(FoodOrder);
       },
       error: (err) => console.error('OrderSubject emitted an error: ' + err),
       complete: () =>
         console.log('OrderSubject emitted the complete notification'),
     });
-
     
     this.chef = this.chefService.getData();
   }
-  extractData(theOrder: CustomerOrder) {
+
+  extractData(theOrder: FoodOrder) {
     if ( this.utils.isValid(theOrder) && theOrder.status === "Completed"){
       return;
     }
@@ -66,8 +66,7 @@ export class BasketComponent {
         }
       }
     }else{
-      this.order = this.getOrder();
-      this.cartTotal = this.order.subTotal;
+      this.cartTotal = 0;
     }
   }
 
@@ -80,9 +79,9 @@ export class BasketComponent {
   }
 
 
-  getOrder(): CustomerOrder{
+  getOrder(): FoodOrder{
     var orderJson = localStorage.getItem('order');
-    var order: CustomerOrder = null;
+    var order: FoodOrder = null;
     if ( orderJson !== null && orderJson !== undefined){
       order = JSON.parse(orderJson);
     }
