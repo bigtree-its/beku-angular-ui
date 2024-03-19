@@ -53,7 +53,7 @@ export class BasketComponent {
   }
 
   extractData(theOrder: FoodOrder) {
-    if ( this.utils.isValid(theOrder) && theOrder.status === "Completed"){
+    if ( Utils.isValid(theOrder) && theOrder.status === "Completed"){
       return;
     }
     this.order = theOrder;
@@ -73,7 +73,7 @@ export class BasketComponent {
   getAddress(): string {
     var address: string = ""
     if ( this.chef !== null && this.chef !== undefined){
-      return this.utils.getChefAddress(this.chef);
+      return Utils.getChefAddress(this.chef);
     }
     return address;
   }

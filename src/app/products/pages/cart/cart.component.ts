@@ -1,13 +1,10 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { faArrowLeft, faBatteryEmpty, faFaceSmile, faPeopleArrows, faStar } from '@fortawesome/free-solid-svg-icons';
-import { FoodOrder, LocalChef } from 'src/app/model/localchef';
+import { faArrowLeft, faBatteryEmpty, faClose, faFaceSmile, faPeopleArrows, faStar } from '@fortawesome/free-solid-svg-icons';
 import { Order, OrderItem } from 'src/app/model/products/all';
-import { ChefService } from 'src/app/services/chef.service';
-import { ContextService } from 'src/app/services/context.service';
-import { FoodOrderService } from 'src/app/services/food-order.service';
 import { OrderService } from 'src/app/services/products/order.service';
+import { SupplierService } from 'src/app/services/products/supplier.service';
 import { Utils } from 'src/app/services/utils';
 
 
@@ -24,13 +21,17 @@ export class CartComponent {
   faStar = faStar;
   faPeopleArrows = faPeopleArrows;
   faFaceSmile = faFaceSmile;
+  faClose = faClose;
+  
 
   cartTotal: number = 0;
   order: Order;
   price: number = 0.00;
   panels = ['Your Order', 'Second', 'Third'];
 
-  constructor(private utils: Utils,
+  showPaymentSummary: boolean = false;
+
+  constructor(
     private _location: Location,
     private orderService: OrderService,
     private router: Router) {
@@ -56,12 +57,19 @@ export class CartComponent {
   }
 
   extractData() {
-    if (this.utils.isValid(this.order) && this.order.status === "Completed") {
+    if (Utils.isValid(this.order) && this.order.status === "Completed") {
       return;
     }
-    if (!this.utils.isValid(this.order)) {
+    if (!Utils.isValid(this.order)) {
       this.cartTotal = 0;
     }
+  }
+
+  clickShowPaymentSummary(){
+    this.showPaymentSummary = true;
+  }
+  hidePaymentSummary(){
+    this.showPaymentSummary = false;
   }
 
   goback() {

@@ -78,13 +78,13 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
   }
 
   fetchFoodOrders() {
-    if (this.utils.isValid(this.user)) {
+    if (Utils.isValid(this.user)) {
       let orderSearchQuery: OrderSearchQuery = {
         customerEmail: this.user.email,
       };
       let observable = this.orderService.getFoodOrders(orderSearchQuery);
       observable.subscribe((e) => {
-        if (this.utils.isValid(e)) {
+        if (Utils.isValid(e)) {
           this.orders = e;
           console.log('Orders ' + this.orders.length);
         }
@@ -147,7 +147,7 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
       error: (err) => {
         this.loading = false;
         console.error('Errors from reset submit.' + JSON.stringify(err));
-        if (this.utils.isJsonString(err)) {
+        if (Utils.isJsonString(err)) {
           this.toastService.error(err.error.detail);
         }
       },
@@ -168,7 +168,7 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
     let observable = this.orderService.fetchPaymentIntent(this.viewOrder.reference, null);
     observable.pipe(takeUntil(this.destroy$)).subscribe({
       next: (e) => {
-        if (this.utils.isValid(e)){
+        if (Utils.isValid(e)){
           var paymentIntent: PaymentIntentResponse[] = e;
           this.router.navigateByUrl("/make_payment?intent="+paymentIntent[0].intentId);
         }

@@ -148,7 +148,7 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
       next: (value) => {
         console.log('OrderSubject emitted a change'),
         this.order = value;
-        if ( this.utils.isValid(this.order)){
+        if ( Utils.isValid(this.order)){
           this.cartTotal = this.order.total;
         }
       },
@@ -286,7 +286,7 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
   getAddress(): string {
     var address: string = '';
     if (this.chef !== null && this.chef !== undefined) {
-      return this.utils.getChefAddress(this.chef);
+      return Utils.getChefAddress(this.chef);
     }
     return address;
   }
@@ -298,7 +298,7 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
       month = theDate.getMonth();
     for (let i = 0; i < 7; i++) {
       theDate = this.addDays(theDate, i === 0 ? 0 : 1);
-      weekDays.push(this.utils.getDay(theDate));
+      weekDays.push(Utils.getDay(theDate));
     }
     return weekDays;
   }

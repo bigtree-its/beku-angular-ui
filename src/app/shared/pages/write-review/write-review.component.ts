@@ -64,15 +64,15 @@ export class WriteReviewComponent implements OnInit, OnDestroy {
     });
     this.order = this.activatedRoute.snapshot.queryParamMap.get('order');
     this.chefId = this.activatedRoute.snapshot.queryParamMap.get('chef');
-    if (this.utils.isEmpty(this.order) ) {
+    if (Utils.isEmpty(this.order) ) {
       this.orderNotSupplied = true;
       console.log('Oops. Order is not supplied.');
     }
-    if ( this.utils.isEmpty(this.chefId)) {
+    if ( Utils.isEmpty(this.chefId)) {
       this.chefNotSupplied = true;
       console.log('Oops. Chef not supplied');
     } 
-    if ( this.utils.isValid(this.customer)) {
+    if ( Utils.isValid(this.customer)) {
       this.customerNotLoggedIn = true;
       console.log('Oops. Customer not logged in');
     }
@@ -82,7 +82,7 @@ export class WriteReviewComponent implements OnInit, OnDestroy {
       next: (value) => {
         this.chef = value;
         console.log('ChefSubject emitted a notification: '+ this.chef)
-        if ( (this.chef == null || this.chef === undefined) && !this.utils.isEmpty(this.chefId)){
+        if ( (this.chef == null || this.chef === undefined) && !Utils.isEmpty(this.chefId)){
           this.loadChef();
         }
       },
@@ -118,18 +118,18 @@ export class WriteReviewComponent implements OnInit, OnDestroy {
 
   onSubmitReview() {
    
-    if (this.utils.isEmpty(this.order)){
+    if (Utils.isEmpty(this.order)){
       this.order = this.orderReference;
     }
-    if (this.utils.isEmpty(this.order)) {
+    if (Utils.isEmpty(this.order)) {
       this.errorMessage = 'Order is mandatory';
       return;
     }
-    if (this.utils.isEmpty(this.headline)) {
+    if (Utils.isEmpty(this.headline)) {
       this.errorMessage = 'Headline is mandatory';
       return;
     }
-    if (this.utils.isEmpty(this.comment)) {
+    if (Utils.isEmpty(this.comment)) {
       this.errorMessage = 'Comment is mandatory';
       return;
     }

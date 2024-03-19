@@ -29,7 +29,7 @@ export class ResetInitiateComponent implements OnInit, OnDestroy{
   }
   submit(){
     this.onSubmission = false;
-    if (this.utils.isEmpty(this.email)) {
+    if (Utils.isEmpty(this.email)) {
       this.error = 'Email is mandatory';
       return;
     }

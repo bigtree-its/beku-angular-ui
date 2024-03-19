@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import {Title} from "@angular/platform-browser";
+import { Title } from "@angular/platform-browser";
 import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -7,7 +7,7 @@ import {
   RapidApiByPostcodeResponse,
   RapidApiByPostcodeResponseSummary,
 } from 'src/app/model/address';
-import { FoodOrder,  LocalChef } from 'src/app/model/localchef';
+import { FoodOrder, LocalChef } from 'src/app/model/localchef';
 import { ContextService } from 'src/app/services/context.service';
 import { RapidApiService } from 'src/app/services/rapid-api.service';
 import { Utils } from 'src/app/services/utils';
@@ -87,10 +87,9 @@ export class CheckoutComponent implements OnDestroy {
   customer: User;
   orderSubmitted: boolean = false;
   showOrderConfirmation: boolean = false;
-loading: any;
+  loading: any;
 
   constructor(
-    private utils: Utils,
     private rapidApiService: RapidApiService,
     private stripeService: StripeService,
     private _location: Location,
@@ -101,7 +100,7 @@ loading: any;
     private toastService: ToastService,
     private router: Router,
     private titleService: Title
-  ) {}
+  ) { }
 
   public loadStripe$: Observable<any> = this.stripeService.LoadStripe();
 
@@ -116,6 +115,7 @@ loading: any;
     this.orderService.getData();
     this.orderService.orderSubject$.subscribe({
       next: (value) => {
+        console.log('OrderSubject rx emitted : '+ JSON.stringify(value));
         var FoodOrder: FoodOrder = value;
         this.extractOrder(FoodOrder);
       },
@@ -147,7 +147,7 @@ loading: any;
   }
 
   extractOrder(theOrder: FoodOrder) {
-    if (this.utils.isValid(theOrder) && theOrder.status === 'Completed') {
+    if (Utils.isValid(theOrder) && theOrder.status === 'Completed') {
       return;
     }
     this.order = theOrder;
@@ -165,12 +165,12 @@ loading: any;
       }
     } else {
       this.order = this.getOrder();
-      if ( this.order === null || this.order === undefined){
+      if (this.order === null || this.order === undefined) {
         this.router.navigateByUrl("/")
-      }else{
+      } else {
         this.cartTotal = this.order.subTotal;
       }
-      
+
     }
   }
   ngAfterViewInit(): void {
@@ -178,7 +178,7 @@ loading: any;
       this.stripeService.getStripe().subscribe((s) => {
         console.log(
           'Initializing Stripe card element inside form: ' +
-            JSON.stringify(this.stripeService.stripe)
+          JSON.stringify(this.stripeService.stripe)
         );
       });
     }
@@ -265,9 +265,9 @@ loading: any;
   }
   validateCustomerDetails(): boolean {
     if (
-      this.utils.isEmpty(this.customerName) ||
-      this.utils.isEmpty(this.customerEmail) ||
-      this.utils.isEmpty(this.customerMobile)
+      Utils.isEmpty(this.customerName) ||
+      Utils.isEmpty(this.customerEmail) ||
+      Utils.isEmpty(this.customerMobile)
     ) {
       return false;
     }
@@ -278,8 +278,8 @@ loading: any;
     if (
       this.serviceMode === 'DELIVERY' &&
       this.addressSelected &&
-      this.utils.isValid(this.customerAddress) &&
-      !this.utils.isEmpty(this.customerAddress.addressLine1)
+      Utils.isValid(this.customerAddress) &&
+      !Utils.isEmpty(this.customerAddress.addressLine1)
     ) {
       return true;
     }
@@ -289,7 +289,7 @@ loading: any;
     return false;
   }
 
-  submitOrder(){
+  submitOrder() {
 
   }
 
@@ -303,9 +303,9 @@ loading: any;
     this.order.serviceMode = this.serviceMode;
     this.order.notes = this.notesToChef;
     this.orderService.saveOrder(this.order).subscribe((e) => {
-      if (this.utils.isStringValid(e.reference)) {
+      if (Utils.isStringValid(e.reference)) {
 
-        if ( content){
+        if (content) {
           this.orderService.createPaymentIntentForOrder(e).subscribe((pi) => {
             this.paymentIntent = pi;
             console.log('Payment intent ' + JSON.stringify(pi));
@@ -326,7 +326,7 @@ loading: any;
               this.open(content);
             }
           });
-        }else{
+        } else {
           this.orderSubmitted = true;
           this.order = e;
           this.loading = false;
@@ -416,7 +416,7 @@ loading: any;
   getAddress(): string {
     var address: string = '';
     if (this.chef !== null && this.chef !== undefined) {
-      return this.utils.getChefAddress(this.chef);
+      return Utils.getChefAddress(this.chef);
     }
     return address;
   }
@@ -459,7 +459,7 @@ loading: any;
           this.addressSelected = false;
           console.log(
             'Address Lookup response ' +
-              JSON.stringify(this.postcodeAddressList)
+            JSON.stringify(this.postcodeAddressList)
           );
         },
         (error) => {
@@ -512,7 +512,7 @@ loading: any;
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
-        (result) => {},
+        (result) => { },
         (reason) => {
           // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         }

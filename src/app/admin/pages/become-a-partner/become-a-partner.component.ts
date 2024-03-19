@@ -53,19 +53,19 @@ export class BecomeAPartnerComponent implements OnInit, OnDestroy {
 
   submit() {
     // stop here if form is invalid
-    if (this.utils.isEmpty(this.email)) {
+    if (Utils.isEmpty(this.email)) {
       this.error = 'Email is mandatory';
       return;
     }
-    if (this.utils.isEmpty(this.fullName)) {
+    if (Utils.isEmpty(this.fullName)) {
       this.error = 'Fullname is mandatory';
       return;
     }
-    if (this.utils.isEmpty(this.mobile)) {
+    if (Utils.isEmpty(this.mobile)) {
       this.error = 'Mobile is mandatory';
       return;
     }
-    if (this.utils.isEmpty(this.message)) {
+    if (Utils.isEmpty(this.message)) {
       this.error = 'Message is mandatory';
       return;
     }

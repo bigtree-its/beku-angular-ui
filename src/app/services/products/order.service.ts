@@ -219,8 +219,8 @@ export class OrderService {
         email: '',
         telephone: '',
         address: {
-          line1: '',
-          line2: '',
+          addressLine1: '',
+          addressLine2: '',
           city: '',
           country: '',
           postcode: '',

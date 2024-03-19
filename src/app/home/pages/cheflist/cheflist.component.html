@@ -13,7 +13,7 @@
     <div class="full-screen mb-2 px-3">
         <h4>Whats on your mind ?</h4>
         <div class="flex-row-scrollable">
-            <div *ngFor="let d of dishes" class="selectable mr_0.5" (click)="onSelectDish(d)"
+            <div *ngFor="let d of dishes" class="selectable mr-1" (click)="onSelectDish(d)"
                 [class.selected]="isDishSelected(d)">
                 <fa-icon [icon]="faCheck"></fa-icon>
                 <span class="pl-1">{{d.name}}</span>

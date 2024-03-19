@@ -22,7 +22,7 @@ export class BasketService {
     addToProductOrder(OrderItem: OrderItem){
         console.log('Adding a product to cart');
         var json = this.localService.getData(Constants.StorageItem_F_Order);
-        if ( this.utils.isValid(json) && this.utils.isJsonString(json)){
+        if ( Utils.isValid(json) && Utils.isJsonString(json)){
             this.toastService.warning("You have a active food cart. Please be informed that food cart will be removed.");
             this.fOrderService.destroy();
             this.pOrderService.addToOrder(OrderItem);
@@ -34,7 +34,7 @@ export class BasketService {
     addToFoodOrder(foodItem: FoodOrderItem){
         console.log('Adding a food to cart');
         var json = this.localService.getData(Constants.StorageItem_P_Order);
-        if ( this.utils.isValid(json) && this.utils.isJsonString(json)){
+        if ( Utils.isValid(json) && Utils.isJsonString(json)){
             this.toastService.warning("You have a active product cart. Please be informed that product cart will be removed.");
             this.pOrderService.destroy();
             this.fOrderService.addToOrder(foodItem);

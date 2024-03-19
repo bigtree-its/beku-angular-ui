@@ -1,5 +1,10 @@
 <div *ngIf="chef !== null && chef !== undefined">
 
+    <div class="my-3">
+        <div class="arrow-icon-div" (click)="goback()">
+            <fa-icon [icon]="faArrowLeft"></fa-icon>
+        </div>
+      </div>
     <div class="page">
         <div class="page-left">
             <div class="py-1">
@@ -80,7 +85,7 @@
 </div>
 
 <ng-template #noItemsBlock>
-    <div style=" margin-top: 10px;display: flex;flex-direction: column; gap: 0.1rem;align-items: center;">
+    <div class="alert alert-info p-5" style=" margin-top: 10px;display: flex;flex-direction: column; gap: 0.1rem;align-items: center;">
         <fa-icon [icon]="faBatteryEmpty" class="fa-2xl" style="opacity: 0.1;"></fa-icon>
         <span style="margin-top: 10px;font-weight: 900;">
             YOUR BASKET IS EMPTY

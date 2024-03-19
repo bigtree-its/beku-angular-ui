@@ -6,33 +6,65 @@
             </div>
             <span class="a-page-header">{{order?.items?.length}} Items in your cart</span>
         </div>
-        <div class="flex-row flex-start gap-2">
-            <div class="flex-column  w-100">
-                <div *ngFor="let item of order.items" class="border br-7 p-4 flex-column mb-3" [routerLink]="[ '/p/products', item.productId | lowercase] ">
-                    <b class="f-size-md">{{item.supplier.tradingName}}</b>
-                    <div class="flex-row mt-2">
-                        <div style="width: 100px;height: 100px;">
-                            <img src="{{item.image}}" class="d-block w-100" alt="..."
-                                style="width: 100%;height: 100%;object-fit: cover;">
-                        </div>
-                        <div class="flex-column px-3 w-100">
-                            <div class="flex-row-space-between  w-100">
-                                <h6 class="clickable-link">{{item.productName}}</h6>
-                                <span class="bolder text-success fs-3">{{item.subTotal | currency : 'GBP'}}</span>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="flex-column  w-100">
+                    <div *ngFor="let item of order.items" class="border br-7 p-4 flex-column mb-3"
+                        [routerLink]="[ '/p/products', item.productId | lowercase] ">
+                        <b class="f-size-md">{{item.supplier.tradingName}}</b>
+                        <div class="flex-row mt-2">
+                            <div style="width: 100px;height: 100px;">
+                                <img src="{{item.image}}" class="d-block w-100" alt="..."
+                                    style="width: 100%;height: 100%;object-fit: cover;">
                             </div>
-                            <div class="flex-row gap-2">
-                                <div class="attribute" *ngIf="item.size">Size: <b>{{item.size?.name}}</b></div>
-                                <div class="attribute" *ngIf="item.color">Color: <b>{{item.color?.name}}</b></div>
-                            </div>
-                            <div class="flex-row mt-2">
-                                <button type="button" class="clickable" (click)="removeItem(item)">Remove</button>
+                            <div class="flex-column px-3 w-100">
+                                <div class="flex-row-space-between  w-100">
+                                    <h6 class="clickable-link">{{item.productName}}</h6>
+                                    <span class="bolder text-success fs-3">{{item.subTotal | currency : 'GBP'}}</span>
+                                </div>
+                                <div class="flex-row gap-2">
+                                    <div class="attribute" *ngIf="item.size">Size: <b>{{item.size?.name}}</b></div>
+                                    <div class="attribute" *ngIf="item.color">Color: <b>{{item.color?.name}}</b></div>
+                                </div>
+                                <div class="flex-row mt-2">
+                                    <button type="button" class="clickable" (click)="removeItem(item)">Remove</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="flex-column p-4 br-7 w-100 lg">
-                <div class="flex-column">
+            <div class="col-md-4">
+                <div class="flex-column p-4 br-7 w-100 lg">
+                    <div class="flex-column">
+                        <div class="flex-row-space-between">
+                            <strong>Subtotal</strong>
+                            <strong>{{order?.subTotal| currency: 'GBP'}}</strong>
+                        </div>
+                        <div class="flex-row-space-between">
+                            <span>Delivery fee</span>
+                            <span>{{order?.deliveryFee| currency: 'GBP'}}</span>
+                        </div>
+                        <div class="flex-row-space-between">
+                            <span>Service Fee</span>
+                            <span>{{order?.serviceFee| currency: 'GBP'}}</span>
+                        </div>
+                        <div class="flex-row-space-between" style="margin-top: 10px;">
+                            <strong>Total</strong>
+                            <strong>{{order?.total| currency: 'GBP'}}</strong>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary  mt-3 br-25" [routerLink]="['/p/checkout']">Proceed to
+                        checkout</button>
+                </div>
+            </div>
+        </div>
+        <div class="sm footer border-top p-2">
+            <div class="flex-column w-100 ">
+                <div *ngIf="showPaymentSummary" class="p-4">
+                    <div class="flex-row jce py-1">
+                        <fa-icon [icon]="faClose" class="close-icon" (click)="hidePaymentSummary()"></fa-icon>
+                    </div>
                     <div class="flex-row-space-between">
                         <strong>Subtotal</strong>
                         <strong>{{order?.subTotal| currency: 'GBP'}}</strong>
@@ -50,15 +82,13 @@
                         <strong>{{order?.total| currency: 'GBP'}}</strong>
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary  mt-3 br-25">Proceed to checkout</button>
+                <div class="flex-row-space-between">
+                    <button type="button" class="btn btn-dark  mt-3 br-25" (click)="clickShowPaymentSummary()">Show
+                        Payment summary</button>
+                    <button type="button" class="btn btn-primary  mt-3 br-25" [routerLink]="['/p/checkout']">Proceed to
+                        checkout</button>
+                </div>
             </div>
-        </div>
-        <div class="sm footer border-top p-2">
-            <div class="flex-row-space-between">
-                <button type="button" class="btn btn-dark  mt-3 br-25">Show Payment summary</button>
-                <button type="button" class="btn btn-primary  mt-3 br-25">Proceed to checkout</button>
-            </div>
-            
         </div>
     </div>
 </div>

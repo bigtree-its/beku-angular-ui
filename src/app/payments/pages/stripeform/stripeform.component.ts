@@ -62,7 +62,7 @@ export class StripeformComponent {
     const appearance = {
       theme: 'stripe',
     };
-    if ( this.utils.isValid(this.paymentIntent)){
+    if ( Utils.isValid(this.paymentIntent)){
       var clientSecret = this.paymentIntent.clientSecret;
       console.log(
         'Initializing stripe elements with clientSecret: ' + clientSecret

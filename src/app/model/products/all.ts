@@ -32,6 +32,7 @@ export interface Product {
   name: string;
   productInfo: ProductInfo[];
   image: string;
+  shortDesc: string;
   slug: string;
   group: string;
   supplier: SupplierBasic;
@@ -44,6 +45,7 @@ export interface Product {
   careInstruction: string;
   storageInstruction: string;
   shippingAndReturns: string;
+  deliveryLeadTime: number;
   gallery: string[];
   price: number;
   priceOld: number;
@@ -96,6 +98,7 @@ export interface OrderItem {
   supplier: SupplierBasic;
   productName: string;
   quantity: number;
+  deliveryLeadTime: number;
   price: number;
   size: Variant;
   color: Variant;
@@ -152,14 +155,21 @@ export interface Supplier {
   contact: Contact;
 }
 
+export interface CheckoutItem{
+  freeDelivery: Boolean;
+  clubShipment: Boolean;
+  freeDeliveryShortfall: number;
+  items:OrderItem[],
+}
+
 export interface Address {
-  line1: string;
-  line2: string;
-  city: string;
-  postcode: string;
-  country: string;
-  latitude: string;
-  longitude: string;
+    addressLine1: string;
+    city: string;
+    postcode: string;
+    country: string;
+    latitude: string;
+    longitude: string;
+    addressLine2: string;
 }
 
 export interface Variant {

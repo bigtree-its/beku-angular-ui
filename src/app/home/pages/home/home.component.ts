@@ -27,7 +27,8 @@ export class HomeComponent {
   faHandshake = faHandshake;
   faCode = faCode;
 
-  images = ['wall-art-indian.jpg', 'wall-art-taco.jpg', 'thali.jpeg'].map((name) => `/assets/images/${name}`);
+  // images = ['https://ik.imagekit.io/kikysfekf/foods/food-2.jpeg?updatedAt=1710784365762', 'https://ik.imagekit.io/kikysfekf/foods/food-2.jpeg?updatedAt=1710784365762', 'https://ik.imagekit.io/kikysfekf/foods/food-3.webp?updatedAt=1710784365649'].map((name) => `/assets/images/${name}`);
+  images = ['https://ik.imagekit.io/kikysfekf/foods/food-2.jpeg?updatedAt=1710784365762', 'https://ik.imagekit.io/kikysfekf/foods/food-2.jpeg?updatedAt=1710784365762', 'https://ik.imagekit.io/kikysfekf/foods/food-3.webp?updatedAt=1710784365649'];
 
   constructor(
     private locationService: LocationService,

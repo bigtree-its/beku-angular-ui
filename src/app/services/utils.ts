@@ -8,7 +8,7 @@ import { LocalChef } from '../model/localchef';
 export class Utils {
   constructor() {}
 
-  days: string[] = [
+  static days: string[] = [
     'Sunday',
     'Monday',
     'Tuesday',
@@ -17,8 +17,8 @@ export class Utils {
     'Friday',
     'Saturday',
   ];
-  daysShort: string[] = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-  monthNames: string[] = [
+  static daysShort: string[] = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+  static monthNames: string[] = [
     'January',
     'February',
     'March',
@@ -32,7 +32,7 @@ export class Utils {
     'November',
     'December',
   ];
-  monthNamesShort: string[] = [
+  static monthNamesShort: string[] = [
     'Jan',
     'Feb',
     'Mar',
@@ -47,7 +47,7 @@ export class Utils {
     'Dec',
   ];
 
-  getDay(theDate: Date): Day {
+  static getDay(theDate: Date): Day {
     if (theDate === null || theDate === undefined) {
       theDate = new Date();
     }
@@ -64,48 +64,42 @@ export class Utils {
     return d;
   }
 
-  public isCollectionEmpty(data: any[]): Boolean {
+  public static isCollectionEmpty(data: any[]): Boolean {
     if (data === null || data === undefined || data.length === 0) {
       return true;
     }
     return false;
   }
 
-  isStringValid(str: string): boolean {
+  static isStringValid(str: string): boolean {
     if (str === null || str === undefined || str.length === 0) {
       return false;
     }
     return true;
   }
 
-  public static isValid(data: any): Boolean {
-    if (data === null || data === undefined || data.length === 0) {
-      return true;
-    }
-    return false;
-  }
-  public isEmpty(data: string): Boolean {
+  public static isEmpty(data: string): Boolean {
     if (data === null || data === undefined || data.length === 0) {
       return true;
     }
     return false;
   }
 
-  public isValid(data: any): Boolean {
+  public static isValid(data: any): Boolean {
     if (data === null || data === undefined) {
       return false;
     }
     return true;
   }
 
-  public isEquals(data1: string, data2: string): Boolean {
+  public  static isEquals(data1: string, data2: string): Boolean {
     if (data1 === data2) {
       return true;
     }
     return false;
   }
 
-  getChefAddress(chef: LocalChef) {
+  static getChefAddress(chef: LocalChef) {
     var address: string = '';
 
     if (chef === null || chef === undefined) {

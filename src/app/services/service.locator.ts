@@ -32,8 +32,10 @@ export class ServiceLocator {
   UpdatePersonalDetails: string;
   OrdersUrl: string;
   PaymentsUrl: string;
+  SupplierUrl: string;
 
   constructor() {
+    this.SupplierUrl = environment.SupplierUrl;
     this.groupsUrl = environment.GroupsUrl;
     this.productsUrl = environment.ProductsUrl;
     this.feedbacksUrl = environment.FeedbacksUrl;

@@ -1,7 +1,12 @@
 <div class="container">
-    <div class="flex-row py-2 gap-1">
-        <a>{{dept | titlecase}}</a>
-    </div>
+    <div class="my-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{dept | titlecase}}</li>
+          </ol>
+        </nav>
+      </div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
         <div class="col mb-4" *ngFor="let group of groups" [routerLink]="[ '/p/products']"  [queryParams]="{dept: dept, grp: group.name, grpid: group?._id}">
             <div class="card">

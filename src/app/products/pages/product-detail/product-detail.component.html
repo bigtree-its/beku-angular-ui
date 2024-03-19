@@ -2,6 +2,11 @@
     <div *ngIf="error" class="error-page alert alert-warning p-5 m-5">
         <span>{{errorMessage}}</span>
     </div>
+    <div class="my-3">
+        <div class="arrow-icon-div" (click)="goback()">
+            <fa-icon [icon]="faArrowLeft"></fa-icon>
+        </div>
+      </div>
     <div *ngIf="!error" class="lg-row-sm-col">
         <div class="left p-3 ">
             <div id="carouselExample" class="carousel slide">
@@ -40,26 +45,29 @@
                 <div class="flex-column my-1" *ngIf="product.size">
                     <b>Size</b>
                     <div class="flex-row gap-1">
-                        <button type="button" *ngFor="let Size of product?.sizes" [class.clicked]="isSelectedSize(Size)" class="btn btn-outline-dark btn-sm" (click)="selectSize(Size)">{{Size.name}}</button>
+                        <button type="button" *ngFor="let Size of product?.sizes" [class.clicked]="isSelectedSize(Size)" class="btn btn-outline-dark btn-sm light-border" (click)="selectSize(Size)">{{Size.name}}</button>
                     </div>
                 </div>
                 <div class="flex-column my-1"  *ngIf="product.color">
                     <b>Color</b>
                     <div class="flex-row gap-1">
-                        <button type="button" *ngFor="let color of product?.colors" [class.clicked]="isSelectedColor(color)" class="btn btn-outline-dark btn-sm" (click)="selectColor(color)">{{color.name}}</button>
+                        <button type="button" *ngFor="let color of product?.colors" [class.clicked]="isSelectedColor(color)" class="btn btn-outline-dark btn-sm light-border" (click)="selectColor(color)">{{color.name}}</button>
                     </div>
                 </div>
                 <div class="flex-column">
                     <b>Quantity</b>
                     <div class="flex-row aic">
-                        <button class="btn btn-outline-dark btn-sm" (click)="decreaseQuantity()">
+                        <button class="btn btn-outline-dark btn-sm light-border" (click)="decreaseQuantity()">
                             <fa-icon [icon]="faMinus"></fa-icon>
                         </button>
                         <span class="bold p-2 f-size-lg ">{{quantity}}</span>
-                        <button class="btn btn-outline-dark btn-sm" (click)="increaseQuantity()">
+                        <button class="btn btn-outline-dark btn-sm light-border" (click)="increaseQuantity()">
                             <fa-icon [icon]="faPlus"></fa-icon>
                         </button>
                     </div>
+                </div>
+                <div class="p-4 bg-light border">
+                    <b>Dispatched within {{product.deliveryLeadTime}} days</b>
                 </div>
                 <div class="flex-row my-3">
                     <button class="bold btn btn-primary" (click)="addToOrder()">Add to order</button>

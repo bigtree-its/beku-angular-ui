@@ -45,11 +45,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   submit() {
     // stop here if form is invalid
-    if (this.utils.isEmpty(this.email)) {
+    if (Utils.isEmpty(this.email)) {
       this.error = 'Email is mandatory';
       return;
     }
-    if (this.utils.isEmpty(this.password)) {
+    if (Utils.isEmpty(this.password)) {
       this.error = 'Password is mandatory';
       return;
     }

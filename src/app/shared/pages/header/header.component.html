@@ -57,11 +57,11 @@
           </li> -->
         </ul>
       </nav>
-      <div *ngIf="fOrder !== null && fOrder !== undefined" class="flex-row mr-1 ml-3 align-items-center" [routerLink]="['/basket']">
+      <div *ngIf="foodItems > 0" class="flex-row mr-1 ml-3 align-items-center" [routerLink]="['/basket']">
         <fa-icon [icon]="cartIcon" class="cart-icon"></fa-icon>
         <span style="padding-right: 5px;">{{foodItems}}</span>
       </div>
-      <div *ngIf="pOrder !== null && pOrder !== undefined" class="flex-row mr-1 ml-3 align-items-center" [routerLink]="['/p/cart']">
+      <div *ngIf="productItems > 0" class="flex-row mr-1 ml-3 align-items-center" [routerLink]="['/p/cart']">
         <fa-icon [icon]="cartIcon" class="cart-icon" ></fa-icon>
         <span style="padding-right: 5px;">{{productItems}}</span>
       </div>

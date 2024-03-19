@@ -58,23 +58,23 @@ export class ManageOrderComponent implements OnInit, OnDestroy{
     
     var intentId = this.activatedRoute.snapshot.queryParamMap.get('intent');
     var ref = this.activatedRoute.snapshot.queryParamMap.get('ref');
-    if ( this.utils.isEmpty(ref) && this.utils.isEmpty(intentId)){
+    if ( Utils.isEmpty(ref) && Utils.isEmpty(intentId)){
       this.insufficient_data = true;
     }else{
       this.insufficient_data = false;
-      if (!this.utils.isEmpty(intentId)) {
+      if (!Utils.isEmpty(intentId)) {
         let observable = this.orderService.retrieveSinglePaymentIntent(intentId);
         observable.pipe(takeUntil(this.destroy$)).subscribe({
           next: (e) => {
             this.paymentIntent = e;
             console.log('Payment Intent ' + JSON.stringify(e));
-            if (this.utils.isValid(e)) {
+            if (Utils.isValid(e)) {
               if (this.paymentIntent.status === 'succeeded') {
                 this.error = true;
                 this.errorMessage = 'This order has already been paid';
                 this.toastService.warning('This order has already been paid');
               }
-              if ( this.utils.isEmpty(ref)){
+              if ( Utils.isEmpty(ref)){
                 this.retrieveOrder(this.paymentIntent.orderReference);
               }
             } else {
@@ -93,7 +93,7 @@ export class ManageOrderComponent implements OnInit, OnDestroy{
                 JSON.stringify(err)
             );
             this.errors = err;
-            if (this.utils.isJsonString(err)) {
+            if (Utils.isJsonString(err)) {
               this.errorMessage = err.error.detail;
               this.toastService.info(this.errorMessage);
             } else {
@@ -103,7 +103,7 @@ export class ManageOrderComponent implements OnInit, OnDestroy{
           },
         });
       } 
-      if ( this.utils.isEmpty(ref)){
+      if ( Utils.isEmpty(ref)){
         this.retrieveOrder(ref);
       }
     }
@@ -114,7 +114,7 @@ export class ManageOrderComponent implements OnInit, OnDestroy{
     let observable = this.orderService.retrieveSingleOrder(orderReference, null);
     observable.pipe(takeUntil(this.destroy$)).subscribe({
       next: (e) => {
-        if (this.utils.isValid(e)) {
+        if (Utils.isValid(e)) {
           this.order = e[0];
           console.log('Customer order ' + JSON.stringify(e));
           this.retrieveSupplier(this.order.supplier._id);
@@ -130,7 +130,7 @@ export class ManageOrderComponent implements OnInit, OnDestroy{
         this.toastService.warning(
           'Error occurred when retrieving customer order.'
         );
-        if (this.utils.isJsonString(err)) {
+        if (Utils.isJsonString(err)) {
           this.errorMessage = err.error.detail;
           this.error = true;
         }

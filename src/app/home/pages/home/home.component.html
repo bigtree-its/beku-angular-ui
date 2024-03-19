@@ -53,51 +53,36 @@
             </div>
         </div>
     </div> -->
-    <div class="hero border br-7 mt-3">
-        <div class="hero-left">
-            <div class="flex-column">
-                <span class="lg font-abril-fatface hero-phrase">Discover a Homechef</span>
-                <span class="lg font-abril-fatface hero-phrase">you'll love to eat</span>
-                <span class="sm font-abril-fatface hero-phrase jcc">Home Foods</span>
-                <div class="content">
-                    <div class="slider">
-                        <div class="slider-text1">Nostalgic</div>
-                        <div class="slider-text2">A taste of home</div>
-                        <div class="slider-text3">Made with love</div>
-                    </div>
-                </div>
-                <div class="hp-search-container border">
-                    <div class="flex-row" style="width: 80%;">
-                        <input type="text" placeholder="Enter your location" class="hp-search-box"
-                            [(ngModel)]="serviceLocationSearchText" (keyup.enter)="onEnter()">
-                    </div>
-                    <div class="flex-row align-items-center">
-                        <span *ngIf="showServiceLocations" (click)="closeServiceLocations()"
-                            style="color: var(--d-orange);cursor: pointer;padding: 0 10px;">Clear</span>
-                        <button type="button" class="btn btn-success btn-sm float-right" (click)="onEnter()">Find</button>
-                    </div>
-
-                </div>
-                <div *ngIf="showServiceLocations" class="hp-locations-container">
-                    <div class="hp-locations">
-                        <span class="hp-location" *ngFor="let sl of serviceLocations"
-                            (click)="onSelectServiceLocation(sl)">{{ sl.name }},
-                            {{sl.city}}</span>
-                    </div>
-                </div>
+    <div class="flex-column jcc aic">
+        <span class="lg font-abril-fatface hero-phrase">Discover a Homechef</span>
+        <span class="lg font-abril-fatface hero-phrase">you'll love to eat</span>
+        <span class="sm font-abril-fatface hero-phrase jcc">Home Foods</span>
+        <div class="content">
+            <div class="slider">
+                <div class="slider-text1">Nostalgic</div>
+                <div class="slider-text2">A taste of home</div>
+                <div class="slider-text3">Made with love</div>
             </div>
         </div>
-        <div class="hero-right">
-            <ngb-carousel>
-                <ng-template ngbSlide *ngFor="let image of images">
-                    <div class="picsum-img-wrapper">
-                        <img [src]="image" alt="Random slide"  class="hero-img-div "/>
-                    </div>
-                    <div class="carousel-caption">
-                       <p>Home made foods for sale</p>>
-                    </div>
-                </ng-template>
-            </ngb-carousel>
+        <div class="hp-search-container border">
+            <div class="flex-row" style="width: 80%;">
+                <input type="text" placeholder="Enter your location" class="hp-search-box"
+                    [(ngModel)]="serviceLocationSearchText" (keyup.enter)="onEnter()">
+            </div>
+            <div class="flex-row align-items-center">
+                <span *ngIf="showServiceLocations" (click)="closeServiceLocations()"
+                    style="color: var(--d-orange);cursor: pointer;padding: 0 10px;">Clear</span>
+                <button type="button" class="btn btn-success btn-sm float-right"
+                    (click)="onEnter()">Find</button>
+            </div>
+
+        </div>
+        <div *ngIf="showServiceLocations" class="hp-locations-container">
+            <div class="hp-locations">
+                <span class="hp-location" *ngFor="let sl of serviceLocations"
+                    (click)="onSelectServiceLocation(sl)">{{ sl.name }},
+                    {{sl.city}}</span>
+            </div>
         </div>
     </div>
 
@@ -105,7 +90,7 @@
         <strong style="font-size: 22px;font-weight: 800;">Top Locations</strong>
         <div class="flex-row flex-wrap aic gap-1 jcc aic">
             <span class="clickable my-2" *ngFor="let pl of popularLocations" [routerLink]="['cooks']"
-                    [queryParams]="{location: pl.slug}">{{pl.name}}</span>
+                [queryParams]="{location: pl.slug}">{{pl.name}}</span>
         </div>
     </div>
 
@@ -117,86 +102,29 @@
         </div>
     </div>
 
-
-
-    <div class="flex-column jcc aic px-3 py-5 border-bottom">
-        <strong class="pb-5 f-size-xl">How It Works!</strong>
-        <div class="flex-row">
-            <div class="d-flex jcc aic p-5 border-right">
-                <span class="f-size-lg">ORDER</span>
-            </div>
-            <div class="d-flex jcc aic p-5  border-right">
-                <span class="f-size-lg">EAT</span>
-            </div>
-            <div class="d-flex jcc aic p-5">
-                <span class="f-size-lg">ENJOY</span>
+    <div class="row row-cols-1 row-cols-md-2 g-4 my-3">
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://ik.imagekit.io/kikysfekf/become-partner.jpeg?updatedAt=1710780429618" class="card-img-top"
+                    alt="Become a partner" />
+                <div class="card-body">
+                    <h5 class="card-title">Become a partner</h5>
+                    <p class="card-text">Reach more customers and achieve growth with us</p>
+                </div>
             </div>
         </div>
-        <!-- <div class="flex-row flex-wrap">
-            <div class="flex-column justify-content-center align-items-center bg-white m-3 p-3 flex-grow">
-                <div class="flex-row justify-content-center align-items-center">
-                    <span style="font-size: 40px;opacity: 0.5;">1</span>
-                    <img src="/assets/icons/chef.png" height="100px" width="100px" style="object-fit: contain;">
-                </div>
-                <strong style="text-align: center;font-size: 30px;padding: 10px 0;color: #3C4043;">Find</strong>
-                <small>Find a home chef nearest to your home</small>
-            </div>
-            <div class="flex-column justify-content-center align-items-center  bg-white  m-3 p-3 flex-grow">
-                <div class="flex-row justify-content-center align-items-center">
-                    <span style="font-size: 40px;opacity: 0.5;">2</span>
-                    <img src="/assets/icons/order.png" height="100px" width="100px" style="object-fit: contain;">
-                </div>
-                <strong style="text-align: center;font-size: 30px;padding: 10px 0;color: #3C4043;">Order</strong>
-                <small class="break-word">Order in for yourself or for the group,
-                    with no restrictions on order value</small>
-            </div>
-            <div class="flex-column justify-content-center align-items-center bg-white  m-3 p-3 flex-grow">
-                <div class="flex-row justify-content-center  align-items-center">
-                    <span style="font-size: 40px;opacity: 0.5;">3</span>
-                    <img src="/assets/icons/eating.png" height="100px" width="100px" style="object-fit: contain;">
-                </div>
-                <strong style="text-align: center;font-size: 30px;padding: 10px 0;color: #3C4043;">Eat</strong>
-                <small>Enjoy the home cooked food at your home</small>
-            </div>
-        </div> -->
-    </div>
-
-
-    <div class="flex-column jcc aic py-5">
-        <span style="font-weight: 900;font-size: 25px;padding: 10px 0;">Join us</span>
-        <div style="margin-bottom: 10px;">Be a part of <span class="logo-text">DESI TIMES</span></div>
-        <div class="flex-row gap-1">
-            <div class="flex-row bg-light br-25" style="height: 200px;">
-                <div
-                    style="height: 200px;width:200px;display: flex;justify-content: center;align-items: center;color: var(--d-red);">
-                    <fa-icon [icon]="faHandshake" style="font-size: 50px;"></fa-icon>
-                </div>
-                <div class="flex-column justify-content-center align-items-center" style="height: 200px;width:100%;">
-                    <span style="font-weight: 900;font-size: 20px;padding: 10px 0;">Become
-                        a Partner</span>
-                    <p style="margin: 10px 0; word-wrap: break-word;padding: 0 20px;text-align: center;">Reach more
-                        customers and achieve growth with us</p>
-                    <button
-                        style="border-radius: 5px;border: none;padding: 8px; background-color: var(--d-red);color: #fff;"
-                        routerLink="/contact_us">Find
-                        our more</button>
-                </div>
-            </div>
-            <div class="flex-row bg-light br-25" style="height: 200px;">
-                <div
-                    style="height: 200px;width:200px;display: flex;justify-content: center;align-items: center;color: var(--d-red);">
-                    <fa-icon [icon]="faCode" style="font-size: 50px;"></fa-icon>
-                </div>
-                <div class="flex-column justify-content-center align-items-center" style="height: 200px;width:100%;">
-                    <span style="font-weight: 900;font-size: 20px;padding: 10px 0;">Build your career</span>
-                    <p style="margin: 10px 0; word-wrap: break-word;padding: 0 20px;text-align: center;">Join the
-                        dynamic team that makes it all happen</p>
-                    <button
-                        style="border-radius: 5px;border: none;padding: 8px; background-color: var(--d-red);color: #fff;">Find
-                        our more</button>
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://ik.imagekit.io/kikysfekf/join-us.jpeg?updatedAt=1710780429642" class="card-img-top"
+                    alt="Build your career" />
+                <div class="card-body">
+                    <h5 class="card-title">Build your career</h5>
+                    <p class="card-text">Join the dynamic team that makes it all happen
+                    </p>
                 </div>
             </div>
         </div>
     </div>
+
     <app-footer />
 </div>

@@ -1,6 +1,7 @@
+import { Location } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Subject, takeUntil } from 'rxjs';
 import { Utils } from 'src/app/helpers/utils';
 import { OrderItem, Product, Variant } from 'src/app/model/products/all';
@@ -19,6 +20,7 @@ export class ProductDetailComponent {
   activatedRoute = inject(ActivatedRoute);
   orderService = inject(OrderService);
   basketService = inject(BasketService);
+  _location = inject(Location);
 
   utils = inject(Utils);
   destroy$ = new Subject<void>();
@@ -29,6 +31,7 @@ export class ProductDetailComponent {
 
   faPlus = faPlus;
   faMinus = faMinus;
+  faArrowLeft = faArrowLeft;
   selectedSize: Variant;
   selectedColor: Variant;
   quantity: number = 1;
@@ -38,13 +41,13 @@ export class ProductDetailComponent {
 
     var id = this.activatedRoute.snapshot.paramMap.get('id');
     console.log('Product :' + id)
-    if (!this.utils.isEmpty(id)) {
+    if (!Utils.isEmpty(id)) {
       let observable = this.productService.getProduct(id);
       observable.pipe(takeUntil(this.destroy$)).subscribe({
         next: (e) => {
           this.product = e;
           console.log('Product ' + JSON.stringify(e));
-          if (!this.utils.isValid(e)) {
+          if (!Utils.isValid(e)) {
             this.error = true;
             this.errorMessage =
               'Product not found. Please contact customer support';
@@ -107,6 +110,7 @@ export class ProductDetailComponent {
       image: this.product.image,
       productName: this.product.name,
       quantity: this.quantity,
+      deliveryLeadTime: this.product.deliveryLeadTime,
       size: this.selectedSize,
       color: this.selectedColor,
       price: this.product.price,
@@ -134,5 +138,9 @@ export class ProductDetailComponent {
     console.log('Destrying component...')
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  goback() {
+    this._location.back();
   }
 }

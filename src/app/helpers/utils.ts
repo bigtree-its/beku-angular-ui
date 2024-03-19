@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class Utils {
   constructor() {}
 
-  isJsonString(str) {
+  static isJsonString(str) {
     try {
       JSON.parse(str);
     } catch (e) {
@@ -15,25 +15,18 @@ export class Utils {
     return true;
   }
 
-  public isCollectionEmpty(data: any[]): Boolean {
+  public static isCollectionEmpty(data: any[]): Boolean {
     if ( data === null || data === undefined || data.length === 0){
         return true;
     }
     return false;
   }
 
-  public isEmpty(data: string): Boolean {
+  public  static isEmpty(data: string): Boolean {
     if ( data === null || data === undefined || data.length === 0){
         return true;
     }
     return false;
-  }
-
-  public isValid(data: any): Boolean {
-    if ( data === null || data === undefined ){
-        return false;
-    }
-    return true;
   }
 
   public static isValid(data: any): Boolean {
@@ -43,7 +36,7 @@ export class Utils {
     return true;
   }
 
-  public isEquals(data1: string, data2: string): Boolean {
+  public static isEquals(data1: string, data2: string): Boolean {
     console.log('Comparing '+ data1+" and "+ data2)
     return data1 === data2;
   }

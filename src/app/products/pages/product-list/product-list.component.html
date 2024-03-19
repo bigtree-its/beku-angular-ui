@@ -1,39 +1,255 @@
 <div class="container">
-  <div class="flex-row py-2 gap-1">
-    <a [routerLink]="[ '/p/groups', dept | lowercase] ">{{dept | titlecase}}</a>
-    <span>/</span>
-    <a>{{grp | titlecase}}</a>
+  <div class="my-3">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="[ '/p/groups', dept | lowercase] ">{{dept | titlecase}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{grp | titlecase}}</li>
+      </ol>
+    </nav>
   </div>
-  <div class="row">
-    <div class="col-sm-1 col-md-2 col-lg-3 col-xl-4" *ngFor="let product of products" [routerLink]="[ '/p/product-detail', product._id ] ">
-      <div class="col">
-        <div class="el-wrapper">
-          <div class="box-up">
-            <img class="img" src="{{product.image}}" alt="">
-            <div class="img-info">
-              <div class="info-inner">
-                <span class="p-name">{{product.name}}</span>
-                <span class="p-company">{{product.supplier.tradingName}}</span>
-              </div>
-              <div class="a-size">Available sizes : <span class="size">S , M , L , XL</span></div>
-            </div>
+  <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+     <div class="col hp" *ngFor="let p of products">
+      <div class="card h-100 shadow-sm">
+        <img src="{{p.image}}" class="card-img-top" alt="product.name" />
+        <div class="label-top shadow-sm bg-info">
+          <a class="text-white" target="_blank" href="https://amzn.to/3qeS1Fe">{{p.supplier.tradingName}}</a>
+        </div>
+        <div class="card-body">
+          <div class="clearfix mb-3">
+            <span class="float-start badge rounded-pill bg-success">{{p.price | currency : 'GBP'}}</span>
+            <span class="float-end"><a href="#" class="small text-muted aff-link">Reviews</a></span>
           </div>
+          <h5 class="card-title">
+            {{p.name}}
+          </h5>
+          <div class="d-grid gap-2 my-4" [routerLink]="[ '/p/product-detail', p._id] ">
+            <button type="button" class="btn btn-warning" >More</button>
+          </div>
+          <!-- <div class="clearfix mb-1">
+            <span class="float-start"><a href="#"><i class="fas fa-question-circle"></i></a></span>
+            <span class="float-end">
+              <i class="far fa-heart" style="cursor: pointer"></i>
+            </span>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="col hp">
+      <div class="card h-100 shadow-sm">
+        <a href="https://amzn.to/42dsdGC" target="_blank">
+          <img src="https://m.media-amazon.com/images/I/71wF7YDIQkL._AC_SL1500_.jpg" class="card-img-top" alt="product.title" />
+        </a>
 
-          <div class="box-down">
-            <div class="h-bg">
-              <div class="h-bg-inner"></div>
-            </div>
+        <div class="label-top shadow-sm">
+          <a class="text-white" href="https://amzn.to/42dsdGC" target="_blank">razer</a>
+        </div>
+        <div class="card-body">
+          <div class="clearfix mb-3">
+            <span class="float-start badge rounded-pill bg-success">2.345$</span>
 
-            <a class="cart"> 
-              <span class="price">{{product.price | currency : 'GBP'}}</span>
-              <span class="add-to-cart">
-                <span class="txt">Add to cart</span>
-              </span>
-            </a>
+            <span class="float-end"><a href="#" class="small text-muted text-uppercase aff-link">reviews</a></span>
+          </div>
+          <h5 class="card-title">
+            <a target="_blank" href="#">Razer Blade 15 Base Gaming Laptop 2020: Intel Core i7-10750H 6-Core, NVIDIA GeForce GTX 1660 Ti, 15.6" FHD 1080p 120Hz, 16GB RAM, 256GB SSD, CNC Aluminum, Chroma RGB Lighting, Black</a>
+          </h5>
+
+          <div class="d-grid gap-2 my-4">
+
+            <a href="#" class="btn btn-warning bold-btn">add to cart</a>
+
+          </div>
+          <div class="clearfix mb-1">
+
+            <span class="float-start"><a href="#"><i class="fas fa-question-circle"></i></a></span>
+
+            <span class="float-end">
+              <i class="far fa-heart" style="cursor: pointer"></i>
+
+            </span>
           </div>
         </div>
       </div>
+    </div>
+    <div class="col hp">
+      <div class="card h-100 shadow-sm">
+        <a href="https://amzn.to/42dsdGC" target="_blank">
+          <img src="https://m.media-amazon.com/images/I/71wF7YDIQkL._AC_SL1500_.jpg" class="card-img-top" alt="product.title" />
+        </a>
 
+        <div class="label-top shadow-sm">
+          <a class="text-white" href="https://amzn.to/42dsdGC" target="_blank">razer</a>
+        </div>
+        <div class="card-body">
+          <div class="clearfix mb-3">
+            <span class="float-start badge rounded-pill bg-success">2.345$</span>
+
+            <span class="float-end"><a href="#" class="small text-muted text-uppercase aff-link">reviews</a></span>
+          </div>
+          <h5 class="card-title">
+            <a target="_blank" href="#">Razer Blade 15 Base Gaming Laptop 2020: Intel Core i7-10750H 6-Core, NVIDIA GeForce GTX 1660 Ti, 15.6" FHD 1080p 120Hz, 16GB RAM, 256GB SSD, CNC Aluminum, Chroma RGB Lighting, Black</a>
+          </h5>
+
+          <div class="d-grid gap-2 my-4">
+
+            <a href="#" class="btn btn-warning bold-btn">add to cart</a>
+
+          </div>
+          <div class="clearfix mb-1">
+
+            <span class="float-start"><a href="#"><i class="fas fa-question-circle"></i></a></span>
+
+            <span class="float-end">
+              <i class="far fa-heart" style="cursor: pointer"></i>
+
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col hp">
+      <div class="card h-100 shadow-sm">
+        <a href="https://amzn.to/42dsdGC" target="_blank">
+          <img src="https://m.media-amazon.com/images/I/71wF7YDIQkL._AC_SL1500_.jpg" class="card-img-top" alt="product.title" />
+        </a>
+
+        <div class="label-top shadow-sm">
+          <a class="text-white" href="https://amzn.to/42dsdGC" target="_blank">razer</a>
+        </div>
+        <div class="card-body">
+          <div class="clearfix mb-3">
+            <span class="float-start badge rounded-pill bg-success">2.345$</span>
+
+            <span class="float-end"><a href="#" class="small text-muted text-uppercase aff-link">reviews</a></span>
+          </div>
+          <h5 class="card-title">
+            <a target="_blank" href="#">Razer Blade 15 Base Gaming Laptop 2020: Intel Core i7-10750H 6-Core, NVIDIA GeForce GTX 1660 Ti, 15.6" FHD 1080p 120Hz, 16GB RAM, 256GB SSD, CNC Aluminum, Chroma RGB Lighting, Black</a>
+          </h5>
+
+          <div class="d-grid gap-2 my-4">
+
+            <a href="#" class="btn btn-warning bold-btn">add to cart</a>
+
+          </div>
+          <div class="clearfix mb-1">
+
+            <span class="float-start"><a href="#"><i class="fas fa-question-circle"></i></a></span>
+
+            <span class="float-end">
+              <i class="far fa-heart" style="cursor: pointer"></i>
+
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col hp">
+      <div class="card h-100 shadow-sm">
+        <a href="https://amzn.to/42dsdGC" target="_blank">
+          <img src="https://m.media-amazon.com/images/I/71wF7YDIQkL._AC_SL1500_.jpg" class="card-img-top" alt="product.title" />
+        </a>
+
+        <div class="label-top shadow-sm">
+          <a class="text-white" href="https://amzn.to/42dsdGC" target="_blank">razer</a>
+        </div>
+        <div class="card-body">
+          <div class="clearfix mb-3">
+            <span class="float-start badge rounded-pill bg-success">2.345$</span>
+
+            <span class="float-end"><a href="#" class="small text-muted text-uppercase aff-link">reviews</a></span>
+          </div>
+          <h5 class="card-title">
+            <a target="_blank" href="#">Razer Blade 15 Base Gaming Laptop 2020: Intel Core i7-10750H 6-Core, NVIDIA GeForce GTX 1660 Ti, 15.6" FHD 1080p 120Hz, 16GB RAM, 256GB SSD, CNC Aluminum, Chroma RGB Lighting, Black</a>
+          </h5>
+
+          <div class="d-grid gap-2 my-4">
+
+            <a href="#" class="btn btn-warning bold-btn">add to cart</a>
+
+          </div>
+          <div class="clearfix mb-1">
+
+            <span class="float-start"><a href="#"><i class="fas fa-question-circle"></i></a></span>
+
+            <span class="float-end">
+              <i class="far fa-heart" style="cursor: pointer"></i>
+
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col hp">
+      <div class="card h-100 shadow-sm">
+        <a href="https://amzn.to/42dsdGC" target="_blank">
+          <img src="https://m.media-amazon.com/images/I/71wF7YDIQkL._AC_SL1500_.jpg" class="card-img-top" alt="product.title" />
+        </a>
+
+        <div class="label-top shadow-sm">
+          <a class="text-white" href="https://amzn.to/42dsdGC" target="_blank">razer</a>
+        </div>
+        <div class="card-body">
+          <div class="clearfix mb-3">
+            <span class="float-start badge rounded-pill bg-success">2.345$</span>
+
+            <span class="float-end"><a href="#" class="small text-muted text-uppercase aff-link">reviews</a></span>
+          </div>
+          <h5 class="card-title">
+            <a target="_blank" href="#">Razer Blade 15 Base Gaming Laptop 2020: Intel Core i7-10750H 6-Core, NVIDIA GeForce GTX 1660 Ti, 15.6" FHD 1080p 120Hz, 16GB RAM, 256GB SSD, CNC Aluminum, Chroma RGB Lighting, Black</a>
+          </h5>
+
+          <div class="d-grid gap-2 my-4">
+
+            <a href="#" class="btn btn-warning bold-btn">add to cart</a>
+
+          </div>
+          <div class="clearfix mb-1">
+
+            <span class="float-start"><a href="#"><i class="fas fa-question-circle"></i></a></span>
+
+            <span class="float-end">
+              <i class="far fa-heart" style="cursor: pointer"></i>
+
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col hp">
+      <div class="card h-100 shadow-sm">
+        <a href="https://amzn.to/42dsdGC" target="_blank">
+          <img src="https://m.media-amazon.com/images/I/71wF7YDIQkL._AC_SL1500_.jpg" class="card-img-top" alt="product.title" />
+        </a>
+
+        <div class="label-top shadow-sm">
+          <a class="text-white" href="https://amzn.to/42dsdGC" target="_blank">razer</a>
+        </div>
+        <div class="card-body">
+          <div class="clearfix mb-3">
+            <span class="float-start badge rounded-pill bg-success">2.345$</span>
+
+            <span class="float-end"><a href="#" class="small text-muted text-uppercase aff-link">reviews</a></span>
+          </div>
+          <h5 class="card-title">
+            <a target="_blank" href="#">Razer Blade 15 Base Gaming Laptop 2020: Intel Core i7-10750H 6-Core, NVIDIA GeForce GTX 1660 Ti, 15.6" FHD 1080p 120Hz, 16GB RAM, 256GB SSD, CNC Aluminum, Chroma RGB Lighting, Black</a>
+          </h5>
+
+          <div class="d-grid gap-2 my-4">
+
+            <a href="#" class="btn btn-warning bold-btn">add to cart</a>
+
+          </div>
+          <div class="clearfix mb-1">
+
+            <span class="float-start"><a href="#"><i class="fas fa-question-circle"></i></a></span>
+
+            <span class="float-end">
+              <i class="far fa-heart" style="cursor: pointer"></i>
+
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

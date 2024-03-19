@@ -12,7 +12,8 @@ export const environment = {
   ReviewsUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/reviews',
   ServiceAreasUrl:
     'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/serviceareas',
-  MenusUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/menus',
+  MenusUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/menus',  
+  SupplierUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/suppliers',
   CalendersUrl:
     'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/calendars',
   OrderTrackingUrl:

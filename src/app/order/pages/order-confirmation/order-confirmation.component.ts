@@ -45,7 +45,7 @@ export class OrderConfirmationComponent {
     }
     this.orderService.updateOrder(obj ).subscribe((o) => {
       this.order = o;
-      if (this.utils.isValid(this.order)) {
+      if (Utils.isValid(this.order)) {
         if (this.redirectStatus === 'succeeded' && o.status === 'PAID') {
           this.orderService.destroy();
         }

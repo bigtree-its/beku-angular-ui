@@ -596,7 +596,7 @@ export class FoodOrderService {
   getData() {
     var json = this.localService.getData(Constants.StorageItem_F_Order);
     console.log('FoodOrder in storage ' + json);
-    if (this.utils.isValid(json) &&  this.isJsonString(json)) {
+    if (Utils.isValid(json) &&  this.isJsonString(json)) {
       var obj = JSON.parse(json);
       this.foodOrder = obj.constructor.name === 'Array' ? obj[0] : obj;
       console.log('FoodOrder object' + JSON.stringify(this.foodOrder));

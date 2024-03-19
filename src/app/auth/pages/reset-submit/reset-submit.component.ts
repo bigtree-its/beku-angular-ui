@@ -36,16 +36,16 @@ export class ResetSubmitComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const qs = this.activatedRoute.snapshot.queryParamMap.get('qs');
-    if ( this.utils.isEmpty(qs)){
+    if ( Utils.isEmpty(qs)){
       this.errorMessage = "Something went wrong. Retry again."
     }else{
       var decryptedQS = this.cryptoService.decrypt(qs);
       var params = decryptedQS.split("&");
       this.oneTimePasscode = params[0].split("=")[1];
       this.email = params[1].split("=")[1];
-      if ( this.utils.isEmpty(this.oneTimePasscode)){
+      if ( Utils.isEmpty(this.oneTimePasscode)){
         this.errorMessage = "Something went wrong. Retry again."
-      }else  if ( this.utils.isEmpty(this.email)){
+      }else  if ( Utils.isEmpty(this.email)){
         this.errorMessage = "Something went wrong. Retry again."
       }
      
@@ -55,23 +55,23 @@ export class ResetSubmitComponent implements OnInit, OnDestroy {
   submit() {
 
     this.errorMessage = undefined;
-    if (this.utils.isEmpty(this.email)) {
+    if (Utils.isEmpty(this.email)) {
       this.error = 'Email is mandatory';
       return;
     }
-    if (this.utils.isEmpty(this.oneTimePasscode)) {
+    if (Utils.isEmpty(this.oneTimePasscode)) {
       this.error = 'OTP is mandatory';
       return;
     }
-    if (this.utils.isEmpty(this.password)) {
+    if (Utils.isEmpty(this.password)) {
       this.error = 'Password is mandatory';
       return;
     }
-    if (this.utils.isEmpty(this.repeatPassword)) {
+    if (Utils.isEmpty(this.repeatPassword)) {
       this.error = 'Confirm Password is mandatory';
       return;
     }
-    if (!this.utils.isEquals(this.password, this.repeatPassword)) {
+    if (!Utils.isEquals(this.password, this.repeatPassword)) {
       this.error = 'Password and Repeat Password are not matching';
       return;
     }

@@ -79,7 +79,7 @@ export class CheflistComponent implements OnDestroy {
     console.log('cuisine: ' + cuisine);
     if (location !== null && location.length > 5) {
       this.locationService.getLocation(location).subscribe((sl) => {
-        if (this.utils.isValid(sl)) {
+        if (Utils.isValid(sl)) {
           this.serviceLocation = sl;
           this.titleService.setTitle(sl.slug.toLocaleUpperCase())
           this.localService.saveData(
@@ -93,7 +93,7 @@ export class CheflistComponent implements OnDestroy {
 
     if (cuisine !== null && cuisine.length > 5) {
       this.cuisinesService.getSingleCuisine(cuisine).subscribe((c) => {
-        if (this.utils.isValid(c)) {
+        if (Utils.isValid(c)) {
           this.cuisine = c;
           console.log('Fetched the cuisine ' + JSON.stringify(this.cuisine));
           this.contextService.selectCuisine(this.cuisine);
@@ -262,7 +262,7 @@ export class CheflistComponent implements OnDestroy {
   }
 
   getAddress(cook: LocalChef): string {
-    return this.utils.getChefAddress(cook);
+    return Utils.getChefAddress(cook);
   }
 
   public scrollRight(): void {

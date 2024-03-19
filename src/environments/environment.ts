@@ -34,25 +34,25 @@ export const environment = {
   // ====================
   // Order Service Remote
   // ====================
-  // OrderTrackingUrl:
-  //   'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/order-tracking',
-  // FoodOrdersUrl:
-  //   'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders',
-  // FoodOrderSearchUrl:
-  //   'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders/search',
-  // StripePaymentsUrl:
-  //   'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments',
-  // PaymentIntentUrl:
-  //   'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments/payment-intent',
+  OrderTrackingUrl:
+    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/order-tracking',
+  FoodOrdersUrl:
+    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders',
+  FoodOrderSearchUrl:
+    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders/search',
+  StripePaymentsUrl:
+    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments',
+  PaymentIntentUrl:
+    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments/payment-intent',
 
   // ====================
   // Order Service Remote
   // ====================
-  OrderTrackingUrl: 'http://localhost:8082/api/order-tracking',
-  FoodOrdersUrl: 'http://localhost:8082/api/customer-orders',
-  FoodOrderSearchUrl: 'http://localhost:8082/api/customer-orders/search',
-  StripePaymentsUrl: 'http://localhost:8082/api/stripe-payments',
-  PaymentIntentUrl: 'http://localhost:8082/api/stripe-payments/payment-intent',
+  // OrderTrackingUrl: 'http://localhost:8082/api/order-tracking',
+  // FoodOrdersUrl: 'http://localhost:8082/api/customer-orders',
+  // FoodOrderSearchUrl: 'http://localhost:8082/api/customer-orders/search',
+  // StripePaymentsUrl: 'http://localhost:8082/api/stripe-payments',
+  // PaymentIntentUrl: 'http://localhost:8082/api/stripe-payments/payment-intent',
   OrdersUrl: 'http://localhost:8082/orders/v1',
   PaymentsUrl: 'http://localhost:8082/payments/v1',
 
@@ -93,6 +93,7 @@ export const environment = {
   CalendersUrl: "http://localhost:8083/ads/v1/calendars",
   GroupsUrl: 'http://localhost:8083/ads/v1/groups',
   ProductsUrl: 'http://localhost:8083/ads/v1/products',
+  SupplierUrl: 'http://localhost:8083/ads/v1/suppliers',
   FeedbacksUrl: 'http://localhost:8083/ads/v1/feedbacks',
   
 
