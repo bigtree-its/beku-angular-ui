@@ -20,10 +20,12 @@ export interface ProductInfo{
 export interface SupplierBasic{
   _id: string,
   name: string,
+  canClubDelivery: boolean,
   tradingName: string,
   email: string,
   mobile: string,
   telephone: string,
+
 }
 
 
@@ -103,6 +105,59 @@ export interface OrderItem {
   size: Variant;
   color: Variant;
   subTotal: number;
+  clubDelivery: boolean;
+}
+
+export interface SaleOrder{
+  reference: string;
+  datePlaced: Date;
+  customer: Customer;
+  saleOrderPerSuppliers: SaleOrderPerSupplier[];
+  subTotal: number;
+  total: number;
+  grandTotal: number;
+  promotionsApplied: number;
+  serviceFee: number;
+  deliveryFee: number;
+}
+
+export interface SaleOrderItem {
+  _tempId: number;
+  image: string;
+  productId: string;
+  productName: string;
+  quantity: number;
+  deliveryLeadTime: number;
+  price: number;
+  size: Variant;
+  color: Variant;
+  subTotal: number;
+  deliveryFee: number;
+  total: number;
+  promotionsApplied: number;
+  dateDispatched: Date;
+  dateDelivered: Date;
+  dateReturned: Date;
+  dateRefunded: Date;
+  deliveryNotes: string;
+}
+
+export interface SaleOrderPerSupplier{
+  reference: string;
+  supplier: Supplier;
+  subTotal: number;
+  total: number;
+  grandTotal: number;
+  promotionsApplied: number;
+  serviceFee: number;
+  deliveryFee: number;
+  clubDelivery: boolean;
+  items: SaleOrderItem[];
+  datePlaced: Date;
+  dateDispatched: Date;
+  dateDelivered: Date;
+  dateReturned: Date;
+  dateRefunded: Date;
 }
 
 export interface Feedback {
@@ -159,7 +214,7 @@ export interface CheckoutItem{
   freeDelivery: Boolean;
   clubShipment: Boolean;
   freeDeliveryShortfall: number;
-  items:OrderItem[],
+  items: OrderItem[],
 }
 
 export interface Address {

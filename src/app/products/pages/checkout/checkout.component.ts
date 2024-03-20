@@ -19,6 +19,9 @@ import {
   faBox,
   faArrowLeft,
   faTruckFast,
+  faPlus,
+  faMinus,
+  faCheck,
 } from '@fortawesome/free-solid-svg-icons';
 import { AccountService } from 'src/app/services/account.service';
 import { User } from 'src/app/model/auth-model';
@@ -33,6 +36,7 @@ import { SupplierService } from 'src/app/services/products/supplier.service';
   styleUrls: ['./checkout.component.css'],
 })
 export class CheckoutComponent implements OnDestroy {
+
   @ViewChild('stripeContent', { read: ElementRef })
   public stripeContent: ElementRef<any>;
   @ViewChild('cardInfo', { read: ElementRef }) public cardInfo: ElementRef<any>;
@@ -47,6 +51,9 @@ export class CheckoutComponent implements OnDestroy {
   faBox = faBox;
   faArrowLeft = faArrowLeft;
   faTruckfast = faTruckFast;
+  faPlus = faPlus;
+  faMinus = faMinus;
+  faCheck = faCheck;
 
   enablePayButton: boolean = false;
 
@@ -56,6 +63,9 @@ export class CheckoutComponent implements OnDestroy {
   notesToChef: string = '';
 
   divHeader: string = '';
+
+  showContactDetails: boolean = false;
+
   nextButtonText: string = 'Next';
   showHomeScreen: boolean = true;
   showCustomerDetailsSection: boolean = false;
@@ -144,6 +154,10 @@ export class CheckoutComponent implements OnDestroy {
       complete: () =>
         console.log('CustomerSubject emitted the complete notification'),
     });
+  }
+
+  openCloseContactDetails() {
+    this.showContactDetails = !this.showContactDetails; //not equal to condition
   }
 
   extractOrder(theOrder: Order) {
@@ -300,7 +314,6 @@ export class CheckoutComponent implements OnDestroy {
     this.order.customer.mobile = this.customerMobile;
     this.order.customer.address = this.customerAddress;
     this.order.serviceMode = this.serviceMode;
-    this.order.notes = this.notesToChef;
     this.orderService.saveOrder(this.order).subscribe((e) => {
       if (Utils.isStringValid(e.reference)) {
 
@@ -547,50 +560,69 @@ export class CheckoutComponent implements OnDestroy {
   fetchSuppliers() {
     var count = this.supplierIds.length;
     var retrieved = 0;
-    this.supplierIds.forEach(id=>{
-      this.supplierService.getSupplier(id).subscribe(supplier =>{
-          if ( Utils.isValid(supplier)){
-            this.supplierMap.set(id, supplier);
-            retrieved = retrieved+1;
-            if ( count === retrieved){
-              this.aggregateOrder();
-            }
+    this.supplierIds.forEach(id => {
+      this.supplierService.getSupplier(id).subscribe(supplier => {
+        if (Utils.isValid(supplier)) {
+          this.supplierMap.set(id, supplier);
+          retrieved = retrieved + 1;
+          if (count === retrieved) {
+            this.aggregateOrder();
           }
+        }
       });
     });
   }
 
   aggregateOrder() {
     this.supplierMap.forEach((value: Supplier, key: string) => {
-        var items:OrderItem[] = this.itemsMap.get(key);
-        var total = 0.00;
-        items.forEach(it=>{
-          total = total + it.subTotal;
-        });
-        total = +(+total).toFixed(2);
-        var freeDelivery = false;
-        var freeDeliveryShortfall = 0;
-        if ( total >= value.freeDeliveryOver){
-          freeDelivery = true;
-        }else{
-          freeDeliveryShortfall = value.freeDeliveryOver - total;
-        }
-        var supplierBasic: SupplierBasic = {
-          _id: value._id,
-          name: value.name,
-          tradingName: value.tradingName,
-          email: value.contact.email,
-          mobile: value.contact.mobile,
-          telephone: value.contact.telephone
-        }
-        var checkoutItem: CheckoutItem = {
-          freeDelivery: freeDelivery,
-          clubShipment: false,
-          freeDeliveryShortfall: freeDeliveryShortfall,
-          items: items
-        }
+      var items: OrderItem[] = this.itemsMap.get(key);
+      var total = 0.00;
+      items.forEach(it => {
+        total = total + it.subTotal;
+      });
+      total = +(+total).toFixed(2);
+      var freeDelivery = false;
+      var freeDeliveryShortfall = 0;
+      if (total >= value.freeDeliveryOver) {
+        freeDelivery = true;
+      } else {
+        freeDeliveryShortfall = value.freeDeliveryOver - total;
+      }
+      var supplierBasic: SupplierBasic = {
+        _id: value._id,
+        name: value.name,
+        canClubDelivery: (items.length> 1),
+        tradingName: value.tradingName,
+        email: value.contact.email,
+        mobile: value.contact.mobile,
+        telephone: value.contact.telephone
+      }
+      var checkoutItem: CheckoutItem = {
+        freeDelivery: freeDelivery,
+        clubShipment: false,
+        freeDeliveryShortfall: freeDeliveryShortfall,
+        items: items
+      }
 
-        this.checkoutItemsMap.set(supplierBasic, checkoutItem);
+      this.checkoutItemsMap.set(supplierBasic, checkoutItem);
+    });
+  }
+
+  clubDelivery(arg0: SupplierBasic, arg1: OrderItem) {
+    this.checkoutItemsMap.forEach((value: CheckoutItem, key: SupplierBasic) => {
+      if ( key._id === arg0._id){
+        var tempItems = value.items;
+        tempItems.forEach(i=>{
+          if ( i._tempId === arg1._tempId){
+            if ( i.clubDelivery){
+              i.clubDelivery = false;
+            }else{
+              i.clubDelivery = true;
+            }
+          }
+        });
+        value.items = tempItems;
+      }
   });
   }
 }
