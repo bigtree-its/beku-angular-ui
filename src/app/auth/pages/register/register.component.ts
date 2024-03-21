@@ -13,6 +13,8 @@ export class RegisterComponent {
   register: RegisterRequest;
   registerForm: FormGroup;
   errorMessage: any;
+  signupSuccess: boolean;
+  loading: boolean;
 
   constructor(private accountService: AccountService,
     private router: Router,
@@ -32,6 +34,7 @@ export class RegisterComponent {
   }
 
   registerUser() {
+    this.signupSuccess = false;
     if (this.registerForm.valid) {
       this.register = {
         firstName: this.registerForm.get('firstName').value,
@@ -42,14 +45,17 @@ export class RegisterComponent {
         userType: 'Customer',
       };
       console.log('Registering '+ JSON.stringify(this.register))
-
+      this.loading = true;
       this.accountService.register(this.register).subscribe(
         (data) => {
           console.warn(JSON.stringify(data, null, 2));
-          this.router.navigate(['login']);
+          this.signupSuccess = true;
+          this.loading = false;
         },
         (err) => {
-          this.errorMessage = err.error.detail;
+          this.signupSuccess = false;
+          this.loading = false;
+          this.errorMessage = err.error?.detail;
         }
       );
     } else {

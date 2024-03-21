@@ -25,6 +25,11 @@ export interface LoginResponse {
     accessToken: string;
 }
 
+export interface SignupResponse {
+    endpoint: string;
+    message: string;
+}
+
 export class User{
     id: string;
     firstName: string;

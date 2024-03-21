@@ -50,7 +50,7 @@ export class CheckoutComponent implements OnDestroy {
   faPersonBiking = faPersonBiking;
   faBox = faBox;
   faArrowLeft = faArrowLeft;
-  faTruckfast = faTruckFast;
+  faTruckFast = faTruckFast;
   faPlus = faPlus;
   faMinus = faMinus;
   faCheck = faCheck;
@@ -145,8 +145,10 @@ export class CheckoutComponent implements OnDestroy {
           this.customerMobile = this.customer.mobile;
           this.showCustomerDetailsSection = true;
           this.showHomeScreen = false;
+          this.showContactDetails = true;
         } else {
           this.showHomeScreen = true;
+          this.showContactDetails = false;
           this.showCustomerDetailsSection = false;
         }
       },

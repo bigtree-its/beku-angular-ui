@@ -14,6 +14,7 @@ import {
   PasswordResetInitiate,
   PasswordResetSubmit,
   RegisterRequest,
+  SignupResponse,
   User,
 } from '../model/auth-model';
 import { ServiceLocator } from './service.locator';
@@ -174,12 +175,12 @@ export class AccountService {
       );
   }
 
-  register(registerReq: RegisterRequest): Observable<{ loginResp: LoginResponse }> {
+  register(registerReq: RegisterRequest): Observable<{ signupResponse: SignupResponse }> {
     return this.http
-      .post<{ loginResp: LoginResponse }>(this.serviceLocator.RegisterUrl,registerReq)
+      .post<{ signupResponse: SignupResponse }>(this.serviceLocator.RegisterUrl,registerReq)
       .pipe(
-        tap(({ loginResp }) => {
-          this.setUser(loginResp);
+        tap(({ signupResponse }) => {
+          // this.setUser(loginResp);
         })
       );
   }
