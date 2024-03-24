@@ -1,8 +1,23 @@
 <div class="container">
+
+    <div class="flex-row jcsb aic">
+        <div class="arrow-icon-div" (click)="goback()">
+            <fa-icon [icon]="faArrowLeft"></fa-icon>
+        </div>
+        <span class="a-page-header">Checkout</span>
+        <span class="a-page-header"></span>
+    </div>
+
+    <div class="flex-row-space-between border-bottom py-3 sm">
+        <span class="bold f-size-lg ">Your Items</span>
+        <fa-icon class="collapsible-icon" *ngIf="!showItems" [icon]="faPlus" (click)="openCloseItems()"></fa-icon>
+        <fa-icon class="collapsible-icon" *ngIf="showItems" [icon]="faMinus" (click)="openCloseItems()"></fa-icon>
+    </div>
+    <ng-container *ngIf="showItems" [ngTemplateOutlet]="itemsLayout"></ng-container>
     <div class="row">
-        <div class="col-md-7 p-3" style="min-height: 100vh;">
+        <div class="col-md-7 px-3" style="min-height: 100vh;">
             <div style="min-width: 100%;display: flex;flex-direction: column;">
-                <div *ngIf="!showOrderConfirmation" class="sub-header">{{divHeader}}</div>
+                <div *ngIf="!showOrderConfirmation">{{divHeader}}</div>
                 <div *ngIf="showHomeScreen" class="flex-column p-3">
                     <div class="flex-row mb-2">
                         <span>Do you have an account?</span>
@@ -69,51 +84,8 @@
 
             </div>
         </div>
-        <div class="col-md-5 border-left" style="min-height: 100vh;">
-            <div class="flex-column p-3" *ngIf="checkoutItemsMap">
-                <div *ngFor="let entry of checkoutItemsMap  | keyvalue" class="mb-1 flex-column">
-                    <span class="py-2">Sold by: {{entry.key.tradingName}}</span>
-                    <div class="alert alert-warning flex-column">
-                        <div class="flex-row">
-                            <fa-icon [icon]="faTruckFast"></fa-icon>
-                            <b class="ml-1">Shipping Fee</b>
-                        </div>
-                        <span *ngIf="entry.value.freeDeliveryShortfall > 0">
-                            Buy {{entry.value.freeDeliveryShortfall | currency : 'GBP'}} more to enjoy FREE STANDARD
-                            SHIPPING!
-                        </span>
-                        <span *ngIf="entry.value.freeDelivery">
-                            Enjoy FREE STANDARD SHIPPING! for the Items Below
-                        </span>
-                    </div>
-                    <div *ngFor="let item of entry.value.items" class="mb-3">
-                        <div class="flex-row" style="height: 80px;">
-                            <div style="width: 80px;height: 80px;" class="border br-7">
-                                <img src="{{item.image}}" class="d-block w-100" alt="..." style="width: 100%;height: 100%;object-fit: cover;border-radius: 7px;">
-                            </div>
-                            <div class="flex-row jcsb  w-100 px-2">
-                                <div class="flex-column">
-                                    <b>{{item.productName}}</b>
-                                    <div class="flex-row">
-                                        <div class="mr-2" *ngIf="item.size">Size: <b>{{item.size?.name}}</b></div>
-                                        <div *ngIf="item.color">Color: <b>{{item.color?.name}}</b>
-                                        </div>
-                                    </div>
-                                    <b class="mt-1">Dispatched within {{item.deliveryLeadTime}} days</b>
-                                    <div *ngIf="entry.key.canClubDelivery" class="selectable mr-1" (click)="clubDelivery(entry.key, item)" [class.selected]="item.clubDelivery">
-                                        <fa-icon [icon]="faCheck"></fa-icon>
-                                        <span class="pl-1">Club Delivery</span>
-                                    </div>
-                                </div>
-                                <div class="flex-column">
-                                    <b class="text-center">Qty : {{item.quantity}}</b>
-                                    <b class="text-danger fs-5">{{item.subTotal | currency : 'GBP'}}</b>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="col-md-5 border-left lg" style="min-height: 100vh;">
+            <ng-container [ngTemplateOutlet]="itemsLayout"></ng-container>
         </div>
     </div>
 </div>
@@ -168,6 +140,53 @@
                 <div class="address-item" *ngFor="let add of postcodeAddressList" (click)="onSelectDeliveryAddress(add)">
                     <span> {{add.StreetAddress }},
                         {{add.Place}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #itemsLayout>
+    <div class="flex-column p-3" *ngIf="checkoutItemsMap">
+        <div *ngFor="let entry of checkoutItemsMap  | keyvalue" class="mb-1 flex-column">
+            <span class="py-2">Sold by: {{entry.key.tradingName}}</span>
+            <div class="alert alert-warning flex-column">
+                <div class="flex-row">
+                    <fa-icon [icon]="faTruckFast"></fa-icon>
+                    <b class="ml-1">Shipping Fee</b>
+                </div>
+                <span *ngIf="entry.value.freeDeliveryShortfall > 0">
+                    Buy {{entry.value.freeDeliveryShortfall | currency : 'GBP'}} more to enjoy FREE STANDARD
+                    SHIPPING!
+                </span>
+                <span *ngIf="entry.value.freeDelivery">
+                    Enjoy FREE STANDARD SHIPPING! for the Items Below
+                </span>
+            </div>
+            <div *ngFor="let item of entry.value.items" class="mb-3">
+                <div class="flex-row" style="height: 80px;">
+                    <div style="width: 80px;height: 80px;" class="border br-7">
+                        <img src="{{item.image}}" class="d-block w-100" alt="..." style="width: 100%;height: 100%;object-fit: cover;border-radius: 7px;">
+                    </div>
+                    <div class="flex-row jcsb  w-100 px-2">
+                        <div class="flex-column">
+                            <b>{{item.productName}}</b>
+                            <div class="flex-row">
+                                <div class="mr-2" *ngIf="item.size">Size: <b>{{item.size?.name}}</b></div>
+                                <div *ngIf="item.color">Color: <b>{{item.color?.name}}</b>
+                                </div>
+                            </div>
+                            <b class="mt-1">Dispatched within {{item.deliveryLeadTime}} days</b>
+                            <div *ngIf="entry.key.canClubDelivery" class="selectable mr-1" (click)="clubDelivery(entry.key, item)" [class.selected]="item.clubDelivery">
+                                <fa-icon [icon]="faCheck"></fa-icon>
+                                <span class="pl-1">Club Delivery</span>
+                            </div>
+                        </div>
+                        <div class="flex-column">
+                            <b class="text-center">Qty : {{item.quantity}}</b>
+                            <b class="text-danger fs-5">{{item.subTotal | currency : 'GBP'}}</b>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

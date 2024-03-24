@@ -19,19 +19,15 @@ export class BasketService {
     localService = inject(LocalService);
     toastService = inject(ToastService);
     confirmationDialogService = inject(ConfirmationDialogService);
-    utils = inject(Utils);
 
     addToProductOrder(OrderItem: OrderItem) {
         console.log('Adding a product to cart');
         var json = this.localService.getData(Constants.StorageItem_F_Order);
         if (Utils.isValid(json) && Utils.isJsonString(json)) {
-            this.confirmationDialogService.confirm('Please confirm', 'You have a active food cart. Adding this product to the cart will remove food order. Please confirm ?')
-                .then((confirmed) => {
-                    console.log('User confirmed:', confirmed);
-                    this.fOrderService.destroy();
-                    this.pOrderService.addToOrder(OrderItem);
-                })
-                .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+            if (window.confirm("There is a Food Order. Are you sure to delete that and create Product Order ?")){
+                this.fOrderService.destroy();
+                this.pOrderService.addToOrder(OrderItem);
+            }
         } else {
             this.pOrderService.addToOrder(OrderItem);
         }
@@ -41,13 +37,10 @@ export class BasketService {
         console.log('Adding a food to cart');
         var json = this.localService.getData(Constants.StorageItem_P_Order);
         if (Utils.isValid(json) && Utils.isJsonString(json)) {
-            this.confirmationDialogService.confirm('Please confirm', 'You have a active Product cart. Adding this food to the cart will remove Prouct order. Please confirm ?')
-                .then((confirmed) => {
-                    console.log('User confirmed:', confirmed);
-                    this.pOrderService.destroy();
-                    this.fOrderService.addToOrder(foodItem);
-                })
-                .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+            if (window.confirm("There is a Product Order.You sure to delete that and create Food Order ?")){
+                this.pOrderService.destroy();
+                this.fOrderService.addToOrder(foodItem);
+            }
         } else {
             this.fOrderService.addToOrder(foodItem);
         }

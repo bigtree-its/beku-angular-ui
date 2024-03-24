@@ -65,6 +65,7 @@ export class CheckoutComponent implements OnDestroy {
   divHeader: string = '';
 
   showContactDetails: boolean = false;
+  showItems: boolean = false;
 
   nextButtonText: string = 'Next';
   showHomeScreen: boolean = true;
@@ -156,6 +157,10 @@ export class CheckoutComponent implements OnDestroy {
       complete: () =>
         console.log('CustomerSubject emitted the complete notification'),
     });
+  }
+
+  openCloseItems() {
+    this.showItems = !this.showItems;
   }
 
   openCloseContactDetails() {

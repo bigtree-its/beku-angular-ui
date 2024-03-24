@@ -3,10 +3,10 @@
         <span>{{errorMessage}}</span>
     </div>
     <div class="my-3">
-        <div class="arrow-icon-div" (click)="goback()">
+        <div class="arrow-icon-div" (click)="goBack()">
             <fa-icon [icon]="faArrowLeft"></fa-icon>
         </div>
-      </div>
+    </div>
     <div *ngIf="!error" class="lg-row-sm-col">
         <div class="left p-3 ">
             <div id="carouselExample" class="carousel slide">
@@ -48,7 +48,7 @@
                         <button type="button" *ngFor="let Size of product?.sizes" [class.clicked]="isSelectedSize(Size)" class="btn btn-outline-dark btn-sm light-border" (click)="selectSize(Size)">{{Size.name}}</button>
                     </div>
                 </div>
-                <div class="flex-column my-1"  *ngIf="product.color">
+                <div class="flex-column my-1" *ngIf="product.color">
                     <b>Color</b>
                     <div class="flex-row gap-1">
                         <button type="button" *ngFor="let color of product?.colors" [class.clicked]="isSelectedColor(color)" class="btn btn-outline-dark btn-sm light-border" (click)="selectColor(color)">{{color.name}}</button>

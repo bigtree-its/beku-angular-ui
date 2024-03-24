@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { faArrowLeft, faBatteryEmpty, faClose, faFaceSmile, faPeopleArrows, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faBatteryEmpty, faClose, faFaceSmile, faMinus, faPeopleArrows, faPlus, faStar } from '@fortawesome/free-solid-svg-icons';
 import { Order, OrderItem } from 'src/app/model/products/all';
 import { OrderService } from 'src/app/services/products/order.service';
 import { SupplierService } from 'src/app/services/products/supplier.service';
@@ -22,6 +22,8 @@ export class CartComponent {
   faPeopleArrows = faPeopleArrows;
   faFaceSmile = faFaceSmile;
   faClose = faClose;
+  faPlus = faPlus;
+  faMinus = faMinus;
   
 
   cartTotal: number = 0;
@@ -72,7 +74,26 @@ export class CartComponent {
     this.showPaymentSummary = false;
   }
 
-  goback() {
+  increaseQuantity(item: OrderItem) {
+
+    if (item.quantity < 10) {
+      item.quantity = item.quantity + 1;
+      item.subTotal = item.price * item.quantity;
+      item.subTotal = +(+item.subTotal).toFixed(2);
+      this.orderService.updateItem(item);
+    }
+  }
+
+  decreaseQuantity(item: OrderItem) {
+    if (item.quantity > 0) {
+      item.quantity = item.quantity - 1;
+      item.subTotal = item.price * item.quantity;
+      item.subTotal = +(+item.subTotal).toFixed(2);
+      this.orderService.updateItem(item);
+    }
+  }
+
+  goBack() {
     this._location.back();
   }
 

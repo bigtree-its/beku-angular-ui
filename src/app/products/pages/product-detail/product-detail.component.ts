@@ -136,12 +136,12 @@ export class ProductDetailComponent {
   }
 
   ngOnDestroy(): void {
-    console.log('Destrying component...')
+    console.log('Destroying component...')
     this.destroy$.next();
     this.destroy$.complete();
   }
 
-  goback() {
+  goBack() {
     this._location.back();
   }
 }

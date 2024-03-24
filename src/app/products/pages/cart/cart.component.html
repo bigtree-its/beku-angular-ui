@@ -1,34 +1,47 @@
 <div class="container">
     <div class="flex-column">
-        <div class="flex-row align-items-center">
-            <div class="arrow-icon-div" (click)="goback()">
+        <div class="flex-row jcsb aic">
+            <div class="arrow-icon-div" (click)="goBack()">
                 <fa-icon [icon]="faArrowLeft"></fa-icon>
             </div>
-            <span class="a-page-header">{{order?.items?.length}} Items in your cart</span>
+            <span class="a-page-header">{{order?.items?.length}} Items in your
+                cart</span>
+            <span class="a-page-header"></span>
         </div>
         <div class="row">
             <div class="col-md-8">
                 <div class="flex-column  w-100">
-                    <div *ngFor="let item of order.items" class="border br-7 p-4 flex-column mb-3"
-                        [routerLink]="[ '/p/products', item.productId | lowercase] ">
+                    <div *ngFor="let item of order.items" class="border br-7 p-4 flex-column mb-3" [routerLink]="[ '/p/products', item.productId | lowercase] ">
                         <b class="f-size-md">{{item.supplier.tradingName}}</b>
                         <div class="flex-row mt-2">
                             <div style="width: 100px;height: 100px;">
-                                <img src="{{item.image}}" class="d-block w-100" alt="..."
-                                    style="width: 100%;height: 100%;object-fit: cover;">
+                                <img src="{{item.image}}" class="d-block w-100" alt="..." style="width: 100%;height: 100%;object-fit: cover;">
                             </div>
                             <div class="flex-column px-3 w-100">
                                 <div class="flex-row-space-between  w-100">
                                     <h6 class="clickable-link">{{item.productName}}</h6>
-                                    <span class="bolder text-success fs-3">{{item.subTotal | currency : 'GBP'}}</span>
+                                    <span class="bolder text-success fs-3">{{item.subTotal
+                                        | currency : 'GBP'}}</span>
                                 </div>
                                 <div class="flex-row gap-2">
-                                    <div class="attribute" *ngIf="item.size">Size: <b>{{item.size?.name}}</b></div>
-                                    <div class="attribute" *ngIf="item.color">Color: <b>{{item.color?.name}}</b></div>
+                                    <div class="attribute" *ngIf="item.size">Size:
+                                        <b>{{item.size?.name}}</b></div>
+                                    <div class="attribute" *ngIf="item.color">Color:
+                                        <b>{{item.color?.name}}</b></div>
                                 </div>
-                                <div class="flex-row mt-2">
-                                    <button type="button" class="clickable" (click)="removeItem(item)">Remove</button>
+                                <div class="flex-row aic mt-1">
+                                    <button class="btn btn-outline-dark btn-sm light-border br-25" (click)="decreaseQuantity(item)">
+                                        <fa-icon
+                                            [icon]="faMinus"></fa-icon>
+                                    </button>
+                                    <span class="bold px-1 f-size-sm ">{{item.quantity}}</span>
+                                    <button class="btn btn-outline-dark btn-sm light-border br-25" (click)="increaseQuantity(item)">
+                                        <fa-icon
+                                            [icon]="faPlus"></fa-icon>
+                                    </button>
+                                    <button type="button" class="clickable ml-1" (click)="removeItem(item)">Remove</button>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -39,7 +52,8 @@
                     <div class="flex-column">
                         <div class="flex-row-space-between">
                             <strong>Subtotal</strong>
-                            <strong>{{order?.subTotal| currency: 'GBP'}}</strong>
+                            <strong>{{order?.subTotal| currency:
+                                'GBP'}}</strong>
                         </div>
                         <div class="flex-row-space-between">
                             <span>Delivery fee</span>
