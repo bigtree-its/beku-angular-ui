@@ -3,7 +3,7 @@
     <div class="flex-row jcsb aic py-2 border-bottom">
       <fa-icon [icon]="faBars" (click)="toggleSideNav()" class="menu-icon"></fa-icon>
       <span [routerLink]="['/']" routerLinkActive="router-link-active" class="tc logo-text f-size-xl">desitimes</span>
-      <div class="flex-row">
+      <div class="flex-row aic">
         <span *ngIf="user !== null">Hi, {{user.name}}</span>
         <button *ngIf="user === null" class="btn-text mr-1 lg" routerLink="/login">Login</button>
         <button *ngIf="user === null" type="button" class="btn btn-dark btn-sm lg br-25 bold px-3" routerLink="/register">Signup</button>

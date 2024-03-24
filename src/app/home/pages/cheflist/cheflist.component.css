@@ -11,12 +11,13 @@
     padding: 5px;
     border-radius: 12px;
     font-size: 12px;
+    justify-content: center;
+    align-items: center;
 }
 
 .cuisine:hover {
     cursor: pointer;
-    background-color: var(--gray);
-    color: #fff;
+    background-color: var(--warning);
 }
 
 .cuisine-logo {
@@ -31,8 +32,7 @@
 }
 
 .selectedCuisine {
-    background-color: var(--gold);
-    color: #fff;
+    background-color: var(--warning);
 }
 
 .change-area {

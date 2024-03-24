@@ -544,7 +544,7 @@ select {
     border-radius: 7px;
 }
 .br-12{
-    border-radius: 12px;
+    border-radius: 14px;
 }
 .br-25{
     border-radius: 25px;
@@ -553,6 +553,30 @@ select {
     border-radius: 50%;
     text-align: center;
     padding: 8px;
+}
+.br-top-7{
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+.br-top-14{
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+}
+.br-top-25{
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+.br-bottom-7{
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+.br-bottom-14{
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+}
+.br-bottom-25{
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
 .hp-search-container {
     min-width: 350px;
@@ -1052,18 +1076,7 @@ select {
 }
 
 .chef-card {
-    border: 1px solid #edecec;
-    min-width: 450px;
-    max-width: 450px;
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    border-radius: 8px;
-}
-
-.chef-card:hover {
     cursor: pointer;
-    border: 1px solid #1967d2;
 }
 
 .btn-modal-close {
@@ -1645,8 +1658,8 @@ select {
 }
 
 .selectable {
-    padding-top: 2px;
-    padding-bottom: 2px;
+    padding-top: 4px;
+    padding-bottom: 4px;
     padding-left: 8px;
     padding-right: 20px;
     border-radius: 24px;
@@ -1656,8 +1669,7 @@ select {
 
 .selectable:hover {
     cursor: pointer;
-    color: #fff;
-    background-color: var(--info);
+    background-color: var(--warning);
 }
 
 .light-border{
@@ -1687,8 +1699,7 @@ select {
 }
 
 .selected {
-    background-color: #ed8080;
-    color: #fff;
+    background-color: var(--warning);
 }
 
 .selected :first-child {

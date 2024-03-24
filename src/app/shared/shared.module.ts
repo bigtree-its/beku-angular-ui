@@ -15,6 +15,7 @@ import { WriteReviewComponent } from './pages/write-review/write-review.componen
 import { AuthGuard } from '../services/auth-guard.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -33,6 +34,7 @@ const routes: Routes = [
     DateAgoPipe,
     WriteReviewComponent,
     AboutUsComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     NgbToastModule,

@@ -1,7 +1,7 @@
 <div class="page">
 
     <div class="full-screen mb-2 px-3">
-        <div class="flex-row-scrollable">
+        <div class="flex-row-scrollable py-3">
             <div *ngFor="let cuisine of cuisines" class="cuisine" (click)="onSelectCuisine(cuisine)"
                 [class.selectedCuisine]="isSelectedCuisine(cuisine)">
                 <img src={{cuisine.logo}} class="cuisine-logo" height="90px" width="120px">
@@ -32,9 +32,9 @@
     <!-- <span class="f-size-xl bold lg">{{serviceLocation.name}}</span> -->
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
-        <div class="col mb-4" *ngFor="let chef of filteredChefs " [routerLink]="[ '/cooks', chef._id] ">
-            <div class="card">
-                <img src="{{chef.image}}" class="card-img-top" alt="...">
+        <div class="col mb-4 br-12" *ngFor="let chef of filteredChefs " [routerLink]="[ '/cooks', chef._id] ">
+            <div class="card br-12 chef-card">
+                <img src="{{chef.image}}" class="card-img-top br-top-14" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{chef.kitchenName}}</h5>
                     <p class="card-text"> {{chef.description}}</p>
