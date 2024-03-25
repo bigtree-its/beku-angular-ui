@@ -1,7 +1,7 @@
 <div class="container">
 
     <div class="flex-row jcsb aic">
-        <div class="arrow-icon-div" (click)="goback()">
+        <div class="arrow-icon-div" (click)="goBack()">
             <fa-icon [icon]="faArrowLeft"></fa-icon>
         </div>
         <span class="a-page-header">Checkout</span>
@@ -79,8 +79,7 @@
                 </div>
 
                 <button [class.disabled]="loading || customerAddress === null || customerAddress === undefined || customerAddress.addressLine1 === null || customerAddress.addressLine1 === undefined ||  customerAddress.addressLine1.length === 0" *ngIf="!showOrderConfirmation"
-                    type="button" class="btn btn-primary btn-xs mt-3" style="float: right;min-width: 100px;" (click)="placeOrder(stripeContent)" tabindex="5">Proceed
-                    to Pay</button>
+                    type="button" class="btn btn-primary btn-xs mt-3" style="float: right;min-width: 100px;" (click)="placeOrder(stripeContent)" tabindex="5">I'm ready to pay</button>
 
             </div>
         </div>

@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { faCode, faHandshake } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faCode, faHandshake } from '@fortawesome/free-solid-svg-icons';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Cuisine, LocalChef } from 'src/app/model/localchef';
 import { ServiceLocation } from 'src/app/model/ServiceLocation';
@@ -26,6 +26,7 @@ export class HomeComponent {
   cuisineMap: Map<String, Cuisine> = new Map<String, Cuisine>();
   faHandshake = faHandshake;
   faCode = faCode;
+  faRight = faArrowRight;
 
   // images = ['https://ik.imagekit.io/kikysfekf/foods/food-2.jpeg?updatedAt=1710784365762', 'https://ik.imagekit.io/kikysfekf/foods/food-2.jpeg?updatedAt=1710784365762', 'https://ik.imagekit.io/kikysfekf/foods/food-3.webp?updatedAt=1710784365649'].map((name) => `/assets/images/${name}`);
   images = ['https://ik.imagekit.io/kikysfekf/foods/food-2.jpeg?updatedAt=1710784365762', 'https://ik.imagekit.io/kikysfekf/foods/food-2.jpeg?updatedAt=1710784365762', 'https://ik.imagekit.io/kikysfekf/foods/food-3.webp?updatedAt=1710784365649'];

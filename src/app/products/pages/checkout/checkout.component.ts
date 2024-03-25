@@ -204,85 +204,7 @@ export class CheckoutComponent implements OnDestroy {
     }
   }
 
-  previous() {
-    if (this.showCustomerDetailsSection) {
-      this.divHeader = '';
-      this.nextButtonText = 'Next';
-    } else if (this.showServiceModeSection) {
-      this.showCustomerDetailsSection = true;
-      this.showServiceModeSection = false;
-      this.showItemsSection = false;
-      this.showPaymentSection = false;
-      this.showStripeSection = false;
-      this.showPlaceOrderButton = false;
-      this.showOrderConfirmation = false;
-      this.divHeader = 'Your Details';
-      this.nextButtonText = 'Next';
-    } else if (this.showItemsSection) {
-      this.showCustomerDetailsSection = false;
-      this.showServiceModeSection = true;
-      this.showItemsSection = false;
-      this.showPaymentSection = false;
-      this.showStripeSection = false;
-      this.showPlaceOrderButton = false;
-      this.showOrderConfirmation = false;
-      this.divHeader = 'Choose service mode';
-      this.nextButtonText = 'Next';
-    } else if (this.showPaymentSection) {
-      this.showCustomerDetailsSection = false;
-      this.showServiceModeSection = false;
-      this.showItemsSection = true;
-      this.showPaymentSection = false;
-      this.showStripeSection = false;
-      this.showPlaceOrderButton = false;
-      this.showOrderConfirmation = false;
-      this.divHeader = 'Review Your Items';
-      this.nextButtonText = 'Next';
-    } else if (this.showStripeSection) {
-      this.showCustomerDetailsSection = false;
-      this.showServiceModeSection = false;
-      this.showItemsSection = false;
-      this.showPaymentSection = true;
-      this.showStripeSection = false;
-      this.showOrderConfirmation = false;
-    }
-  }
-
-  next() {
-    if (this.showCustomerDetailsSection && this.validateCustomerDetails()) {
-      this.showCustomerDetailsSection = false;
-      this.showServiceModeSection = true;
-      this.showItemsSection = false;
-      this.showPaymentSection = false;
-      this.showStripeSection = false;
-      this.showPlaceOrderButton = false;
-      this.showOrderConfirmation = false;
-      this.divHeader = 'Choose service mode';
-      this.nextButtonText = 'Next';
-    } else if (this.showServiceModeSection && this.validateServiceMode()) {
-      this.showCustomerDetailsSection = false;
-      this.showServiceModeSection = false;
-      this.showItemsSection = true;
-      this.showPaymentSection = false;
-      this.showStripeSection = false;
-      this.showPlaceOrderButton = false;
-      this.showOrderConfirmation = false;
-      this.divHeader = 'Review Your Items';
-      this.nextButtonText = 'Next';
-    } else if (this.showItemsSection) {
-      this.showCustomerDetailsSection = false;
-      this.showServiceModeSection = false;
-      this.showItemsSection = false;
-      this.showPaymentSection = true;
-      this.showStripeSection = false;
-      this.showPlaceOrderButton = true;
-      this.showOrderConfirmation = false;
-      this.divHeader = 'You Pay';
-      this.nextButtonText = 'Proceed to Pay';
-    } else if (this.showPaymentSection) {
-      return;
-    }
-  }
+ 
   validateCustomerDetails(): boolean {
     if (
       Utils.isEmpty(this.customerName) ||
@@ -295,15 +217,10 @@ export class CheckoutComponent implements OnDestroy {
   }
 
   validateServiceMode(): boolean {
-    if (
-      this.serviceMode === 'DELIVERY' &&
-      this.addressSelected &&
+    if (this.addressSelected &&
       Utils.isValid(this.customerAddress) &&
       !Utils.isEmpty(this.customerAddress.addressLine1)
     ) {
-      return true;
-    }
-    if (this.serviceMode === 'COLLECTION') {
       return true;
     }
     return false;
@@ -560,7 +477,7 @@ export class CheckoutComponent implements OnDestroy {
     // setLoading(false);
   }
 
-  goback() {
+  goBack() {
     this._location.back();
   }
 

@@ -1,5 +1,82 @@
 <div class="container">
 
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3 mt-3">
+        <div class="col hp br-12">
+            <div class="card br-12 ">
+                <img src="/assets/icons/eat.png" class="card-img-top br-top-14" alt="...">
+                <!-- <img src="/assets/icons/localfood.png" class="card-img-top br-top-14" alt="..."> -->
+                <div class="card-body bg-light  br-bottom-14">
+                    <!-- <h5 class="card-title">Find local chef</h5> -->
+                    <div class="flex-row jcsb w-100">
+                        <input type="text" placeholder="e.g Glasgow" class="hp-search-box" [(ngModel)]="serviceLocationSearchText" (keyup.enter)="onEnter()">
+                        <button type="button" class="btn btn-sm btn-dark br-25">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col hp br-12">
+            <div class="card br-12 ">
+                <img src="/assets/icons/fashion.png" class="card-img-top br-top-14" alt="...">
+                <div class="card-body bg-light  br-12">
+                    <!-- <h5 class="card-title">Find local chef</h5> -->
+                    <div class="flex-row jcsb w-100">
+                        <span></span>
+                        <fa-icon [icon]="faRight"></fa-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col hp br-12">
+            <div class="card br-12 ">
+                <img src="/assets/icons/decor.png" class="card-img-top br-top-14" alt="...">
+                <div class="card-body bg-light  br-12">
+                    <!-- <h5 class="card-title">Find local chef</h5> -->
+                    <div class="flex-row jcsb w-100">
+                        <span></span>
+                        <fa-icon [icon]="faRight"></fa-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col hp br-12">
+            <div class="card br-12 ">
+                <img src="/assets/icons/property.png" class="card-img-top br-top-14" alt="...">
+                <div class="card-body bg-light  br-12">
+                    <!-- <h5 class="card-title">Find local chef</h5> -->
+                    <div class="flex-row jcsb w-100">
+                        <span></span>
+                        <fa-icon [icon]="faRight"></fa-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col hp br-12">
+            <div class="card br-12 ">
+                <img src="/assets/icons/cars.png" class="card-img-top br-top-14" alt="...">
+                <div class="card-body bg-light  br-12">
+                    <!-- <h5 class="card-title">Find local chef</h5> -->
+                    <div class="flex-row jcsb w-100">
+                        <span></span>
+                        <fa-icon [icon]="faRight"></fa-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col hp br-12">
+            <div class="card br-12 ">
+                <img src="/assets/icons/services.png" class="card-img-top br-top-14" alt="...">
+                <div class="card-body bg-light  br-12">
+                    <!-- <h5 class="card-title">Find local chef</h5> -->
+                    <div class="flex-row jcsb w-100">
+                        <span></span>
+                        <fa-icon [icon]="faRight"></fa-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- <div class="lg flex-row jcc border-bottom">
         <div class="flex-column border-right px-4 py-2">
             <span class="title">Services</span>
@@ -66,21 +143,17 @@
         </div>
         <div class="hp-search-container border">
             <div class="flex-row" style="width: 80%;">
-                <input type="text" placeholder="Enter your location" class="hp-search-box"
-                    [(ngModel)]="serviceLocationSearchText" (keyup.enter)="onEnter()">
+                <input type="text" placeholder="Enter your location" class="hp-search-box" [(ngModel)]="serviceLocationSearchText" (keyup.enter)="onEnter()">
             </div>
             <div class="flex-row align-items-center">
-                <span *ngIf="showServiceLocations" (click)="closeServiceLocations()"
-                    style="color: var(--d-orange);cursor: pointer;padding: 0 10px;">Clear</span>
-                <button type="button" class="btn btn-warning px-5 bold br-12 btn-sm float-right"
-                    (click)="onEnter()">Find</button>
+                <span *ngIf="showServiceLocations" (click)="closeServiceLocations()" style="color: var(--d-orange);cursor: pointer;padding: 0 10px;">Clear</span>
+                <button type="button" class="btn btn-warning px-5 bold br-12 btn-sm float-right" (click)="onEnter()">Find</button>
             </div>
 
         </div>
         <div *ngIf="showServiceLocations" class="hp-locations-container">
             <div class="hp-locations">
-                <span class="hp-location" *ngFor="let sl of serviceLocations"
-                    (click)="onSelectServiceLocation(sl)">{{ sl.name }},
+                <span class="hp-location" *ngFor="let sl of serviceLocations" (click)="onSelectServiceLocation(sl)">{{ sl.name }},
                     {{sl.city}}</span>
             </div>
         </div>
@@ -89,24 +162,21 @@
     <div class="flex-column jcc aic border my-2 br-7 p-4">
         <strong style="font-size: 22px;font-weight: 800;">Top Locations</strong>
         <div class="flex-row flex-wrap aic gap-1 jcc aic">
-            <span class="clickable my-2" *ngFor="let pl of popularLocations" [routerLink]="['cooks']"
-                [queryParams]="{location: pl.slug}">{{pl.name}}</span>
+            <span class="clickable my-2" *ngFor="let pl of popularLocations" [routerLink]="['cooks']" [queryParams]="{location: pl.slug}">{{pl.name}}</span>
         </div>
     </div>
 
     <div class="flex-column jcc aic border my-2 br-7 p-4">
         <strong style="font-size: 22px;font-weight: 800;">Top Cuisines</strong>
         <div class="flex-row flex-wrap aic gap-1 jcc aic">
-            <span class="clickable my-2" *ngFor="let cuisine of cuisines" [routerLink]="['cooks']"
-                [queryParams]="{cuisine: cuisine.slug}">{{cuisine.name}}</span>
+            <span class="clickable my-2" *ngFor="let cuisine of cuisines" [routerLink]="['cooks']" [queryParams]="{cuisine: cuisine.slug}">{{cuisine.name}}</span>
         </div>
     </div>
 
     <div class="row row-cols-1 row-cols-md-2 g-4 my-3">
         <div class="col">
             <div class="card h-100">
-                <img src="https://ik.imagekit.io/kikysfekf/become-partner.jpeg?updatedAt=1710780429618" class="card-img-top"
-                    alt="Become a partner" />
+                <img src="https://ik.imagekit.io/kikysfekf/become-partner.jpeg?updatedAt=1710780429618" class="card-img-top" alt="Become a partner" />
                 <div class="card-body">
                     <h5 class="card-title">Become a partner</h5>
                     <p class="card-text">Reach more customers and achieve growth with us</p>
@@ -115,8 +185,7 @@
         </div>
         <div class="col">
             <div class="card h-100">
-                <img src="https://ik.imagekit.io/kikysfekf/join-us.jpeg?updatedAt=1710780429642" class="card-img-top"
-                    alt="Build your career" />
+                <img src="https://ik.imagekit.io/kikysfekf/join-us.jpeg?updatedAt=1710780429642" class="card-img-top" alt="Build your career" />
                 <div class="card-body">
                     <h5 class="card-title">Build your career</h5>
                     <p class="card-text">Join the dynamic team that makes it all happen
