@@ -60,48 +60,48 @@ export const environment = {
   // ====================
   // Auth Service Remote
   // ====================
-  // LoginUrl:
-  //   'https://bigtree-auth-service-672f06320174.herokuapp.com/v1/auth/token',
-  // LogoutUrl:
-  //   'https://bigtree-auth-service-672f06320174.herokuapp.com/v1/auth/logout',
-  // RegisterUrl:
-  //   'https://bigtree-auth-service-672f06320174.herokuapp.com/v1/users/signup',
-  // PasswordResetInitiateUrl:
-  //   'https://bigtree-auth-service-672f06320174.herokuapp.com/v1/auth/passwords/reset_initiate',
-  // PasswordResetSubmitUrl:
-  //   'https://bigtree-auth-service-672f06320174.herokuapp.com/v1/auth/passwords/reset_submit',
-  // GetCustomerPreferencesUrl:
-  //   'https://bigtree-auth-service-672f06320174.herokuapp.com/v1/customers/replace-me/preferences',
-  // CreateOrUpdateCustomerPreferencesUrl:
-  //   'https://bigtree-auth-service-672f06320174.herokuapp.com/v1/customers/preferences',
-  // CreateContactsUrl:
-  //   'https://bigtree-auth-service-672f06320174.herokuapp.com/v1/contacts',
-  // UpdatePersonalDetails:
-  //   'https://bigtree-auth-service-672f06320174.herokuapp.com/v1/users/update_personal',
+  LoginUrl:
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/v1/auth/token',
+  LogoutUrl:
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/v1/auth/logout',
+  RegisterUrl:
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/v1/users/signup',
+  PasswordResetInitiateUrl:
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/v1/auth/passwords/reset_initiate',
+  PasswordResetSubmitUrl:
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/v1/auth/passwords/reset_submit',
+  GetCustomerPreferencesUrl:
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/v1/customers/replace-me/preferences',
+  CreateOrUpdateCustomerPreferencesUrl:
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/v1/customers/preferences',
+  CreateContactsUrl:
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/v1/contacts',
+  UpdatePersonalDetails:
+    'https://bigtree-auth-service-672f06320174.herokuapp.com/v1/users/update_personal',
  
 
 
 // ====================
   // Auth Service Local
   // ====================
-  LoginUrl:
-    'http://localhost:8081/v1/auth/token',
-  LogoutUrl:
-    'http://localhost:8081/v1/auth/logout',
-  RegisterUrl:
-    'http://localhost:8081/v1/users/signup',
-  PasswordResetInitiateUrl:
-    'http://localhost:8081/v1/auth/passwords/reset_initiate',
-  PasswordResetSubmitUrl:
-    'http://localhost:8081/v1/auth/passwords/reset_submit',
-  GetCustomerPreferencesUrl:
-    'http://localhost:8081/v1/customers/replace-me/preferences',
-  CreateOrUpdateCustomerPreferencesUrl:
-    'http://localhost:8081/v1/customers/preferences',
-  CreateContactsUrl:
-    'http://localhost:8081/v1/contacts',
-  UpdatePersonalDetails:
-    'http://localhost:8081/v1/users/update_personal',
+  // LoginUrl:
+  //   'http://localhost:8081/v1/auth/token',
+  // LogoutUrl:
+  //   'http://localhost:8081/v1/auth/logout',
+  // RegisterUrl:
+  //   'http://localhost:8081/v1/users/signup',
+  // PasswordResetInitiateUrl:
+  //   'http://localhost:8081/v1/auth/passwords/reset_initiate',
+  // PasswordResetSubmitUrl:
+  //   'http://localhost:8081/v1/auth/passwords/reset_submit',
+  // GetCustomerPreferencesUrl:
+  //   'http://localhost:8081/v1/customers/replace-me/preferences',
+  // CreateOrUpdateCustomerPreferencesUrl:
+  //   'http://localhost:8081/v1/customers/preferences',
+  // CreateContactsUrl:
+  //   'http://localhost:8081/v1/contacts',
+  // UpdatePersonalDetails:
+  //   'http://localhost:8081/v1/users/update_personal',
 
   // ====================
   // Ads Service Local

@@ -115,7 +115,9 @@ export class ProductDetailComponent {
       color: this.selectedColor,
       price: this.product.price,
       subTotal: this.subTotal,
-      clubDelivery: false
+      clubDelivery: false,
+      deliveryNotes: '',
+      promotionApplied: 0
     };
     console.log('Adding item '+ JSON.stringify(item))
     this.basketService.addToProductOrder(item);

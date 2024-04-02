@@ -1,17 +1,13 @@
-<div class="main">
-    <div class="left lg p-3">
-        <div class="flex-column px-3 w-100 jcs">
-            <img src="/assets/images/spring-leaf.jpeg" style="width: 100%;height: 100%;object-fit: contain;background: transparent;">
-        </div>
+<div class="container jcc">
 
-    </div>
-    <div class="right  p-5">
-        <div class="flex-column px-3 w-100 jcs">
+    <div class="d-flex jcc">
+        <div class="flex-column border card mt-3 p-3 jcs width-m">
             <span style="font-weight: 900;font-size: 30px;padding: 10px 0;">Signup</span>
             <form (ngSubmit)="registerUser()" [formGroup]="registerForm" *ngIf="!signupSuccess">
                 <div class="h-flex">
                     <div class="input-div">
-                        <input type="text" id="firstName" class="form-control _381fS" formControlName="firstName" required />
+                        <input type="text" id="firstName" class="form-control _381fS" formControlName="firstName"
+                            required />
                         <div class="_2EeI1 _26LFr"></div>
                         <label class="_1Cvlf _2tL9P" for="firstName">First name</label>
                     </div>
@@ -33,13 +29,14 @@
                         <label class="_1Cvlf _2tL9P" for="mobile">Mobile</label>
                     </div>
                 </div>
-
+    
                 <div class="input-div">
                     <input type="password" id="password" class="form-control _381fS" formControlName="password" required />
                     <div class="_2EeI1 _26LFr"></div>
                     <label class="_1Cvlf _2tL9P" for="mobile">Password</label>
                 </div>
-                <button type="submit" class="btn btn-dark mt-3" style="width: 100%;" [class.disabled]="loading">Create Account</button>
+                <button type="submit" class="btn btn-dark mt-3" style="width: 100%;" [class.disabled]="loading">Create
+                    Account</button>
                 <div style="text-align: center;padding: 10px;font-weight: 600;">
                     Already have an account? <span (click)="signIn()" class="clickable-link">Sign In</span>
                 </div>
@@ -47,10 +44,12 @@
             <div *ngIf="errorMessage !== undefined" class="alert alert-danger p-3">
                 <p>{{errorMessage}}</p>
             </div>
-
+    
             <div *ngIf="signupSuccess" class="alert alert-success p-3">
-                <b>You are now registered with Desi Times. <button class="btn btn-warning px-5 bold" [routerLink]="['/login']">Login</button></b>
+                <b>You are now registered with Desi Times. <button class="btn btn-warning px-5 bold"
+                        [routerLink]="['/login']">Login</button></b>
             </div>
         </div>
     </div>
+   
 </div>

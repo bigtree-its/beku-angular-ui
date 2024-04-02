@@ -25,6 +25,9 @@ export interface SupplierBasic{
   email: string,
   mobile: string,
   telephone: string,
+  freeDeliveryOver: number,
+  deliveryFee: number,
+  packingFee: number,
 
 }
 
@@ -94,6 +97,8 @@ export interface Order {
 }
 
 export interface OrderItem {
+  deliveryNotes: string;
+  promotionApplied: number;
   _tempId: number;
   image: string;
   productId: string;
@@ -133,25 +138,22 @@ export interface SaleOrderItem {
   color: Variant;
   subTotal: number;
   deliveryFee: number;
-  total: number;
   promotionsApplied: number;
   dateDispatched: Date;
   dateDelivered: Date;
   dateReturned: Date;
   dateRefunded: Date;
   deliveryNotes: string;
+  clubDelivery: boolean;
 }
 
 export interface SaleOrderPerSupplier{
-  reference: string;
-  supplier: Supplier;
+  supplier: SupplierBasic;
   subTotal: number;
   total: number;
   grandTotal: number;
   promotionsApplied: number;
-  serviceFee: number;
   deliveryFee: number;
-  clubDelivery: boolean;
   items: SaleOrderItem[];
   datePlaced: Date;
   dateDispatched: Date;

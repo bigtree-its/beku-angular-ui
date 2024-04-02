@@ -48,26 +48,8 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="flex-column p-4 br-7 w-100 lg">
-                    <div class="flex-column">
-                        <div class="flex-row-space-between">
-                            <strong>Subtotal</strong>
-                            <strong>{{order?.subTotal| currency:
-                                'GBP'}}</strong>
-                        </div>
-                        <div class="flex-row-space-between">
-                            <span>Delivery fee</span>
-                            <span>{{order?.deliveryFee| currency: 'GBP'}}</span>
-                        </div>
-                        <div class="flex-row-space-between">
-                            <span>Service Fee</span>
-                            <span>{{order?.serviceFee| currency: 'GBP'}}</span>
-                        </div>
-                        <div class="flex-row-space-between" style="margin-top: 10px;">
-                            <strong>Total</strong>
-                            <strong>{{order?.total| currency: 'GBP'}}</strong>
-                        </div>
-                    </div>
+                <div class="flex-column w-100 lg">
+                    <ng-container [ngTemplateOutlet]="orderSummary"></ng-container>
                     <button type="button" class="btn btn-primary  mt-3 br-25" [routerLink]="['/p/checkout']">Proceed to
                         checkout</button>
                 </div>
@@ -75,26 +57,11 @@
         </div>
         <div class="sm footer border-top p-2">
             <div class="flex-column w-100 ">
-                <div *ngIf="showPaymentSummary" class="p-4">
+                <div *ngIf="showPaymentSummary">
                     <div class="flex-row jce py-1">
                         <fa-icon [icon]="faClose" class="close-icon" (click)="hidePaymentSummary()"></fa-icon>
                     </div>
-                    <div class="flex-row-space-between">
-                        <strong>Subtotal</strong>
-                        <strong>{{order?.subTotal| currency: 'GBP'}}</strong>
-                    </div>
-                    <div class="flex-row-space-between">
-                        <span>Delivery fee</span>
-                        <span>{{order?.deliveryFee| currency: 'GBP'}}</span>
-                    </div>
-                    <div class="flex-row-space-between">
-                        <span>Service Fee</span>
-                        <span>{{order?.serviceFee| currency: 'GBP'}}</span>
-                    </div>
-                    <div class="flex-row-space-between" style="margin-top: 10px;">
-                        <strong>Total</strong>
-                        <strong>{{order?.total| currency: 'GBP'}}</strong>
-                    </div>
+                    <ng-container [ngTemplateOutlet]="orderSummary"></ng-container>
                 </div>
                 <div class="flex-row-space-between">
                     <button type="button" class="btn btn-dark  mt-3 br-25" (click)="clickShowPaymentSummary()">Show
@@ -106,3 +73,24 @@
         </div>
     </div>
 </div>
+
+<ng-template #orderSummary>
+    <div class="p-4 br-12 bg-light">
+        <div class="flex-row-space-between">
+            <strong>Subtotal</strong>
+            <strong>{{order?.subTotal| currency: 'GBP'}}</strong>
+        </div>
+        <div class="flex-row-space-between">
+            <span>Delivery fee</span>
+            <span>{{order?.deliveryFee| currency: 'GBP'}}</span>
+        </div>
+        <div class="flex-row-space-between">
+            <span>Service Fee</span>
+            <span>{{order?.serviceFee| currency: 'GBP'}}</span>
+        </div>
+        <div class="flex-row-space-between" style="margin-top: 10px;">
+            <strong>Total</strong>
+            <strong>{{order?.total| currency: 'GBP'}}</strong>
+        </div>
+    </div>
+</ng-template>

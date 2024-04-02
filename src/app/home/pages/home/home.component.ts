@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { faArrowRight, faCode, faHandshake } from '@fortawesome/free-solid-svg-icons';
-import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarouselConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Utils } from 'src/app/helpers/utils';
 import { Cuisine, LocalChef } from 'src/app/model/localchef';
 import { ServiceLocation } from 'src/app/model/ServiceLocation';
 import { ChefService } from 'src/app/services/chef.service';
@@ -27,6 +28,8 @@ export class HomeComponent {
   faHandshake = faHandshake;
   faCode = faCode;
   faRight = faArrowRight;
+
+  modalService = inject(NgbModal);
 
   // images = ['https://ik.imagekit.io/kikysfekf/foods/food-2.jpeg?updatedAt=1710784365762', 'https://ik.imagekit.io/kikysfekf/foods/food-2.jpeg?updatedAt=1710784365762', 'https://ik.imagekit.io/kikysfekf/foods/food-3.webp?updatedAt=1710784365649'].map((name) => `/assets/images/${name}`);
   images = ['https://ik.imagekit.io/kikysfekf/foods/food-2.jpeg?updatedAt=1710784365762', 'https://ik.imagekit.io/kikysfekf/foods/food-2.jpeg?updatedAt=1710784365762', 'https://ik.imagekit.io/kikysfekf/foods/food-3.webp?updatedAt=1710784365649'];
@@ -58,6 +61,7 @@ export class HomeComponent {
   closeServiceLocations() {
     this.showServiceLocations = false;
     this.serviceLocationSearchText = undefined;
+    this.serviceLocations = [];
   }
 
   fetchPopularLocations(searchString: string) {
@@ -80,7 +84,7 @@ export class HomeComponent {
       );
   }
 
-  lookupServiceLocation(searchString: string) {
+  lookupServiceLocation(searchString: string, content) {
     if (searchString === null && searchString === undefined) {
       return;
     }
@@ -90,10 +94,11 @@ export class HomeComponent {
       .subscribe(
         (data: ServiceLocation[]) => {
           this.serviceLocations = data;
+          if ( Utils.isValid(this.serviceLocations)){
+            this.open(content);
+          }
           this.showServiceLocations = true;
-          console.log(
-            'The service location List: ' +
-            JSON.stringify(this.serviceLocations)
+          console.log('The service location List: ' + JSON.stringify(this.serviceLocations)
           );
         },
         (error) => {
@@ -126,6 +131,7 @@ export class HomeComponent {
   }
 
   onSelectServiceLocation(selectedServiceLocation: ServiceLocation) {
+    this.close();
     this.selectedServiceLocation = selectedServiceLocation;
     this.contextService.selectLocation(this.selectedServiceLocation);
     // this.fetchChefsByServiceLocation(selectedServiceLocation);
@@ -153,11 +159,28 @@ export class HomeComponent {
   //     });
   // }
 
-  onEnter() {
+  onEnter(content) {
     if ( this.serviceLocationSearchText !== undefined){
-      this.lookupServiceLocation(this.serviceLocationSearchText);
+      this.lookupServiceLocation(this.serviceLocationSearchText, content);
     }
    
+  }
+  open(content) {
+    this.modalService
+      .open(content, {
+        ariaLabelledBy: 'modal-basic-title',
+        windowClass: 'custom-class',
+      })
+      .result.then(
+        (result) => {},
+        (reason) => {
+          // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
+
+  close() {
+    this.modalService.dismissAll();
   }
 
   ngAfterViewInit() { }

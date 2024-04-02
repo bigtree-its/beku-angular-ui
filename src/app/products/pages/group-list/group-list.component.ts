@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { Subject } from 'rxjs';
 import { Utils } from 'src/app/helpers/utils';
 import { Group } from 'src/app/model/products/all';
@@ -18,6 +19,7 @@ export class GroupListComponent implements OnInit, OnDestroy {
   groups: Group[]= [];
   destroy$ = new Subject<void>();
   dept: string;
+  faRight = faArrowRight;
 
   ngOnInit(): void {
     this.dept = this.activatedRoute.snapshot.paramMap.get('dept');

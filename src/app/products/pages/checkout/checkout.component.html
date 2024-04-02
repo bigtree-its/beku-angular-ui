@@ -8,45 +8,31 @@
         <span class="a-page-header"></span>
     </div>
 
-    <div class="flex-row-space-between border-bottom py-3 sm">
-        <span class="bold f-size-lg ">Your Items</span>
-        <fa-icon class="collapsible-icon" *ngIf="!showItems" [icon]="faPlus" (click)="openCloseItems()"></fa-icon>
-        <fa-icon class="collapsible-icon" *ngIf="showItems" [icon]="faMinus" (click)="openCloseItems()"></fa-icon>
+    <div class="flex-column border p-3 br-12 sm my-2">
+        <div class="flex-row jcsb">
+            <span class="bold f-size-lg ">Your Items</span>
+            <fa-icon class="collapsible-icon" *ngIf="!showItems" [icon]="faAngleDown" (click)="openCloseItems()"></fa-icon>
+            <fa-icon class="collapsible-icon" *ngIf="showItems" [icon]="faAngleUp" (click)="openCloseItems()"></fa-icon>
+        </div>
+        <ng-container *ngIf="showItems" [ngTemplateOutlet]="itemsLayout"></ng-container>
     </div>
-    <ng-container *ngIf="showItems" [ngTemplateOutlet]="itemsLayout"></ng-container>
+    
     <div class="row">
-        <div class="col-md-7 px-3" style="min-height: 100vh;">
-            <div style="min-width: 100%;display: flex;flex-direction: column;">
+        <div class="col-md-7" style="min-height: 100vh;">
+            <div class="flex-column w-100">
                 <div *ngIf="!showOrderConfirmation">{{divHeader}}</div>
-                <div *ngIf="showHomeScreen" class="flex-column p-3">
-                    <div class="flex-row mb-2">
+                <div *ngIf="showLoginPrompt" class="flex-column p-3 border br-12">
+                    <div class="flex-row mb-2 border-bottom py-2 aic">
                         <span>Do you have an account?</span>
-                        <span [routerLink]="['/login']" [queryParams]="{returnUrl: 'checkout'}" class="clickable ml-2">Login</span>
+                        <button type="button" [routerLink]="['/login']" [queryParams]="{returnUrl: 'p/checkout'}" class="btn btn-outline-dark px-3 ml-3">Login</button>
                     </div>
-                    <div class="flex-row">
+                    <div class="flex-row py-2 aic">
                         <span>Don't have an account?</span>
-                        <span [routerLink]="['/register']" class="clickable ml-2">Signup</span>
+                        <button type="button" [routerLink]="['/register']" [queryParams]="{returnUrl: 'p/checkout'}" class="btn btn-outline-dark px-3 ml-3">Signup</button>
                     </div>
                 </div>
                 <ng-container *ngIf="showContactDetails" [ngTemplateOutlet]="contactDetailsLayout"></ng-container>
-                <div class="flex-column p-3 bg-light my-2">
-                    <div class="flex-row-space-between">
-                        <strong>Subtotal</strong>
-                        <strong>{{order?.subTotal| currency: 'GBP'}}</strong>
-                    </div>
-                    <div class="flex-row-space-between">
-                        <span>Delivery fee</span>
-                        <span>{{order?.deliveryFee| currency: 'GBP'}}</span>
-                    </div>
-                    <div class="flex-row-space-between">
-                        <span>Service Fee</span>
-                        <span>{{order?.serviceFee| currency: 'GBP'}}</span>
-                    </div>
-                    <div class="flex-row-space-between" style="margin-top: 10px;">
-                        <strong>Total</strong>
-                        <strong>{{order?.total| currency: 'GBP'}}</strong>
-                    </div>
-                </div>
+                <ng-container [ngTemplateOutlet]="orderSummary"></ng-container>
                 <div *ngIf="showStripeSection">
                     <div id="cardInfo" #cardInfo style="border: 1px solid var(--v-border);padding: 12px 5px;">
                         <!--Stripe.js injects the Card Element-->
@@ -77,10 +63,11 @@
                 <div *ngIf="loading" class="d-flex jcc aic p-3">
                     <div class="loader"></div>
                 </div>
-
-                <button [class.disabled]="loading || customerAddress === null || customerAddress === undefined || customerAddress.addressLine1 === null || customerAddress.addressLine1 === undefined ||  customerAddress.addressLine1.length === 0" *ngIf="!showOrderConfirmation"
-                    type="button" class="btn btn-primary btn-xs mt-3" style="float: right;min-width: 100px;" (click)="placeOrder(stripeContent)" tabindex="5">I'm ready to pay</button>
-
+                <div class="flex-row">
+                    <button [class.disabled]="loading || customerAddress === null || customerAddress === undefined || customerAddress.addressLine1 === null || customerAddress.addressLine1 === undefined ||  customerAddress.addressLine1.length === 0" *ngIf="!showOrderConfirmation"
+                    type="button" class="w-button mt-3" style="float: right;min-width: 100px;" (click)="placeOrder(stripeContent)" tabindex="5">I'm ready to pay</button>
+                </div>
+               
             </div>
         </div>
         <div class="col-md-5 border-left lg" style="min-height: 100vh;">
@@ -91,19 +78,18 @@
 
 
 <ng-template #contactDetailsLayout>
-    <div class="flex-column">
-        <span class="bold f-size-lg py-2 border-bottom mb-2">Your Contact Details</span>
+    <div class="flex-column border p-3 br-12 my-2">
+        <span class="bold fs-5 py-2 mb-2">Your Contact Details</span>
         <div class="flex-column mb-3">
-            <label for="customerName">Your name on order (for when
-                you collect)<small style="color: red;">**</small></label>
+            <label for="customerName"><b>Name</b><small style="color: red;">**</small></label>
             <input class="fb-input" type="text" name="customerName" tabindex="0" autocomplete="off" value [(ngModel)]="customerName" #ctrl="ngModel" required="true">
         </div>
         <div class="flex-column mb-3">
-            <label for="customerMobile">Your mobile<small style="color: red;">**</small></label>
+            <label for="customerMobile"><b>Mobile</b><small style="color: red;">**</small></label>
             <input class="fb-input" type="mobile" name="customerMobile" tabindex="1" autocomplete="off" value [(ngModel)]="customerMobile" #ctrl="ngModel" required="true">
         </div>
         <div class="flex-column">
-            <label for="customerEmail">Your email<small style="color: red;">**</small></label>
+            <label for="customerEmail"><b>Email</b><small style="color: red;">**</small></label>
             <input class="fb-input" type="email" name="customerEmail" tabindex="2" autocomplete="off" value [(ngModel)]="customerEmail" #ctrl="ngModel" required="true" readonly>
         </div>
         <div class="my-2"></div>
@@ -126,13 +112,9 @@
                 <button class="btn btn-warning btn-sm bold" (click)="showAddressLookup()">Change</button>
             </div>
         </div>
-        <div class="row" *ngIf="lookupAddress">
-            <div class="col-md-9 col-sm-9 col-xs-9">
-                <input class="fb-input" type="text" name="postcode" id="postcode" tabindex="4" autocomplete="off" value [(ngModel)]="addressLookupPostcode" #ctrl="ngModel" placeholder="Enter your postcode">
-            </div>
-            <div class="col-md-3  col-sm-3  col-xs-3">
-                <button class="btn btn-warning btn-sm bold" (click)="findAddress()" style="margin-right: 8px;">Find</button>
-            </div>
+        <div class="flex-row" *ngIf="lookupAddress">
+            <input class="fb-input" type="text" name="postcode" id="postcode" tabindex="4" autocomplete="off" value [(ngModel)]="addressLookupPostcode" #ctrl="ngModel" placeholder="Enter your postcode">
+            <button class="o-button bold ml-2 py-2" (click)="findAddress()" style="margin-right: 8px;">Find</button>
         </div>
         <div *ngIf="postcodeAddressList !== undefined && postcodeAddressList.length > 0 && !addressSelected">
             <div style="border: 1px solid var(--light-border);overflow-y: auto;height: 100px;margin-top: 5px;padding: 5px;">
@@ -188,6 +170,27 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #orderSummary>
+    <div class="p-4 br-12 bg-light my-2 border">
+        <div class="flex-row-space-between">
+            <strong>Subtotal</strong>
+            <strong>{{order?.subTotal| currency: 'GBP'}}</strong>
+        </div>
+        <div class="flex-row-space-between">
+            <span>Delivery fee</span>
+            <span>{{order?.deliveryFee| currency: 'GBP'}}</span>
+        </div>
+        <div class="flex-row-space-between">
+            <span>Service Fee</span>
+            <span>{{order?.serviceFee| currency: 'GBP'}}</span>
+        </div>
+        <div class="flex-row-space-between" style="margin-top: 10px;">
+            <strong>Total</strong>
+            <strong>{{order?.total| currency: 'GBP'}}</strong>
         </div>
     </div>
 </ng-template>

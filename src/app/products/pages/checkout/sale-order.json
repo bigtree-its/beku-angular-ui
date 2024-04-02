@@ -1,0 +1,72 @@
+{
+    "reference": "",
+    "customer": {
+        "_id": "",
+        "name": "Navaneethakrishnan Kannusamy",
+        "mobile": "07979191176",
+        "email": "nava.arul@gmail.com",
+        "telephone": "",
+        "address": {
+            "city": "Glasgow",
+            "addressLine1": "359 Glasgow Road",
+            "addressLine2": "Eaglesham Glasgow",
+            "country": "UK",
+            "postcode": "G760HE",
+            "latitude": "",
+            "longitude": ""
+        }
+    },
+    "saleOrderPerSuppliers": [
+        {
+            "supplier": {
+                "_id": "7cd3ac5c-276a-47cc-99ee-d506953b24fe",
+                "name": "Avaneesh Pati Navaneetha",
+                "canClubDelivery": true,
+                "tradingName": "King Games",
+                "email": "avaneesh.pati.navaneetha@gmail.com",
+                "mobile": "07490495497",
+                "telephone": "01416440508",
+                "freeDeliveryOver": 20,
+                "deliveryFee": 5,
+                "packingFee": 2
+            },
+            "subTotal": 15,
+            "total": 20.5,
+            "grandTotal": 20.5,
+            "promotionsApplied": 0,
+            "deliveryFee": 5,
+            "items": [
+                {
+                    "_tempId": 1711390352085,
+                    "image": "https://ik.imagekit.io/kikysfekf/Games/0002-0002-0001-0.jpeg?updatedAt=1710600503204",
+                    "productId": "65f5b1ed6e8eb4c7f1a4aef2",
+                    "productName": "Power  Soccer",
+                    "quantity": 1,
+                    "deliveryLeadTime": 3,
+                    "price": 7.5,
+                    "subTotal": 7.5,
+                    "deliveryFee": 0,
+                    "clubDelivery": false
+                },
+                {
+                    "_tempId": 1711390393867,
+                    "image": "https://ik.imagekit.io/kikysfekf/products/s1203/s-1203-p-1200-1.webp?updatedAt=1710788458401",
+                    "productId": "65f890b97619de27e4ae6f69",
+                    "productName": "Indian Patchwork Mandala Ethnic Bag",
+                    "quantity": 1,
+                    "deliveryLeadTime": 3,
+                    "price": 7.5,
+                    "subTotal": 7.5,
+                    "deliveryFee": 0,
+                    "clubDelivery": false
+                }
+            ]
+        }
+    ],
+    "subTotal": 20.5,
+    "total": 20.5,
+    "grandTotal": 20.5,
+    "promotionsApplied": 0,
+    "serviceFee": 0,
+    "deliveryFee": 0
+}

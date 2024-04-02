@@ -7,15 +7,19 @@
           </ol>
         </nav>
       </div>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
-        <div class="col mb-4" *ngFor="let group of groups" [routerLink]="[ '/p/products']"  [queryParams]="{dept: dept, grp: group.name, grpid: group?._id}">
-            <div class="card">
-                <img src="{{group.image}}" class="card-img-top" alt="...">
-                <div class="card-body">
+     
+      <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3 mt-3">
+        <div class="col hp br-12" *ngFor="let group of groups" [routerLink]="[ '/p/products']"  [queryParams]="{dept: dept, grp: group.name, grpid: group?._id}">
+            <div class="card br-12 ">
+                <img src="{{group.image}}" class="card-img-top br-top-14" alt="...">
+                <!-- <img src="/assets/icons/localfood.png" class="card-img-top br-top-14" alt="..."> -->
+                <div class="card-body flex-row jcsb w-100 moving-arrow p-3">
                     <h5 class="card-title link">{{group.name}}</h5>
+                    <fa-icon [icon]="faRight"></fa-icon>
                 </div>
             </div>
         </div>
+
     </div>
     <!-- <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">

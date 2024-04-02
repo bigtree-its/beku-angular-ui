@@ -8,20 +8,20 @@
                 <div class="card-body bg-light  br-bottom-14">
                     <!-- <h5 class="card-title">Find local chef</h5> -->
                     <div class="flex-row jcsb w-100">
-                        <input type="text" placeholder="e.g Glasgow" class="hp-search-box" [(ngModel)]="serviceLocationSearchText" (keyup.enter)="onEnter()">
+                        <input type="text" placeholder="e.g Glasgow" class="hp-search-box" [(ngModel)]="serviceLocationSearchText" (keyup.enter)="onEnter(addressList)">
                         <button type="button" class="btn btn-sm btn-dark br-25">Go</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col hp br-12">
+        <div class="col hp br-12" [routerLink]="['/p/groups/fashion']">
             <div class="card br-12 ">
                 <img src="/assets/icons/fashion.png" class="card-img-top br-top-14" alt="...">
-                <div class="card-body bg-light  br-12">
+                <div class="card-body bg-light  br-bottom-14">
                     <!-- <h5 class="card-title">Find local chef</h5> -->
-                    <div class="flex-row jcsb w-100">
+                    <div class="flex-row jcsb w-100 moving-arrow">
                         <span></span>
-                        <fa-icon [icon]="faRight"></fa-icon>
+                        <fa-icon [icon]="faRight"  [routerLink]="['/p/groups/fashion']"></fa-icon>
                     </div>
                 </div>
             </div>
@@ -29,11 +29,11 @@
         <div class="col hp br-12">
             <div class="card br-12 ">
                 <img src="/assets/icons/decor.png" class="card-img-top br-top-14" alt="...">
-                <div class="card-body bg-light  br-12">
+                <div class="card-body bg-light  br-bottom-14">
                     <!-- <h5 class="card-title">Find local chef</h5> -->
-                    <div class="flex-row jcsb w-100">
+                    <div class="flex-row jcsb w-100  moving-arrow">
                         <span></span>
-                        <fa-icon [icon]="faRight"></fa-icon>
+                        <fa-icon [icon]="faRight"   [routerLink]="['/p/groups/decor']"></fa-icon>
                     </div>
                 </div>
             </div>
@@ -41,11 +41,11 @@
         <div class="col hp br-12">
             <div class="card br-12 ">
                 <img src="/assets/icons/property.png" class="card-img-top br-top-14" alt="...">
-                <div class="card-body bg-light  br-12">
+                <div class="card-body bg-light  br-bottom-14">
                     <!-- <h5 class="card-title">Find local chef</h5> -->
-                    <div class="flex-row jcsb w-100">
+                    <div class="flex-row jcsb w-100  moving-arrow">
                         <span></span>
-                        <fa-icon [icon]="faRight"></fa-icon>
+                        <fa-icon [icon]="faRight"   [routerLink]="['/p/groups/property']"></fa-icon>
                     </div>
                 </div>
             </div>
@@ -53,11 +53,11 @@
         <div class="col hp br-12">
             <div class="card br-12 ">
                 <img src="/assets/icons/cars.png" class="card-img-top br-top-14" alt="...">
-                <div class="card-body bg-light  br-12">
+                <div class="card-body bg-light  br-bottom-14">
                     <!-- <h5 class="card-title">Find local chef</h5> -->
-                    <div class="flex-row jcsb w-100">
+                    <div class="flex-row jcsb w-100  moving-arrow">
                         <span></span>
-                        <fa-icon [icon]="faRight"></fa-icon>
+                        <fa-icon [icon]="faRight" [routerLink]="['/p/groups/cars']"></fa-icon>
                     </div>
                 </div>
             </div>
@@ -65,11 +65,11 @@
         <div class="col hp br-12">
             <div class="card br-12 ">
                 <img src="/assets/icons/services.png" class="card-img-top br-top-14" alt="...">
-                <div class="card-body bg-light  br-12">
+                <div class="card-body bg-light  br-bottom-14">
                     <!-- <h5 class="card-title">Find local chef</h5> -->
-                    <div class="flex-row jcsb w-100">
+                    <div class="flex-row jcsb w-100  moving-arrow">
                         <span></span>
-                        <fa-icon [icon]="faRight"></fa-icon>
+                        <fa-icon [icon]="faRight"   [routerLink]="['/p/groups/services']"></fa-icon>
                     </div>
                 </div>
             </div>
@@ -143,19 +143,13 @@
         </div>
         <div class="hp-search-container border">
             <div class="flex-row" style="width: 80%;">
-                <input type="text" placeholder="Enter your location" class="hp-search-box" [(ngModel)]="serviceLocationSearchText" (keyup.enter)="onEnter()">
+                <input type="text" placeholder="Enter your location" class="hp-search-box" [(ngModel)]="serviceLocationSearchText" (keyup.enter)="onEnter(locationResults)">
             </div>
-            <div class="flex-row align-items-center">
+            <!-- <div class="flex-row align-items-center">
                 <span *ngIf="showServiceLocations" (click)="closeServiceLocations()" style="color: var(--d-orange);cursor: pointer;padding: 0 10px;">Clear</span>
-                <button type="button" class="btn btn-warning px-5 bold br-12 btn-sm float-right" (click)="onEnter()">Find</button>
-            </div>
+                <button type="button" class="btn btn-warning px-5 bold br-12 btn-sm float-right" (click)="onEnter(addressList)">Find</button>
+            </div> -->
 
-        </div>
-        <div *ngIf="showServiceLocations" class="hp-locations-container">
-            <div class="hp-locations">
-                <span class="hp-location" *ngFor="let sl of serviceLocations" (click)="onSelectServiceLocation(sl)">{{ sl.name }},
-                    {{sl.city}}</span>
-            </div>
         </div>
     </div>
 
@@ -197,3 +191,50 @@
 
     <app-footer />
 </div>
+
+<ng-template #addressList let-modal class="modal-dialog-centered">
+
+    <div class="modal-header" hidden>
+    </div>
+    <div class="modal-body">
+        <div class="flex-column border" >
+            <div class="flex-row jcsb w-100 border-bottom p-3 aic">
+                <input type="text" placeholder="eg Glasgow" class="hp-search-box" [(ngModel)]="serviceLocationSearchText" (keyup.enter)="onEnter(addressList)">
+                <span *ngIf="showServiceLocations" (click)="closeServiceLocations()" style="color: var(--danger);cursor: pointer;padding: 0 10px;">Clear</span>
+                <button type="button" class="btn btn-sm btn-dark br-25">Go</button>
+            </div>
+            <div class="flex-column" style="max-height: 500px;overflow-y: auto;">
+                <span class="hp-location" *ngFor="let sl of serviceLocations" (click)="onSelectServiceLocation(sl)">{{ sl.name }},
+                    {{sl.city}}</span>
+            </div>
+            
+        </div>
+    </div>
+    <div class="modal-footer" hidden>
+    </div>
+</ng-template>
+
+<ng-template #locationResults let-modal>
+    <div class="modal" id="exampleModalCentered" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header" hidden>
+              <h5 class="modal-title" id="exampleModalCenteredLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="flex-column" style="max-height: 500px;overflow-y: auto;">
+                    <span class="hp-location" *ngFor="let sl of serviceLocations" (click)="onSelectServiceLocation(sl)">{{ sl.name }},
+                        {{sl.city}}</span>
+                </div>
+            </div>
+            <div class="modal-footer" hidden>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</ng-template>

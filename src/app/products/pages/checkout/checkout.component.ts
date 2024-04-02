@@ -22,11 +22,13 @@ import {
   faPlus,
   faMinus,
   faCheck,
+  faAngleDown,
+  faAngleUp,
 } from '@fortawesome/free-solid-svg-icons';
 import { AccountService } from 'src/app/services/account.service';
 import { User } from 'src/app/model/auth-model';
 import { ToastService } from 'src/app/services/toast.service';
-import { CheckoutItem, Order, OrderItem, Supplier, SupplierBasic } from 'src/app/model/products/all';
+import { CheckoutItem, Order, OrderItem, SaleOrder, SaleOrderItem, SaleOrderPerSupplier, Supplier, SupplierBasic } from 'src/app/model/products/all';
 import { OrderService } from 'src/app/services/products/order.service';
 import { SupplierService } from 'src/app/services/products/supplier.service';
 
@@ -54,6 +56,8 @@ export class CheckoutComponent implements OnDestroy {
   faPlus = faPlus;
   faMinus = faMinus;
   faCheck = faCheck;
+  faAngleDown = faAngleDown;
+  faAngleUp = faAngleUp;
 
   enablePayButton: boolean = false;
 
@@ -68,7 +72,7 @@ export class CheckoutComponent implements OnDestroy {
   showItems: boolean = false;
 
   nextButtonText: string = 'Next';
-  showHomeScreen: boolean = true;
+  showLoginPrompt: boolean = true;
   showCustomerDetailsSection: boolean = false;
   showServiceModeSection: boolean = false;
   showItemsSection: boolean = false;
@@ -102,6 +106,7 @@ export class CheckoutComponent implements OnDestroy {
   itemsMap: Map<String, OrderItem[]> = new Map<String, OrderItem[]>();
   supplierMap: Map<String, Supplier> = new Map<String, Supplier>();
   checkoutItemsMap: Map<SupplierBasic, CheckoutItem> = new Map<SupplierBasic, CheckoutItem>();
+  saleOrder: SaleOrder;
 
   constructor(
     private rapidApiService: RapidApiService,
@@ -138,20 +143,22 @@ export class CheckoutComponent implements OnDestroy {
     this.accountService.getData();
     this.accountService.loginSession$.subscribe({
       next: (value) => {
-        console.log('Customer subject ' + JSON.stringify(value));
+        console.log('User subject ' + JSON.stringify(value));
         this.customer = value;
-        if (this.customer !== null && this.customer !== undefined) {
+        if (Utils.isValid(this.customer)) {
           this.customerName = this.customer.firstName + this.customer.lastName;
           this.customerEmail = this.customer.email;
           this.customerMobile = this.customer.mobile;
-          this.showCustomerDetailsSection = true;
-          this.showHomeScreen = false;
+          this.showLoginPrompt = false;
           this.showContactDetails = true;
+
         } else {
-          this.showHomeScreen = true;
+          this.showLoginPrompt = true;
           this.showContactDetails = false;
           this.showCustomerDetailsSection = false;
         }
+        console.log('Show Login Prompt ' + this.showLoginPrompt);
+        console.log('Show Contact Info ' + this.showContactDetails);
       },
       error: (err) => console.error('CustomerSubject emitted an error: ' + err),
       complete: () =>
@@ -161,10 +168,6 @@ export class CheckoutComponent implements OnDestroy {
 
   openCloseItems() {
     this.showItems = !this.showItems;
-  }
-
-  openCloseContactDetails() {
-    this.showContactDetails = !this.showContactDetails; //not equal to condition
   }
 
   extractOrder(theOrder: Order) {
@@ -238,11 +241,107 @@ export class CheckoutComponent implements OnDestroy {
     this.order.customer.mobile = this.customerMobile;
     this.order.customer.address = this.customerAddress;
     this.order.serviceMode = this.serviceMode;
-    this.orderService.saveOrder(this.order).subscribe((e) => {
+
+    var supplierOrders: SaleOrderPerSupplier[] = [];
+    this.checkoutItemsMap.forEach((value: CheckoutItem, key: SupplierBasic, map: Map<SupplierBasic, CheckoutItem>) => {
+
+      var subTotal = 0.00;
+      var total = 0.00;
+      var saleOrderItems: SaleOrderItem[] = [];
+      value.items.forEach(i=>{
+        var saleOrderItem: SaleOrderItem = {
+          _tempId: i._tempId,
+          image: i.image,
+          productId: i.productId,
+          productName: i.productName,
+          quantity: i.quantity,
+          deliveryLeadTime: i.deliveryLeadTime,
+          price: i.price,
+          size: i.size,
+          color: i.color,
+          subTotal: i.subTotal,
+          deliveryFee: 0.00,
+          promotionsApplied: i.promotionApplied,
+          dateDispatched: undefined,
+          dateDelivered: undefined,
+          dateReturned: undefined,
+          dateRefunded: undefined,
+          deliveryNotes: i.deliveryNotes,
+          clubDelivery: i.clubDelivery
+        }
+        subTotal = subTotal + saleOrderItem.subTotal;
+        saleOrderItems.push(saleOrderItem);
+      });
+      var deliveryFee = key.deliveryFee;
+      if ( subTotal >= key.freeDeliveryOver){
+        deliveryFee = 0.00;
+      }
+      // Total = subtotal + deliveryFee + servicefee
+      total = subTotal + deliveryFee + 0.50;
+      total = +(+total).toFixed(2);
+
+      var supOrder: SaleOrderPerSupplier = {
+        supplier: key,
+        subTotal: subTotal,
+        total: total,
+        grandTotal: total,
+        promotionsApplied: 0,
+        deliveryFee: deliveryFee,
+        items: saleOrderItems,
+        datePlaced: undefined,
+        dateDispatched: undefined,
+        dateDelivered: undefined,
+        dateReturned: undefined,
+        dateRefunded: undefined
+      }
+      supplierOrders.push(supOrder);
+    }); 
+
+    var subTotal = 0.00;
+    var total = 0.00;
+    supplierOrders.forEach(sops =>{
+      subTotal = subTotal + sops.total;
+    });
+    total = subTotal;
+    total = +(+total).toFixed(2);
+    var saleOrder: SaleOrder = {
+      reference: '',
+      datePlaced: undefined,
+      customer: this.order.customer,
+      saleOrderPerSuppliers: supplierOrders,
+      subTotal: subTotal,
+      total: total,
+      grandTotal: total,
+      promotionsApplied: 0,
+      serviceFee: 0,
+      deliveryFee: 0
+    }
+    console.log('Sale Order: '+ JSON.stringify(saleOrder))
+    this.orderService.createPaymentIntentForOrder(saleOrder).subscribe((pi) => {
+      this.paymentIntent = pi;
+      console.log('Payment intent ' + JSON.stringify(pi));
+      if (this.paymentIntent.error || this.paymentIntent.status === 'succeeded') {
+        this.toastService.error(
+          'Something is not right. Cannot proceed with this order. Please create new order.'
+        );
+        this.loading = false;
+        this.orderService.destroy();
+      } else if (
+        this.paymentIntent != null &&
+        this.paymentIntent.clientSecret != null &&
+        this.paymentIntent.status === 'requires_payment_method'
+      ) {
+        console.log('Payment intent: ' + this.paymentIntent.id);
+        console.log('Payment intent secret: ' + this.paymentIntent.clientSecret);
+        console.log('Payment intent status: ' + this.paymentIntent.status);
+        this.open(content);
+      }
+    });
+    this.orderService.saveSaleOrder(saleOrder).subscribe((e) => {
       if (Utils.isStringValid(e.reference)) {
 
         if (content) {
-          this.orderService.createPaymentIntentForOrder(e).subscribe((pi) => {
+          this.orderService.createPaymentIntentForOrder(saleOrder).subscribe((pi) => {
             this.paymentIntent = pi;
             console.log('Payment intent ' + JSON.stringify(pi));
             if (this.paymentIntent.error || this.paymentIntent.status === 'succeeded') {
@@ -264,7 +363,7 @@ export class CheckoutComponent implements OnDestroy {
           });
         } else {
           this.orderSubmitted = true;
-          this.order = e;
+          this.saleOrder = e;
           this.loading = false;
           this.orderConfirmed();
           // this.router.navigateByUrl("your_order?ref="+ );
@@ -515,11 +614,14 @@ export class CheckoutComponent implements OnDestroy {
       var supplierBasic: SupplierBasic = {
         _id: value._id,
         name: value.name,
-        canClubDelivery: (items.length> 1),
+        canClubDelivery: (items.length > 1),
         tradingName: value.tradingName,
         email: value.contact.email,
         mobile: value.contact.mobile,
-        telephone: value.contact.telephone
+        telephone: value.contact.telephone,
+        freeDeliveryOver: value.freeDeliveryOver,
+        deliveryFee: value.deliveryFee,
+        packingFee: value.packagingFee
       }
       var checkoutItem: CheckoutItem = {
         freeDelivery: freeDelivery,

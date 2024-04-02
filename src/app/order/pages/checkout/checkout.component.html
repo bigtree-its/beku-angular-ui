@@ -44,14 +44,16 @@
         <div class="overflow-y p-3" id="contentDiv">
             <div style="min-width: 100%;display: flex;flex-direction: column;">
                 <div *ngIf="!showOrderConfirmation" class="sub-header">{{divHeader}}</div>
-                <div *ngIf="showHomeScreen" class="flex-column p-3">
-                    <div class="flex-row mb-2">
+                <div *ngIf="showHomeScreen" class="flex-column p-3 border br-25">
+                    <div class="flex-row mb-2 border-bottom py-2 aic">
                         <span>Do you have an account?</span>
-                        <span [routerLink]="['/login']" [queryParams]="{returnUrl: 'checkout'}" class="clickable ml-2">Login</span>
+                        <!-- <span [routerLink]="['/login']" [queryParams]="{returnUrl: 'checkout'}" class="clickable ml-2">Login</span> -->
+                        <button type="button" [routerLink]="['/login']" [queryParams]="{returnUrl: 'checkout'}" class="btn btn-outline-dark px-3 ml-3">Login</button>
                     </div>
-                    <div class="flex-row">
+                    <div class="flex-row py-2 aic">
                         <span>Don't have an account?</span>
-                        <span [routerLink]="['/register']" class="clickable ml-2">Signup</span>
+                        <!-- <span [routerLink]="['/register']" class="clickable ml-2">Signup</span> -->
+                        <button type="button" [routerLink]="['/register']" [queryParams]="{returnUrl: 'checkout'}" class="btn btn-outline-dark px-3 ml-3">Signup</button>
                     </div>
                 </div>
                 <div *ngIf="showCustomerDetailsSection" class="flex-column p-3">

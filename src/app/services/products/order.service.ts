@@ -7,7 +7,7 @@ import { Utils } from '../utils';
 import { ServiceLocator } from '../service.locator';
 import { LocalService } from '../local.service';
 import { Constants } from '../constants';
-import { Order, OrderItem, OrderQuery } from '../../model/products/all';
+import { Order, OrderItem, OrderQuery, SaleOrder } from '../../model/products/all';
 
 @Injectable({
   providedIn: 'root',
@@ -42,6 +42,14 @@ export class OrderService {
     return this.http.post<Order>(this.serviceLocator.OrdersUrl, order).pipe(
       tap((result) => {
         this.setData(result);
+      })
+    );
+  }
+
+  saveSaleOrder(order: SaleOrder): Observable<SaleOrder> {
+    return this.http.post<SaleOrder>(this.serviceLocator.OrdersUrl, order).pipe(
+      tap((result) => {
+        // this.setData(result);
       })
     );
   }
@@ -170,13 +178,13 @@ export class OrderService {
     this.setData(this.order);
   }
 
-  createPaymentIntentForOrder(order: Order): Observable<PaymentIntentResponse> {
-    console.log('Creating intent for order: ' + JSON.stringify(order));
+  createPaymentIntentForOrder(saleOrder: SaleOrder): Observable<PaymentIntentResponse> {
+    console.log('Creating intent for order: ' + JSON.stringify(saleOrder));
     const paymentIntentRequest: PaymentIntentRequest = {
       currency: 'GBP',
-      amount: order.total,
-      orderReference: order.reference,
-      customerEmail: order.customer.email,
+      amount: saleOrder.total,
+      orderReference: saleOrder.reference,
+      customerEmail: saleOrder.customer.email,
     };
     console.log(
       'Creating payment intent: ' +

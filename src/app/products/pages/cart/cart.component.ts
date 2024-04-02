@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { faArrowLeft, faBatteryEmpty, faClose, faFaceSmile, faMinus, faPeopleArrows, faPlus, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleUp, faArrowLeft, faBatteryEmpty, faClose, faFaceSmile, faMinus, faPeopleArrows, faPlus, faStar } from '@fortawesome/free-solid-svg-icons';
 import { Order, OrderItem } from 'src/app/model/products/all';
 import { OrderService } from 'src/app/services/products/order.service';
 import { SupplierService } from 'src/app/services/products/supplier.service';
@@ -24,6 +24,7 @@ export class CartComponent {
   faClose = faClose;
   faPlus = faPlus;
   faMinus = faMinus;
+
   
 
   cartTotal: number = 0;
