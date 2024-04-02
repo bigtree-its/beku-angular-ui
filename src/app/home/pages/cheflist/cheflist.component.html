@@ -2,8 +2,7 @@
 
     <div class="full-screen mb-2 px-3">
         <div class="flex-row-scrollable py-3">
-            <div *ngFor="let cuisine of cuisines" class="cuisine" (click)="onSelectCuisine(cuisine)"
-                [class.selectedCuisine]="isSelectedCuisine(cuisine)">
+            <div *ngFor="let cuisine of cuisines" class="cuisine" (click)="onSelectCuisine(cuisine)" [class.selectedCuisine]="isSelectedCuisine(cuisine)">
                 <img src={{cuisine.logo}} class="cuisine-logo" height="90px" width="120px">
                 <span>{{cuisine.name}}</span>
             </div>
@@ -11,10 +10,9 @@
     </div>
 
     <div class="full-screen mb-2 px-3">
-        <h4>Whats on your mind ?</h4>
+        <h4 class="color-navy">Whats on your mind ?</h4>
         <div class="flex-row-scrollable">
-            <div *ngFor="let d of dishes" class="selectable mr-1" (click)="onSelectDish(d)"
-                [class.selected]="isDishSelected(d)">
+            <div *ngFor="let d of dishes" class="selectable mr-1" (click)="onSelectDish(d)" [class.selected]="isDishSelected(d)">
                 <fa-icon [icon]="faCheck"></fa-icon>
                 <span class="pl-1">{{d.name}}</span>
             </div>
@@ -22,8 +20,7 @@
     </div>
 
     <div class="full-screen mb-2 px-3">
-        <div class="flex-row-space-between mb-1 md bg-light p-2 mx-1"
-            *ngIf="serviceLocation != null && serviceLocation !== undefined">
+        <div class="flex-row-space-between mb-1 md bg-light p-2 mx-1" *ngIf="serviceLocation != null && serviceLocation !== undefined">
             <span>{{serviceLocation.name}}, {{serviceLocation.city}}</span>
             <span class="change-area" routerLink="/">Change</span>
         </div>

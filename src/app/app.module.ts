@@ -18,6 +18,7 @@ import { SideNavComponent } from './shared/side-nav/side-nav.component';
 import { SideNavContentComponent } from './shared/side-nav-content/side-nav-content.component';
 import { PaymentsModule } from './payments';
 import { ProductsModule } from './products';
+import { FoodsModule } from './foods';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ProductsModule } from './products';
     SharedModule,
     OrderModule,
     PaymentsModule,
+    FoodsModule,
     ProductsModule,
     FormsModule,
     NgbModule,

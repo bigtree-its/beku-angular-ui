@@ -2,10 +2,10 @@
     <div class="flex-column">
         <div class="flex-row jcsb aic py-2 border-bottom">
             <fa-icon [icon]="faBars" (click)="toggleSideNav()" class="menu-icon"></fa-icon>
-            <div class="flex-column" [routerLink]="['/']" >
-              <span class="tc logo-text f-size-xl">ONE DESI</span>
+            <div class="flex-column" [routerLink]="['/']">
+                <span class="tc logo-text f-size-xl">ONE DESI</span>
             </div>
-            
+
             <div class="flex-row aic">
                 <span *ngIf="user !== null">Hi, {{user.name}}</span>
                 <button *ngIf="user === null" class="btn-text mr-1 lg" routerLink="/login">Login</button>
@@ -16,7 +16,7 @@
         <div class="flex-row jcsb aic py-2 border-bottom">
             <nav>
                 <ul>
-                    <li><a href="/">Foods</a></li>
+                    <li><a href="/foods/home">Foods</a></li>
                     <li><a href="/p/groups/fashion">Fashion</a></li>
                     <li><a href="/p/groups/decor">Decor</a></li>
                     <li><a href="/p/groups/games">Games</a></li>

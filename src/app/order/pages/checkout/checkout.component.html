@@ -152,23 +152,6 @@
                         <strong>Total</strong>
                         <strong>{{order?.total| currency: 'GBP'}}</strong>
                     </div>
-                    <div *ngIf="chef.paymentRequireApproval" class="alert alert-info p-4 mt-4">
-                        <div class="flex-column justify-content-start">
-                            <span >Payment requires
-                                Pre-approval</span>
-                            <span >Step 1. You submit your
-                                order.</span>
-                            <span >Step 2. YourChef will accept
-                                your order.</span>
-                            <span >Step 3. You will then make a
-                                payment.</span>
-                            <small class="mt-2 normal">Once your order accepted
-                                by the Chef a Payment
-                                link will be sent to your email address
-                                <b>{{customerEmail}}</b>.</small>
-                        </div>
-
-                    </div>
                 </div>
                 <div *ngIf="showStripeSection">
                     <div id="cardInfo" #cardInfo style="border: 1px solid var(--v-border);padding: 12px 5px;">
@@ -193,7 +176,7 @@
                 </div>
                 <div *ngIf="showOrderConfirmation">
                     <div class="flex-column jcc  aic bg-light p-4">
-                        <span >Your order has been
+                        <span>Your order has been
                             submitted</span>
                         <span class="f-size-xl mt-4 bolder">{{order?.reference}}</span>
                     </div>
@@ -205,10 +188,10 @@
                 <div *ngIf="!showOrderConfirmation" class="lg flex-row jcsb p-1 h-5 px-3 my-3">
                     <span *ngIf="showHomeScreen || showCustomerDetailsSection"></span>
                     <button type="button" *ngIf="!showHomeScreen && !showCustomerDetailsSection && !orderSubmitted" class="btn btn-dark btn-xs" (click)="previous()" tabindex="4" style="float: left;min-width: 100px;">Previous</button>
-                    <button type="button" *ngIf="!showPlaceOrderButton &&  !showHomeScreen && !orderSubmitted" class="btn btn-primary btn-xs" style="float: right;min-width: 100px;" (click)="next()" tabindex="5">Next</button>
-                    <button type="button" *ngIf="showPlaceOrderButton && !chef.paymentRequireApproval && !orderSubmitted" class="btn btn-primary btn-xs" style="float: right;min-width: 100px;" (click)="placeOrder(stripeContent)" tabindex="5">Proceed
+                    <button type="button" *ngIf="!showPlaceOrderButton &&  !showHomeScreen && !orderSubmitted" class="btn-navy btn-xs" style="float: right;min-width: 100px;" (click)="next()" tabindex="5">Next</button>
+                    <button type="button" *ngIf="showPlaceOrderButton && !chef.paymentRequireApproval && !orderSubmitted" class="btn-navy btn-xs" style="float: right;min-width: 100px;" (click)="placeOrder(stripeContent)" tabindex="5">Proceed
                         to Pay</button>
-                    <button type="button" [disabled]="loading" *ngIf="showPlaceOrderButton && chef.paymentRequireApproval && !orderSubmitted" class="btn btn-primary btn-xs" style="float: right;min-width: 100px;" (click)="placeOrder(null)" tabindex="5">Submit your order</button>
+                    <button type="button" [disabled]="loading" *ngIf="showPlaceOrderButton && chef.paymentRequireApproval && !orderSubmitted" class="btn-navy btn-xs" style="float: right;min-width: 100px;" (click)="placeOrder(null)" tabindex="5">Submit your order</button>
                 </div>
             </div>
         </div>
@@ -220,7 +203,7 @@
             <button type="button" *ngIf="!showPlaceOrderButton &&  !showHomeScreen && !orderSubmitted" class="btn btn-primary btn-xs" style="float: right;min-width: 100px;" (click)="next()" tabindex="5">Next</button>
             <button type="button" *ngIf="showPlaceOrderButton && !chef.paymentRequireApproval && !orderSubmitted" class="btn btn-success btn-xs" style="float: right;min-width: 100px;" (click)="placeOrder(stripeContent)" tabindex="5">Proceed
                 to Pay</button>
-            <button type="button"  [disabled]="loading" *ngIf="showPlaceOrderButton && chef.paymentRequireApproval && !orderSubmitted" class="btn btn-primary btn-xs" style="float: right;min-width: 100px;" (click)="placeOrder(null)" tabindex="5">Submit your
+            <button type="button" [disabled]="loading" *ngIf="showPlaceOrderButton && chef.paymentRequireApproval && !orderSubmitted" class="btn btn-primary btn-xs" style="float: right;min-width: 100px;" (click)="placeOrder(null)" tabindex="5">Submit your
                 order</button>
         </div>
     </div>

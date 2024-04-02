@@ -1,2 +1,2 @@
-export * from './pages';
-export * from './products.module';
+export * from './foods.module';
+export * from './pages'

@@ -21,7 +21,7 @@
                     <!-- <h5 class="card-title">Find local chef</h5> -->
                     <div class="flex-row jcsb w-100 moving-arrow">
                         <span></span>
-                        <fa-icon [icon]="faRight"  [routerLink]="['/p/groups/fashion']"></fa-icon>
+                        <fa-icon [icon]="faRight" [routerLink]="['/p/groups/fashion']"></fa-icon>
                     </div>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                     <!-- <h5 class="card-title">Find local chef</h5> -->
                     <div class="flex-row jcsb w-100  moving-arrow">
                         <span></span>
-                        <fa-icon [icon]="faRight"   [routerLink]="['/p/groups/decor']"></fa-icon>
+                        <fa-icon [icon]="faRight" [routerLink]="['/p/groups/decor']"></fa-icon>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                     <!-- <h5 class="card-title">Find local chef</h5> -->
                     <div class="flex-row jcsb w-100  moving-arrow">
                         <span></span>
-                        <fa-icon [icon]="faRight"   [routerLink]="['/p/groups/property']"></fa-icon>
+                        <fa-icon [icon]="faRight" [routerLink]="['/p/groups/property']"></fa-icon>
                     </div>
                 </div>
             </div>
@@ -69,7 +69,7 @@
                     <!-- <h5 class="card-title">Find local chef</h5> -->
                     <div class="flex-row jcsb w-100  moving-arrow">
                         <span></span>
-                        <fa-icon [icon]="faRight"   [routerLink]="['/p/groups/services']"></fa-icon>
+                        <fa-icon [icon]="faRight" [routerLink]="['/p/groups/services']"></fa-icon>
                     </div>
                 </div>
             </div>
@@ -153,19 +153,6 @@
         </div>
     </div>
 
-    <div class="flex-column jcc aic border my-2 br-7 p-4">
-        <strong style="font-size: 22px;font-weight: 800;">Top Locations</strong>
-        <div class="flex-row flex-wrap aic gap-1 jcc aic">
-            <span class="clickable my-2" *ngFor="let pl of popularLocations" [routerLink]="['cooks']" [queryParams]="{location: pl.slug}">{{pl.name}}</span>
-        </div>
-    </div>
-
-    <div class="flex-column jcc aic border my-2 br-7 p-4">
-        <strong style="font-size: 22px;font-weight: 800;">Top Cuisines</strong>
-        <div class="flex-row flex-wrap aic gap-1 jcc aic">
-            <span class="clickable my-2" *ngFor="let cuisine of cuisines" [routerLink]="['cooks']" [queryParams]="{cuisine: cuisine.slug}">{{cuisine.name}}</span>
-        </div>
-    </div>
 
     <div class="row row-cols-1 row-cols-md-2 g-4 my-3">
         <div class="col">
@@ -197,7 +184,7 @@
     <div class="modal-header" hidden>
     </div>
     <div class="modal-body">
-        <div class="flex-column border" >
+        <div class="flex-column border">
             <div class="flex-row jcsb w-100 border-bottom p-3 aic">
                 <input type="text" placeholder="eg Glasgow" class="hp-search-box" [(ngModel)]="serviceLocationSearchText" (keyup.enter)="onEnter(addressList)">
                 <span *ngIf="showServiceLocations" (click)="closeServiceLocations()" style="color: var(--danger);cursor: pointer;padding: 0 10px;">Clear</span>
@@ -207,7 +194,7 @@
                 <span class="hp-location" *ngFor="let sl of serviceLocations" (click)="onSelectServiceLocation(sl)">{{ sl.name }},
                     {{sl.city}}</span>
             </div>
-            
+
         </div>
     </div>
     <div class="modal-footer" hidden>
@@ -217,24 +204,24 @@
 <ng-template #locationResults let-modal>
     <div class="modal" id="exampleModalCentered" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header" hidden>
-              <h5 class="modal-title" id="exampleModalCenteredLabel">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <div class="modal-content">
+                <div class="modal-header" hidden>
+                    <h5 class="modal-title" id="exampleModalCenteredLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-            </div>
-            <div class="modal-body">
-                <div class="flex-column" style="max-height: 500px;overflow-y: auto;">
-                    <span class="hp-location" *ngFor="let sl of serviceLocations" (click)="onSelectServiceLocation(sl)">{{ sl.name }},
+                </div>
+                <div class="modal-body">
+                    <div class="flex-column" style="max-height: 500px;overflow-y: auto;">
+                        <span class="hp-location" *ngFor="let sl of serviceLocations" (click)="onSelectServiceLocation(sl)">{{ sl.name }},
                         {{sl.city}}</span>
+                    </div>
+                </div>
+                <div class="modal-footer" hidden>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
-            <div class="modal-footer" hidden>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
 </ng-template>
