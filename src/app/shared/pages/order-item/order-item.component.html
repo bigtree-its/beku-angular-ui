@@ -1,8 +1,7 @@
-<div class="order-item-wrapper">
-    <div class="order-item-container">
+<div class="d-flex w-100 border-bottom py-2 aic">
         <div class="flex-column justify-content-center align-items-center">
-            <span style="font-size: 15px; padding-top: 10px;">{{item.price | currency: 'GBP'}}</span>
-            <span class="attribute" *ngIf="!editable">{{quantity}}</span>
+            <!-- <span style="font-size: 15px; padding-top: 10px;">{{item.price | currency: 'GBP'}}</span> -->
+            <span class="qty-circle" *ngIf="!editable">{{quantity}}</span>
             <div *ngIf="editable" style="padding: 5px;display: flex;justify-content: space-around; box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);">
                 <button style="border:none" (click)="decreaseQuantity()"> - </button>
                 <span class="qty-value">{{quantity}}</span>
@@ -11,8 +10,8 @@
         </div>
         <div class="flex-column" style="width: 100%;">
             <div style="width: 100%;clear: both; display: flex; justify-content: space-between;">
-                <strong><small>{{item.name}}</small></strong>
-                <strong><small>{{item.subTotal | currency: 'GBP'}}</small></strong>
+                <strong>{{item.name}}</strong>
+                <strong>{{item.subTotal | currency: 'GBP'}}</strong>
             </div>
             <div *ngIf="item.choice !== null && item.choice !== undefined">
                 <div style="width: 100%;clear: both; display: flex; justify-content: space-between;">
@@ -27,5 +26,4 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>

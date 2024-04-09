@@ -22,6 +22,8 @@ import {
   faPersonBiking,
   faBox,
   faArrowLeft,
+  faPlus,
+  faMinus,
 } from '@fortawesome/free-solid-svg-icons';
 import { AccountService } from 'src/app/services/account.service';
 import { User } from 'src/app/model/auth-model';
@@ -46,7 +48,10 @@ export class CheckoutComponent implements OnDestroy {
   faPersonBiking = faPersonBiking;
   faBox = faBox;
   faArrowLeft = faArrowLeft;
+  faPlus = faPlus;
+  faMinus = faMinus;
 
+  openItems: boolean  = false;
   enablePayButton: boolean = false;
 
   customerMobile: string = '';
@@ -144,6 +149,10 @@ export class CheckoutComponent implements OnDestroy {
       complete: () =>
         console.log('CustomerSubject emitted the complete notification'),
     });
+  }
+
+  openCloseItems(){
+    this.openItems = !this.openItems;
   }
 
   extractOrder(theOrder: FoodOrder) {
@@ -295,7 +304,6 @@ export class CheckoutComponent implements OnDestroy {
 
   placeOrder(content) {
     this.loading = true;
-    this.orderSubmitted = false;
     this.order.customer.name = this.customerName;
     this.order.customer.email = this.customerEmail;
     this.order.customer.mobile = this.customerMobile;
@@ -303,38 +311,14 @@ export class CheckoutComponent implements OnDestroy {
     this.order.serviceMode = this.serviceMode;
     this.order.notes = this.notesToChef;
     this.orderService.saveOrder(this.order).subscribe((e) => {
-      if (Utils.isStringValid(e.reference)) {
-
-        if (content) {
-          this.orderService.createPaymentIntentForOrder(e).subscribe((pi) => {
-            this.paymentIntent = pi;
-            console.log('Payment intent ' + JSON.stringify(pi));
-            if (this.paymentIntent.error || this.paymentIntent.status === 'succeeded') {
-              this.toastService.error(
-                'Something is not right. Cannot proceed with this order. Please create new order.'
-              );
-              this.loading = false;
-              this.orderService.destroy();
-            } else if (
-              this.paymentIntent != null &&
-              this.paymentIntent.clientSecret != null &&
-              this.paymentIntent.status === 'requires_payment_method'
-            ) {
-              console.log('Payment intent: ' + this.paymentIntent.id);
-              console.log('Payment intent secret: ' + this.paymentIntent.clientSecret);
-              console.log('Payment intent status: ' + this.paymentIntent.status);
-              this.open(content);
-            }
-          });
-        } else {
-          this.orderSubmitted = true;
-          this.order = e;
-          this.loading = false;
-          this.orderConfirmed();
-          // this.router.navigateByUrl("your_order?ref="+ );
-          // this.orderService.destroy();
-        }
-      }
+      this.orderSubmitted = true;
+      this.order = e;
+      this.loading = false;
+      this.orderConfirmed();
+      console.log('Saved order '+ JSON.stringify(e))
+      if (content) {
+        this.open(content);
+      } 
     });
   }
 

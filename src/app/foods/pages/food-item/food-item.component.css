@@ -1,0 +1,106 @@
+.menu-item-layout {
+    display: flex;
+    gap: 1rem;
+    margin: 5px 0;
+    padding: 10px;
+}
+
+.menu-item-layout>img {
+    display: none;
+}
+
+.item-name {
+    font-weight: 500;
+    color: #242e30;
+    padding: 0 0 10px 0;
+}
+
+.price {
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--d-red);
+}
+
+.menu-item-layout:hover {
+    cursor: pointer;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+}
+
+.spice {
+    opacity: 0.1;
+    height: 15px;
+    width: 15px;
+}
+
+.selectedSpice {
+    opacity: 1.0;
+}
+
+::ng-deep .modal-content {
+    /* border-radius: 25px; */
+    border: none;
+    z-index: 9999999;
+}
+
+::ng-deep .modal-body {
+    overflow-y: auto;
+}
+
+.modal-title {
+    text-align: center;
+}
+
+.qty-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    border: 2px solid #fff;
+}
+
+.qty-btn-container:hover {
+    cursor: pointer;
+    border: 2px solid var(--green);
+}
+
+.qty-value {
+    font-size: 16px;
+    margin: 0 10px;
+    font-weight: 600;
+}
+
+.btn-add-to-order {
+    background-color: #46bb4c;
+    width: 100%;
+    padding: 0 20px;
+    color: #fff;
+}
+
+.btn-add-to-order:hover {
+    cursor: pointer;
+    background-color: #2fad35;
+}
+
+
+/* Desktop */
+
+@media (min-width: 400px) {
+    .menu-desc {
+        display: block;
+        word-wrap: break-word;
+        padding: 0;
+    }
+    .menu-item-layout>img {
+        display: inline-block;
+        height: 100px;
+        object-fit: cover;
+        transition: 0.5s ease-in-out;
+    }
+    .menu-item-layout>img:hover {
+        cursor: pointer;
+        transform: scale(1.08);
+    }
+}

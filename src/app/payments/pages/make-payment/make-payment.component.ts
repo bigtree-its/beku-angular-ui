@@ -75,53 +75,22 @@ export class MakePaymentComponent implements OnInit, OnDestroy {
   openItems: boolean = true;
   showItems: boolean = false;
   error = false;
+  paymentIntentId: string;
+  secret: string;
+  orderRef: string;
 
   ngOnInit(): void {
     this.error = false;
     this.loadStripe$.subscribe((s) => {
       console.log('Loaded stripe: ' + s);
     });
-    var intentId = this.activatedRoute.snapshot.queryParamMap.get('intent');
-    if (!Utils.isEmpty(intentId)) {
-      let observable = this.orderService.retrieveSinglePaymentIntent(intentId);
-      observable.pipe(takeUntil(this.destroy$)).subscribe({
-        next: (e) => {
-          this.paymentIntent = e;
-          console.log('Payment Intent ' + JSON.stringify(e));
-          if (Utils.isValid(e)) {
-            if (this.paymentIntent.status === 'succeeded') {
-              this.error = true;
-              this.errorMessage = 'This order has already been paid';
-              this.toastService.warning('This order has already been paid');
-            }
-            this.retrieveOrder(this.paymentIntent.orderReference);
-          } else {
-            this.error = true;
-            this.errorMessage =
-              'There is some issue retrieving this order. Please contact customer support';
-            this.toastService.warning(
-              'There is some issue retrieving this order. Please contact customer support'
-            );
-          }
-        },
-        error: (err) => {
-          this.error = true;
-          console.error(
-            'Error occurred when retrieving payment intent.' +
-            JSON.stringify(err)
-          );
-          this.errors = err;
-          if (Utils.isJsonString(err)) {
-            this.errorMessage = err.error.detail;
-            this.toastService.info(this.errorMessage);
-          } else {
-            this.errorMessage =
-              'There is some issue retrieving this order. Please contact customer support';
-          }
-        },
-      });
+    this.paymentIntentId = this.activatedRoute.snapshot.queryParamMap.get('intent');
+    this.secret = this.activatedRoute.snapshot.queryParamMap.get('secret');
+    this.orderRef = this.activatedRoute.snapshot.queryParamMap.get('ref');
+    if (!Utils.isEmpty(this.orderRef)) {
+      this.retrieveOrder(this.orderRef);
     } else {
-      console.error('Payment Intent cannot be null');
+      console.error('Order not found');
       this.error = true;
     }
   }

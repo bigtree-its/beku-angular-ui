@@ -16,16 +16,7 @@ export const environment = {
   SupplierUrl: 'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/suppliers',
   CalendersUrl:
     'https://chef-service-1b2023ebc956.herokuapp.com/ads/v1/calendars',
-  OrderTrackingUrl:
-    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/order-tracking',
-    FoodOrdersUrl:
-    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders',
-  FoodOrderSearchUrl:
-    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders/search',
-  StripePaymentsUrl:
-    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments',
-  PaymentIntentUrl:
-    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments/payment-intent',
+ 
 
   LoginUrl:
     'https://bigtree-auth-service-672f06320174.herokuapp.com/authenticate/customer/token',
@@ -48,9 +39,15 @@ export const environment = {
     'https://https://bigtree-auth-service-672f06320174.herokuapp.com/api/users/update_personal',
 
 
-  // Products Local
-  OrdersUrl: 'https://polar-fortress-28097-08459456d8d7.herokuapp.com/orders/v1',
-  PaymentsUrl: 'https://polar-fortress-28097-08459456d8d7.herokuapp.com/payments/v1',
+  // Orders
+  FoodOrdersTrackingUrl: 'https://polar-fortress-28097-08459456d8d7.herokuapp.com/orders/v1/foods-tracking',
+  FoodOrdersUrl: 'https://polar-fortress-28097-08459456d8d7.herokuapp.com/orders/v1/foods',
+  FoodOrderSearchUrl: 'https://polar-fortress-28097-08459456d8d7.herokuapp.com/orders/v1/foods/search',
+  FoodOrdersStripePaymentsUrl: 'https://polar-fortress-28097-08459456d8d7.herokuapp.com/orders/v1/foods/stripe-payments',
+  FoodOrdersPaymentIntentUrl: 'https://polar-fortress-28097-08459456d8d7.herokuapp.com/orders/v1/food-s/stripe-payments/payment-intent',
+  ProductOrdersUrl: 'https://polar-fortress-28097-08459456d8d7.herokuapp.com/orders/v1/products',
+  ProductOrdersSearchUrl: 'https://polar-fortress-28097-08459456d8d7.herokuapp.com/orders/v1/products/search',
+  ProductOrdersPaymentsUrl: 'https://polar-fortress-28097-08459456d8d7.herokuapp.com/orders/v1/products/stripe-payments',
 
 
   debug: window['env']['debug'] || false,

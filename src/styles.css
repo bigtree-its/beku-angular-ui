@@ -949,6 +949,19 @@ select {
     padding: 5px 0;
     background-color: #fcfcfd;
 }
+.qty-circle{
+    align-items: center;
+    background-color: #f5f3f1;
+    border-radius: 50rem;
+    display: flex;
+    flex-shrink: 0;
+    font-weight: 700;
+    height: 24px;
+    justify-content: center;
+    margin-right: 8px;
+    white-space: nowrap;
+    width: 24px;
+}
 
 .btn-circle {
     padding: 10px 13px;

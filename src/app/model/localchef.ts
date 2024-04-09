@@ -218,6 +218,8 @@ export interface SupplierOrder{
 
 export interface FoodOrder {
     id: string;
+    paymentIntentId: string;
+    clientSecret: string;
     supplier: OrderSupplier;
     customer: OrderCustomer;
     reference: string;

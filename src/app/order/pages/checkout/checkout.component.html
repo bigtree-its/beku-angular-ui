@@ -11,39 +11,39 @@
                 currency:
                 'GBP'}}</strong>
         </div>
-
     </div>
-    <div class="flex-row jcsb ais my-3 main">
-        <div class="lg left flex-column bg-light overflow-y br-25 p-3">
-            <div class="w-100">
-                <app-order-item *ngFor="let item of order?.items" [item]="item" [editable]=false></app-order-item>
-            </div>
-            <div class="flex-column mt-2 w-100">
-                <div class="flex-row-space-between">
-                    <strong>Subtotal</strong>
-                    <strong>{{order?.subTotal| currency: 'GBP'}}</strong>
-                </div>
-                <div class="flex-row-space-between">
-                    <span>Delivery fee</span>
-                    <span>{{order?.deliveryFee| currency: 'GBP'}}</span>
-                </div>
-                <div class="flex-row-space-between">
-                    <span>Service Fee</span>
-                    <span>{{order?.serviceFee| currency: 'GBP'}}</span>
-                </div>
-                <div class="flex-row-space-between" style="margin-top: 10px;">
-                    <strong>Total</strong>
-                    <strong>{{order?.total| currency: 'GBP'}}</strong>
-                </div>
-            </div>
-            <!-- The following image absolute works fine when screen resizing -->
-            <!-- <div style="max-height: 100%;max-width: 100%;padding: 30px;">
-                <img src="/assets/images/food.jpeg" style="object-fit: cover;max-height: 100%;max-width: 100%;">
-            </div> -->
+    <div class="flex-column sm border p-3 br-25 mt-5">
+        <div class="flex-row jcsb aic">
+            <span class="bold fs-5">Items</span>
+            <fa-icon *ngIf="!openItems" [icon]="faPlus" (click)="openCloseItems()" class="btn-circle"></fa-icon>
+            <fa-icon *ngIf="openItems" [icon]="faMinus" (click)="openCloseItems()"  class="btn-circle"></fa-icon>
         </div>
-        <div class="overflow-y p-3" id="contentDiv">
-            <div style="min-width: 100%;display: flex;flex-direction: column;">
-                <div *ngIf="!showOrderConfirmation" class="sub-header">{{divHeader}}</div>
+        <ng-template *ngIf="openItems" [ngTemplateOutlet]="items"></ng-template>
+    </div>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col flex-column lg">
+                <app-order-item *ngFor="let item of order?.items" [item]="item" [editable]=false></app-order-item>
+                <div class="flex-column mt-2 w-100">
+                    <div class="flex-row-space-between">
+                        <strong>Subtotal</strong>
+                        <strong>{{order?.subTotal| currency: 'GBP'}}</strong>
+                    </div>
+                    <div class="flex-row-space-between">
+                        <span>Delivery fee</span>
+                        <span>{{order?.deliveryFee| currency: 'GBP'}}</span>
+                    </div>
+                    <div class="flex-row-space-between">
+                        <span>Service Fee</span>
+                        <span>{{order?.serviceFee| currency: 'GBP'}}</span>
+                    </div>
+                    <div class="flex-row-space-between" style="margin-top: 10px;">
+                        <strong>Total</strong>
+                        <strong>{{order?.total| currency: 'GBP'}}</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="col border-left">
                 <div *ngIf="showHomeScreen" class="flex-column p-3 border br-25">
                     <div class="flex-row mb-2 border-bottom py-2 aic">
                         <span>Do you have an account?</span>
@@ -56,7 +56,9 @@
                         <button type="button" [routerLink]="['/register']" [queryParams]="{returnUrl: 'checkout'}" class="btn btn-outline-dark px-3 ml-3">Signup</button>
                     </div>
                 </div>
-                <div *ngIf="showCustomerDetailsSection" class="flex-column p-3">
+
+                <div *ngIf="showCustomerDetailsSection" class="flex-column">
+                    <span class="bold fs-5 mb-2 border-bottom mb-4">Your details</span>
                     <div class="flex-column mb-3">
                         <label for="customerName">Your name on order (for when
                             you collect)<small
@@ -73,7 +75,13 @@
                                 style="color: red;">**</small></label>
                         <input class="fb-input" type="email" name="customerEmail" tabindex="2" autocomplete="off" value [(ngModel)]="customerEmail" #ctrl="ngModel" required="true" readonly>
                     </div>
+                    <div class="flex-column my-3">
+                        <label for="notesToChef" class="bold my-2">Leave a note</label>
+                        <p>Leave a note for the chef with anything they need to know (e.g. the doorbell doesn't work). Do not include details about any allergies here.</p>
+                        <input class="fb-input" type="text" name="notesToChef" tabindex="2" autocomplete="off" value [(ngModel)]="notesToChef" #ctrl="ngModel" required="true">
+                    </div>
                 </div>
+
                 <div *ngIf="showServiceModeSection" class="flex-column p-3">
                     <div style="margin-bottom: 30px;background-color: #efedea;display: flex;height: 50px;justify-content: space-around;margin: 8px 0 16px;padding: 3px;">
                         <button class="service-mode" (click)="selectPickup()" [class.bg-warning]="serviceMode==='COLLECTION'"><fa-icon
@@ -113,7 +121,7 @@
                         </div>
                         <div class="postcode-lookup-container" *ngIf="lookupAddress">
                             <input class="fb-input" type="text" name="postcode" id="postcode" tabindex="4" autocomplete="off" value [(ngModel)]="addressLookupPostcode" #ctrl="ngModel" placeholder="Enter your postcode">
-                            <button class="btn btn-outline-primary btn-sm" (click)="findAddress()" style="margin-right: 8px;">Find</button>
+                            <button class="btn-navy btn-sm py-3" (click)="findAddress()" >Find</button>
                         </div>
                         <div *ngIf="postcodeAddressList !== undefined && postcodeAddressList.length > 0 && !addressSelected">
                             <div style="border: 1px solid var(--light-border);overflow-y: auto;height: 100px;margin-top: 5px;padding: 5px;">
@@ -124,35 +132,25 @@
                             </div>
                         </div>
                     </div>
+    
+                </div>
 
-                </div>
-                <div *ngIf="showItemsSection" class="flex-column p-3 mb-5">
-                    <div style="margin-bottom: 6px;">
-                        <label for="notesToChef">Notes to chef</label>
-                        <input class="fb-input" type="text" name="notesToChef" tabindex="2" autocomplete="off" value [(ngModel)]="notesToChef" #ctrl="ngModel" required="true">
-                    </div>
-                    <div style="display: flex;flex-direction: column;max-height: 380px;overflow: auto;padding-bottom: 10px;" *ngIf="order !== null && order !== undefined">
-                        <app-order-item *ngFor="let item of order?.items" [item]="item"></app-order-item>
+                <div *ngIf="showOrderConfirmation">
+                    <div class="flex-column jcc  aic bg-light p-4">
+                        <span>Your order has been
+                            submitted</span>
+                        <span class="f-size-xl mt-4 bolder">{{order?.reference}}</span>
                     </div>
                 </div>
-                <div *ngIf="showPaymentSection" class="flex-column p-3">
-                    <div class="flex-row-space-between">
-                        <strong>Subtotal</strong>
-                        <strong>{{order?.subTotal| currency: 'GBP'}}</strong>
-                    </div>
-                    <div class="flex-row-space-between">
-                        <span>Delivery fee</span>
-                        <span>{{order?.deliveryFee| currency: 'GBP'}}</span>
-                    </div>
-                    <div class="flex-row-space-between">
-                        <span>Service Fee</span>
-                        <span>{{order?.serviceFee| currency: 'GBP'}}</span>
-                    </div>
-                    <div class="flex-row-space-between" style="margin-top: 10px;">
-                        <strong>Total</strong>
-                        <strong>{{order?.total| currency: 'GBP'}}</strong>
-                    </div>
+                
+                <div *ngIf="!showOrderConfirmation" class="lg flex-row jcsb p-1 h-5 px-3 my-3">
+                    <span *ngIf="showHomeScreen || showCustomerDetailsSection"></span>
+                    <button type="button" *ngIf="!showHomeScreen && !showCustomerDetailsSection && !orderSubmitted" class="btn btn-dark btn-xs br-25" (click)="previous()" tabindex="4" style="float: left;min-width: 100px;">Previous</button>
+                    <button type="button" *ngIf="!showServiceModeSection" class="btn-navy btn-xs" style="float: right;min-width: 100px;" (click)="next()" tabindex="5">Next</button>
+                    <button type="button" *ngIf="showServiceModeSection" class="btn-navy btn-xs" (click)="placeOrder(stripeContent)" tabindex="5">Go to payment</button>
+                    <!-- <button type="button" [disabled]="loading" *ngIf="showPlaceOrderButton && chef.paymentRequireApproval && !orderSubmitted" class="btn-navy btn-xs" style="float: right;min-width: 100px;" (click)="placeOrder(null)" tabindex="5">Submit your order</button> -->
                 </div>
+
                 <div *ngIf="showStripeSection">
                     <div id="cardInfo" #cardInfo style="border: 1px solid var(--v-border);padding: 12px 5px;">
                         <!--Stripe.js injects the Card Element-->
@@ -165,7 +163,7 @@
                     <small class="text-muted">By selecting this button, you
                         agree to the Terms of
                         Sale.</small>
-
+    
                     <div id="cardErrors" *ngIf="cardErrors">{{cardErrors}}</div>
                     <div id="payment-result-section" class="payment-result-section hidden">
                         <span id="payment-message"></span>
@@ -174,28 +172,14 @@
                         <img src="/assets/icons/secure-stripe-payment-logo.png" class="stripe-logo" />
                     </div>
                 </div>
-                <div *ngIf="showOrderConfirmation">
-                    <div class="flex-column jcc  aic bg-light p-4">
-                        <span>Your order has been
-                            submitted</span>
-                        <span class="f-size-xl mt-4 bolder">{{order?.reference}}</span>
-                    </div>
-                </div>
+               
                 <div *ngIf="loading" class="d-flex jcc aic p-3">
                     <div class="loader"></div>
-                </div>
-
-                <div *ngIf="!showOrderConfirmation" class="lg flex-row jcsb p-1 h-5 px-3 my-3">
-                    <span *ngIf="showHomeScreen || showCustomerDetailsSection"></span>
-                    <button type="button" *ngIf="!showHomeScreen && !showCustomerDetailsSection && !orderSubmitted" class="btn btn-dark btn-xs" (click)="previous()" tabindex="4" style="float: left;min-width: 100px;">Previous</button>
-                    <button type="button" *ngIf="!showPlaceOrderButton &&  !showHomeScreen && !orderSubmitted" class="btn-navy btn-xs" style="float: right;min-width: 100px;" (click)="next()" tabindex="5">Next</button>
-                    <button type="button" *ngIf="showPlaceOrderButton && !chef.paymentRequireApproval && !orderSubmitted" class="btn-navy btn-xs" style="float: right;min-width: 100px;" (click)="placeOrder(stripeContent)" tabindex="5">Proceed
-                        to Pay</button>
-                    <button type="button" [disabled]="loading" *ngIf="showPlaceOrderButton && chef.paymentRequireApproval && !orderSubmitted" class="btn-navy btn-xs" style="float: right;min-width: 100px;" (click)="placeOrder(null)" tabindex="5">Submit your order</button>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="sm footer " *ngIf="!showOrderConfirmation">
         <div class="flex-row-space-between align-items-center p-1 h-5 mt-3 bg-light">
             <span *ngIf="showHomeScreen || showCustomerDetailsSection"></span>
@@ -208,6 +192,12 @@
         </div>
     </div>
 </div>
+
+<ng-template #items>
+    <div *ngIf="order !== null && order !== undefined" class="flex-column">
+        <app-order-item *ngFor="let item of order?.items" [item]="item" [editable]="false"></app-order-item>
+    </div>
+</ng-template>
 
 <ng-template #itemsContent let-modal>
     <div class="modal-header">
@@ -229,7 +219,7 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <app-stripeform [order]="order" [paymentIntent]="paymentIntent"></app-stripeform>
+        <app-stripeform [order]="order" [paymentIntentId]="order.paymentIntentId" [clientSecret]="order.clientSecret"></app-stripeform>
     </div>
 
 </ng-template>

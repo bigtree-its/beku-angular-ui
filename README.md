@@ -32,3 +32,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 Current NG Version is : 16
 The compatible Font Awsome version is 0.13.x
 Command: ng add @fortawesome/angular-fontawesome@0.13.x
+
+### How do I generate a new component in a Module
+ng g c foods/pages/chef-list --module=foods
+

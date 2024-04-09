@@ -29,7 +29,7 @@ export class OrderService {
     const params = new HttpParams({
       fromString: 'ref=' + reference + '&action=' + action,
     });
-    var url = this.serviceLocator.OrdersUrl + '/action';
+    var url = this.serviceLocator.ProductOrdersUrl + '/action';
     console.log('Action on order ' + url + '. Params: ' + params);
     return this.http.put<Order>(url, params).pipe(
       tap((result) => {
@@ -39,7 +39,7 @@ export class OrderService {
   }
 
   saveOrder(order: Order): Observable<Order> {
-    return this.http.post<Order>(this.serviceLocator.OrdersUrl, order).pipe(
+    return this.http.post<Order>(this.serviceLocator.ProductOrdersUrl, order).pipe(
       tap((result) => {
         this.setData(result);
       })
@@ -47,7 +47,7 @@ export class OrderService {
   }
 
   saveSaleOrder(order: SaleOrder): Observable<SaleOrder> {
-    return this.http.post<SaleOrder>(this.serviceLocator.OrdersUrl, order).pipe(
+    return this.http.post<SaleOrder>(this.serviceLocator.ProductOrdersUrl, order).pipe(
       tap((result) => {
         // this.setData(result);
       })
@@ -56,7 +56,7 @@ export class OrderService {
 
 
   retrieveOrders(query: OrderQuery): Observable<Order[]> {
-    var url = this.serviceLocator.OrdersUrl;
+    var url = this.serviceLocator.ProductOrdersUrl;
     console.log('Fetching customer orders ' + url);
     return this.http.post<Order[]>(url, query);
   }
@@ -73,7 +73,7 @@ export class OrderService {
       params = params.set('intent', intent);
     }
     return this.http.get<PaymentIntentResponse>(
-      this.serviceLocator.PaymentsUrl,
+      this.serviceLocator.ProductOrdersUrl,
       { params: params }
     );
   }
@@ -188,12 +188,12 @@ export class OrderService {
     };
     console.log(
       'Creating payment intent: ' +
-        this.serviceLocator.PaymentIntentUrl +
+        this.serviceLocator.ProductOrdersPaymentsUrl +
         ', ' +
         JSON.stringify(paymentIntentRequest)
     );
     return this.http.post<PaymentIntentResponse>(
-      this.serviceLocator.PaymentsUrl,
+      this.serviceLocator.ProductOrdersPaymentsUrl,
       paymentIntentRequest
     );
   }
@@ -203,12 +203,12 @@ export class OrderService {
   ): Observable<PaymentIntentResponse> {
     console.log(
       'Creating payment intent: ' +
-        this.serviceLocator.PaymentIntentUrl +
+        this.serviceLocator.ProductOrdersPaymentsUrl +
         ', ' +
         JSON.stringify(paymentIntentRequest)
     );
     return this.http.post<PaymentIntentResponse>(
-      this.serviceLocator.PaymentIntentUrl,
+      this.serviceLocator.ProductOrdersPaymentsUrl,
       paymentIntentRequest
     );
   }

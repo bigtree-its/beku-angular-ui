@@ -25,10 +25,9 @@ export class StripeformComponent {
   public paymentMessage: ElementRef<any>;
 
   enablePayButton: boolean = false;
-  // @Input() order: FoodOrder;
-  // @Input() paymentIntent: PaymentIntentResponse;
   @Input() order: FoodOrder;
-  @Input() paymentIntent: PaymentIntentResponse;
+  @Input() paymentIntentId: string;
+  @Input() clientSecret: string;
   stripeConfirmationError: string;
   stripeElements: any;
   cardElement: any;
@@ -38,7 +37,7 @@ export class StripeformComponent {
     private orderService: FoodOrderService,
     private toastService: ToastService,
     private utils: Utils
-  ) {}
+  ) { }
 
   ngOnInit() {
     // this.toastService.error();
@@ -47,10 +46,7 @@ export class StripeformComponent {
   ngAfterViewInit(): void {
     if (this.stripeService.stripe === undefined) {
       this.stripeService.getStripe().subscribe((s) => {
-        console.log(
-          'Initializing Stripe card element inside form: ' +
-            this.stripeService.stripe
-        );
+        console.log('Initializing Stripe card element inside form: ' + this.stripeService.stripe);
         this.initializeStripe();
       });
     } else {
@@ -62,32 +58,20 @@ export class StripeformComponent {
     const appearance = {
       theme: 'stripe',
     };
-    if ( Utils.isValid(this.paymentIntent)){
-      var clientSecret = this.paymentIntent.clientSecret;
-      console.log(
-        'Initializing stripe elements with clientSecret: ' + clientSecret
-      );
-      this.stripeElements = this.stripeService.stripe.elements({
-        appearance,
-        clientSecret,
-      });
-      const paymentElementOptions = {
-        layout: 'tabs',
-      };
-  
-      const paymentElement = this.stripeElements.create(
-        'payment',
-        paymentElementOptions
-      );
-      paymentElement.mount('#payment-info');
-      paymentElement.addEventListener('change', (result: any) => {
-        this.enablePayButton = result.complete ? true : false;
-        this.cardErrors = result.error && result.error.message;
-      });
-    }else{
-      this.enablePayButton = false;
-    }
     
+    var secret = this.clientSecret;
+    console.log('Initializing stripe elements with clientSecret: ' + secret);
+    this.stripeElements = this.stripeService.stripe.elements({clientSecret: secret});
+    const paymentElementOptions = {layout: 'tabs',};
+
+    const paymentElement = this.stripeElements.create('payment', paymentElementOptions);
+    paymentElement.mount('#payment-info');
+    paymentElement.addEventListener('change', (result: any) => {
+      this.enablePayButton = result.complete ? true : false;
+      this.cardErrors = result.error && result.error.message;
+    });
+
+
 
     // var linkAuthentication = this.stripeElements.create("linkAuthentication");
     // linkAuthentication.mount(this.linkAuthenticationInfo.nativeElement);
@@ -102,7 +86,7 @@ export class StripeformComponent {
     // console.log('The customer email: ' + emailAddress)
     // });
 
-    
+
     // const paymentElement = this.stripeElements.create("payment", paymentElementOptions);
     // paymentElement.mount(this.paymentElement.nativeElement);
 
@@ -193,10 +177,10 @@ export class StripeformComponent {
   //redirect_status=succeeded
 
   async confirmPaymentIntent() {
-    this.orderService.getData();
+    // this.orderService.getData();
     console.log('Confirming payment intent');
     const elements = this.stripeElements;
-    const clientSecret = this.paymentIntent.clientSecret;
+    const clientSecret = this.clientSecret;
     // const {paymentIntent, error} = await this.stripeService.stripe.confirmCardPayment({
     //   elements,
     //   confirmParams: {
@@ -216,21 +200,21 @@ export class StripeformComponent {
     //   this.toastService.info('You payment is successful')
     // }
 
-    const {error} = await this.stripeService.stripe.confirmPayment(
+    const { error } = await this.stripeService.stripe.confirmPayment(
       {
         elements,
         confirmParams: {
           // Return URL where the customer should be redirected after the PaymentIntent is confirmed.
-        return_url: 'http://localhost:4200/order-confirmation',
-        receipt_email: 'nava.arul@gmail.com',
+          return_url: 'http://localhost:4200/order-confirmation',
+          receipt_email: 'nava.arul@gmail.com',
         },
       }
     );
     if (error) {
       console.log(JSON.stringify(error))
-      this.orderService.updateSinglePaymentIntent(error.payment_intent.id,error.payment_intent.status);
+      this.orderService.updateSinglePaymentIntent(error.payment_intent.id, error.payment_intent.status);
     }
-    
+
 
     // this.stripeService.stripe
     //   .confirmPayment({
@@ -254,8 +238,8 @@ export class StripeformComponent {
     //   });
   }
 
-  updatePaymentIntent(id: string, status: string){
-    this.orderService.updateSinglePaymentIntent(id,status);
+  updatePaymentIntent(id: string, status: string) {
+    this.orderService.updateSinglePaymentIntent(id, status);
   }
 
   async confirmPayment() {

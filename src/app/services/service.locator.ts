@@ -15,11 +15,16 @@ export class ServiceLocator {
   menusUrl: string;
   ServiceAreasUrl: string;
   calendersUrl: string;
-  OrderTrackingUrl: string;
+
+  FoodOrdersTrackingUrl: string;
   FoodOrdersUrl: string;
-  PaymentIntentUrl: string;
-  StripePaymentsUrl: string;
+  FoodOrdersPaymentIntentUrl: string;
+  FoodOrdersStripePaymentsUrl: string;
   FoodOrderSearchUrl: string;
+
+  ProductOrdersUrl: string;
+  ProductOrdersPaymentsUrl: string;
+  
   LoginUrl: string;
   LogoutUrl: string;
   RegisterUrl: string;
@@ -30,8 +35,8 @@ export class ServiceLocator {
   CreateOrUpdateCustomerPreferencesUrl: string;
   CreateContactsUrl: string;
   UpdatePersonalDetails: string;
-  OrdersUrl: string;
-  PaymentsUrl: string;
+
+
   SupplierUrl: string;
 
   constructor() {
@@ -46,11 +51,15 @@ export class ServiceLocator {
     this.ServiceAreasUrl = environment.ServiceAreasUrl;
     this.menusUrl = environment.MenusUrl;
     this.calendersUrl = environment.CalendersUrl;
-    this.OrderTrackingUrl = environment.OrderTrackingUrl;
+
+    this.FoodOrdersTrackingUrl = environment.FoodOrdersTrackingUrl;
     this.FoodOrdersUrl = environment.FoodOrdersUrl;
     this.FoodOrderSearchUrl = environment.FoodOrderSearchUrl;
-    this.PaymentIntentUrl = environment.PaymentIntentUrl;
-    this.StripePaymentsUrl = environment.StripePaymentsUrl;
+    this.FoodOrdersPaymentIntentUrl = environment.FoodOrdersPaymentIntentUrl;
+    this.FoodOrdersStripePaymentsUrl = environment.FoodOrdersStripePaymentsUrl;
+    this.ProductOrdersUrl = environment.ProductOrdersUrl;
+    this.ProductOrdersPaymentsUrl = environment.ProductOrdersPaymentsUrl;
+
     this.LoginUrl = environment.LoginUrl;
     this.LogoutUrl = environment.LogoutUrl;
     this.RegisterUrl = environment.RegisterUrl;
@@ -61,7 +70,6 @@ export class ServiceLocator {
     this.CreateOrUpdateCustomerPreferencesUrl = environment.CreateOrUpdateCustomerPreferencesUrl;
     this.CreateContactsUrl = environment.CreateContactsUrl;
     this.UpdatePersonalDetails = environment.UpdatePersonalDetails;
-    this.OrdersUrl = environment.OrdersUrl;
-    this.PaymentsUrl = environment.PaymentsUrl;
+    
   }
 }

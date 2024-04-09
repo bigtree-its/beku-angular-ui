@@ -5,6 +5,8 @@ import { PaymentCard } from './payment-card';
 export class Order {
     id: number;
     reference: string;
+    paymentIntentId: string;
+    clientSecret: string;
     status: string;
     date: Date;
     expectedDeliveryDate: Date;

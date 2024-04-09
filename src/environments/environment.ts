@@ -34,27 +34,27 @@ export const environment = {
   // ====================
   // Order Service Remote
   // ====================
-  OrderTrackingUrl:
-    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/order-tracking',
-  FoodOrdersUrl:
-    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders',
-  FoodOrderSearchUrl:
-    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/customer-orders/search',
-  StripePaymentsUrl:
-    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments',
-  PaymentIntentUrl:
-    'https://polar-fortress-28097-08459456d8d7.herokuapp.com/api/stripe-payments/payment-intent',
+
+  // FoodOrdersTrackingUrl: 'https://polar-fortress-28097-08459456d8d7.herokuapp.com/orders/v1/food-order-tracking',
+  // FoodOrdersUrl: 'https://polar-fortress-28097-08459456d8d7.herokuapp.com/orders/v1/food-orders',
+  // FoodOrderSearchUrl: 'https://polar-fortress-28097-08459456d8d7.herokuapp.com/orders/v1/food-orders/search',
+  // FoodOrdersStripePaymentsUrl: 'https://polar-fortress-28097-08459456d8d7.herokuapp.com/orders/v1/food-orders/stripe-payments',
+  // FoodOrdersPaymentIntentUrl: 'https://polar-fortress-28097-08459456d8d7.herokuapp.com/orders/v1/food-orders/stripe-payments/payment-intent',
+  // ProductOrdersUrl: 'https://polar-fortress-28097-08459456d8d7.herokuapp.com/orders/v1/product-orders',
+  // ProductOrdersSearchUrl: 'https://polar-fortress-28097-08459456d8d7.herokuapp.com/orders/v1/product-orders/search',
+  // ProductOrdersPaymentsUrl: 'https://polar-fortress-28097-08459456d8d7.herokuapp.com/orders/v1/product-orders/stripe-payments',
 
   // ====================
-  // Order Service Remote
+  // Order Service Local
   // ====================
-  // OrderTrackingUrl: 'http://localhost:8082/api/order-tracking',
-  // FoodOrdersUrl: 'http://localhost:8082/api/customer-orders',
-  // FoodOrderSearchUrl: 'http://localhost:8082/api/customer-orders/search',
-  // StripePaymentsUrl: 'http://localhost:8082/api/stripe-payments',
-  // PaymentIntentUrl: 'http://localhost:8082/api/stripe-payments/payment-intent',
-  OrdersUrl: 'http://localhost:8082/orders/v1',
-  PaymentsUrl: 'http://localhost:8082/payments/v1',
+  FoodOrdersTrackingUrl: 'http://localhost:8082/orders/v1/food-order-tracking',
+  FoodOrdersUrl: 'http://localhost:8082/orders/v1/foods',
+  FoodOrderSearchUrl: 'http://localhost:8082/orders/v1/foods/search',
+  FoodOrdersStripePaymentsUrl: 'http://localhost:8082/orders/v1/foods/stripe-payments',
+  FoodOrdersPaymentIntentUrl: 'http://localhost:8082/orders/v1/foods/stripe-payments/payment-intent',
+  ProductOrdersUrl: 'http://localhost:8082/orders/v1/products',
+  ProductOrdersSearchUrl: 'http://localhost:8082/orders/v1/products/search',
+  ProductOrdersPaymentsUrl: 'http://localhost:8082/orders/v1/products/stripe-payments',
 
 
   // ====================

@@ -14,14 +14,14 @@
     <div class="flex-column jcc aic border my-4 br-7 p-4">
         <strong style="font-size: 22px;font-weight: 800;" class="color-navy">Top Locations</strong>
         <div class="flex-row flex-wrap aic gap-1 jcc aic">
-            <span class="clickable my-2" *ngFor="let pl of popularLocations" [routerLink]="['cooks']" [queryParams]="{location: pl.slug}">{{pl.name}}</span>
+            <span class="clickable my-2" *ngFor="let pl of popularLocations" [routerLink]="['/f/chef-list']" [queryParams]="{location: pl.slug}">{{pl.name}}</span>
         </div>
     </div>
 
     <div class="flex-column jcc aic border my-4 br-7 p-4">
         <strong style="font-size: 22px;font-weight: 800;" class="color-navy">Top Cuisines</strong>
         <div class="flex-row flex-wrap aic gap-1 jcc aic">
-            <span class="clickable my-2" *ngFor="let cuisine of cuisines" [routerLink]="['cooks']" [queryParams]="{cuisine: cuisine.slug}">{{cuisine.name}}</span>
+            <span class="clickable my-2" *ngFor="let cuisine of cuisines" [routerLink]="['/f/chef-list']" [queryParams]="{cuisine: cuisine.slug}">{{cuisine.name}}</span>
         </div>
     </div>
 </div>
