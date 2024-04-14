@@ -1,11 +1,10 @@
-<div class="container">
+<div class="container-fluid">
     <div *ngIf="error" class="error-page alert alert-warning p-5 m-5">
         <span>{{errorMessage}}</span>
     </div>
-    <div class="my-3">
-        <div class="arrow-icon-div" (click)="goBack()">
-            <fa-icon [icon]="faArrowLeft"></fa-icon>
-        </div>
+    <div class="flex-row py-2 aic px-3">
+        <fa-icon [icon]="faArrowLeft" (click)="goBack()" class="back mr-3"></fa-icon>
+        <span class="big-text fs-3 mr-2">{{product?.name}}</span>
     </div>
     <div *ngIf="!error" class="lg-row-sm-col">
         <div class="left p-3 ">
@@ -24,20 +23,23 @@
                     <span class="visually-hidden">Previous</span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                    <span class="carousel-control-next-icon  circle-button"
-                       ></span>
+                    <span
+                        class="carousel-control-next-icon  circle-button"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
         </div>
         <div class="right h-100 p-3">
             <div class="flex-column">
-                <h3 class="py-2 lg">{{product?.name}}</h3>
-                <div class="flex-row">
-                    <span class="product-seller">{{product?.supplier?.tradingName}}</span>
+                <div class="flex-row jcsb aic">
+                    <span class="big-text bg-light p-2">{{product?.supplier?.tradingName}}</span>
+                    <div class="bg-light p-2">
+                        <b>Dispatched within {{product.deliveryLeadTime}} days</b>
+                    </div>
                 </div>
                 <div class="flex-row gap-1">
-                    <h3 class="py-3 product-price">{{product?.price | currency : 'GBP'}}</h3>
+                    <h3 class="py-3 product-price">{{product?.price | currency : 'GBP'}}
+                    </h3>
                     <h5 *ngIf="product?.priceOld > 0" class="py-3 text-danger text-decoration-line-through ">{{product?.priceOld | currency : 'GBP'}}</h5>
                     <!-- <h5 *ngIf="product?.priceOld > 0" class="py-3 text-muted">{{ product?.price / product?.priceOld | percent:'2.0-2' }}</h5> -->
                     <h5 *ngIf="product?.priceOld > 0" class="py-3 text-muted">Save {{ product?.priceOld - product?.price | currency : 'GBP' }}</h5>
@@ -66,9 +68,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="p-4 bg-light border">
-                    <b>Dispatched within {{product.deliveryLeadTime}} days</b>
-                </div>
+
                 <div class="flex-row my-3">
                     <button class="bold btn btn-primary" (click)="addToOrder()">Add to order</button>
                 </div>

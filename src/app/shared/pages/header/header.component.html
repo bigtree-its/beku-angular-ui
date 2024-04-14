@@ -1,72 +1,42 @@
-<div class="container">
+<div class="container-fluid">
     <div class="flex-column">
-        <div class="flex-row jcsb aic py-2 border-bottom">
-            <fa-icon [icon]="faBars" (click)="toggleSideNav()" class="menu-icon"></fa-icon>
-            <div class="flex-column" [routerLink]="['/']">
-                <span class="tc logo-text f-size-xl">ONE DESI</span>
-            </div>
-
+        <div class="sm flex-row jcsb aic py-2 border-bottom">
+            <fa-icon [icon]="faBars" (click)="toggleSideNav()" class="menu-icon sm"></fa-icon>
+            <span class="logo-text f-size-xl" [routerLink]="['/']">desify</span>
+            <span></span>
+        </div>
+        <div class="lg flex-row jcsb aic py-2 border-bottom">
+            <span class="logo-text f-size-xl" [routerLink]="['/']">desify</span>
+            <fa-icon [icon]="faBars" (click)="toggleSideNav()" class="menu-icon sm"></fa-icon>
             <div class="flex-row aic">
+                <span class="btn-text mr-3 lg">Become Partner</span>
                 <span *ngIf="user !== null">Hi, {{user.name}}</span>
                 <button *ngIf="user === null" class="btn-text mr-1 lg" routerLink="/login">Login</button>
                 <button *ngIf="user === null" type="button" class="btn btn-dark btn-sm lg br-25 bold px-3" routerLink="/register">Signup</button>
             </div>
         </div>
 
-        <div class="flex-row jcsb aic py-2 border-bottom">
-            <nav>
-                <ul>
-                    <li><a href="/foods/home">Foods</a></li>
-                    <li><a href="/p/groups/fashion">Fashion</a></li>
-                    <li><a href="/p/groups/decor">Decor</a></li>
-                    <li><a href="/p/groups/games">Games</a></li>
-                    <!-- <li><a href="#">Decor</a>
-            <ul>
-              <li><a href="#">Graphic</a></li>
-              <li><a href="#">Web</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Clothing</a>
-            <ul>
-              <li><a href="#">Shirts</a></li>
-              <li><a href="#">Bottoms</a></li>
-              <li><a href="#">Kurtas</a></li>
-              <li><a href="#">Sarees</a></li>
-              <li><a href="#">Dupatas</a></li>
-              <li><a href="#">Ethnic Tops</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Misc</a>
-            <ul>
-              <li>
-                <table style="width: 600px;height: 500px;">
-                  <tr>
-                    <td>
-                      <ul>
-                        <li><a href="#">Graphic</a></li>
-                        <li><a href="#">Web</a></li>
-                      </ul>
-                    </td>
-                    <td>
-                      <ul>
-                        <li><a href="#">Ethinic Wear</a></li>
-                        <li><a href="#">Shirts</a></li>
-                      </ul>
-                    </td>
-                  </tr>
-                </table>
-              </li>
-            </ul>
-          </li> -->
-                </ul>
-            </nav>
-            <div *ngIf="foodItems > 0" class="flex-row mr-1 ml-3 align-items-center" [routerLink]="['/basket']">
-                <fa-icon [icon]="cartIcon" class="cart-icon"></fa-icon>
-                <span style="padding-right: 5px;">{{foodItems}}</span>
+        <div class="flex-row jcsb aic py-1 border-bottom">
+            <div></div>
+            <div>
+                <nav>
+                    <ul>
+                        <li><a href="/f/home" class="fs-5">Foods</a></li>
+                        <li><a href="/p/groups/fashion" class="fs-5">Fashion</a></li>
+                        <li><a href="/p/groups/decor" class="fs-5">Decor</a></li>
+                        <li><a href="/p/groups/games" class="fs-5">Games</a></li>
+                    </ul>
+                </nav>
             </div>
-            <div *ngIf="productItems > 0" class="flex-row mr-1 ml-3 align-items-center" [routerLink]="['/p/cart']">
-                <fa-icon [icon]="cartIcon" class="cart-icon"></fa-icon>
-                <span style="padding-right: 5px;">{{productItems}}</span>
+            <div>
+                <div *ngIf="foodItems > 0" class="flex-row mr-1 ml-3 align-items-center" [routerLink]="['/f/basket']">
+                    <fa-icon [icon]="cartIcon" class="cart-icon"></fa-icon>
+                    <span style="padding-right: 5px;">{{foodItems}}</span>
+                </div>
+                <div *ngIf="productItems > 0" class="flex-row mr-1 ml-3 align-items-center" [routerLink]="['/p/cart']">
+                    <fa-icon [icon]="cartIcon" class="cart-icon"></fa-icon>
+                    <span style="padding-right: 5px;">{{productItems}}</span>
+                </div>
             </div>
         </div>
     </div>

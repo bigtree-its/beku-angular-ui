@@ -117,7 +117,7 @@ export class FoodsHomeComponent implements OnInit{
     this.selectedServiceLocation = selectedServiceLocation;
     // this.fetchChefsByServiceLocation(selectedServiceLocation);
     this.router
-      .navigate(['cooks'], {
+      .navigate(['/f/chef-list'], {
         queryParams: { location: selectedServiceLocation.slug },
       })
       .then();

@@ -1,13 +1,9 @@
-<div class="container">
+<div class="container-fluid">
 
-    <div class="flex-row jcsb aic">
-        <div class="arrow-icon-div" (click)="goBack()">
-            <fa-icon [icon]="faArrowLeft"></fa-icon>
-        </div>
-        <span class="a-page-header">Checkout</span>
-        <span class="a-page-header"></span>
+    <div class="flex-row py-2 aic px-1">
+        <fa-icon [icon]="faArrowLeft" (click)="goBack()" class="back mr-3"></fa-icon>
+        <span class="fs-3 mr-2">Checkout</span>
     </div>
-
     <div class="flex-column border p-3 br-12 sm my-2">
         <div class="flex-row jcsb">
             <span class="bold f-size-lg ">Your Items</span>
@@ -16,9 +12,9 @@
         </div>
         <ng-container *ngIf="showItems" [ngTemplateOutlet]="itemsLayout"></ng-container>
     </div>
-    
+
     <div class="row">
-        <div class="col-md-7" style="min-height: 100vh;">
+        <div class="col-md-7 pb-3" style="min-height: 100vh;">
             <div class="flex-column w-100">
                 <div *ngIf="!showOrderConfirmation">{{divHeader}}</div>
                 <div *ngIf="showLoginPrompt" class="flex-column p-3 border br-12">
@@ -60,36 +56,40 @@
                         <span class="f-size-xl mt-4 bolder">{{order?.reference}}</span>
                     </div>
                 </div>
-                <div *ngIf="loading" class="d-flex jcc aic p-3">
-                    <div class="loader"></div>
-                </div>
-                <div class="flex-row">
+
+                <div class="flex-row jcsb aic px-2">
                     <button [class.disabled]="loading || customerAddress === null || customerAddress === undefined || customerAddress.addressLine1 === null || customerAddress.addressLine1 === undefined ||  customerAddress.addressLine1.length === 0" *ngIf="!showOrderConfirmation"
-                    type="button" class="w-button mt-3" style="float: right;min-width: 100px;" (click)="placeOrder(stripeContent)" tabindex="5">I'm ready to pay</button>
+                        type="button" class="w-button mt-3" style="float: right;min-width: 100px;" (click)="placeOrder(stripeContent)" tabindex="5">I'm
+                        ready to pay</button>
+                    <div *ngIf="loading" class="d-flex jcc aic p-3">
+                        <div class="loader"></div>
+                    </div>
                 </div>
-               
+
             </div>
         </div>
-        <div class="col-md-5 border-left lg" style="min-height: 100vh;">
+        <div class="col-md-5 bg-light lg" style="min-height: 100vh;">
             <ng-container [ngTemplateOutlet]="itemsLayout"></ng-container>
         </div>
     </div>
 </div>
 
-
 <ng-template #contactDetailsLayout>
     <div class="flex-column border p-3 br-12 my-2">
         <span class="bold fs-5 py-2 mb-2">Your Contact Details</span>
         <div class="flex-column mb-3">
-            <label for="customerName"><b>Name</b><small style="color: red;">**</small></label>
+            <label for="customerName"><b>Name</b><small
+                    style="color: red;">**</small></label>
             <input class="fb-input" type="text" name="customerName" tabindex="0" autocomplete="off" value [(ngModel)]="customerName" #ctrl="ngModel" required="true">
         </div>
         <div class="flex-column mb-3">
-            <label for="customerMobile"><b>Mobile</b><small style="color: red;">**</small></label>
+            <label for="customerMobile"><b>Mobile</b><small
+                    style="color: red;">**</small></label>
             <input class="fb-input" type="mobile" name="customerMobile" tabindex="1" autocomplete="off" value [(ngModel)]="customerMobile" #ctrl="ngModel" required="true">
         </div>
         <div class="flex-column">
-            <label for="customerEmail"><b>Email</b><small style="color: red;">**</small></label>
+            <label for="customerEmail"><b>Email</b><small
+                    style="color: red;">**</small></label>
             <input class="fb-input" type="email" name="customerEmail" tabindex="2" autocomplete="off" value [(ngModel)]="customerEmail" #ctrl="ngModel" required="true" readonly>
         </div>
         <div class="my-2"></div>
@@ -137,7 +137,8 @@
                     <b class="ml-1">Shipping Fee</b>
                 </div>
                 <span *ngIf="entry.value.freeDeliveryShortfall > 0">
-                    Buy {{entry.value.freeDeliveryShortfall | currency : 'GBP'}} more to enjoy FREE STANDARD
+                    Buy {{entry.value.freeDeliveryShortfall | currency : 'GBP'}}
+                    more to enjoy FREE STANDARD
                     SHIPPING!
                 </span>
                 <span *ngIf="entry.value.freeDelivery">
@@ -153,11 +154,14 @@
                         <div class="flex-column">
                             <b>{{item.productName}}</b>
                             <div class="flex-row">
-                                <div class="mr-2" *ngIf="item.size">Size: <b>{{item.size?.name}}</b></div>
-                                <div *ngIf="item.color">Color: <b>{{item.color?.name}}</b>
+                                <div class="mr-2" *ngIf="item.size">Size:
+                                    <b>{{item.size?.name}}</b></div>
+                                <div *ngIf="item.color">Color:
+                                    <b>{{item.color?.name}}</b>
                                 </div>
                             </div>
-                            <b class="mt-1">Dispatched within {{item.deliveryLeadTime}} days</b>
+                            <b class="mt-1">Dispatched within
+                                {{item.deliveryLeadTime}} days</b>
                             <div *ngIf="entry.key.canClubDelivery" class="selectable mr-1" (click)="clubDelivery(entry.key, item)" [class.selected]="item.clubDelivery">
                                 <fa-icon [icon]="faCheck"></fa-icon>
                                 <span class="pl-1">Club Delivery</span>
@@ -165,7 +169,8 @@
                         </div>
                         <div class="flex-column">
                             <b class="text-center">Qty : {{item.quantity}}</b>
-                            <b class="text-danger fs-5">{{item.subTotal | currency : 'GBP'}}</b>
+                            <b class="text-danger fs-5">{{item.subTotal |
+                                currency : 'GBP'}}</b>
                         </div>
                     </div>
                 </div>

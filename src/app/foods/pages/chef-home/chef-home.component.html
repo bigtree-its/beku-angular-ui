@@ -1,20 +1,19 @@
 <div *ngIf="chef !== null && chef !== undefined">
 
-    <div class="py-2">
-        <div class="arrow-icon-div" (click)="goback()">
-            <fa-icon [icon]="faArrowLeft"></fa-icon>
-        </div>
+    <div class="flex-row jcsb py-2 aic px-3">
+        <fa-icon [icon]="faArrowLeft" (click)="goback()" class="back mr-3"></fa-icon>
+        <span class="big-text fs-3 mr-2">{{chef.kitchenName}}</span>
+        <span [class.open]="chef.open" [class.closed]="!chef.open">{{chef.open? "Open":"Closed"}}</span>
     </div>
-    <div class="page">
-        <div class="page-left">
+    <div class="row">
+        <div class="col-md-6" style=" min-height: 100vh;overflow-y: auto; margin-bottom: 100px;">
             <div class="py-1">
-                <div class="flex-row">
+                <div class="flex-row gap-1">
                     <div style="height: 200px;width: 300px;">
                         <img src="{{chef.image}}" style="object-fit: cover;height: 100%; width: 100%;">
                     </div>
-                    <div class="flex-column" style="padding: 0 20px;width: 100%;">
+                    <div class="flex-column gap-1">
                         <div class="title-section">
-                            <span class="title mr-2">{{chef.kitchenName}}</span>
                             <div class="clickable-row" style="font-size: 12px;" (click)="selectLayout('Reviews')">
                                 <fa-icon [icon]="faStar"></fa-icon>
                                 <span style="padding-left: 6px;">{{chef.rating}}</span>
@@ -23,25 +22,26 @@
                             </div>
                         </div>
                         <div class="flex-row">
-                            <span [ngStyle]="{'color': chef.open ? 'green' :  'red'}">{{chef.open?
-                                "Open":"Closed"}}</span>
                             <span *ngIf="chef.preOrderOnly" class="attribute">PreOrder Only</span>
                         </div>
                         <span class="py-1 px-1 f-size-s">{{chef.description}}</span>
-                        <div class="flex-row-wrap">
-                            <ng-container *ngFor="let cuisine of chef.cuisines | slice:0:3">
-                                <div class="attribute">{{ cuisine.name }}
-                                </div>
-                            </ng-container>
-                        </div>
-                        <div class="flex-column" *ngIf="chef.doDelivery">
-                            <div class="flex-row" style="padding: 5px;align-items: center;">
-                                <fa-icon [icon]="faPeopleArrows"></fa-icon>
-                                <span style="font-size: 12px;padding-left: 5px;"><b>Delivery: </b> Upto {{chef.deliveryDistance}} miles</span>
+                        <div class="flex-row big-text border">
+                            <span style="background-color: gold;padding: 0 20px;">CUISINES</span>
+                            <div class="flex-row ml-2">
+                                <ng-container *ngFor="let cuisine of chef.cuisines | slice:0:3">
+                                    <span class="mr-1">{{ cuisine.name }}
+                                    </span>
+                                </ng-container>
                             </div>
-                            <div class="flex-row" *ngIf="chef.freeDeliveryOver > 0" style="padding: 5px;align-items: center;">
-                                <fa-icon [icon]="faFaceSmile" class="mr-1"></fa-icon>
-                                <span style="font-size: 12px;"><b>Free Delivery: </b>Order over {{chef.freeDeliveryOver |
+                        </div>
+                        <div class="flex-column gap-1" *ngIf="chef.doDelivery">
+                            <div class="flex-row big-text border">
+                                <span style="background-color: gold;padding: 0 20px;">DELIVERY DISTANCE</span>
+                                <span class="pl-2">{{chef.deliveryDistance}} miles</span>
+                            </div>
+                            <div class="flex-row big-text border">
+                                <span style="background-color: gold;padding: 0 20px;">FREE DELIVERY</span>
+                                <span class="pl-2">Order over {{chef.freeDeliveryOver |
                                     currency: 'GBP'}}</span>
                             </div>
                         </div>
@@ -51,10 +51,10 @@
                     </div>
                 </div>
             </div>
-            <div class="flex-row justify-content-center align-items-center mt-3 py-3 border-top w-100">
-                <span (click)="selectLayout('Menu')" class="clickable mx-2 px-3">Menu</span>
-                <span (click)="selectLayout('Reviews')" class="clickable mx-2 px-3">Reviews ({{reviews.length}})</span>
-                <span (click)="selectLayout('Info')" class="clickable mx-2 px-3">Info</span>
+            <div class="flex-row jcc aic mt-3 py-2 bg-light border-top border-bottom w-100">
+                <span (click)="selectLayout('Menu')" class="square mx-2 px-3 fs-6">Menu</span>
+                <span (click)="selectLayout('Reviews')" class="square mx-2 px-3 fs-6">Reviews ({{reviews.length}})</span>
+                <span (click)="selectLayout('Info')" class="square mx-2 px-3 fs-6">Info</span>
             </div>
             <ng-container [ngSwitch]="activeLayout">
                 <ng-container *ngSwitchCase="'Menu'" [ngTemplateOutlet]="menuLayout"></ng-container>
@@ -62,7 +62,7 @@
                 <ng-container *ngSwitchCase="'Info'" [ngTemplateOutlet]="infoLayout"></ng-container>
             </ng-container>
         </div>
-        <div class="page-right border-left">
+        <div class="col-md-6 lg">
             <div style="flex-direction: column;position: sticky;top: 0;min-height: 100vh;overflow-y: auto;width: 100%; padding: 10px;">
                 <div style="width: 100%;display: flex;justify-content: space-between;height: 40px;max-height: 40px;">
                     <span style="font-size: 20px;">Your Order</span>
@@ -76,11 +76,16 @@
                 </div> -->
                 <div *ngIf="order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0; then itemsBlock else noItemsBlock">
                 </div>
-                <div class="d-flex jcc aic">
-                    <button class="btn btn-primary btn-md flex-grow py-2 f-size-md" [routerLink]="[ '/checkout'] " *ngIf="(order !== null && order !== undefined &&  order.items !== null && order.items.length > 0)">Checkout</button>
+                <div class="d-flex jcc aic mt-3">
+                    <button class="btn-lift flex-grow py-2 f-size-md" [routerLink]="[ '/f/checkout'] " *ngIf="(order !== null && order !== undefined &&  order.items !== null && order.items.length > 0)">Checkout</button>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="sm footer flex-row jcsb aic bg-orange h-5 px-3 py-2">
+        <span *ngIf="order != null" class="color-red fs-1 big-text">{{order.total |
+            currency:'GBP'}}</span>
+        <button class="btn-lift">Go to Checkout</button>
     </div>
 </div>
 
@@ -136,8 +141,8 @@
 </ng-template>
 <ng-template #ItemsInCategory>
     <div style="padding: 10px;">
-        <app-menu-item *ngFor="let menu of items_to_display" [menu]="menu" [displayDescription]="true">
-        </app-menu-item>
+        <app-food-item *ngFor="let menu of items_to_display" [menu]="menu" [displayDescription]="true">
+        </app-food-item>
     </div>
 </ng-template>
 
@@ -145,7 +150,7 @@
     <div class="flex-column">
         <div class="flex-row my-2 align-items-center">
             <strong class="ml-2">Want to write a review ? </strong>
-            <button class="btn btn-primary btn-sm mx-1" [routerLink]="['/write_review']" [queryParams]="{chef: supplierId}">Write
+            <button class="btn-lift btn-sm mx-3" [routerLink]="['/write_review']" [queryParams]="{chef: supplierId}">Write
                 Review</button>
         </div>
         <div *ngIf="reviews !== null && reviews !== undefined &&  reviews.length > 0" style="max-height: 300px;overflow-y: auto;">
@@ -157,53 +162,56 @@
     </div>
 </ng-template>
 <ng-template #infoLayout>
-    <div class="flex-column border mx-2 p-3" style="width: 100%;margin: 0 20px;">
-        <table>
-            <tr class="border-bottom py-2" cellpadding="10px">
-                <td class="bold">Minimum order amount</td>
-                <td>{{chef.minimumOrder | currency: 'GBP'}}
-                </td>
-            </tr>
-            <tr class="border-bottom py-2" cellpadding="10px" *ngIf="chef.doDelivery">
-                <td class="bold">Delivery fee</td>
-                <td>{{chef.deliveryFee | currency: 'GBP'}}
-                </td>
-            </tr>
-            <tr class="border-bottom py-2" cellpadding="10px" *ngIf="chef.doDelivery">
-                <td class="bold">Free Delivery Order Over</td>
-                <td>{{chef.freeDeliveryOver | currency: 'GBP'}}
-                </td>
-            </tr>
-            <tr class="border-bottom py-2" cellpadding="10px">
-                <td class="bold">Address</td>
-                <td>
-                    <div class="flex-row">
-                        <span>{{chef.address.addressLine1}}</span>
-                        <span class="pl-1">{{chef.address.addressLine2}}</span>
-                        <span class="pl-1">{{chef.address.postcode}}</span>
-                    </div>
-                </td>
-            </tr>
-        </table>
+    <div class="flex-column">
+        <div class="border flex-column py-2 px-3 br-12 my-2">
+            <b class="fs-6 py-2">Food hygiene rating</b>
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="/assets/images/fhis.png" height="40px" width="100px">
+                </div>
+                <div class="col-md-9 flex-column">
+                    <span>
+                        Rating by the Food Standards Agency and your local authority. This rating may have changed.
+                    </span>
+                    <span>
+                        For more information
+                    </span>
+                    <span>
+                        Last inspection 02/08/2023
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="border flex-column py-2 px-3 br-12 my-2">
+            <b class="fs-6 py-2">A little bit about us</b>
+            <p>{{chef.description}}</p>
+        </div>
+        <div class="border flex-column py-2 px-3 br-12 my-2">
+            <b class="fs-6 py-2">Where to find us</b>
+            <div class="flex-row fs-6  big-text">
+                <span>{{chef.address.addressLine1}}</span>
+                <span class="pl-1">{{chef.address.addressLine2}}</span>
+            </div>
+            <div class="flex-row  fs-6   big-text">
+                <span>{{chef.address.city}}</span>
+                <span class="pl-1">{{chef.address.postcode}}</span>
+            </div>
+        </div>
     </div>
 </ng-template>
 
 <ng-template #menuLayout>
-    <div class="flex-column justify-content-center align-items-center">
+    <div class="flex-column jcc aic">
         <div class="scroll-container">
-
             <div class="arrow-icon-div" (click)="scrollLeft()">
                 <fa-icon [icon]="faArrowLeft"></fa-icon>
             </div>
-
             <div #widgetsContent style="display: flex;width: 415px;padding: 10px;overflow-x: hidden;white-space: nowrap;">
                 <span *ngFor="let c of collections" class="select-span" (click)="onSelectCategory(c)" [class.selectedSpan]="isSelectedCategory(c)">{{c.name}}</span>
             </div>
-
             <div class="arrow-icon-div" (click)="scrollRight()">
                 <fa-icon [icon]="faArrowRight"></fa-icon>
             </div>
-
         </div>
     </div>
     <div *ngIf="items_to_display !== null && items_to_display !== undefined &&  items_to_display.length > 0; then ItemsInCategory else NoItemsInCategory">

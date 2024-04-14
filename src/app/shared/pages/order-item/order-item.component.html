@@ -1,29 +1,29 @@
 <div class="d-flex w-100 border-bottom py-2 aic">
-        <div class="flex-column justify-content-center align-items-center">
-            <!-- <span style="font-size: 15px; padding-top: 10px;">{{item.price | currency: 'GBP'}}</span> -->
-            <span class="qty-circle" *ngIf="!editable">{{quantity}}</span>
-            <div *ngIf="editable" style="padding: 5px;display: flex;justify-content: space-around; box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);">
-                <button style="border:none" (click)="decreaseQuantity()"> - </button>
-                <span class="qty-value">{{quantity}}</span>
-                <button style="border:none" (click)="increaseQuantity()">+</button>
-            </div>
+    <div class="flex-column jcc aic">
+        <!-- <span style="font-size: 15px; padding-top: 10px;">{{item.price | currency: 'GBP'}}</span> -->
+        <span class="qty-circle" *ngIf="!editable">{{quantity}}</span>
+        <div *ngIf="editable" style="padding: 5px;display: flex;justify-content: space-around;">
+            <button style="border:none" (click)="decreaseQuantity()"> - </button>
+            <span class="qty-value">{{quantity}}</span>
+            <button style="border:none" (click)="increaseQuantity()">+</button>
         </div>
-        <div class="flex-column" style="width: 100%;">
+    </div>
+    <div class="flex-column w-100 ml-1">
+        <div class="flex-row jcsb w-100">
+            <strong>{{item.name}}</strong>
+            <strong>{{item.subTotal | currency: 'GBP'}}</strong>
+        </div>
+        <div *ngIf="item.choice !== null && item.choice !== undefined">
             <div style="width: 100%;clear: both; display: flex; justify-content: space-between;">
-                <strong>{{item.name}}</strong>
-                <strong>{{item.subTotal | currency: 'GBP'}}</strong>
-            </div>
-            <div *ngIf="item.choice !== null && item.choice !== undefined">
-                <div style="width: 100%;clear: both; display: flex; justify-content: space-between;">
-                    <span style="font-style: italic;">({{item.choice.name}})</span>
-                    <span>{{item.choice.price | currency: 'GBP'}}</span>
-                </div>
-            </div>
-            <div *ngIf="item.extras !== null && item.extras !== undefined && item.extras.length > 0">
-                <div style="width: 100%;clear: both; display: flex; justify-content: space-between;" *ngFor="let extra of item.extras">
-                    <span>{{extra.name}}</span>
-                    <span>{{extra.price | currency: 'GBP'}}</span>
-                </div>
+                <span style="font-style: italic;">({{item.choice.name}})</span>
+                <span>{{item.choice.price | currency: 'GBP'}}</span>
             </div>
         </div>
+        <div *ngIf="item.extras !== null && item.extras !== undefined && item.extras.length > 0">
+            <div style="width: 100%;clear: both; display: flex; justify-content: space-between;" *ngFor="let extra of item.extras">
+                <span>{{extra.name}}</span>
+                <span>{{extra.price | currency: 'GBP'}}</span>
+            </div>
+        </div>
+    </div>
 </div>
