@@ -12,25 +12,26 @@
                 'GBP'}}</strong>
         </div>
     </div>
-    <div class="flex-column" style="max-height:500px; overflow-y: auto;">
-        <div class="flex-column sm bg-light p-2 mt-2" *ngIf="!showHomeScreen">
-            <div class="flex-row jcsb aic">
-                <span class="bold fs-5">Items</span>
+    <div class="flex-column sm">
+        <ng-template *ngIf="showHomeScreen" [ngTemplateOutlet]="auth"></ng-template>
+        <div class="flex-column p-2 mt-2" *ngIf="!showHomeScreen">
+            <div class="flex-row jcsb aic border-bottom py-1">
+                <span class="bold fs-5 ">Items</span>
                 <fa-icon *ngIf="!openItems" [icon]="faPlus" (click)="openCloseItems()" class="btn-circle"></fa-icon>
                 <fa-icon *ngIf="openItems" [icon]="faMinus" (click)="openCloseItems()" class="btn-circle"></fa-icon>
             </div>
             <ng-template *ngIf="openItems" [ngTemplateOutlet]="items"></ng-template>
         </div>
-        <div class="flex-column sm bg-light  p-2 mt-2" *ngIf="!showHomeScreen">
-            <div class="flex-row jcsb aic">
+        <div class="flex-column p-2 mt-2" *ngIf="!showHomeScreen">
+            <div class="flex-row jcsb aic  border-bottom py-1">
                 <span class="bold fs-5">Your details</span>
                 <fa-icon *ngIf="!yourDetails" [icon]="faPlus" (click)="openCloseDetails()" class="btn-circle"></fa-icon>
                 <fa-icon *ngIf="yourDetails" [icon]="faMinus" (click)="openCloseDetails()" class="btn-circle"></fa-icon>
             </div>
             <ng-template *ngIf="yourDetails" [ngTemplateOutlet]="details"></ng-template>
         </div>
-        <div class="flex-column sm bg-light  p-2 mt-2" *ngIf="!showHomeScreen">
-            <div class="flex-row jcsb aic">
+        <div class="flex-column p-2 mt-2" *ngIf="!showHomeScreen">
+            <div class="flex-row jcsb aic  border-bottom py-1 mb-1">
                 <span class="bold fs-5">Your address</span>
                 <fa-icon *ngIf="!yourAddress" [icon]="faPlus" (click)="openCloseAddress()" class="btn-circle"></fa-icon>
                 <fa-icon *ngIf="yourAddress" [icon]="faMinus" (click)="openCloseAddress()" class="btn-circle"></fa-icon>
@@ -39,142 +40,130 @@
         </div>
     </div>
 
-    <div class="container mt-3 lg">
-        <div class="row">
-            <div class="col flex-column lg">
-                <app-order-item *ngFor="let item of order?.items" [item]="item" [editable]=false></app-order-item>
-                <div class="flex-column mt-2 w-100">
-                    <div class="flex-row-space-between">
-                        <strong>Subtotal</strong>
-                        <strong>{{order?.subTotal| currency: 'GBP'}}</strong>
-                    </div>
-                    <div class="flex-row-space-between">
-                        <span>Delivery fee</span>
-                        <span>{{order?.deliveryFee| currency: 'GBP'}}</span>
-                    </div>
-                    <div class="flex-row-space-between">
-                        <span>Service Fee</span>
-                        <span>{{order?.serviceFee| currency: 'GBP'}}</span>
-                    </div>
-                    <div class="flex-row-space-between" style="margin-top: 10px;">
-                        <strong>Total</strong>
-                        <strong>{{order?.total| currency: 'GBP'}}</strong>
-                    </div>
+    <div class="row lg">
+        <div class="col-md-6">
+            <app-order-item *ngFor="let item of order?.items" [item]="item" [editable]=false></app-order-item>
+            <ng-template [ngTemplateOutlet]="summary"></ng-template>
+        </div>
+        <div class="col-md-6">
+
+            <ng-template *ngIf="showHomeScreen" [ngTemplateOutlet]="auth"></ng-template>
+
+            <div *ngIf="!showHomeScreen" class="flex-column">
+                <ng-template [ngTemplateOutlet]="details"></ng-template>
+                <ng-template [ngTemplateOutlet]="address"></ng-template>
+                <button class="btn-arrow mt-1 d-flex jcc aic" (click)="placeOrder(stripeContent)">
+                    <span>I'm Ready to Pay</span>
+                    <svg width="34" height="34" viewBox="0 0 74 74" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="37" cy="37" r="35.5" stroke="black"
+                            stroke-width="3"></circle>
+                        <path
+                            d="M25 35.5C24.1716 35.5 23.5 36.1716 23.5 37C23.5 37.8284 24.1716 38.5 25 38.5V35.5ZM49.0607 38.0607C49.6464 37.4749 49.6464 36.5251 49.0607 35.9393L39.5147 26.3934C38.9289 25.8076 37.9792 25.8076 37.3934 26.3934C36.8076 26.9792 36.8076 27.9289 37.3934 28.5147L45.8787 37L37.3934 45.4853C36.8076 46.0711 36.8076 47.0208 37.3934 47.6066C37.9792 48.1924 38.9289 48.1924 39.5147 47.6066L49.0607 38.0607ZM25 38.5L48 38.5V35.5L25 35.5V38.5Z"
+                            fill="black"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div *ngIf="showOrderConfirmation">
+                <div class="flex-column jcc aic bg-light p-4">
+                    <span>Your order has been submitted</span>
+                    <span class="f-size-xl mt-4 bolder big-text">{{order?.reference}}</span>
                 </div>
             </div>
-            <div class="col">
-                <div *ngIf="showHomeScreen" class="flex-column p-3 border">
-                    <div class="flex-row mb-2 border-bottom py-2 aic">
-                        <span>Do you have an account?</span>
-                        <!-- <span [routerLink]="['/login']" [queryParams]="{returnUrl: 'checkout'}" class="clickable ml-2">Login</span> -->
-                        <button type="button" [routerLink]="['/login']" [queryParams]="{returnUrl: '/f/checkout'}" class="btn btn-outline-dark px-3 ml-3">Login</button>
-                    </div>
-                    <div class="flex-row py-2 aic">
-                        <span>Don't have an account?</span>
-                        <!-- <span [routerLink]="['/register']" class="clickable ml-2">Signup</span> -->
-                        <button type="button" [routerLink]="['/register']" [queryParams]="{returnUrl: '/f/checkout'}" class="btn btn-outline-dark px-3 ml-3">Signup</button>
-                    </div>
+            <div *ngIf="showStripeSection">
+                <div id="cardInfo" #cardInfo style="border: 1px solid var(--v-border);padding: 12px 5px;">
+                    <!--Stripe.js injects the Card Element-->
                 </div>
-
-                <div *ngIf="showCustomerDetailsSection" class="flex-column">
-                    <span class="bold fs-5 mb-2 border-bottom mb-4">Your details</span>
-                    <ng-template [ngTemplateOutlet]="details"></ng-template>
+                <div id="payment-element">
+                    <!--Stripe.js injects the Payment Element-->
                 </div>
+                <button id="paywithCardButton" [disabled]="!enablePayButton" class="n-button" (click)="confirmPayment()">Pay {{
+                    order?.subTotal| currency: 'GBP'}}</button>
+                <small class="text-muted">By selecting this button, you
+                    agree to the Terms of
+                    Sale.</small>
 
-                <div *ngIf="showServiceModeSection" class="flex-column p-3">
-                    <ng-template [ngTemplateOutlet]="address"></ng-template>
+                <div id="cardErrors" *ngIf="cardErrors">{{cardErrors}}</div>
+                <div id="payment-result-section" class="payment-result-section hidden">
+                    <span id="payment-message"></span>
                 </div>
-
-                <div *ngIf="showOrderConfirmation">
-                    <div class="flex-column jcc aic bg-light p-4">
-                        <span>Your order has been submitted</span>
-                        <span class="f-size-xl mt-4 bolder big-text">{{order?.reference}}</span>
-                    </div>
+                <div class="my-5">
+                    <img src="/assets/icons/secure-stripe-payment-logo.png" class="stripe-logo" />
                 </div>
-
-                <div *ngIf="!showOrderConfirmation" class="lg flex-row jcsb p-1 h-5 px-3 my-3">
-                    <span *ngIf="showHomeScreen || showCustomerDetailsSection"></span>
-
-                    <button type="button" *ngIf="!showHomeScreen && !showCustomerDetailsSection && !orderSubmitted" class="btn-lift" (click)="previous()" tabindex="4" style="float: left;min-width: 100px;">Your details</button>
-                    <button type="button" *ngIf=" !showHomeScreen && !showServiceModeSection" class="btn-lift" style="float: right;min-width: 100px;" (click)="next()" tabindex="5">Next</button>
-                    <div *ngIf="loading" class="d-flex jcc aic p-3">
-                        <div class="loader"></div>
-                    </div>
-                    <button *ngIf="showServiceModeSection" (click)="placeOrder(stripeContent)" tabindex="5" class="btn-lift">Go to payment
-                    </button>
-                    <!-- <button type="button" [disabled]="loading" *ngIf="showPlaceOrderButton && chef.paymentRequireApproval && !orderSubmitted" class="btn-navy btn-xs" style="float: right;min-width: 100px;" (click)="placeOrder(null)" tabindex="5">Submit your order</button> -->
-                </div>
-
-                <div *ngIf="showStripeSection">
-                    <div id="cardInfo" #cardInfo style="border: 1px solid var(--v-border);padding: 12px 5px;">
-                        <!--Stripe.js injects the Card Element-->
-                    </div>
-                    <div id="payment-element">
-                        <!--Stripe.js injects the Payment Element-->
-                    </div>
-                    <button id="paywithCardButton" [disabled]="!enablePayButton" class="n-button" (click)="confirmPayment()">Pay {{
-                        order?.subTotal| currency: 'GBP'}}</button>
-                    <small class="text-muted">By selecting this button, you
-                        agree to the Terms of
-                        Sale.</small>
-
-                    <div id="cardErrors" *ngIf="cardErrors">{{cardErrors}}</div>
-                    <div id="payment-result-section" class="payment-result-section hidden">
-                        <span id="payment-message"></span>
-                    </div>
-                    <div class="my-5">
-                        <img src="/assets/icons/secure-stripe-payment-logo.png" class="stripe-logo" />
-                    </div>
-                </div>
-
-
             </div>
         </div>
     </div>
 
-    <div class="sm footer">
-        <div class="flex-row p-1 w-100 flex-grow">
-            <button type="button" *ngIf="canShowPlaceOrderButton()" class="btn-bug flex-grow" (click)="placeOrder(stripeContent)">PROCEED TO PAY</button>
-        </div>
+    <div class="sm footer flex-row p-2 jcc">
+        <button *ngIf="canShowPlaceOrderButton()" class="btn-arrow mt-1 d-flex jcc aic" (click)="placeOrder(stripeContent)">
+            <span>I'm Ready to Pay</span>
+            <svg width="34" height="34" viewBox="0 0 74 74" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <circle cx="37" cy="37" r="35.5" stroke="black"
+                    stroke-width="3"></circle>
+                <path
+                    d="M25 35.5C24.1716 35.5 23.5 36.1716 23.5 37C23.5 37.8284 24.1716 38.5 25 38.5V35.5ZM49.0607 38.0607C49.6464 37.4749 49.6464 36.5251 49.0607 35.9393L39.5147 26.3934C38.9289 25.8076 37.9792 25.8076 37.3934 26.3934C36.8076 26.9792 36.8076 27.9289 37.3934 28.5147L45.8787 37L37.3934 45.4853C36.8076 46.0711 36.8076 47.0208 37.3934 47.6066C37.9792 48.1924 38.9289 48.1924 39.5147 47.6066L49.0607 38.0607ZM25 38.5L48 38.5V35.5L25 35.5V38.5Z"
+                    fill="black"></path>
+            </svg>
+        </button>
     </div>
 </div>
 
+<ng-template #auth>
+    <div class="flex-column p-3 border">
+        <div class="flex-row mb-2 border-bottom py-2 aic">
+            <span>Do you have an account?</span>
+            <!-- <span [routerLink]="['/login']" [queryParams]="{returnUrl: 'checkout'}" class="clickable ml-2">Login</span> -->
+            <button type="button" [routerLink]="['/login']" [queryParams]="{returnUrl: '/f/checkout'}" class="btn btn-outline-dark px-3 ml-3">Login</button>
+        </div>
+        <div class="flex-row py-2 aic">
+            <span>Don't have an account?</span>
+            <!-- <span [routerLink]="['/register']" class="clickable ml-2">Signup</span> -->
+            <button type="button" [routerLink]="['/register']" [queryParams]="{returnUrl: '/f/checkout'}" class="btn btn-outline-dark px-3 ml-3">Signup</button>
+        </div>
+    </div>
+</ng-template>
+
 <ng-template #details>
-    <div class="flex-column">
-        <div class="flex-column mb-3">
-            <label for="customerName">Your name on order (for when
-                you collect)<small
+    <div class="flex-column my-1 border br-7 px-2 py-2">
+        <div class="flex-column mb-1">
+            <label for="customerName">Your name<small
                     style="color: red;">**</small></label>
             <input class="fb-input" type="text" name="customerName" tabindex="0" autocomplete="off" value [(ngModel)]="customerName" #ctrl="ngModel" required="true">
         </div>
-        <div class="flex-column mb-3">
-            <label for="customerMobile">Your mobile<small
-                    style="color: red;">**</small></label>
-            <input class="fb-input" type="mobile" name="customerMobile" tabindex="1" autocomplete="off" value [(ngModel)]="customerMobile" #ctrl="ngModel" required="true">
+        <div class="flex-row gap-1">
+            <div class="flex-column flex-grow">
+                <label for="customerMobile">Your mobile<small
+                        style="color: red;">**</small></label>
+                <input class="fb-input" type="mobile" name="customerMobile" tabindex="1" autocomplete="off" value [(ngModel)]="customerMobile" #ctrl="ngModel" required="true">
+            </div>
+            <div class="flex-column  flex-grow">
+                <label for="customerEmail">Your email<small
+                        style="color: red;">**</small></label>
+                <input class="fb-input" type="email" name="customerEmail" tabindex="2" autocomplete="off" value [(ngModel)]="customerEmail" #ctrl="ngModel" required="true" readonly>
+            </div>
         </div>
         <div class="flex-column">
-            <label for="customerEmail">Your email<small
-                    style="color: red;">**</small></label>
-            <input class="fb-input" type="email" name="customerEmail" tabindex="2" autocomplete="off" value [(ngModel)]="customerEmail" #ctrl="ngModel" required="true" readonly>
-        </div>
-        <div class="flex-column my-3">
-            <label for="notesToChef" class="bold my-2">Leave a note</label>
-            <p>Leave a note for the chef with anything they need to know (e.g. the doorbell doesn't work). Do not include details about any allergies here.</p>
+            <label for="notesToChef" class="bold mb-1">Leave a note</label>
+            <span>Leave a note for the chef with anything they need to know
+                (e.g. the doorbell doesn't work). Do not include details about
+                any allergies here.</span>
             <input class="fb-input" type="text" name="notesToChef" tabindex="2" autocomplete="off" value [(ngModel)]="notesToChef" #ctrl="ngModel" required="true">
         </div>
     </div>
 </ng-template>
 <ng-template #address>
-    <div class="flex-column">
-        <div style="margin-bottom: 30px;background-color: #efedea;display: flex;height: 50px;justify-content: space-around;margin: 8px 0 16px;padding: 3px;">
-            <button class="service-mode" (click)="selectPickup()" [class.bg-warning]="serviceMode==='COLLECTION'"><fa-icon
+    <div class="flex-column border br-7 p-2">
+        <div class="d-flex flex-grow  br-25 p-0_5" style=" background: #cfef00;">
+            <button class="service-mode br-25" (click)="selectPickup()" [class.bg-white]="serviceMode==='COLLECTION'"><fa-icon
                     [icon]="faPersonBiking"
                     class="mr-1"></fa-icon>Collection</button>
-            <button class="service-mode" (click)="selectDelivery()" [class.bg-warning]="serviceMode==='DELIVERY'" [disabled]="!chef.doDelivery"><fa-icon
+            <button class="service-mode  br-25" (click)="selectDelivery()" [class.bg-white]="serviceMode==='DELIVERY'" [disabled]="!chef.doDelivery"><fa-icon
                     [icon]="faBox"
                     class="mr-1"></fa-icon>Delivery</button>
         </div>
-        <div *ngIf="serviceMode === 'COLLECTION'" style=" padding: 1rem;display: flex;flex-direction: column;background-color: var(--light-background);flex-grow: 1;margin-right: 10px;">
+        <div *ngIf="serviceMode === 'COLLECTION'" class="flex-column">
             <strong style="display: block;">Please collect
                 at</strong>
             <span style="display: block;">{{chef.address.addressLine1}}</span>
@@ -182,7 +171,7 @@
             <span style="display: block;">{{chef.address.city}}</span>
             <span style="display: block;">{{chef.address.postcode}}</span>
         </div>
-        <div style=" display: flex;flex-direction: column;" *ngIf="chef.doDelivery  && serviceMode === 'DELIVERY'">
+        <div class="flex-column" *ngIf="chef.doDelivery  && serviceMode === 'DELIVERY'">
             <strong>Where should we send your order?</strong>
             <div class="flex-row-space-between align-items-center" *ngIf="customerAddress !== null && customerAddress !== undefined && customerAddress.addressLine1 !== null && customerAddress.addressLine1 !== undefined &&  customerAddress.addressLine1.length > 0">
                 <div style=" padding: 1rem;display: flex;flex-direction: column;background-color: var(--light-background);flex-grow: 1;margin-right: 10px;">
@@ -214,6 +203,27 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #summary>
+    <div class="flex-column my-2 w-100">
+        <div class="flex-row-space-between">
+            <strong>Subtotal</strong>
+            <strong>{{order?.subTotal| currency: 'GBP'}}</strong>
+        </div>
+        <div class="flex-row-space-between">
+            <span>Delivery fee</span>
+            <span>{{order?.deliveryFee| currency: 'GBP'}}</span>
+        </div>
+        <div class="flex-row-space-between">
+            <span>Service Fee</span>
+            <span>{{order?.serviceFee| currency: 'GBP'}}</span>
+        </div>
+        <div class="flex-row-space-between" style="margin-top: 10px;">
+            <strong>Total</strong>
+            <strong>{{order?.total| currency: 'GBP'}}</strong>
         </div>
     </div>
 </ng-template>

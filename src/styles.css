@@ -1,14 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Limelight&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Kalnia:wght@100..700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Londrina+Outline&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Rampart+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 :root {
     --blue: #007bff;
     --indigo: #6610f2;
@@ -43,12 +38,14 @@
     border: none;
     color: var(--black);
     /* font-size: clamp(.5rem, 0.5rem + 10vw, .8rem); */
-    font-size: 0.9rem;
-    letter-spacing: 0.1px;
     box-sizing: content-box;
 }
 
 html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    /* font-size: 62.5%; */
     /* font-size: 70%; */
     overflow-x: hidden;
     overflow-y: auto;
@@ -56,7 +53,6 @@ html {
     text-size-adjust: 100%;
     background-color: #fff;
     /* background-color: #f9f7f1; */
-    font-weight: 100;
     overflow: -moz-scrollbars-none;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -116,11 +112,10 @@ body {
     margin: 0px;
     padding: 0px;
     font-size: 13px;
-    font-weight: 400;
-    line-height: 1.4;
+    /* line-height: 2.6rem; */
     letter-spacing: 0.1px;
     /* background-color: #f9f7f1; */
-    font-family: Helvetica Neue, Helvetica, sans-serif;
+    font-family: "Open Sans", sans-serif;
     overflow: -moz-scrollbars-none;
     -ms-overflow-style: none;
     /* color: #162127; */
@@ -216,6 +211,38 @@ tr:nth-child(odd) {
     border: 2px solid #000;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.btn-arrow {
+    cursor: pointer;
+    font-weight: 700;
+    font-family: Helvetica, "sans-serif";
+    transition: all .2s;
+    padding: 5px 20px;
+    border-radius: 100px;
+    background: #cfef00;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+}
+
+.btn-arrow:hover {
+    background: #c4e201;
+}
+
+.btn-arrow>svg {
+    width: 34px;
+    margin-left: 10px;
+    transition: transform .3s ease-in-out;
+}
+
+.btn-arrow:hover svg {
+    transform: translateX(5px);
+}
+
+.btn-arrow:active {
+    transform: scale(0.95);
 }
 
 .btn-lift,
@@ -448,7 +475,7 @@ tr:nth-child(odd) {
 }
 
 .logo-text {
-    font-family: "Rampart One", sans-serif;
+    font-family: "Anton", sans-serif;
     font-weight: 100;
     cursor: pointer;
 }
@@ -937,7 +964,7 @@ select {
 }
 
 .jce {
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .ais {
@@ -945,7 +972,7 @@ select {
 }
 
 .aie {
-    align-items: end;
+    align-items: flex-end;
 }
 
 .flex-row {
@@ -1383,6 +1410,10 @@ select {
 .link-button:hover {
     cursor: pointer;
     color: #1967d2;
+}
+
+.pointer {
+    cursor: pointer;
 }
 
 .clickable {

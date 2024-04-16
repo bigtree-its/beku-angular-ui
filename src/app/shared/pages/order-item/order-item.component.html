@@ -10,7 +10,7 @@
     </div>
     <div class="flex-column w-100 ml-1">
         <div class="flex-row jcsb w-100">
-            <strong>{{item.name}}</strong>
+            <span>{{item.name}}</span>
             <strong>{{item.subTotal | currency: 'GBP'}}</strong>
         </div>
         <div *ngIf="item.choice !== null && item.choice !== undefined">

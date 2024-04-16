@@ -2,29 +2,43 @@
     <div class="flex-column">
         <div class="sm flex-row jcsb aic py-2 border-bottom">
             <fa-icon [icon]="faBars" (click)="toggleSideNav()" class="menu-icon sm"></fa-icon>
-            <span class="logo-text f-size-xl" [routerLink]="['/']">desify</span>
+            <span class="logo-text f-size-xl" [routerLink]="['/']">DESIFY</span>
             <span></span>
         </div>
+
         <div class="lg flex-row jcsb aic py-2 border-bottom">
-            <span class="logo-text f-size-xl" [routerLink]="['/']">desify</span>
+            <span class="logo-text f-size-xl" [routerLink]="['/']">DESIFY</span>
             <fa-icon [icon]="faBars" (click)="toggleSideNav()" class="menu-icon sm"></fa-icon>
+            <div style="color: rgb(163, 152, 152);">
+                <nav>
+                    <ul>
+                        <li><a href="/f/home">FOODS</a></li>
+                        <li><a href="/p/groups/fashion">FASHION</a></li>
+                        <li><a href="/p/groups/decor">DECOR</a></li>
+                        <li><a href="/p/groups/games">GAMES</a></li>
+                    </ul>
+                </nav>
+            </div>
             <div class="flex-row aic">
                 <span class="btn-text mr-3 lg">Become Partner</span>
-                <span *ngIf="user !== null">Hi, {{user.name}}</span>
+                <!-- <span >Hi, {{user.name}}</span> -->
+                <div (click)="toggleSideNav()" *ngIf="user !== null" class="flex-column jcc aic br-50 border pointer" style="height: 30px;width:30px;">
+                    <span>{{user.firstName | slice:0:1}}{{user.lastName | slice:0:1}}</span>
+                </div>
                 <button *ngIf="user === null" class="btn-text mr-1 lg" routerLink="/login">Login</button>
                 <button *ngIf="user === null" type="button" class="btn btn-dark btn-sm lg br-25 bold px-3" routerLink="/register">Signup</button>
             </div>
         </div>
 
-        <div class="flex-row jcsb aic py-1 border-bottom">
+        <div class="sm flex-row jcsb aic py-1 border-bottom">
             <div></div>
             <div>
                 <nav>
                     <ul>
-                        <li><a href="/f/home" class="fs-5">Foods</a></li>
-                        <li><a href="/p/groups/fashion" class="fs-5">Fashion</a></li>
-                        <li><a href="/p/groups/decor" class="fs-5">Decor</a></li>
-                        <li><a href="/p/groups/games" class="fs-5">Games</a></li>
+                        <li><a href="/f/home">FOODS</a></li>
+                        <li><a href="/p/groups/fashion">FASHION</a></li>
+                        <li><a href="/p/groups/decor">DECOR</a></li>
+                        <li><a href="/p/groups/games">GAMES</a></li>
                     </ul>
                 </nav>
             </div>
