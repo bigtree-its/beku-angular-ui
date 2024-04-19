@@ -13,10 +13,13 @@
     <label for="payment-info"></label>
     <div id="payment-info" #PaymentInfo></div>
 
-    <button id="paywithCardButton" disabled="!enablePayButton" class="btn btn-primary" (click)="confirmPaymentIntent()">
-        Pay {{order?.total| currency: 'GBP'}}
-        {{loading? 'Please wait...': "Pay {{ order?.total| currency: 'GBP'}}"}}
-    </button>
+    <div class="flex-row jcc aic">
+        <span class="big-text fs-3 mr-3">{{order?.total| currency: 'GBP'}}</span>
+        <button id="paywithCardButton" disabled="loading" class="btn-l2r fs-5" (click)="confirmPaymentIntent()">
+            {{loading ? 'Please wait...':'Pay'}}
+        </button>
+    </div>
+    
     <small class="text-muted">By selecting this button, you agree to the Terms of
         Sale.</small>
 

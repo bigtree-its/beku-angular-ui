@@ -226,7 +226,7 @@ export class AccountService {
   }
 
   purgeAuth(): void {
-    console.log('Purging auth...');
+    console.log('Purging all session data...');
     this.jwtService.destroyToken();
     this.loginSession$.next(null);
     this.localService.removeData(Constants.StorageItem_C_User);

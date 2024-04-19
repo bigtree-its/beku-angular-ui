@@ -4,6 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
 :root {
     --blue: #007bff;
     --indigo: #6610f2;
@@ -250,6 +251,38 @@ tr:nth-child(odd) {
     border: 2px solid #000;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.btn-l2r {
+    color: #000;
+    display: inline-block;
+    padding: 6px 20px;
+    font-weight: 700;
+    border: 3px solid var(--brand-color);
+    cursor: pointer;
+    position: relative;
+    background-color: transparent;
+    text-decoration: none;
+    overflow: hidden;
+    z-index: 1;
+    font-family: inherit;
+}
+
+.btn-l2r::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--brand-color);
+    transform: translateX(-100%);
+    transition: all .3s;
+    z-index: -1;
+}
+
+.btn-l2r:hover::before {
+    transform: translateX(0);
 }
 
 .btn-arrow {
@@ -2170,9 +2203,11 @@ select {
     0% {
         opacity: 0;
     }
+
     49% {
         opacity: 0;
     }
+
     50% {
         opacity: 1;
     }
@@ -2201,16 +2236,20 @@ select {
     .lg {
         display: flex;
     }
+
     .sm {
         display: none;
     }
+
     .md {
         display: none;
     }
+
     .title-section {
         display: flex;
         flex-direction: row;
     }
+
     .lg-row-sm-col {
         display: flex;
         flex-direction: row;
