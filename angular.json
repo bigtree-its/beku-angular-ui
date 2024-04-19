@@ -21,7 +21,7 @@
                         ],
                         "tsConfig": "tsconfig.app.json",
                         "assets": [
-                            "src/favicon.ico",
+                            "favicon.ico",
                             "src/assets"
                         ],
                         "styles": [
@@ -71,13 +71,13 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                          "buildTarget": "customer-app:build:production"
+                            "buildTarget": "customer-app:build:production"
                         },
                         "development": {
-                          "buildTarget": "customer-app:build:development"
+                            "buildTarget": "customer-app:build:development"
                         },
                         "staging": {
-                          "buildTarget": "customer-app:build:staging"
+                            "buildTarget": "customer-app:build:staging"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -85,7 +85,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                      "buildTarget": "customer-app:build"
+                        "buildTarget": "customer-app:build"
                     }
                 },
                 "test": {
@@ -97,7 +97,7 @@
                         ],
                         "tsConfig": "tsconfig.spec.json",
                         "assets": [
-                            "src/favicon.ico",
+                            "favicon.ico",
                             "src/assets"
                         ],
                         "styles": [
