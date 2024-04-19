@@ -36,3 +36,7 @@ Command: ng add @fortawesome/angular-fontawesome@0.13.x
 ### How do I generate a new component in a Module
 ng g c foods/pages/chef-list --module=foods
 
+
+### Upgrade Angular Version
+In the application's project directory, run ng update @angular/core@17 @angular/cli@17 to update your application to Angular v17
+

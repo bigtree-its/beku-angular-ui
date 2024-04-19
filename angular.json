@@ -71,13 +71,13 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                            "browserTarget": "customer-app:build:production"
+                          "buildTarget": "customer-app:build:production"
                         },
                         "development": {
-                            "browserTarget": "customer-app:build:development"
+                          "buildTarget": "customer-app:build:development"
                         },
                         "staging": {
-                            "browserTarget": "customer-app:build:staging"
+                          "buildTarget": "customer-app:build:staging"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -85,7 +85,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "customer-app:build"
+                      "buildTarget": "customer-app:build"
                     }
                 },
                 "test": {
