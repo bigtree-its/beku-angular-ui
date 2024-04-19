@@ -1,2 +1,2 @@
 export * from './make-payment/make-payment.component';
-export * from './stripeform/stripeform.component';
+export * from './payment-form/payment-form.component';

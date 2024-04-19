@@ -8,6 +8,7 @@ import {
   faPlus,
   faStar,
 } from '@fortawesome/free-solid-svg-icons';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject, takeUntil } from 'rxjs';
 import { Utils } from 'src/app/helpers/utils';
 import { User } from 'src/app/model/auth-model';
@@ -34,6 +35,7 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
   toastService = inject(ToastService);
   supplierService = inject(ChefService);
   router = inject(Router);
+  modalService = inject(NgbModal);
 
   utils = inject(Utils);
   user: User;
@@ -125,6 +127,27 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
 
   goBack() {
     this.viewOrder = null;
+  }
+
+  makePayment(content){
+    if (content) {
+      this.openPayment(content);
+    } 
+  }
+
+  openPayment(content) {
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => { },
+        (reason) => {
+          // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
+
+  closePayment() {
+    this.modalService.dismissAll();
   }
 
   submit() {

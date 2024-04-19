@@ -10,11 +10,11 @@ import { ToastService } from 'src/app/services/toast.service';
 import { Utils } from 'src/app/services/utils';
 
 @Component({
-  selector: 'app-stripeform',
-  templateUrl: './stripeform.component.html',
-  styleUrls: ['./stripeform.component.css'],
+  selector: 'app-payment-form',
+  templateUrl: './payment-form.component.html',
+  styleUrls: ['./payment-form.component.css'],
 })
-export class StripeformComponent {
+export class PaymentFormComponent {
   @ViewChild('linkAuthenticationInfo', { read: ElementRef })
   public linkAuthenticationInfo: ElementRef<any>;
   @ViewChild('payment-element', { read: ElementRef })
@@ -31,6 +31,7 @@ export class StripeformComponent {
   stripeConfirmationError: string;
   stripeElements: any;
   cardElement: any;
+  loading: boolean;
 
   constructor(
     private stripeService: StripeService,
@@ -40,10 +41,11 @@ export class StripeformComponent {
   ) { }
 
   ngOnInit() {
-    // this.toastService.error();
+   this.loading = false;
   }
 
   ngAfterViewInit(): void {
+    this.loading = false;
     if (this.stripeService.stripe === undefined) {
       this.stripeService.getStripe().subscribe((s) => {
         console.log('Initializing Stripe card element inside form: ' + this.stripeService.stripe);
@@ -178,6 +180,7 @@ export class StripeformComponent {
 
   async confirmPaymentIntent() {
     // this.orderService.getData();
+    this.loading = true;
     console.log('Confirming payment intent');
     const elements = this.stripeElements;
     const clientSecret = this.clientSecret;
@@ -205,14 +208,15 @@ export class StripeformComponent {
         elements,
         confirmParams: {
           // Return URL where the customer should be redirected after the PaymentIntent is confirmed.
-          return_url: 'http://localhost:4200/order-confirmation',
+          return_url: 'http://localhost:4200/f/confirmation',
           receipt_email: 'nava.arul@gmail.com',
         },
       }
     );
     if (error) {
       console.log(JSON.stringify(error))
-      this.orderService.updateSinglePaymentIntent(error.payment_intent.id, error.payment_intent.status);
+      this.loading = false;
+      // this.orderService.updateSinglePaymentIntent(error.payment_intent.id, error.payment_intent.status);
     }
 
 

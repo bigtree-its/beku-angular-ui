@@ -4,9 +4,9 @@
     "doc_url": "https://stripe.com/docs/error-codes/payment-intent-unexpected-state",
     "message": "A processing error occurred.",
     "payment_intent": {
-        "id": "pi_3O9FE5JtRMxkXWc31mrb3S3n",
+        "id": "pi_3P6WJpJtRMxkXWc30iTVzT1b",
         "object": "payment_intent",
-        "amount": 550,
+        "amount": 2850,
         "amount_details": {
             "tip": {}
         },
@@ -17,18 +17,22 @@
         "canceled_at": null,
         "cancellation_reason": null,
         "capture_method": "automatic",
-        "client_secret": "pi_3O9FE5JtRMxkXWc31mrb3S3n_secret_L7PfeOFYlkfgm2oVlnOjynci5",
+        "client_secret": "pi_3P6WJpJtRMxkXWc30iTVzT1b_secret_JP0J7m0Rf0OR79vzgMQ9laGqq",
         "confirmation_method": "automatic",
-        "created": 1699224929,
+        "created": 1713351985,
         "currency": "gbp",
         "description": null,
         "last_payment_error": null,
         "livemode": false,
         "next_action": null,
-        "payment_method": "pm_1O9FEGJtRMxkXWc31xhuJd9w",
-        "payment_method_configuration_details": null,
+        "payment_method": "pm_1P6ZCyJtRMxkXWc3LVG8dFEo",
+        "payment_method_configuration_details": {
+            "id": "pmc_1OmqPcJtRMxkXWc3fvO7wK4j",
+            "parent": null
+        },
         "payment_method_types": [
-            "card"
+            "card",
+            "link"
         ],
         "processing": null,
         "receipt_email": "nava.arul@gmail.com",
@@ -37,5 +41,5 @@
         "source": null,
         "status": "succeeded"
     },
-    "request_log_url": "https://dashboard.stripe.com/test/logs/req_aKoSBrOrbAK0hJ?t=1708628449"
+    "request_log_url": "https://dashboard.stripe.com/test/logs/req_8OBdqNVmO0i5Zs?t=1713365303"
 }

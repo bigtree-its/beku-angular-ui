@@ -32,11 +32,11 @@
         </div>
         <div class="flex-column p-2 mt-2" *ngIf="!showHomeScreen">
             <div class="flex-row jcsb aic  border-bottom py-1 mb-1">
-                <span class="bold fs-5">Your address</span>
+                <span class="bold fs-5">Delivery option</span>
                 <fa-icon *ngIf="!yourAddress" [icon]="faPlus" (click)="openCloseAddress()" class="btn-circle"></fa-icon>
                 <fa-icon *ngIf="yourAddress" [icon]="faMinus" (click)="openCloseAddress()" class="btn-circle"></fa-icon>
             </div>
-            <ng-template *ngIf="yourAddress" [ngTemplateOutlet]="address"></ng-template>
+            <ng-template *ngIf="yourAddress" [ngTemplateOutlet]="deliveryOption"></ng-template>
         </div>
     </div>
 
@@ -51,9 +51,9 @@
 
             <div *ngIf="!showHomeScreen" class="flex-column">
                 <ng-template [ngTemplateOutlet]="details"></ng-template>
-                <ng-template [ngTemplateOutlet]="address"></ng-template>
-                <button class="btn-arrow mt-1 d-flex jcc aic" (click)="placeOrder(stripeContent)">
-                    <span>I'm Ready to Pay</span>
+                <ng-template [ngTemplateOutlet]="deliveryOption"></ng-template>
+                <button *ngIf="canShowPlaceOrderButton()" class="btn-arrow mt-1 d-flex jcc aic" (click)="placeOrder(paymentForm)">
+                    <span>{{loading? 'Please wait...': "I'm Ready to Pay"}}</span>
                     <svg width="34" height="34" viewBox="0 0 74 74" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <circle cx="37" cy="37" r="35.5" stroke="black"
@@ -71,33 +71,13 @@
                     <span class="f-size-xl mt-4 bolder big-text">{{order?.reference}}</span>
                 </div>
             </div>
-            <div *ngIf="showStripeSection">
-                <div id="cardInfo" #cardInfo style="border: 1px solid var(--v-border);padding: 12px 5px;">
-                    <!--Stripe.js injects the Card Element-->
-                </div>
-                <div id="payment-element">
-                    <!--Stripe.js injects the Payment Element-->
-                </div>
-                <button id="paywithCardButton" [disabled]="!enablePayButton" class="n-button" (click)="confirmPayment()">Pay {{
-                    order?.subTotal| currency: 'GBP'}}</button>
-                <small class="text-muted">By selecting this button, you
-                    agree to the Terms of
-                    Sale.</small>
 
-                <div id="cardErrors" *ngIf="cardErrors">{{cardErrors}}</div>
-                <div id="payment-result-section" class="payment-result-section hidden">
-                    <span id="payment-message"></span>
-                </div>
-                <div class="my-5">
-                    <img src="/assets/icons/secure-stripe-payment-logo.png" class="stripe-logo" />
-                </div>
-            </div>
         </div>
     </div>
 
     <div class="sm footer flex-row p-2 jcc">
-        <button *ngIf="canShowPlaceOrderButton()" class="btn-arrow mt-1 d-flex jcc aic" (click)="placeOrder(stripeContent)">
-            <span>I'm Ready to Pay</span>
+        <button disabled="loading" *ngIf="canShowPlaceOrderButton()" class="btn-arrow mt-1 d-flex jcc aic" (click)="placeOrder(paymentForm)">
+            <span>{{loading? 'Please wait...': "I'm Ready to Pay"}}</span>
             <svg width="34" height="34" viewBox="0 0 74 74" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <circle cx="37" cy="37" r="35.5" stroke="black"
@@ -153,9 +133,9 @@
         </div>
     </div>
 </ng-template>
-<ng-template #address>
+<ng-template #deliveryOption>
     <div class="flex-column border br-7 p-2">
-        <div class="d-flex flex-grow  br-25 p-0_5" style=" background: #cfef00;">
+        <div *ngIf="chef.doDelivery" class="d-flex flex-grow  br-25 p-0_5" style=" background: #cfef00;">
             <button class="service-mode br-25" (click)="selectPickup()" [class.bg-white]="serviceMode==='COLLECTION'"><fa-icon
                     [icon]="faPersonBiking"
                     class="mr-1"></fa-icon>Collection</button>
@@ -163,7 +143,7 @@
                     [icon]="faBox"
                     class="mr-1"></fa-icon>Delivery</button>
         </div>
-        <div *ngIf="serviceMode === 'COLLECTION'" class="flex-column">
+        <div *ngIf="serviceMode === 'COLLECTION' || !chef.doDelivery" class="flex-column">
             <strong style="display: block;">Please collect
                 at</strong>
             <span style="display: block;">{{chef.address.addressLine1}}</span>
@@ -172,7 +152,7 @@
             <span style="display: block;">{{chef.address.postcode}}</span>
         </div>
         <div class="flex-column" *ngIf="chef.doDelivery  && serviceMode === 'DELIVERY'">
-            <strong>Where should we send your order?</strong>
+            <strong class="py-1">Where should we send your order?</strong>
             <div class="flex-row-space-between align-items-center" *ngIf="customerAddress !== null && customerAddress !== undefined && customerAddress.addressLine1 !== null && customerAddress.addressLine1 !== undefined &&  customerAddress.addressLine1.length > 0">
                 <div style=" padding: 1rem;display: flex;flex-direction: column;background-color: var(--light-background);flex-grow: 1;margin-right: 10px;">
                     <span *ngIf="customerAddress.addressLine1 !== undefined &&  customerAddress.addressLine1.length > 0">{{
@@ -248,15 +228,14 @@
     </div>
 </ng-template>
 
-<ng-template #stripeContent let-modal>
+<ng-template #paymentForm let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Secure Pay</h4>
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <app-stripeform [order]="order" [paymentIntentId]="order.paymentIntentId" [clientSecret]="order.clientSecret"></app-stripeform>
+        <app-payment-form [order]="order" [paymentIntentId]="order.paymentIntentId" [clientSecret]="order.clientSecret"></app-payment-form>
     </div>
-
 </ng-template>
 
 <ng-template #loadingStripe>

@@ -7,7 +7,6 @@ import { SharedModule } from '../shared';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { StripeformComponent } from '../payments/pages/stripeform/stripeform.component';
 import { OrderConfirmationComponent } from './pages/order-confirmation/order-confirmation.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PaymentsModule } from '../payments';

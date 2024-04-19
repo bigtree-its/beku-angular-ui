@@ -16,7 +16,7 @@
         <div class="flex-row jcsb aic">
             <span class="bold fs-5">Items</span>
             <fa-icon *ngIf="!openItems" [icon]="faPlus" (click)="openCloseItems()" class="btn-circle"></fa-icon>
-            <fa-icon *ngIf="openItems" [icon]="faMinus" (click)="openCloseItems()"  class="btn-circle"></fa-icon>
+            <fa-icon *ngIf="openItems" [icon]="faMinus" (click)="openCloseItems()" class="btn-circle"></fa-icon>
         </div>
         <ng-template *ngIf="openItems" [ngTemplateOutlet]="items"></ng-template>
     </div>
@@ -121,7 +121,7 @@
                         </div>
                         <div class="postcode-lookup-container" *ngIf="lookupAddress">
                             <input class="fb-input" type="text" name="postcode" id="postcode" tabindex="4" autocomplete="off" value [(ngModel)]="addressLookupPostcode" #ctrl="ngModel" placeholder="Enter your postcode">
-                            <button class="btn-navy btn-sm py-3" (click)="findAddress()" >Find</button>
+                            <button class="btn-navy btn-sm py-3" (click)="findAddress()">Find</button>
                         </div>
                         <div *ngIf="postcodeAddressList !== undefined && postcodeAddressList.length > 0 && !addressSelected">
                             <div style="border: 1px solid var(--light-border);overflow-y: auto;height: 100px;margin-top: 5px;padding: 5px;">
@@ -132,7 +132,7 @@
                             </div>
                         </div>
                     </div>
-    
+
                 </div>
 
                 <div *ngIf="showOrderConfirmation">
@@ -142,7 +142,7 @@
                         <span class="f-size-xl mt-4 bolder">{{order?.reference}}</span>
                     </div>
                 </div>
-                
+
                 <div *ngIf="!showOrderConfirmation" class="lg flex-row jcsb p-1 h-5 px-3 my-3">
                     <span *ngIf="showHomeScreen || showCustomerDetailsSection"></span>
                     <button type="button" *ngIf="!showHomeScreen && !showCustomerDetailsSection && !orderSubmitted" class="btn btn-dark btn-xs br-25" (click)="previous()" tabindex="4" style="float: left;min-width: 100px;">Previous</button>
@@ -163,7 +163,7 @@
                     <small class="text-muted">By selecting this button, you
                         agree to the Terms of
                         Sale.</small>
-    
+
                     <div id="cardErrors" *ngIf="cardErrors">{{cardErrors}}</div>
                     <div id="payment-result-section" class="payment-result-section hidden">
                         <span id="payment-message"></span>
@@ -172,7 +172,7 @@
                         <img src="/assets/icons/secure-stripe-payment-logo.png" class="stripe-logo" />
                     </div>
                 </div>
-               
+
                 <div *ngIf="loading" class="d-flex jcc aic p-3">
                     <div class="loader"></div>
                 </div>
@@ -219,7 +219,7 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <app-stripeform [order]="order" [paymentIntentId]="order.paymentIntentId" [clientSecret]="order.clientSecret"></app-stripeform>
+        <app-payment-form [order]="order" [paymentIntentId]="order.paymentIntentId" [clientSecret]="order.clientSecret"></app-payment-form>
     </div>
 
 </ng-template>

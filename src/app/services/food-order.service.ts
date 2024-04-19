@@ -49,7 +49,10 @@ export class FoodOrderService {
 
   updateStatus(orderTracking: OrderTracking) {
     this.http
-      .post<OrderTracking>(this.serviceLocator.FoodOrdersTrackingUrl, orderTracking)
+      .post<OrderTracking>(
+        this.serviceLocator.FoodOrdersTrackingUrl,
+        orderTracking
+      )
       .subscribe((e) => {
         console.log('Update status response. ' + JSON.stringify(e));
       });
@@ -63,7 +66,9 @@ export class FoodOrderService {
     // if (action !== null && action !== undefined) {
     //   params = params.set('action', action);
     // }
-    const params = new HttpParams({ fromString: 'ref=' + reference + "&action=" + action });
+    const params = new HttpParams({
+      fromString: 'ref=' + reference + '&action=' + action,
+    });
     // const options = params ? { params: params } : {};
     var url = this.serviceLocator.FoodOrdersUrl + '/action';
     console.log('Action on order ' + url + '. Params: ' + params);
@@ -76,9 +81,9 @@ export class FoodOrderService {
 
   saveOrder(order: FoodOrder): Observable<FoodOrder> {
     var params = new HttpParams();
-    params = params.set('action', "IntentToPay");
+    params = params.set('action', 'IntentToPay');
     return this.http
-      .post<FoodOrder>(this.serviceLocator.FoodOrdersUrl, order, {params})
+      .post<FoodOrder>(this.serviceLocator.FoodOrdersUrl, order, { params })
       .pipe(
         tap((result) => {
           this.setData(result);
@@ -101,7 +106,7 @@ export class FoodOrderService {
           console.log('Setting up supplier');
           this.changeSupplier();
           this.foodOrder.items = [];
-          this.foodOrder.status = "Draft";
+          this.foodOrder.status = 'Draft';
           this.calculateTotal();
         }
       }
@@ -123,7 +128,10 @@ export class FoodOrderService {
     };
   }
 
-  retrieveSingleOrder(reference: string, intent: string): Observable<FoodOrder[]> {
+  retrieveSingleOrder(
+    reference: string,
+    intent: string
+  ): Observable<FoodOrder[]> {
     var params = new HttpParams();
     if (reference !== null && reference !== undefined) {
       params = params.set('ref', reference);
@@ -158,7 +166,10 @@ export class FoodOrderService {
     );
   }
 
-  fetchPaymentIntent(ref: string, intent: string): Observable<PaymentIntentResponse[]> {
+  fetchPaymentIntent(
+    ref: string,
+    intent: string
+  ): Observable<PaymentIntentResponse[]> {
     var params = new HttpParams();
     if (ref !== null && ref !== undefined) {
       params = params.set('ref', ref);
@@ -166,7 +177,10 @@ export class FoodOrderService {
     if (intent !== null && intent !== undefined) {
       params = params.set('intent', intent);
     }
-    return this.http.get<PaymentIntentResponse[]>(this.serviceLocator.FoodOrdersPaymentIntentUrl, { params: params });
+    return this.http.get<PaymentIntentResponse[]>(
+      this.serviceLocator.FoodOrdersPaymentIntentUrl,
+      { params: params }
+    );
   }
 
   updateSinglePaymentIntent(
@@ -276,9 +290,7 @@ export class FoodOrderService {
     });
   }
 
-  getFoodOrders(
-    orderSearchQuery: OrderSearchQuery
-  ): Observable<FoodOrder[]> {
+  getFoodOrders(orderSearchQuery: OrderSearchQuery): Observable<FoodOrder[]> {
     console.log(
       'Retrieving food orders for ' + JSON.stringify(orderSearchQuery)
     );
@@ -310,10 +322,9 @@ export class FoodOrderService {
     if (orderSearchQuery.all) {
       params = params.set('all', 'true');
     }
-    return this.http.get<FoodOrder[]>(
-      this.serviceLocator.FoodOrdersUrl,
-      { params }
-    );
+    return this.http.get<FoodOrder[]>(this.serviceLocator.FoodOrdersUrl, {
+      params,
+    });
   }
 
   private getIPAddress() {
@@ -425,9 +436,9 @@ export class FoodOrderService {
     };
     console.log(
       'Creating payment intent: ' +
-      this.serviceLocator.FoodOrdersPaymentIntentUrl +
-      ', ' +
-      JSON.stringify(paymentIntentRequest)
+        this.serviceLocator.FoodOrdersPaymentIntentUrl +
+        ', ' +
+        JSON.stringify(paymentIntentRequest)
     );
     return this.http.post<PaymentIntentResponse>(
       this.serviceLocator.FoodOrdersPaymentIntentUrl,
@@ -440,9 +451,9 @@ export class FoodOrderService {
   ): Observable<PaymentIntentResponse> {
     console.log(
       'Creating payment intent: ' +
-      this.serviceLocator.FoodOrdersPaymentIntentUrl +
-      ', ' +
-      JSON.stringify(paymentIntentRequest)
+        this.serviceLocator.FoodOrdersPaymentIntentUrl +
+        ', ' +
+        JSON.stringify(paymentIntentRequest)
     );
     return this.http.post<PaymentIntentResponse>(
       this.serviceLocator.FoodOrdersPaymentIntentUrl,
@@ -458,7 +469,7 @@ export class FoodOrderService {
 
     this.foodOrder = {
       id: '',
-      status: "Draft",
+      status: 'Draft',
       items: [],
       supplier: {
         _id: this.supplier?._id,
@@ -509,9 +520,7 @@ export class FoodOrderService {
       serviceMode: 'COLLECTION',
       notes: '',
     };
-    console.log(
-      'Created a brand new Order ' + JSON.stringify(this.foodOrder)
-    );
+    console.log('Created a brand new Order ' + JSON.stringify(this.foodOrder));
   }
 
   getDeliveryFee(): number {
@@ -530,20 +539,15 @@ export class FoodOrderService {
     return packagingFee;
   }
 
-  updateOrder(
-    orderUpdateRequest: OrderUpdateRequest
-  ): Observable<FoodOrder> {
+  updateOrder(orderUpdateRequest: OrderUpdateRequest): Observable<FoodOrder> {
     console.log(
       'Updating Order: ' +
-      this.serviceLocator.FoodOrdersUrl +
-      ', ' +
-      JSON.stringify(orderUpdateRequest)
+        this.serviceLocator.FoodOrdersUrl +
+        ', ' +
+        JSON.stringify(orderUpdateRequest)
     );
     return this.http
-      .put<FoodOrder>(
-        this.serviceLocator.FoodOrdersUrl,
-        orderUpdateRequest
-      )
+      .put<FoodOrder>(this.serviceLocator.FoodOrdersUrl, orderUpdateRequest)
       .pipe(
         tap((result) => {
           console.log('Order update response ' + JSON.stringify(result));
@@ -554,9 +558,9 @@ export class FoodOrderService {
   placeOrder(FoodOrder: FoodOrder): Observable<FoodOrder> {
     console.log(
       'Placing an order for LocalChef : ' +
-      this.serviceLocator.FoodOrdersUrl +
-      ', ' +
-      JSON.stringify(FoodOrder)
+        this.serviceLocator.FoodOrdersUrl +
+        ', ' +
+        JSON.stringify(FoodOrder)
     );
     return this.http.post<FoodOrder>(
       this.serviceLocator.FoodOrdersUrl,

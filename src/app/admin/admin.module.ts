@@ -8,6 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { OrderByDatePipe } from '../pipes/order-by-date.pipe';
 import { ManageOrderComponent } from './pages/manage-order/manage-order.component';
+import { SharedModule } from '../shared';
+import { PaymentsModule } from '../payments';
 
 const routes: Routes = [
   { path: 'my_orders', component: MyOrdersComponent },
@@ -27,9 +29,10 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    PaymentsModule,
     FormsModule,
-    FontAwesomeModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
     RouterModule.forChild(routes)
   ]
 })

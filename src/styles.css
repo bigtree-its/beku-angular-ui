@@ -30,6 +30,16 @@
     --light: #f8f9fa;
     --dark: #343a40;
     --border: #22306d;
+    --color-white: #fff;
+    --color-black: #333;
+    --color-gray: #75787b;
+    --color-gray-light: #bbb;
+    --color-gray-disabled: #e8e8e8;
+    --color-green: #53a318;
+    --color-green-dark: #383;
+    --font-size-small: .75rem;
+    --font-size-default: .875rem;
+    --brand-color: #deff08;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -130,6 +140,35 @@ body {
     border: none;
     z-index: 9999999;
     border-radius: 0;
+}
+
+.scroll-container {
+    min-width: 415px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0;
+}
+
+.scroll-right,
+.scroll-left {
+    margin: 10px;
+    height: 30px;
+    width: 30px;
+    align-items: center;
+    padding: 10px;
+    background-color: transparent;
+}
+
+.scroll-right:hover {
+    cursor: pointer;
+    background-color: #f2f2f2;
+}
+
+.scroll-left:hover {
+    cursor: pointer;
+    background-color: #f2f2f2;
 }
 
 .hero-phrase {
@@ -455,19 +494,18 @@ tr:nth-child(odd) {
 }
 
 .open {
-    color: #08de9e;
-    background-color: #000;
-    padding: 6px 20px;
-    font-family: "Bebas Neue", sans-serif;
-    font-size: 20px;
+    background-color: #2fad35;
+    color: #000;
+    border-radius: 4px;
+    color: #fff;
+    padding: 0px 20px;
 }
 
 .closed {
-    color: #E50914;
-    font-size: 20px;
-    background-color: #000;
-    padding: 6px 20px;
-    font-family: "Bebas Neue", sans-serif;
+    background-color: #E50914;
+    border-radius: 7px;
+    color: #fff;
+    padding: 0px 20px;
 }
 
 .big-text {
@@ -1114,12 +1152,38 @@ select {
     width: 24px;
 }
 
-.btn-circle {
-    padding: 10px 13px;
+.btn-circle,
+.btn-circle-g,
+.btn-circle-d {
+    height: 30px;
+    width: 30px;
     border: 1px solid #f1f1f1;
     border-radius: 50%;
-    background-color: #f3f3f3;
-    opacity: 0.5;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-circle-g {
+    border: 1px solid #08de9e;
+}
+
+.btn-circle-d {
+    border: 1px solid rgb(230, 76, 76);
+}
+
+.btn-circle-g:hover {
+    cursor: pointer;
+    opacity: 1.0;
+    background-color: #08de9e;
+}
+
+.btn-circle-d:hover {
+    cursor: pointer;
+    opacity: 1.0;
+    color: #fff;
+    background-color: rgb(230, 76, 76);
 }
 
 .btn-circle:hover {

@@ -16,6 +16,7 @@ import { AuthGuard } from '../services/auth-guard.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { PaymentFormComponent } from './pages/payment-form/payment-form.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -35,6 +36,7 @@ const routes: Routes = [
     WriteReviewComponent,
     AboutUsComponent,
     ConfirmationDialogComponent,
+    PaymentFormComponent,
   ],
   imports: [
     NgbToastModule,
@@ -50,6 +52,7 @@ const routes: Routes = [
     HeaderComponent,
     FooterComponent,
     OrderItemComponent,
+    PaymentFormComponent,
     ReviewItemComponent,
   ]
 })

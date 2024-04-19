@@ -5,7 +5,7 @@
                 <div *ngIf="viewOrder" class="arrow-icon-div" (click)="goBack()">
                     <fa-icon [icon]="faArrowLeft"></fa-icon>
                 </div>
-                <span class="py-2 f-size-lg bolder">{{viewOrder?
+                <span class="py-2 fs-1 big-text">{{viewOrder?
                     viewOrder.reference: 'My Orders'}}</span>
             </div>
             <span class="color-red f-size-md bold" *ngIf="viewOrder">{{viewOrder.total | currency: 'GBP'}}</span>
@@ -30,31 +30,74 @@
         <div class="flex-column" *ngIf="viewOrder">
 
             <div class="bg-light p-3 my-2">
-                <span class="bolder f-size-md">Order Summary</span>
+                <span class="bolder fs-7">Order Summary</span>
                 <div class="flex-row py-2 align-items-center">
-                    <span *ngIf="!loading" class="bold">{{viewOrder.status | titlecase}}</span>
+                    <span *ngIf="!loading" class="bold fs-3 big-text">{{viewOrder.status |
+                        titlecase}}</span>
                     <div *ngIf="loading" class="d-flex jcc aic p-3">
                         <div class="loader"></div>
                     </div>
-                    <button class=" btn-secondary ml-2 " *ngIf="viewOrder?.status==='Draft' " (click)="submit()">Submit</button>
-                    <button class=" btn-danger ml-2 " *ngIf="viewOrder?.status==='Draft' " (click)="delete()">Delete</button>
-                    <button class=" btn-danger ml-2 " *ngIf="viewOrder?.status==='Pending' " (click)="cancel()">Cancel</button>
-                    <button class=" btn-danger ml-2 " *ngIf="viewOrder?.status==='Cancelled' " (click)="delete()">Delete</button>
-                    <button class=" btn-secondary ml-2 " *ngIf="viewOrder?.status==='Accepted' " (click)="pay()">Make Payment</button>
+                    <button class=" btn-secondary ml-2 " *ngIf="viewOrder?.status==='Draft' " (click)="makePayment(paymentForm)">Pay</button>
+                    <button class=" btn-danger ml-2 " *ngIf="viewOrder?.status==='Draft' " (click)="cancel()">Cancel</button>
+                </div>
+
+                <div class="progress_container">
+                    <div class="progress" id="progress"></div>
+                    <div class="flex-column jcc aic">
+                        <div class="circle mt-3" [class.active]="viewOrder?.status === 'Draft' || viewOrder?.status === 'Paid' || viewOrder?.status === 'Collected' || viewOrder?.status === 'Delivered' || viewOrder?.status === 'Ready'"></div>
+                        <span>New</span>
+                    </div>
+                    <div class="flex-column  jcc aic">
+                        <div class="circle mt-3" [class.active]="viewOrder?.status === 'Paid' || viewOrder?.status === 'Collected' || viewOrder?.status === 'Delivered' || viewOrder?.status === 'Ready'"></div>
+                        <span>In Progress</span>
+                    </div>
+                    <div class="flex-column  jcc aic">
+                        <div class="circle mt-3" [class.active]="viewOrder?.status === 'Ready'"></div>
+                        <span>Ready</span>
+                    </div>
+                    <div class="flex-column  jcc aie">
+                        <div class="circle mt-3" [class.active]="viewOrder?.status === 'Collected' || viewOrder?.status === 'Delivered'"></div>
+                        <span>Completed</span>
+                    </div>
                 </div>
             </div>
-            <ng-container *ngIf="showOrder" [ngTemplateOutlet]="orderLayout"></ng-container>
-            <div class="flex-row-space-between border-bottom py-3">
-                <span class="bold f-size-lg ">Your Chef</span>
-                <fa-icon class="collapsible-icon" *ngIf="!showSupplier" [icon]="faPlus" (click)="openCloseSupplier()"></fa-icon>
-                <fa-icon class="collapsible-icon" *ngIf="showSupplier" [icon]="faMinus" (click)="openCloseSupplier()"></fa-icon>
+            <!-- <ng-container *ngIf="showOrder" [ngTemplateOutlet]="orderLayout"></ng-container> -->
+            <div class="flex-column border p-2 br-7">
+                <span class="bolder py-2">{{viewOrder.serviceMode === 'DELIVERY'? 'Delivery Address': 'Collection Address'}}</span>
+                <span [routerLink]="[ '/f/chef', supplier?._id] " style="font-size: 15px;cursor: pointer;color:coral;" class="bold py-1" *ngIf="viewOrder.serviceMode === 'COLLECTION'">{{supplier.kitchenName}}</span>
+                <div class="flex-row" *ngIf="viewOrder.serviceMode === 'DELIVERY'">
+                    <span>{{viewOrder.customer.address.addressLine1}},</span>
+                    <span>{{viewOrder.customer.address.addressLine2}}</span>
+                </div>
+                <div class="flex-row" *ngIf="viewOrder.serviceMode === 'DELIVERY'">
+                    <span>{{viewOrder.customer.address.city}}, </span>
+                    <span class="pl-1">{{viewOrder.customer.address.postcode}}</span>
+                </div>
+                <div class="flex-row" *ngIf="viewOrder.serviceMode === 'COLLECTION'">
+                    <span>{{supplier.address.addressLine1}},</span>
+                    <span>{{supplier.address.addressLine2}}</span>
+                </div>
+                <div class="flex-row" *ngIf="viewOrder.serviceMode === 'COLLECTION'">
+                    <span>{{supplier.address.city}}, </span>
+                    <span class="pl-1">{{supplier.address.postcode}}</span>
+                </div>
             </div>
-            <ng-container *ngIf="showSupplier" [ngTemplateOutlet]="supplierLayout"></ng-container>
-
+            <div class="flex-column border p-2 br-7 my-1" *ngIf="viewOrder.serviceMode === 'DELIVERY'">
+                <span class="bolder py-2">Order prepared by</span>
+                <span [routerLink]="[ '/f/chef', supplier?._id] " style="font-size: 15px;cursor: pointer;color:coral;" class="bold py-1">{{supplier?.kitchenName}}</span>
+                <div class="flex-row">
+                    <span>{{supplier.address.addressLine1}},</span>
+                    <span>{{supplier.address.addressLine2}}</span>
+                </div>
+                <div class="flex-row">
+                    <span>{{supplier.address.city}}, </span>
+                    <span>{{supplier.address.postcode}}</span>
+                </div>
+            </div>
             <div class="flex-row-space-between border-bottom py-3">
                 <span class="bold f-size-lg ">Your Items</span>
-                <fa-icon class="collapsible-icon" *ngIf="!showItems" [icon]="faPlus" (click)="openCloseItems()"></fa-icon>
-                <fa-icon class="collapsible-icon" *ngIf="showItems" [icon]="faMinus" (click)="openCloseItems()"></fa-icon>
+                <fa-icon class="btn-circle" *ngIf="!showItems" [icon]="faPlus" (click)="openCloseItems()"></fa-icon>
+                <fa-icon class="btn-circle" *ngIf="showItems" [icon]="faMinus" (click)="openCloseItems()"></fa-icon>
             </div>
             <ng-container *ngIf="showItems" [ngTemplateOutlet]="itemsLayout"></ng-container>
             <div class="bg-light p-3 my-2">
@@ -62,23 +105,28 @@
                     <div style=" display: flex; flex-direction: column;width: 100%;padding: 5px 30px;">
                         <div class="flex-row-space-between">
                             <span>Subtotal</span>
-                            <span>{{viewOrder?.subTotal | currency: 'GBP'}}</span>
+                            <span>{{viewOrder?.subTotal | currency:
+                                'GBP'}}</span>
                         </div>
                         <div class="flex-row-space-between">
                             <span>Delivery fee</span>
-                            <span>{{viewOrder?.deliveryFee | currency: 'GBP'}}</span>
+                            <span>{{viewOrder?.deliveryFee | currency:
+                                'GBP'}}</span>
                         </div>
                         <div class="flex-row-space-between">
                             <span>Packing fee</span>
-                            <span>{{viewOrder?.packingFee | currency: 'GBP'}}</span>
+                            <span>{{viewOrder?.packingFee | currency:
+                                'GBP'}}</span>
                         </div>
                         <div class="flex-row-space-between">
                             <span>Service Fee</span>
-                            <span>{{viewOrder?.serviceFee | currency: 'GBP'}}</span>
+                            <span>{{viewOrder?.serviceFee | currency:
+                                'GBP'}}</span>
                         </div>
                         <div class="flex-row-space-between" style="margin-top: 10px;">
                             <span style="font-weight: 900;">TOTAL</span>
-                            <span style="font-weight: 900;">{{viewOrder?.total | currency:
+                            <span style="font-weight: 900;">{{viewOrder?.total |
+                                currency:
                                 'GBP'}}</span>
                         </div>
                     </div>
@@ -93,7 +141,7 @@
 <ng-template #supplierLayout>
     <div class="flex-row py-2">
         <div style="height: 200px;width: 170px;">
-            <img src="/assets/images/chefs/{{supplier?._id}}/cover-photo.jpg" style="object-fit: cover;
+            <img src="{{supplier.image}}" style="object-fit: cover;
             max-height: 198px;
             height: 198px;
             width: 170px;
@@ -133,7 +181,8 @@
                 <span class="attribute">Collection Only</span>
             </div>
             <div class="flex-row">
-                <button class="btn-red" [routerLink]="[ '/cooks', supplier?._id] ">Order Again</button>
+                <button class="btn-red" [routerLink]="[ '/cooks', supplier?._id] ">Order
+                    Again</button>
             </div>
 
         </div>
@@ -170,4 +219,14 @@
             <td>{{item.subTotal | currency: 'GBP'}}</td>
         </tr>
     </table>
+</ng-template>
+
+<ng-template #paymentForm let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Secure Pay</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <app-payment-form [order]="viewOrder" [paymentIntentId]="viewOrder?.paymentIntentId" [clientSecret]="viewOrder?.clientSecret"></app-payment-form>
+    </div>
 </ng-template>

@@ -3,10 +3,9 @@ import { CommonModule } from '@angular/common';
 import { MakePaymentComponent } from './pages/make-payment/make-payment.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule, Routes } from '@angular/router';
-import { StripeformComponent } from './pages';
-import { SharedModule } from '../shared';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import { PaymentFormComponent } from './pages';
 
 const routes: Routes = [
   { path: 'make_payment', component: MakePaymentComponent }
@@ -15,12 +14,11 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     MakePaymentComponent,
-    StripeformComponent
+    PaymentFormComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
-    SharedModule,
     FormsModule,
     ReactiveFormsModule,
     NgbAccordionModule,
@@ -28,7 +26,7 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   exports: [
-    StripeformComponent
+    PaymentFormComponent
   ]
 })
 export class PaymentsModule { }

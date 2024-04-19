@@ -11,7 +11,6 @@ import { FoodBasketComponent } from './pages/food-basket/food-basket.component';
 import { FoodCheckoutComponent } from './pages/food-checkout/food-checkout.component';
 import { FoodOrderConfirmationComponent } from './pages/food-order-confirmation/food-order-confirmation.component';
 import { SharedModule } from '../shared';
-import { PaymentsModule } from '../payments';
 
 const routes: Routes = [
   { path: 'f/home', component: FoodsHomeComponent },
@@ -19,6 +18,7 @@ const routes: Routes = [
   { path: 'f/chef/:id', component: ChefHomeComponent },
   { path: 'f/basket', component: FoodBasketComponent },
   { path: 'f/checkout', component: FoodCheckoutComponent },
+  { path: 'f/confirmation', component: FoodOrderConfirmationComponent },
 ]
 
 @NgModule({
@@ -34,7 +34,6 @@ const routes: Routes = [
   imports: [
     CommonModule,
     SharedModule,
-    PaymentsModule,
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,

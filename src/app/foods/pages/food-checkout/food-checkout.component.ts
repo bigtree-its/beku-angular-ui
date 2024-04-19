@@ -35,15 +35,6 @@ import { ToastService } from 'src/app/services/toast.service';
   styleUrls: ['./food-checkout.component.css'],
 })
 export class FoodCheckoutComponent implements OnDestroy {
-  @ViewChild('stripeContent', { read: ElementRef })
-  public stripeContent: ElementRef<any>;
-  @ViewChild('cardInfo', { read: ElementRef }) public cardInfo: ElementRef<any>;
-  @ViewChild('#payment-element', { read: ElementRef })
-  public paymentOptions: ElementRef<any>;
-  @ViewChild('cardErrors', { read: ElementRef })
-  public cardErrors: ElementRef<any>;
-  @ViewChild('payment-message', { read: ElementRef })
-  public paymentMessage: ElementRef<any>;
 
   faPersonBiking = faPersonBiking;
   faBox = faBox;
@@ -104,7 +95,6 @@ export class FoodCheckoutComponent implements OnDestroy {
     private orderService: FoodOrderService,
     private chefService: ChefService,
     private accountService: AccountService,
-    private toastService: ToastService,
     private router: Router,
     private titleService: Title
   ) { }
@@ -112,6 +102,7 @@ export class FoodCheckoutComponent implements OnDestroy {
   public loadStripe$: Observable<any> = this.stripeService.LoadStripe();
 
   ngOnInit(): void {
+    this.loading = false;
     this.titleService.setTitle("Checkout")
     this.loadStripe$.subscribe((s) => {
       console.log('Loaded stripe: ' + s);
@@ -174,7 +165,8 @@ export class FoodCheckoutComponent implements OnDestroy {
   }
 
   extractOrder(theOrder: FoodOrder) {
-    if (Utils.isValid(theOrder) && theOrder.status === 'Completed') {
+    console.log('Order status '+ theOrder.status)
+    if (Utils.isValid(theOrder) && (theOrder.status === 'Completed' || theOrder.status === 'Paid')) {
       return;
     }
     this.order = theOrder;
@@ -201,95 +193,17 @@ export class FoodCheckoutComponent implements OnDestroy {
     }
   }
   ngAfterViewInit(): void {
-    if (this.stripeService.stripe === undefined) {
-      this.stripeService.getStripe().subscribe((s) => {
-        console.log(
-          'Initializing Stripe card element inside form: ' +
-          JSON.stringify(this.stripeService.stripe)
-        );
-      });
-    }
+    // if (this.stripeService.stripe === undefined) {
+    //   this.stripeService.getStripe().subscribe((s) => {
+    //     console.log(
+    //       'Initializing Stripe card element inside form: ' +
+    //       JSON.stringify(this.stripeService.stripe)
+    //     );
+    //   });
+    // }
   }
 
-  previous() {
-    if (this.showCustomerDetailsSection) {
-      this.divHeader = '';
-      this.nextButtonText = 'Next';
-    } else if (this.showServiceModeSection) {
-      this.showCustomerDetailsSection = true;
-      this.showServiceModeSection = false;
-      this.showItemsSection = false;
-      this.showPaymentSection = false;
-      this.showStripeSection = false;
-      this.showPlaceOrderButton = false;
-      this.showOrderConfirmation = false;
-      this.divHeader = 'Your Details';
-      this.nextButtonText = 'Next';
-    } else if (this.showItemsSection) {
-      this.showCustomerDetailsSection = false;
-      this.showServiceModeSection = true;
-      this.showItemsSection = false;
-      this.showPaymentSection = false;
-      this.showStripeSection = false;
-      this.showPlaceOrderButton = false;
-      this.showOrderConfirmation = false;
-      this.divHeader = 'Choose service mode';
-      this.nextButtonText = 'Next';
-    } else if (this.showPaymentSection) {
-      this.showCustomerDetailsSection = false;
-      this.showServiceModeSection = false;
-      this.showItemsSection = true;
-      this.showPaymentSection = false;
-      this.showStripeSection = false;
-      this.showPlaceOrderButton = false;
-      this.showOrderConfirmation = false;
-      this.divHeader = 'Review Your Items';
-      this.nextButtonText = 'Next';
-    } else if (this.showStripeSection) {
-      this.showCustomerDetailsSection = false;
-      this.showServiceModeSection = false;
-      this.showItemsSection = false;
-      this.showPaymentSection = true;
-      this.showStripeSection = false;
-      this.showOrderConfirmation = false;
-    }
-  }
-
-  next() {
-    if (this.showCustomerDetailsSection && this.validateCustomerDetails()) {
-      this.showCustomerDetailsSection = false;
-      this.showServiceModeSection = true;
-      this.showItemsSection = false;
-      this.showPaymentSection = false;
-      this.showStripeSection = false;
-      this.showPlaceOrderButton = false;
-      this.showOrderConfirmation = false;
-      this.divHeader = 'Choose service mode';
-      this.nextButtonText = 'Next';
-    } else if (this.showServiceModeSection && this.validateServiceMode()) {
-      this.showCustomerDetailsSection = false;
-      this.showServiceModeSection = false;
-      this.showItemsSection = true;
-      this.showPaymentSection = false;
-      this.showStripeSection = false;
-      this.showPlaceOrderButton = false;
-      this.showOrderConfirmation = false;
-      this.divHeader = 'Review Your Items';
-      this.nextButtonText = 'Next';
-    } else if (this.showItemsSection) {
-      this.showCustomerDetailsSection = false;
-      this.showServiceModeSection = false;
-      this.showItemsSection = false;
-      this.showPaymentSection = true;
-      this.showStripeSection = false;
-      this.showPlaceOrderButton = true;
-      this.showOrderConfirmation = false;
-      this.divHeader = 'You Pay';
-      this.nextButtonText = 'Proceed to Pay';
-    } else if (this.showPaymentSection) {
-      return;
-    }
-  }
+ 
 
   validateCustomerDetails(): boolean {
     if (
@@ -328,8 +242,8 @@ export class FoodCheckoutComponent implements OnDestroy {
     this.orderService.saveOrder(this.order).subscribe((e) => {
       this.orderSubmitted = true;
       this.order = e;
-      this.loading = false;
-      this.orderConfirmed();
+      // this.loading = false;
+      // this.orderConfirmed();
       console.log('Saved order '+ JSON.stringify(e))
       if (content) {
         this.open(content);
@@ -345,53 +259,8 @@ export class FoodCheckoutComponent implements OnDestroy {
     this.showOrderConfirmation = true;
   }
 
-  private createCardElement() {
-    const style = {
-      base: {
-        color: '#303238',
-        fontSize: '16px',
-        border: '1px solid var(--v-border)',
-        fontFamily: '"Open Sans", sans-serif',
-        fontSmoothing: 'antialiased',
-        '::placeholder': {
-          color: '#CFD7DF',
-        },
-      },
-      invalid: {
-        color: '#e5424d',
-        ':focus': {
-          color: '#303238',
-        },
-      },
-    };
-
-    this.cardElement = this.stripeElements.create('card', style);
-    this.cardElement.mount(this.cardInfo.nativeElement);
-    this.cardElement.addEventListener('change', (result: any) => {
-      this.enablePayButton = result.complete ? true : false;
-      this.cardErrors = result.error && result.error.message;
-    });
-  }
-
-  createPaymentOptions() {
-    const paymentElementOptions = {
-      layout: 'tabs',
-    };
-
-    const paymentElement = this.stripeElements.create(
-      'payment',
-      paymentElementOptions
-    );
-    paymentElement.mount(this.paymentOptions.nativeElement);
-  }
 
   ngOnDestroy() {
-    if (this.cardElement) {
-      this.cardElement.removeEventListener('change', (result: any) => {
-        this.cardErrors = result.error && result.error.message;
-        this.cardElement.destroy();
-      });
-    }
     this.destroy$.next();
     this.destroy$.complete();
   }
@@ -522,35 +391,6 @@ export class FoodCheckoutComponent implements OnDestroy {
     this.modalService.dismissAll();
   }
 
-  async confirmPayment() {
-    // e.preventDefault();
-    // setLoading(true);
-    const elements = this.stripeElements;
-    const { error } = await this.stripeService.stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        // Make sure to change this to your payment completion page
-        return_url:
-          'http://localhost:5200/order-confirmation/' + this.order.reference,
-        receipt_email: 'nava.arul@gmail.com',
-      },
-    });
-
-    // This point will only be reached if there is an immediate error when
-    // confirming the payment. Otherwise, your customer will be redirected to
-    // your `return_url`. For some payment methods like iDEAL, your customer will
-    // be redirected to an intermediate site first to authorize the payment, then
-    // redirected to the `return_url`.
-    this.cardErrors = error && error.message;
-    // if (error.type === "card_error" || error.type === "validation_error") {
-    //   this.cardErrors = error && error.message;
-    // } else {
-    //   this.cardErrors = "An unexpected error occurred.";
-    //   showMessage("An unexpected error occurred.");
-    // }
-
-    // setLoading(false);
-  }
 
   goback() {
     this._location.back();
