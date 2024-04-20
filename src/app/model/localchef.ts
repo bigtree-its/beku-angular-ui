@@ -161,12 +161,8 @@ export interface Calendar {
     _id: string;
     chefId: string;
     description: string[];
-    orderBefore: Date;
-    menus: Menu[];
-    collectionStartDate: Date;
-    collectionEndDate: Date;
-    deliveryStartDate: Date;
-    deliveryEndDate: Date;
+    date: Date;
+    foods: Menu[];
 }
 
 export interface LocalChefSearchQuery {

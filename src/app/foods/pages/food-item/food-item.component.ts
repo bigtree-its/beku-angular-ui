@@ -22,7 +22,7 @@ export class FoodItemComponent {
   selectedchoice?: Extra;
   selectedExtras: Extra[] = [];
   quantity: number = 1;
-  orderByDate: Day;
+  orderByDate: Date;
 
   faPlus = faPlus;
   faMinus = faMinus;
@@ -38,6 +38,13 @@ export class FoodItemComponent {
 
   ngOnInit() {
     this.price = this.menu.price;
+    if ( this.orderBy){
+      // this.orderByDate = this.orderBy.getTimezoneOffset
+    }
+  }
+
+  addDays(theDate: Date, days: number): Date {
+    return new Date(theDate.getTime() + days * 24 * 60 * 60 * 1000);
   }
 
   open(content) {

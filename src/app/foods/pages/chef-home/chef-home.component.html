@@ -220,20 +220,29 @@
             <fa-icon [icon]="faArrowLeft"></fa-icon>
         </div>
         <div #widgetsContent style="display: flex;width: 415px;padding: 10px;overflow-x: hidden;white-space: nowrap;">
-            <span *ngFor="let c of collections" class="select-span" (click)="onSelectCategory(c)" [class.selectedSpan]="isSelectedCategory(c)">{{c.name}}</span>
+            <span *ngFor="let c of collections" class="select-span" (click)="onSelectCategory(c)" [class.selectedCal]="c.name === selectedCategory.name">{{c.name}}</span>
         </div>
         <div class="arrow-icon-div" (click)="scrollRight()">
             <fa-icon [icon]="faArrowRight"></fa-icon>
         </div>
     </div>
-    <div *ngIf="items_to_display !== null && items_to_display !== undefined &&  items_to_display.length > 0; then ItemsInCategory else NoItemsInCategory">
-    </div>
 
-    <div *ngIf="displayCal && calendarsToDisplay !== null && calendarsToDisplay !== undefined && calendarsToDisplay.length > 0">
-        <div *ngFor="let calendar of calendarsToDisplay;  let i = index">
-            <div *ngIf="calendar.menus !== null && calendar.menus !== undefined" class="thisweek">
-                <app-food-item *ngFor="let menu of calendar.menus" [menu]="menu" [orderBy]="calendar.orderBefore" [displayDescription]="false"></app-food-item>
+    <div *ngIf="!displayCal">
+        <div *ngIf="items_to_display !== null && items_to_display !== undefined &&  items_to_display.length > 0; then ItemsInCategory else NoItemsInCategory">
+        </div>
+    </div>
+    
+    <div *ngIf="displayCal && calendars" class="flex-column">
+
+        <div class="flex-row jcc aic">
+            <div [class.selectedCal]="calendar.date === calendarToDisplay.date" class="flex-column jcc aic btn-circle mx-2 p-4" *ngFor="let calendar of calendars;" (click)="selectCalendar(calendar)">
+                <span class="bold">{{calendar.date| date: 'E':'EST'}}</span>
+                <span class="bold">{{calendar.date| date: 'd':'EST'}}</span>
             </div>
+        </div>
+        
+        <div *ngIf="calendarToDisplay" class="flex-column" >
+            <app-food-item *ngFor="let food of calendarToDisplay.foods" [menu]="food" [displayDescription]="true" [orderBy]="calendarToDisplay.date | dateCalc : '':'':'':0 " ></app-food-item>
         </div>
     </div>
 </ng-template>

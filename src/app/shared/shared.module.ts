@@ -11,6 +11,7 @@ import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontaweso
 import { faCopyright, fas } from '@fortawesome/free-solid-svg-icons';
 import { ReviewItemComponent } from './pages/review-item/review-item.component';
 import { DateAgoPipe } from '../pipes/date-ago.pipe';
+import { DateCalcPipe } from '../pipes/date-ago.pipe';
 import { WriteReviewComponent } from './pages/write-review/write-review.component';
 import { AuthGuard } from '../services/auth-guard.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';

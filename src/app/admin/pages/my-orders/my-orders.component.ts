@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   faArrowLeft,
+  faChevronDown,
+  faChevronUp,
   faFaceSmile,
   faMinus,
   faPeopleArrows,
@@ -46,8 +48,8 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
   faStar = faStar;
   faPeopleArrows = faPeopleArrows;
   faFaceSmile = faFaceSmile;
-  faPlus = faPlus;
-  faMinus = faMinus;
+  chevronDown = faChevronDown;
+  chevronUp = faChevronUp;
 
   
   openSupplier: boolean = true;

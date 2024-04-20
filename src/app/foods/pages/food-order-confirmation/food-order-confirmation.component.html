@@ -2,13 +2,32 @@
     <div class="d-flex jcsb aic">
         <span class="a-page-header">Order Confirmation</span>
         <div>
+
             <strong *ngIf="order" class="f-size-lg color-red bolder">{{order?.total|
                 currency:
                 'GBP'}}</strong>
         </div>
     </div>
 
-    <div class="row">
+    <div class="flex-column jcc aic" *ngIf="loading">
+        <section class="equalizer-container" >
+            <div class="equalizer" style="--i:0">
+            </div>
+            <div class="equalizer" style="--i:1">
+            </div>
+            <div class="equalizer" style="--i:2">
+            </div>
+            <div class="equalizer" style="--i:3">
+            </div>
+            <div class="equalizer" style="--i:4">
+            </div>
+        </section>
+        <span class="py-2 fs-4">Please wait while we confirm your order</span>
+    </div>
+    
+
+
+    <div class="row" *ngIf="!loading">
         <div class="col-md-6">
             <app-order-item *ngFor="let item of order?.items" [item]="item" [editable]=false></app-order-item>
             <ng-template [ngTemplateOutlet]="summary"></ng-template>
@@ -17,17 +36,21 @@
             <div class="flex-column" *ngIf="order">
                 <div class="bg-light p-3 my-2">
                     <div class="flex-row aic">
-                        <span class="bolder fs-6">Your Order</span>
+                        <span class="bolder fs-5">Your Order</span>
                         <span class="bolder fs-3 big-text ml-3">{{order.reference}}</span>
                     </div>
                     <div class="progress_container">
                         <div class="progress" id="progress"></div>
                         <div class="flex-column jcc aic">
-                            <div class="circle mt-3" [class.active]="order?.status === 'Draft' || order?.status === 'Paid' || order?.status === 'Collected' || order?.status === 'Delivered' || order?.status === 'Ready'"></div>
+                            <div class="circle mt-3"
+                                [class.active]="order?.status === 'Draft' || order?.status === 'Paid' || order?.status === 'Collected' || order?.status === 'Delivered' || order?.status === 'Ready'">
+                            </div>
                             <span>New</span>
                         </div>
                         <div class="flex-column  jcc aic">
-                            <div class="circle mt-3" [class.active]="order?.status === 'Paid' || order?.status === 'Collected' || order?.status === 'Delivered' || order?.status === 'Ready'"></div>
+                            <div class="circle mt-3"
+                                [class.active]="order?.status === 'Paid' || order?.status === 'Collected' || order?.status === 'Delivered' || order?.status === 'Ready'">
+                            </div>
                             <span>In Progress</span>
                         </div>
                         <div class="flex-column  jcc aic">
@@ -35,15 +58,24 @@
                             <span>Ready</span>
                         </div>
                         <div class="flex-column  jcc aie">
-                            <div class="circle mt-3" [class.active]="order?.status === 'Collected' || order?.status === 'Delivered'"></div>
+                            <div class="circle mt-3"
+                                [class.active]="order?.status === 'Collected' || order?.status === 'Delivered'"></div>
                             <span>Completed</span>
                         </div>
                     </div>
                 </div>
+                <div class="flex-column p-4 bg-light my-3 jcc aic fs-6 bold">
+                    <span>You will be notified once your order is ready to be {{order.serviceMode === 'DELIVERY'?
+                        'Delivered':'Collected'}}</span>
+                    <span class="fs-6 py-2">You can also track your order at <a href="/my_orders">Orders</a></span>
+                </div>
                 <!-- <ng-container *ngIf="showOrder" [ngTemplateOutlet]="orderLayout"></ng-container> -->
                 <div class="flex-column border p-2 br-7">
-                    <span class="bolder py-2">{{order.serviceMode === 'DELIVERY'? 'Delivery Address': 'Collection Address'}}</span>
-                    <span [routerLink]="[ '/f/chef', supplier?._id] " style="font-size: 15px;cursor: pointer;color:coral;" class="bold py-1" *ngIf="order.serviceMode === 'COLLECTION'">{{supplier.name}}</span>
+                    <span class="bolder py-2">{{order.serviceMode === 'DELIVERY'? 'Delivery Address': 'Collection
+                        Address'}}</span>
+                    <span [routerLink]="[ '/f/chef', supplier?._id] "
+                        style="font-size: 15px;cursor: pointer;color:coral;" class="bold py-1"
+                        *ngIf="order.serviceMode === 'COLLECTION'">{{supplier.name}}</span>
                     <div class="flex-row" *ngIf="order.serviceMode === 'DELIVERY'">
                         <span>{{order.customer.address.addressLine1}},</span>
                         <span>{{order.customer.address.addressLine2}}</span>
@@ -63,7 +95,8 @@
                 </div>
                 <div class="flex-column border p-2 br-7 my-1" *ngIf="order.serviceMode === 'DELIVERY'">
                     <span class="bolder py-2">Order prepared by</span>
-                    <span [routerLink]="[ '/f/chef', supplier?._id] " style="font-size: 15px;cursor: pointer;color:coral;" class="bold py-1">{{supplier?.name}}</span>
+                    <span [routerLink]="[ '/f/chef', supplier?._id] "
+                        style="font-size: 15px;cursor: pointer;color:coral;" class="bold py-1">{{supplier?.name}}</span>
                     <div class="flex-row">
                         <span>{{supplier.address.addressLine1}},</span>
                         <span>{{supplier.address.addressLine2}}</span>

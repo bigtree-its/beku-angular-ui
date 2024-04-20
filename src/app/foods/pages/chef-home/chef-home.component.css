@@ -12,10 +12,14 @@
 }
 
 .selectedSpan {
-    border-bottom: 2px solid #111;
-    cursor: pointer;
+    background-color: #111;
+    color: #fff;
 }
 
+.selectedCal{
+    background-color: #111;
+    color: #fff;
+}
 ::ng-deep .modal-content {
     border: none;
     z-index: 9999999;

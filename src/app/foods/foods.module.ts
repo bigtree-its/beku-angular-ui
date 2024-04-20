@@ -11,6 +11,7 @@ import { FoodBasketComponent } from './pages/food-basket/food-basket.component';
 import { FoodCheckoutComponent } from './pages/food-checkout/food-checkout.component';
 import { FoodOrderConfirmationComponent } from './pages/food-order-confirmation/food-order-confirmation.component';
 import { SharedModule } from '../shared';
+import { DateCalcPipe } from '../pipes/date-calc.pipe';
 
 const routes: Routes = [
   { path: 'f/home', component: FoodsHomeComponent },
@@ -35,6 +36,7 @@ const routes: Routes = [
     CommonModule,
     SharedModule,
     FormsModule,
+    DateCalcPipe,
     ReactiveFormsModule,
     FontAwesomeModule,
     RouterModule.forChild(routes)

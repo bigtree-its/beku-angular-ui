@@ -96,8 +96,8 @@
             </div>
             <div class="flex-row-space-between border-bottom py-3">
                 <span class="bold f-size-lg ">Your Items</span>
-                <fa-icon class="btn-circle" *ngIf="!showItems" [icon]="faPlus" (click)="openCloseItems()"></fa-icon>
-                <fa-icon class="btn-circle" *ngIf="showItems" [icon]="faMinus" (click)="openCloseItems()"></fa-icon>
+                <fa-icon class="btn-circle" *ngIf="!showItems" [icon]="chevronDown" (click)="openCloseItems()"></fa-icon>
+                <fa-icon class="btn-circle" *ngIf="showItems" [icon]="chevronUp" (click)="openCloseItems()"></fa-icon>
             </div>
             <ng-container *ngIf="showItems" [ngTemplateOutlet]="itemsLayout"></ng-container>
             <div class="bg-light p-3 my-2">

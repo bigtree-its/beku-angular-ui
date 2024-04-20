@@ -29,6 +29,7 @@ import {
   faPeopleArrows,
   faStar,
 } from '@fortawesome/free-solid-svg-icons';
+import { DateCalcPipe } from 'src/app/pipes/date-calc.pipe';
 
 @Component({
   selector: 'app-chef-home',
@@ -51,7 +52,6 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
   calendars: Calendar[] = [];
   weeklyCals: Calendar[] = [];
   monthlyCals: Calendar[] = [];
-  calendarsToDisplay: Calendar[];
   displayCal: boolean = true;
   displayAllDays: boolean = false;
   displayWeeklyCals: boolean = false;
@@ -111,6 +111,7 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
   activeLayout: string = 'Menu';
   supplierId: any;
   reviews: Review[] = [];
+  calendarToDisplay: Calendar;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -217,21 +218,8 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
       .getCalendars(supplierId, true, false)
       .subscribe((calendars: Calendar[]) => {
         this.calendars = calendars;
-        this.groupCalendar();
-        console.log('Calendars for chef: ' + this.calendars.length);
+        console.log('Calendars for chef: ' + JSON.stringify(calendars));
       });
-  }
-
-  selectThisWeek() {
-    this.displayCal = true;
-    this.displayAllDays = false;
-    this.calendarsToDisplay = this.weeklyCals;
-  }
-
-  selectThisMonth() {
-    this.displayCal = true;
-    this.displayAllDays = false;
-    this.calendarsToDisplay = this.monthlyCals;
   }
 
   addDays(theDate: Date, days: number): Date {
@@ -255,7 +243,7 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
     for (var i = 0; i < this.calendars.length; i++) {
       var calendar: Calendar = this.calendars[i];
       if (calendar !== null && calendar !== undefined) {
-        let calDate: Date = new Date(calendar.orderBefore);
+        let calDate: Date = new Date(calendar.date);
         console.log('Cal Date ' + calDate);
         if (calDate < endDate && calDate > today) {
           this.weeklyCals.push(calendar);
@@ -326,11 +314,22 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
     this._location.back();
   }
 
+  selectCalendar(calendar: Calendar){
+    console.log('Selected calendar '+ calendar.date)
+    this.calendarToDisplay = calendar;
+    
+  }
+
   onSelectCategory(category: Collection) {
-    this.filterItemsByCat(category);
     this.selectedCategory = category;
-    this.displayCal = false;
-    this.displayAllDays = true;
+    if ( category.name === 'This Week'){
+      this.displayCal = true;
+      this.calendarToDisplay = this.calendars[0];
+    }else{
+      this.filterItemsByCat(category);
+      this.displayCal = false;
+    }
+   
     // // event.target.style = "border-right: 3px solid #766df4;color: #766df4;text-align: right;";
     // this.categoriesMap.set(category, event.target);
     // this.categoriesMap.forEach((key: string, value: any) => {

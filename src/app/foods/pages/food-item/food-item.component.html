@@ -12,11 +12,7 @@
                 <span class="price"><b>from {{menu.price | currency:'GBP'}}</b></span>
             </div>
             <p *ngIf="displayDescription" class="py-1">{{menu.description}}</p>
-            <div class="flex-row align-items-center">
-                <span *ngIf="menu.preOrder" class="attribute">PreOrder Only</span>
-                <span *ngIf="menu.collectionOnly" class="attribute">CollectionOnly</span>
-                <small *ngIf="menu.orderBy" class="ml-2 blinker text-blue">OrderBy {{menu.orderBy | date: 'EEEE'}}</small>
-            </div>
+            <small *ngIf="orderBy" class="ml-2 blinker text-blue">OrderBy {{orderBy | date: 'EEEE'}}</small>
         </div>
     </div>
 

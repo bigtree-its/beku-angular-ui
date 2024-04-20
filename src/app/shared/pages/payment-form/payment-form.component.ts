@@ -31,7 +31,7 @@ export class PaymentFormComponent {
   stripeConfirmationError: string;
   stripeElements: any;
   cardElement: any;
-  loading: boolean;
+  loading: boolean = false;
 
   constructor(
     private stripeService: StripeService,

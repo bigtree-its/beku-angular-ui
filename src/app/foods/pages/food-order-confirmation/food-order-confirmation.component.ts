@@ -21,8 +21,10 @@ export class FoodOrderConfirmationComponent {
   orderService=inject(FoodOrderService);
   supplier: OrderSupplier;
   error: boolean;
+  loading: boolean;
 
   ngOnInit() {
+    this.loading = true;
     this.redirectStatus = this.activatedRoute.snapshot.queryParamMap.get('redirect_status');
     const paymentIntent = this.activatedRoute.snapshot.queryParamMap.get('payment_intent');
     console.log('paymentIntent '+ paymentIntent);
@@ -34,6 +36,7 @@ export class FoodOrderConfirmationComponent {
     this.orderService.updateOrder(obj ).subscribe((o) => {
       this.order = o;
       if (Utils.isValid(this.order)) {
+        this.loading = false;
         console.log('Retrieved order from server ['+ this.order.reference+", Status = "+ this.order.status+"]")
         this.supplier = this.order.supplier;
         if (this.redirectStatus === 'succeeded') {
