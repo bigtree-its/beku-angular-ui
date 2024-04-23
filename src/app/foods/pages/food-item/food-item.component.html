@@ -1,25 +1,7 @@
-<div *ngIf="menu !== null && menu !== undefined" class="menu-item-layout bg-light" (click)="open(content)">
-    <!-- <img src="/assets/images/menu-items/chicken-tikka-kebab.jpg" loading="lazy"> -->
-
-    <div class="flex-column" style="width: 100%;">
-        <span *ngIf="menu.preOrder" class="bg-blk pl-2">{{menu.readyBy| date: 'EEEE'}}</span>
-        <div class="flex-column p-2">
-            <div class="flex-row space-between">
-                <div class="flex-row justify-content-center">
-                    <span class="item-name">{{menu.name}}</span>
-                    <fa-icon [icon]="faCircle" style="color: #46bb4c;margin-left: 5px;" *ngIf="menu.vegetarian"></fa-icon>
-                </div>
-                <span class="price"><b>from {{menu.price | currency:'GBP'}}</b></span>
-            </div>
-            <p *ngIf="displayDescription" class="py-1">{{menu.description}}</p>
-            <small *ngIf="orderBy" class="ml-2 blinker text-blue">OrderBy {{orderBy | date: 'EEEE'}}</small>
-        </div>
-    </div>
-
+<div *ngIf="menu then regularMenuLayout else pbLayout">
 </div>
 
 <ng-template #content let-modal>
-
     <div class="modal-header">
         <span></span>
         <button type="button" class="btn-modal-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
@@ -98,7 +80,139 @@
             <span class="text-center" style="font-size: large;margin: 10px;"><b>{{price | currency:
                     'GBP'}}</b></span>
         </div>
-        <!-- <button (click)="addToOrder()" class="n-button" style="width: 200px;">Add to Cart</button> -->
     </div>
-    <!-- </div> -->
+</ng-template>
+
+<ng-template #pbBuilder let-modal>
+    <div class="modal-header d-flex jcsb">
+        <div class="flex-row aic">
+            <span class="bolder fs-5">{{pb.name}}</span>
+            <div style="width: 50px;">
+                <div style="height: 25px;
+                width: 25px;
+                border: 1px solid #46bb4c;
+                display: flex;
+                justify-content: center;
+                align-items: center;" *ngIf="pb.vegetarian === true">
+                    <span style="height: 15px;width: 15px;border-radius: 50%;background-color: #46bb4c;"></span>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn-modal-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+    </div>
+    <div class="modal-body flex-column jcc aic" style="overflow-y: auto;">
+        <h4 class="modal-title" id="modal-basic-title">{{pb.price | currency :'GBP'}}
+        </h4>
+        <p class="menu-desc">{{pb.description}}</p>
+        <div class="flex-column w-100 bg-light my-2 p-2">
+            <div class="d-flex jcsb  w-100 px-2">
+                <span class="bolder fs-7">Starters</span>
+                <span *ngIf="selectedStarters.length === 0" class="tag-primary">Required</span>
+                <span *ngIf="selectedStarters.length === 1" class="tag-primary">1 more</span>
+                <span *ngIf="selectedStarters.length === 2" class="tag-success bolder">All Set</span>
+                <span *ngIf="selectedStarters.length > 2" class="tag-danger">Max
+                    2</span>
+                <!-- <fa-icon *ngIf="selectedStarters.length === 2" [icon]="faCheck"></fa-icon> -->
+            </div>
+            <div class="flex-column" style="max-height: 80px;overflow-y: auto;">
+                <div class="w-100 p-2 py-1 border-bottom flex-row aic jcsb" *ngFor="let item of pb.starters">
+                    <span>{{item.name}}</span>
+                    <label class="check-div">
+                        <input id="toggle" type="checkbox" value="item.name" id="item.name" (change)="selectStarter(item,$event)" />
+                        <span class="checkmark"></span>
+                      </label>
+                </div>
+            </div>
+        </div>
+        <div class="flex-column w-100 bg-light my-2 p-2">
+            <div class="d-flex jcsb  w-100">
+                <span class="bolder fs-7">Mains</span>
+                <span class="bg-dark px-2 br-7 color-white">Required</span>
+            </div>
+            <div class="w-100 p-2 py-1 border-bottom" *ngFor="let item of pb.mains">
+                <span>{{item.name}}</span>
+            </div>
+        </div>
+        <div class="flex-column w-100 bg-light my-2 p-2">
+            <div class="d-flex jcsb  w-100">
+                <span class="bolder fs-7">Deserts</span>
+                <span class="bg-dark px-2 br-7 color-white">Required</span>
+            </div>
+            <div class="w-100 p-2 py-1 border-bottom" *ngFor="let item of pb.deserts">
+                <span>{{item.name}}</span>
+            </div>
+        </div>
+        <div class="flex-column w-100 bg-light my-2 p-2">
+            <div class="d-flex jcsb  w-100">
+                <span class="bolder fs-7">Sides</span>
+                <span class="bg-white px-2 br-7">Optional</span>
+            </div>
+            <div class="w-100 p-2 py-1 border-bottom" *ngFor="let item of pb.sides">
+                <span>{{item.name}}</span>
+            </div>
+        </div>
+        <div class="flex-column w-100 bg-light my-2 p-2">
+            <div class="d-flex jcsb  w-100">
+                <span class="bolder fs-7">Extras</span>
+                <span class="bg-white">Optional</span>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="modal-footer"> -->
+    <div class="modal-footer flex-column" style="margin: 10px;padding: 10px;gap:.6rem;">
+        <div style="display: flex;justify-content: center;">
+            <div style="padding: 5px;display: flex;justify-content: space-around;align-items: center;">
+                <div class="qty-btn-container" (click)="decreaseQuantity()">
+                    <fa-icon [icon]="faMinus"></fa-icon>
+                </div>
+                <span class="qty-value">{{quantity}}</span>
+                <div class="qty-btn-container" (click)="increaseQuantity()">
+                    <fa-icon [icon]="faPlus"></fa-icon>
+                </div>
+            </div>
+        </div>
+        <div class="flex-row-space-between align-items-center btn-add-to-order" (click)="addToOrder()">
+            <span style="font-weight: 500;font-size: large;">Add to order</span>
+            <span class="text-center" style="font-size: large;margin: 10px;"><b>{{price | currency:
+                    'GBP'}}</b></span>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #pbLayout>
+    <div class="flex-column bg-light w-100 p-2" (click)="open(pbBuilder)">
+        <div class="flex-row jcsb">
+            <div class="flex-row jcc aic">
+                <span class="bolder fs-7">{{pb.name}}</span>
+                <fa-icon [icon]="faCircle" style="color: #46bb4c;margin-left: 5px;" *ngIf="pb.vegetarian"></fa-icon>
+            </div>
+            <span class="price"><b>from {{pb.price | currency:'GBP'}}</b></span>
+        </div>
+        <p>{{pb.description}}</p>
+    </div>
+</ng-template>
+
+<ng-template #regularMenuLayout>
+    <div class="menu-item-layout bg-light" (click)="open(content)">
+        <div class="flex-column" style="width: 100%;">
+            <span *ngIf="menu.preOrder" class="bg-blk pl-2">{{menu.readyBy|
+                date: 'EEEE'}}</span>
+            <div class="flex-column p-2">
+                <div class="flex-row jcsb">
+                    <div class="flex-row jcc aic">
+                        <span class="bolder fs-7">{{menu.name}}</span>
+                        <fa-icon [icon]="faCircle" style="color: #46bb4c;margin-left: 5px;" *ngIf="menu.vegetarian"></fa-icon>
+                    </div>
+                    <span class="price"><b>from {{menu.price |
+                            currency:'GBP'}}</b></span>
+                </div>
+                <p *ngIf="displayDescription">{{menu.description}}</p>
+                <div class="flex-row aic" *ngIf="orderBy">
+                    <span>Order By</span>
+                    <small class="ml-1 attribute">{{orderBy | date : 'E':'UTC'}}
+                        {{orderBy | date : 'd':'UTC'}}</small>
+                </div>
+            </div>
+        </div>
+    </div>
 </ng-template>

@@ -1,4 +1,4 @@
-<div *ngIf="chef !== null && chef !== undefined">
+<div *ngIf="chef !== null && chef !== undefined && !incorrectLanding">
 
     <div class="flex-row jcsb py-2 aic px-3">
         <fa-icon [icon]="faArrowLeft" (click)="goback()" class="back mr-3"></fa-icon>
@@ -9,9 +9,9 @@
     <div class="row">
         <div class="col-md-8" style=" min-height: 100vh;overflow-y: auto; margin-bottom: 100px;">
             <div class="py-1">
-                <div class="flex-row gap-1">
+                <div class="flex-row jcc aic">
                     <div style="height: 220px;width: 200px;">
-                        <img src="{{chef.image}}" style="object-fit: cover;height: 100%; width: 100%;border-radius: 12px;">
+                        <img src="{{chef.image}}" style="object-fit: contain;height: 100%; width: 100%;border-radius: 12px;">
                     </div>
                     <div class="flex-column gap-1 ml-2">
                         <div class="title-section">
@@ -25,25 +25,22 @@
                         <div class="flex-row">
                             <span *ngIf="chef.preOrderOnly" class="attribute">PreOrder Only</span>
                         </div>
-                        <span class="py-1 px-1 f-size-s">{{chef.description}}</span>
-                        <div class="flex-row big-text border">
-                            <span style="background-color: gold;padding: 0 20px;">CUISINES</span>
-                            <div class="flex-row ml-2">
-                                <ng-container *ngFor="let cuisine of chef.cuisines | slice:0:3">
-                                    <span class="mr-1">{{ cuisine.name }}
-                                    </span>
-                                </ng-container>
+                        <span class="py-1 px-1 f-size-s lg">{{chef.description}}</span>
+                        <div class="my-1">
+                            <div class="gap-1 flex-row-wrap">
+                                <span style="font-size: 10px;" class="attribute big-text" *ngFor="let cuisine of chef.cuisines | slice:0:3">{{ cuisine.name }}
+                                </span>
                             </div>
                         </div>
                         <div class="flex-column gap-1" *ngIf="chef.doDelivery">
-                            <div class="flex-row big-text border">
-                                <span style="background-color: gold;padding: 0 20px;">DELIVERY
+                            <div class="flex-row big-text">
+                                <span style="background-color: gold;padding: 0 20px; border-top-left-radius: 12px;border-bottom-left-radius: 12px;">DELIVERY
                                     DISTANCE</span>
                                 <span class="pl-2">{{chef.deliveryDistance}}
                                     miles</span>
                             </div>
-                            <div class="flex-row big-text border">
-                                <span style="background-color: gold;padding: 0 20px;">FREE
+                            <div class="flex-row big-text">
+                                <span style="background-color: gold;padding: 0 20px; border-top-left-radius: 12px;border-bottom-left-radius: 12px;">FREE
                                     DELIVERY</span>
                                 <span class="pl-2">Order over
                                     {{chef.freeDeliveryOver |
@@ -58,6 +55,7 @@
                             <b (click)="selectLayout('Reviews')" class="square mx-2 px-3">Reviews
                                 ({{reviews.length}})</b>
                             <b (click)="selectLayout('Info')" class="square mx-2 px-3">Info</b>
+                            <b (click)="selectLayout('Party')" class="square mx-2 px-3">Party</b>
                         </div>
                     </div>
                 </div>
@@ -67,13 +65,14 @@
                 <ng-container *ngSwitchCase="'Menu'" [ngTemplateOutlet]="menuLayout"></ng-container>
                 <ng-container *ngSwitchCase="'Reviews'" [ngTemplateOutlet]="reviewsLayout"></ng-container>
                 <ng-container *ngSwitchCase="'Info'" [ngTemplateOutlet]="infoLayout"></ng-container>
+                <ng-container *ngSwitchCase="'Party'" [ngTemplateOutlet]="partyLayout"></ng-container>
             </ng-container>
         </div>
         <div class="col-md-4 lg">
             <div style="flex-direction: column;position: sticky;top: 0;min-height: 100vh;overflow-y: auto;width: 100%; padding: 10px;">
                 <div class="d-flex jcsb py-2 px-3">
                     <span style="font-size: 20px;">Your Order</span>
-                    <span *ngIf="order != null" class="font-abril-fatface color-red f-size-lg">{{order.total
+                    <span *ngIf="order != null" class="fs-4 bolder">{{order.total
                         |
                         currency:'GBP'}}</span>
                 </div>
@@ -99,6 +98,15 @@
                     fill="black"></path>
             </svg>
         </button>
+    </div>
+</div>
+
+<div class="flex-row jcc aic " *ngIf="incorrectLanding">
+    <div class="p-5 my-3 flex-column jcc aic bg-dark br-12">
+        <span class="fs-1 color-brand">Sorry, we didn't catch that...</span>
+        <p class="color-white">We couldn't find that page. Please enter your area and search for a HomeChef – we have plenty to choose from
+            <a href="/f/home">Lets Go</a>
+        </p>
     </div>
 </div>
 
@@ -149,7 +157,7 @@
 
 <ng-template #NoItemsInCategory>
     <span class="d-flex jcc aic py-2">
-        NO ITEMS TO DISPLAY
+        No items to display
     </span>
 </ng-template>
 <ng-template #ItemsInCategory>
@@ -160,8 +168,8 @@
 </ng-template>
 
 <ng-template #reviewsLayout>
-    <div class="flex-column">
-        <div class="flex-row my-2 align-items-center">
+    <div class="flex-column jcc aic">
+        <div class="flex-row my-2 jcc aic">
             <strong class="ml-2">Want to write a review ? </strong>
             <button class="btn-lift btn-sm mx-3" [routerLink]="['/write_review']" [queryParams]="{chef: supplierId}">Write
                 Review</button>
@@ -178,11 +186,11 @@
     <div class="flex-column">
         <div class="border flex-column py-2 px-3 br-12 my-2">
             <b class="fs-6 py-2">Food hygiene rating</b>
-            <div class="row">
-                <div class="col-md-3">
+            <div class="d-flex aic gap-1">
+                <div class="flex-grow">
                     <img src="/assets/images/fhis.png" height="40px" width="100px">
                 </div>
-                <div class="col-md-9 flex-column">
+                <div class="flex-grow flex-column ml-2">
                     <span>
                         Rating by the Food Standards Agency and your local
                         authority. This rating may have changed.
@@ -202,11 +210,11 @@
         </div>
         <div class="border flex-column py-2 px-3 br-12 my-2">
             <b class="fs-6 py-2">Where to find us</b>
-            <div class="flex-row fs-6  big-text">
+            <div class="flex-row fs-7">
                 <span>{{chef.address.addressLine1}}</span>
                 <span class="pl-1">{{chef.address.addressLine2}}</span>
             </div>
-            <div class="flex-row  fs-6   big-text">
+            <div class="flex-row fs-7">
                 <span>{{chef.address.city}}</span>
                 <span class="pl-1">{{chef.address.postcode}}</span>
             </div>
@@ -220,7 +228,7 @@
             <fa-icon [icon]="faArrowLeft"></fa-icon>
         </div>
         <div #widgetsContent style="display: flex;width: 415px;padding: 10px;overflow-x: hidden;white-space: nowrap;">
-            <span *ngFor="let c of collections" class="select-span" (click)="onSelectCategory(c)" [class.selectedCal]="c.name === selectedCategory.name">{{c.name}}</span>
+            <span *ngFor="let c of collections" class="select-span" (click)="onSelectCategory(c)" [class.selectedCal]="c?.name === selectedCategory?.name">{{c?.name}}</span>
         </div>
         <div class="arrow-icon-div" (click)="scrollRight()">
             <fa-icon [icon]="faArrowRight"></fa-icon>
@@ -231,7 +239,7 @@
         <div *ngIf="items_to_display !== null && items_to_display !== undefined &&  items_to_display.length > 0; then ItemsInCategory else NoItemsInCategory">
         </div>
     </div>
-    
+
     <div *ngIf="displayCal && calendars" class="flex-column">
 
         <div class="flex-row jcc aic">
@@ -240,9 +248,15 @@
                 <span class="bold">{{calendar.date| date: 'd':'EST'}}</span>
             </div>
         </div>
-        
-        <div *ngIf="calendarToDisplay" class="flex-column" >
-            <app-food-item *ngFor="let food of calendarToDisplay.foods" [menu]="food" [displayDescription]="true" [orderBy]="calendarToDisplay.date | dateCalc : '':'':'':0 " ></app-food-item>
+
+        <div *ngIf="calendarToDisplay" class="flex-column">
+            <app-food-item *ngFor="let food of calendarToDisplay.foods" [menu]="food" [displayDescription]="true" [readyBy]="calendarToDisplay.date"></app-food-item>
         </div>
+    </div>
+</ng-template>
+
+<ng-template #partyLayout>
+    <div class="flex-column">
+        <app-food-item *ngFor="let pb of partyBundles" [pb]="pb"></app-food-item>
     </div>
 </ng-template>

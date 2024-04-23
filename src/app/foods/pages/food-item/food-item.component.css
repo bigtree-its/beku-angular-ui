@@ -1,8 +1,7 @@
 .menu-item-layout {
     display: flex;
-    gap: 1rem;
-    margin: 5px 0;
-    padding: 10px;
+    flex-direction: column;
+    margin: 10px 0;
 }
 
 .menu-item-layout>img {
@@ -33,7 +32,7 @@
 }
 
 .selectedSpice {
-    opacity: 1.0;
+    opacity: 1;
 }
 
 ::ng-deep .modal-content {
@@ -82,6 +81,78 @@
 .btn-add-to-order:hover {
     cursor: pointer;
     background-color: #2fad35;
+}
+
+
+/* Customize the label (the container) */
+
+.check-div {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    font-size: 22px;
+    user-select: none;
+}
+
+
+/* Hide the browser's default checkbox */
+
+.check-div input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+
+/* Create a custom checkbox */
+
+.checkmark {
+    position: absolute;
+    top: -11px;
+    left: -14px;
+    height: 18px;
+    width: 18px;
+    background-color: #fff;
+    border: solid gray 1px;
+    border-radius: 4px;
+}
+
+
+/* When the checkbox is checked, add a blue background */
+
+.check-div input:checked~.checkmark {
+    background-color: #19cb4c;
+}
+
+
+/* Create the checkmark/indicator (hidden when not checked) */
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+
+/* Show the checkmark when checked */
+
+.check-div input:checked~.checkmark:after {
+    display: block;
+}
+
+
+/* Style the checkmark/indicator */
+
+.check-div .checkmark:after {
+    left: 0.4rem;
+    top: 0.2rem;
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
 }
 
 

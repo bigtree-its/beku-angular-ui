@@ -1,21 +1,34 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Utils } from '../helpers/utils';
 
 @Pipe({
   name: 'dateCalc',
-  standalone: true
+  standalone: true,
 })
 export class DateCalcPipe implements PipeTransform {
-
-  transform(value: Date, add: boolean, sub: boolean, count: number): unknown {
+  transform(value: any, operation: string, count: number, tz: string): unknown {
     if (value) {
-      if ( add){
-        return new Date(value.getTime() + count * 24 * 60 * 60 * 1000);
+      var date;
+      if (tz) {
+        date = this.convertTZ(value, tz);
+      } else {
+        date = new Date(value);
       }
-      if ( sub){
-        return new Date(value.getTime() - count * 24 * 60 * 60 * 1000);
+      if (Utils.isEquals(operation, 'add')) {
+        return new Date(date.getTime() + count * 24 * 60 * 60 * 1000);
+      } else if (Utils.isEquals(operation, 'sub')) {
+        return new Date(date.getTime() - count * 24 * 60 * 60 * 1000);
       }
     }
     return value;
   }
 
+  convertTZ(date, tzString) {
+    return new Date(
+      (typeof date === 'string' ? new Date(date) : date).toLocaleString(
+        'en-US',
+        { timeZone: tzString }
+      )
+    );
+  }
 }

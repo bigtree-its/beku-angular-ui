@@ -118,6 +118,7 @@ export const environment = {
   ProductsUrl: 'http://localhost:8083/ads/v1/products',
   SupplierUrl: 'http://localhost:8083/ads/v1/suppliers',
   FeedbacksUrl: 'http://localhost:8083/ads/v1/feedbacks',
+  PartyBundlesUrl: 'http://localhost:8083/ads/v1/party-bundles',
   
 
   debug: window['env']['debug'] || false,

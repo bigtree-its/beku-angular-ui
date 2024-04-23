@@ -7,6 +7,7 @@ import { ChefSearchQuery } from '../model/ChefSearchQuery';
 import { Calendar, Collection, Food, LocalChef, Menu } from '../model/localchef';
 import { ServiceLocator } from './service.locator';
 import { LocalService } from './local.service';
+import { PartyBundle } from '../model/foods/all-foods';
 
 @Injectable({
   providedIn: 'root'
@@ -74,6 +75,16 @@ export class ChefService {
         this.setChef(data);
       })
     );
+  }
+
+  getPartyBundleForChef(chefId: string): Observable<PartyBundle[]> {
+
+    var params = new HttpParams();
+    if (chefId !== undefined && chefId !== null) {
+      params = params.set('chef', chefId);
+    }
+    console.log('Fetching party bundles for : ' + params)
+    return this.http.get<PartyBundle[]>(this.serviceLocator.PartyBundlesUrl, { params });
   }
 
   getMenusForChef(chefId: string): Observable<Menu[]> {

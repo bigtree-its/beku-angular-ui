@@ -10,14 +10,13 @@ import { PopupComponent } from './pages/popup/popup.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faCopyright, fas } from '@fortawesome/free-solid-svg-icons';
 import { ReviewItemComponent } from './pages/review-item/review-item.component';
-import { DateAgoPipe } from '../pipes/date-ago.pipe';
-import { DateCalcPipe } from '../pipes/date-ago.pipe';
 import { WriteReviewComponent } from './pages/write-review/write-review.component';
 import { AuthGuard } from '../services/auth-guard.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { PaymentFormComponent } from './pages/payment-form/payment-form.component';
+import { DateAgoPipe } from '../pipes/date-ago.pipe';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,36 +25,36 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  declarations: [
-    HeaderComponent,
-    FooterComponent,
-    OrderItemComponent,
-    FooterComponent,
-    PopupComponent,
-    ReviewItemComponent,
-    DateAgoPipe,
-    WriteReviewComponent,
-    AboutUsComponent,
-    ConfirmationDialogComponent,
-    PaymentFormComponent,
-  ],
-  imports: [
-    NgbToastModule,
-    CommonModule,
-    NgbDropdownModule,
-    NgbDatepickerModule,
-    FontAwesomeModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule.forChild(routes)
-  ],
-  exports: [
-    HeaderComponent,
-    FooterComponent,
-    OrderItemComponent,
-    PaymentFormComponent,
-    ReviewItemComponent,
-  ]
+    declarations: [
+        HeaderComponent,
+        FooterComponent,
+        OrderItemComponent,
+        FooterComponent,
+        PopupComponent,
+        ReviewItemComponent,
+        WriteReviewComponent,
+        AboutUsComponent,
+        ConfirmationDialogComponent,
+        PaymentFormComponent,
+    ],
+    exports: [
+        HeaderComponent,
+        FooterComponent,
+        OrderItemComponent,
+        PaymentFormComponent,
+        ReviewItemComponent,
+    ],
+    imports: [
+        NgbToastModule,
+        CommonModule,
+        NgbDropdownModule,
+        NgbDatepickerModule,
+        FontAwesomeModule,
+        FormsModule,
+        ReactiveFormsModule,
+        DateAgoPipe,
+        RouterModule.forChild(routes)
+    ]
 })
 export class SharedModule { 
   constructor(library: FaIconLibrary) {

@@ -30,6 +30,7 @@ import {
   faStar,
 } from '@fortawesome/free-solid-svg-icons';
 import { DateCalcPipe } from 'src/app/pipes/date-calc.pipe';
+import { PartyBundle } from 'src/app/model/foods/all-foods';
 
 @Component({
   selector: 'app-chef-home',
@@ -112,6 +113,8 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
   supplierId: any;
   reviews: Review[] = [];
   calendarToDisplay: Calendar;
+  incorrectLanding: boolean;
+  partyBundles: PartyBundle[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -119,8 +122,7 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
     private chefService: ChefService,
     private reviewService: ReviewService,
     private _location: Location,
-    private router: Router,
-    private utils: Utils
+    private router: Router
   ) {}
 
   ngAfterViewInit(): void {
@@ -171,25 +173,38 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
         },
       });
 
-      let observable1 = this.chefService.getChef(this.supplierId);
-      observable1.pipe(takeUntil(this.destroy$)).subscribe({
+      let chefObs = this.chefService.getChef(this.supplierId);
+      chefObs.pipe(takeUntil(this.destroy$)).subscribe({
         next: (data) => {
-          this.chef = data;
-          this.fetchItems(this.chef._id);
-          this.fetchCalendars(this.chef._id);
-          this.fetchReviews(this.chef._id);
+          if (!Utils.isValid(data)){
+            this.incorrectLanding =true;
+          }else{
+            this.chef = data;
+            this.fetchItems(this.chef._id);
+            this.fetchCalendars(this.chef._id);
+            this.fetchReviews(this.chef._id);
+            if ( this.chef.doPartyOrders){
+              this.fetchPartyBundles(this.chef._id);
+            }
+          }
         },
         error: (err) => {
+          this.incorrectLanding =true;
           console.error(
             'Errors when getting chef from server. ' + JSON.stringify(err)
           );
         },
       });
     });
-
-    
-
   }
+
+  fetchPartyBundles(supplierId: string) {
+    this.chefService.getPartyBundleForChef(supplierId).subscribe((partyBundles: PartyBundle[]) => {
+      this.partyBundles = partyBundles;
+      console.log('PartyBundles fetched: ' + this.partyBundles.length);
+    });
+  }
+
   checkOrder() {
     this.orderService.getData();
     

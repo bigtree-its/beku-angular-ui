@@ -24,6 +24,8 @@ import {
   faArrowLeft,
   faPlus,
   faMinus,
+  faChevronDown,
+  faChevronUp,
 } from '@fortawesome/free-solid-svg-icons';
 import { AccountService } from 'src/app/services/account.service';
 import { User } from 'src/app/model/auth-model';
@@ -39,8 +41,8 @@ export class FoodCheckoutComponent implements OnDestroy {
   faPersonBiking = faPersonBiking;
   faBox = faBox;
   faArrowLeft = faArrowLeft;
-  faPlus = faPlus;
-  faMinus = faMinus;
+  chevronDown = faChevronDown;
+  chevronUp = faChevronUp;
 
   openItems: boolean  = false;
   yourDetails: boolean  = false;
@@ -202,9 +204,6 @@ export class FoodCheckoutComponent implements OnDestroy {
     //   });
     // }
   }
-
- 
-
   validateCustomerDetails(): boolean {
     if (
       Utils.isEmpty(this.customerName) ||
@@ -380,8 +379,9 @@ export class FoodCheckoutComponent implements OnDestroy {
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
-        (result) => { },
+        (result) => { this.loading = false; },
         (reason) => {
+          this.loading = false;
           // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         }
       );
@@ -389,6 +389,7 @@ export class FoodCheckoutComponent implements OnDestroy {
 
   close() {
     this.modalService.dismissAll();
+    this.loading = false;
   }
 
 

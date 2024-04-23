@@ -10,21 +10,10 @@
     </div>
 
     <div class="flex-column jcc aic" *ngIf="loading">
-        <section class="equalizer-container" >
-            <div class="equalizer" style="--i:0">
-            </div>
-            <div class="equalizer" style="--i:1">
-            </div>
-            <div class="equalizer" style="--i:2">
-            </div>
-            <div class="equalizer" style="--i:3">
-            </div>
-            <div class="equalizer" style="--i:4">
-            </div>
-        </section>
+        <div class="waiter"></div>
         <span class="py-2 fs-4">Please wait while we confirm your order</span>
     </div>
-    
+
 
 
     <div class="row" *ngIf="!loading">
@@ -42,24 +31,22 @@
                     <div class="progress_container">
                         <div class="progress" id="progress"></div>
                         <div class="flex-column jcc aic">
-                            <div class="circle mt-3"
-                                [class.active]="order?.status === 'Draft' || order?.status === 'Paid' || order?.status === 'Collected' || order?.status === 'Delivered' || order?.status === 'Ready'">
+                            <div class="circle mt-3" [class.active]="order?.status === 'Draft' || order?.status === 'Paid' || order?.status === 'Collected' || order?.status === 'Delivered' || order?.status === 'Ready'">
                             </div>
                             <span>New</span>
                         </div>
                         <div class="flex-column  jcc aic">
-                            <div class="circle mt-3"
-                                [class.active]="order?.status === 'Paid' || order?.status === 'Collected' || order?.status === 'Delivered' || order?.status === 'Ready'">
+                            <div class="circle mt-3" [class.active]="order?.status === 'Paid' || order?.status === 'Collected' || order?.status === 'Delivered' || order?.status === 'Ready'">
                             </div>
                             <span>In Progress</span>
                         </div>
                         <div class="flex-column  jcc aic">
-                            <div class="circle mt-3" [class.active]="order?.status === 'Ready'"></div>
-                            <span>Ready</span>
+                            <div class="circle mt-3" [class.active]="order?.status === 'Ready' || order?.status === 'Cancelled'"></div>
+                            <span *ngIf="order?.status === 'Paid'">Ready</span>
+                            <span *ngIf="order?.status === 'Cancelled'">Cancelled</span>
                         </div>
-                        <div class="flex-column  jcc aie">
-                            <div class="circle mt-3"
-                                [class.active]="order?.status === 'Collected' || order?.status === 'Delivered'"></div>
+                        <div class="flex-column jcc aie" *ngIf="order?.status !== 'Cancelled'">
+                            <div class="circle mt-3" [class.active]="order?.status === 'Collected' || order?.status === 'Delivered'"></div>
                             <span>Completed</span>
                         </div>
                     </div>
@@ -73,9 +60,6 @@
                 <div class="flex-column border p-2 br-7">
                     <span class="bolder py-2">{{order.serviceMode === 'DELIVERY'? 'Delivery Address': 'Collection
                         Address'}}</span>
-                    <span [routerLink]="[ '/f/chef', supplier?._id] "
-                        style="font-size: 15px;cursor: pointer;color:coral;" class="bold py-1"
-                        *ngIf="order.serviceMode === 'COLLECTION'">{{supplier.name}}</span>
                     <div class="flex-row" *ngIf="order.serviceMode === 'DELIVERY'">
                         <span>{{order.customer.address.addressLine1}},</span>
                         <span>{{order.customer.address.addressLine2}}</span>
@@ -95,8 +79,7 @@
                 </div>
                 <div class="flex-column border p-2 br-7 my-1" *ngIf="order.serviceMode === 'DELIVERY'">
                     <span class="bolder py-2">Order prepared by</span>
-                    <span [routerLink]="[ '/f/chef', supplier?._id] "
-                        style="font-size: 15px;cursor: pointer;color:coral;" class="bold py-1">{{supplier?.name}}</span>
+                    <span [routerLink]="[ '/f/chef', supplier?._id] " style="font-size: 15px;cursor: pointer;color:coral;" class="bold py-1">{{supplier?.name}}</span>
                     <div class="flex-row">
                         <span>{{supplier.address.addressLine1}},</span>
                         <span>{{supplier.address.addressLine2}}</span>

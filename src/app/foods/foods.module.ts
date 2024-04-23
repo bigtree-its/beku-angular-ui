@@ -12,6 +12,7 @@ import { FoodCheckoutComponent } from './pages/food-checkout/food-checkout.compo
 import { FoodOrderConfirmationComponent } from './pages/food-order-confirmation/food-order-confirmation.component';
 import { SharedModule } from '../shared';
 import { DateCalcPipe } from '../pipes/date-calc.pipe';
+import { DateAgoPipe } from '../pipes/date-ago.pipe';
 
 const routes: Routes = [
   { path: 'f/home', component: FoodsHomeComponent },
@@ -36,6 +37,7 @@ const routes: Routes = [
     CommonModule,
     SharedModule,
     FormsModule,
+    DateAgoPipe,
     DateCalcPipe,
     ReactiveFormsModule,
     FontAwesomeModule,

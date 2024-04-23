@@ -4,7 +4,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-
 :root {
     --blue: #007bff;
     --indigo: #6610f2;
@@ -201,8 +200,37 @@ body {
     height: 500px;
 }
 
+.tag-primary {
+    background-color: #000a19;
+    color: #fff;
+    padding: 0 20px;
+    border-radius: 7px;
+}
+
+.tag-success {
+    background-color: #000a19;
+    color: var(--brand-color);
+    padding: 0 20px;
+    border-radius: 7px;
+}
+
+.tag-danger {
+    background-color: #dd4848;
+    color: #fff;
+    padding: 0 20px;
+    border-radius: 7px;
+}
+
 .color-light {
     opacity: 0.6;
+}
+
+.color-brand {
+    color: var(--brand-color);
+}
+
+.bg-dark {
+    background-color: #162127;
 }
 
 
@@ -749,8 +777,8 @@ select {
     color: var(--d-red);
 }
 
-.color-navy {
-    color: var(--navy);
+.color-white {
+    color: #fff;
 }
 
 .font-playfair-display {
@@ -949,11 +977,8 @@ select {
 
 .attribute,
 .attribute-sm {
-    background-color: #f8f8f8;
-    padding: 5px 20px;
-    margin: 0 5px 0 0;
-    font-weight: 500;
-    text-transform: lowercase;
+    background-color: #b8f968;
+    padding: 3px 20px;
     border-radius: 19px;
 }
 
@@ -2203,11 +2228,9 @@ select {
     0% {
         opacity: 0;
     }
-
     49% {
         opacity: 0;
     }
-
     50% {
         opacity: 1;
     }
@@ -2236,20 +2259,16 @@ select {
     .lg {
         display: flex;
     }
-
     .sm {
         display: none;
     }
-
     .md {
         display: none;
     }
-
     .title-section {
         display: flex;
         flex-direction: row;
     }
-
     .lg-row-sm-col {
         display: flex;
         flex-direction: row;

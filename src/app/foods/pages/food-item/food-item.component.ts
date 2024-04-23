@@ -1,11 +1,16 @@
 import { Component, Input } from '@angular/core';
-import { Extra, FoodOrderItem, Menu } from 'src/app/model/localchef';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Utils } from 'src/app/services/utils';
-import { Day } from 'src/app/model/common-models';
-import { FoodOrderService } from 'src/app/services/food-order.service';
-import { faCircle, faMinus, faPepperHot, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { Extra, Food, FoodOrderItem, Menu } from 'src/app/model/localchef';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {
+  faCheck,
+  faCircle,
+  faCircleCheck,
+  faMinus,
+  faPepperHot,
+  faPlus,
+} from '@fortawesome/free-solid-svg-icons';
 import { BasketService } from 'src/app/services/basket.service';
+import { PartyBundle } from 'src/app/model/foods/all-foods';
 
 @Component({
   selector: 'app-food-item',
@@ -16,7 +21,10 @@ export class FoodItemComponent {
   @Input() menu?: Menu;
   @Input() displayOrderBy?: Boolean = false;
   @Input() displayDescription?: Boolean = false;
-  @Input() orderBy?: Date = new Date();
+  @Input() orderBy?: Date;
+  @Input() readyBy?: Date;
+  @Input() pb?: PartyBundle;
+
   price: number = 0.0;
   specialInstruction: string | undefined;
   selectedchoice?: Extra;
@@ -24,22 +32,31 @@ export class FoodItemComponent {
   quantity: number = 1;
   orderByDate: Date;
 
+  faCheck = faCheck;
   faPlus = faPlus;
   faMinus = faMinus;
   faPepperHot = faPepperHot;
   faCircle = faCircle;
+  selectedStarters: Food[] = [];
+  selectedMains: Food[] = [];
+  selectedDeserts: Food[] = [];
+  selectedSides: Food[] = [];
 
   constructor(
-    private foodOrderService: FoodOrderService,
     private basketService: BasketService,
-    private utils: Utils,
     private modalService: NgbModal
   ) {}
 
   ngOnInit() {
-    this.price = this.menu.price;
-    if ( this.orderBy){
-      // this.orderByDate = this.orderBy.getTimezoneOffset
+    if (this.menu) {
+      this.price = this.menu.price;
+    } else if (this.pb) {
+      this.price = this.pb.price;
+    }
+
+    if (this.readyBy) {
+      var date = new Date(this.readyBy);
+      this.orderBy = new Date(date.getTime() - 1 * 24 * 60 * 60 * 1000);
     }
   }
 
@@ -63,6 +80,28 @@ export class FoodItemComponent {
 
   close() {
     this.modalService.dismissAll();
+  }
+
+  selectStarter(_t92: Food, e: any) {
+    if (this.selectedStarters.length === 2){
+      return;
+    }
+    if (this.pb !== null && this.pb !== undefined) {
+      this.pb.starters.forEach((item) => {
+        if (item.name === _t92.name) {
+          if (e.target.checked) {
+            this.selectedStarters.push(item);
+          } else {
+            for (var i = 0; i < this.selectedStarters.length; i++) {
+              var st = this.selectedStarters[i];
+              if (st.name === _t92.name) {
+                this.selectedStarters.splice(i, 1);
+              }
+            }
+          }
+        }
+      });
+    }
   }
 
   handleChoiceSelection(e: any) {

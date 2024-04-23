@@ -17,24 +17,24 @@
         <div class="flex-column p-2 mt-2" *ngIf="!showHomeScreen">
             <div class="flex-row jcsb aic border-bottom py-1">
                 <span class="bold fs-5 ">Items</span>
-                <fa-icon *ngIf="!openItems" [icon]="faPlus" (click)="openCloseItems()" class="btn-circle"></fa-icon>
-                <fa-icon *ngIf="openItems" [icon]="faMinus" (click)="openCloseItems()" class="btn-circle"></fa-icon>
+                <fa-icon *ngIf="!openItems" [icon]="chevronDown" (click)="openCloseItems()" class="btn-circle"></fa-icon>
+                <fa-icon *ngIf="openItems" [icon]="chevronUp" (click)="openCloseItems()" class="btn-circle"></fa-icon>
             </div>
             <ng-template *ngIf="openItems" [ngTemplateOutlet]="items"></ng-template>
         </div>
         <div class="flex-column p-2 mt-2" *ngIf="!showHomeScreen">
             <div class="flex-row jcsb aic  border-bottom py-1">
                 <span class="bold fs-5">Your details</span>
-                <fa-icon *ngIf="!yourDetails" [icon]="faPlus" (click)="openCloseDetails()" class="btn-circle"></fa-icon>
-                <fa-icon *ngIf="yourDetails" [icon]="faMinus" (click)="openCloseDetails()" class="btn-circle"></fa-icon>
+                <fa-icon *ngIf="!yourDetails" [icon]="chevronDown" (click)="openCloseDetails()" class="btn-circle"></fa-icon>
+                <fa-icon *ngIf="yourDetails" [icon]="chevronUp" (click)="openCloseDetails()" class="btn-circle"></fa-icon>
             </div>
             <ng-template *ngIf="yourDetails" [ngTemplateOutlet]="details"></ng-template>
         </div>
         <div class="flex-column p-2 mt-2" *ngIf="!showHomeScreen">
             <div class="flex-row jcsb aic  border-bottom py-1 mb-1">
                 <span class="bold fs-5">Delivery option</span>
-                <fa-icon *ngIf="!yourAddress" [icon]="faPlus" (click)="openCloseAddress()" class="btn-circle"></fa-icon>
-                <fa-icon *ngIf="yourAddress" [icon]="faMinus" (click)="openCloseAddress()" class="btn-circle"></fa-icon>
+                <fa-icon *ngIf="!yourAddress" [icon]="chevronDown" (click)="openCloseAddress()" class="btn-circle"></fa-icon>
+                <fa-icon *ngIf="yourAddress" [icon]="chevronUp" (click)="openCloseAddress()" class="btn-circle"></fa-icon>
             </div>
             <ng-template *ngIf="yourAddress" [ngTemplateOutlet]="deliveryOption"></ng-template>
         </div>
@@ -76,7 +76,7 @@
     </div>
 
     <div class="sm footer flex-row p-2 jcc">
-        <button disabled="loading" *ngIf="canShowPlaceOrderButton()" class="btn-arrow mt-1 d-flex jcc aic" (click)="placeOrder(paymentForm)">
+        <button *ngIf="canShowPlaceOrderButton()" class="btn-arrow mt-1 d-flex jcc aic" (click)="placeOrder(paymentForm)">
             <span>{{loading? 'Please wait...': "I'm Ready to Pay"}}</span>
             <svg width="34" height="34" viewBox="0 0 74 74" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
