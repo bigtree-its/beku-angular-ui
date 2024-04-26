@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FoodOrderItem } from 'src/app/model/localchef';
+import { FoodOrderItem, PartyOrderItem } from 'src/app/model/localchef';
 import { ContextService } from 'src/app/services/context.service';
 import { FoodOrderService } from 'src/app/services/food-order.service';
 
@@ -11,6 +11,7 @@ import { FoodOrderService } from 'src/app/services/food-order.service';
 export class OrderItemComponent {
 
   @Input() item: FoodOrderItem;
+  @Input() partyItem: PartyOrderItem;
   @Input() priceMode: String;
   @Input() editable: boolean = true;
   @Input() displayImage: boolean = true;
@@ -21,8 +22,14 @@ export class OrderItemComponent {
   constructor(private orderService: FoodOrderService) { }
 
   ngOnInit(): void {
-    this.price = this.item.price;
-    this.quantity = this.item.quantity;
+    if ( this.partyItem){
+      this.price = this.partyItem.price;
+      this.quantity = this.partyItem.quantity;
+    }else{
+      this.price = this.item.price;
+      this.quantity = this.item.quantity;
+    }
+    
   }
 
   increaseQuantity() {
@@ -41,12 +48,24 @@ export class OrderItemComponent {
 
   private calculatePrice() {
     if ( this.quantity === 0){
+      if ( this.partyItem){
+        this.orderService.removePartyItem(this.partyItem);
+      }else{
         this.orderService.removeItem(this.item);
+      }
     }else{
-      this.item.subTotal = this.item.price * this.quantity;
-      this.item.subTotal = +(+this.item.subTotal).toFixed(2);
-      this.item.quantity = this.quantity;
-      this.orderService.updateItem(this.item);
+      if (this.partyItem){
+        this.partyItem.subTotal = this.partyItem.price * this.quantity;
+        this.partyItem.subTotal = +(+this.partyItem.subTotal).toFixed(2);
+        this.partyItem.quantity = this.quantity;
+        this.orderService.updatePartyItem(this.partyItem);
+      }else{
+        this.item.subTotal = this.item.price * this.quantity;
+        this.item.subTotal = +(+this.item.subTotal).toFixed(2);
+        this.item.quantity = this.quantity;
+        this.orderService.updateItem(this.item);
+      }
+      
     }
     
   }

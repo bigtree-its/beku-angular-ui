@@ -208,10 +208,11 @@ body {
 }
 
 .tag-success {
-    background-color: #000a19;
-    color: var(--brand-color);
+    background-color: var(--brand-color);
+    color: #000a19;
     padding: 0 20px;
     border-radius: 7px;
+    font-weight: 900;
 }
 
 .tag-danger {
@@ -390,120 +391,6 @@ tr:nth-child(odd) {
     outline-offset: 1px;
 }
 
-.btn-bug {
-    display: inline-block;
-    outline: 0;
-    cursor: pointer;
-    border: 2px solid #2f2727;
-    border-radius: 3px;
-    color: #fff;
-    background: #2f2727;
-    font-weight: 600;
-    padding: 6px 20px;
-    text-align: center;
-    transition-duration: .15s;
-    transition-property: all;
-    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
-}
-
-.btn-bug:hover {
-    color: #000;
-    background: rgb(255, 218, 87);
-}
-
-.btn-navy {
-    background-color: var(--navy);
-    color: #fff;
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 25px;
-    border: none;
-}
-
-.btn-navy:hover {
-    cursor: pointer;
-}
-
-.btn-info,
-.btn-outline-info {
-    border: 1px solid #0dcaf0;
-    line-height: 30px;
-    height: 30px;
-    padding: 0 20px;
-    color: #222;
-    background: transparent;
-    font-size: 12px;
-}
-
-.btn-outline-info:hover {
-    border: 1px solid #0dcaf0;
-    background-color: #0dcaf0;
-    cursor: pointer;
-}
-
-.rotate {
-    transform: rotate(-7deg);
-    /* Legacy vendor prefixes that you probably don't need... */
-    /* Safari */
-    -webkit-transform: rotate(-7deg);
-    /* Firefox */
-    -moz-transform: rotate(-7deg);
-    /* IE */
-    -ms-transform: rotate(-7deg);
-    /* Opera */
-    -o-transform: rotate(-7deg);
-    /* Internet Explorer */
-    filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=3);
-}
-
-.btn-text {
-    border: none;
-    font-weight: bold;
-    background: none;
-}
-
-.btn-info {
-    background-color: #0dcaf0;
-}
-
-.btn-info:hover {
-    cursor: pointer;
-    background-color: #00d3fd;
-}
-
-.btn-outline-blue {
-    color: #1b202c;
-    border: 1px solid #1b202c;
-    background-color: transparent;
-}
-
-.btn-outline-blue:hover {
-    color: #fff;
-    cursor: pointer;
-    background-color: #1b202c;
-}
-
-.bg-none {
-    background: transparent;
-}
-
-.bg-spring {
-    background-color: var(--spring);
-}
-
-.bg-blk {
-    background-color: #1b202c;
-    color: #fff;
-}
-
-.bg-light {
-    background-color: #f9f7f1;
-}
-
-.bg-orange {
-    background-color: #ffc107;
-}
-
 .bg-white {
     background-color: #fff;
 }
@@ -512,19 +399,9 @@ tr:nth-child(odd) {
     background-color: #007bff;
 }
 
-.bg-green-100 {
-    background-color: var(--bg-green-100);
+.bg-success{
+    background-color: var(--brand-color);
 }
-
-.bg-green-100 {
-    background-color: var(--bg-green-200);
-}
-
-.color-green-100 {
-    color: var(--color-green-100);
-    font-size: 24px;
-}
-
 .text-outline {
     font-family: "Londrina Outline", sans-serif;
 }
@@ -710,10 +587,6 @@ select {
 
 .border-right {
     border-right: 1px solid #c8c5c5;
-}
-
-.bg-l-grey {
-    background-color: #c5c5e5;
 }
 
 .w-1 {

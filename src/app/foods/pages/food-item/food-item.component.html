@@ -104,53 +104,23 @@
         <h4 class="modal-title" id="modal-basic-title">{{pb.price | currency :'GBP'}}
         </h4>
         <p class="menu-desc">{{pb.description}}</p>
-        <div class="flex-column w-100 bg-light my-2 p-2">
+        <div class="flex-column w-100 bg-light my-2 p-2" *ngFor="let candidate of pb.partyBundleCandidates">
             <div class="d-flex jcsb  w-100 px-2">
-                <span class="bolder fs-7">Starters</span>
-                <span *ngIf="selectedStarters.length === 0" class="tag-primary">Required</span>
-                <span *ngIf="selectedStarters.length === 1" class="tag-primary">1 more</span>
-                <span *ngIf="selectedStarters.length === 2" class="tag-success bolder">All Set</span>
-                <span *ngIf="selectedStarters.length > 2" class="tag-danger">Max
-                    2</span>
+                <span class="bolder fs-7">{{candidate.name}}</span>
+                <span class="tag-primary" [class.tag-success]="getRequiredText(candidate)==='All Set'">{{getRequiredText(candidate)}}</span>
                 <!-- <fa-icon *ngIf="selectedStarters.length === 2" [icon]="faCheck"></fa-icon> -->
             </div>
             <div class="flex-column" style="max-height: 80px;overflow-y: auto;">
-                <div class="w-100 p-2 py-1 border-bottom flex-row aic jcsb" *ngFor="let item of pb.starters">
+                <div class="w-100 p-2 py-1 border-bottom flex-row aic jcsb" *ngFor="let item of candidate.items">
                     <span>{{item.name}}</span>
                     <label class="check-div">
-                        <input id="toggle" type="checkbox" value="item.name" id="item.name" (change)="selectStarter(item,$event)" />
+                        <input id="toggle" type="checkbox" value="item.name" id="item.name" (change)="selectItemOnCandidate(candidate, item,$event)" />
                         <span class="checkmark"></span>
                       </label>
                 </div>
             </div>
         </div>
-        <div class="flex-column w-100 bg-light my-2 p-2">
-            <div class="d-flex jcsb  w-100">
-                <span class="bolder fs-7">Mains</span>
-                <span class="bg-dark px-2 br-7 color-white">Required</span>
-            </div>
-            <div class="w-100 p-2 py-1 border-bottom" *ngFor="let item of pb.mains">
-                <span>{{item.name}}</span>
-            </div>
-        </div>
-        <div class="flex-column w-100 bg-light my-2 p-2">
-            <div class="d-flex jcsb  w-100">
-                <span class="bolder fs-7">Deserts</span>
-                <span class="bg-dark px-2 br-7 color-white">Required</span>
-            </div>
-            <div class="w-100 p-2 py-1 border-bottom" *ngFor="let item of pb.deserts">
-                <span>{{item.name}}</span>
-            </div>
-        </div>
-        <div class="flex-column w-100 bg-light my-2 p-2">
-            <div class="d-flex jcsb  w-100">
-                <span class="bolder fs-7">Sides</span>
-                <span class="bg-white px-2 br-7">Optional</span>
-            </div>
-            <div class="w-100 p-2 py-1 border-bottom" *ngFor="let item of pb.sides">
-                <span>{{item.name}}</span>
-            </div>
-        </div>
+       
         <div class="flex-column w-100 bg-light my-2 p-2">
             <div class="d-flex jcsb  w-100">
                 <span class="bolder fs-7">Extras</span>

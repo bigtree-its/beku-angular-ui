@@ -9,6 +9,7 @@ import {
   OrderSearchQuery,
   OrderTracking,
   OrderUpdateRequest,
+  PartyOrderItem,
   SupplierOrders,
 } from '../model/localchef';
 import { UserSession } from '../model/common-models';
@@ -23,6 +24,8 @@ import { Constants } from './constants';
   providedIn: 'root',
 })
 export class FoodOrderService {
+
+
   userSession: UserSession;
   ipAddress: any;
   supplier: LocalChef;
@@ -350,6 +353,26 @@ export class FoodOrderService {
     this.calculateTotal();
   }
 
+  addPartyItemToOrder(partyItem: PartyOrderItem) {
+    throw new Error("Method not implemented.");
+  }
+
+  updatePartyItem(partyItem: PartyOrderItem) {
+    throw new Error('Method not implemented.');
+  }
+
+  removePartyItem(partyItem: PartyOrderItem) {
+    if (this.foodOrder !== null && this.foodOrder !== undefined) {
+      for (var i = 0; i < this.foodOrder.items.length; i++) {
+        var item = this.foodOrder.items[i];
+        if (item._tempId === partyItem._tempId) {
+          this.foodOrder.items.splice(i, 1);
+        }
+      }
+    }
+    this.calculateTotal();
+  }
+
   removeItem(itemToDelete: FoodOrderItem) {
     if (this.foodOrder !== null && this.foodOrder !== undefined) {
       for (var i = 0; i < this.foodOrder.items.length; i++) {
@@ -436,9 +459,9 @@ export class FoodOrderService {
     };
     console.log(
       'Creating payment intent: ' +
-        this.serviceLocator.FoodOrdersPaymentIntentUrl +
-        ', ' +
-        JSON.stringify(paymentIntentRequest)
+      this.serviceLocator.FoodOrdersPaymentIntentUrl +
+      ', ' +
+      JSON.stringify(paymentIntentRequest)
     );
     return this.http.post<PaymentIntentResponse>(
       this.serviceLocator.FoodOrdersPaymentIntentUrl,
@@ -451,14 +474,43 @@ export class FoodOrderService {
   ): Observable<PaymentIntentResponse> {
     console.log(
       'Creating payment intent: ' +
-        this.serviceLocator.FoodOrdersPaymentIntentUrl +
-        ', ' +
-        JSON.stringify(paymentIntentRequest)
+      this.serviceLocator.FoodOrdersPaymentIntentUrl +
+      ', ' +
+      JSON.stringify(paymentIntentRequest)
     );
     return this.http.post<PaymentIntentResponse>(
       this.serviceLocator.FoodOrdersPaymentIntentUrl,
       paymentIntentRequest
     );
+  }
+
+  public createPartyOrder(){
+    var partyOrder: FoodOrder = {
+      id: '',
+      paymentIntentId: '',
+      clientSecret: '',
+      supplier: undefined,
+      customer: undefined,
+      reference: '',
+      currency: '',
+      serviceMode: '',
+      items: [],
+      partyItems: [],
+      subTotal: 0,
+      total: 0,
+      deliveryFee: this.getDeliveryFee(),
+      packingFee: this.getPackagingFee(),
+      dateCreated: undefined,
+      deliverBy: undefined,
+      collectBy: undefined,
+      dateDeleted: undefined,
+      expectedDeliveryDate: undefined,
+      dateAccepted: undefined,
+      dateDelivered: undefined,
+      dateCollected: undefined,
+      partyOrder: undefined,
+      notes: ''
+    }
   }
 
   public createOrder() {
@@ -542,9 +594,9 @@ export class FoodOrderService {
   updateOrder(orderUpdateRequest: OrderUpdateRequest): Observable<FoodOrder> {
     console.log(
       'Updating Order: ' +
-        this.serviceLocator.FoodOrdersUrl +
-        ', ' +
-        JSON.stringify(orderUpdateRequest)
+      this.serviceLocator.FoodOrdersUrl +
+      ', ' +
+      JSON.stringify(orderUpdateRequest)
     );
     return this.http
       .put<FoodOrder>(this.serviceLocator.FoodOrdersUrl, orderUpdateRequest)
@@ -558,9 +610,9 @@ export class FoodOrderService {
   placeOrder(FoodOrder: FoodOrder): Observable<FoodOrder> {
     console.log(
       'Placing an order for LocalChef : ' +
-        this.serviceLocator.FoodOrdersUrl +
-        ', ' +
-        JSON.stringify(FoodOrder)
+      this.serviceLocator.FoodOrdersUrl +
+      ', ' +
+      JSON.stringify(FoodOrder)
     );
     return this.http.post<FoodOrder>(
       this.serviceLocator.FoodOrdersUrl,

@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { OrderItem, Product } from "../model/products/all";
-import { FoodOrderItem } from "../model/localchef";
+import { FoodOrderItem, PartyOrderItem } from "../model/localchef";
 import { LocalService } from "./local.service";
 import { Constants } from "./constants";
 import { Utils } from "../helpers/utils";
@@ -14,6 +14,7 @@ import { ConfirmationDialogService } from "../shared/confirmation-dialog/confirm
 })
 export class BasketService {
 
+
     pOrderService = inject(OrderService);
     fOrderService = inject(FoodOrderService);
     localService = inject(LocalService);
@@ -24,7 +25,7 @@ export class BasketService {
         console.log('Adding a product to cart');
         var json = this.localService.getData(Constants.StorageItem_F_Order);
         if (Utils.isValid(json) && Utils.isJsonString(json)) {
-            if (window.confirm("There is a Food Order. Are you sure to delete that and create Product Order ?")){
+            if (window.confirm("There is a Food Order. Are you sure to delete that and create Product Order ?")) {
                 this.fOrderService.destroy();
                 this.pOrderService.addToOrder(OrderItem);
             }
@@ -37,12 +38,25 @@ export class BasketService {
         console.log('Adding a food to cart');
         var json = this.localService.getData(Constants.StorageItem_P_Order);
         if (Utils.isValid(json) && Utils.isJsonString(json)) {
-            if (window.confirm("There is a Product Order.You sure to delete that and create Food Order ?")){
+            if (window.confirm("There is a Product Order.You sure to delete that and create Food Order ?")) {
                 this.pOrderService.destroy();
                 this.fOrderService.addToOrder(foodItem);
             }
         } else {
             this.fOrderService.addToOrder(foodItem);
+        }
+    }
+
+    addPartyItem(partyItem: PartyOrderItem) {
+        console.log('Adding party item to cart');
+        var json = this.localService.getData(Constants.StorageItem_P_Order);
+        if (Utils.isValid(json) && Utils.isJsonString(json)) {
+            if (window.confirm("There is a Product Order.You sure to delete that and create Food Order ?")) {
+                this.pOrderService.destroy();
+                this.fOrderService.addPartyItemToOrder(partyItem);
+            }
+        } else {
+            this.fOrderService.addPartyItemToOrder(partyItem);
         }
     }
 }

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Extra, Food, FoodOrderItem, Menu } from 'src/app/model/localchef';
+import { Extra, Food, FoodOrderItem, Menu, PartyOrderItem } from 'src/app/model/localchef';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   faCheck,
@@ -10,7 +10,8 @@ import {
   faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import { BasketService } from 'src/app/services/basket.service';
-import { PartyBundle } from 'src/app/model/foods/all-foods';
+import { PartyBundle, PartyBundleCandidate } from 'src/app/model/foods/all-foods';
+import { Utils } from 'src/app/helpers/utils';
 
 @Component({
   selector: 'app-food-item',
@@ -18,6 +19,7 @@ import { PartyBundle } from 'src/app/model/foods/all-foods';
   styleUrls: ['./food-item.component.css'],
 })
 export class FoodItemComponent {
+
   @Input() menu?: Menu;
   @Input() displayOrderBy?: Boolean = false;
   @Input() displayDescription?: Boolean = false;
@@ -37,15 +39,12 @@ export class FoodItemComponent {
   faMinus = faMinus;
   faPepperHot = faPepperHot;
   faCircle = faCircle;
-  selectedStarters: Food[] = [];
-  selectedMains: Food[] = [];
-  selectedDeserts: Food[] = [];
-  selectedSides: Food[] = [];
+  candidates: PartyBundleCandidate[] = [];
 
   constructor(
     private basketService: BasketService,
     private modalService: NgbModal
-  ) {}
+  ) { }
 
   ngOnInit() {
     if (this.menu) {
@@ -71,7 +70,7 @@ export class FoodItemComponent {
         windowClass: 'custom-class',
       })
       .result.then(
-        (result) => {},
+        (result) => { },
         (reason) => {
           // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         }
@@ -82,26 +81,76 @@ export class FoodItemComponent {
     this.modalService.dismissAll();
   }
 
-  selectStarter(_t92: Food, e: any) {
-    if (this.selectedStarters.length === 2){
-      return;
-    }
+  selectItemOnCandidate(candidate: PartyBundleCandidate, food: Food, e: any) {
     if (this.pb !== null && this.pb !== undefined) {
-      this.pb.starters.forEach((item) => {
-        if (item.name === _t92.name) {
-          if (e.target.checked) {
-            this.selectedStarters.push(item);
-          } else {
-            for (var i = 0; i < this.selectedStarters.length; i++) {
-              var st = this.selectedStarters[i];
-              if (st.name === _t92.name) {
-                this.selectedStarters.splice(i, 1);
-              }
+      var candis: PartyBundleCandidate[] = this.pb.partyBundleCandidates.filter(c => c.name === candidate.name);
+      var theCandidate = candis[0];
+      console.log('Item Clicked on ' + theCandidate.name + ", Food " + food.name);
+      console.log('Master Candidates ' + this.pb.partyBundleCandidates.length);
+      console.log('Current Candidates ' + this.candidates.length);
+
+      // When User selected a food item
+      if (e.target.checked) {
+        var candiOnSelectedCandis: PartyBundleCandidate[] = this.candidates.filter(c => c.name === candidate.name);
+        var theSelectedCandidate = candiOnSelectedCandis[0];
+        if ( theSelectedCandidate){
+          console.log('Canidate has found in selected list ' + theSelectedCandidate.name );
+          if (theSelectedCandidate.items.length === theSelectedCandidate.max) {
+            e.target.checked = false;
+            return;
+          }else{
+            console.log('Pushing item to ' + theSelectedCandidate.name );
+            theSelectedCandidate.items.push(food);
+          }
+        }else{
+          // The candiate never been selected
+          console.log('This canidate not on list.. Adding');
+          var c1: PartyBundleCandidate = {
+            name: theCandidate.name,
+            required: theCandidate.required,
+            max: theCandidate.max,
+            items: []
+          }
+          c1.items.push(food);
+          this.candidates.push(c1);
+          console.log('Selected candiates '+ this.candidates.length);
+        }
+      } else {
+         // When User un-selected a food item
+         console.log('User unselected  '+ food.name);
+        var candiOnSelectedCandis: PartyBundleCandidate[] = this.candidates.filter(c => c.name === candidate.name);
+        var theSelectedCandidate = candiOnSelectedCandis[0];
+        if ( theSelectedCandidate){
+          for (var i = 0; i <  theSelectedCandidate.items.length; i++) {
+            var foodOn = theSelectedCandidate.items[i];
+            if (foodOn.name === food.name) {
+              theSelectedCandidate.items.splice(i, 1);
             }
           }
         }
-      });
+      }
+    
     }
+
+
+  }
+
+  getRequiredText(_t88: PartyBundleCandidate) {
+    if ( this.candidates.length > 0){
+      var candidate = null;
+      for (var i = 0; i <  this.candidates.length; i++) {
+        var c = this.candidates[i];
+        if (c.name === _t88.name) {
+          candidate = c;
+          break;
+        }
+      }
+      if ( candidate){
+        return candidate.items.length === 0? "Required": candidate.items.length < candidate.max? candidate.max - candidate.items.length + " more": "All Set"; 
+      }
+      
+    }
+    return _t88.required? "Required": "Optional";
   }
 
   handleChoiceSelection(e: any) {
@@ -181,19 +230,36 @@ export class FoodItemComponent {
 
   addToOrder() {
     console.log('Add to Order: ');
-    var foodOrderItem: FoodOrderItem = {
-      _tempId: Date.now(),
-      id: this.menu._id,
-      image: this.menu.image,
-      name: this.menu.name,
-      quantity: this.quantity,
-      price: this.menu.price,
-      subTotal: this.price,
-      extras: this.selectedExtras,
-      choice: this.selectedchoice,
-      specialInstruction: this.specialInstruction,
-    };
-    this.basketService.addToFoodOrder(foodOrderItem);
+    if ( this.pb){
+      var partyItem: PartyOrderItem = {
+        _tempId: Date.now(),
+        id: this.menu._id,
+        image: this.menu.image,
+        name: this.menu.name,
+        quantity: this.quantity,
+        price: this.menu.price,
+        subTotal: this.price,
+        extras: this.selectedExtras,
+        candidates: this.candidates,
+        specialInstruction: this.specialInstruction,
+      };
+      this.basketService.addPartyItem(partyItem);
+    }else{
+      var foodOrderItem: FoodOrderItem = {
+        _tempId: Date.now(),
+        id: this.menu._id,
+        image: this.menu.image,
+        name: this.menu.name,
+        quantity: this.quantity,
+        price: this.menu.price,
+        subTotal: this.price,
+        extras: this.selectedExtras,
+        choice: this.selectedchoice,
+        specialInstruction: this.specialInstruction,
+      };
+      this.basketService.addToFoodOrder(foodOrderItem);
+    }
+   
     this.close();
   }
 }

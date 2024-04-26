@@ -1,4 +1,5 @@
 import { Address, ChefContact, Contact, User } from "./common-models";
+import { PartyBundleCandidate } from "./foods/all-foods";
 
 export interface OrderSupplier{
     _id: string;
@@ -223,20 +224,24 @@ export interface FoodOrder {
     currency: string;
     serviceMode: string;
     items: FoodOrderItem[];
+    partyItems: PartyOrderItem[];
     subTotal: number;
     total: number;
     deliveryFee: number;
     packingFee: number;
     serviceFee: number;
     dateCreated: Date;
+    deliverBy: Date;
     collectBy: Date;
     dateDeleted: Date;
     expectedDeliveryDate: Date;
     dateAccepted: Date;
     dateDelivered: Date;
     dateCollected: Date;
+    partyOrder: Boolean;
     notes: string;
 }
+
 
 export interface SupplierSummary{
     totalOrdersWeekly: number;
@@ -351,6 +356,19 @@ export interface FoodOrderItem {
     price: number;
     extras: Extra[];
     choice: Extra;
+    subTotal: number;
+    specialInstruction: string;
+}
+
+export interface PartyOrderItem {
+    _tempId: number;
+    id: string;
+    image: string;
+    name: string;
+    quantity: number;
+    price: number;
+    candidates: PartyBundleCandidate[];
+    extras: Extra[];
     subTotal: number;
     specialInstruction: string;
 }

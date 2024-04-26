@@ -1,4 +1,20 @@
 import { Extra, Food } from "../localchef";
+const PartyBundleCandidate = {
+    name: String,
+    required: Boolean,
+    max: Number,
+    items: [{
+        type: String,
+        ref: 'Menu'
+    }]
+}
+
+export interface PartyBundleCandidate {
+    name: string;
+    required: boolean;
+    max: number;
+    items: Food[]
+}
 
 export interface PartyBundle{
     _id: string;
@@ -7,14 +23,7 @@ export interface PartyBundle{
     name: string;
     slug: string;
     price: number;
-    maxStarters: number;
-    maxMains: number;
-    maxDeserts: number;
-    maxSides: number;
-    starters: Food[],
-    mains: Food[],
-    sides: Food[],
-    deserts: Food[],
+    partyBundleCandidates: PartyBundleCandidate[],
     extras: Extra[],
     vegetarian: boolean,
     discounted: boolean,
