@@ -85,16 +85,11 @@ export class FoodItemComponent {
     if (this.pb !== null && this.pb !== undefined) {
       var candis: PartyBundleCandidate[] = this.pb.partyBundleCandidates.filter(c => c.name === candidate.name);
       var theCandidate = candis[0];
-      console.log('Item Clicked on ' + theCandidate.name + ", Food " + food.name);
-      console.log('Master Candidates ' + this.pb.partyBundleCandidates.length);
-      console.log('Current Candidates ' + this.candidates.length);
-
       // When User selected a food item
       if (e.target.checked) {
         var candiOnSelectedCandis: PartyBundleCandidate[] = this.candidates.filter(c => c.name === candidate.name);
         var theSelectedCandidate = candiOnSelectedCandis[0];
         if ( theSelectedCandidate){
-          console.log('Canidate has found in selected list ' + theSelectedCandidate.name );
           if (theSelectedCandidate.items.length === theSelectedCandidate.max) {
             e.target.checked = false;
             return;
@@ -103,8 +98,7 @@ export class FoodItemComponent {
             theSelectedCandidate.items.push(food);
           }
         }else{
-          // The candiate never been selected
-          console.log('This canidate not on list.. Adding');
+          // The candidate never been selected
           var c1: PartyBundleCandidate = {
             name: theCandidate.name,
             required: theCandidate.required,
@@ -113,7 +107,6 @@ export class FoodItemComponent {
           }
           c1.items.push(food);
           this.candidates.push(c1);
-          console.log('Selected candiates '+ this.candidates.length);
         }
       } else {
          // When User un-selected a food item
@@ -129,10 +122,7 @@ export class FoodItemComponent {
           }
         }
       }
-    
     }
-
-
   }
 
   getRequiredText(_t88: PartyBundleCandidate) {
@@ -222,7 +212,11 @@ export class FoodItemComponent {
     if (this.selectedchoice !== null && this.selectedchoice !== undefined) {
       extraTotal = extraTotal + this.selectedchoice.price;
     }
-    if (this.menu !== null && this.menu !== undefined) {
+    if ( this.pb){
+      this.price = (this.pb.price + extraTotal) * this.quantity;
+      this.price = +(+this.price).toFixed(2);
+    }
+    if (this.menu){
       this.price = (this.menu.price + extraTotal) * this.quantity;
       this.price = +(+this.price).toFixed(2);
     }
@@ -233,11 +227,11 @@ export class FoodItemComponent {
     if ( this.pb){
       var partyItem: PartyOrderItem = {
         _tempId: Date.now(),
-        id: this.menu._id,
-        image: this.menu.image,
-        name: this.menu.name,
+        id: this.pb._id,
+        image: this.pb.image,
+        name: this.pb.name,
         quantity: this.quantity,
-        price: this.menu.price,
+        price: this.pb.price,
         subTotal: this.price,
         extras: this.selectedExtras,
         candidates: this.candidates,

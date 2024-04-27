@@ -3,6 +3,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  Injectable,
   OnDestroy,
   ViewChild,
 } from '@angular/core';
@@ -25,12 +26,18 @@ import {
   faArrowLeft,
   faArrowRight,
   faBatteryEmpty,
+  faCalendar,
   faFaceSmile,
   faPeopleArrows,
   faStar,
 } from '@fortawesome/free-solid-svg-icons';
-import { DateCalcPipe } from 'src/app/pipes/date-calc.pipe';
 import { PartyBundle } from 'src/app/model/foods/all-foods';
+import {
+  NgbAlertModule,
+  NgbDateParserFormatter,
+  NgbDatepickerModule,
+  NgbDateStruct,
+} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-chef-home',
@@ -41,10 +48,14 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
   @ViewChild('widgetsContent', { read: ElementRef })
   public widgetsContent: ElementRef<any>;
 
+  eventDate: NgbDateStruct;
+  eventTime = { hour: 13, minute: 30 };
+
   faArrowLeft = faArrowLeft;
   faArrowRight = faArrowRight;
   faPeopleArrows = faPeopleArrows;
   faFaceSmile = faFaceSmile;
+  faCalendar = faCalendar;
 
   chef: LocalChef | undefined;
   display_picture: any;
@@ -149,9 +160,8 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
     }
     this.orderService.orderSubject$.subscribe({
       next: (value) => {
-        console.log('OrderSubject emitted a change'),
-        this.order = value;
-        if ( Utils.isValid(this.order)){
+        console.log('OrderSubject emitted a change'), (this.order = value);
+        if (Utils.isValid(this.order)) {
           this.cartTotal = this.order.total;
         }
       },
@@ -176,20 +186,20 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
       let chefObs = this.chefService.getChef(this.supplierId);
       chefObs.pipe(takeUntil(this.destroy$)).subscribe({
         next: (data) => {
-          if (!Utils.isValid(data)){
-            this.incorrectLanding =true;
-          }else{
+          if (!Utils.isValid(data)) {
+            this.incorrectLanding = true;
+          } else {
             this.chef = data;
             this.fetchItems(this.chef._id);
             this.fetchCalendars(this.chef._id);
             this.fetchReviews(this.chef._id);
-            if ( this.chef.doPartyOrders){
+            if (this.chef.doPartyOrders) {
               this.fetchPartyBundles(this.chef._id);
             }
           }
         },
         error: (err) => {
-          this.incorrectLanding =true;
+          this.incorrectLanding = true;
           console.error(
             'Errors when getting chef from server. ' + JSON.stringify(err)
           );
@@ -199,15 +209,16 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
   }
 
   fetchPartyBundles(supplierId: string) {
-    this.chefService.getPartyBundleForChef(supplierId).subscribe((partyBundles: PartyBundle[]) => {
-      this.partyBundles = partyBundles;
-      console.log('PartyBundles fetched: ' + this.partyBundles.length);
-    });
+    this.chefService
+      .getPartyBundleForChef(supplierId)
+      .subscribe((partyBundles: PartyBundle[]) => {
+        this.partyBundles = partyBundles;
+        console.log('PartyBundles fetched: ' + this.partyBundles.length);
+      });
   }
 
   checkOrder() {
     this.orderService.getData();
-    
   }
 
   writeReview() {
@@ -329,22 +340,21 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
     this._location.back();
   }
 
-  selectCalendar(calendar: Calendar){
-    console.log('Selected calendar '+ calendar.date)
+  selectCalendar(calendar: Calendar) {
+    console.log('Selected calendar ' + calendar.date);
     this.calendarToDisplay = calendar;
-    
   }
 
   onSelectCategory(category: Collection) {
     this.selectedCategory = category;
-    if ( category.name === 'This Week'){
+    if (category.name === 'This Week') {
       this.displayCal = true;
       this.calendarToDisplay = this.calendars[0];
-    }else{
+    } else {
       this.filterItemsByCat(category);
       this.displayCal = false;
     }
-   
+
     // // event.target.style = "border-right: 3px solid #766df4;color: #766df4;text-align: right;";
     // this.categoriesMap.set(category, event.target);
     // this.categoriesMap.forEach((key: string, value: any) => {
@@ -359,3 +369,5 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
     this.destroy$.complete();
   }
 }
+
+

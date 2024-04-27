@@ -17,6 +17,7 @@ export interface PartyBundleCandidate {
 }
 
 export interface PartyBundle{
+    image: string;
     _id: string;
     chefId: string;
     collectionId: string;

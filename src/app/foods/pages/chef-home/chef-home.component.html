@@ -76,8 +76,16 @@
                         |
                         currency:'GBP'}}</span>
                 </div>
-                <div *ngIf="order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0; then itemsBlock else noItemsBlock">
+                <div *ngIf="order && !order.partyOrder">
+                    <div *ngIf="order !== null && order !== undefined &&  order.items !== null &&  order.items !== undefined &&  order.items.length > 0; then itemsBlock else noItemsBlock">
+                    </div>
                 </div>
+
+                <div *ngIf="order && order.partyOrder">
+                    <div *ngIf="order.partyItems !== null &&  order.partyItems !== undefined &&  order?.partyItems.length > 0; then itemsBlock else noItemsBlock">
+                    </div>
+                </div>
+
                 <div class="d-flex jcc aic mt-3">
                     <button class="btn-lift flex-grow py-2 f-size-md" [routerLink]="[ '/f/checkout'] " *ngIf="(order !== null && order !== undefined &&  order.items !== null && order.items.length > 0)">Checkout</button>
                 </div>
@@ -123,37 +131,47 @@
 </ng-template>
 
 <ng-template #itemsBlock>
-    <div class="flex-column justify-content-center align-items-center">
-        <div style=" display: flex; flex-direction: column;width: 100%;padding: 5px 30px;">
-            <div class="flex-row-space-between">
-                <span>Subtotal</span>
-                <span>{{order.subTotal | currency: 'GBP'}}</span>
+    <div class="flex-column jcc aic">
+        <div *ngIf="order && order.partyOrder" class="flex-row jcsb w-100 aic gap-1">
+            <span class="bolder">Event</span>
+            <div class="input-group">
+                <input class="form-control" placeholder="dd-mm-yyyy" name="dp" [(ngModel)]="eventDate" ngbDatepicker #d="ngbDatepicker" />
+                <fa-icon [icon]="faCalendar" (click)="d.toggle()" class="border br-tr-7 br-br-7 p-2 clickable-icon"></fa-icon>
             </div>
-            <div class="flex-row-space-between">
-                <span>Delivery fee</span>
-                <span>{{order.deliveryFee | currency: 'GBP'}}</span>
-            </div>
-            <div class="flex-row-space-between">
-                <span>Packing fee</span>
-                <span>{{order.packingFee | currency: 'GBP'}}</span>
-            </div>
-            <div class="flex-row-space-between">
-                <span>Service Fee</span>
-                <span>{{order.serviceFee | currency: 'GBP'}}</span>
-            </div>
-            <div class="flex-row-space-between" style="margin-top: 10px;">
-                <span style="font-weight: 900;">TOTAL</span>
-                <span style="font-weight: 900;">{{order.total | currency:
-                    'GBP'}}</span>
-            </div>
+            <ngb-timepicker [(ngModel)]="eventTime" />
+        </div>
+        <div class="flex-row-space-between">
+            <span>Subtotal</span>
+            <span>{{order.subTotal | currency: 'GBP'}}</span>
+        </div>
+        <div class="flex-row-space-between">
+            <span>Delivery fee</span>
+            <span>{{order.deliveryFee | currency: 'GBP'}}</span>
+        </div>
+        <div class="flex-row-space-between">
+            <span>Packing fee</span>
+            <span>{{order.packingFee | currency: 'GBP'}}</span>
+        </div>
+        <div class="flex-row-space-between">
+            <span>Service Fee</span>
+            <span>{{order.serviceFee | currency: 'GBP'}}</span>
+        </div>
+        <div class="flex-row-space-between" style="margin-top: 10px;">
+            <span style="font-weight: 900;">TOTAL</span>
+            <span style="font-weight: 900;">{{order.total | currency:
+                'GBP'}}</span>
         </div>
         <div style="display: flex;flex-direction: column;width: 100%;padding: 5px;">
             <div *ngIf="order !== null && order !== undefined && order.items !== null && order.items !== undefined && order.items.length > 0">
                 <app-order-item *ngFor="let item of order.items" [item]="item"></app-order-item>
             </div>
+            <div *ngIf="order?.partyItems && order?.partyItems.length > 0">
+                <app-order-item *ngFor="let item of order.partyItems" [partyItem]="item"></app-order-item>
+            </div>
         </div>
     </div>
 </ng-template>
+
 
 <ng-template #NoItemsInCategory>
     <span class="d-flex jcc aic py-2">

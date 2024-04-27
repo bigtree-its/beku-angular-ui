@@ -231,6 +231,7 @@ export interface FoodOrder {
     packingFee: number;
     serviceFee: number;
     dateCreated: Date;
+    partyDate: Date;
     deliverBy: Date;
     collectBy: Date;
     dateDeleted: Date;

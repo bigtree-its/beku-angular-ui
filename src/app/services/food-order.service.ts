@@ -24,8 +24,6 @@ import { Constants } from './constants';
   providedIn: 'root',
 })
 export class FoodOrderService {
-
-
   userSession: UserSession;
   ipAddress: any;
   supplier: LocalChef;
@@ -337,7 +335,7 @@ export class FoodOrderService {
   }
 
   public addToOrder(foodOrderItem: FoodOrderItem) {
-    console.log('Adding item to food order ' + JSON.stringify(this.foodOrder));
+    console.log('Adding item to food order '+ foodOrderItem.name);
     if (this.foodOrder === null || this.foodOrder === undefined) {
       this.getData();
     }
@@ -354,19 +352,28 @@ export class FoodOrderService {
   }
 
   addPartyItemToOrder(partyItem: PartyOrderItem) {
-    throw new Error("Method not implemented.");
-  }
+    console.log('Adding party item to food order '+ partyItem.name);
+    if (this.foodOrder === null || this.foodOrder === undefined) {
+      this.getData();
+    }
+    if (
+      this.foodOrder != null &&
+      this.foodOrder !== undefined &&
+      this.foodOrder.partyItems === null
+    ) {
+      this.foodOrder.partyItems = [];
+    }
 
-  updatePartyItem(partyItem: PartyOrderItem) {
-    throw new Error('Method not implemented.');
+    this.foodOrder.partyItems.push(partyItem);
+    this.calculateTotal();
   }
 
   removePartyItem(partyItem: PartyOrderItem) {
-    if (this.foodOrder !== null && this.foodOrder !== undefined) {
-      for (var i = 0; i < this.foodOrder.items.length; i++) {
-        var item = this.foodOrder.items[i];
+    if (this.foodOrder) {
+      for (var i = 0; i < this.foodOrder.partyItems.length; i++) {
+        var item = this.foodOrder.partyItems[i];
         if (item._tempId === partyItem._tempId) {
-          this.foodOrder.items.splice(i, 1);
+          this.foodOrder.partyItems.splice(i, 1);
         }
       }
     }
@@ -412,17 +419,43 @@ export class FoodOrderService {
     }
   }
 
+  updatePartyItem(partyItem: PartyOrderItem) {
+    var idx = -1;
+    console.log('Updating party item ' + JSON.stringify(partyItem));
+    if (this.foodOrder !== null && this.foodOrder !== undefined) {
+      for (var i = 0; i < this.foodOrder.partyItems.length; i++) {
+        var fi = this.foodOrder.partyItems[i];
+        if (fi._tempId === partyItem._tempId) {
+          console.log('Found existing party item at index ' + i);
+          idx = i;
+          break;
+        }
+      }
+
+      if (idx != -1) {
+        const newItems = [
+          ...this.foodOrder.partyItems.slice(0, idx),
+          partyItem,
+          ...this.foodOrder.partyItems.slice(idx + 1),
+        ];
+        this.foodOrder.partyItems = newItems;
+        this.calculateTotal();
+      }
+    }
+  }
   public calculateTotal() {
     var subTotal: number = 0.0;
-    if (
-      this.foodOrder.items !== null &&
-      this.foodOrder.items !== undefined &&
-      this.foodOrder.items.length > 0
-    ) {
+    if ( this.foodOrder.partyOrder && this.foodOrder.partyItems){
+      this.foodOrder.partyItems.forEach((item) => {
+        subTotal = subTotal + item.subTotal;
+      });
+    }
+    if ( !this.foodOrder.partyOrder && this.foodOrder.items){
       this.foodOrder.items.forEach((item) => {
         subTotal = subTotal + item.subTotal;
       });
     }
+    
     this.foodOrder.deliveryFee = 0.0;
     this.foodOrder.packingFee = 0.0;
     this.foodOrder.serviceFee = 0.0;
@@ -439,11 +472,10 @@ export class FoodOrderService {
       this.foodOrder.deliveryFee +
       this.foodOrder.packingFee +
       this.foodOrder.serviceFee;
-    console.log('Calculating SubTotal: ' + subTotal);
-    console.log('Calculating TotalPay: ' + totalToPay);
+    
     this.foodOrder.total = totalToPay;
     this.foodOrder.total = +(+this.foodOrder.total).toFixed(2);
-    console.log('The calculated order total: ' + this.foodOrder.total);
+    console.log('Food order SubTotal: ' + subTotal+' Total: '+ totalToPay);
     this.setData(this.foodOrder);
   }
 
@@ -459,9 +491,9 @@ export class FoodOrderService {
     };
     console.log(
       'Creating payment intent: ' +
-      this.serviceLocator.FoodOrdersPaymentIntentUrl +
-      ', ' +
-      JSON.stringify(paymentIntentRequest)
+        this.serviceLocator.FoodOrdersPaymentIntentUrl +
+        ', ' +
+        JSON.stringify(paymentIntentRequest)
     );
     return this.http.post<PaymentIntentResponse>(
       this.serviceLocator.FoodOrdersPaymentIntentUrl,
@@ -474,9 +506,9 @@ export class FoodOrderService {
   ): Observable<PaymentIntentResponse> {
     console.log(
       'Creating payment intent: ' +
-      this.serviceLocator.FoodOrdersPaymentIntentUrl +
-      ', ' +
-      JSON.stringify(paymentIntentRequest)
+        this.serviceLocator.FoodOrdersPaymentIntentUrl +
+        ', ' +
+        JSON.stringify(paymentIntentRequest)
     );
     return this.http.post<PaymentIntentResponse>(
       this.serviceLocator.FoodOrdersPaymentIntentUrl,
@@ -484,45 +516,15 @@ export class FoodOrderService {
     );
   }
 
-  public createPartyOrder(){
-    var partyOrder: FoodOrder = {
-      id: '',
-      paymentIntentId: '',
-      clientSecret: '',
-      supplier: undefined,
-      customer: undefined,
-      reference: '',
-      currency: '',
-      serviceMode: '',
-      items: [],
-      partyItems: [],
-      subTotal: 0,
-      total: 0,
-      deliveryFee: this.getDeliveryFee(),
-      packingFee: this.getPackagingFee(),
-      dateCreated: undefined,
-      deliverBy: undefined,
-      collectBy: undefined,
-      dateDeleted: undefined,
-      expectedDeliveryDate: undefined,
-      dateAccepted: undefined,
-      dateDelivered: undefined,
-      dateCollected: undefined,
-      partyOrder: undefined,
-      notes: ''
-    }
-  }
-
   public createOrder() {
     console.log('Creating empty new order');
     if (Utils.isValid(this.supplier)) {
       this.supplier = this.chefService.getData();
     }
-
     this.foodOrder = {
       id: '',
-      status: 'Draft',
-      items: [],
+      paymentIntentId: '',
+      clientSecret: '',
       supplier: {
         _id: this.supplier?._id,
         name: this.supplier?.kitchenName,
@@ -553,26 +555,30 @@ export class FoodOrderService {
           longitude: '',
         },
       },
-      paymentIntentId: '',
-      clientSecret: '',
-      currency: 'GBP',
       reference: '',
-      subTotal: 0.0,
-      total: 0.0,
+      currency: 'GBP',
+      serviceMode: '',
+      items: [],
+      partyItems: [],
+      subTotal: 0,
+      total: 0,
+      serviceFee: 0,
       deliveryFee: this.getDeliveryFee(),
       packingFee: this.getPackagingFee(),
-      serviceFee: 0.0,
       dateCreated: new Date(),
-      dateAccepted: null,
-      expectedDeliveryDate: null,
-      dateCollected: null,
-      dateDelivered: null,
-      collectBy: null,
-      dateDeleted: null,
-      serviceMode: 'COLLECTION',
+      partyDate: undefined,
+      deliverBy: undefined,
+      collectBy: undefined,
+      dateDeleted: undefined,
+      expectedDeliveryDate: undefined,
+      dateAccepted: undefined,
+      dateDelivered: undefined,
+      dateCollected: undefined,
+      partyOrder: false,
       notes: '',
     };
-    console.log('Created a brand new Order ' + JSON.stringify(this.foodOrder));
+
+    console.log('Created a empty Order ' + JSON.stringify(this.foodOrder));
   }
 
   getDeliveryFee(): number {
@@ -594,9 +600,9 @@ export class FoodOrderService {
   updateOrder(orderUpdateRequest: OrderUpdateRequest): Observable<FoodOrder> {
     console.log(
       'Updating Order: ' +
-      this.serviceLocator.FoodOrdersUrl +
-      ', ' +
-      JSON.stringify(orderUpdateRequest)
+        this.serviceLocator.FoodOrdersUrl +
+        ', ' +
+        JSON.stringify(orderUpdateRequest)
     );
     return this.http
       .put<FoodOrder>(this.serviceLocator.FoodOrdersUrl, orderUpdateRequest)
@@ -610,9 +616,9 @@ export class FoodOrderService {
   placeOrder(FoodOrder: FoodOrder): Observable<FoodOrder> {
     console.log(
       'Placing an order for LocalChef : ' +
-      this.serviceLocator.FoodOrdersUrl +
-      ', ' +
-      JSON.stringify(FoodOrder)
+        this.serviceLocator.FoodOrdersUrl +
+        ', ' +
+        JSON.stringify(FoodOrder)
     );
     return this.http.post<FoodOrder>(
       this.serviceLocator.FoodOrdersUrl,
@@ -677,5 +683,19 @@ export class FoodOrderService {
 
   destroy() {
     this.purgeData();
+  }
+
+  convertPartyOrder() {
+    if ( this.foodOrder && !this.foodOrder.partyOrder){
+      console.log('Converting regular food order to party order')
+      this.foodOrder.partyOrder = true;
+      this.foodOrder.items = [];
+      this.foodOrder.partyItems = [];
+      this.foodOrder.subTotal= 0;
+      this.foodOrder.total= 0;
+      this.foodOrder.serviceFee =0;
+      this.foodOrder.reference ='';
+      this.foodOrder.notes ='';
+    }
   }
 }

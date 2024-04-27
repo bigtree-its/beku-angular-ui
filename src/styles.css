@@ -399,9 +399,10 @@ tr:nth-child(odd) {
     background-color: #007bff;
 }
 
-.bg-success{
+.bg-success {
     background-color: var(--brand-color);
 }
+
 .text-outline {
     font-family: "Londrina Outline", sans-serif;
 }
@@ -742,6 +743,22 @@ select {
 .br-bottom-25 {
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
+}
+
+.br-tr-7 {
+    border-top-right-radius: 7px;
+}
+
+.br-br-7 {
+    border-bottom-right-radius: 7px;
+}
+
+.br-tl-7 {
+    border-top-left-radius: 7px;
+}
+
+.br-bl-7 {
+    border-top-left-radius: 7px;
 }
 
 .hp-search-container {
@@ -1422,6 +1439,15 @@ select {
 .clickable:hover {
     cursor: pointer;
     background-color: #dedede;
+}
+
+.clickable-icon {
+    cursor: pointer;
+}
+
+.clickable-icon:hover {
+    border: 1px solid #000a19;
+    color: #333BFF;
 }
 
 .clickable-selected {

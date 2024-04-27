@@ -49,14 +49,24 @@ export class BasketService {
 
     addPartyItem(partyItem: PartyOrderItem) {
         console.log('Adding party item to cart');
-        var json = this.localService.getData(Constants.StorageItem_P_Order);
-        if (Utils.isValid(json) && Utils.isJsonString(json)) {
-            if (window.confirm("There is a Product Order.You sure to delete that and create Food Order ?")) {
+        var pJson = this.localService.getData(Constants.StorageItem_P_Order);
+        var fJson = this.localService.getData(Constants.StorageItem_F_Order);
+        if (Utils.isValid(pJson) && Utils.isJsonString(pJson)) {
+            if (window.confirm("There is a Product Order.Are you sure to delete that and create a Food Order ?")) {
                 this.pOrderService.destroy();
                 this.fOrderService.addPartyItemToOrder(partyItem);
             }
-        } else {
-            this.fOrderService.addPartyItemToOrder(partyItem);
+        } else  if (Utils.isValid(fJson) && Utils.isJsonString(fJson)) {
+            var obj = JSON.parse(fJson);
+            if (! obj.partyOrder){
+                if (window.confirm("There is a regular food Order.Are you sure to delete that and create a Party Order ?")) {
+                    this.fOrderService.convertPartyOrder();
+                    this.fOrderService.addPartyItemToOrder(partyItem);
+                }
+            }else{
+                this.fOrderService.addPartyItemToOrder(partyItem);
+            }
+           
         }
     }
 }

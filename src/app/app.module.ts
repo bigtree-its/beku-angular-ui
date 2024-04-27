@@ -10,7 +10,7 @@ import { SharedModule } from './shared';
 import { OrderModule } from './order';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { AuthModule } from './auth';
-import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateParserFormatter, NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,6 +19,7 @@ import { SideNavContentComponent } from './shared/side-nav-content/side-nav-cont
 import { PaymentsModule } from './payments';
 import { ProductsModule } from './products';
 import { FoodsModule } from './foods';
+import { CustomDateParserFormatter } from './shared/CustomDateParserFormatter';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,9 @@ import { FoodsModule } from './foods';
       progressBar: false, // Show progress bar
     }),
   ],
-  providers: [ { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+  providers: [ 
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
