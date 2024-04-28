@@ -37,6 +37,7 @@ import {
   NgbDateParserFormatter,
   NgbDatepickerModule,
   NgbDateStruct,
+  NgbModal,
 } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -133,7 +134,8 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
     private chefService: ChefService,
     private reviewService: ReviewService,
     private _location: Location,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) {}
 
   ngAfterViewInit(): void {
@@ -368,6 +370,37 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
+  openModal(content) {
+    this.modalService
+      .open(content, {
+        ariaLabelledBy: 'modal-basic-title',
+        windowClass: 'custom-class',
+      })
+      .result.then(
+        (result) => {},
+        (reason) => {
+          // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
+
+  close() {
+    this.modalService.dismissAll();
+  }
+
+  isEventValid(): any {
+    var today = new Date();
+    const jsDate = new Date(this.eventDate.year, this.eventDate.month - 1, this.eventDate.day);
+    var diff = this.calculateDiff(jsDate);
+    // var eventDate = this.eventDate.day;
+    console.log('Today '+ today+ ' Event day '+ jsDate+' Lapsed: '+ diff);
+    return false;
+  }
+
+  calculateDiff(dateSent){
+    let currentDate = new Date();
+    dateSent = new Date(dateSent);
+    return Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate()) ) /(1000 * 60 * 60 * 24));
 }
-
-
+}

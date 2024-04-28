@@ -46,6 +46,7 @@ export interface LocalChef {
     gallery: string[];
     rating: number;
     reviews: number;
+    partyOrderLeadDays: number;
     address: Address;
     contact: ChefContact;
     active: boolean;

@@ -28,7 +28,8 @@
                         <span class="py-1 px-1 f-size-s lg">{{chef.description}}</span>
                         <div class="my-1">
                             <div class="gap-1 flex-row-wrap">
-                                <span style="font-size: 10px;" class="attribute big-text" *ngFor="let cuisine of chef.cuisines | slice:0:3">{{ cuisine.name }}
+                                <span style="font-size: 10px;" class="attribute big-text" *ngFor="let cuisine of chef.cuisines | slice:0:3">{{
+                                    cuisine.name }}
                                 </span>
                             </div>
                         </div>
@@ -55,7 +56,9 @@
                             <b (click)="selectLayout('Reviews')" class="square mx-2 px-3">Reviews
                                 ({{reviews.length}})</b>
                             <b (click)="selectLayout('Info')" class="square mx-2 px-3">Info</b>
-                            <b (click)="selectLayout('Party')" class="square mx-2 px-3">Party</b>
+                            <!-- <b (click)="selectLayout('Party')" class="square mx-2 px-3">Party</b> -->
+                            <b (click)="openModal(partyModal)" class="square mx-2 px-3">Party</b>
+
                         </div>
                     </div>
                 </div>
@@ -87,7 +90,7 @@
                 </div>
 
                 <div class="d-flex jcc aic mt-3">
-                    <button class="btn-lift flex-grow py-2 f-size-md" [routerLink]="[ '/f/checkout'] " *ngIf="(order !== null && order !== undefined &&  order.items !== null && order.items.length > 0)">Checkout</button>
+                    <button class="btn-14 flex-grow py-2 f-size-md" [routerLink]="[ '/f/checkout'] " *ngIf="(order?.items && (order.items.length > 0|| order.partyItems.length > 0))">Checkout</button>
                 </div>
             </div>
         </div>
@@ -162,7 +165,7 @@
                 'GBP'}}</span>
         </div>
         <div style="display: flex;flex-direction: column;width: 100%;padding: 5px;">
-            <div *ngIf="order !== null && order !== undefined && order.items !== null && order.items !== undefined && order.items.length > 0">
+            <div *ngIf="order?.items && order.items.length > 0">
                 <app-order-item *ngFor="let item of order.items" [item]="item"></app-order-item>
             </div>
             <div *ngIf="order?.partyItems && order?.partyItems.length > 0">
@@ -171,7 +174,6 @@
         </div>
     </div>
 </ng-template>
-
 
 <ng-template #NoItemsInCategory>
     <span class="d-flex jcc aic py-2">
@@ -276,5 +278,61 @@
 <ng-template #partyLayout>
     <div class="flex-column">
         <app-food-item *ngFor="let pb of partyBundles" [pb]="pb"></app-food-item>
+    </div>
+</ng-template>
+
+<ng-template #partyModal let-modal>
+    <div class="modal-header d-flex jcsb aic">
+        <span class="bolder fs-6">Start Party Order</span>
+        <button type="button" class="btn-modal-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+    </div>
+    <div class="modal-body jcc" style="height: 400px;">
+
+        <div class="p-4">
+            <table>
+                <tr>
+                    <td><span class="bolder">Event Date</span></td>
+                    <td>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="dd-mm-yyyy" name="dp" [(ngModel)]="eventDate" ngbDatepicker #d="ngbDatepicker" />
+                            <fa-icon [icon]="faCalendar" (click)="d.toggle()" class="border br-tr-7 br-br-7 p-2 clickable-icon"></fa-icon>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="bolder">Delivery Time</span></td>
+                    <td>
+                        <ngb-timepicker [(ngModel)]="eventTime" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <div class="modal-footer flex-column" style="margin: 10px;padding: 10px;gap:.6rem;">
+        <button *ngIf="isEventValid()" type="button" class="btn-32" (click)="selectLayout('Party')">Check our Party Menu</button>
+    </div>
+
+</ng-template>
+
+<ng-template #partyModal2 let-modal>
+    <div class="modal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
 </ng-template>

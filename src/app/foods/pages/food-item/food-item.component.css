@@ -38,7 +38,7 @@
 ::ng-deep .modal-content {
     /* border-radius: 25px; */
     border: none;
-    z-index: 9999999;
+    z-index: 99;
 }
 
 ::ng-deep .modal-body {
