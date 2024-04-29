@@ -35,6 +35,7 @@ import { PartyBundle } from 'src/app/model/foods/all-foods';
 import {
   NgbAlertModule,
   NgbDateParserFormatter,
+  NgbDatepickerConfig,
   NgbDatepickerModule,
   NgbDateStruct,
   NgbModal,
@@ -127,6 +128,7 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
   calendarToDisplay: Calendar;
   incorrectLanding: boolean;
   partyBundles: PartyBundle[];
+  minDate = undefined;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -135,8 +137,10 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
     private reviewService: ReviewService,
     private _location: Location,
     private router: Router,
-    private modalService: NgbModal
-  ) {}
+    private modalService: NgbModal,
+    private config: NgbDatepickerConfig
+  ) {
+  }
 
   ngAfterViewInit(): void {
     console.log('AfterViewInit....');
@@ -192,6 +196,7 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
             this.incorrectLanding = true;
           } else {
             this.chef = data;
+            this.setPartyMinDate();
             this.fetchItems(this.chef._id);
             this.fetchCalendars(this.chef._id);
             this.fetchReviews(this.chef._id);
@@ -208,6 +213,21 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
         },
       });
     });
+  }
+
+  private setPartyMinDate() {
+    const current = new Date();
+    var futureDate;
+    if ( this.chef && this.chef.partyOrderLeadDays > 0){
+      futureDate = this.addDays(current, this.chef.partyOrderLeadDays);
+    }else{
+      futureDate = this.addDays(current, 1);
+    }
+    this.minDate = {
+      year: futureDate.getFullYear(),
+      month: futureDate.getMonth() + 1,
+      day: futureDate.getDate(),
+    };
   }
 
   fetchPartyBundles(supplierId: string) {
@@ -239,6 +259,7 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
 
   selectLayout(layout: string) {
     this.activeLayout = layout;
+    this.close();
   }
 
   private fetchCalendars(supplierId: string) {
@@ -391,16 +412,32 @@ export class ChefHomeComponent implements AfterViewInit, OnDestroy {
 
   isEventValid(): any {
     var today = new Date();
-    const jsDate = new Date(this.eventDate.year, this.eventDate.month - 1, this.eventDate.day);
+    const jsDate = new Date(
+      this.eventDate.year,
+      this.eventDate.month - 1,
+      this.eventDate.day
+    );
     var diff = this.calculateDiff(jsDate);
     // var eventDate = this.eventDate.day;
-    console.log('Today '+ today+ ' Event day '+ jsDate+' Lapsed: '+ diff);
+    console.log('Today ' + today + ' Event day ' + jsDate + ' Lapsed: ' + diff);
     return false;
   }
 
-  calculateDiff(dateSent){
+  calculateDiff(dateSent) {
     let currentDate = new Date();
     dateSent = new Date(dateSent);
-    return Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate()) ) /(1000 * 60 * 60 * 24));
-}
+    return Math.floor(
+      (Date.UTC(
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        currentDate.getDate()
+      ) -
+        Date.UTC(
+          dateSent.getFullYear(),
+          dateSent.getMonth(),
+          dateSent.getDate()
+        )) /
+        (1000 * 60 * 60 * 24)
+    );
+  }
 }

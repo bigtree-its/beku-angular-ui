@@ -6,7 +6,36 @@
         <span [class.open]="chef.open" [class.closed]="!chef.open">{{chef.open?
             "Open":"Closed"}}</span>
     </div>
-    <div class="row">
+    <div class="sm flex-row jcc aic w-100 my-1">
+        <div class="clickable-row" style="font-size: 12px;" (click)="selectLayout('Reviews')">
+            <fa-icon [icon]="faStar"></fa-icon>
+            <span style="padding-left: 6px;">{{chef.rating}}</span>
+            <span style="padding-left: 6px;">({{chef.reviews}}
+                reviews)</span>
+        </div>
+    </div>
+    <div class="sm flex-row jcc aic w-100 my-1 gap-1">
+        <span style="font-size: 16px;" class="big-text mx-2" *ngFor="let cuisine of chef.cuisines | slice:0:3">{{
+            cuisine.name }}
+        </span>
+    </div>
+    <div class="sm flex-row jcc aic bg-light w-100 my-1">
+        <b (click)="selectLayout('Menu')" class="square mx-2 px-3">Menu</b>
+        <b (click)="selectLayout('Reviews')" class="square mx-2 px-3">Reviews
+            ({{reviews.length}})</b>
+        <b (click)="selectLayout('Info')" class="square mx-2 px-3">Info</b>
+        <!-- <b (click)="selectLayout('Party')" class="square mx-2 px-3">Party</b> -->
+        <b (click)="openModal(partyModal)" class="square mx-2 px-3">Party</b>
+    </div>
+    <div class="sm flex-column w-100 my-1" style="padding-bottom: 100px;">
+        <ng-container [ngSwitch]="activeLayout">
+            <ng-container *ngSwitchCase="'Menu'" [ngTemplateOutlet]="menuLayout"></ng-container>
+            <ng-container *ngSwitchCase="'Reviews'" [ngTemplateOutlet]="reviewsLayout"></ng-container>
+            <ng-container *ngSwitchCase="'Info'" [ngTemplateOutlet]="infoLayout"></ng-container>
+            <ng-container *ngSwitchCase="'Party'" [ngTemplateOutlet]="partyLayout"></ng-container>
+        </ng-container>
+    </div>
+    <div class="lg row">
         <div class="col-md-8" style=" min-height: 100vh;overflow-y: auto; margin-bottom: 100px;">
             <div class="py-1">
                 <div class="flex-row jcc aic">
@@ -56,9 +85,7 @@
                             <b (click)="selectLayout('Reviews')" class="square mx-2 px-3">Reviews
                                 ({{reviews.length}})</b>
                             <b (click)="selectLayout('Info')" class="square mx-2 px-3">Info</b>
-                            <!-- <b (click)="selectLayout('Party')" class="square mx-2 px-3">Party</b> -->
                             <b (click)="openModal(partyModal)" class="square mx-2 px-3">Party</b>
-
                         </div>
                     </div>
                 </div>
@@ -71,7 +98,7 @@
                 <ng-container *ngSwitchCase="'Party'" [ngTemplateOutlet]="partyLayout"></ng-container>
             </ng-container>
         </div>
-        <div class="col-md-4 lg">
+        <div class="col-md-4">
             <div style="flex-direction: column;position: sticky;top: 0;min-height: 100vh;overflow-y: auto;width: 100%; padding: 10px;">
                 <div class="d-flex jcsb py-2 px-3">
                     <span style="font-size: 20px;">Your Order</span>
@@ -98,7 +125,7 @@
     <div class="sm footer flex-row jcsb aic px-3 py-2">
         <span *ngIf="order != null" class="color-red fs-1 big-text">{{order.total |
             currency:'GBP'}}</span>
-        <button class="btn-arrow mt-1 d-flex jcc aic" [routerLink]="[ '/f/checkout'] ">
+        <button *ngIf="(order?.items && (order.items.length > 0|| order.partyItems.length > 0))" class="btn-arrow mt-1 d-flex jcc aic" [routerLink]="[ '/f/checkout'] ">
             <span>CHECKOUT</span>
             <svg width="34" height="34" viewBox="0 0 74 74" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
@@ -261,7 +288,6 @@
     </div>
 
     <div *ngIf="displayCal && calendars" class="flex-column">
-
         <div class="flex-row jcc aic">
             <div [class.selectedCal]="calendar.date === calendarToDisplay.date" class="flex-column jcc aic btn-circle mx-2 p-4" *ngFor="let calendar of calendars;" (click)="selectCalendar(calendar)">
                 <span class="bold">{{calendar.date| date: 'E':'EST'}}</span>
@@ -287,14 +313,15 @@
         <button type="button" class="btn-modal-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
     </div>
     <div class="modal-body jcc" style="height: 400px;">
-
         <div class="p-4">
             <table>
                 <tr>
                     <td><span class="bolder">Event Date</span></td>
                     <td>
+                        <!-- <input class="form-control" ngbDatepicker [minDate]="minDate" (click)="datePicker.toggle()" #datePicker="ngbDatepicker" formControlName="date" placeholder="yyyy-mm-dd"> -->
+
                         <div class="input-group">
-                            <input class="form-control" placeholder="dd-mm-yyyy" name="dp" [(ngModel)]="eventDate" ngbDatepicker #d="ngbDatepicker" />
+                            <input class="form-control" [minDate]="minDate" placeholder="dd-mm-yyyy" name="dp" [(ngModel)]="eventDate" ngbDatepicker #d="ngbDatepicker" />
                             <fa-icon [icon]="faCalendar" (click)="d.toggle()" class="border br-tr-7 br-br-7 p-2 clickable-icon"></fa-icon>
                         </div>
                     </td>
@@ -309,30 +336,8 @@
         </div>
 
     </div>
-    <div class="modal-footer flex-column" style="margin: 10px;padding: 10px;gap:.6rem;">
-        <button *ngIf="isEventValid()" type="button" class="btn-32" (click)="selectLayout('Party')">Check our Party Menu</button>
+    <div *ngIf="eventDate" class="modal-footer flex-column" style="margin: 10px;padding: 10px;gap:.6rem;">
+        <button type="button" class="btn-32" (click)="selectLayout('Party')">Check our Party Menu</button>
     </div>
 
-</ng-template>
-
-<ng-template #partyModal2 let-modal>
-    <div class="modal" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-                </div>
-                <div class="modal-body">
-                    <p>Modal body text goes here.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </ng-template>
