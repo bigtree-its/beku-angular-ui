@@ -19,13 +19,12 @@
             cuisine.name }}
         </span>
     </div>
-    <div class="sm flex-row jcc aic bg-light w-100 my-1">
-        <b (click)="selectLayout('Menu')" class="square mx-2 px-3">Menu</b>
-        <b (click)="selectLayout('Reviews')" class="square mx-2 px-3">Reviews
+    <div class="sm flex-row jcc aic btn-grp w-100 my-1">
+        <b (click)="selectLayout('Menu')" [class.selectedCal]="activeLayout === 'Menu'" class="square mx-2 px-3">Menu</b>
+        <b (click)="selectLayout('Reviews')" [class.selectedCal]="activeLayout === 'Reviews'" class="square mx-2 px-3">Reviews
             ({{reviews.length}})</b>
-        <b (click)="selectLayout('Info')" class="square mx-2 px-3">Info</b>
-        <!-- <b (click)="selectLayout('Party')" class="square mx-2 px-3">Party</b> -->
-        <b (click)="openModal(partyModal)" class="square mx-2 px-3">Party</b>
+        <b (click)="selectLayout('Info')" [class.selectedCal]="activeLayout === 'Info'" class="square mx-2 px-3">Info</b>
+        <b (click)="openModal(partyModal)" [class.selectedCal]="activeLayout === 'Party'" class="square mx-2 px-3">Party</b>
     </div>
     <div class="sm flex-column w-100 my-1" style="padding-bottom: 100px;">
         <ng-container [ngSwitch]="activeLayout">
@@ -34,6 +33,21 @@
             <ng-container *ngSwitchCase="'Info'" [ngTemplateOutlet]="infoLayout"></ng-container>
             <ng-container *ngSwitchCase="'Party'" [ngTemplateOutlet]="partyLayout"></ng-container>
         </ng-container>
+    </div>
+    <div class="sm footer flex-row jcsb aic px-3 py-2">
+        <span *ngIf="order != null" class="color-red fs-1 big-text">{{order.total |
+            currency:'GBP'}}</span>
+        <button *ngIf="(order?.items && (order.items.length > 0|| order.partyItems.length > 0))" class="btn-arrow mt-1 d-flex jcc aic" [routerLink]="[ '/f/checkout'] ">
+            <span>CHECKOUT</span>
+            <svg width="34" height="34" viewBox="0 0 74 74" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <circle cx="37" cy="37" r="35.5" stroke="black"
+                    stroke-width="3"></circle>
+                <path
+                    d="M25 35.5C24.1716 35.5 23.5 36.1716 23.5 37C23.5 37.8284 24.1716 38.5 25 38.5V35.5ZM49.0607 38.0607C49.6464 37.4749 49.6464 36.5251 49.0607 35.9393L39.5147 26.3934C38.9289 25.8076 37.9792 25.8076 37.3934 26.3934C36.8076 26.9792 36.8076 27.9289 37.3934 28.5147L45.8787 37L37.3934 45.4853C36.8076 46.0711 36.8076 47.0208 37.3934 47.6066C37.9792 48.1924 38.9289 48.1924 39.5147 47.6066L49.0607 38.0607ZM25 38.5L48 38.5V35.5L25 35.5V38.5Z"
+                    fill="black"></path>
+            </svg>
+        </button>
     </div>
     <div class="lg row">
         <div class="col-md-8" style=" min-height: 100vh;overflow-y: auto; margin-bottom: 100px;">
@@ -80,12 +94,12 @@
                         <div *ngIf="!chef.doDelivery" style="padding: 5px 0;">
                             <span class="attribute">Collection Only</span>
                         </div>
-                        <div class="flex-row jcc aic bg-light w-100 mt-3">
-                            <b (click)="selectLayout('Menu')" class="square mx-2 px-3">Menu</b>
-                            <b (click)="selectLayout('Reviews')" class="square mx-2 px-3">Reviews
+                        <div class="flex-row jcc aic w-100 mt-1 btn-grp">
+                            <b (click)="selectLayout('Menu')" [class.selectedCal]="activeLayout === 'Menu'" class="square mx-2 px-3">Menu</b>
+                            <b (click)="selectLayout('Reviews')" [class.selectedCal]="activeLayout === 'Reviews'" class="square mx-2 px-3">Reviews
                                 ({{reviews.length}})</b>
-                            <b (click)="selectLayout('Info')" class="square mx-2 px-3">Info</b>
-                            <b (click)="openModal(partyModal)" class="square mx-2 px-3">Party</b>
+                            <b (click)="selectLayout('Info')" [class.selectedCal]="activeLayout === 'Info'" class="square mx-2 px-3">Info</b>
+                            <b (click)="openModal(partyModal)" [class.selectedCal]="activeLayout === 'Party'" class="square mx-2 px-3">Party</b>
                         </div>
                     </div>
                 </div>
@@ -117,26 +131,12 @@
                 </div>
 
                 <div class="d-flex jcc aic mt-3">
-                    <button class="btn-14 flex-grow py-2 f-size-md" [routerLink]="[ '/f/checkout'] " *ngIf="(order?.items && (order.items.length > 0|| order.partyItems.length > 0))">Checkout</button>
+                    <button class="btn-14 flex-grow py-2 f-size-md" [routerLink]="[ '/f/checkout']" *ngIf="(order?.items && (order.items.length > 0|| order.partyItems.length > 0))">Checkout</button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="sm footer flex-row jcsb aic px-3 py-2">
-        <span *ngIf="order != null" class="color-red fs-1 big-text">{{order.total |
-            currency:'GBP'}}</span>
-        <button *ngIf="(order?.items && (order.items.length > 0|| order.partyItems.length > 0))" class="btn-arrow mt-1 d-flex jcc aic" [routerLink]="[ '/f/checkout'] ">
-            <span>CHECKOUT</span>
-            <svg width="34" height="34" viewBox="0 0 74 74" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <circle cx="37" cy="37" r="35.5" stroke="black"
-                    stroke-width="3"></circle>
-                <path
-                    d="M25 35.5C24.1716 35.5 23.5 36.1716 23.5 37C23.5 37.8284 24.1716 38.5 25 38.5V35.5ZM49.0607 38.0607C49.6464 37.4749 49.6464 36.5251 49.0607 35.9393L39.5147 26.3934C38.9289 25.8076 37.9792 25.8076 37.3934 26.3934C36.8076 26.9792 36.8076 27.9289 37.3934 28.5147L45.8787 37L37.3934 45.4853C36.8076 46.0711 36.8076 47.0208 37.3934 47.6066C37.9792 48.1924 38.9289 48.1924 39.5147 47.6066L49.0607 38.0607ZM25 38.5L48 38.5V35.5L25 35.5V38.5Z"
-                    fill="black"></path>
-            </svg>
-        </button>
-    </div>
+
 </div>
 
 <div class="flex-row jcc aic " *ngIf="incorrectLanding">

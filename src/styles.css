@@ -1,13 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 :root {
     --blue: #007bff;
     --indigo: #6610f2;
-    --navy: #333BFF;
+    --navy: #333bff;
     --purple: #6f42c1;
     --pink: #e83e8c;
     --red: #dc3545;
@@ -37,8 +37,8 @@
     --color-gray-disabled: #e8e8e8;
     --color-green: #53a318;
     --color-green-dark: #383;
-    --font-size-small: .75rem;
-    --font-size-default: .875rem;
+    --font-size-small: 0.75rem;
+    --font-size-default: 0.875rem;
     --brand-color: #deff08;
     margin: 0;
     padding: 0;
@@ -306,7 +306,7 @@ tr:nth-child(odd) {
     height: 100%;
     background-color: var(--brand-color);
     transform: translateX(-100%);
-    transition: all .3s;
+    transition: all 0.3s;
     z-index: -1;
 }
 
@@ -318,7 +318,7 @@ tr:nth-child(odd) {
     cursor: pointer;
     font-weight: 700;
     font-family: Helvetica, "sans-serif";
-    transition: all .2s;
+    transition: all 0.2s;
     padding: 5px 20px;
     border-radius: 100px;
     background: #cfef00;
@@ -335,7 +335,7 @@ tr:nth-child(odd) {
 .btn-arrow>svg {
     width: 34px;
     margin-left: 10px;
-    transition: transform .3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
 }
 
 .btn-arrow:hover svg {
@@ -346,13 +346,19 @@ tr:nth-child(odd) {
     transform: scale(0.95);
 }
 
+.btn-grp {
+    border-radius: 12px;
+    background-color: #1FB796;
+    border: 2px solid #009a79;
+}
+
 .btn-14 {
     background-image: linear-gradient(#f7f8fa, #e7e9ec);
     border-color: #adb1b8 #a2a6ac #8d9096;
     border-style: solid;
     border-width: 1px;
     border-radius: 3px;
-    box-shadow: rgba(255, 255, 255, .6) 0 1px 0 inset;
+    box-shadow: rgba(255, 255, 255, 0.6) 0 1px 0 inset;
     box-sizing: border-box;
     cursor: pointer;
     display: inline-block;
@@ -382,7 +388,7 @@ tr:nth-child(odd) {
 
 .btn-14:focus {
     border-color: #e77600;
-    box-shadow: rgba(228, 121, 17, .5) 0 0 3px 2px;
+    box-shadow: rgba(228, 121, 17, 0.5) 0 0 3px 2px;
     outline: 0;
 }
 
@@ -408,7 +414,7 @@ tr:nth-child(odd) {
 .btn-32:not(:disabled):focus {
     outline: 0;
     background: #f4e603;
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, .2), 0 3px 8px 0 rgba(0, 0, 0, .15);
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.15);
 }
 
 .btn-32:disabled {
@@ -459,7 +465,7 @@ tr:nth-child(odd) {
     padding: 3px 16px;
     text-decoration: none;
     text-overflow: ellipsis;
-    transition: all .14s ease-out;
+    transition: all 0.14s ease-out;
     white-space: nowrap;
 }
 
@@ -535,7 +541,7 @@ tr:nth-child(odd) {
 }
 
 .closed {
-    background-color: #E50914;
+    background-color: #e50914;
     border-radius: 7px;
     color: #fff;
     padding: 0px 20px;
@@ -1217,20 +1223,20 @@ select {
 
 .btn-circle-g:hover {
     cursor: pointer;
-    opacity: 1.0;
+    opacity: 1;
     background-color: #08de9e;
 }
 
 .btn-circle-d:hover {
     cursor: pointer;
-    opacity: 1.0;
+    opacity: 1;
     color: #fff;
     background-color: rgb(230, 76, 76);
 }
 
 .btn-circle:hover {
     cursor: pointer;
-    opacity: 1.0;
+    opacity: 1;
 }
 
 .btn-block {
@@ -1323,7 +1329,7 @@ select {
     padding: 12px 16px;
     text-decoration: none;
     text-overflow: ellipsis;
-    transition: all .14s ease-out;
+    transition: all 0.14s ease-out;
     white-space: nowrap;
 }
 
@@ -1543,7 +1549,7 @@ select {
 
 .clickable-icon:hover {
     border: 1px solid #000a19;
-    color: #333BFF;
+    color: #333bff;
 }
 
 .clickable-selected {
