@@ -34,10 +34,10 @@
             <ng-container *ngSwitchCase="'Party'" [ngTemplateOutlet]="partyLayout"></ng-container>
         </ng-container>
     </div>
-    <div class="sm footer flex-row jcsb aic px-3 py-2">
-        <span *ngIf="order != null" class="color-red fs-1 big-text">{{order.total |
+    <div class="sm footer flex-row jcsb aic px-3 py-2" *ngIf="(order?.items && order.items.length > 0) || (order?.partyItems && order.partyItems.length > 0)">
+        <span  class="color-red fs-1 big-text">{{order.total |
             currency:'GBP'}}</span>
-        <button *ngIf="(order?.items && (order.items.length > 0|| order.partyItems.length > 0))" class="btn-arrow mt-1 d-flex jcc aic" [routerLink]="[ '/f/checkout'] ">
+        <button class="btn-arrow mt-1 d-flex jcc aic" [routerLink]="[ '/f/checkout'] ">
             <span>CHECKOUT</span>
             <svg width="34" height="34" viewBox="0 0 74 74" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
@@ -131,7 +131,7 @@
                 </div>
 
                 <div class="d-flex jcc aic mt-3">
-                    <button class="btn-14 flex-grow py-2 f-size-md" [routerLink]="[ '/f/checkout']" *ngIf="(order?.items && (order.items.length > 0|| order.partyItems.length > 0))">Checkout</button>
+                    <button class="btn-14 flex-grow py-2 f-size-md" [routerLink]="[ '/f/checkout']" *ngIf="(order?.items && order.items.length > 0) || (order?.partyItems && order.partyItems.length > 0)">Checkout</button>
                 </div>
             </div>
         </div>
